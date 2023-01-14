@@ -5,8 +5,9 @@ import reportWebVitals from './reportWebVitals';
 
 import Home from './routes/Home/Home';
 import Demo from './routes/Demo/Demo';
-import { Global } from './index.styles';
+import NavBar from './components/NavBar/NavBar';
 
+import { Global } from './index.styles';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,6 +16,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <Global>
   <BrowserRouter>
+    <NavBar/>
     <Routes>
       {/* We may want to move to Switch routes based on changing requirements. */}
       <Route path="/" element={<Home />}>
