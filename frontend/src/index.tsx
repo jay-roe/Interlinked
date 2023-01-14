@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 import Home from './routes/Home/Home';
+import Demo from './routes/Demo/Demo';
 
 
 const root = ReactDOM.createRoot(
@@ -23,6 +24,7 @@ root.render(
           }
         />
       </Route>
+      <Route path="/demo" element={<Demo />} />
     </Routes>
   </BrowserRouter>
 );
