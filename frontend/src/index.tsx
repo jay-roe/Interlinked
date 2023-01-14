@@ -9,6 +9,19 @@ import NavBar from './components/NavBar/NavBar';
 
 import { Global } from './index.styles';
 
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCndJ1p56QiX3yTzg-tXq_dshjdtCwYYfY",
+  authDomain: "interlinked-420e3.firebaseapp.com",
+  projectId: "interlinked-420e3",
+  storageBucket: "interlinked-420e3.appspot.com",
+  messagingSenderId: "415871175145",
+  appId: "1:415871175145:web:8710d367357d7fb6e2e378"
+};
+
+const app = initializeApp(firebaseConfig);
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
