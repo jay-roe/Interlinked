@@ -1,11 +1,13 @@
-import { Global, Title } from "./Home.styles";
+import { HomeDiv, Title } from "./Home.styles";
+import NavBar from "../../components/NavBar/NavBar";
 
 const Home = () => {
   return (
-      <Global>
+      <HomeDiv>
+        <NavBar></NavBar>
         <Title>Interlinked</Title>
         {/* Here goes the app's components */}
-      </Global>
+      </HomeDiv>
     );
 }
 

@@ -1,9 +1,11 @@
 import ReactDOM from 'react-dom/client';
+import 'bootstrap/dist/css/bootstrap.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 
 import Home from './routes/Home/Home';
 import Demo from './routes/Demo/Demo';
+import { Global } from './index.styles';
 
 
 const root = ReactDOM.createRoot(
@@ -11,6 +13,7 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
+  <Global>
   <BrowserRouter>
     <Routes>
       {/* We may want to move to Switch routes based on changing requirements. */}
@@ -27,6 +30,7 @@ root.render(
       <Route path="/demo" element={<Demo />} />
     </Routes>
   </BrowserRouter>
+  </Global>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-// Global CSS
-export const Global = styled.div`
+export const HomeDiv = styled.div`
   font-family: monospace;
 `;
 
