@@ -10,6 +10,8 @@ const NavBar = () => {
                 <Navbar.Collapse>
                     <Nav>
                         <Nav.Link href="demo">Demo</Nav.Link>
+                        <Nav.Link href="login">Login</Nav.Link>
+                        <Nav.Link href="register">Register</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
