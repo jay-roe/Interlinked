@@ -1,7 +1,7 @@
 import DemoComponent from "../../components/DemoComponent/DemoComponent";
 import { DemoDiv } from "./Demo.styles";
 
-const Home = () => {
+const Demo = () => {
   return (
       <DemoDiv>
         <DemoComponent></DemoComponent>
@@ -9,4 +9,4 @@ const Home = () => {
     );
 }
 
-export default Home;
+export default Demo;
