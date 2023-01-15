@@ -2,27 +2,33 @@
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Login from '../Login';
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useAuth } from "../../../contexts/AuthContext";
 
 
-
-it('check if user is logged in', () => {
+//calls login
+it('check if user is logged in', async () => {
 
     const { } = render(
         <MemoryRouter>
             <Login />
         </MemoryRouter>
     );
-
     //TODO add script to log in a test user
+    // const { currentUSer, login } = useAuth();
+    // await login('login@test.ca', 'logintest');
 
     const auth = getAuth();
+    await signInWithEmailAndPassword(auth, 'login@test.ca', 'logintest');
+
+
 
     expect(auth.currentUser).toBeTruthy();
 
 });
 
-it('check if user is logged out', () => {
+//calls logout
+it('check if user is logged out', async () => {
 
     const { } = render(
         <MemoryRouter>
@@ -30,7 +36,8 @@ it('check if user is logged out', () => {
         </MemoryRouter>
     );
 
-    const auth = getAuth();
+        const auth = getAuth();
+        await auth.signOut();
 
     expect(auth.currentUser).toBeNull();
 
