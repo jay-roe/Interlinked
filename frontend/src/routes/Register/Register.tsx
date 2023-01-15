@@ -4,6 +4,7 @@ import {useState} from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function Register() {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ export default function Register() {
         }
     }, [currentUser, navigate]);
 
-    async function handleFormSubmit(e) {
+    async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();
 
         if (password !== confirmPassword) {
@@ -31,8 +32,8 @@ export default function Register() {
             setLoading(true);
             await register(email, password);
             navigate("/profile");
-        } catch (e) {
-            alert(e.message);
+        } catch (err) {
+            alert(err.message);
         }
 
         setLoading(false);
@@ -85,13 +86,14 @@ export default function Register() {
                         </div>
                     </div>
                     <div>
-                        <button
+                        <Button
                             type="submit"
                             onClick={(event) => handleFormSubmit(event)}
+                            disabled={loading}
                             className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
                         >
                             Register
-                        </button>
+                        </Button>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm">

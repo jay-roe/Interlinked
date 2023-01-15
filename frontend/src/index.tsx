@@ -12,6 +12,7 @@ import {ProtectedRoute} from "./components/ProtectedRoute/ProtectedRoute";
 import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
 import {AuthProvider} from "./contexts/AuthContext";
+import Profile from './routes/Profile/Profile';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -45,6 +46,14 @@ root.render(
 
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>
+                    <Route 
+                        path="/profile" 
+                        element={
+                            // <ProtectedRoute>
+                                <Profile />
+                            // </ProtectedRoute>
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </Global>

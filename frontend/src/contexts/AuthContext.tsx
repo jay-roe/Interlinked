@@ -1,17 +1,20 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import {
     createUserWithEmailAndPassword,
+    deleteUser,
     signInWithEmailAndPassword,
 } from "firebase/auth";
+import type { UserCredential } from "firebase/auth";
 
 import auth from "../config/firebase";
 import type {User} from "firebase/auth";
 
 interface AuthContextType {
     currentUser: User
-    login: Function
-    register: Function
-    logout: Function
+    login: (email: string, password: string) => Promise<UserCredential>
+    register: (email: string, password: string) => Promise<UserCredential>
+    logout: () => Promise<void>
+    deleteAccount: () => Promise<void>
 }
 
 // Creates a context that will be passed down to all routes, allowing authentication functions to be used
@@ -40,6 +43,11 @@ export function AuthProvider({ children }) {
         return auth.signOut();
     }
 
+    // Deletes user
+    function deleteAccount() {
+        return deleteUser(auth.currentUser);
+    }
+
     // On first load of the page, prepare an unsubscribe function
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -55,7 +63,8 @@ export function AuthProvider({ children }) {
         currentUser,
         login,
         register,
-        logout
+        logout,
+        deleteAccount
     };
 
     return (

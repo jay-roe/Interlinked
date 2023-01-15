@@ -2,6 +2,7 @@ import { StyledLogin } from "./Login.styles";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext";
+import { Button } from "react-bootstrap";
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -16,14 +17,15 @@ const Login = () => {
         }
     }, [currentUser, navigate]);
 
-    async function handleFormSubmit(e) {
+    async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();
 
         try {
             setLoading(true);
             await login(email, password);
             navigate("/");
-        } catch (e) {
+        } catch (err) {
+            console.error(err);
             alert("Failed to login");
         }
 
@@ -67,13 +69,14 @@ const Login = () => {
                         </div>
                     </div>
                     <div>
-                        <button
+                        <Button
                             type="submit"
                             onClick={handleFormSubmit}
+                            disabled={loading}
                             className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
                         >
                             Login
-                        </button>
+                        </Button>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
