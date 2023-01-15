@@ -69,7 +69,7 @@ const Login = () => {
                     <div>
                         <button
                             type="submit"
-                            onSubmit={handleFormSubmit}
+                            onClick={handleFormSubmit}
                             className=" w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-sky-800 hover:bg-sky-900"
                         >
                             Login
