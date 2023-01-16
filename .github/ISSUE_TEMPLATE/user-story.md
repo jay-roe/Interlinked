@@ -7,35 +7,14 @@ assignees: ''
 
 ---
 
-<table>
-    <tr>
-        <th colspan="4"><strong>USER STORY</strong></th>
-    </tr>
-    <tr>
-        <td><strong>STORY POINTS</strong>: 5 </td>
-        <td colspan="4">
-            <strong>DESCRIPTION</strong>
-            <p>As a user, I want X, because Y, so that Z.</p>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <strong>ACCEPTANCE TEST</strong>
-            <ul>
-                <li>User can see this</li>
-                <li>User can see that</li>
-            </ul>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4">
-            <strong>TASKS</strong>
-            <ul>
-                <li>#1 <a href='https://github.com/JR-prog/Interlinked_SOEN390_Team11/issues'>TASK 1</a> (1 points)</li>
-                <li>#2 <a href='https://github.com/JR-prog/Interlinked_SOEN390_Team11/issues'>TASK 2</a> (1 points)</li>
-                <li>#3 <a href='https://github.com/JR-prog/Interlinked_SOEN390_Team11/issues'>TASK 
-3</a> (3 points)</li>
-            </ul>
-        </td>
-    </tr>
-</table>
+# User Story (X points)
+### Description
+As a W, I want X, because Y, so that Z.
+
+### Acceptance Test
+- [ ] Test 1
+- [ ] Test 2
+
+### Tasks
+- [ ] #1 (1 point)
+- [ ] #2 (2 point)
