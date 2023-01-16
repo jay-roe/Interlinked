@@ -5,7 +5,7 @@ export const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
     const { currentUser } = useAuth();
     if (!currentUser) {
         // user is not authenticated, send to login page
-        console.log('user not logged in, redirecting');
+        alert('You must be logged in to access this page, redirecting.');
         
         return <Navigate to="/login" />;
     }
