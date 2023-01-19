@@ -41,10 +41,11 @@ export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: Delet
   return (
     <>
       <Modal.Body>
-        <h5>Please enter the email associated with your account.</h5>
+        <h5>Please login with one of the methods below.</h5>
         <RedText>
           This action is irreversible. Your account, and all of its data, will be permanently deleted.
         </RedText>
+        {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
         <Button onClick={() => updateCredential()}><FaGoogle /> Login with Google</Button>
         {
           isAuthError && <RedText>Authentication error. Please try logging in again.</RedText>
