@@ -8,7 +8,7 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
 } from "firebase/auth";
-import type { UserCredential } from "firebase/auth";
+import type { AuthCredential, UserCredential } from "firebase/auth";
 
 import auth from "../config/firebase";
 import type {User} from "firebase/auth";
@@ -20,11 +20,12 @@ interface AuthContextType {
     register: (email: string, password: string) => Promise<UserCredential>
     logout: () => Promise<void>
     deleteAccount: () => Promise<void>
-    reauthenticateUser: (email: string, password: string) => Promise<UserCredential>
+    reauthenticateEmail: (email: string, password: string) => Promise<UserCredential>
+    reauthenticateOAuth: (credential: UserCredential) => Promise<UserCredential>
 }
 
 // Creates a context that will be passed down to all routes, allowing authentication functions to be used
-const AuthContext = createContext({currentUser: null, login: null, loginWithGoogle: null, register: null, logout: null, reauthenticateUser: null} as AuthContextType);
+const AuthContext = createContext({currentUser: null, login: null, loginWithGoogle: null, register: null, logout: null, reauthenticateEmail: null, reauthenticateOAuth: null} as AuthContextType);
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -61,8 +62,13 @@ export function AuthProvider({ children }) {
     }
 
     // Must reobtain credentials when user is doing security risky task (deleting account, changing password/email) 😱
-    function reauthenticateUser(email: string, password: string) {
+    function reauthenticateEmail(email: string, password: string) {
         const credential = EmailAuthProvider.credential(email, password);
+        return reauthenticateWithCredential(auth.currentUser, credential);
+    }
+
+    function reauthenticateOAuth(userCredential: UserCredential) {
+        const credential = GoogleAuthProvider.credentialFromResult(userCredential);
         return reauthenticateWithCredential(auth.currentUser, credential);
     }
 
@@ -84,7 +90,8 @@ export function AuthProvider({ children }) {
         register,
         logout,
         deleteAccount,
-        reauthenticateUser
+        reauthenticateEmail,
+        reauthenticateOAuth
     };
 
     return (

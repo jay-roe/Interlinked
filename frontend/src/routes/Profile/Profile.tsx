@@ -1,4 +1,4 @@
-import { Button, Image } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext';
 import VerifiedIcon from '../../components/VerifiedIcon/VerifiedIcon';
 import { useState } from 'react';
@@ -8,13 +8,11 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
     const navigate = useNavigate()
 
-    const { currentUser, deleteAccount, reauthenticateUser } = useAuth();
+    const { currentUser, deleteAccount } = useAuth();
     const [isModalShow, setIsModalShow] = useState(false);
 
-    const onDeleteAccount = async (password: string) => {
+    async function onDeleteAccount() {
         try {
-            // Must reauthenticate user before deleting account for security 💂‍♀️
-            await reauthenticateUser(currentUser.email, password);
             await deleteAccount();
 
             // Redirect to home page, with state saying account was just deleted
