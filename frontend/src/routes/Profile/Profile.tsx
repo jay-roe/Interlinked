@@ -42,7 +42,10 @@ export default function Profile() {
     return (
         <>
             <h1>{currentUser.displayName ? currentUser.displayName : 'No display name provided.'}</h1>
-            <Image src={currentUser.photoURL} />
+            {/* 
+                // TODO (Optional): Update user profile with OAuth provider profile picture by default
+                <Image src={currentUser.photoURL} />   
+            */}
             <h2>Email: {currentUser.email} <VerifiedIcon verified={currentUser.emailVerified} showText /></h2>
             <h2>Phone number {currentUser.phoneNumber ? `: ${currentUser.phoneNumber}` : 'not provided.'}</h2>
             <Button variant='danger' onClick={() => setIsModalShow(true)}>Delete account</Button>

@@ -14,4 +14,8 @@ const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
+// TODO: Adapt this when adding multiple languages. Sets the OAuth popups (Google login) to the given language.
+// auth.languageCode = 'en';
+auth.useDeviceLanguage();
+
 export default auth;

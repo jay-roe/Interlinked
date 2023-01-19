@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import {
     EmailAuthProvider,
+    GoogleAuthProvider,
     createUserWithEmailAndPassword,
     deleteUser,
     reauthenticateWithCredential,
@@ -15,7 +16,7 @@ import type {User} from "firebase/auth";
 interface AuthContextType {
     currentUser: User
     login: (email: string, password: string) => Promise<UserCredential>
-    loginWithPopup: () => Promise<UserCredential>
+    loginWithGoogle: () => Promise<UserCredential>
     register: (email: string, password: string) => Promise<UserCredential>
     logout: () => Promise<void>
     deleteAccount: () => Promise<void>
@@ -23,7 +24,7 @@ interface AuthContextType {
 }
 
 // Creates a context that will be passed down to all routes, allowing authentication functions to be used
-const AuthContext = createContext({currentUser: null, login: null, loginWithPopup: null, register: null, logout: null, reauthenticateUser: null} as AuthContextType);
+const AuthContext = createContext({currentUser: null, login: null, loginWithGoogle: null, register: null, logout: null, reauthenticateUser: null} as AuthContextType);
 
 export function useAuth() {
     return useContext(AuthContext);
@@ -44,9 +45,9 @@ export function AuthProvider({ children }) {
     }
 
     // Login user with email and password in popup.
-    function loginWithPopup() {
-        const emailProvider = new EmailAuthProvider();
-        return signInWithPopup(auth, emailProvider);
+    function loginWithGoogle() {
+        const googleProvider = new GoogleAuthProvider();
+        return signInWithPopup(auth, googleProvider);
     }
 
     // Logs out of the current user session.
@@ -79,7 +80,7 @@ export function AuthProvider({ children }) {
     const value = {
         currentUser,
         login,
-        loginWithPopup,
+        loginWithGoogle,
         register,
         logout,
         deleteAccount,
