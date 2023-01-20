@@ -3,8 +3,6 @@ import axios from "axios";
 import { useState } from "react";
 
 const DemoComponent = () => {
-    console.log('in demo component');
-    
     const [message, setMessage] = useState("This is just a demo component!");
 
     const getData = async () => {

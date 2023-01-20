@@ -1,5 +1,8 @@
-export interface DeleteAccountPopupProps {
+export interface DeleteAccountPopupProps extends DeleteAccountPopupChildProps {
     show: boolean;
-    onHide: () => void;
-    onDeleteAccount: (password: string) => Promise<boolean>;
+}
+
+export interface DeleteAccountPopupChildProps {
+    onHide: () => void
+    onDeleteAccount: () => Promise<boolean>;
 }

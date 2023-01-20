@@ -3,12 +3,14 @@ import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
+import { HorizontalSeparator } from "../Register/Register.styles";
+import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { currentUser, login } = useAuth();
+    const { currentUser, login, loginWithGoogle } = useAuth();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -77,6 +79,10 @@ const Login = () => {
                         >
                             Login
                         </Button>
+                    </div>
+                    <HorizontalSeparator>OR</HorizontalSeparator>
+                    <div>
+                        <Button onClick={() => loginWithGoogle()}><FaGoogle /> Login with Google</Button>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
