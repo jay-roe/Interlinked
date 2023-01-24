@@ -55,6 +55,5 @@ jobs:
       uses: cypress-io/github-action@v4
       with:
         working-directory: ./cypress
-        start: npm start
 
     # TODO add backend & make sure to run backend before e2e and keep the backend running!
