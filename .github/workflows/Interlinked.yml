@@ -68,7 +68,7 @@ jobs:
 
     - name: Run Backend for Cypress
       run: |
-        cd frontend
+        cd backend
         npm run start &
       env:
         PORT: 8001
