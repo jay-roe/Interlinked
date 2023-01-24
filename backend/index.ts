@@ -1,10 +1,11 @@
 import express from 'express';
 import type { Express } from 'express';
 import dotenv from 'dotenv';
+import allRoutes from './routes';
 
 dotenv.config();
 
-const app: Express = express();
+export const app: Express = express();
 const port = process.env.PORT;
 
 app.listen(port, () => {
@@ -17,10 +18,4 @@ app.use(function(req, res, next) {
   next();
 });
 
-
-// Routes
-import index from './routes';
-import sampleIndex from './routes/sample';
-
-app.use('/', index)
-app.use('/sample', sampleIndex)
+app.use(allRoutes)
