@@ -22,7 +22,7 @@ const Home = () => {
     
     return (
         <HomeDiv>
-            <Title data-test-id="home-brand">Interlinked</Title>
+            <Title data-testid="home-brand">Interlinked</Title>
             {/* Here goes the app's components */}
             {
                 currentUser ? 

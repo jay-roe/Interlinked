@@ -11,7 +11,7 @@ const DemoComponent = () => {
     
     return (
         <DemoStyle data-testid="demo-component">
-            <DemoButton onClick={getData}>Styled Button!</DemoButton>
+            <DemoButton data-testid="demo-button" onClick={getData}>Styled Button!</DemoButton>
             {message}
         </DemoStyle>
     )

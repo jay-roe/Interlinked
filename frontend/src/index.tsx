@@ -43,6 +43,10 @@ root.render(
                             </ProtectedRoute>
                         }
                     />
+                    <Route
+                        path="/cypressDemo"
+                        element={<Demo/>}
+                    />
 
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/register" element={<Register/>}/>

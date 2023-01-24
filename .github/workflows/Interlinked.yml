@@ -14,6 +14,7 @@ env:
   REACT_APP_FIREBASE_STORAGE_BUCKET: ${{secrets.REACT_APP_FIREBASE_STORAGE_BUCKET}}
   REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}}
   REACT_APP_FIREBASE_APP_ID: ${{secrets.REACT_APP_FIREBASE_APP_ID}}
+  PORT: 8001
   
 jobs:
   test:
@@ -30,6 +31,14 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: frontend/package-lock.json
+    
+    - uses: actions/checkout@v3
+    - name: Use Node.js for Backend ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
 
     - uses: actions/checkout@v3
     - name: Use Node.js for Cypress ${{ matrix.node-version }}
@@ -39,9 +48,16 @@ jobs:
         cache: 'npm'
         cache-dependency-path: cypress/package-lock.json
 
-    - name: Run React component tests & test coverage
+    - name: Run React tests & test coverage
       run: |
         cd frontend
+        npm ci
+        npm run build --if-present
+        npm run test:coverage
+
+    - name: Run Express tests & test coverage
+      run: |
+        cd backend
         npm ci
         npm run build --if-present
         npm run test:coverage
@@ -51,9 +67,12 @@ jobs:
         cd frontend
         npm run start &
 
+    - name: Run Backend for Cypress
+      run: |
+        cd frontend
+        npm run start &
+
     - name: Run e2e tests
       uses: cypress-io/github-action@v4
       with:
         working-directory: ./cypress
-
-    # TODO add backend & make sure to run backend before e2e and keep the backend running!
