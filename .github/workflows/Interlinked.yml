@@ -37,6 +37,7 @@ jobs:
         npm run build --if-present
         npm run test:coverage
       env:
+        CI: ""  # Use this because otherwise warnings will make the pipeline fail
         REACT_APP_FIREBASE_API_KEY: ${{secrets.REACT_APP_FIREBASE_API_KEY}}
         REACT_APP_FIREBASE_AUTH_DOMAIN: ${{secrets.REACT_APP_FIREBASE_AUTH_DOMAIN}}
         REACT_APP_FIREBASE_PROJECT_ID: ${{secrets.REACT_APP_FIREBASE_PROJECT_ID}}
