@@ -6,7 +6,7 @@ const DemoComponent = () => {
     const [message, setMessage] = useState("This is just a demo component!");
 
     const getData = async () => {
-        setMessage(await (await axios.get(`http://localhost:8001/`)).data);
+        setMessage(await (await axios.get(process.env.REACT_APP_API_URL)).data);
     }
     
     return (
