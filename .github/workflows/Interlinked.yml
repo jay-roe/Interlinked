@@ -2,7 +2,7 @@ name: Interlinked CI
 
 on:
   push:
-    branches: [ 17-testing-plan-for-sprint-2-1-point ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
