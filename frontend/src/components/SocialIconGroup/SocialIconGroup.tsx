@@ -13,7 +13,7 @@ export default function SocialIconGroup({
 
   return (
     <div>
-      {Object.keys(socials).map((social, index) => {
+      {socials && Object.keys(socials).map((social, index) => {
         return (
           <a
             key={index}
