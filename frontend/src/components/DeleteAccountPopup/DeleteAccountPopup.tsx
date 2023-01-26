@@ -5,7 +5,7 @@ import DeleteAccountPopupOAuth from '../DeleteAccountPopupOAuth/DeleteAccountPop
 import DeleteAccountPopupEmail from '../DeleteAccountPopupEmail/DeleteAccountPopupEmail';
 
 export default function DeleteAccountPopup({show, onHide, onDeleteAccount}: DeleteAccountPopupProps) {
-  const { currentUser } = useAuth();
+  const { authUser } = useAuth();
 
   return (
     <Modal
@@ -22,7 +22,7 @@ export default function DeleteAccountPopup({show, onHide, onDeleteAccount}: Dele
       </Modal.Header>
       {
         // Account has OAuth provider. Make them confirm email associated to account.
-        currentUser.providerData.length > 0 ?
+        authUser.providerData.length > 0 ?
         <DeleteAccountPopupOAuth onHide={onHide} onDeleteAccount={onDeleteAccount} />
         :
         // Account is email/password. Make them confirm password.

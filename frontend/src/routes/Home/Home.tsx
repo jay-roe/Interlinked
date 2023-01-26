@@ -26,11 +26,11 @@ const Home = () => {
             {/* Here goes the app's components */}
             {
                 currentUser ? 
-                <HeroDescription>Welcome, {currentUser.displayName ? currentUser.displayName : currentUser.email}. Let's get you interlinked.</HeroDescription>: 
+                <HeroDescription>Welcome, {currentUser.name || currentUser.email}. Let's get you interlinked.</HeroDescription>: 
                 <HeroDescription>We will become interlinked.</HeroDescription>
             }
             <Alert variant='danger' show={isDeletedAlertShow}>
-                Successfully deleted your account. You screwed up.🌚
+                Successfully deleted your account.
             </Alert>
         </HomeDiv>
     );

@@ -10,14 +10,14 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { currentUser, login, loginWithGoogle } = useAuth();
+    const { authUser, login, loginWithGoogle } = useAuth();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (currentUser) {
+        if (authUser) {
             navigate("/");
         }
-    }, [currentUser, navigate]);
+    }, [authUser, navigate]);
 
     async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();
