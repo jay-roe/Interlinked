@@ -9,7 +9,7 @@ import { FaGoogle } from "react-icons/fa";
 
 export default function Register() {
     const navigate = useNavigate();
-    const { currentUser, register, loginWithGoogle } = useAuth();
+    const { authUser, register, loginWithGoogle } = useAuth();
     const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState("");
@@ -17,10 +17,10 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
-        if (currentUser) {
+        if (authUser) {
             navigate("/");
         }
-    }, [currentUser, navigate]);
+    }, [authUser, navigate]);
 
     async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();

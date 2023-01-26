@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,5 +18,8 @@ const auth = getAuth(app);
 // TODO: Adapt this when adding multiple languages. Sets the OAuth popups (Google login) to the given language.
 // auth.languageCode = 'en';
 auth.useDeviceLanguage();
+
+// Initialize firestore database
+export const firestore = getFirestore(app);
 
 export default auth;
