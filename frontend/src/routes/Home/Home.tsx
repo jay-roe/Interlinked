@@ -30,7 +30,7 @@ const Home = () => {
                 <HeroDescription>We will become interlinked.</HeroDescription>
             }
             <Alert variant='danger' show={isDeletedAlertShow}>
-                Successfully deleted your account. You screwed up.🌚
+                Successfully deleted your account.
             </Alert>
         </HomeDiv>
     );
