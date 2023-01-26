@@ -1,16 +1,16 @@
-import { Button, Image } from 'react-bootstrap';
+import { Button, Container, Image } from 'react-bootstrap';
 import { useAuth } from '../../contexts/AuthContext';
 import VerifiedIcon from '../../components/VerifiedIcon/VerifiedIcon';
 import { useState } from 'react';
 import DeleteAccountPopup from '../../components/DeleteAccountPopup/DeleteAccountPopup';
 import { useNavigate } from 'react-router-dom';
+import SocialIconGroup from '../../components/SocialIconGroup/SocialIconGroup';
 
 export default function Profile() {
     const navigate = useNavigate()
 
     const { currentUser, authUser, deleteAccount } = useAuth();
 
-    const [name, setName] = useState(currentUser?.name);
     const [isModalShow, setIsModalShow] = useState(false);
 
     async function onDeleteAccount() {
@@ -40,23 +40,95 @@ export default function Profile() {
 
     // User logged in
     return (
-        <>
-            <h1>{name || 'No name provided.'}</h1>
-            <Image src={currentUser.profilePicture} />
-            <h2>Email: {currentUser.email} <VerifiedIcon verified={authUser.emailVerified} showText /></h2>
-            {/* <h2>About</h2>
-            <p>{currentUser.bio}</p>
-            <input
-                id="edit-name"
-                name="name"
-                type="text"
-                onChange={e => setName(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-                placeholder="Name"
-            /> */}
+        <Container>
+            <h1>Your Information</h1>
+            {currentUser.profilePicture && <Image src={currentUser.profilePicture} />}
+            <p>{currentUser?.name || 'No name provided.'}</p>
+            <p>Email: {currentUser.email} <VerifiedIcon verified={authUser.emailVerified} showText /></p>
+            
+            <h1>Profile Preview</h1>
+            <h2>About</h2>
+            <p>{currentUser.bio || 'No bio given.'}</p>
+            <h2>Contact Info</h2>
+                <p>✉ <a href={`mailto:${currentUser.email}`}>{currentUser.email}</a></p>
+                {currentUser.phone && <p>📞 <a href={`telno:${currentUser.phone}`}>{currentUser.phone}</a></p>}
+            <h2>Socials 📫 </h2>
+            <SocialIconGroup socials={currentUser.socials} />
+            <h2>Languages 🗨 </h2>
+            <ul>
+            {
+                currentUser.languages.map((lang, index) => <li key={index}>{lang}</li>)
+            }
+            </ul>
+            <h2>Education 🏫 </h2>
+            {
+                currentUser.education.map((ed, index) => (
+                    <div key={index} style={{ border: '1px solid black', borderRadius: '6px', padding: '1em', marginBottom: '1em' }}>
+                        {ed.image && <Image src={ed.image} />}
+                        <h3>{ed.name}</h3>
+                        <h4>{ed.location}</h4>
+                        <h6>{ed.startDate.toDate().getFullYear()} - {ed.endDate ? ed.endDate.toDate().getFullYear() : 'present'}</h6>
+                        <div>{ed.description}</div>
+                    </div>
+                ))
+            }
+            <h2>Courses 📚</h2>
+            {
+                currentUser.courses.map((course, index) => (
+                    <div key={index} style={{ border: '1px solid black', borderRadius: '6px', padding: '1em', marginBottom: '1em' }}>
+                        <h3>{course.title}</h3>
+                        <h4>{course.courseNo}</h4>
+                        <div>{course.description}</div>
+                    </div>
+                ))
+            }
+
+            <h2>Experience 🏢</h2>
+            {
+                currentUser.experience.map((exp, index) => (
+                    <div key={index} style={{ border: '1px solid black', borderRadius: '6px', padding: '1em', marginBottom: '1em' }}>
+                        {exp.image && <Image src={exp.image} />}
+                        <h3>{exp.title}</h3>
+                        <h4>{exp.employer}</h4>
+                        <h5>{exp.location}</h5>
+                        <h6>{exp.startDate.toDate().toLocaleDateString()}{exp.endDate ? ' - ' + exp.endDate.toDate().toLocaleDateString() : ''}</h6>
+                        <div>{exp.description}</div>
+                    </div>
+                ))
+            }
+            <h2>Projects 🛠</h2>
+            {
+                currentUser.projects.map((project, index) => (
+                    <div key={index} style={{ border: '1px solid black', borderRadius: '6px', padding: '1em', marginBottom: '1em' }}>
+                        {project.image && <Image src={project.image} />}
+                        <h3>{project.title}</h3>
+                        <h6>{project.startDate.toDate().getFullYear()} - {project.endDate ? project.endDate.toDate().getFullYear() : 'present'}</h6>
+                        <div>{project.description}</div>
+                        {project.repoLink && <Button href={project.repoLink}>View Source</Button>}
+                        {project.demoLink && <Button href={project.demoLink}>View Demo</Button>}
+                    </div>
+                ))
+            }
+            <h2>Skills 💪</h2>
+            <ul>
+            {
+                currentUser.skills.map((skill, index) => <li key={index}>{skill.name}</li>)
+            }
+            </ul>
+
+            <h2>Awards 🏆</h2>
+            {
+                currentUser.awards.map((award, index) => (
+                    <div key={index} style={{ border: '1px solid black', borderRadius: '6px', padding: '1em', marginBottom: '1em' }}>
+                        <h3>{award.title}</h3>
+                        <h6>{award.date.toDate().toLocaleDateString()}</h6>
+                        <div>{award.description}</div>
+                    </div>
+                ))
+            }
 
             <Button variant='danger' onClick={() => setIsModalShow(true)}>Delete account</Button>
             <DeleteAccountPopup show={isModalShow} onHide={() => setIsModalShow(false)} onDeleteAccount={onDeleteAccount} />
-        </>
+        </Container>
     )
 }
