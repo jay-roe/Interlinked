@@ -1,0 +1,80 @@
+name: Interlinked CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  CI: ""  # Use this because otherwise warnings will make the pipeline fail
+  REACT_APP_FIREBASE_API_KEY: ${{secrets.REACT_APP_FIREBASE_API_KEY}}
+  REACT_APP_FIREBASE_AUTH_DOMAIN: ${{secrets.REACT_APP_FIREBASE_AUTH_DOMAIN}}
+  REACT_APP_FIREBASE_PROJECT_ID: ${{secrets.REACT_APP_FIREBASE_PROJECT_ID}}
+  REACT_APP_FIREBASE_STORAGE_BUCKET: ${{secrets.REACT_APP_FIREBASE_STORAGE_BUCKET}}
+  REACT_APP_FIREBASE_MESSAGING_SENDER_ID: ${{secrets.REACT_APP_FIREBASE_MESSAGING_SENDER_ID}}
+  REACT_APP_FIREBASE_APP_ID: ${{secrets.REACT_APP_FIREBASE_APP_ID}}
+  REACT_APP_API_URL: http://localhost:8001/
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js for Frontend ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - uses: actions/checkout@v3
+    - name: Use Node.js for Backend ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+
+    - uses: actions/checkout@v3
+    - name: Use Node.js for Cypress ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        cache-dependency-path: cypress/package-lock.json
+
+    - name: Run React tests & test coverage
+      run: |
+        cd frontend
+        npm ci
+        npm run build --if-present
+        npm run test:coverage
+
+    - name: Run Express tests & test coverage
+      run: |
+        cd backend
+        npm ci
+        npm run build --if-present
+        npm run test:coverage
+
+    - name: Run Frontend for Cypress
+      run: |
+        cd frontend
+        npm run start &
+
+    - name: Run Backend for Cypress
+      run: |
+        cd backend
+        npm run start &
+      env:
+        PORT: 8001
+
+    - name: Run e2e tests
+      uses: cypress-io/github-action@v4
+      with:
+        working-directory: ./cypress
