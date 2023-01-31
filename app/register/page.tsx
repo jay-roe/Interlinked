@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Link from "next/link";
 import { HorizontalSeparator } from "./Register.styles";
 import {useState} from "react";
-import { useAuth } from "../../../../contexts/AuthContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { Button } from "react-bootstrap";
 import { FaGoogle } from "react-icons/fa";
 
 export default function Register() {
-    const navigate = useNavigate();
+    const router = useRouter();
     const { authUser, register, loginWithGoogle } = useAuth();
     const [loading, setLoading] = useState(false);
 
@@ -18,9 +20,9 @@ export default function Register() {
 
     useEffect(() => {
         if (authUser) {
-            navigate("/");
+            router.push("/");
         }
-    }, [authUser, navigate]);
+    }, [authUser, router]);
 
     async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();
@@ -32,7 +34,7 @@ export default function Register() {
         try {
             setLoading(true);
             await register(email, password);
-            navigate("/profile");
+            router.push("/profile");
         } catch (err) {
             alert(err.message);
         }
@@ -104,7 +106,7 @@ export default function Register() {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <Link
-                                to="/login"
+                                href="/login"
                                 className="text-blue-600 hover:underline dark:text-blue-500"
                             >
                                 Already have an account? Login

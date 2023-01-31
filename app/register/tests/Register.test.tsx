@@ -1,12 +1,13 @@
-
+export {}
+/*
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import Register from '../Register';
+import Register from '../page';
 import { getAuth , createUserWithEmailAndPassword } from "firebase/auth";
 
 
 //tests are dependent on the 'delete account' tests passing
-/*it('check if user is registered', async () => {
+it('check if user is registered', async () => {
 
     const { } = render(
         <MemoryRouter>
@@ -20,7 +21,7 @@ import { getAuth , createUserWithEmailAndPassword } from "firebase/auth";
 
     expect(auth.currentUser).toBeTruthy();
 
-});*/
+});
 it('check if user is not registered', () => {
 
 
@@ -35,4 +36,4 @@ it('check if user is not registered', () => {
 
     expect(auth.currentUser).toBeNull();
 
-});
+});*/

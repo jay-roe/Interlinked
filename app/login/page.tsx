@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import {useEffect, useState} from "react";
 import {useAuth} from "../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
-import { HorizontalSeparator } from "../../frontend/src/routes/Register/Register.styles";
+import { HorizontalSeparator } from "@/app/register/Register.styles";
 import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
