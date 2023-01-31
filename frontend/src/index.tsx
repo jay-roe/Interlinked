@@ -9,7 +9,7 @@ import NavBar from '../../components/NavBar/NavBar';
 
 import {Global} from './index.styles';
 import {ProtectedRoute} from "./components/ProtectedRoute/ProtectedRoute";
-import Login from "./routes/Login/Login";
+import Login from "../../app/login/page";
 import Register from "./routes/Register/Register";
 import {AuthProvider} from "../../contexts/AuthContext";
 import Profile from './routes/Profile/Profile';

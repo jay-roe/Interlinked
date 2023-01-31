@@ -1,23 +1,27 @@
+"use client";
+
 import { StyledLogin } from "./Login.styles";
-import {Link, useNavigate} from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import {useEffect, useState} from "react";
-import {useAuth} from "../../../../contexts/AuthContext";
+import {useAuth} from "../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
-import { HorizontalSeparator } from "../Register/Register.styles";
+import { HorizontalSeparator } from "../../frontend/src/routes/Register/Register.styles";
 import { FaGoogle } from "react-icons/fa";
 
 const Login = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
     const { authUser, login, loginWithGoogle } = useAuth();
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (authUser) {
-            navigate("/");
+            router.push("/");
         }
-    }, [authUser, navigate]);
+    }, [authUser, router]);
 
     async function handleFormSubmit(e: React.MouseEvent) {
         e.preventDefault();
@@ -25,7 +29,7 @@ const Login = () => {
         try {
             setLoading(true);
             await login(email, password);
-            navigate("/");
+            router.push("/");
         } catch (err) {
             console.error(err);
             alert("Failed to login");
@@ -87,7 +91,7 @@ const Login = () => {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <Link
-                                to="/register"
+                                href="/register"
                                 className="text-blue-600 hover:underline dark:text-blue-500"
                             >
                                 Don't have an account? Register
