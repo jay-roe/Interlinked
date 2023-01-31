@@ -1,6 +1,6 @@
 import { Modal } from 'react-bootstrap';
-import type { DeleteAccountPopupProps } from '../../models/DeleteAccountPopup';
-import { useAuth } from '../../../../contexts/AuthContext';
+import type { DeleteAccountPopupProps } from '@/types/DeleteAccountPopup';
+import { useAuth } from '@/contexts/AuthContext';
 import DeleteAccountPopupOAuth from '../DeleteAccountPopupOAuth/DeleteAccountPopupOAuth';
 import DeleteAccountPopupEmail from '../DeleteAccountPopupEmail/DeleteAccountPopupEmail';
 

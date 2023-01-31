@@ -1,4 +1,4 @@
-import { VerifiedIconProps } from '../../models/VerifiedIcon';
+import { VerifiedIconProps } from '@/types/VerifiedIcon';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
 import { GreenVerified, RedVerified } from './VerifiedIcon.styles';
 

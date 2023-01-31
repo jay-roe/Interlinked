@@ -1,8 +1,8 @@
 import { Button, Modal } from 'react-bootstrap';
-import type { DeleteAccountPopupChildProps } from '../../models/DeleteAccountPopup';
+import type { DeleteAccountPopupChildProps } from '@/types/DeleteAccountPopup';
 import { RedText } from './DeleteAccountPopupOAuth.styles';
 import { useState } from 'react';
-import { useAuth } from '../../../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
 import type { UserCredential } from 'firebase/auth';
 

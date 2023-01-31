@@ -33,6 +33,7 @@ export default function Register() {
 
         try {
             setLoading(true);
+            console.log(register);
             await register(email, password);
             router.push("/profile");
         } catch (err) {

@@ -1,4 +1,4 @@
-import { User } from "../../../../types/User";
+import { User } from "@/types/User";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 
 export default function SocialIconGroup({

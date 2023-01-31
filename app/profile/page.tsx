@@ -1,13 +1,15 @@
+"use client";
+
 import { Button, Container, Image } from 'react-bootstrap';
-import { useAuth } from '../../../../contexts/AuthContext';
-import VerifiedIcon from '../../components/VerifiedIcon/VerifiedIcon';
+import { useAuth } from '@/contexts/AuthContext';
+import VerifiedIcon from '@/components/VerifiedIcon/VerifiedIcon';
 import { useState } from 'react';
-import DeleteAccountPopup from '../../components/DeleteAccountPopup/DeleteAccountPopup';
-import { useNavigate } from 'react-router-dom';
-import SocialIconGroup from '../../components/SocialIconGroup/SocialIconGroup';
+import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
+import { useRouter } from 'next/navigation';
+import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
 
 export default function Profile() {
-    const navigate = useNavigate()
+    const router = useRouter()
 
     const { currentUser, authUser, deleteAccount } = useAuth();
 
@@ -18,7 +20,7 @@ export default function Profile() {
             await deleteAccount();
 
             // Redirect to home page, with state saying account was just deleted
-            navigate('/', { state: { deletedAccount: true } });
+            router.push('/')  // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
             setIsModalShow(false);
         } catch(err) {
             console.error(err);

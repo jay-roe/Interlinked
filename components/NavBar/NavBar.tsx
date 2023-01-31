@@ -16,7 +16,6 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse>
                     <Nav>
-                        <Nav.Link href="demo">Demo</Nav.Link>
                         {
                             // Logged in user sees profile and logout buttons
                             // Logged out user sees Login and Register buttons

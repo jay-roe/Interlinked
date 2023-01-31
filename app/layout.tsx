@@ -1,5 +1,6 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from "@/components/NavBar/NavBar"
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function RootLayout({
   children,
@@ -14,8 +15,10 @@ export default function RootLayout({
       */}
       <head />
         <body>
-          <NavBar />
-          {children}
+          <AuthProvider>
+            <NavBar />
+            {children}
+          </AuthProvider>
         </body>
     </html>
   )
