@@ -1,4 +1,5 @@
-import './globals.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import NavBar from "@/components/NavBar/NavBar"
 
 export default function RootLayout({
   children,
@@ -12,7 +13,10 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+        <body>
+          <NavBar />
+          {children}
+        </body>
     </html>
   )
 }

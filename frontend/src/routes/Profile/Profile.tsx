@@ -1,5 +1,5 @@
 import { Button, Container, Image } from 'react-bootstrap';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../../contexts/AuthContext';
 import VerifiedIcon from '../../components/VerifiedIcon/VerifiedIcon';
 import { useState } from 'react';
 import DeleteAccountPopup from '../../components/DeleteAccountPopup/DeleteAccountPopup';

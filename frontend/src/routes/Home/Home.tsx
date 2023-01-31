@@ -1,5 +1,5 @@
 import { Alert } from "react-bootstrap";
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../../../contexts/AuthContext";
 import { HeroDescription, HomeDiv, Title } from "./Home.styles";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";

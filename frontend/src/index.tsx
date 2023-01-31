@@ -5,13 +5,13 @@ import reportWebVitals from './reportWebVitals';
 
 import Home from './routes/Home/Home';
 import Demo from './routes/Demo/Demo';
-import NavBar from './components/NavBar/NavBar';
+import NavBar from '../../components/NavBar/NavBar';
 
 import {Global} from './index.styles';
 import {ProtectedRoute} from "./components/ProtectedRoute/ProtectedRoute";
 import Login from "./routes/Login/Login";
 import Register from "./routes/Register/Register";
-import {AuthProvider} from "./contexts/AuthContext";
+import {AuthProvider} from "../../contexts/AuthContext";
 import Profile from './routes/Profile/Profile';
 
 const root = ReactDOM.createRoot(

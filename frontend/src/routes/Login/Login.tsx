@@ -1,7 +1,7 @@
 import { StyledLogin } from "./Login.styles";
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {useAuth} from "../../contexts/AuthContext";
+import {useAuth} from "../../../../contexts/AuthContext";
 import { Button } from "react-bootstrap";
 import { HorizontalSeparator } from "../Register/Register.styles";
 import { FaGoogle } from "react-icons/fa";

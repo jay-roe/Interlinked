@@ -2,7 +2,7 @@ import { Button, Modal, Form } from 'react-bootstrap';
 import type { DeleteAccountPopupChildProps } from '../../models/DeleteAccountPopup';
 import { RedText } from './DeleteAccountPopupEmail.styles';
 import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../../../contexts/AuthContext';
 
 export default function DeleteAccountPopupEmail({onHide, onDeleteAccount}: DeleteAccountPopupChildProps) {
   const [password, setPassword] = useState<string>();
