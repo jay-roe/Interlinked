@@ -19,28 +19,30 @@ export default function DeleteAccountPopupEmail({onHide, onDeleteAccount}: Delet
   
   // Incorrect password was given if on delete returned false
   const handleDeleteClick = async () => {
-    await reauthenticateEmail(currentUser.email, password);
-    
-    const isCorrectPassword = await onDeleteAccount();
-    setIncorrectPassword(!isCorrectPassword);
+    try {
+      await reauthenticateEmail(currentUser.email, password);
+      await onDeleteAccount();
+    } catch (err) {
+      setIncorrectPassword(true);
+    }
   }
     
   return (
-    <>
+    <div data-testid="delete-acc-email">
       <Modal.Body>
         <h5>Please enter your password.</h5>
         <RedText>
           This action is irreversible. Your account, and all of its data, will be permanently deleted.
         </RedText>
-        <Form.Control className='mb-3' type="password" placeholder="Password" autoComplete="new-password" value={password} onChange={e => setPassword(e.target.value)} />
+        <Form.Control data-testid="pw-field" className='mb-3' type="password" placeholder="Password" autoComplete="new-password" value={password} onChange={e => setPassword(e.target.value)} />
         {
-          incorrectPassword && <RedText>Incorrect password.</RedText>
+          incorrectPassword ? <RedText data-testid="incorrect-pw">Incorrect password.</RedText> : null
         }
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
-        <Button onClick={onHideLocal}>Close</Button>
+        <Button data-testid="del-acc" onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
+        <Button data-testid="close-popup" onClick={onHideLocal}>Close</Button>
       </Modal.Footer>
-    </>
+    </div>
   );
 }

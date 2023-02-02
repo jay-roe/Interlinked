@@ -22,7 +22,7 @@ export default function DeleteAccountPopup({show, onHide, onDeleteAccount}: Dele
       </Modal.Header>
       {
         // Account has OAuth provider. Make them confirm email associated to account.
-        authUser.providerData.length > 0 ?
+        authUser.providerData[0].providerId == "google.com" ?
         <DeleteAccountPopupOAuth onHide={onHide} onDeleteAccount={onDeleteAccount} />
         :
         // Account is email/password. Make them confirm password.
