@@ -14,6 +14,13 @@ jest.mock('contexts/AuthContext', () => ({
     } 
 }));
 
+const intersectionObserverMock = () => ({
+     observe: () => null,
+     disconnect: () => jest.fn()
+})
+
+window.IntersectionObserver = jest.fn().mockImplementation(intersectionObserverMock);
+
 it("deletes account given correct password", async () => {
     const onDel = jest.fn().mockResolvedValue(true);
     const { findByTestId } = render(
