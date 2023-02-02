@@ -3,11 +3,11 @@ import '@testing-library/jest-dom'
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import NavBar from '../NavBar';
 
-jest.mock("contexts/AuthContext", () => ({
+jest.mock("contexts/AuthContext", () => ({  // override the real useAuth, which would require firebase connection
     useAuth: jest.fn()
 }))
 
-const mockedUseAuth = useAuth as jest.Mock<any>;
+const mockedUseAuth = useAuth as jest.Mock<any>;  // make useAuth modifiable based on the test case
 
 it('render nav bar component with a user', async () => {
     mockedUseAuth.mockImplementation(() => {
