@@ -1,19 +1,22 @@
-import { Button, Modal } from 'react-bootstrap';
 import type { DeleteAccountPopupChildProps } from '@/types/DeleteAccountPopup';
-import { RedText } from './DeleteAccountPopupOAuth.styles';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
 import type { UserCredential } from 'firebase/auth';
+import Button from '../Button/Button';
+import { Dialog } from '@headlessui/react';
 
 export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: DeleteAccountPopupChildProps) {
   const [credential, setCredential] = useState<UserCredential>();
   const [isAuthError, setAuthError] = useState<boolean>(false);
 
+  const [open, setOpen] = useState<boolean>(true);
+
   const { loginWithGoogle, reauthenticateOAuth } = useAuth();
 
   // Clear password field before closing modal
   const onHideLocal = () => {
+    setOpen(false);
     setCredential(null);
     setAuthError(false);
     onHide();
@@ -40,21 +43,19 @@ export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: Delet
 
   return (
     <div data-testid="delete-acc-oauth">
-      <Modal.Body>
+      {/* <Dialog open={open} onClose={onHideLocal}> */}
         <h5>Please login with one of the methods below.</h5>
-        <RedText>
+        <p className='text-red-500'>
           This action is irreversible. Your account, and all of its data, will be permanently deleted.
-        </RedText>
+        </p>
         {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
         <Button onClick={() => updateCredential()}><FaGoogle /> Login with Google</Button>
         {
-          isAuthError && <RedText>Authentication error. Please try logging in again.</RedText>
+          isAuthError && <p className='text-red-500'>Authentication error. Please try logging in again.</p>
         }
-      </Modal.Body>
-      <Modal.Footer>
         <Button data-testid="del-acc" disabled={!credential} onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
         <Button data-testid="close-popup" onClick={onHideLocal}>Close</Button>
-      </Modal.Footer>
+      {/* </Dialog> */}
     </div>
   );
 }

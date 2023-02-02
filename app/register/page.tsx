@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { HorizontalSeparator } from "./Register.styles";
+import styles from './Register.module.css';
 import {useState} from "react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "react-bootstrap";
+import Button from "@/components/Button/Button";
 import { FaGoogle } from "react-icons/fa";
+import GoogleButton from "@/components/Button/GoogleButton/GoogleButton";
 
 export default function Register() {
     const router = useRouter();
@@ -19,6 +20,8 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
 
     useEffect(() => {
+        console.log(authUser);
+        
         if (authUser) {
             router.push("/");
         }
@@ -61,7 +64,7 @@ export default function Register() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 autoComplete="email"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                                 placeholder="Email address"
                             />
                         </div>
@@ -73,7 +76,7 @@ export default function Register() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
+                                className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                                 placeholder="Password"
                             />
                         </div>
@@ -85,8 +88,8 @@ export default function Register() {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 autoComplete="current-password"
                                 required
-                                className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
+                                className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+                                placeholder="Confirm Password"
                             />
                         </div>
                     </div>
@@ -100,9 +103,9 @@ export default function Register() {
                             Register
                         </Button>
                     </div>
-                    <HorizontalSeparator>OR</HorizontalSeparator>
+                    <div className={styles.HorizontalSeparator}></div>
                     <div>
-                        <Button onClick={() => loginWithGoogle()}><FaGoogle /> Register with Google</Button>
+                        <GoogleButton onClick={() => loginWithGoogle()}>Register with Google</GoogleButton>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm">

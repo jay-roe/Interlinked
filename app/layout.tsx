@@ -1,5 +1,5 @@
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import NavBar from "@/components/NavBar/NavBar"
+import 'styles/globals.css'
+import NavBar from "@/components/NavBar/NavBar";
 import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function RootLayout({
@@ -16,8 +16,10 @@ export default function RootLayout({
       <head />
         <body>
           <AuthProvider>
-            <NavBar />
-            {children}
+            <main className='min-h-screen flex flex-col bg-purple-background'>
+              <NavBar />
+              {children}
+            </main>
           </AuthProvider>
         </body>
     </html>

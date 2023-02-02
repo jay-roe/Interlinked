@@ -1,22 +1,21 @@
 import { VerifiedIconProps } from '@/types/VerifiedIcon';
 import { FaCheckCircle, FaTimesCircle } from 'react-icons/fa';
-import { GreenVerified, RedVerified } from './VerifiedIcon.styles';
 
 function VerifiedIcon({ verified, showText, showIcon }: VerifiedIconProps) {
   showIcon = showIcon || true;
   if (verified) {
     return (
-      <GreenVerified>
+      <span className='text-green-500'>
         {showIcon && <FaCheckCircle />}
         {showText && ' Verified'}
-      </GreenVerified>
+      </span>
     )
   }
   return (
-    <RedVerified>
+    <span className='text-red-500'>
       {showIcon && <FaTimesCircle />}
       {showText && ' Not verified'}
-    </RedVerified>
+    </span>
   )
 }
 
