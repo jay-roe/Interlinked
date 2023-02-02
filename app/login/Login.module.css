@@ -1,0 +1,19 @@
+.horizontal-separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.horizontal-separator::before, .horizontal-separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;  
+}
+
+.horizontal-separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.horizontal-separator:not(:empty)::after {
+  margin-left: .25em;
+}

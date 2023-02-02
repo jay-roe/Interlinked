@@ -1,3 +1,0 @@
-Remove this once we actually have models. 
-
-Models are our user-defined object types.
