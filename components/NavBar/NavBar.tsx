@@ -22,11 +22,11 @@ const NavBar = () => {
                             currentUser ?
                             <>
                                 <Nav.Link href="profile">Profile</Nav.Link>
-                                <Button onClick={() => logout()}>Logout</Button> 
+                                <Button data-testid="nav-logout" onClick={() => logout()}>Logout</Button> 
                             </>
                             :
                             <>
-                                <Nav.Link href="login">Login</Nav.Link>
+                                <Nav.Link data-testid="nav-login" href="login">Login</Nav.Link>
                                 <Nav.Link href="register">Register</Nav.Link> 
                             </>
                         }

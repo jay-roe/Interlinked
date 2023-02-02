@@ -76,6 +76,7 @@ const Login = () => {
                     </div>
                     <div>
                         <Button
+                            data-testid="login"
                             type="submit"
                             onClick={handleFormSubmit}
                             disabled={loading}
