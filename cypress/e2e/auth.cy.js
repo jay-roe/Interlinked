@@ -13,7 +13,7 @@ describe('Full auth spec', () => {
         cy.get('[data-testid=register]').click()
 
         cy.get('[data-testid=profile-title]')
-            .should('contain', 'Your Information')  // Makes sure we made it to the profile
+            .should('contain', 'No name provided')  // Makes sure we made it to the profile
     })
 
     it('can logout', () => {
