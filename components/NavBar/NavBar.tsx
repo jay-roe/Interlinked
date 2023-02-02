@@ -20,6 +20,7 @@ export default function NavBar() {
   const navLinks = function navigation(currentUser: User) {
     return currentUser ? 
     [
+      { name: 'Home', href: '/', current: true },
       { name: 'Profile', href: '/profile', current: false },
       { name: 'Logout', href: '#', onClick: logout, dataTestid: "nav-logout", current: false },
     ] :
