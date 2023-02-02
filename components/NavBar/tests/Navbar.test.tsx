@@ -1,5 +1,5 @@
-import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom'
+import { useAuth } from '@/contexts/AuthContext';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import NavBar from '../NavBar';
 

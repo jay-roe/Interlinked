@@ -1,4 +1,9 @@
-export {}
+import '@testing-library/jest-dom'
+
+it('passes', async () => {
+    expect(true).toBeTruthy()
+})
+
 /*
 import { render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';

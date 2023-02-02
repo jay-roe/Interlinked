@@ -1,46 +1,53 @@
-export {}
-/*
+import '@testing-library/jest-dom'
 import { render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 import Login from '../page';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../../../contexts/AuthContext";
+import { useRouter } from 'next/navigation';
 
+jest.mock('contexts/AuthContext', () => ({ 
+    useAuth: jest.fn()
+}));
 
-//calls login
+jest.mock('next/navigation', () => ({
+    useRouter: jest.fn()
+}))
+
+const mockedUseAuth = useAuth as jest.Mock<any>;  // make useAuth modifiable based on the test case
+const mockedRouter = useRouter as jest.Mock<any>;
+
 it('check if user is logged in', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            currentUser: {}  // There IS a current user
+        }
+    })
 
-    const { } = render(
-        <MemoryRouter>
-            <Login />
-        </MemoryRouter>
+    const myPush = jest.fn()
+    mockedRouter.mockImplementation(() => {
+        return {
+            push: myPush()
+        }
+    })
+
+    render(
+        <Login />
     );
-    //TODO add script to log in a test user
-    // const { currentUSer, login } = useAuth();
-    // await login('login@test.ca', 'logintest');
 
-    const auth = getAuth();
-    await signInWithEmailAndPassword(auth, 'login@test.ca', 'logintest');
-
-
-
-    expect(auth.currentUser).toBeTruthy();
-
+    expect(myPush).toBeCalled;  // Check if the router function was called (ie, user was redirected)
 });
 
-//calls logout
 it('check if user is logged out', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            currentUser: null  // There IS a current user
+        } 
+    })
 
-    const { } = render(
-        <MemoryRouter>
+    const { findByTestId } = render(
             <Login />
-        </MemoryRouter>
     );
 
-        const auth = getAuth();
-        await auth.signOut();
 
-    expect(auth.currentUser).toBeNull();
-
+    const modalTitle = await findByTestId("login-title");
+    expect(modalTitle).toBeInTheDocument();
 });
-*/

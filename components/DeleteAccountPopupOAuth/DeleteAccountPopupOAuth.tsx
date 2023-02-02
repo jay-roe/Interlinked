@@ -39,7 +39,7 @@ export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: Delet
   }
 
   return (
-    <div data-testid="delete-acc-oauth" >
+    <div data-testid="delete-acc-oauth">
       <Modal.Body>
         <h5>Please login with one of the methods below.</h5>
         <RedText>
@@ -52,8 +52,8 @@ export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: Delet
         }
       </Modal.Body>
       <Modal.Footer>
-        <Button disabled={!credential} onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
-        <Button onClick={onHideLocal}>Close</Button>
+        <Button data-testid="del-acc" disabled={!credential} onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
+        <Button data-testid="close-popup" onClick={onHideLocal}>Close</Button>
       </Modal.Footer>
     </div>
   );

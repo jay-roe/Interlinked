@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 
 export default function DeleteAccountPopupEmail({onHide, onDeleteAccount}: DeleteAccountPopupChildProps) {
-  const [password, setPassword] = useState<string>();
+  const [password, setPassword] = useState<string>("");
   const [incorrectPassword, setIncorrectPassword] = useState<boolean>(false);
 
   const { currentUser, reauthenticateEmail } = useAuth();
