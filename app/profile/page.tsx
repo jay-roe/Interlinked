@@ -34,7 +34,7 @@ export default function Profile() {
         return (
             <>
                 <h1>Your Profile</h1>
-                <h2>You must be logged in to edit your profile.</h2>
+                <h2 data-testid="profile-login-prompt">You must be logged in to edit your profile.</h2>
                 <Button href='login'>Login</Button>
                 <Button href='register'>Register</Button>
             </>
@@ -49,7 +49,7 @@ export default function Profile() {
                     <img className='w-40 md:w-52 h-50 rounded-full' src={currentUser.profilePicture} alt={currentUser.name} />
                 </div>}
                 <div className='row-auto place-self-start self-center'>
-                    <h1 className='font-extrabold text-3xl'>{currentUser?.name || 'No name provided.'}</h1>
+                    <h1 data-testid="profile-title" className='font-extrabold text-3xl'>{currentUser?.name || 'No name provided.'}</h1>
                     <p>{currentUser.bio || 'No bio given.'}</p>
                 </div>
             </div>
@@ -135,7 +135,7 @@ export default function Profile() {
                 ))
             }
 
-            <Button variant='danger' onClick={() => setIsModalShow(true)}>Delete account</Button>
+            <Button data-testid="danger-zone" variant='danger' onClick={() => setIsModalShow(true)}>Delete account</Button>
             <DeleteAccountPopup show={isModalShow} onHide={() => setIsModalShow(false)} onDeleteAccount={onDeleteAccount} />
         </div>
     )

@@ -21,11 +21,11 @@ export default function NavBar() {
     return currentUser ? 
     [
       { name: 'Profile', href: '/profile', current: false },
-      { name: 'Logout', href: '#', onClick: logout, current: false },
+      { name: 'Logout', href: '#', onClick: logout, dataTestid: "nav-logout", current: false },
     ] :
     [
       { name: 'Home', href: '/', current: true },
-      { name: 'Login', href: '/login', current: false },
+      { name: 'Login', href: '/login', dataTestid: "nav-login", current: false },
       { name: 'Register', href: '/register', current: false },
     ]
   }(currentUser)
@@ -69,6 +69,7 @@ export default function NavBar() {
                         key={item.name}
                         href={item.href}
                         onClick={item.onClick}
+                        data-testid={item.dataTestid}
                         className={classNames(
                           item.href === pathname ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                           'px-3 py-2 rounded-md text-sm font-medium'

@@ -95,6 +95,7 @@ export default function Register() {
                     </div>
                     <div>
                         <Button
+                            data-testid="register"
                             type="submit"
                             onClick={(event) => handleFormSubmit(event)}
                             disabled={loading}

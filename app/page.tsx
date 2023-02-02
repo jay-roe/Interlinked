@@ -30,8 +30,8 @@ const Home = () => {
             {/* Here goes the app's components */}
             {
                 currentUser ? 
-                <p className='text-center text-2xl'>Welcome, {currentUser.name || currentUser.email}. Let&apos;s get you interlinked.</p>: 
-                <p className='text-center text-2xl'>We will become interlinked.</p>
+                <p data-testid="welcome-msg" className='text-center text-2xl'>Welcome, {currentUser.name || currentUser.email}. Let&apos;s get you interlinked.</p>: 
+                <p data-testid="base-msg" className='text-center text-2xl'>We will become interlinked.</p>
             }
             {/* <Alert variant='danger' show={isDeletedAlertShow}>
                 Successfully deleted your account.
