@@ -2,7 +2,7 @@ name: Interlinked CI
 
 on:
   push:
-    branches: [ 83-migration-to-nextjs ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
