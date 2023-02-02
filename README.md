@@ -23,9 +23,8 @@ Develop a LinkedIn clone with a twist!
 - Languages
   - Typescript
 - Platforms
-  - React
+  - Next.js
   - Firebase
-  - Express
   - Cypress
 
 ## Setup ⚙️
