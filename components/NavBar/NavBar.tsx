@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import { Fragment, useEffect, useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { FiMenu, FiBell } from "react-icons/fi";
-import { HiOutlineXMark } from "react-icons/hi2";
-import { useAuth } from "../../contexts/AuthContext";
-import { User } from "@/types/User";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Fragment, } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { FiMenu, FiBell } from 'react-icons/fi';
+import { HiOutlineXMark } from 'react-icons/hi2';
+import { useAuth } from '../../contexts/AuthContext';
+import { User } from '@/types/User';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function NavBar() {
@@ -20,25 +20,25 @@ export default function NavBar() {
   const navLinks = (function navigation(currentUser: User) {
     return currentUser
       ? [
-          { name: "Home", href: "/", current: true },
-          { name: "Profile", href: "/profile", current: false },
+          { name: 'Home', href: '/', current: true },
+          { name: 'Profile', href: '/profile', current: false },
           {
-            name: "Logout",
-            href: "#",
+            name: 'Logout',
+            href: '#',
             onClick: logout,
-            dataTestid: "nav-logout",
+            dataTestid: 'nav-logout',
             current: false,
           },
         ]
       : [
-          { name: "Home", href: "/", current: true },
+          { name: 'Home', href: '/', current: true },
           {
-            name: "Login",
-            href: "/login",
-            dataTestid: "nav-login",
+            name: 'Login',
+            href: '/login',
+            dataTestid: 'nav-login',
             current: false,
           },
-          { name: "Register", href: "/register", current: false },
+          { name: 'Register', href: '/register', current: false },
         ];
   })(currentUser);
 
@@ -87,12 +87,12 @@ export default function NavBar() {
                         data-testid={item.dataTestid}
                         className={classNames(
                           item.href === pathname
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
                         )}
                         aria-current={
-                          item.href === pathname ? "page" : undefined
+                          item.href === pathname ? 'page' : undefined
                         }
                       >
                         {item.name}
@@ -118,7 +118,7 @@ export default function NavBar() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src={currentUser.profilePicture || ""}
+                          src={currentUser.profilePicture || ''}
                           alt={currentUser.name}
                         />
                       </Menu.Button>
@@ -137,10 +137,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Your Profile
                             </a>
@@ -150,10 +149,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Settings
                             </a>
@@ -163,10 +161,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(
-                                active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
-                              )}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Sign out
                             </a>
@@ -188,11 +185,11 @@ export default function NavBar() {
                   href={item.href}
                   className={classNames(
                     item.href === pathname
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block rounded-md px-3 py-2 text-base font-medium"
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium'
                   )}
-                  aria-current={item.href === pathname ? "page" : undefined}
+                  aria-current={item.href === pathname ? 'page' : undefined}
                 >
                   {item.name}
                 </Link>

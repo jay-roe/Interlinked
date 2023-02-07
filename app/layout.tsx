@@ -1,6 +1,6 @@
-import "styles/globals.css";
-import NavBar from "@/components/NavBar/NavBar";
-import { AuthProvider } from "@/contexts/AuthContext";
+import 'styles/globals.css';
+import NavBar from '@/components/NavBar/NavBar';
+import { AuthProvider } from '@/contexts/AuthContext';
 
 export default function RootLayout({
   children,

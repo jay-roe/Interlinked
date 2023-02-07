@@ -1,9 +1,9 @@
-import { FaLink } from "react-icons/fa";
+import { FaLink } from 'react-icons/fa';
 
 export default function LinkIcon({
   linked,
   showText,
-  size=40
+  size = 40,
 }: {
   linked?: boolean;
   showText?: boolean;
@@ -22,7 +22,13 @@ export default function LinkIcon({
   // Not yet linked, show 'Link' button
   return (
     <div className="flex min-w-min basis-4">
-      <FaLink size={size} viewBox='-21 -21 554 554' color='transparent' stroke='orange' strokeWidth='1rem' />
+      <FaLink
+        size={size}
+        viewBox="-21 -21 554 554"
+        color="transparent"
+        stroke="orange"
+        strokeWidth="1rem"
+      />
       {showText && <p className="text-accent-orange">Link</p>}
     </div>
   );

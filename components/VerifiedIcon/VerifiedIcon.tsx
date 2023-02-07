@@ -5,18 +5,18 @@ function VerifiedIcon({ verified, showText, showIcon }: VerifiedIconProps) {
   showIcon = showIcon || true;
   if (verified) {
     return (
-      <span className='text-green-500'>
+      <span className="text-green-500">
         {showIcon && <FaCheckCircle />}
         {showText && ' Verified'}
       </span>
-    )
+    );
   }
   return (
-    <span className='text-red-500'>
+    <span className="text-red-500">
       {showIcon && <FaTimesCircle />}
       {showText && ' Not verified'}
     </span>
-  )
+  );
 }
 
-export default VerifiedIcon
+export default VerifiedIcon;

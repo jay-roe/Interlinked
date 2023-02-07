@@ -1,13 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+'use client';
 
-import { useAuth } from "@/contexts/AuthContext";
-import { useState } from "react";
-import DeleteAccountPopup from "@/components/DeleteAccountPopup/DeleteAccountPopup";
-import { useRouter } from "next/navigation";
-import SocialIconGroup from "@/components/SocialIconGroup/SocialIconGroup";
-import Button from "@/components/Button/Button";
-import LinkIcon from "@/components/LinkIcon/LinkIcon";
+import { useAuth } from '@/contexts/AuthContext';
+import { useState } from 'react';
+import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
+import { useRouter } from 'next/navigation';
+import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
+import Button from '@/components/Button/Button';
+import LinkIcon from '@/components/LinkIcon/LinkIcon';
 
 export default function Profile() {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function Profile() {
       await deleteAccount();
 
       // Redirect to home page, with state saying account was just deleted
-      router.push("/"); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
+      router.push('/'); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
       setIsModalShow(false);
     } catch (err) {
       console.error(err);
@@ -50,7 +50,7 @@ export default function Profile() {
         {currentUser.profilePicture && (
           <div className="row-auto">
             <img
-              className="h-40 w-40 rounded-full md:w-52 m-auto"
+              className="m-auto h-40 w-40 rounded-full md:w-52"
               src={currentUser.profilePicture}
               alt={currentUser.name}
             />
@@ -58,12 +58,12 @@ export default function Profile() {
         )}
         <div className="row-auto place-self-start self-center text-center md:text-left">
           <h1 data-testid="profile-title" className="text-3xl font-extrabold">
-            {currentUser?.name || "No name provided."}
+            {currentUser?.name || 'No name provided.'}
           </h1>
-          <p>{currentUser.bio || "No bio given."}</p>
+          <p>{currentUser.bio || 'No bio given.'}</p>
         </div>
       </div>
-      <div className="mb-3 mx-auto">
+      <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
       <div className="mb-3 flex max-w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3 font-semibold">
@@ -71,9 +71,11 @@ export default function Profile() {
         <p>{currentUser.connections.length} Links</p>
       </div>
 
-      <h1 className="text-2xl font-extrabold">Link with {currentUser.name.split(' ')[0]}</h1>
+      <h1 className="text-2xl font-extrabold">
+        Link with {currentUser.name?.split(' ')[0]}
+      </h1>
       <p>
-        ✉ <a href={`mailto:${currentUser.email}`}>{currentUser.email}</a>{" "}
+        ✉ <a href={`mailto:${currentUser.email}`}>{currentUser.email}</a>{' '}
         {/* TODO: Add to edit profile: <VerifiedIcon verified={authUser.emailVerified} showText /> */}
       </p>
       {currentUser.phone && (
@@ -93,18 +95,18 @@ export default function Profile() {
         <div
           key={index}
           style={{
-            border: "1px solid white",
-            borderRadius: "6px",
-            padding: "1em",
-            marginBottom: "1em",
+            border: '1px solid white',
+            borderRadius: '6px',
+            padding: '1em',
+            marginBottom: '1em',
           }}
         >
           {ed.image && <img src={ed.image} alt={ed.name} />}
           <h3>{ed.name}</h3>
           <h4>{ed.location}</h4>
           <h6>
-            {ed.startDate.toDate().getFullYear()} -{" "}
-            {ed.endDate ? ed.endDate.toDate().getFullYear() : "present"}
+            {ed.startDate.toDate().getFullYear()} -{' '}
+            {ed.endDate ? ed.endDate.toDate().getFullYear() : 'present'}
           </h6>
           <div>{ed.description}</div>
         </div>
@@ -114,10 +116,10 @@ export default function Profile() {
         <div
           key={index}
           style={{
-            border: "1px solid white",
-            borderRadius: "6px",
-            padding: "1em",
-            marginBottom: "1em",
+            border: '1px solid white',
+            borderRadius: '6px',
+            padding: '1em',
+            marginBottom: '1em',
           }}
         >
           <h3>{course.title}</h3>
@@ -131,10 +133,10 @@ export default function Profile() {
         <div
           key={index}
           style={{
-            border: "1px solid white",
-            borderRadius: "6px",
-            padding: "1em",
-            marginBottom: "1em",
+            border: '1px solid white',
+            borderRadius: '6px',
+            padding: '1em',
+            marginBottom: '1em',
           }}
         >
           {exp.image && <img src={exp.image} alt={exp.title} />}
@@ -144,8 +146,8 @@ export default function Profile() {
           <h6>
             {exp.startDate.toDate().toLocaleDateString()}
             {exp.endDate
-              ? " - " + exp.endDate.toDate().toLocaleDateString()
-              : ""}
+              ? ' - ' + exp.endDate.toDate().toLocaleDateString()
+              : ''}
           </h6>
           <div>{exp.description}</div>
         </div>
@@ -155,19 +157,19 @@ export default function Profile() {
         <div
           key={index}
           style={{
-            border: "1px solid white",
-            borderRadius: "6px",
-            padding: "1em",
-            marginBottom: "1em",
+            border: '1px solid white',
+            borderRadius: '6px',
+            padding: '1em',
+            marginBottom: '1em',
           }}
         >
           {project.image && <img src={project.image} alt={project.title} />}
           <h3>{project.title}</h3>
           <h6>
-            {project.startDate.toDate().getFullYear()} -{" "}
+            {project.startDate.toDate().getFullYear()} -{' '}
             {project.endDate
               ? project.endDate.toDate().getFullYear()
-              : "present"}
+              : 'present'}
           </h6>
           <div>{project.description}</div>
           {project.repoLink && (
@@ -190,10 +192,10 @@ export default function Profile() {
         <div
           key={index}
           style={{
-            border: "1px solid white",
-            borderRadius: "6px",
-            padding: "1em",
-            marginBottom: "1em",
+            border: '1px solid white',
+            borderRadius: '6px',
+            padding: '1em',
+            marginBottom: '1em',
           }}
         >
           <h3>{award.title}</h3>

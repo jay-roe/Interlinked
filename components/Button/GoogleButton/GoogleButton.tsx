@@ -1,5 +1,4 @@
-import React from "react";
-import { FaGoogle } from "react-icons/fa";
+import { FaGoogle } from 'react-icons/fa';
 
 export default function GoogleButton(props) {
   return (
