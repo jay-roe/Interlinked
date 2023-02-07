@@ -1,8 +1,13 @@
-import React from 'react'
-import { FaGoogle } from 'react-icons/fa'
+import React from "react";
+import { FaGoogle } from "react-icons/fa";
 
 export default function Button(props) {
   return (
-    <button {...props} className={`${props.className} text-center inline-flex items-center focus:outline-none text-purple-background bg-yellow-600 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900  `}>{props.children}</button>
-  )
+    <button
+      {...props}
+      className={`${props.className} mr-2 mb-2 inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-medium text-purple-background hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900  `}
+    >
+      {props.children}
+    </button>
+  );
 }

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
-import { FaGoogle } from "react-icons/fa";
 import Button from "@/components/Button/Button";
 import GoogleButton from "@/components/Button/GoogleButton/GoogleButton";
 

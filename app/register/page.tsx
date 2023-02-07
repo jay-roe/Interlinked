@@ -7,7 +7,6 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button/Button";
-import { FaGoogle } from "react-icons/fa";
 import GoogleButton from "@/components/Button/GoogleButton/GoogleButton";
 
 export default function Register() {

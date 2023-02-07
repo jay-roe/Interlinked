@@ -7,7 +7,7 @@ export default function SocialIconGroup({
   socials: User["socials"];
 }) {
   return (
-    <div className='flex flex-row gap-2'>
+    <div className='flex flex-row justify-center md:justify-start gap-2'>
       {socials &&
         Object.keys(socials).map((social: keyof User["socials"], index) => {
           return (
