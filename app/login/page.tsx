@@ -45,7 +45,7 @@ const Login = () => {
             data-testid="login-title"
             className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
           >
-            Login to your account
+            Welcome back
           </h2>
         </div>
         <form className="mt-8 space-y-6">

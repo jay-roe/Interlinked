@@ -50,7 +50,7 @@ export default function Register() {
             <div className="max-w-md w-full space-y-8">
                 <div>
                     <h2 className="mt-4 text-3xl text-center tracking-tight font-light dark:text-white">
-                        Register your account
+                        Create an Account
                     </h2>
                 </div>
                 <form className="mt-8 space-y-6">
