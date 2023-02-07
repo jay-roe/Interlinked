@@ -1,29 +1,25 @@
 import { User } from "@/types/User";
-import { FaGithub, FaInstagram } from "react-icons/fa";
+import SocialIcon from "../SocialIcon/SocialIcon";
 
 export default function SocialIconGroup({
   socials,
 }: {
   socials: User["socials"];
 }) {
-  const iconMap = {
-    github: <FaGithub size={30} />,
-    instagram: <FaInstagram size={30} />,
-  };
-
   return (
-    <div>
-      {socials && Object.keys(socials).map((social, index) => {
-        return (
-          <a
-            key={index}
-            style={{ textDecoration: "none", color: "black" }}
-            href={socials[social]}
-          >
-            {iconMap[social]}
-          </a>
-        );
-      })}
+    <div className='flex flex-row gap-2'>
+      {socials &&
+        Object.keys(socials).map((social: keyof User["socials"], index) => {
+          return (
+            <a
+              key={index}
+              className="text-white no-underline transition-all hover:text-accent-orange"
+              href={socials[social]}
+            >
+              <SocialIcon social={social} />
+            </a>
+          );
+        })}
     </div>
   );
 }

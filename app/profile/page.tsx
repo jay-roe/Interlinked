@@ -8,6 +8,7 @@ import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPop
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Button/Button';
+import LinkIcon from '@/components/LinkIcon/LinkIcon';
 
 export default function Profile() {
     const router = useRouter()
@@ -53,8 +54,11 @@ export default function Profile() {
                     <p>{currentUser.bio || 'No bio given.'}</p>
                 </div>
             </div>
-            <div className='mb-5'>
+            <div className='mb-3'>
                 <SocialIconGroup socials={currentUser.socials} />
+            </div>
+            <div className='flex mb-3 gap-2 items-center p-3 bg-opacity-10 bg-white max-w-fit rounded-md font-semibold'>
+                <LinkIcon />
                 <p>{currentUser.connections.length} Links</p>
             </div>
             
