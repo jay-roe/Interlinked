@@ -18,6 +18,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  // If user logged in, send them to home
   useEffect(() => {
     console.log(authUser);
 
