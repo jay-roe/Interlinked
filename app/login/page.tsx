@@ -1,25 +1,24 @@
-"use client";
+'use client';
 
-import styles from "./Login.module.css";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useAuth } from "../../contexts/AuthContext";
-import { FaGoogle } from "react-icons/fa";
-import Button from "@/components/Button/Button";
-import GoogleButton from "@/components/Button/GoogleButton/GoogleButton";
+import styles from './Login.module.css';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
+import Button from '@/components/Button/Button';
+import GoogleButton from '@/components/Button/GoogleButton/GoogleButton';
 
 const Login = () => {
   const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { authUser, login, loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (authUser) {
-      router.push("/");
+      router.push('/');
     }
   }, [authUser, router]);
 
@@ -29,10 +28,10 @@ const Login = () => {
     try {
       setLoading(true);
       await login(email, password);
-      router.push("/");
+      router.push('/');
     } catch (err) {
       console.error(err);
-      alert("Failed to login");
+      alert('Failed to login');
     }
 
     setLoading(false);
@@ -46,7 +45,7 @@ const Login = () => {
             data-testid="login-title"
             className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
           >
-            Login to your account
+            Welcome back
           </h2>
         </div>
         <form className="mt-8 space-y-6">

@@ -1,35 +1,46 @@
-'use client'
+'use client';
 
-import { Fragment, useEffect, useState } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { FiMenu, FiBell } from 'react-icons/fi'
-import { HiOutlineXMark } from 'react-icons/hi2'
+import { Fragment, } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { FiMenu, FiBell } from 'react-icons/fi';
+import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
-import { User } from '@/types/User'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { User } from '@/types/User';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function NavBar() {
   const { currentUser, logout } = useAuth();
   const pathname = usePathname();
 
-  const navLinks = function navigation(currentUser: User) {
-    return currentUser ? 
-    [
-      { name: 'Home', href: '/', current: true },
-      { name: 'Profile', href: '/profile', current: false },
-      { name: 'Logout', href: '#', onClick: logout, dataTestid: "nav-logout", current: false },
-    ] :
-    [
-      { name: 'Home', href: '/', current: true },
-      { name: 'Login', href: '/login', dataTestid: "nav-login", current: false },
-      { name: 'Register', href: '/register', current: false },
-    ]
-  }(currentUser)
+  const navLinks = (function navigation(currentUser: User) {
+    return currentUser
+      ? [
+          { name: 'Home', href: '/', current: true },
+          { name: 'Profile', href: '/profile', current: false },
+          {
+            name: 'Logout',
+            href: '#',
+            onClick: logout,
+            dataTestid: 'nav-logout',
+            current: false,
+          },
+        ]
+      : [
+          { name: 'Home', href: '/', current: true },
+          {
+            name: 'Login',
+            href: '/login',
+            dataTestid: 'nav-login',
+            current: false,
+          },
+          { name: 'Register', href: '/register', current: false },
+        ];
+  })(currentUser);
 
   return (
     <Disclosure as="nav" className="">
@@ -42,7 +53,10 @@ export default function NavBar() {
                 <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
-                    <HiOutlineXMark className="block h-6 w-6" aria-hidden="true" />
+                    <HiOutlineXMark
+                      className="block h-6 w-6"
+                      aria-hidden="true"
+                    />
                   ) : (
                     <FiMenu className="block h-6 w-6" aria-hidden="true" />
                   )}
@@ -51,7 +65,7 @@ export default function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   {/* // TODO Fix font family for logo */}
-                  <h1 className='font-sans text-white'>INTERLINKED</h1>
+                  <h1 className="font-sans text-white">INTERLINKED</h1>
                   {/* <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
@@ -72,10 +86,14 @@ export default function NavBar() {
                         onClick={item.onClick}
                         data-testid={item.dataTestid}
                         className={classNames(
-                          item.href === pathname ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'px-3 py-2 rounded-md text-sm font-medium'
+                          item.href === pathname
+                            ? 'bg-gray-900 text-white'
+                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-medium'
                         )}
-                        aria-current={item.href === pathname ? 'page' : undefined}
+                        aria-current={
+                          item.href === pathname ? 'page' : undefined
+                        }
                       >
                         {item.name}
                       </Link>
@@ -83,8 +101,7 @@ export default function NavBar() {
                   </div>
                 </div>
               </div>
-              {
-                currentUser &&
+              {currentUser && (
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
@@ -120,7 +137,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Your Profile
                             </a>
@@ -130,7 +149,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Settings
                             </a>
@@ -140,7 +161,9 @@ export default function NavBar() {
                           {({ active }) => (
                             <a
                               href="#"
-                              className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Sign out
                             </a>
@@ -150,7 +173,7 @@ export default function NavBar() {
                     </Transition>
                   </Menu>
                 </div>
-              }
+              )}
             </div>
           </div>
 
@@ -161,8 +184,10 @@ export default function NavBar() {
                   key={item.name}
                   href={item.href}
                   className={classNames(
-                    item.href === pathname ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.href === pathname
+                      ? 'bg-gray-900 text-white'
+                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                    'block rounded-md px-3 py-2 text-base font-medium'
                   )}
                   aria-current={item.href === pathname ? 'page' : undefined}
                 >
@@ -174,5 +199,5 @@ export default function NavBar() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
