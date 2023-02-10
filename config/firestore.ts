@@ -16,5 +16,4 @@ const dataPoint = <T>(collectionPath: string) => collection(firestore, collectio
 
 // List of supported collections exported as 'db'
 export const db = {
-  users: dataPoint<User>('users')
-}
+  users: dataPoint<User>('users')}
