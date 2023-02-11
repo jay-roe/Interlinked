@@ -5,9 +5,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
-import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
+import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Button/Button';
-import LinkIcon from '@/components/LinkIcon/LinkIcon';
+import LinkIcon from '@/components/Icons/LinkIcon/LinkIcon';
+import FeedPost from '@/components/FeedPostGroup/FeedPost/FeedPost';
+import { Post } from '@/types/Post';
 
 export default function Profile() {
   const router = useRouter();
@@ -56,6 +58,7 @@ export default function Profile() {
             />
           </div>
         )}
+
         <div className="row-auto place-self-start self-center text-center md:text-left">
           <h1 data-testid="profile-title" className="text-3xl font-extrabold">
             {currentUser?.name || 'No name provided.'}

@@ -7,9 +7,9 @@ function LikeIcon(props) {
   return (
     <span className="flex flex-nowrap space-x-1 text-accent-orange ">
       <button onClick={() => setIsCommented(!isCommented)}>
-        {isCommented ? <FaRegComment /> : <FaComment />}
+        {isCommented ? <FaComment /> : <FaRegComment />}
       </button>
-      <span className="text-white"> {props.likes} </span>
+      <span className="text-white"> {props.comments} </span>
     </span>
   );
 }
