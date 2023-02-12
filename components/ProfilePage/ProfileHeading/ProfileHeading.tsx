@@ -3,18 +3,26 @@ import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 
 /* eslint-disable @next/next/no-img-element */
+
+/**
+ * Creates profile heading (profile picture, name, bio).
+ * @param currentUser User object
+ * @param bio Bio field of desired user
+ * @param isEditable True when user has edit permissions
+ * @param bioEditing Controls when text input is rendered instead of text output
+ */
 export default function ProfileHeading({
   currentUser,
+  bio,
   isEditable = false,
   bioEditing = false,
-  bio,
   setBioEditing,
   setBio,
 }: {
   currentUser: User;
+  bio: string;
   isEditable?: boolean;
   bioEditing?: boolean;
-  bio: string;
   setBioEditing?: Dispatch<SetStateAction<boolean>>;
   setBio?: (bio: string) => void;
 }) {
