@@ -24,10 +24,11 @@ export default function EditProfile() {
 
   const { currentUser, authUser, deleteAccount } = useAuth();
 
+  // User not logged in
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
-  const [bio, setBio] = useState<string>(currentUser.bio);
+  const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
   async function onDeleteAccount() {
@@ -43,7 +44,6 @@ export default function EditProfile() {
     }
   }
 
-  // User not logged in
   if (!currentUser || !authUser) {
     return (
       <>
