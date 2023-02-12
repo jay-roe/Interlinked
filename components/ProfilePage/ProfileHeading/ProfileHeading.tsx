@@ -9,7 +9,7 @@ export default function ProfileHeading({ currentUser }: { currentUser: User }) {
           <img
             className="m-auto h-40 w-40 rounded-full md:w-52"
             src={currentUser.profilePicture}
-            alt={currentUser.name}
+            alt={currentUser?.name}
           />
         </div>
       )}

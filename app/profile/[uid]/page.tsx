@@ -19,17 +19,19 @@ async function getUser(uid: string) {
 
 export default async function ViewProfile({ params }) {
   const user = await getUser(params.uid);
+  if (!user || !user.name || !user.email)
+    return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
 
   return (
     <div className="container mx-auto text-white">
       <ProfileHeading currentUser={user} />
       <div className="mx-auto mb-3">
-        <SocialIconGroup socials={user.socials} />
+        <SocialIconGroup socials={user?.socials} />
       </div>
       <LinkButton currentUser={user} />
 
       <h1 className="text-2xl font-extrabold">
-        Link with {user.name?.split(' ')[0]}
+        Link with {user?.name?.split(' ')[0]}
       </h1>
       <ProfileContact currentUser={user} />
 
