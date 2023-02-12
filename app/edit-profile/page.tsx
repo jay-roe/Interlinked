@@ -19,17 +19,25 @@ import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills'
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 import Link from 'next/link';
 
+import { db } from '@/config/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
+
 export default function EditProfile() {
   const router = useRouter();
 
   const { currentUser, authUser, deleteAccount } = useAuth();
 
-  // User not logged in
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+
+  async function updateAccount() {
+    await updateDoc(doc(db.users, authUser.uid), {
+      bio: bio,
+    });
+  }
 
   async function onDeleteAccount() {
     try {
@@ -44,6 +52,7 @@ export default function EditProfile() {
     }
   }
 
+  // User not logged in
   if (!currentUser || !authUser) {
     return (
       <>
