@@ -38,7 +38,7 @@ export default function Register() {
       setLoading(true);
       console.log(register);
       await register(email, password);
-      router.push('/profile');
+      router.push('/edit-profile');
     } catch (err) {
       alert(err.message);
     }
