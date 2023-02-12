@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, } from 'react';
+import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
@@ -21,7 +21,8 @@ export default function NavBar() {
     return currentUser
       ? [
           { name: 'Home', href: '/', current: true },
-          { name: 'Profile', href: '/profile', current: false },
+          { name: 'Profile Preview', href: '/profile', current: false },
+          { name: 'Edit Profile', href: '/edit-profile', current: false },
           {
             name: 'Logout',
             href: '#',

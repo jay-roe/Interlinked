@@ -1,7 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
+import { useState } from 'react';
+import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
+import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
+import Button from '@/components/Button/Button';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/LinkButton/LinkButton';
@@ -12,18 +17,34 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
-import Button from '@/components/Button/Button';
 
-export default function PreviewProfile() {
-  const { currentUser } = useAuth();
+export default function EditProfile() {
+  const router = useRouter();
 
-  // User not logged in, can't preview
-  if (!currentUser) {
+  const { currentUser, authUser, deleteAccount } = useAuth();
+
+  const [isModalShow, setIsModalShow] = useState(false);
+
+  async function onDeleteAccount() {
+    try {
+      await deleteAccount();
+
+      // Redirect to home page, with state saying account was just deleted
+      router.push('/'); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
+      setIsModalShow(false);
+    } catch (err) {
+      console.error(err);
+      return false;
+    }
+  }
+
+  // User not logged in
+  if (!currentUser || !authUser) {
     return (
       <>
         <h1>Your Profile</h1>
         <h2 data-testid="profile-login-prompt">
-          You must be logged in to preview your profile.
+          You must be logged in to edit your profile.
         </h2>
         <Button href="login">Login</Button>
         <Button href="register">Register</Button>
@@ -31,7 +52,7 @@ export default function PreviewProfile() {
     );
   }
 
-  // Profile preview
+  // User logged in
   return (
     <div className="container mx-auto text-white">
       <ProfileHeading currentUser={currentUser} />
@@ -65,6 +86,19 @@ export default function PreviewProfile() {
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards currentUser={currentUser} />
+
+      <Button
+        data-testid="danger-zone"
+        variant="danger"
+        onClick={() => setIsModalShow(true)}
+      >
+        Delete account
+      </Button>
+      <DeleteAccountPopup
+        show={isModalShow}
+        onHide={() => setIsModalShow(false)}
+        onDeleteAccount={onDeleteAccount}
+      />
     </div>
   );
 }

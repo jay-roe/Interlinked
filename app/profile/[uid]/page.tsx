@@ -1,6 +1,3 @@
-'use client';
-
-import { useAuth } from '@/contexts/AuthContext';
 import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
@@ -12,59 +9,52 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
-import Button from '@/components/Button/Button';
+import { db } from '@/config/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 
-export default function PreviewProfile() {
-  const { currentUser } = useAuth();
+async function getUser(uid: string) {
+  const res = await getDoc(doc(db.users, uid));
+  return res.data();
+}
 
-  // User not logged in, can't preview
-  if (!currentUser) {
-    return (
-      <>
-        <h1>Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to preview your profile.
-        </h2>
-        <Button href="login">Login</Button>
-        <Button href="register">Register</Button>
-      </>
-    );
-  }
+export default async function ViewProfile({ params }) {
+  const user = await getUser(params.uid);
+  if (!user || !user.name || !user.email)
+    return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
 
-  // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} />
+      <ProfileHeading currentUser={user} />
       <div className="mx-auto mb-3">
-        <SocialIconGroup socials={currentUser.socials} />
+        <SocialIconGroup socials={user?.socials} />
       </div>
-      <LinkButton currentUser={currentUser} />
+      <LinkButton currentUser={user} />
 
       <h1 className="text-2xl font-extrabold">
-        Link with {currentUser.name?.split(' ')[0]}
+        Link with {user?.name?.split(' ')[0]}
       </h1>
-      <ProfileContact currentUser={currentUser} />
+      <ProfileContact currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+      <ProfileLanguages currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-      <ProfileEducation currentUser={currentUser} />
+      <ProfileEducation currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={currentUser} />
+      <ProfileCourses currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={currentUser} />
+      <ProfileExperience currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={currentUser} />
+      <ProfileProjects currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={currentUser} />
+      <ProfileSkills currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+      <ProfileAwards currentUser={user} />
     </div>
   );
 }
