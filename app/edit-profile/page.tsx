@@ -34,9 +34,16 @@ export default function EditProfile() {
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
   async function updateAccount() {
-    await updateDoc(doc(db.users, authUser.uid), {
-      bio: bio,
-    });
+    try {
+      await updateDoc(doc(db.users, authUser.uid), {
+        bio: bio,
+      });
+      alert('Successfully updated your profile!');
+      router.refresh();
+      router.push('/profile');
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   async function onDeleteAccount() {
@@ -75,7 +82,7 @@ export default function EditProfile() {
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Edit Profile</h1>
-        <Button>Save Changes</Button>
+        <Button onClick={updateAccount}>Save Changes</Button>
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
         <ProfileHeading
@@ -119,7 +126,7 @@ export default function EditProfile() {
         <ProfileAwards currentUser={currentUser} />
       </div>
       <div className="flex justify-end">
-        <Button>Save Changes</Button>
+        <Button onClick={updateAccount}>Save Changes</Button>
       </div>
 
       <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
