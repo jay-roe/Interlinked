@@ -17,6 +17,7 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
+import Link from 'next/link';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -24,6 +25,10 @@ export default function EditProfile() {
   const { currentUser, authUser, deleteAccount } = useAuth();
 
   const [isModalShow, setIsModalShow] = useState(false);
+
+  // Profile component states
+  const [bio, setBio] = useState<string>(currentUser.bio);
+  const [bioEditing, setBioEditing] = useState<boolean>(false);
 
   async function onDeleteAccount() {
     try {
@@ -46,8 +51,12 @@ export default function EditProfile() {
         <h2 data-testid="profile-login-prompt">
           You must be logged in to edit your profile.
         </h2>
-        <Button href="login">Login</Button>
-        <Button href="register">Register</Button>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
       </>
     );
   }
@@ -55,7 +64,15 @@ export default function EditProfile() {
   // User logged in
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} />
+      <ProfileHeading
+        currentUser={currentUser}
+        isEditable
+        bio={bio}
+        setBio={setBio}
+        bioEditing={bioEditing}
+        setBioEditing={setBioEditing}
+      />
+
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
@@ -87,11 +104,7 @@ export default function EditProfile() {
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards currentUser={currentUser} />
 
-      <Button
-        data-testid="danger-zone"
-        variant="danger"
-        onClick={() => setIsModalShow(true)}
-      >
+      <Button data-testid="danger-zone" onClick={() => setIsModalShow(true)}>
         Delete account
       </Button>
       <DeleteAccountPopup
