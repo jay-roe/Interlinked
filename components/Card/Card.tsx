@@ -5,9 +5,12 @@ const Card = ({
   children: React.ReactNode;
   className?: string;
 }) => {
+  if (!className) {
+    className = '';
+  }
   return (
     <div
-      className={`${className} min-h-min min-w-fit rounded bg-white bg-opacity-[0.12] p-4`}
+      className={`${className} min-h-min rounded bg-white bg-opacity-[0.12] p-4`}
     >
       {children}
       <p>tingle</p>

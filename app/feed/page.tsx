@@ -22,7 +22,12 @@ const Feeds = () => {
           <p data-testid="welcome-msg" className="text-left text-2xl">
             Let&apos;s see what your links are talking about.
           </p>
-          <Card></Card>
+          <div className="grid grid-cols-2-1 gap-x-8 gap-y-8">
+            <Card>no</Card>
+            <Card>
+              fuck<Card>beef</Card>
+            </Card>
+          </div>
         </div>
       ) : (
         <div>
