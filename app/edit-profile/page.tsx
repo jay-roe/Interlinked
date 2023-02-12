@@ -73,47 +73,65 @@ export default function EditProfile() {
   // User logged in
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading
-        currentUser={currentUser}
-        isEditable
-        bio={bio}
-        setBio={setBio}
-        bioEditing={bioEditing}
-        setBioEditing={setBioEditing}
-      />
-
-      <div className="mx-auto mb-3">
-        <SocialIconGroup socials={currentUser.socials} />
+      <div className="mb-2 flex justify-between">
+        <h1 className="text-3xl font-extrabold">Edit Profile</h1>
+        <Button>Save Changes</Button>
       </div>
-      <LinkButton currentUser={currentUser} />
+      <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
+        <ProfileHeading
+          currentUser={currentUser}
+          isEditable
+          bio={bio}
+          setBio={setBio}
+          bioEditing={bioEditing}
+          setBioEditing={setBioEditing}
+        />
 
-      <h1 className="text-2xl font-extrabold">
-        Link with {currentUser.name?.split(' ')[0]}
-      </h1>
-      <ProfileContact currentUser={currentUser} />
+        <div className="mx-auto mb-3">
+          <SocialIconGroup socials={currentUser.socials} />
+        </div>
+        <LinkButton currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+        <h1 className="text-2xl font-extrabold">
+          Link with {currentUser.name?.split(' ')[0]}
+        </h1>
+        <ProfileContact currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-      <ProfileEducation currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
+        <ProfileLanguages currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
+        <ProfileEducation currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Courses 📚</h2>
+        <ProfileCourses currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
+        <ProfileExperience currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
+        <ProfileProjects currentUser={currentUser} />
 
-      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+        <h2 className="text-2xl font-extrabold">Skills 💪</h2>
+        <ProfileSkills currentUser={currentUser} />
 
-      <Button data-testid="danger-zone" onClick={() => setIsModalShow(true)}>
+        <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
+        <ProfileAwards currentUser={currentUser} />
+      </div>
+      <div className="flex justify-end">
+        <Button>Save Changes</Button>
+      </div>
+
+      <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
+      <p className="mb-1">
+        We&apos;re sorry to see you go. Click the button below to permanently
+        delete your account and all of its information.
+      </p>
+      <Button
+        data-testid="danger-zone"
+        className="bg-red-600 hover:bg-red-500"
+        onClick={() => setIsModalShow(true)}
+      >
         Delete account
       </Button>
       <DeleteAccountPopup
