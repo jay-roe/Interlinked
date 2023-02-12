@@ -13,6 +13,7 @@ import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfilePro
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 import Button from '@/components/Button/Button';
+import Link from 'next/link';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
@@ -25,8 +26,12 @@ export default function PreviewProfile() {
         <h2 data-testid="profile-login-prompt">
           You must be logged in to preview your profile.
         </h2>
-        <Button href="login">Login</Button>
-        <Button href="register">Register</Button>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
       </>
     );
   }
@@ -34,7 +39,7 @@ export default function PreviewProfile() {
   // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} />
+      <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
