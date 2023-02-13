@@ -3,6 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import Card from '@/components/Card/Card';
+import CardGrid from '@/components/Card/CardGrid';
 import Button from '@/components/Button/Button';
 
 const Feeds = () => {
@@ -22,12 +23,15 @@ const Feeds = () => {
           <p data-testid="welcome-msg" className="text-left text-2xl">
             Let&apos;s see what your links are talking about.
           </p>
-          <div className="grid grid-cols-2-1 gap-x-8 gap-y-8">
+          <CardGrid gridTemplateColumns="grid-cols-2-1">
             <Card>no</Card>
-            <Card>
-              fuck<Card>beef</Card>
+            <Card className="overflow-y-scroll">
+              <Card>beef</Card>
             </Card>
-          </div>
+            <Card>yo</Card>
+            <Card className="hidden">snow</Card>
+            <Card>bro</Card>
+          </CardGrid>
         </div>
       ) : (
         <div>

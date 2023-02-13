@@ -1,13 +1,10 @@
 const Card = ({
   children,
-  className,
+  className = '',
 }: {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
 }) => {
-  if (!className) {
-    className = '';
-  }
   return (
     <div
       className={`${className} min-h-min rounded bg-white bg-opacity-[0.12] p-4`}
