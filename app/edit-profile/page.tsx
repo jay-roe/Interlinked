@@ -33,11 +33,13 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
+  const statesToUpdate = {
+    bio: bio,
+  };
+
   async function updateAccount() {
     try {
-      await updateDoc(doc(db.users, authUser.uid), {
-        bio: bio,
-      });
+      await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
       await refresh();
       router.push('/profile');
