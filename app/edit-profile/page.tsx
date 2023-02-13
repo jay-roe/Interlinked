@@ -25,7 +25,7 @@ import { doc, updateDoc } from 'firebase/firestore';
 export default function EditProfile() {
   const router = useRouter();
 
-  const { currentUser, authUser, deleteAccount } = useAuth();
+  const { currentUser, authUser, deleteAccount, refresh } = useAuth();
 
   const [isModalShow, setIsModalShow] = useState(false);
 
@@ -39,7 +39,7 @@ export default function EditProfile() {
         bio: bio,
       });
       alert('Successfully updated your profile!');
-      router.refresh();
+      await refresh();
       router.push('/profile');
     } catch (err) {
       console.error(err);
