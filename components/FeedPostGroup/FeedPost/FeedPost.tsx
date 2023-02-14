@@ -1,4 +1,4 @@
-import CommentIcon from '@/components/CommentIcon/CommentIcon';
+import CommentIcon from '@/components/Icons/CommentIcon/CommentIcon';
 import LikeIcon from '@/components/Icons/LikeIcon/LikeIcon';
 import type { Post } from '@/types/Post';
 
