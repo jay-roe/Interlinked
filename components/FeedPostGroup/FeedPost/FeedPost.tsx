@@ -5,12 +5,12 @@ import type { Post } from '@/types/Post';
 export default function FeedPost() {
   const image = require('../Screenshot 2023-02-10 194009.png');
   return (
-    <div className="flex justify-center">
-      <div className="purple-background max-w-sm rounded-lg shadow-lg">
-        <h5 className="mb-2 text-xl font-medium text-gray-900">Card title</h5>
+    <div className="orange flex justify-center">
+      <div className="orange max-w-sm rounded-lg shadow-lg">
+        <h5 className="para-med mb-2 text-xl text-white">Card title</h5>
 
         <div className="p-6">
-          <p className="mb-4 text-base text-gray-700">
+          <p className="mb-4 text-base text-white">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
           </p>

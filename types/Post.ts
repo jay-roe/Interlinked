@@ -1,11 +1,11 @@
 import type { Timestamp } from 'firebase/firestore';
 
 export type Post = {
+  authorID: string; // ID related to author found in DB
+  author: string;
   title: string;
   text_content?: string;
   image_content?: string;
-  author: string;
-  autherID: string; // ID related to author found in DB
   likes?: Like[];
   comments?: Comment[];
   date: Timestamp;
@@ -14,6 +14,7 @@ export type Post = {
 };
 
 export type Comment = {
+  authorID: string;
   author: string;
   content: string;
   date: Timestamp;
@@ -21,4 +22,5 @@ export type Comment = {
 
 export type Like = {
   authorID: string;
+  author: string;
 };
