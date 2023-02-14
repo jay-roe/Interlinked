@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
-import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
+import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Button/Button';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
