@@ -1,4 +1,4 @@
-import Button from '@/components/Button/Button';
+import Button from '@/components/Buttons/Button';
 import type { User } from '@/types/User';
 
 export default function ProfileProjects({
