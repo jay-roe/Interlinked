@@ -1,4 +1,4 @@
-import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
+import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/LinkButton/LinkButton';
