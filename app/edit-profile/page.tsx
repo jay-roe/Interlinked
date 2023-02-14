@@ -5,11 +5,11 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
-import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
-import Button from '@/components/Button/Button';
+import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
+
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/LinkButton/LinkButton';
+import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
@@ -21,6 +21,7 @@ import Link from 'next/link';
 
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
+import Button from '@/components/Buttons/Button';
 
 export default function EditProfile() {
   const router = useRouter();

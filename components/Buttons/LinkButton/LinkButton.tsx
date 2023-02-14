@@ -1,5 +1,5 @@
 import type { User } from '@/types/User';
-import LinkIcon from '../LinkIcon/LinkIcon';
+import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
 export default function LinkButton({ currentUser }: { currentUser: User }) {
   return (

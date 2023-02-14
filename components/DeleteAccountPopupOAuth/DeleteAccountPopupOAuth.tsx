@@ -3,8 +3,9 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { FaGoogle } from 'react-icons/fa';
 import type { UserCredential } from 'firebase/auth';
-import Button from '../Button/Button';
+
 import { Dialog } from '@headlessui/react';
+import Button from '../Buttons/Button';
 
 export default function DeleteAccountPopupOAuth({
   onHide,

@@ -39,9 +39,11 @@ const Home = () => {
           interlinked.
         </p>
       ) : (
-        <p data-testid="base-msg" className="text-center text-2xl">
-          We will become interlinked.
-        </p>
+        <>
+          <p data-testid="base-msg" className="text-center text-2xl">
+            We will become interlinked.
+          </p>
+        </>
       )}
       {/* <Alert variant='danger' show={isDeletedAlertShow}>
                 Successfully deleted your account.
