@@ -1,6 +1,5 @@
 'use client';
 
-import FeedPost from '@/components/FeedPostGroup/FeedPost/FeedPost';
 // import { Inter } from '@next/font/google';
 // import { Alert } from "react-bootstrap";
 import { useAuth } from '../contexts/AuthContext';
@@ -44,7 +43,6 @@ const Home = () => {
           <p data-testid="base-msg" className="text-center text-2xl">
             We will become interlinked.
           </p>
-          <FeedPost></FeedPost>
         </>
       )}
       {/* <Alert variant='danger' show={isDeletedAlertShow}>
