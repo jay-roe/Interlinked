@@ -24,7 +24,7 @@ export default async function ViewProfile({ params }) {
 
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={user} />
+      <ProfileHeading currentUser={user} bio={user.bio} />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={user?.socials} />
       </div>
