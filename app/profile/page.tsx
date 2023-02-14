@@ -11,9 +11,10 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
-import Button from '@/components/Button/Button';
+
 import Link from 'next/link';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
+import Button from '@/components/Buttons/Button';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();

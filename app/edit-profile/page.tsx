@@ -6,7 +6,7 @@ import { useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
-import Button from '@/components/Button/Button';
+
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
@@ -21,6 +21,7 @@ import Link from 'next/link';
 
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
+import Button from '@/components/Buttons/Button';
 
 export default function EditProfile() {
   const router = useRouter();
