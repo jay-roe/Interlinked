@@ -7,10 +7,10 @@ const Card = ({
 }) => {
   return (
     <div
-      className={`${className} min-h-min rounded bg-white bg-opacity-[0.12] p-4`}
+      className={`${className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
     >
       {children}
-      <p>tingle</p>
+      <p>balls 4</p>
     </div>
   );
 };

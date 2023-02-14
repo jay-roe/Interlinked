@@ -20,7 +20,7 @@ const Feeds = () => {
       </h1>
       {currentUser ? (
         <div>
-          <p data-testid="welcome-msg" className="text-left text-2xl">
+          <p data-testid="welcome-msg" className="text-left text-2xl mb-3">
             Let&apos;s see what your links are talking about.
           </p>
           <CardGrid gridTemplateColumns="grid-cols-2-1">
