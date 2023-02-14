@@ -1,8 +1,10 @@
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useAuth } from '@/contexts/AuthContext';
 import Login from '../page';
 import { useRouter } from 'next/navigation';
+
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 jest.mock('contexts/AuthContext', () => ({ 
     useAuth: jest.fn()
@@ -18,14 +20,14 @@ const mockedRouter = useRouter as jest.Mock<any>;
 it('check if user is logged in', async () => {
     mockedUseAuth.mockImplementation(() => {
         return {
-            currentUser: {}  // There IS a current user
+            authUser: {}  // There IS a current users
         }
     })
 
     const myPush = jest.fn()
-    mockedRouter.mockImplementation(() => {
+    mockedRouter.mockImplementation((path) => {
         return {
-            push: myPush()
+            push: myPush
         }
     })
 
@@ -39,7 +41,7 @@ it('check if user is logged in', async () => {
 it('check if user is logged out', async () => {
     mockedUseAuth.mockImplementation(() => {
         return { 
-            currentUser: null  // There IS a current user
+            authUser: null  // There is no current user
         } 
     })
 
@@ -51,3 +53,48 @@ it('check if user is logged out', async () => {
     const modalTitle = await findByTestId("login-title");
     expect(modalTitle).toBeInTheDocument();
 });
+
+it('can attempt to log in', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const myLogin = jest.fn()
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            login: myLogin()
+        }
+    })
+
+    const { findByTestId } = render(
+            <Login />
+    );
+
+    const loginButton = await findByTestId("login");
+    fireEvent.click(loginButton);
+    await waitFor(() => expect(myLogin).toBeCalledTimes(2));
+})
+
+it('can enter email and pw', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const { findByTestId } = render(
+            <Login />
+    );
+
+    const emailField = await findByTestId("email");
+    const pwField = await findByTestId("pw");
+
+    fireEvent.change(emailField, { target: {value: 'test@test.com'}});
+    fireEvent.change(pwField, { target: {value: '123456'}});
+
+
+    expect(emailField).toHaveValue('test@test.com');
+    expect(pwField).toHaveValue('123456');
+})
