@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/LinkButton/LinkButton';
+import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
