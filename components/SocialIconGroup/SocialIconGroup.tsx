@@ -2,17 +2,17 @@ import { User } from "@/types/User";
 import { FaGithub, FaInstagram } from "react-icons/fa";
 
 export default function SocialIconGroup({
-  socials,
-}: {
-  socials: User["socials"];
-}) {
+    socials,
+  }: {
+    socials: User["socials"];
+  }) {
   const iconMap = {
     github: <FaGithub size={30} />,
     instagram: <FaInstagram size={30} />,
   };
 
   return (
-    <div>
+    <div data-testid='social-icon-group-container'>
       {socials && Object.keys(socials).map((social, index) => {
         return (
           <a
