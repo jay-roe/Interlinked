@@ -31,7 +31,6 @@ const Login = () => {
       await login(email, password);
       router.push("/");
     } catch (err) {
-      console.error(err);
       alert("Failed to login");
     }
 
@@ -54,6 +53,7 @@ const Login = () => {
             <div>
               <input
                 id="email-address"
+                data-testid="email"
                 name="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -66,6 +66,7 @@ const Login = () => {
             <div>
               <input
                 id="password"
+                data-testid="pw"
                 name="password"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
