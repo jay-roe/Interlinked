@@ -6,13 +6,9 @@ import type { User } from '@/types/User';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function CreatePost() {
+export default function CreatePost(props: any) {
   const { currentUser } = useAuth();
   const [message, setMessage] = useState('');
-
-  function post() {
-    return message;
-  }
 
   return (
     <>
@@ -46,7 +42,10 @@ export default function CreatePost() {
           </div>
 
           <div className="flex justify-end">
-            <button className="flex grow justify-end  " onClick={() => post()}>
+            <button
+              className="flex grow justify-end  "
+              onClick={() => props.getText(message)}
+            >
               <PostButton></PostButton>
             </button>
           </div>
