@@ -49,12 +49,12 @@ export default function DeleteAccountPopupOAuth({onHide, onDeleteAccount}: Delet
           This action is irreversible. Your account, and all of its data, will be permanently deleted.
         </p>
         {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
-        <Button onClick={() => updateCredential()}><FaGoogle /> Login with Google</Button>
+        <Button data-testid='update-credentials-oauth' onClick={() => updateCredential()}><FaGoogle /> Login with Google</Button>
         {
           isAuthError && <p className='text-red-500'>Authentication error. Please try logging in again.</p>
         }
-        <Button data-testid="del-acc" disabled={!credential} onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
-        <Button data-testid="close-popup" onClick={onHideLocal}>Close</Button>
+        <Button data-testid='del-acc-oauth' disabled={!credential} onClick={() => handleDeleteClick()} variant='danger'>Delete account</Button>
+        <Button data-testid='close-popup-oauth' onClick={onHideLocal}>Close</Button>
       {/* </Dialog> */}
     </div>
   );
