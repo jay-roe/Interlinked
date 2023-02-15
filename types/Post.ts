@@ -13,14 +13,14 @@ export type Post = {
   // ex: meme, advertisement, python, lisp,
 };
 
-export type Comment = {
+type Comment = {
   authorID: string;
   author: string;
   content: string;
   date: Timestamp;
 };
 
-export type Like = {
+type Like = {
   authorID: string;
   author: string;
 };
