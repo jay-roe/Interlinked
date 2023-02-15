@@ -4,7 +4,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Link from 'next/link';
 import Card from '@/components/Card/Card';
 import CardGrid from '@/components/Card/CardGrid';
-import Button from '@/components/Button/Button';
+import Button from '@/components/Buttons/Button';
 
 const Feeds = () => {
   const { currentUser } = useAuth();
@@ -20,7 +20,7 @@ const Feeds = () => {
       </h1>
       {currentUser ? (
         <div>
-          <p data-testid="welcome-msg" className="text-left text-2xl mb-3">
+          <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
             Let&apos;s see what your links are talking about.
           </p>
           <CardGrid gridTemplateColumns="grid-cols-2-1">
