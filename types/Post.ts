@@ -18,6 +18,7 @@ type Comment = {
   author: string;
   content: string;
   date: Timestamp;
+  comments: Comment[];
 };
 
 type Like = {
