@@ -1,15 +1,15 @@
-import { User } from "@/types/User";
-import SocialIcon from "../SocialIcon/SocialIcon";
+import { User } from '@/types/User';
+import SocialIcon from '../SocialIcon/SocialIcon';
 
 export default function SocialIconGroup({
   socials,
 }: {
-  socials: User["socials"];
+  socials: User['socials'];
 }) {
   return (
-    <div className='flex flex-row justify-center md:justify-start gap-2'>
+    <div className="flex flex-row justify-center gap-2 md:justify-start">
       {socials &&
-        Object.keys(socials).map((social: keyof User["socials"], index) => {
+        Object.keys(socials).map((social: keyof User['socials'], index) => {
           return (
             <a
               key={index}

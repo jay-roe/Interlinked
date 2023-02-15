@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         'purple-background': '#130921',
         'accent-orange': '#E58F40',
+        'purple-component': '#2F273C',
       },
       container: {
         padding: {
@@ -19,6 +20,7 @@ module.exports = {
       fontFamily: {
         logo: 'Orbitron',
         'para-heavy': 'Paralucent-Heavy',
+        'para-med': 'Paralucent-Medium',
       },
       gridTemplateColumns: {
         '2-1': '2fr 1fr',

@@ -1,7 +1,7 @@
 import type { DeleteAccountPopupChildProps } from '@/types/DeleteAccountPopup';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import Button from '../Button/Button';
+import Button from '../Buttons/Button';
 
 export default function DeleteAccountPopupEmail({
   onHide,
@@ -34,7 +34,7 @@ export default function DeleteAccountPopupEmail({
 
   return (
     <div data-testid="delete-acc-email">
-      <p className="text-red-500 mb-1">
+      <p className="mb-1 text-red-500">
         This action is irreversible. Your account, and all of its data, will be
         permanently deleted.
       </p>
@@ -49,7 +49,7 @@ export default function DeleteAccountPopupEmail({
         onChange={(e) => setPassword(e.target.value)}
       />
       {incorrectPassword ? (
-        <p className="text-red-500 mb-3" data-testid="incorrect-pw">
+        <p className="mb-3 text-red-500" data-testid="incorrect-pw">
           Incorrect password.
         </p>
       ) : null}

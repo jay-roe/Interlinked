@@ -1,5 +1,5 @@
-import { User } from "@/types/User";
-import { FaGithub, FaInstagram } from "react-icons/fa";
+import { User } from '@/types/User';
+import { FaGithub, FaInstagram } from 'react-icons/fa';
 
 // Add other social media options to this map to represent icon elements
 const iconMap = {
@@ -10,7 +10,7 @@ const iconMap = {
 export default function SocialIcon({
   social,
 }: {
-  social: keyof User["socials"];
+  social: keyof User['socials'];
 }) {
   return iconMap[social];
 }

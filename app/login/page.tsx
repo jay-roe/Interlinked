@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import Button from '@/components/Button/Button';
-import GoogleButton from '@/components/Button/GoogleButton/GoogleButton';
+import Button from '@/components/Buttons/Button';
+import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 
 const Login = () => {
   const router = useRouter();

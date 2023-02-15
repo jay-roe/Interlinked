@@ -1,4 +1,4 @@
-import EditButton from '@/components/EditButton/EditButton';
+import EditButton from '@/components/Buttons/EditButton/EditButton';
 import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 
