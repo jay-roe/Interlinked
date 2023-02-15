@@ -32,10 +32,12 @@ export default function ProfileExperience({
             <div>{exp.description}</div>
           </div>
         ))} */}
-        <div id={`stack_card_1`} key="1">
+        <div>
           <h2>First Card</h2>
+          <h3>Some more content down here</h3>
+          <p>Bullet points about experience</p>
         </div>
-        <div id={`stack_card_2`} key="2">
+        <div>
           <h2>Second Card</h2>
         </div>
       </CardStack>
