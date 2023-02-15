@@ -16,7 +16,7 @@ export default function CreatePost(props: any) {
         <div className=" w-full  rounded-lg bg-purple-component p-4 px-7 font-para-med shadow-lg ">
           <div className="flex flex-row gap-3 pb-2">
             <div>
-              {currentUser == null ? (
+              {currentUser.coverPhoto == null ? (
                 <FaUserCircle size="2em" />
               ) : (
                 currentUser.coverPhoto
