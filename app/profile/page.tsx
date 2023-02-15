@@ -43,7 +43,7 @@ export default function Profile() {
 
     // User logged in
     return (
-        <div className='container mx-auto text-white'>
+        <div className='container mx-auto text-white' data-testid='profile-info'>
             <div className="block md:flex gap-5 md:max-w-xl mb-5">
                 {currentUser.profilePicture && <div className='row-auto'>
                     <img className='w-40 md:w-52 h-50 rounded-full' src={currentUser.profilePicture} alt={currentUser.name} />

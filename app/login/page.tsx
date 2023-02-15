@@ -90,7 +90,7 @@ const Login = () => {
           </div>
           <div className={styles.HorizontalSeparator}></div>
           <div>
-            <GoogleButton onClick={() => loginWithGoogle()}>
+            <GoogleButton onClick={() => loginWithGoogle()} data-testid="googleLogin">
               Login with Google
             </GoogleButton>
           </div>

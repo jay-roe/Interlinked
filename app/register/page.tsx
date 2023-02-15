@@ -57,6 +57,7 @@ export default function Register() {
                     <div className="rounded-md shadow-sm -space-y-px">
                         <div>
                             <input
+                                data-testid = "email"
                                 id="email-address"
                                 name="email"
                                 type="email"
@@ -69,6 +70,7 @@ export default function Register() {
                         </div>
                         <div>
                             <input
+                                data-testid = "pw"
                                 id="password"
                                 name="password"
                                 type="password"
@@ -81,6 +83,7 @@ export default function Register() {
                         </div>
                         <div>
                             <input
+                                data-testid = "confirm-pw"
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 type="password"
@@ -105,7 +108,7 @@ export default function Register() {
                     </div>
                     <div className={styles.HorizontalSeparator}></div>
                     <div>
-                        <GoogleButton onClick={() => loginWithGoogle()}>Register with Google</GoogleButton>
+                        <GoogleButton onClick={() => loginWithGoogle()} data-testid="google-register">Register with Google</GoogleButton>
                     </div>
                     <div className="flex items-center justify-between">
                         <div className="text-sm">

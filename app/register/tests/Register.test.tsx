@@ -1,14 +1,8 @@
 import '@testing-library/jest-dom'
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/AuthContext';
-import { render } from '@testing-library/react';
+import { fireEvent, render, waitFor } from '@testing-library/react';
 import Register from '../page';
-
-
-
-// note: all the onclick and onchanges in Register and Login are preventing code coverage
-// why??? Find out soon..:P
-
 
 
 // mock authentication and navigation modules:
@@ -24,6 +18,7 @@ jest.mock('next/navigation', () => ({
 const mockedUseAuth = useAuth as jest.Mock<any>;  // make useAuth modifiable based on the test case
 const mockedRouter = useRouter as jest.Mock<any>;
 
+jest.spyOn(window, 'alert').mockImplementation(() => {});
 
 // when the Register page is opened, if the user is already logged in, it redirects
 it('check if user is logged in', async () => {
@@ -67,6 +62,102 @@ it('check if user is logged out', async () => {
     );
 
     // check if the message telling the user to register is on the page
-    const modalTitle = await findByTestId("register-title");
+    const modalTitle = await findByTestId('register-title');
     expect(modalTitle).toBeInTheDocument();
 });
+
+it('can attempt to register with matching passwords', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const myRegister = jest.fn()
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            register: myRegister()
+        }
+    })
+
+    const { findByTestId } = render(
+            <Register />
+    );
+
+    const registerButton = await findByTestId('register');
+    fireEvent.click(registerButton);
+    await waitFor(() => expect(myRegister).toBeCalledTimes(2));
+})
+
+it('can attempt to register when passwords don\'t match', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const { findByTestId } = render(
+            <Register />
+    );
+
+    const pwField = await findByTestId('pw');
+    const confirmPwField = await findByTestId('confirm-pw');
+
+    fireEvent.change(pwField, { target: {value: '123456'}});
+    fireEvent.change(confirmPwField, { target: {value: '654321'}});
+
+    const registerButton = await findByTestId('register');
+    fireEvent.click(registerButton);
+
+    expect(alert).toBeCalledWith('Passwords do not match');
+})
+
+/*
+it('can attempt to register with google', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const myGoogleRegister = jest.fn(() => 0)
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            loginWithGoogle: myGoogleRegister()
+        }
+    })
+
+    const { findByTestId } = render(
+            <Register />
+    );
+
+    const googleRegisterButton = await findByTestId('google-register');
+    fireEvent.click(googleRegisterButton);
+    await waitFor(() => expect(myGoogleRegister).toBeCalled());
+})
+*/
+
+it('can fill form fields', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+    const { findByTestId } = render(
+            <Register />
+    );
+
+    const emailField = await findByTestId('email');
+    const pwField = await findByTestId('pw');
+    const confirmPwField = await findByTestId('confirm-pw');
+
+    fireEvent.change(emailField, { target: {value: 'test@test.com'}});
+    fireEvent.change(pwField, { target: {value: '123456'}});
+    fireEvent.change(confirmPwField, { target: {value: '123456'}});
+
+
+    expect(emailField).toHaveValue('test@test.com');
+    expect(pwField).toHaveValue('123456');
+    expect(confirmPwField).toHaveValue('123456');
+})

@@ -77,6 +77,32 @@ it('can attempt to log in', async () => {
     await waitFor(() => expect(myLogin).toBeCalledTimes(2));
 })
 
+/*
+it('can attempt to log in with google', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return { 
+            authUser: null  // There is no current user
+        } 
+    })
+
+   const myGoogleLogin = jest.fn()
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            loginWithGoogle: myGoogleLogin()
+        }
+    })
+
+    const { findByTestId } = render(
+            <Login />
+    );
+
+    const googleLoginButton = await findByTestId("googleLogin");
+    fireEvent.click(googleLoginButton);
+    await waitFor(() => expect(myGoogleLogin).toBeCalled());
+})
+
+*/
+
 it('can enter email and pw', async () => {
     mockedUseAuth.mockImplementation(() => {
         return { 

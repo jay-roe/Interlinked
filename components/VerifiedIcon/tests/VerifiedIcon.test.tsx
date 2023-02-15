@@ -15,7 +15,7 @@ it('verified icon is shown', async () => {
 it('unverified icon is not shown', async () => {
 
     const { findByTestId } = render(
-        <VerifiedIcon verified={false} showText={true} showIcon={true} />
+        <VerifiedIcon verified={false} showText={true} />
     );
 
     const verifiedContainer = await findByTestId('unverified-icon-container');
