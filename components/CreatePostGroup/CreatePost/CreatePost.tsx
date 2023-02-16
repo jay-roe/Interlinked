@@ -15,9 +15,9 @@ export default function CreatePost(props: any) {
       <div className="  font-para-med ">
         <div className=" w-full  rounded-lg bg-purple-component p-4 px-7 font-para-med shadow-lg ">
           <div className="flex flex-row gap-3 pb-2">
-            <div>
+            <div data-testid="profile-pic">
               {currentUser.coverPhoto == null ? (
-                <FaUserCircle size="2em" />
+                <FaUserCircle data-testid="placeholder-pic" size="2em" />
               ) : (
                 currentUser.coverPhoto
               )}
@@ -34,6 +34,7 @@ export default function CreatePost(props: any) {
             <form>
               <textarea
                 id="message"
+                data-testid="post-content"
                 className="   w-full  rounded-lg bg-purple-text-area p-1 text-sm text-white shadow-lg  "
                 placeholder="Write text here..."
                 onChange={(e) => setMessage(e.target.value)}
@@ -44,6 +45,7 @@ export default function CreatePost(props: any) {
           <div className="flex justify-end">
             <button
               className="flex grow justify-end  "
+              data-testid="post-button"
               onClick={() => props.getText(message)}
             >
               <PostButton></PostButton>
