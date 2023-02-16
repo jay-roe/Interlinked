@@ -23,7 +23,7 @@ const mockedRouter = useRouter as jest.Mock<any>;
 
 // I have to figure out how to either pass the object in properly so the toDate() function can be called on dates
 // or I need to mock toDate() (TimeStamp.toDate())
-/*
+
 it('check if user is logged in', async () => {
 
     mockedUseAuth.mockImplementation(() => {
@@ -38,7 +38,11 @@ it('check if user is logged in', async () => {
                 connections: {},
                 phone: {},
                 languages: ['lang'],
-                education: ['name', 'location', '09/11/2015', 'description'],
+                education: [{
+                    name: '',
+                    location: '',
+                    startDate: '10/10/10'
+                  }],
                 courses: ['title', 'number', 'descriptions'],
                 experience: ['title', 'employer', 'location', '09/11/2015', 'description'],
                 projects: [{}, 'title', 'startDate', 'description', 'repoLink', 'demoLink'],
@@ -56,7 +60,7 @@ it('check if user is logged in', async () => {
     expect(profileInfo).toBeInTheDocument();
 
 });
-*/
+
 
 it('check if user is logged out', async () => {
 
