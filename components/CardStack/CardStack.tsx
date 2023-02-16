@@ -176,10 +176,10 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
         ))}
       </div>
       <Button onClick={() => resetCards()}>
-        <GrPowerReset size={40} />
+        <GrPowerReset size={30} />
       </Button>
       <Button onClick={() => nextClick()}>
-        <GrNext size={40} />
+        <GrNext size={30} />
       </Button>
     </>
   );
