@@ -144,7 +144,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
 
   return (
     <>
-      <div className="relative flex min-h-[12rem] min-w-[15rem] max-w-xl items-center justify-center">
+      <div className="relative flex min-h-[15rem] min-w-[15rem] max-w-xl items-center justify-center">
         {children.map((child, index) => (
           <animated.div
             className="absolute rounded-xl p-5"
@@ -166,7 +166,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
                   ? backgroundColors[index - frontCardIndex]
                   : 'none',
               width: `calc(100% - ${(index - frontCardIndex) * 2.5}rem)`,
-              top: `${(index - frontCardIndex) * -1.25 + 3.75}rem`,
+              top: `${(index - frontCardIndex) * -1.25 + 0.5}rem`,
             }}
             id={`stack_card_${index}`}
             key={index}
