@@ -40,6 +40,15 @@ export default function ProfileExperience({
         <div>
           <h2>Second Card</h2>
         </div>
+        <div>
+          <h2>Third Card</h2>
+        </div>
+        <div>
+          <h2>Fourth Card</h2>
+        </div>
+        <div>
+          <h2>Fifth Card</h2>
+        </div>
       </CardStack>
     </div>
   );
