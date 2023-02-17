@@ -56,7 +56,6 @@ it('can edit bio', async () => {
     <ProfileHeading
       currentUser={currentUser}
       bio=""
-      bioEditing={false}
       isEditable={true}
       setBioEditing={setBioEditingMock}
     />

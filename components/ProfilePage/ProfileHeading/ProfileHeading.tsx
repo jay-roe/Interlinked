@@ -56,7 +56,6 @@ export default function ProfileHeading({
           )}
           {isEditable && (
             <EditButton
-              data-testid="edit-button"
               className="inline"
               onClick={() => setBioEditing((curr) => !curr)}
             />
