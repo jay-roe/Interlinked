@@ -31,11 +31,15 @@ export default function EditProfile() {
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
+  const [name, setName] = useState<string>(currentUser?.name);
+  const [nameEditing, setNameEditing] = useState<boolean>(false);
+
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
   const statesToUpdate = {
     bio: bio,
+    name: name,
   };
 
   async function updateAccount() {
@@ -91,6 +95,10 @@ export default function EditProfile() {
         <ProfileHeading
           currentUser={currentUser}
           isEditable
+          name={name}
+          setName={setName}
+          nameEditing={nameEditing}
+          setNameEditing={setNameEditing}
           bio={bio}
           setBio={setBio}
           bioEditing={bioEditing}
