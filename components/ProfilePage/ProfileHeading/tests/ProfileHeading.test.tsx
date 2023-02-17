@@ -19,24 +19,78 @@ const currentUser = {
 };
 
 it('renders name given user', async () => {
-  const { findByText } = render(<ProfileHeading currentUser={currentUser} bio=''/>);
+  const { findByText } = render(
+    <ProfileHeading currentUser={currentUser} bio="" />
+  );
 
   const name = await findByText('Melisa', { exact: false });
   expect(name).toBeInTheDocument();
 });
 
 // this doesn't render parts with onclick and onchange so the test ids are't found
-// it('can change bio', async () => {
-//     const { findByTestId, findByText } = render(<ProfileHeading currentUser={currentUser} bio=''/>);
+it('can change bio', async () => {
+  const setBioMock = jest.fn();
 
-//     const inputBox = await findByTestId('bio-input');
-//     inputBox.setAttribute('value', 'hi');
+  const { findByTestId } = render(
+    <ProfileHeading
+      currentUser={currentUser}
+      bio=""
+      bioEditing={true}
+      isEditable={true}
+      setBio={setBioMock}
+    />
+  );
 
-//     const editButton = await findByTestId('edit-button');
-//     fireEvent.click(editButton);
+  const inputBox = await findByTestId('bio-editing');
+  expect(inputBox).toBeInTheDocument();
 
-//     const bio = await findByText('hi', { exact: false });
-//     expect(bio).toBeInTheDocument();
+  fireEvent.change(inputBox, { target: { value: 'NEW BIO' } });
 
-//   });
-  
+  expect(setBioMock).toHaveBeenCalledTimes(1);
+});
+
+it('can edit bio', async () => {
+  const setBioEditingMock = jest.fn();
+
+  const { findByTestId } = render(
+    <ProfileHeading
+      currentUser={currentUser}
+      bio=""
+      bioEditing={false}
+      isEditable={true}
+      setBioEditing={setBioEditingMock}
+    />
+  );
+
+  const editButton = await findByTestId('edit-button');
+  expect(editButton).toBeInTheDocument();
+
+  fireEvent.click(editButton);
+
+  expect(setBioEditingMock).toHaveBeenCalledTimes(1);
+});
+
+it('renders placeholder if user has no name', async () => {
+  let currUser = {
+    awards: [],
+    codingLanguages: [],
+    connections: [],
+    courses: [],
+    education: [],
+    email: '',
+    experience: [],
+    languages: [],
+    name: '',
+    projects: [],
+    recommendations: [],
+    skills: [],
+    volunteering: [],
+  };
+
+  const { findByText } = render(
+    <ProfileHeading currentUser={currUser} bio="" />
+  );
+
+  const namePlaceholder = await findByText('No name provided.');
+  expect(namePlaceholder).toBeInTheDocument();
+});
