@@ -4,7 +4,7 @@ import { animated, useSprings, to as interpolate } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import { useState } from 'react';
 import { GrNext, GrPowerReset } from 'react-icons/gr';
-import Button from '../Button/Button';
+import Button from '../Buttons/Button';
 
 // Background color by card index (Front = 0, Second = 1, Third = 2, Any other = none, not shown)
 const backgroundColors = ['#2F263B', '#251E2F', '#1E1825'];
