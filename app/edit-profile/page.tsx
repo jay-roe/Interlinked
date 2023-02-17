@@ -7,6 +7,8 @@ import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPop
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 
+import type { User } from '@/types/User';
+
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
@@ -37,6 +39,12 @@ export default function EditProfile() {
   const statesToUpdate = {
     bio: bio,
   };
+
+  //Education component states
+  const [education, setEducation] = useState<User['education']>(
+    currentUser?.education
+  );
+  const [educationEditing, setEducationEditing] = useState<boolean>(false);
 
   async function updateAccount() {
     try {
@@ -111,7 +119,14 @@ export default function EditProfile() {
         <ProfileLanguages currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-        <ProfileEducation currentUser={currentUser} />
+        <ProfileEducation
+          currentUser={currentUser}
+          education={currentUser.education}
+          isEditable
+          educationEditing={educationEditing}
+          setEducation={setEducation}
+          setEducationEditing={setEducationEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses currentUser={currentUser} />

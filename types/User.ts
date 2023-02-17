@@ -1,4 +1,4 @@
-import type { Timestamp } from "firebase/firestore";
+import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
   awards: Award[];
@@ -43,6 +43,7 @@ type Education = {
   image?: string;
   startDate: Timestamp;
   endDate?: Timestamp;
+  program?: string;
 };
 
 type Experience = {
