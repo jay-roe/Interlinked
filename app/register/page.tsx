@@ -20,8 +20,6 @@ export default function Register() {
 
   // If user logged in, send them to home
   useEffect(() => {
-    console.log(authUser);
-
     if (authUser) {
       router.push('/');
     }
@@ -36,7 +34,6 @@ export default function Register() {
 
     try {
       setLoading(true);
-      console.log(register);
       await register(email, password);
       router.push('/edit-profile');
     } catch (err) {
