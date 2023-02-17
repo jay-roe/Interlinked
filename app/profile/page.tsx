@@ -1,10 +1,9 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import SocialIconGroup from '@/components/SocialIconGroup/SocialIconGroup';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/LinkButton/LinkButton';
+import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
@@ -12,8 +11,10 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
-import Button from '@/components/Button/Button';
+
 import Link from 'next/link';
+import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
+import Button from '@/components/Buttons/Button';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
