@@ -1,29 +1,19 @@
 import { useState } from 'react';
 import CreatePost from './CreatePost/CreatePost';
 import PreviewAttachement from './PreviewAttachement/PreviewAttachement';
-import {
-  FieldValue,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import firebase, { firestore, storage } from '@/config/firebase';
+import { storage } from '@/config/firebase';
 import { Post } from '@/types/Post';
 
 export default function CreatePostGroup() {
   const { currentUser, authUser } = useAuth();
   const [image, setImage] = useState<File>();
-  const [upload, setUpload] = useState<boolean>(false);
-  const [imageURL, setImageURL] = useState<string>(''); // link to download image from firestore
 
   const retrieveText = async (text: string) => {
     await createPost(text).then(() => {
-      setImageURL('');
       setImage(null);
     });
   };
