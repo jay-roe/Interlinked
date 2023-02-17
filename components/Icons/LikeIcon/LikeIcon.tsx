@@ -7,7 +7,7 @@ function LikeIcon(props) {
   return (
     <span className="flex flex-nowrap space-x-1 text-accent-orange ">
       <button data-testid="like-btn" onClick={() => setIsLiked(!isLiked)}>
-        {isLiked ? <FaThumbsUp data-testid="like"/> : <FaRegThumbsUp data-testid="dislike"/>}
+        {isLiked ? <FaThumbsUp data-testid="liked"/> : <FaRegThumbsUp data-testid="not-liked"/>}
       </button>
       <span className="text-white"> {props.likes} </span>
     </span>
