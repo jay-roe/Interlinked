@@ -2,13 +2,13 @@ type Props = {};
 
 const CardGrid = ({
   children,
-  gridTemplateColumns = 'grid-cols-1',
+  className = 'grid-cols-1',
 }: {
-  children?: React.ReactNode;
-  gridTemplateColumns?: string;
+  children?: React.ReactNode | React.ReactNode[];
+  className?: string;
 }) => {
   return (
-    <div className={`grid ${gridTemplateColumns} gap-x-8 gap-y-8`}>
+    <div className={`grid ${className} gap-x-8 gap-y-8`}>
       <>{children}</>
     </div>
   );

@@ -1,17 +1,23 @@
-import { useState } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import { FaRegComment, FaComment } from 'react-icons/fa';
 
-function LikeIcon(props) {
-  const [isCommented, setIsCommented] = useState(false);
-
+const CommentIcon = ({
+  commentState,
+  setCommentState,
+  comments,
+}: {
+  commentState: boolean;
+  setCommentState: Dispatch<SetStateAction<boolean>>;
+  comments: number;
+}) => {
   return (
     <span className="flex flex-nowrap space-x-1 text-accent-orange ">
-      <button onClick={() => setIsCommented(!isCommented)}>
-        {isCommented ? <FaComment /> : <FaRegComment />}
+      <button onClick={() => setCommentState(!commentState)}>
+        {commentState ? <FaComment /> : <FaRegComment />}
       </button>
-      <span className="text-white"> {props.comments} </span>
+      <span className="text-white"> {comments} </span>
     </span>
   );
-}
+};
 
-export default LikeIcon;
+export default CommentIcon;

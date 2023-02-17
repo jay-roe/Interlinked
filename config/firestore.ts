@@ -1,5 +1,5 @@
 import { User } from '../types/User';
-import { Post } from '../types/Post';
+import { Post, Comment } from '../types/Post';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
 import type { QueryDocumentSnapshot } from 'firebase/firestore';
@@ -20,4 +20,5 @@ const dataPoint = <T>(collectionPath: string) =>
 export const db = {
   users: dataPoint<User>('users'),
   posts: dataPoint<Post>('posts'),
+  comments: (postId: string) => dataPoint<Comment>(`posts/${postId}/comments`),
 };

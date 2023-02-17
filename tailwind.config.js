@@ -23,7 +23,8 @@ module.exports = {
         'para-med': 'Paralucent-Medium',
       },
       gridTemplateColumns: {
-        '2-1': '2fr 1fr',
+        1: 'minmax(0, 1fr)',
+        '2-1': 'minmax(0, 2fr) minmax(0, 1fr)',
       },
     },
   },

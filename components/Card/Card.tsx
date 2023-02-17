@@ -10,7 +10,6 @@ const Card = ({
       className={`${className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
     >
       {children}
-      <p>balls 4</p>
     </div>
   );
 };

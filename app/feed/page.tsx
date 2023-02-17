@@ -1,7 +1,15 @@
 'use client';
 
 import Link from 'next/link';
-import { getDocs, query, where, documentId } from 'firebase/firestore';
+import {
+  getDocs,
+  query,
+  where,
+  documentId,
+  orderBy,
+  collection,
+} from 'firebase/firestore';
+import { firestore } from '@/config/firebase';
 import { useEffect, useState } from 'react';
 import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
@@ -14,45 +22,65 @@ import { User } from '@/types/User';
 const Feeds = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<Post[]>([]);
-  const [authors, setAuthors] = useState<User[]>([]);
+  const [authors, setAuthors] = useState<Record<string, User>>({}); // This object is formatted in a way where the document id is used as a key to get the user information
   const { currentUser } = useAuth();
   // const router = useRouter();
 
   // get posts
   useEffect(() => {
-    const allPostsQuery = query(db.posts);
+    const allPostsQuery = query(db.posts, orderBy('date', 'desc'));
 
-    getDocs(allPostsQuery).then((docs) => {
-      let postArray: Post[] = [];
-      docs.forEach((doc) => {
-        postArray.push(doc.data());
+    getDocs(allPostsQuery)
+      .then((docs) => {
+        let postArray: Post[] = []; // we make this array first so we only update the state once and only when all the data is there
+        docs.forEach((doc) => {
+          postArray.push(doc.data());
+          // get comments of post
+          postArray[postArray.length - 1].comments = [];
+          const commentsQuery = query(db.comments(doc.id));
+          getDocs(commentsQuery)
+            .then((comments) => {
+              comments.forEach((comment) => {
+                postArray[postArray.length - 1].comments.push(comment.data());
+              });
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        });
+        setPosts(postArray);
+      })
+      .catch((err) => {
+        console.error(err);
       });
-      setPosts(postArray);
-    });
   }, []);
 
   // get authors of posts
   useEffect(() => {
-    const allAuthors = posts.map((post) => post.authorID);
+    const allAuthors = posts.map((post) => {
+      return post['authorID'];
+    });
     const postAuthors = [...new Set(allAuthors)];
-    console.log(postAuthors);
+    // we get the whole set of authors from the posts as posts have the author id attatched to them
     if (postAuthors.length !== 0) {
       const authorsQuery = query(
         db.users,
         where(documentId(), 'in', postAuthors)
       );
       getDocs(authorsQuery).then((docs) => {
-        let authorArray: User[] = [];
+        let authorObject: Record<string, User> = {}; // we do the same 'set the state once'
         docs.forEach((doc) => {
-          authorArray.push(doc.data());
+          authorObject[doc.id] = doc.data();
         });
-        setAuthors(authorArray);
+        setAuthors(authorObject);
       });
-      setLoading(false);
+      setLoading(false); // we're finally done getting info
     }
-  }, [posts]);
+  }, [posts]); // only update when the posts change
 
   if (!currentUser || loading) {
+    // user isnt logged in or the page is still loading
+    // TODO make a better loading page
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
@@ -75,16 +103,17 @@ const Feeds = () => {
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         Let&apos;s see what your links are talking about.
       </p>
-      {/* {posts.map((post, index) => (
-        <p key={index}>{post.text_content}</p>
-      ))} */}
-      {authors.map((post, index) => {
-        console.log(post);
-        return <p key={index}>{post.email}</p>;
-      })}
-      <CardGrid gridTemplateColumns="grid-cols-1">
-        <FullPostCard />
-        <FullPostCard />
+
+      <CardGrid className="grid-cols-1">
+        {posts.map((post, index) => {
+          return (
+            <FullPostCard
+              key={index}
+              post={post}
+              author={authors[post.authorID]}
+            />
+          );
+        })}
       </CardGrid>
     </div>
   );
