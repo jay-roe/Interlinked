@@ -69,7 +69,7 @@ export default function DeleteAccountPopupOAuth({
       >
         Delete account
       </Button>
-      <Button data-testid="close-popup" onClick={onHideLocal}>
+      <Button data-testid="close-popup-oauth" onClick={onHideLocal}>
         Close
       </Button>
     </div>
