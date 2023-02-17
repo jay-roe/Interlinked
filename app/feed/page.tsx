@@ -35,18 +35,6 @@ const Feeds = () => {
         let postArray: Post[] = []; // we make this array first so we only update the state once and only when all the data is there
         docs.forEach((doc) => {
           postArray.push(doc.data());
-          // get comments of post
-          postArray[postArray.length - 1].comments = [];
-          const commentsQuery = query(db.comments(doc.id));
-          getDocs(commentsQuery)
-            .then((comments) => {
-              comments.forEach((comment) => {
-                postArray[postArray.length - 1].comments.push(comment.data());
-              });
-            })
-            .catch((err) => {
-              console.error(err);
-            });
         });
         setPosts(postArray);
       })

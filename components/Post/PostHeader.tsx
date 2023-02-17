@@ -12,10 +12,10 @@ const PostHeader = ({
   currentUser?: User;
 }) => {
   return (
-    <div className="mb-3 flex items-center space-x-4">
+    <div className="mb-3 flex justify-start items-center space-x-4">
       <span>
         <img
-          className="h-10 w-10 min-w-min rounded-full md:h-12 md:w-12"
+          className="h-8 w-8 min-w-[2rem] min-h-[2rem] rounded-full md:h-12 md:w-12"
           src={
             author?.coverPhoto ||
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
@@ -23,10 +23,10 @@ const PostHeader = ({
         ></img>
       </span>
       <div className="flex flex-col">
-        <div className="text-lg">
+        <div className="text-sm md:text-lg break-all">
           {author?.name || author?.email || 'Unknown'}
         </div>
-        <div className="text-sm font-light">
+        <div className="max-md:hidden text-sm font-light">
           {post?.date
             ?.toDate()
             .toLocaleString('en-US', {
@@ -34,6 +34,18 @@ const PostHeader = ({
               year: 'numeric',
               day: '2-digit',
               hour: '2-digit',
+              minute: '2-digit',
+            }) || 'Unknown'}
+        </div>
+        <div className="md:hidden text-sm font-light">
+          {post?.date
+            ?.toDate()
+            .toLocaleString('en-US', {
+              month: '2-digit',
+              year: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              hour12: false,
               minute: '2-digit',
             }) || 'Unknown'}
         </div>

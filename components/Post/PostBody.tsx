@@ -18,7 +18,7 @@ const PostBody = ({
       {post?.image_content ? (
         <img
           src={post?.image_content}
-          className="max-w-64 max-h-64 min-h-min min-w-min object-contain"
+          className="max-w-64 max-h-64 object-contain"
           alt="..."
         />
       ) : (

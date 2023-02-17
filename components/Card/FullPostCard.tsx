@@ -27,7 +27,6 @@ const FullPostCard = ({
     setPostHeight(postContainer.current.clientHeight);
   });
 
-  console.log(post);
   return (
     <CardGrid
       className={`grid-cols-1 md:grid-cols-2-1 max-h-[${postHeight}px]`}
@@ -60,7 +59,7 @@ const FullPostCard = ({
         ></div>
         {/* Comments go here */}
         <div className={`flex flex-col`}>
-          {post.comments?.length === 0 || post.comments === null ? (
+          {(post.comments?.length === 0 || post.comments === null || post.comments === undefined)? (
             <>
               <Card>
                 There are no comments here.

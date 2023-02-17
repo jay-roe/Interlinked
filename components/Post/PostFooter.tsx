@@ -19,7 +19,9 @@ const PostFooter = ({
     <div className="my-2 flex items-center space-x-4">
       <LikeIcon likes={2} likeState={liked} setLiked={setLiked} />
       <CommentIcon
-        comments={3}
+        comments={(post.comments?.length === 0 || post.comments === null || post.comments === undefined)? 
+          0 : 
+          post.comments.length}
         commentState={commentState}
         setCommentState={setCommentState}
       />
