@@ -6,6 +6,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
+import CardStack from '@/components/CardStack/CardStack';
 export default function ProfileEducation({
   education,
   isEditable = false,
@@ -21,6 +22,36 @@ export default function ProfileEducation({
   setEducation?: Dispatch<SetStateAction<User['education']>>;
   setNewEducation?: (education: User['education']) => void;
 }) {
+  // Live version of education component
+  if (!isEditable) {
+    return (
+      <CardStack>
+        {education.map((ed, index) => (
+          <div key={index}>
+            <h3 className="text-xl font-semibold">{ed.program}</h3>
+            {ed.image && <img src={ed.image} alt={ed.name} />}
+            <h3>{ed.name}</h3>
+            <h4>{ed.location}</h4>
+            <h6>
+              {`${ed.startDate?.toDate().toLocaleString('default', {
+                month: 'long',
+                year: 'numeric',
+              })} - `}
+              {ed.endDate
+                ? `${ed.endDate?.toDate().toLocaleString('default', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}`
+                : 'present'}
+            </h6>
+            <p>{ed.description}</p>
+          </div>
+        ))}
+      </CardStack>
+    );
+  }
+
+  // Editable version of education component
   return (
     <div>
       {education.map((ed, index) => (
@@ -167,60 +198,56 @@ export default function ProfileEducation({
               <p>{ed.description}</p>
             </div>
           )}
-          {isEditable && (
-            <div className="flex items-center">
-              {/* External edit education button */}
-              {educationEditing && educationEditing[index] ? (
-                <Button className="mr-2" type="submit">
-                  Save Education
-                </Button>
-              ) : (
-                <EditButton
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setEducationEditing((eduedits) =>
-                      eduedits.map((edu, i) => (i === index ? !edu : edu))
-                    );
-                  }}
-                />
-              )}
-              {/* External delete education button */}
-              <DeleteButton
+          <div className="flex items-center">
+            {/* External edit education button */}
+            {educationEditing && educationEditing[index] ? (
+              <Button className="mr-2" type="submit">
+                Save Education
+              </Button>
+            ) : (
+              <EditButton
                 onClick={(e) => {
                   e.preventDefault();
-                  setEducation((edus) => edus.filter((_, i) => index !== i));
-
                   setEducationEditing((eduedits) =>
-                    eduedits.filter((_, i) => index !== i)
+                    eduedits.map((edu, i) => (i === index ? !edu : edu))
                   );
                 }}
               />
-            </div>
-          )}
+            )}
+            {/* External delete education button */}
+            <DeleteButton
+              onClick={(e) => {
+                e.preventDefault();
+                setEducation((edus) => edus.filter((_, i) => index !== i));
+
+                setEducationEditing((eduedits) =>
+                  eduedits.filter((_, i) => index !== i)
+                );
+              }}
+            />
+          </div>
         </form>
       ))}
       {/* Adding new education, appears after all education cards */}
-      {isEditable && (
-        <Button
-          className="inline"
-          onClick={() => {
-            // Append new empty education to current array of educations
-            setEducation((edus) => [
-              ...edus,
-              {
-                program: '',
-                name: '',
-                location: '',
-                startDate: Timestamp.now(),
-              },
-            ]);
+      <Button
+        className="inline"
+        onClick={() => {
+          // Append new empty education to current array of educations
+          setEducation((edus) => [
+            ...edus,
+            {
+              program: '',
+              name: '',
+              location: '',
+              startDate: Timestamp.now(),
+            },
+          ]);
 
-            setEducationEditing((eduedits) => [...eduedits, true]);
-          }}
-        >
-          Add New Education
-        </Button>
-      )}
+          setEducationEditing((eduedits) => [...eduedits, true]);
+        }}
+      >
+        Add New Education
+      </Button>
     </div>
   );
 }
