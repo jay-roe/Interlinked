@@ -25,7 +25,7 @@ export default function ProfileEducation({
   // Live version of education component
   if (!isEditable) {
     return (
-      <CardStack>
+      <CardStack data-testid="education-stack">
         {education.map((ed, index) => (
           <div key={index}>
             <h3 className="text-xl font-semibold">{ed.program}</h3>
@@ -53,9 +53,10 @@ export default function ProfileEducation({
 
   // Editable version of education component
   return (
-    <div>
+    <div data-testid="editable-edu">
       {education.map((ed, index) => (
         <form
+          data-testid={`submit-education-${index}`}
           action=""
           key={index}
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
@@ -72,6 +73,7 @@ export default function ProfileEducation({
                 Program <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid={`change-edu-program-${index}`}
                 type="text"
                 name="program"
                 id="profileProgram"
@@ -89,6 +91,7 @@ export default function ProfileEducation({
                 School <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid={`change-edu-school-${index}`}
                 name="name"
                 id="profileName"
                 value={ed.name}
@@ -105,6 +108,7 @@ export default function ProfileEducation({
                 Location <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid={`change-edu-location-${index}`}
                 type="text"
                 id="profileLocation"
                 name="location"
@@ -166,6 +170,7 @@ export default function ProfileEducation({
               </div>
               <p>Description</p>
               <TextArea
+                data-testid={`change-edu-description-${index}`}
                 name="info"
                 value={ed.description}
                 onChange={(e) =>
@@ -206,6 +211,7 @@ export default function ProfileEducation({
               </Button>
             ) : (
               <EditButton
+                data-testid={`edit-edu-ext-${index}`}
                 onClick={(e) => {
                   e.preventDefault();
                   setEducationEditing((eduedits) =>
@@ -216,6 +222,7 @@ export default function ProfileEducation({
             )}
             {/* External delete education button */}
             <DeleteButton
+              data-testid={`delete-edu-ext-${index}`}
               onClick={(e) => {
                 e.preventDefault();
                 setEducation((edus) => edus.filter((_, i) => index !== i));
@@ -230,6 +237,7 @@ export default function ProfileEducation({
       ))}
       {/* Adding new education, appears after all education cards */}
       <Button
+        data-testid="add-new-edu"
         className="inline"
         onClick={() => {
           // Append new empty education to current array of educations
