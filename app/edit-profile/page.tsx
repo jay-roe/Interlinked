@@ -7,6 +7,8 @@ import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPop
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 
+import type { User } from '@/types/User';
+
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
@@ -34,11 +36,26 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
+  //Education component states
+  const [education, setEducation] = useState<User['education']>(
+    currentUser?.education
+  );
+  const [educationEditing, setEducationEditing] = useState<boolean[]>(
+    education.map(() => false)
+  );
+
   const statesToUpdate = {
     bio: bio,
+    education: education.filter((_, i) => !educationEditing[i]),
   };
 
+  console.log(education);
+
   async function updateAccount() {
+    const save = confirm('Unsaved changes will be lost. Continue?');
+    if (!save) {
+      return;
+    }
     try {
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
@@ -111,7 +128,13 @@ export default function EditProfile() {
         <ProfileLanguages currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-        <ProfileEducation currentUser={currentUser} />
+        <ProfileEducation
+          education={education}
+          isEditable
+          educationEditing={educationEditing}
+          setEducation={setEducation}
+          setEducationEditing={setEducationEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses currentUser={currentUser} />
