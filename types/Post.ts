@@ -20,7 +20,7 @@ export type Comment = {
   date: Timestamp;
 };
 
-type Like = {
+export type Like = {
   authorID: string;
   author: string;
 };

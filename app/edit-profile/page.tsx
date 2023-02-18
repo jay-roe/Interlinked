@@ -85,7 +85,9 @@ export default function EditProfile() {
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Edit Profile</h1>
-        <Button onClick={updateAccount}>Save Changes</Button>
+        <Button data-testid="update-account-button" onClick={updateAccount}>
+          Save Changes
+        </Button>
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
         <ProfileHeading
@@ -129,7 +131,9 @@ export default function EditProfile() {
         <ProfileAwards currentUser={currentUser} />
       </div>
       <div className="flex justify-end">
-        <Button onClick={updateAccount}>Save Changes</Button>
+        <Button data-testid="update-account-button2" onClick={updateAccount}>
+          Save Changes
+        </Button>
       </div>
 
       <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>

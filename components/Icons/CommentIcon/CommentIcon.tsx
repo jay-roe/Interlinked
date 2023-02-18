@@ -15,8 +15,15 @@ const CommentIcon = ({
       data-testid="test-comment-icon-footer"
       className="flex flex-nowrap space-x-1 text-accent-orange "
     >
-      <button onClick={() => setCommentState(!commentState)}>
-        {commentState ? <FaComment /> : <FaRegComment />}
+      <button
+        data-testid="comment-btn"
+        onClick={() => setCommentState(!commentState)}
+      >
+        {commentState ? (
+          <FaComment data-testid="commented" />
+        ) : (
+          <FaRegComment data-testid="not-commented" />
+        )}
       </button>
       <span data-testid="comments" className="text-white">
         {' '}
