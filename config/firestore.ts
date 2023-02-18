@@ -20,5 +20,4 @@ const dataPoint = <T>(collectionPath: string) =>
 export const db = {
   users: dataPoint<User>('users'),
   posts: dataPoint<Post>('posts'),
-  comments: (postId: string) => dataPoint<Comment>(`posts/${postId}/comments`),
 };

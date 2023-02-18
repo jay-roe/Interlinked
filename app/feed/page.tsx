@@ -22,8 +22,9 @@ import { User } from '@/types/User';
 const Feeds = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [postIDs, setPostIDs] = useState<string[]>([]);
   const [authors, setAuthors] = useState<Record<string, User>>({}); // This object is formatted in a way where the document id is used as a key to get the user information
-  const { currentUser } = useAuth();
+  const { currentUser, authUser } = useAuth();
   // const router = useRouter();
 
   // get posts
@@ -33,10 +34,13 @@ const Feeds = () => {
     getDocs(allPostsQuery)
       .then((docs) => {
         let postArray: Post[] = []; // we make this array first so we only update the state once and only when all the data is there
+        let postIdArray: string[] = []
         docs.forEach((doc) => {
           postArray.push(doc.data());
+          postIdArray.push(doc.id)
         });
         setPosts(postArray);
+        setPostIDs(postIdArray);
       })
       .catch((err) => {
         console.error(err);
@@ -98,7 +102,10 @@ const Feeds = () => {
             <FullPostCard
               key={index}
               post={post}
+              postID={postIDs[index]}
               author={authors[post.authorID]}
+              currentUser={currentUser}
+              authUser={authUser}
             />
           );
         })}

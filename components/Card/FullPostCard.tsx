@@ -8,18 +8,24 @@ import Card from './Card';
 import CardGrid from './CardGrid';
 import CommentHeader from '../Comment/CommentHeader';
 import CommentBody from '../Comment/CommentBody';
+import AddComment from '../Comment/AddComment';
 
 const FullPostCard = ({
   author,
   post,
+  postID,
   currentUser,
+  authUser
 }: {
   author?: User;
-  post?: any;
+  post?: Post;
+  postID?: string
   currentUser?: User;
+  authUser?: any
 }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [postHeight, setPostHeight] = useState(0);
+  const [comments, setComments] = useState(post?.comments)
 
   const postContainer = useRef(null);
 
@@ -29,7 +35,7 @@ const FullPostCard = ({
 
   return (
     <CardGrid
-      className={`grid-cols-1 md:grid-cols-2-1 max-h-[${postHeight}px]`}
+      className={`grid-cols-1 lg:grid-cols-2-1 max-h-[${postHeight}px]`}
     >
       {/* Post card */}
       <Card
@@ -42,7 +48,7 @@ const FullPostCard = ({
           <PostHeader author={author} post={post} currentUser={currentUser} />
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
-            post={post}
+            comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
           />
@@ -58,8 +64,15 @@ const FullPostCard = ({
         "
         ></div>
         {/* Comments go here */}
-        <div className={`flex flex-col`}>
-          {(post.comments?.length === 0 || post.comments === null || post.comments === undefined)? (
+        <div className={`flex flex-col space-y-3`}>
+          <AddComment
+              authUser={authUser}
+              currentUser={currentUser}
+              postID={postID}
+              comments={comments}
+              setComments={setComments}
+          />
+          {(comments?.length === 0 || comments === null || comments === undefined)? (
             <>
               <Card>
                 There are no comments here.
@@ -68,8 +81,8 @@ const FullPostCard = ({
             </>
           ) : (
             <>
-              {/* {post.comments.toString()} */}
-              {post.comments?.map((comment, index) => {
+              {/* Comments for a post */}
+              {comments?.map((comment, index) => {
                 return (
                   <Card key={index} className={`flex flex-col`}>
                     <CommentHeader
