@@ -53,7 +53,7 @@ export default function PreviewProfile() {
       <h1 className="text-2xl font-extrabold">
         Link with {currentUser.name?.split(' ')[0]}
       </h1>
-      <ProfileContact currentUser={currentUser} />
+      <ProfileContact currentUser={currentUser} email={currentUser.email} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       <ProfileLanguages currentUser={currentUser} />

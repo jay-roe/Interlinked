@@ -39,6 +39,11 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
+  //Contact component states
+  const [email, setEmail] = useState<string>(currentUser?.email);
+  const [phone, setPhone] = useState<string>(currentUser?.phone);
+  const [contactEditing, setContactEditing] = useState<boolean>(false);
+
   //Education component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
@@ -69,6 +74,8 @@ export default function EditProfile() {
     bio: bio,
     name: name,
     education: education.filter((_, i) => !educationEditing[i]),
+    phone: phone,
+    email: !contactEditing ? email : currentUser.email,
   };
 
   async function updateAccount() {
@@ -130,7 +137,16 @@ export default function EditProfile() {
         <h1 className="text-2xl font-extrabold">
           Link with {currentUser.name?.split(' ')[0]}
         </h1>
-        <ProfileContact currentUser={currentUser} />
+        <ProfileContact
+          currentUser={currentUser}
+          isEditable
+          email={email}
+          setEmail={setEmail}
+          phone={phone}
+          setPhone={setPhone}
+          contactEditing={contactEditing}
+          setContactEditing={setContactEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
         <ProfileLanguages currentUser={currentUser} />
