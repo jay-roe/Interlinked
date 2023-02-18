@@ -2,6 +2,8 @@ import EditButton from '@/components/Buttons/EditButton/EditButton';
 import Input from '@/components/InputFields/Input/Input';
 import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
+import React from 'react';
+import { FaRegEdit } from 'react-icons/fa';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -13,8 +15,9 @@ import type { Dispatch, SetStateAction } from 'react';
  * @param bioEditing Controls when text input is rendered instead of text output
  */
 export default function ProfileHeading({
-  currentUser,
   isEditable = false,
+  profilePictureURL,
+  setProfilePicture,
   name,
   nameEditing = false,
   setName,
@@ -24,8 +27,9 @@ export default function ProfileHeading({
   setBio,
   setBioEditing,
 }: {
-  currentUser: User;
   isEditable?: boolean;
+  profilePictureURL: string;
+  setProfilePicture?: Dispatch<SetStateAction<File>>;
   name: string;
   nameEditing?: boolean;
   setName?: (name: string) => void;
@@ -35,28 +39,49 @@ export default function ProfileHeading({
   setBio?: (bio: string) => void;
   setBioEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  // Set profile picture preview if not empty file
+  const handleFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const images = Array.from(event.target.files);
+    if (!images || !images[0]) {
+      return;
+    }
+
+    setProfilePicture(images[0]);
+    console.log(images[0]);
+  };
+
   return (
     <div className="mb-5 block min-h-full gap-5 md:flex md:max-w-xl">
-      {currentUser.profilePicture && (
+      {profilePictureURL && (
         <div className="row-auto">
           <div className="relative m-auto w-fit">
-            <img
-              className="h-40 w-40 max-w-none rounded-full"
-              src={currentUser.profilePicture}
-              alt={currentUser?.name}
-            />
-            {isEditable && (
+            {isEditable ? (
               <div>
                 <input
                   accept="image/*"
                   id="upload-profile-picture"
                   type="file"
                   style={{ display: 'none' }}
+                  onChange={handleFileSelected}
                 />
                 <label htmlFor="upload-profile-picture">
-                  <EditButton className="absolute -right-4 -bottom-4" />
+                  <img
+                    className="h-40 w-40 max-w-none rounded-full"
+                    src={profilePictureURL}
+                    alt={name || 'Profile Picture'}
+                  />
+                  <FaRegEdit
+                    className="absolute -right-4 -bottom-4 p-2 text-yellow-600"
+                    size={45}
+                  />
                 </label>
               </div>
+            ) : (
+              <img
+                className="h-40 w-40 max-w-none rounded-full"
+                src={profilePictureURL}
+                alt={name || 'Profile Picture'}
+              />
             )}
           </div>
         </div>

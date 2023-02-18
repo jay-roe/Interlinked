@@ -2,7 +2,7 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
@@ -24,6 +24,8 @@ import Link from 'next/link';
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
+import { storage } from '@/config/firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -33,6 +35,23 @@ export default function EditProfile() {
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
+  const [profilePicture, setProfilePicture] = useState<File>();
+  const [profilePictureURL, setProfilePictureURL] = useState<string>(
+    currentUser?.profilePicture
+  );
+
+  // Preview uploaded profile picture before posting to database
+  useEffect(() => {
+    if (!profilePicture) {
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(profilePicture);
+    setProfilePictureURL(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [profilePicture]);
+
   const [name, setName] = useState<string>(currentUser?.name);
   const [nameEditing, setNameEditing] = useState<boolean>(false);
 
@@ -47,13 +66,20 @@ export default function EditProfile() {
     education.map(() => false)
   );
 
-  const statesToUpdate = {
-    bio: bio,
+  const statesToUpdate: Partial<User> = {
     name: name,
+    bio: bio,
     education: education.filter((_, i) => !educationEditing[i]),
   };
 
-  console.log(education);
+  async function uploadProfilePicture() {
+    const profilePictureRef = ref(
+      storage,
+      `users/${authUser.uid}/profilePicture/${profilePicture.name}`
+    );
+    await uploadBytes(profilePictureRef, profilePicture);
+    statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
+  }
 
   async function updateAccount() {
     const save = confirm('Unsaved changes will be lost. Continue?');
@@ -61,6 +87,9 @@ export default function EditProfile() {
       return;
     }
     try {
+      await uploadProfilePicture();
+      console.log(statesToUpdate);
+
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
       await refresh();
@@ -112,8 +141,9 @@ export default function EditProfile() {
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
         <ProfileHeading
-          currentUser={currentUser}
           isEditable
+          profilePictureURL={profilePictureURL}
+          setProfilePicture={setProfilePicture}
           name={name}
           setName={setName}
           nameEditing={nameEditing}

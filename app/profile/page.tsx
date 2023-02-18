@@ -41,7 +41,7 @@ export default function PreviewProfile() {
   return (
     <div className="container mx-auto text-white">
       <ProfileHeading
-        currentUser={currentUser}
+        profilePictureURL={currentUser.profilePicture}
         name={currentUser.name}
         bio={currentUser.bio}
       />
