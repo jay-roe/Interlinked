@@ -129,7 +129,7 @@ export default function EditProfile() {
         <ProfileAwards currentUser={currentUser} />
       </div>
       <div className="flex justify-end">
-        <Button onClick={updateAccount}>Save Changes</Button>
+        <Button data-testid="update-account-button2" onClick={updateAccount}>Save Changes</Button>
       </div>
 
       <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
