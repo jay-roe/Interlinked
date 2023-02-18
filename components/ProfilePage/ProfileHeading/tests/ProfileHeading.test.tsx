@@ -95,3 +95,43 @@ it('renders placeholder if user has no name', async () => {
   const namePlaceholder = await findByText('No name provided.');
   expect(namePlaceholder).toBeInTheDocument();
 });
+
+it('can set editing name', async () => {
+  const setNameEditingMock = jest.fn();
+
+  const { findByTestId } = render(
+    <ProfileHeading
+      currentUser={currentUser}
+      name=""
+      bio=""
+      isEditable={true}
+      setNameEditing={setNameEditingMock}
+    />
+  );
+
+  const nameEditBtn = await findByTestId('name-edit-button');
+  expect(nameEditBtn).toBeInTheDocument();
+
+  fireEvent.click(nameEditBtn);
+  expect(setNameEditingMock).toHaveBeenCalledTimes(1);
+});
+
+it('can set name', async () => {
+  const setNameMock = jest.fn();
+
+  const { findByTestId } = render(
+    <ProfileHeading
+      currentUser={currentUser}
+      name=""
+      bio=""
+      isEditable={true}
+      nameEditing={true}
+      setName={setNameMock}
+    />
+  );
+
+  const nameEditField = await findByTestId('change-name');
+  fireEvent.change(nameEditField, { target: { value: 'new nameeeee' } });
+
+  expect(setNameMock).toHaveBeenCalledTimes(1);
+});

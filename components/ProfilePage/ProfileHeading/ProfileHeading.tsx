@@ -50,6 +50,7 @@ export default function ProfileHeading({
           {nameEditing ? (
             <input
               type="text"
+              data-testid="change-name"
               className="mb-2 mt-2 appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-3xl text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -60,7 +61,10 @@ export default function ProfileHeading({
             </h1>
           )}
           {isEditable && (
-            <EditButton onClick={() => setNameEditing((curr) => !curr)} />
+            <EditButton
+              data-testid="name-edit-button"
+              onClick={() => setNameEditing((curr) => !curr)}
+            />
           )}
         </div>
         <div className="flex items-center">
