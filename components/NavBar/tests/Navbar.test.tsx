@@ -52,3 +52,17 @@ it('render nav bar component without a user', async () => {
     const navbarElement = await findByText("Register", { exact: false });
     expect(navbarElement).toBeInTheDocument();
 });
+
+it('render nav bar component without a user', async () => {
+    mockedUseAuth.mockImplementation(() => {
+        return {
+            currentUser: null
+        }
+    })
+
+    const { findByText } = render(
+            <NavBar />
+    );
+    const navbarElement = await findByText("Register", { exact: false });
+    expect(navbarElement).toBeInTheDocument();
+});

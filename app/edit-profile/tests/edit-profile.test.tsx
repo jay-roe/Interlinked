@@ -25,6 +25,8 @@ jest.mock('next/navigation', () => ({
 }));
 
 jest.spyOn(window, 'alert').mockImplementation(() => {});
+jest.spyOn(window, 'confirm').mockImplementation(() => {return true});
+
 
 let stringSplitMock = {
   split: () => {
@@ -52,7 +54,8 @@ const mockedRouter = useRouter as jest.Mock<any>;
 it('check if user is logged out', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
-      authUser: null, // There IS a current users
+      authUser: null,
+      currentUser: null
     };
   });
 
