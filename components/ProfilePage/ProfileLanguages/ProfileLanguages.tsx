@@ -21,18 +21,20 @@ export default function ProfileLanguages({
   setLanguage?: Dispatch<SetStateAction<string[]>>;
 }) {
 
+  // every language string ends with a number from 1-5 that represents proficiency 
 
   // create a new array with another value
   function addStringToArray()
   {
-    setLanguage((language) => [...language, '']);
+    setLanguage((language) => [...language, '1']);
   }
 
   function updateLanguage(newLang: string, index)
   {
+    const proficiency = languages[index].slice(-1);
     const newArray = languages.map((l, i) => {
       if (i === index) {
-        return newLang;
+        return newLang.concat(proficiency);
       } else {
         return l;
       }
@@ -43,6 +45,18 @@ export default function ProfileLanguages({
   function deleteLanguage(index: number) 
   {
     const newArray = languages.filter((lang) => languages.indexOf(lang) !== index);
+    setLanguage(newArray);
+  }
+
+  function changeProficiency(proficiency, index)
+  {
+    const newArray = languages.map((l, i) => {
+      if (i === index) {
+        return l.slice(0, l.length-1).concat(proficiency);
+      } else {
+        return l;
+      }
+    });
     setLanguage(newArray);
   }
 
@@ -59,7 +73,7 @@ export default function ProfileLanguages({
     {!languageEditing && isEditable && (
       <ul>
         {languages.map((lang, index) => (
-          <li key={index}>{lang}</li>
+          <li key={index}>{lang.slice(0, lang.length-1)}</li>
         ))}
       </ul>
     )}
@@ -70,16 +84,23 @@ export default function ProfileLanguages({
         <ul>
           {languages.map((lang, index) => (
             <li key={index}>
-              <textarea
-              className="inline-block min-h-[30px] m-2 appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-              name="langauge"
-              rows={1}
-              value={lang}
-              onChange={(e) => updateLanguage(e.target.value, index)} 
-             />
-             <div className="inline-block align-top">
-              <DeleteButton onClick={() => deleteLanguage(index)}/>
-             </div>
+                <textarea
+                className="inline-block min-h-[30px] m-2 appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+                name="langauge"
+                rows={1}
+                value={lang.slice(0, lang.length-1)}
+                onChange={(e) => updateLanguage(e.target.value, index)} 
+              />
+              <div className="inline-block align-top">
+                  <select onChange={(e) => changeProficiency(e.target.value, index)} value={lang.slice(-1)} className="inline-block min-h-[30px] m-2 appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm">
+                    <option value="1">Elementary</option>
+                    <option value="2">Limited working</option>
+                    <option value="3">Professional working</option>
+                    <option value="4">Full professional</option>
+                    <option value="5">Native</option>
+                  </select>
+                <DeleteButton onClick={() => deleteLanguage(index)}/>
+              </div>
             </li>
 
           ))}
@@ -97,11 +118,11 @@ export default function ProfileLanguages({
 
         <div>
           <CardStack>
-          {languages.map((lang, index) => (
-            <div key={index}>
-              <h3 className="text-xl font-semibold">{lang}</h3>
-            </div>
-          ))}
+        {languages.map((lang, index) => (
+          <div key={index}>
+            <h3 className="text-xl font-semibold">{lang.slice(0, lang.length-1)}</h3>
+          </div>
+        ))}
           </CardStack>
         </div>
 
@@ -110,15 +131,3 @@ export default function ProfileLanguages({
       </>
   );
 }
-
-
-// {currentUser.languages.map((lang, index) => (
-//   <li key={index}>
-//     <textarea
-//       className="mb-2 mt-2 block min-h-[75px] w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-//       name="langauge"
-//       rows={1}
-//       value={lang}
-//       //onChange={(e) => makeNewLanguageArray(e.target.value)} 
-//     />
-//   </li>
