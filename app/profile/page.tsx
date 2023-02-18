@@ -40,7 +40,11 @@ export default function PreviewProfile() {
   // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
+      <ProfileHeading
+        currentUser={currentUser}
+        name={currentUser.name}
+        bio={currentUser.bio}
+      />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
