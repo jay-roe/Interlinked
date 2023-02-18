@@ -8,7 +8,7 @@ export const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
     if (!currentUser) {
         // user is not authenticated, send to login page
         alert('You must be logged in to access this page, redirecting.');
-        router.push('/login')
+        router.push('/login');
         
         return <></>;
     }

@@ -7,6 +7,8 @@ import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPop
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 
+import type { User } from '@/types/User';
+
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
@@ -31,17 +33,52 @@ export default function EditProfile() {
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
+  const [name, setName] = useState<string>(currentUser?.name);
+  const [nameEditing, setNameEditing] = useState<boolean>(false);
+
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
   const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
+  //Education component states
+  const [education, setEducation] = useState<User['education']>(
+    currentUser?.education
+  );
+  const [educationEditing, setEducationEditing] = useState<boolean[]>(
+    currentUser?.education.map(() => false)
+  );
+
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Profile</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to edit your profile.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
+
   const statesToUpdate = {
     bio: bio,
-    languages: languages
+    languages: languages,
+    name: name,
+    education: education.filter((_, i) => !educationEditing[i]),
   };
 
   async function updateAccount() {
+    const save = confirm('Unsaved changes will be lost. Continue?');
+    if (!save) {
+      return;
+    }
     try {
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
@@ -65,35 +102,23 @@ export default function EditProfile() {
     }
   }
 
-  // User not logged in
-  if (!currentUser || !authUser) {
-    return (
-      <>
-        <h1>Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to edit your profile.
-        </h2>
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
-        <Link href="/register">
-          <Button>Register</Button>
-        </Link>
-      </>
-    );
-  }
-
   // User logged in
   return (
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Edit Profile</h1>
-        <Button onClick={updateAccount}>Save Changes</Button>
+        <Button data-testid="update-account-button" onClick={updateAccount}>
+          Save Changes
+        </Button>
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
         <ProfileHeading
           currentUser={currentUser}
           isEditable
+          name={name}
+          setName={setName}
+          nameEditing={nameEditing}
+          setNameEditing={setNameEditing}
           bio={bio}
           setBio={setBio}
           bioEditing={bioEditing}
@@ -121,7 +146,13 @@ export default function EditProfile() {
           />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-        <ProfileEducation currentUser={currentUser} />
+        <ProfileEducation
+          education={education}
+          isEditable
+          educationEditing={educationEditing}
+          setEducation={setEducation}
+          setEducationEditing={setEducationEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses currentUser={currentUser} />
@@ -139,7 +170,9 @@ export default function EditProfile() {
         <ProfileAwards currentUser={currentUser} />
       </div>
       <div className="flex justify-end">
-        <Button onClick={updateAccount}>Save Changes</Button>
+        <Button data-testid="update-account-button2" onClick={updateAccount}>
+          Save Changes
+        </Button>
       </div>
 
       <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>

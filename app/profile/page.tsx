@@ -40,7 +40,11 @@ export default function PreviewProfile() {
   // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
+      <ProfileHeading
+        currentUser={currentUser}
+        name={currentUser.name}
+        bio={currentUser.bio}
+      />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
@@ -55,7 +59,7 @@ export default function PreviewProfile() {
       <ProfileLanguages currentUser={currentUser} languages={currentUser.languages}/>
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-      <ProfileEducation currentUser={currentUser} />
+      <ProfileEducation education={currentUser.education} />
 
       <h2 className="text-2xl font-extrabold">Courses 📚</h2>
       <ProfileCourses currentUser={currentUser} />
