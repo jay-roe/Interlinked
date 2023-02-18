@@ -73,7 +73,15 @@ export default function ProfileLanguages({
     {!languageEditing && isEditable && (
       <ul>
         {languages.map((lang, index) => (
-          <li key={index}>{lang.slice(0, lang.length-1)}</li>
+          <li key={index}>
+            {lang.slice(0, lang.length-1)}
+            {lang.slice(-1) === "1" && " - Elementary "}
+            {lang.slice(-1) === "2" && " - Limited working "}
+            {lang.slice(-1) === "3" && " - Professional working "}
+            {lang.slice(-1) === "4" && " - Full professional "}
+            {lang.slice(-1) === "5" && " - Native "}
+            proficiency
+          </li>
         ))}
       </ul>
     )}
@@ -120,7 +128,15 @@ export default function ProfileLanguages({
           <CardStack>
         {languages.map((lang, index) => (
           <div key={index}>
-            <h3 className="text-xl font-semibold">{lang.slice(0, lang.length-1)}</h3>
+            <h3 className="text-xl font-semibold mb-4">{lang.slice(0, lang.length-1)}</h3>
+            <h5>
+              Proficiency:  
+              {lang.slice(-1) === "1" && " Elementary"}
+              {lang.slice(-1) === "2" && " Limited working"}
+              {lang.slice(-1) === "3" && " Professional working"}
+              {lang.slice(-1) === "4" && " Full professional"}
+              {lang.slice(-1) === "5" && " Native"}
+            </h5>
           </div>
         ))}
           </CardStack>
