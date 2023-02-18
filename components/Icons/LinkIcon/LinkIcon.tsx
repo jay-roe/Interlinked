@@ -12,7 +12,10 @@ export default function LinkIcon({
   // Linked, show 'Unlink' button
   if (linked) {
     return (
-      <div className="flex min-w-min basis-4 text-accent-orange">
+      <div
+        data-testid="unlink-btn"
+        className="flex min-w-min basis-4 text-accent-orange"
+      >
         <FaLink size={size} />
         {showText && <p>Unlink</p>}
       </div>
@@ -21,7 +24,7 @@ export default function LinkIcon({
 
   // Not yet linked, show 'Link' button
   return (
-    <div className="flex min-w-min basis-4">
+    <div data-testid="link-btn" className="flex min-w-min basis-4">
       <FaLink
         size={size}
         viewBox="-21 -21 554 554"
@@ -29,7 +32,11 @@ export default function LinkIcon({
         stroke="orange"
         strokeWidth="1rem"
       />
-      {showText && <p className="text-accent-orange">Link</p>}
+      {showText && (
+        <p data-testid="link-prompt" className="text-accent-orange">
+          Link
+        </p>
+      )}
     </div>
   );
 }
