@@ -44,16 +44,32 @@ export default function EditProfile() {
     currentUser?.education
   );
   const [educationEditing, setEducationEditing] = useState<boolean[]>(
-    education.map(() => false)
+    currentUser?.education.map(() => false)
   );
+
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Profile</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to edit your profile.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
 
   const statesToUpdate = {
     bio: bio,
     name: name,
     education: education.filter((_, i) => !educationEditing[i]),
   };
-
-  console.log(education);
 
   async function updateAccount() {
     const save = confirm('Unsaved changes will be lost. Continue?');
@@ -81,24 +97,6 @@ export default function EditProfile() {
       console.error(err);
       return false;
     }
-  }
-
-  // User not logged in
-  if (!currentUser || !authUser) {
-    return (
-      <>
-        <h1>Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to edit your profile.
-        </h2>
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
-        <Link href="/register">
-          <Button>Register</Button>
-        </Link>
-      </>
-    );
   }
 
   // User logged in
