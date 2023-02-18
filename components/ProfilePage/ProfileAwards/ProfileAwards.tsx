@@ -27,16 +27,8 @@ export default function ProfileAwards({
     return (
       <CardStack>
         {awards.map((award, index) => (
-          <div
-            key={index}
-            style={{
-              border: '1px solid white',
-              borderRadius: '6px',
-              padding: '1em',
-              marginBottom: '1em',
-            }}
-          >
-            <h3>{award.title}</h3>
+          <div key={index}>
+            <h3 className="text-xl font-semibold">{award.title}</h3>
             <h6>
               {`${award.date.toDate().toLocaleString('default', {
                 month: 'long',
@@ -66,9 +58,9 @@ export default function ProfileAwards({
           }}
         >
           {awardsEditing && awardsEditing[index] ? (
-            <div className="mr-2 mb-3">
+            <div className="mr-2 mb-3 w-full max-w-xs">
               <label>
-                Award title<span className="text-yellow-600">*</span>
+                Award Title<span className="text-yellow-600">*</span>
               </label>
               <InputField
                 type="text"
@@ -117,15 +109,7 @@ export default function ProfileAwards({
               />
             </div>
           ) : (
-            <div
-              key={index}
-              style={{
-                border: '1px solid white',
-                borderRadius: '6px',
-                padding: '1em',
-                marginBottom: '1em',
-              }}
-            >
+            <div key={index}>
               <h3>{award.title}</h3>
               <h6>
                 {`${award.date.toDate().toLocaleString('default', {
