@@ -40,7 +40,11 @@ it('page is redirected to login when user is not authenticated', async () => {
   });
 
   // render the protected file
-  render(<ProtectedRoute children={undefined} />);
+  render(
+    <ProtectedRoute>
+      <></>
+    </ProtectedRoute>
+  );
 
   // Check if the router function was called (ie, user was redirected)
   expect(myPush).toHaveBeenCalledWith('/login');
@@ -63,7 +67,11 @@ it('page is not redirected to when user is authenticated', async () => {
     };
   });
 
-  render(<ProtectedRoute children={undefined} />);
+  render(
+    <ProtectedRoute>
+      <></>
+    </ProtectedRoute>
+  );
 
   // Check if the router function was not called (ie, user was redirected)
   expect(myPush).not.toHaveBeenCalledWith('/login');
