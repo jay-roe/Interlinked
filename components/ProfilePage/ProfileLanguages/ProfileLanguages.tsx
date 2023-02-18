@@ -23,7 +23,7 @@ export default function ProfileLanguages({
   // create a new array with another value
   function addStringToArray(newLang: string)
   {
-    setLanguage((language) => [...language, 'lang']);
+    setLanguage((language) => [...language, '']);
   }
 
   function updateLanguage(newLang: string, index)
@@ -35,13 +35,24 @@ export default function ProfileLanguages({
         return l;
       }
     });
-    
+    setLanguage(newArray);
+  }
+
+  function deleteLanguage(index: number) 
+  {
+    const newArray = languages.filter((lang) => languages.indexOf(lang) !== index);
     setLanguage(newArray);
   }
 
 
    return (
     <>
+    
+    {isEditable && (
+          <EditButton
+            className="inline"
+            onClick={() => setLanguageEditing((curr) => !curr)} />
+        )}
     
     <ul>
       {languages.map((lang, index) => (
@@ -52,30 +63,25 @@ export default function ProfileLanguages({
     <div className="flex items-center">
         {languageEditing ? (
         <>
-        <Button onClick={(e) => addStringToArray(e.target.value)}>+</Button>
         <ul>
           {languages.map((lang, index) => (
             <li key={index}>
               <textarea
-              className="mb-2 mt-2 block min-h-[20px] w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
+              className="mb-2 mt-2 inline-block min-h-[20px] w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
               name="langauge"
               rows={1}
               value={lang}
               onChange={(e) => updateLanguage(e.target.value, index)} 
              />
-             <Button>Delete</Button>
+             <Button onClick={() => deleteLanguage(index)}>Delete</Button>
             </li>
 
           ))}
         </ul>
+        <Button onClick={(e) => addStringToArray(e.target.value)}>+</Button>
           </>
         ) : (
           <p>{languages != null || 'I am illiterate.'}</p>
-        )}
-        {isEditable && (
-          <EditButton
-            className="inline"
-            onClick={() => setLanguageEditing((curr) => !curr)} />
         )}
       </div></>
     

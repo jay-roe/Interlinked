@@ -110,7 +110,7 @@ export default function EditProfile() {
         </h1>
         <ProfileContact currentUser={currentUser} />
 
-        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
+        <h2 className="text-2xl font-extrabold inline-block">Languages 🗨 </h2>
         <ProfileLanguages 
           currentUser={currentUser} 
           isEditable
