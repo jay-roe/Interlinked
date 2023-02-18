@@ -12,6 +12,7 @@ const LinkButtonNoNumber = ({
 }) => {
   return (
     <button
+      data-testid="link-btn-no-number"
       onClick={() => {
         onClick();
       }}
