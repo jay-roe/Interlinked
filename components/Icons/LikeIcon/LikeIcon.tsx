@@ -11,7 +11,10 @@ const LikeIcon = ({
   likes: number;
 }) => {
   return (
-    <span className="flex flex-nowrap space-x-1 text-accent-orange ">
+    <span
+      data-testid="test-like-icon-footer"
+      className="flex flex-nowrap space-x-1 text-accent-orange "
+    >
       <button onClick={() => setLiked(!likeState)}>
         {likeState ? <FaThumbsUp /> : <FaRegThumbsUp />}
       </button>
