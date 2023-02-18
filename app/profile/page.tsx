@@ -52,7 +52,7 @@ export default function PreviewProfile() {
       <ProfileContact currentUser={currentUser} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+      <ProfileLanguages currentUser={currentUser} languages={currentUser.languages}/>
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation currentUser={currentUser} />

@@ -33,9 +33,12 @@ export default function EditProfile() {
   // Profile component states
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+  const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
+  const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   const statesToUpdate = {
     bio: bio,
+    languages: languages
   };
 
   async function updateAccount() {
@@ -108,7 +111,14 @@ export default function EditProfile() {
         <ProfileContact currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-        <ProfileLanguages currentUser={currentUser} />
+        <ProfileLanguages 
+          currentUser={currentUser} 
+          isEditable
+          languages={languages}
+          languageEditing={languageEditing}
+          setLanguage={setLanguage}
+          setLanguageEditing={setLanguageEditing}
+          />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation currentUser={currentUser} />
