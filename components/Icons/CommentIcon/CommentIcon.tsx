@@ -11,11 +11,17 @@ const CommentIcon = ({
   comments: number;
 }) => {
   return (
-    <span className="flex flex-nowrap space-x-1 text-accent-orange ">
+    <span
+      data-testid="test-comment-icon-footer"
+      className="flex flex-nowrap space-x-1 text-accent-orange "
+    >
       <button onClick={() => setCommentState(!commentState)}>
         {commentState ? <FaComment /> : <FaRegComment />}
       </button>
-      <span className="text-white"> {comments} </span>
+      <span data-testid="comments" className="text-white">
+        {' '}
+        {comments}{' '}
+      </span>
     </span>
   );
 };
