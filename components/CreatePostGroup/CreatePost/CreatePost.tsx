@@ -35,7 +35,7 @@ export default function CreatePost(props: any) {
               <textarea
                 id="message"
                 data-testid="post-content"
-                className="   w-full  rounded-lg bg-purple-text-area p-1 text-sm text-white shadow-lg  "
+                className="   row-span-4 h-[10rem] w-full rounded-lg bg-purple-text-area p-1 text-sm text-white shadow-lg "
                 placeholder="Write text here..."
                 onChange={(e) => setMessage(e.target.value)}
               ></textarea>
