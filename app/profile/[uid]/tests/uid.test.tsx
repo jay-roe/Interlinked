@@ -1,17 +1,29 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useAuth } from '@/contexts/AuthContext';
 import ViewProfile from '../page';
 import { useRouter } from 'next/navigation';
 
+/* you gonna need these for the could not import stmt from outside module error
+jest.mock('contexts/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
 
-it('check if user is logged out', async () => {
+jest.mock('@/config/firestore', () => ({
+  db: jest.fn(),
+}));
 
-    // const { findByTestId } = render(
-    //     <ViewProfile params={undefined} />
-    // );
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(),
+  updateDoc: jest.fn(),
+}));
+*/
 
-    // const profileInfo = await findByTestId('profile-login-prompt');
-    // expect(profileInfo).toBeInTheDocument();
-
+it('renders', async () => {
+  //const { findByTestId } = render(
+  /* @ts-expect-error Server Component */
+  //  <ViewProfile params={} />
+  //);
+  /*const profile = await findByTestId('profile');
+  expect(profile).toBeInTheDocument();*/
 });
