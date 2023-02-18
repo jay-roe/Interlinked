@@ -36,15 +36,20 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
-  const statesToUpdate = {
-    bio: bio,
-  };
-
   //Education component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
-  const [educationEditing, setEducationEditing] = useState<boolean>(false);
+  const [educationEditing, setEducationEditing] = useState<boolean[]>(
+    education.map(() => false)
+  );
+
+  const statesToUpdate = {
+    bio: bio,
+    education: education,
+  };
+
+  console.log(education);
 
   async function updateAccount() {
     try {
@@ -120,8 +125,7 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation
-          currentUser={currentUser}
-          education={currentUser.education}
+          education={education}
           isEditable
           educationEditing={educationEditing}
           setEducation={setEducation}

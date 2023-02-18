@@ -37,13 +37,13 @@ type Course = {
 };
 
 type Education = {
+  program: string;
   name: string;
   location: string;
   description?: string;
   image?: string;
   startDate: Timestamp;
   endDate?: Timestamp;
-  program?: string;
 };
 
 type Experience = {
