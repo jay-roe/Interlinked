@@ -46,12 +46,16 @@ export default function EditProfile() {
 
   const statesToUpdate = {
     bio: bio,
-    education: education,
+    education: education.filter((_, i) => !educationEditing[i]),
   };
 
   console.log(education);
 
   async function updateAccount() {
+    const save = confirm('Unsaved changes will be lost. Continue?');
+    if (!save) {
+      return;
+    }
     try {
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
