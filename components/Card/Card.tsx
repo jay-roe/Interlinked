@@ -7,6 +7,7 @@ const Card = ({
 }) => {
   return (
     <div
+      data-testid="card"
       className={`${className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
     >
       {children}

@@ -8,7 +8,10 @@ const CardGrid = ({
   className?: string;
 }) => {
   return (
-    <div className={`grid ${className} gap-x-8 gap-y-8`}>
+    <div
+      data-testid="card-grid"
+      className={`grid ${className} gap-x-8 gap-y-8`}
+    >
       <>{children}</>
     </div>
   );
