@@ -15,17 +15,17 @@ const FullPostCard = ({
   post,
   postID,
   currentUser,
-  authUser
+  authUser,
 }: {
   author?: User;
   post?: Post;
-  postID?: string
+  postID?: string;
   currentUser?: User;
-  authUser?: any
+  authUser?: any;
 }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [postHeight, setPostHeight] = useState(0);
-  const [comments, setComments] = useState(post?.comments)
+  const [comments, setComments] = useState(post?.comments);
 
   const postContainer = useRef(null);
 
@@ -35,6 +35,7 @@ const FullPostCard = ({
 
   return (
     <CardGrid
+      data-testid="card-grid"
       className={`grid-cols-1 lg:grid-cols-2-1 max-h-[${postHeight}px]`}
     >
       {/* Post card */}
@@ -43,11 +44,12 @@ const FullPostCard = ({
           commentsOpen ? 'col-span-1' : 'col-span-2'
         } transition-all`}
       >
-        <div id="post-content" ref={postContainer}>
+        <div data-testid="post-card" id="post-content" ref={postContainer}>
           {/* <div>{postHeight}</div> */}
           <PostHeader author={author} post={post} currentUser={currentUser} />
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
+            data-testid="post-footer"
             comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
@@ -66,13 +68,15 @@ const FullPostCard = ({
         {/* Comments go here */}
         <div className={`flex flex-col space-y-3`}>
           <AddComment
-              authUser={authUser}
-              currentUser={currentUser}
-              postID={postID}
-              comments={comments}
-              setComments={setComments}
+            authUser={authUser}
+            currentUser={currentUser}
+            postID={postID}
+            comments={comments}
+            setComments={setComments}
           />
-          {(comments?.length === 0 || comments === null || comments === undefined)? (
+          {comments?.length === 0 ||
+          comments === null ||
+          comments === undefined ? (
             <>
               <Card>
                 There are no comments here.
