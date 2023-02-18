@@ -23,7 +23,7 @@ export default async function ViewProfile({ params }) {
     return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
 
   return (
-    <div className="container mx-auto text-white">
+    <div data-testid="profile" className="container mx-auto text-white">
       <ProfileHeading currentUser={user} bio={user.bio} />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={user?.socials} />
