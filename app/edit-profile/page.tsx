@@ -24,6 +24,7 @@ import Link from 'next/link';
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
+import ProfileSocials from '@/components/ProfilePage/ProfileSocials/ProfileSocials';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -129,9 +130,7 @@ export default function EditProfile() {
           setBioEditing={setBioEditing}
         />
 
-        <div className="mx-auto mb-3">
-          <SocialIconGroup socials={currentUser.socials} />
-        </div>
+        <ProfileSocials socials={currentUser.socials} isEditable />
         <LinkButton currentUser={currentUser} />
 
         <h1 className="text-2xl font-extrabold">
