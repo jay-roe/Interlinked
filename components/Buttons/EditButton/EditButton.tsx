@@ -6,7 +6,7 @@ export default function EditButton(props: ComponentProps<'button'>) {
     <button
       {...props}
       data-testid="edit-button"
-      className="rounded-full p-2 text-yellow-600"
+      className={`${props.className} rounded-full p-2 text-yellow-600`}
     >
       <FaRegEdit size={30} />
     </button>
