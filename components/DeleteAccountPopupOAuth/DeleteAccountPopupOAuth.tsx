@@ -53,11 +53,14 @@ export default function DeleteAccountPopupOAuth({
         permanently deleted.
       </p>
       {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
-      <Button onClick={() => updateCredential()}>
+      <Button
+        data-testid="update-credentials-oauth"
+        onClick={() => updateCredential()}
+      >
         <FaGoogle /> Login with Google
       </Button>
       {isAuthError && (
-        <p className="text-red-500">
+        <p data-testid="auth-error" className="text-red-500">
           Authentication error. Please try logging in again.
         </p>
       )}
