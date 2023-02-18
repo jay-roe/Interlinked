@@ -16,7 +16,15 @@ const draggingSpring = () => ({
 });
 const trans = (s: number) => `scale(${s})`;
 
-export default function CardStack({ children }: { children: JSX.Element[] }) {
+export default function CardStack({
+  children,
+  top = 2.5,
+  height = 15,
+}: {
+  children: JSX.Element[];
+  top?: number;
+  height?: number;
+}) {
   // Set of thrown card indexes
   const [thrownCards] = useState(() => new Set<number>());
 
@@ -143,8 +151,11 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
   console.log(frontCardIndex);
 
   return (
-    <>
-      <div className="relative flex min-h-[15rem] min-w-[15rem] max-w-xl items-center justify-center">
+    <div>
+      <div
+        className="relative flex min-w-[15rem] max-w-xl items-center justify-center"
+        style={{ height: `${height}rem` }}
+      >
         {children.map((child, index) => (
           <animated.div
             className="absolute rounded-xl p-5"
@@ -166,7 +177,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
                   ? backgroundColors[index - frontCardIndex]
                   : 'none',
               width: `calc(100% - ${(index - frontCardIndex) * 2.5}rem)`,
-              top: `${(index - frontCardIndex) * -1.25 + 0.5}rem`,
+              top: `${(index - frontCardIndex) * -1.25 + top}rem`,
             }}
             id={`stack_card_${index}`}
             key={index}
@@ -181,6 +192,6 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
       <Button onClick={() => nextClick()}>
         <GrNext size={30} />
       </Button>
-    </>
+    </div>
   );
 }
