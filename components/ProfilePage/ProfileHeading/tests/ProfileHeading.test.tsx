@@ -20,7 +20,7 @@ const currentUser = {
 
 it('renders name given user', async () => {
   const { findByText } = render(
-    <ProfileHeading currentUser={currentUser} bio="" />
+    <ProfileHeading currentUser={currentUser} name="Melisa" bio="" />
   );
 
   const name = await findByText('Melisa', { exact: false });
@@ -34,6 +34,7 @@ it('can change bio', async () => {
   const { findByTestId } = render(
     <ProfileHeading
       currentUser={currentUser}
+      name=""
       bio=""
       bioEditing={true}
       isEditable={true}
@@ -54,6 +55,7 @@ it('can edit bio', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
+      name=""
       currentUser={currentUser}
       bio=""
       isEditable={true}
@@ -61,7 +63,7 @@ it('can edit bio', async () => {
     />
   );
 
-  const editButton = await findByTestId('edit-button');
+  const editButton = await findByTestId('bio-edit-button');
   expect(editButton).toBeInTheDocument();
 
   fireEvent.click(editButton);
@@ -87,7 +89,7 @@ it('renders placeholder if user has no name', async () => {
   };
 
   const { findByText } = render(
-    <ProfileHeading currentUser={currUser} bio="" />
+    <ProfileHeading currentUser={currUser} name="" bio="" />
   );
 
   const namePlaceholder = await findByText('No name provided.');
