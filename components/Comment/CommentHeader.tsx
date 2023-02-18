@@ -18,16 +18,14 @@ const CommentHeader = ({
           <LinkButtonNoNumber currentUser={currentUser}></LinkButtonNoNumber>
         </div>
       </div>
-      <div className="text-sm font-light">
-        {comment?.date
-          ?.toDate()
-          .toLocaleString('en-US', {
-            month: 'long',
-            year: 'numeric',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          }) || 'Unknown'}
+      <div data-testid="test-comment-date" className="text-sm font-light">
+        {comment?.date?.toDate().toLocaleString('en-US', {
+          month: 'long',
+          year: 'numeric',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+        }) || 'Unknown'}
       </div>
     </div>
   );
