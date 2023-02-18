@@ -15,6 +15,13 @@ export default function PreviewAttachement(props: any) {
     props.getImage(images);
   }, [images]);
 
+  useEffect(() => {
+    if (props.clean) {
+      setPreview([]);
+      setImages([]);
+    }
+  }, [props.clean]);
+
   const handleSelectedFile = (files: FileList) => {
     if (files && files[0].size < 10000000) {
       const file = Array.from(files);
@@ -38,14 +45,18 @@ export default function PreviewAttachement(props: any) {
     setPreview([]);
   };
 
-  const removeImage = (value) => {
-    setPreview((oldValues) => {
-      return oldValues.filter((img) => img !== value);
-    });
+  const removeImage = (value: string) => {
+    if (confirm('Remove image?') == true) {
+      setPreview((oldValues) => {
+        return oldValues.filter((img) => img !== value);
+      });
 
-    setImages((oldValues) => {
-      return oldValues.filter((img) => URL.createObjectURL(img) !== value);
-    });
+      setImages((oldValues) => {
+        return oldValues.filter((img) => URL.createObjectURL(img) !== value);
+      });
+
+      props.deleteImage(value);
+    }
   };
 
   return (
@@ -58,8 +69,11 @@ export default function PreviewAttachement(props: any) {
             {preview != null &&
               preview.map((imgPreview, key) => {
                 return (
-                  <li key={key}>
-                    <button onClick={() => removeImage(imgPreview)}>
+                  <li className="hover:border-red-900" key={key}>
+                    <button
+                      className="hover:border-red-900"
+                      onClick={() => removeImage(imgPreview)}
+                    >
                       <img
                         className="h-[13rem] w-[13rem] object-scale-down  "
                         src={imgPreview}

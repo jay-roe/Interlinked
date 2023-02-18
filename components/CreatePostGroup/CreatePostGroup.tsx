@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreatePost from './CreatePost/CreatePost';
 import PreviewAttachement from './PreviewAttachement/PreviewAttachement';
 import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
@@ -16,12 +16,20 @@ import { Post } from '@/types/Post';
 export default function CreatePostGroup() {
   const { currentUser, authUser } = useAuth();
   const [image, setImage] = useState<File[]>([]);
-  const [URLs, setURLs] = useState<string[]>(['']);
-  const [uploadAmount, setUploadAmount] = useState<number>(0);
+  const [URLs, setURLs] = useState<string[]>([]);
+  const [text, setText] = useState<string>();
+  const [trigger, setTrigger] = useState(0);
 
   const retrieveText = async (text: string) => {
     await createPost(text).then(() => {
-      setImage(null);
+      //  setImage(null);
+    });
+  };
+
+  const removeImage = (value: string) => {
+    alert('deleted' + value);
+    setImage((oldValues) => {
+      return oldValues.filter((img) => URL.createObjectURL(img) !== value);
     });
   };
 
@@ -30,10 +38,9 @@ export default function CreatePostGroup() {
   };
 
   const defineAndSetPost = async (text: string, pics: string[]) => {
-    console.log('inside defineandsetpostfunction');
     let definePost: Post = {
       authorID: authUser.uid,
-      author: currentUser.name,
+      author: currentUser.name || currentUser.email,
       title: 'post', // is a title needed?
       text_content: text, // text from createPost component
       image_content: pics, // URL created after images has been uploaded to firestore storage
@@ -43,22 +50,17 @@ export default function CreatePostGroup() {
       meta_tags: null,
     };
 
-    console.log(definePost);
-    //setPost(definePost);
-    // TO DO: UPLOAD POST TO FIRESTORE
-    // const postRef = doc(collection(db.posts, "posts"));
-    console.log('posting post on firebase');
     const docRef = doc(db.posts);
     await setDoc(docRef, definePost);
-    // set date field to timestamp of uploaded post
     await updateDoc(docRef, {
       date: serverTimestamp(),
     });
+
+    setTrigger((trig) => trig + 1);
+    alert('Posted!');
   };
 
   async function upLoadImage(img: File, text: string) {
-    console.log('inside upload image function');
-
     let storageRef = ref(storage, '`image/' + img.name + '`');
 
     const uploadTask = uploadBytesResumable(storageRef, img);
@@ -70,40 +72,29 @@ export default function CreatePostGroup() {
         alert('Image upload failed');
       },
       async () => {
-        console.log('getting URL');
         await getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-          setUploadAmount((a) => a + 1);
-
-          setURLs([url, url, url]);
-          console.log(URLs);
-          console.log(URLs.length + ' : ' + image.length);
-          if (URLs.length === image.length) {
-            defineAndSetPost(text, URLs);
-            console.log('making post now');
-          }
+          setURLs((prev) => [...prev, url]);
         });
       }
     );
   }
 
+  useEffect(() => {
+    if (image.length != 0 && URLs.length === image.length) {
+      defineAndSetPost(text, URLs);
+      setImage([]);
+      setURLs([]);
+    }
+  }, [URLs]);
+
   async function createPost(text: string) {
     try {
       if (image != null) {
-        console.log(
-          'images are not null: there are currently' + image.length + ' images'
-        );
+        setText(text);
         image.forEach((img) => {
           upLoadImage(img, text);
         });
-        // console.log("uploading image");
-        //  const downloadRefs= await Promise.all(image.map( async (img) => await upLoadImage(img)))
-        //  console.log("getting urls");
-        //  const downloadURLs = await Promise.all(downloadRefs.map( async (ref) => await getURLs(ref)))
-        //  console.log("making post");
-        //  defineAndSetPost(text, downloadURLs)
-        //console.log(downloadURLs);
       } else {
-        console.log('images are  null');
         defineAndSetPost(text, []);
       }
     } catch (err) {
@@ -119,7 +110,11 @@ export default function CreatePostGroup() {
         </div>
 
         <div>
-          <PreviewAttachement getImage={retreiveImage} />
+          <PreviewAttachement
+            clean={trigger}
+            deleteImage={removeImage}
+            getImage={retreiveImage}
+          />
         </div>
       </div>
     </div>

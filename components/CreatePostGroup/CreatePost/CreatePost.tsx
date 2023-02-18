@@ -10,6 +10,11 @@ export default function CreatePost(props: any) {
   const { currentUser } = useAuth();
   const [message, setMessage] = useState('');
 
+  const handleSubmit = () => {
+    props.getText(message);
+    setMessage('');
+  };
+
   return (
     <>
       <div className="  font-para-med ">
@@ -37,7 +42,10 @@ export default function CreatePost(props: any) {
                 data-testid="post-content"
                 className="   row-span-4 h-[10rem] w-full rounded-lg bg-purple-text-area p-1 text-sm text-white shadow-lg "
                 placeholder="Write text here..."
-                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
               ></textarea>
             </form>
           </div>
@@ -46,7 +54,7 @@ export default function CreatePost(props: any) {
             <button
               className="flex grow justify-end  "
               data-testid="post-button"
-              onClick={() => props.getText(message)}
+              onClick={handleSubmit}
             >
               <PostButton></PostButton>
             </button>
