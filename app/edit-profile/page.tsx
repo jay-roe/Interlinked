@@ -47,13 +47,20 @@ export default function EditProfile() {
     education.map(() => false)
   );
 
+  //Award component states
+  const [awards, setAwards] = useState<User['awards']>(currentUser?.awards);
+  const [awardsEditing, setAwardsEditing] = useState<boolean[]>(
+    awards.map(() => false)
+  );
+
   const statesToUpdate = {
     bio: bio,
     name: name,
     education: education.filter((_, i) => !educationEditing[i]),
+    awards: awards.filter((_, i) => !awardsEditing[i]),
   };
 
-  console.log(education);
+  // console.log(education);
 
   async function updateAccount() {
     const save = confirm('Unsaved changes will be lost. Continue?');
@@ -159,7 +166,13 @@ export default function EditProfile() {
         <ProfileSkills currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-        <ProfileAwards currentUser={currentUser} />
+        <ProfileAwards
+          awards={awards}
+          isEditable
+          awardsEditing={awardsEditing}
+          setAwards={setAwards}
+          setAwardsEditing={setAwardsEditing}
+        />
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>
