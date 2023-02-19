@@ -46,7 +46,7 @@ export default function PreviewProfile() {
         name={currentUser.name}
         bio={currentUser.bio}
       />
-      <div className="mx-auto mb-3">
+      <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
       <LinkButton currentUser={currentUser} />
@@ -54,7 +54,7 @@ export default function PreviewProfile() {
       <h1 className="text-2xl font-extrabold">
         Link with {currentUser.name?.split(' ')[0]}
       </h1>
-      <ProfileContact currentUser={currentUser} />
+      <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       <ProfileLanguages languages={currentUser.languages} />

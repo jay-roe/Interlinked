@@ -37,7 +37,7 @@ export default async function ViewProfile({ params }) {
       <h1 className="text-2xl font-extrabold">
         Link with {user?.name?.split(' ')[0]}
       </h1>
-      <ProfileContact currentUser={user} />
+      <ProfileContact email={user.email} phone={user.phone} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       <ProfileLanguages languages={user.languages} />

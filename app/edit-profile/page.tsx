@@ -25,6 +25,7 @@ import Link from 'next/link';
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
+import ProfileSocials from '@/components/ProfilePage/ProfileSocials/ProfileSocials';
 import { storage } from '@/config/firebase';
 import {
   deleteObject,
@@ -66,7 +67,16 @@ export default function EditProfile() {
   const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
-  // Education component states
+  //Socials component states
+  const [socials, setSocials] = useState<User['socials']>(currentUser?.socials);
+  const [socailsEditing, setSocialsEditing] = useState<boolean>(false);
+
+  //Contact component states
+  const [email, setEmail] = useState<string>(currentUser?.email);
+  const [phone, setPhone] = useState<string>(currentUser?.phone);
+  const [contactEditing, setContactEditing] = useState<boolean>(false);
+
+  //Education component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
@@ -139,6 +149,9 @@ export default function EditProfile() {
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
+    phone: phone,
+    email: !contactEditing ? email : currentUser.email,
+    socials: socials,
     codingLanguages: codingLanguages,
     awards: awards.filter((_, i) => !awardsEditing[i]),
     skills: skills,
@@ -220,15 +233,28 @@ export default function EditProfile() {
           setBioEditing={setBioEditing}
         />
 
-        <div className="mx-auto mb-3">
-          <SocialIconGroup socials={currentUser.socials} />
-        </div>
+        <ProfileSocials
+          isEditable
+          socials={socials}
+          setSocials={setSocials}
+          socialsEditing={socailsEditing}
+          setSocialsEditing={setSocialsEditing}
+        />
+
         <LinkButton currentUser={currentUser} />
 
         <h1 className="text-2xl font-extrabold">
           Link with {currentUser.name?.split(' ')[0]}
         </h1>
-        <ProfileContact currentUser={currentUser} />
+        <ProfileContact
+          isEditable
+          email={email}
+          setEmail={setEmail}
+          phone={phone}
+          setPhone={setPhone}
+          contactEditing={contactEditing}
+          setContactEditing={setContactEditing}
+        />
 
         <h2 className="inline-block text-2xl font-extrabold">Languages 🗨 </h2>
         <ProfileLanguages
