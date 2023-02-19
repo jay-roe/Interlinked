@@ -5,6 +5,7 @@ import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeadi
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
 import ProfileExperience from '@/components/ProfilePage/ProfileExperience/ProfileExperience';
@@ -57,6 +58,10 @@ export default function PreviewProfile() {
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       <ProfileLanguages currentUser={currentUser} />
+
+      {/* TODO: change coding languages picture */}
+      <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+      <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation education={currentUser.education} />

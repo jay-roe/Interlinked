@@ -13,6 +13,7 @@ import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeadi
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
 import ProfileExperience from '@/components/ProfilePage/ProfileExperience/ProfileExperience';
@@ -39,13 +40,22 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
-  //Education component states
+  // Coding Languages component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
   const [educationEditing, setEducationEditing] = useState<boolean[]>(
     currentUser?.education.map(() => false)
   );
+
+  // Education component states
+  const [codingLanguages, setCodingLanguages] = useState<
+    User['codingLanguages']
+  >(currentUser?.codingLanguages);
+  const [codingLanguagesHovering, setCodingLanguagesHovering] = useState<
+    boolean[]
+  >(currentUser?.codingLanguages.map(() => false));
+  const [newCodingLanguage, setNewCodingLanguage] = useState<string>('');
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -69,6 +79,7 @@ export default function EditProfile() {
     bio: bio,
     name: name,
     education: education.filter((_, i) => !educationEditing[i]),
+    codingLanguages: codingLanguages,
   };
 
   async function updateAccount() {
@@ -134,6 +145,18 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
         <ProfileLanguages currentUser={currentUser} />
+
+        {/* TODO: change coding languages picture */}
+        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <ProfileCodingLanguages
+          isEditable
+          codingLanguages={codingLanguages}
+          codingLanguagesHovering={codingLanguagesHovering}
+          newCodingLanguage={newCodingLanguage}
+          setCodingLanguages={setCodingLanguages}
+          setCodingLanguagesHovering={setCodingLanguagesHovering}
+          setNewCodingLanguage={setNewCodingLanguage}
+        />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation
