@@ -18,6 +18,7 @@ import CardGrid from '@/components/Card/CardGrid';
 import Button from '@/components/Buttons/Button';
 import { Post } from '@/types/Post';
 import { User } from '@/types/User';
+import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
 const Feeds = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -92,6 +93,7 @@ const Feeds = () => {
 
   return (
     <div>
+      <CreatePostGroup />
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         Let&apos;s see what your links are talking about.
       </p>
