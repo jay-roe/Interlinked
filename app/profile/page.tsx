@@ -58,16 +58,16 @@ export default function PreviewProfile() {
       <ProfileEducation education={currentUser.education} />
 
       <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={currentUser} />
+      <ProfileCourses courses={currentUser.courses} />
 
       <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={currentUser} />
+      <ProfileExperience experience={currentUser.experience} />
 
       <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={currentUser} />
+      <ProfileProjects projects={currentUser.projects} />
 
       <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={currentUser} />
+      <ProfileSkills skills={currentUser.skills} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards currentUser={currentUser} />

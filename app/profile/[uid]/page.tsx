@@ -42,16 +42,16 @@ export default async function ViewProfile({ params }) {
       <ProfileEducation education={user.education} />
 
       <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={user} />
+      <ProfileCourses courses={user.courses} />
 
       <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={user} />
+      <ProfileExperience experience={user.experience} />
 
       <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={user} />
+      <ProfileProjects projects={user.projects} />
 
       <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={user} />
+      <ProfileSkills skills={user.skills} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards currentUser={user} />
