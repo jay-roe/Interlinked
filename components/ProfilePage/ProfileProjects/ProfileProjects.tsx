@@ -7,6 +7,7 @@ import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Timestamp } from 'firebase/firestore';
 import Link from 'next/link';
+import CardStack from '@/components/CardStack/CardStack';
 
 export default function ProfileProjects({
   projects,
@@ -21,6 +22,61 @@ export default function ProfileProjects({
   setProjectsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setProjects?: Dispatch<SetStateAction<User['projects']>>;
 }) {
+  if (!isEditable) {
+    return (
+      <CardStack height={20}>
+        {projects.map((proj, index) => (
+          <div key={index}>
+            {proj.image && <img src={proj.image} alt={proj.title} />}
+            <h3>{proj.title}</h3>
+            <h6>
+              {proj.startDate.toDate().getFullYear()} -{' '}
+              {proj.endDate ? proj.endDate.toDate().getFullYear() : 'present'}
+            </h6>
+            <div>{proj.description}</div>
+            {proj.collaborators.map((co, index) => (
+              <Link
+                key={index}
+                href={`/profile/${co.id}`}
+                className="inline-block"
+              >
+                <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
+                  {co.profilePicture && (
+                    <img
+                      className="h-10 w-10 rounded-full"
+                      src={co.profilePicture}
+                      alt={co.name}
+                    />
+                  )}
+                  <p>{co.name} </p>
+                </div>
+              </Link>
+            ))}
+            <div className="flex gap-2">
+              {proj.repoLink && (
+                <div>
+                  <a href={proj.repoLink}>
+                    <Link href={proj.repoLink}>
+                      <Button>View Repo</Button>
+                    </Link>
+                  </a>
+                </div>
+              )}
+              {proj.demoLink && (
+                <div>
+                  <a href={proj.demoLink}>
+                    <Link href={proj.demoLink}>
+                      <Button>View Demo</Button>
+                    </Link>
+                  </a>{' '}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </CardStack>
+    );
+  }
   return (
     <div>
       {projects.map((project, index) => (

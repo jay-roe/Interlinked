@@ -21,6 +21,27 @@ export default function ProfileExperience({
   setExperienceEditing?: Dispatch<SetStateAction<boolean[]>>;
   setExperience?: Dispatch<SetStateAction<User['experience']>>;
 }) {
+  if (!isEditable) {
+    return (
+      <CardStack>
+        {experience.map((exp, index) => (
+          <div key={index}>
+            {exp.image && <img src={exp.image} alt={exp.title} />}
+            <h3>{exp.title}</h3>
+            <h4>{exp.employer}</h4>
+            <h5>{exp.location}</h5>
+            <h6>
+              {exp.startDate.toDate().toLocaleDateString()}
+              {exp.endDate
+                ? ' - ' + exp.endDate.toDate().toLocaleDateString()
+                : ''}
+            </h6>
+            <div>{exp.description}</div>
+          </div>
+        ))}
+      </CardStack>
+    );
+  }
   return (
     <div>
       {experience.map((exp, index) => (

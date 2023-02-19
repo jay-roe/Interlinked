@@ -6,6 +6,7 @@ import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Dispatch, SetStateAction } from 'react';
+import CardStack from '@/components/CardStack/CardStack';
 
 export default function ProfileCourses({
   courses,
@@ -20,6 +21,19 @@ export default function ProfileCourses({
   setCoursesEditing?: Dispatch<SetStateAction<boolean[]>>;
   setCourses?: Dispatch<SetStateAction<User['courses']>>;
 }) {
+  if (!isEditable) {
+    return (
+      <CardStack height={10}>
+        {courses.map((course, index) => (
+          <div key={index}>
+            <h3>{course.title}</h3>
+            <h4>{course.courseNo}</h4>
+            <p>{course.description}</p>
+          </div>
+        ))}
+      </CardStack>
+    );
+  }
   return (
     <div>
       {courses.map((course, index) => (

@@ -29,7 +29,7 @@ export default function ProfileCodingLanguages({
         {codingLanguages.map((cl, index) => (
           <li
             key={index}
-            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-1 text-xl font-semibold"
+            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
           >
             {cl}
           </li>
@@ -47,7 +47,7 @@ export default function ProfileCodingLanguages({
             <li>
               <form
                 action=""
-                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-1 text-xl font-semibold"
+                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
                 onSubmit={(e) => {
                   e.preventDefault();
                   setCodingLanguagesHovering((clsedits) =>

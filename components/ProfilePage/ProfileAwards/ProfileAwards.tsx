@@ -25,7 +25,7 @@ export default function ProfileAwards({
   // Live version of awards component
   if (!isEditable) {
     return (
-      <CardStack>
+      <CardStack height={12}>
         {awards.map((award, index) => (
           <div key={index}>
             <h3 className="text-xl font-semibold">{award.title}</h3>

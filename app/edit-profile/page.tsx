@@ -88,24 +88,6 @@ export default function EditProfile() {
     awards.map(() => false)
   );
 
-  // User not logged in
-  if (!currentUser || !authUser) {
-    return (
-      <div className="text-white">
-        <h1 className="text-lg font-bold">Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to edit your profile.
-        </h2>
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
-        <Link href="/register">
-          <Button>Register</Button>
-        </Link>
-      </div>
-    );
-  }
-
   //Skills component states
   const [skills, setSkills] = useState<User['skills']>(currentUser?.skills);
   const [skillsEditing, setSkillsEditing] = useState<boolean[]>(
@@ -133,6 +115,24 @@ export default function EditProfile() {
   const [coursesEditing, setCoursesEditing] = useState<boolean[]>(
     courses.map(() => false)
   );
+
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Profile</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to edit your profile.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
 
   const statesToUpdate: Partial<User> = {
     name: name,
