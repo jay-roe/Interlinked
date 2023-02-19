@@ -9,7 +9,7 @@ const children = [
 ];
 
 it('renders button for card reset', async () => {
-  const { findByTestId } = render(<CardStack children={children} />);
+  const { findByTestId } = render(<CardStack>{children}</CardStack>);
 
   const resetButton = await findByTestId('reset-button');
 
@@ -18,7 +18,7 @@ it('renders button for card reset', async () => {
 });
 
 it('renders next button', async () => {
-  const { findByTestId } = render(<CardStack children={children} />);
+  const { findByTestId } = render(<CardStack>{children}</CardStack>);
 
   const nextButton = await findByTestId('next-button');
   fireEvent.click(nextButton);

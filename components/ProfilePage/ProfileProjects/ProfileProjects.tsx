@@ -1,5 +1,6 @@
 import Button from '@/components/Buttons/Button';
 import type { User } from '@/types/User';
+import Link from 'next/link';
 
 export default function ProfileProjects({
   currentUser,
@@ -28,10 +29,14 @@ export default function ProfileProjects({
           </h6>
           <div>{project.description}</div>
           {project.repoLink && (
-            <Button href={project.repoLink}>View Source</Button>
+            <Link href={project.repoLink}>
+              <Button>View Source</Button>
+            </Link>
           )}
           {project.demoLink && (
-            <Button href={project.demoLink}>View Demo</Button>
+            <Link href={project.demoLink}>
+              <Button>View Demo</Button>
+            </Link>
           )}
         </div>
       ))}
