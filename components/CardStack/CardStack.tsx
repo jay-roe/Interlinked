@@ -148,6 +148,10 @@ export default function CardStack({
     { axis: 'x' }
   );
 
+  if (children.length === 0) {
+    return;
+  }
+
   return (
     <div>
       <div
