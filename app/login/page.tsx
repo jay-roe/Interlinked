@@ -31,7 +31,7 @@ const Login = () => {
       router.push('/');
     } catch (err) {
       console.error(err);
-      alert('Failed to login');
+      alert("Failed to login");
     }
 
     setLoading(false);
@@ -53,6 +53,7 @@ const Login = () => {
             <div>
               <input
                 id="email-address"
+                data-testid="email"
                 name="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -65,6 +66,7 @@ const Login = () => {
             <div>
               <input
                 id="password"
+                data-testid="pw"
                 name="password"
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
@@ -88,7 +90,7 @@ const Login = () => {
           </div>
           <div className={styles.HorizontalSeparator}></div>
           <div>
-            <GoogleButton onClick={() => loginWithGoogle()}>
+            <GoogleButton onClick={() => loginWithGoogle()} data-testid="googleLogin">
               Login with Google
             </GoogleButton>
           </div>
