@@ -149,7 +149,6 @@ export default function EditProfile() {
           Link with {currentUser.name?.split(' ')[0]}
         </h1>
         <ProfileContact
-          currentUser={currentUser}
           isEditable
           email={email}
           setEmail={setEmail}

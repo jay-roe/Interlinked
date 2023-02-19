@@ -5,7 +5,6 @@ import EditButton from '@/components/Buttons/EditButton/EditButton';
 import InputField from '@/components/InputFields/Input/Input';
 
 export default function ProfileContact({
-  currentUser,
   isEditable = false,
   email,
   setEmail,
@@ -14,11 +13,10 @@ export default function ProfileContact({
   contactEditing = false,
   setContactEditing,
 }: {
-  currentUser: User;
   isEditable?: boolean;
   email: string;
   setEmail?: (email: string) => void;
-  phone?: string;
+  phone: string;
   setPhone?: (phone: string) => void;
   contactEditing?: boolean;
   setContactEditing?: Dispatch<SetStateAction<boolean>>;
@@ -27,17 +25,17 @@ export default function ProfileContact({
     return (
       <div className="mt-2 mb-3 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4">
         <div className="flex">
-          {currentUser.email && (
+          {email && (
             <p>
-              ✉ <a href={`mailto:${currentUser.email}`}>{currentUser.email}</a>{' '}
+              ✉ <a href={`mailto:${email}`}>{email}</a>{' '}
               {/* TODO: Add to edit profile: <VerifiedIcon verified={authUser.emailVerified} showText /> */}
             </p>
           )}
         </div>
-        {currentUser.phone && (
+        {phone && (
           <div className="mt-2 flex">
             <p>
-              📞 <a href={`telno:${currentUser.phone}`}>{currentUser.phone}</a>
+              📞 <a href={`telno:${phone}`}>{phone}</a>
             </p>
           </div>
         )}
