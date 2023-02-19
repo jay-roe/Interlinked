@@ -56,9 +56,9 @@ export default function PreviewAttachement({
 
   return (
     <>
-      <div className=" flex  font-para-med ">
-        <div className=" rounded-lg   bg-purple-component p-4 px-7 font-para-med shadow-lg ">
-          <h1 className="text-2xl font-bold text-white">Preview Attachments</h1>
+      <div className=" flex ">
+        <div className=" px-7shadow-lg   rounded-lg bg-purple-component p-4 ">
+          <h1 className="text-2xl text-white">Preview Attachments</h1>
 
           <ul className=" h-[12rem] overflow-y-auto ">
             {preview != null &&

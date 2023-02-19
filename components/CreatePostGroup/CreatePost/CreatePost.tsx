@@ -18,8 +18,8 @@ export default function CreatePost({ getText }: CreatePostProps) {
 
   return (
     <>
-      <div className="  font-para-med ">
-        <div className=" w-full  rounded-lg bg-purple-component p-4 px-7 font-para-med shadow-lg ">
+      <div >
+        <div className=" w-full  rounded-lg bg-purple-component p-4 px-7 shadow-lg ">
           <div className="flex flex-row gap-3 pb-2">
             <div data-testid="profile-pic">
               {currentUser.coverPhoto == null ? (
@@ -30,10 +30,10 @@ export default function CreatePost({ getText }: CreatePostProps) {
             </div>
 
             <div>
-              <h1 className="font-para-heavy text-2xl font-bold">
+              <h1 className="text-2xl font-bold">
                 Create a Post{' '}
               </h1>
-              <h4>Write anything to your heart&apos;s content</h4>
+              <h4 className="">Write anything to your heart&apos;s content</h4>
             </div>
           </div>
           <div>
