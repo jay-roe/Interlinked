@@ -78,10 +78,14 @@ export default function ProfileContact({
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
+            <div>
+              <Button className="mt-3" type="submit">
+                Save Contacts
+              </Button>
+            </div>
           </div>
         )}
         <div className="flex flex-col">
-          {/*Ensure that email address is valid + make sure not empty*/}
           {!contactEditing && (
             <p>
               ✉ <a href={`mailto:${email}`}>{email}</a>{' '}
@@ -93,11 +97,6 @@ export default function ProfileContact({
               <p>
                 📞 <a href={`telno:${phone}`}>{phone}</a>
               </p>
-            </div>
-          )}
-          {contactEditing && (
-            <div>
-              <Button type="submit">Save Contacts</Button>
             </div>
           )}
         </div>

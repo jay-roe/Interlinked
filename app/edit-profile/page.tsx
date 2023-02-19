@@ -40,6 +40,10 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
+  //Socials component states
+  const [socials, setSocials] = useState<User['socials']>(currentUser?.socials);
+  const [socailsEditing, setSocialsEditing] = useState<boolean>(false);
+
   //Contact component states
   const [email, setEmail] = useState<string>(currentUser?.email);
   const [phone, setPhone] = useState<string>(currentUser?.phone);
@@ -77,6 +81,7 @@ export default function EditProfile() {
     education: education.filter((_, i) => !educationEditing[i]),
     phone: phone,
     email: !contactEditing ? email : currentUser.email,
+    socials: socials,
   };
 
   async function updateAccount() {
@@ -130,7 +135,14 @@ export default function EditProfile() {
           setBioEditing={setBioEditing}
         />
 
-        <ProfileSocials socials={currentUser.socials} isEditable />
+        <ProfileSocials
+          isEditable
+          socials={socials}
+          setSocials={setSocials}
+          socialsEditing={socailsEditing}
+          setSocialsEditing={setSocialsEditing}
+        />
+
         <LinkButton currentUser={currentUser} />
 
         <h1 className="text-2xl font-extrabold">

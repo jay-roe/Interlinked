@@ -45,7 +45,7 @@ export default function PreviewProfile() {
         name={currentUser.name}
         bio={currentUser.bio}
       />
-      <div className="mx-auto mb-3">
+      <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
       <LinkButton currentUser={currentUser} />
