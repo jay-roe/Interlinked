@@ -14,10 +14,7 @@ const currentUser = {
   name: '',
   projects: [],
   recommendations: [],
-  skills: [
-    {name: 'coding'}, 
-    {name: 'juggling'},
-    {name: 'eating'}],
+  skills: [{ name: 'coding' }, { name: 'juggling' }, { name: 'eating' }],
   volunteering: [],
 };
 

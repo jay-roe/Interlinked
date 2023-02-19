@@ -4,10 +4,10 @@ import CommentIcon from '../CommentIcon';
 
 it('renders dislike icon by default', async () => {
   const { findByText, findByTestId } = render(
-    <CommentIcon comments={'HELLO'} />
+    <CommentIcon commentState={false} comments={0} setCommentState={jest.fn} />
   );
 
-  const comments = await findByText('HELLO', { exact: false });
+  const comments = await findByText(0, { exact: false });
   const notCommentedIcon = await findByTestId('not-commented');
 
   expect(comments).toBeInTheDocument();
@@ -15,7 +15,9 @@ it('renders dislike icon by default', async () => {
 });
 
 it('renders like icon', async () => {
-  const { findByTestId } = render(<CommentIcon commented={'keyboard smash'} />);
+  const { findByTestId } = render(
+    <CommentIcon commentState={true} comments={5} setCommentState={jest.fn} />
+  );
 
   const commentButton = await findByTestId('comment-btn');
   fireEvent.click(commentButton);

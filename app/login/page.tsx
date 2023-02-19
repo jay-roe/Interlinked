@@ -31,7 +31,7 @@ const Login = () => {
       router.push('/');
     } catch (err) {
       console.error(err);
-      alert("Failed to login");
+      alert('Failed to login');
     }
 
     setLoading(false);
@@ -90,7 +90,10 @@ const Login = () => {
           </div>
           <div className={styles.HorizontalSeparator}></div>
           <div>
-            <GoogleButton onClick={() => loginWithGoogle()} data-testid="googleLogin">
+            <GoogleButton
+              onClick={() => loginWithGoogle()}
+              data-testid="googleLogin"
+            >
               Login with Google
             </GoogleButton>
           </div>

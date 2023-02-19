@@ -22,6 +22,10 @@ module.exports = {
         'para-heavy': 'Paralucent-Heavy',
         'para-med': 'Paralucent-Medium',
       },
+      gridTemplateColumns: {
+        1: 'minmax(0, 1fr)',
+        '2-1': 'minmax(0, 2fr) minmax(0, 1fr)',
+      },
     },
   },
   plugins: [],
