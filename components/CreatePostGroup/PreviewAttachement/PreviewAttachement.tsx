@@ -1,20 +1,26 @@
 import { useEffect, useRef, useState } from 'react';
 import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
+import RemoveImageButton from '@/components/Buttons/RemoveImageButton/RemoveImageButton';
+import { PreviewImageProps } from '@/types/PreviewImage';
 
-export default function PreviewAttachement(props: any) {
+export default function PreviewAttachement({
+  clean,
+  deleteImage,
+  getImage,
+}: PreviewImageProps) {
   const [images, setImages] = useState<File[]>([]);
   const [preview, setPreview] = useState<string[]>([]);
 
   useEffect(() => {
-    props.getImage(images);
+    getImage(images);
   }, [images]);
 
   useEffect(() => {
-    if (props.clean) {
+    if (clean) {
       setPreview([]);
       setImages([]);
     }
-  }, [props.clean]);
+  }, [clean]);
 
   const handleSelectedFile = (files: FileList) => {
     if (files && files[0].size < 10000000) {
@@ -35,7 +41,7 @@ export default function PreviewAttachement(props: any) {
   };
 
   const handleFileSubmition = () => {
-    props.getImage(images);
+    getImage(images);
     setPreview([]);
   };
 
@@ -49,7 +55,7 @@ export default function PreviewAttachement(props: any) {
         return oldValues.filter((img) => URL.createObjectURL(img) !== value);
       });
 
-      props.deleteImage(value);
+      deleteImage(value);
     }
   };
 
