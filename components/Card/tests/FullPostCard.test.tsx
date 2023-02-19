@@ -72,14 +72,6 @@ it('renders uno card in FullPostCard', async () => {
   expect(cardUno).toBeInTheDocument();
 });
 
-// it('renders duo card in FullPostCard', async () => {
-//   let { findByTestId } = render(<FullPostCard  />);
-
-//   const cardDuo = await findByTestId('comment-value', { exact: false });
-//   expect(cardDuo).toBeInTheDocument();
-//   console.log(cardDuo);
-// });
-
 it('renders post card in FullPostCard', async () => {
   const { findByTestId } = render(<FullPostCard post={post2} />);
 
