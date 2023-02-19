@@ -5,13 +5,14 @@ import { FaUserCircle } from 'react-icons/fa';
 import type { User } from '@/types/User';
 import Link from 'next/link';
 import { useState } from 'react';
+import { CreatePostProps } from '@/types/CreatPostProps';
 
-export default function CreatePost(props: any) {
+export default function CreatePost({ getText }: CreatePostProps) {
   const { currentUser } = useAuth();
   const [message, setMessage] = useState('');
 
   const handleSubmit = () => {
-    props.getText(message);
+    getText(message);
     setMessage('');
   };
 
@@ -32,7 +33,7 @@ export default function CreatePost(props: any) {
               <h1 className="font-para-heavy text-2xl font-bold">
                 Create a Post{' '}
               </h1>
-              <h4>Write anything to your heart's content</h4>
+              <h4>Write anything to your heart&aposs content</h4>
             </div>
           </div>
           <div>
