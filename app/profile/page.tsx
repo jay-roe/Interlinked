@@ -42,7 +42,7 @@ export default function PreviewProfile() {
   return (
     <div className="container mx-auto text-white">
       <ProfileHeading
-        currentUser={currentUser}
+        profilePictureURL={currentUser.profilePicture}
         name={currentUser.name}
         bio={currentUser.bio}
       />
@@ -57,7 +57,7 @@ export default function PreviewProfile() {
       <ProfileContact currentUser={currentUser} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+      <ProfileLanguages languages={currentUser.languages} />
 
       {/* TODO: change coding languages picture */}
       <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
@@ -79,7 +79,7 @@ export default function PreviewProfile() {
       <ProfileSkills currentUser={currentUser} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+      <ProfileAwards awards={currentUser.awards} />
     </div>
   );
 }

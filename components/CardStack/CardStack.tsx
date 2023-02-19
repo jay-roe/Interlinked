@@ -186,10 +186,10 @@ export default function CardStack({
           </animated.div>
         ))}
       </div>
-      <Button onClick={() => resetCards()}>
+      <Button data-testid={'reset-button'} onClick={() => resetCards()}>
         <GrPowerReset size={30} />
       </Button>
-      <Button onClick={() => nextClick()}>
+      <Button data-testid={'next-button'} onClick={() => nextClick()}>
         <GrNext size={30} />
       </Button>
     </div>

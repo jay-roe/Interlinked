@@ -2,7 +2,7 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
@@ -25,6 +25,13 @@ import Link from 'next/link';
 import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
+import { storage } from '@/config/firebase';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -34,11 +41,30 @@ export default function EditProfile() {
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
+  const [profilePicture, setProfilePicture] = useState<File>();
+  const [profilePictureURL, setProfilePictureURL] = useState<string>(
+    currentUser?.profilePicture
+  );
+
+  // Preview uploaded profile picture before posting to database
+  useEffect(() => {
+    if (!profilePicture) {
+      return;
+    }
+
+    const objectUrl = URL.createObjectURL(profilePicture);
+    setProfilePictureURL(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [profilePicture]);
+
   const [name, setName] = useState<string>(currentUser?.name);
   const [nameEditing, setNameEditing] = useState<boolean>(false);
 
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+  const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
+  const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   // Coding Languages component states
   const [education, setEducation] = useState<User['education']>(
@@ -56,6 +82,11 @@ export default function EditProfile() {
     boolean[]
   >(currentUser?.codingLanguages.map(() => false));
   const [newCodingLanguage, setNewCodingLanguage] = useState<string>('');
+  //Award component states
+  const [awards, setAwards] = useState<User['awards']>(currentUser?.awards);
+  const [awardsEditing, setAwardsEditing] = useState<boolean[]>(
+    awards.map(() => false)
+  );
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -75,12 +106,31 @@ export default function EditProfile() {
     );
   }
 
-  const statesToUpdate = {
-    bio: bio,
+  const statesToUpdate: Partial<User> = {
     name: name,
+    bio: bio,
+    languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
     codingLanguages: codingLanguages,
+    awards: awards.filter((_, i) => !awardsEditing[i]),
   };
+
+  async function uploadProfilePicture() {
+    const profilePictureRef = ref(
+      storage,
+      `users/${authUser.uid}/profilePicture/${profilePicture.name}`
+    );
+
+    // Remove previous profile picture
+    if (currentUser.profilePicture) {
+      const oldProfilePictureRef = ref(storage, currentUser.profilePicture);
+      await deleteObject(oldProfilePictureRef);
+    }
+
+    // Upload new profile picture, update database with new link
+    await uploadBytes(profilePictureRef, profilePicture);
+    statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
+  }
 
   async function updateAccount() {
     const save = confirm('Unsaved changes will be lost. Continue?');
@@ -88,6 +138,9 @@ export default function EditProfile() {
       return;
     }
     try {
+      await uploadProfilePicture();
+      console.log(statesToUpdate);
+
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');
       await refresh();
@@ -121,8 +174,9 @@ export default function EditProfile() {
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
         <ProfileHeading
-          currentUser={currentUser}
           isEditable
+          profilePictureURL={profilePictureURL}
+          setProfilePicture={setProfilePicture}
           name={name}
           setName={setName}
           nameEditing={nameEditing}
@@ -143,8 +197,14 @@ export default function EditProfile() {
         </h1>
         <ProfileContact currentUser={currentUser} />
 
-        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-        <ProfileLanguages currentUser={currentUser} />
+        <h2 className="inline-block text-2xl font-extrabold">Languages 🗨 </h2>
+        <ProfileLanguages
+          isEditable
+          languages={languages}
+          languageEditing={languageEditing}
+          setLanguage={setLanguage}
+          setLanguageEditing={setLanguageEditing}
+        />
 
         {/* TODO: change coding languages picture */}
         <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
@@ -180,7 +240,13 @@ export default function EditProfile() {
         <ProfileSkills currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-        <ProfileAwards currentUser={currentUser} />
+        <ProfileAwards
+          awards={awards}
+          isEditable
+          awardsEditing={awardsEditing}
+          setAwards={setAwards}
+          setAwardsEditing={setAwardsEditing}
+        />
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>
