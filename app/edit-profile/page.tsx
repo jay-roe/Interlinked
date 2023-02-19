@@ -44,6 +44,34 @@ export default function EditProfile() {
     education.map(() => false)
   );
 
+  //Skills component states
+  const [skills, setSkills] = useState<User['skills']>(currentUser?.skills);
+  const [skillsEditing, setSkillsEditing] = useState<boolean[]>(
+    skills.map(() => false)
+  );
+
+  //Projects component states
+  const [projects, setProjects] = useState<User['projects']>(
+    currentUser?.projects
+  );
+  const [projectsEditing, setProjectsEditing] = useState<boolean[]>(
+    projects.map(() => false)
+  );
+
+  //Experience component states
+  const [experience, setExperience] = useState<User['experience']>(
+    currentUser?.experience
+  );
+  const [experienceEditing, setExperienceEditing] = useState<boolean[]>(
+    experience.map(() => false)
+  );
+
+  //Courses component states
+  const [courses, setCourses] = useState<User['courses']>(currentUser?.courses);
+  const [coursesEditing, setCoursesEditing] = useState<boolean[]>(
+    courses.map(() => false)
+  );
+
   const statesToUpdate = {
     bio: bio,
     education: education,
@@ -133,16 +161,40 @@ export default function EditProfile() {
         />
 
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-        <ProfileCourses currentUser={currentUser} />
+        <ProfileCourses
+          courses={courses}
+          isEditable
+          coursesEditing={coursesEditing}
+          setCoursesEditing={setCoursesEditing}
+          setCourses={setCourses}
+        />
 
         <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-        <ProfileExperience currentUser={currentUser} />
+        <ProfileExperience
+          experience={experience}
+          isEditable
+          experienceEditing={experienceEditing}
+          setExperience={setExperience}
+          setExperienceEditing={setExperienceEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-        <ProfileProjects currentUser={currentUser} />
+        <ProfileProjects
+          projects={projects}
+          isEditable
+          projectsEditing={projectsEditing}
+          setProjectsEditing={setProjectsEditing}
+          setProjects={setProjects}
+        />
 
         <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-        <ProfileSkills currentUser={currentUser} />
+        <ProfileSkills
+          skills={skills}
+          isEditable
+          skillsEditing={skillsEditing}
+          setSkills={setSkills}
+          setSkillsEditing={setSkillsEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
         <ProfileAwards currentUser={currentUser} />

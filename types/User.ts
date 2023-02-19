@@ -1,27 +1,27 @@
 import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
-  awards: Award[];
+  awards?: Award[];
   bio?: string;
-  codingLanguages: string[];
-  connections: User[];
-  courses: Course[];
+  codingLanguages?: string[];
+  connections?: User[];
+  courses?: Course[];
   coverPhoto?: string;
-  education: Education[];
+  education?: Education[];
   email: string;
-  experience: Experience[];
-  languages: string[];
+  experience?: Experience[];
+  languages?: string[];
   name: string;
   phone?: string;
   profilePicture?: string;
-  projects: Project[];
-  recommendations: Recommendation[];
-  skills: Skill[];
+  projects?: Project[];
+  recommendations?: Recommendation[];
+  skills?: Skill[];
   socials?: {
     github?: string;
     instagram?: string;
   };
-  volunteering: Experience[];
+  volunteering?: Experience[];
 };
 
 type Award = {
@@ -58,7 +58,11 @@ type Experience = {
 
 type Project = {
   title: string;
-  collaborators: User[];
+  collaborators?: {
+    name: User['name'];
+    profilePicture?: User['profilePicture'];
+    id: string;
+  }[];
   repoLink?: string;
   demoLink?: string;
   description?: string;
@@ -75,4 +79,5 @@ type Recommendation = {
 
 type Skill = {
   name: string;
+  description: string;
 };
