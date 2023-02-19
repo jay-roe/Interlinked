@@ -74,7 +74,7 @@ export default function PreviewProfile() {
       <ProfileSkills currentUser={currentUser} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+      <ProfileAwards awards={currentUser.awards} />
     </div>
   );
 }

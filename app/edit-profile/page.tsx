@@ -73,6 +73,12 @@ export default function EditProfile() {
     currentUser?.education.map(() => false)
   );
 
+  //Award component states
+  const [awards, setAwards] = useState<User['awards']>(currentUser?.awards);
+  const [awardsEditing, setAwardsEditing] = useState<boolean[]>(
+    awards.map(() => false)
+  );
+
   // User not logged in
   if (!currentUser || !authUser) {
     return (
@@ -96,6 +102,7 @@ export default function EditProfile() {
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
+    awards: awards.filter((_, i) => !awardsEditing[i]),
   };
 
   async function uploadProfilePicture() {
@@ -211,7 +218,13 @@ export default function EditProfile() {
         <ProfileSkills currentUser={currentUser} />
 
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-        <ProfileAwards currentUser={currentUser} />
+        <ProfileAwards
+          awards={awards}
+          isEditable
+          awardsEditing={awardsEditing}
+          setAwards={setAwards}
+          setAwardsEditing={setAwardsEditing}
+        />
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>
