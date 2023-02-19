@@ -21,9 +21,7 @@ export default function CreatePostGroup() {
   const [trigger, setTrigger] = useState(0);
 
   const retrieveText = async (text: string) => {
-    await createPost(text).then(() => {
-      //  setImage(null);
-    });
+    await createPost(text).then(() => {});
   };
 
   const removeImage = (value: string) => {
