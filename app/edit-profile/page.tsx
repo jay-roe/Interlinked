@@ -25,7 +25,12 @@ import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
 import { storage } from '@/config/firebase';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -77,6 +82,14 @@ export default function EditProfile() {
       storage,
       `users/${authUser.uid}/profilePicture/${profilePicture.name}`
     );
+
+    // Remove previous profile picture
+    if (currentUser.profilePicture) {
+      const oldProfilePictureRef = ref(storage, currentUser.profilePicture);
+      await deleteObject(oldProfilePictureRef);
+    }
+
+    // Upload new profile picture, update database with new link
     await uploadBytes(profilePictureRef, profilePicture);
     statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
   }
