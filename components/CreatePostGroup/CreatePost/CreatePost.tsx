@@ -33,7 +33,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
               <h1 className="font-para-heavy text-2xl font-bold">
                 Create a Post{' '}
               </h1>
-              <h4>Write anything to your heart&aposs content</h4>
+              <h4>Write anything to your heart&apos;s content</h4>
             </div>
           </div>
           <div>
