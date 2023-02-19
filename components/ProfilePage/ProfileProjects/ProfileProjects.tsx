@@ -6,6 +6,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Timestamp } from 'firebase/firestore';
+import Link from 'next/link';
 
 export default function ProfileProjects({
   projects,
@@ -58,7 +59,7 @@ export default function ProfileProjects({
               </label>
 
               {project.collaborators.map((co, index) => (
-                <form>
+                <form key={index}>
                   <InputField
                     type="text"
                     name="collab"
@@ -184,18 +185,36 @@ export default function ProfileProjects({
                   ? project.endDate.toDate().getFullYear()
                   : 'present'}
               </h6>
-              {project.collaborators.map((co, index) => (
-                <div>
-                  <p>{co.name} </p>
-                </div>
-              ))}
               <div>{project.description}</div>
-              <div>
-                {' '}
-                <a href={project.repoLink}>{project.repoLink}</a>{' '}
-              </div>
-              <div>
-                <a href={project.demoLink}>{project.demoLink}</a>{' '}
+              {project.collaborators.map((co, index) => (
+                <Link key={index} href={`/profile/${co.id}`}>
+                  <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
+                    {co.profilePicture && (
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={co.profilePicture}
+                        alt={co.name}
+                      />
+                    )}
+                    <p>{co.name} </p>
+                  </div>
+                </Link>
+              ))}
+              <div className="flex gap-2">
+                {project.repoLink && (
+                  <div>
+                    <a href={project.repoLink}>
+                      <Button>View Repo</Button>
+                    </a>
+                  </div>
+                )}
+                {project.demoLink && (
+                  <div>
+                    <a href={project.demoLink}>
+                      <Button>Demo</Button>
+                    </a>{' '}
+                  </div>
+                )}
               </div>
             </div>
           )}
