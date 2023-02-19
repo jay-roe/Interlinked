@@ -172,21 +172,21 @@ export default function EditProfile() {
     await uploadBytes(profilePictureRef, profilePicture);
     statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
 
-    // Remove previous profile picture
-    let oldProfilePictureRef;
-    try {
-      oldProfilePictureRef = ref(storage, currentUser.profilePicture);
-    } catch (err) {
-      console.error(err);
-    }
+    // TODO Remove previous profile picture
+    // let oldProfilePictureRef;
+    // try {
+    //   oldProfilePictureRef = ref(storage, currentUser.profilePicture);
+    // } catch (err) {
+    //   console.error(err);
+    // }
 
-    if (oldProfilePictureRef) {
-      try {
-        await deleteObject(oldProfilePictureRef);
-      } catch (err) {
-        console.error(err);
-      }
-    }
+    // if (oldProfilePictureRef) {
+    //   try {
+    //     await deleteObject(oldProfilePictureRef);
+    //   } catch (err) {
+    //     console.error(err);
+    //   }
+    // }
   }
 
   async function updateAccount() {
