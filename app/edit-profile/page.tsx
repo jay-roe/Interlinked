@@ -13,6 +13,7 @@ import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeadi
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
 import ProfileExperience from '@/components/ProfilePage/ProfileExperience/ProfileExperience';
@@ -65,7 +66,7 @@ export default function EditProfile() {
   const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
-  //Education component states
+  // Coding Languages component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
@@ -73,6 +74,14 @@ export default function EditProfile() {
     currentUser?.education.map(() => false)
   );
 
+  // Education component states
+  const [codingLanguages, setCodingLanguages] = useState<
+    User['codingLanguages']
+  >(currentUser?.codingLanguages);
+  const [codingLanguagesHovering, setCodingLanguagesHovering] = useState<
+    boolean[]
+  >(currentUser?.codingLanguages.map(() => false));
+  const [newCodingLanguage, setNewCodingLanguage] = useState<string>('');
   //Award component states
   const [awards, setAwards] = useState<User['awards']>(currentUser?.awards);
   const [awardsEditing, setAwardsEditing] = useState<boolean[]>(
@@ -102,6 +111,7 @@ export default function EditProfile() {
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
+    codingLanguages: codingLanguages,
     awards: awards.filter((_, i) => !awardsEditing[i]),
   };
 
@@ -194,6 +204,18 @@ export default function EditProfile() {
           languageEditing={languageEditing}
           setLanguage={setLanguage}
           setLanguageEditing={setLanguageEditing}
+        />
+
+        {/* TODO: change coding languages picture */}
+        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <ProfileCodingLanguages
+          isEditable
+          codingLanguages={codingLanguages}
+          codingLanguagesHovering={codingLanguagesHovering}
+          newCodingLanguage={newCodingLanguage}
+          setCodingLanguages={setCodingLanguages}
+          setCodingLanguagesHovering={setCodingLanguagesHovering}
+          setNewCodingLanguage={setNewCodingLanguage}
         />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
