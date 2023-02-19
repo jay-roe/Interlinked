@@ -24,6 +24,10 @@ module.exports = {
         'para-med': 'Paralucent-Medium',
         'neue-machina': 'neue-machina',
       },
+      gridTemplateColumns: {
+        1: 'minmax(0, 1fr)',
+        '2-1': 'minmax(0, 2fr) minmax(0, 1fr)',
+      },
     },
   },
   plugins: [],

@@ -1,5 +1,5 @@
-import { Post } from '@/types/Post';
 import { User } from '../types/User';
+import { Post, Comment } from '../types/Post';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
 import type { QueryDocumentSnapshot } from 'firebase/firestore';
