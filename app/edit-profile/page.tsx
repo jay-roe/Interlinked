@@ -75,6 +75,10 @@ export default function EditProfile() {
   const statesToUpdate = {
     bio: bio,
     education: education,
+    skills: skills,
+    projects: projects,
+    experience: experience,
+    courses: courses,
   };
 
   console.log(education);

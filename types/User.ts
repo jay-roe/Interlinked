@@ -16,7 +16,7 @@ export type User = {
   profilePicture?: string;
   projects?: Project[];
   recommendations?: Recommendation[];
-  skills?: Skill[];
+  skills?: string[];
   socials?: {
     github?: string;
     instagram?: string;
@@ -75,9 +75,4 @@ type Recommendation = {
   title: string;
   description: string;
   recommender: User;
-};
-
-type Skill = {
-  name: string;
-  description: string;
 };

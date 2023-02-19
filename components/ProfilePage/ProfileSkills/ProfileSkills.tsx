@@ -20,6 +20,22 @@ export default function ProfileSkills({
   setSkillsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setSkills?: Dispatch<SetStateAction<User['skills']>>;
 }) {
+  // Live version of skills component
+  if (!isEditable) {
+    return (
+      <ul className="inline-flex">
+        {skills.map((skill, index) => (
+          <li
+            key={index}
+            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-1 text-xl font-semibold"
+          >
+            {skill}
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
   return (
     <div>
       {skills.map((skill, index) => (
@@ -43,35 +59,19 @@ export default function ProfileSkills({
                 type="text"
                 name="skill"
                 id="profileSkill"
-                value={skill.name}
+                value={skill}
                 onChange={(e) =>
                   setSkills((s) => {
                     let tempArr = [...s];
-                    tempArr[index].name = e.target.value;
+                    tempArr[index] = e.target.value;
                     return tempArr;
                   })
                 }
                 required
               />
-              <p>Description</p>
-              <TextArea
-                name="info"
-                value={skill.description}
-                onChange={(e) =>
-                  setSkills((s) => {
-                    let tempArr = [...s];
-                    tempArr[index].description = e.target.value;
-                    return tempArr;
-                  })
-                }
-              />
             </div>
           ) : (
-            <li key={index}>
-              {' '}
-              {skill.name}
-              <p> {skill.description}</p>
-            </li>
+            <li key={index}>{skill}</li>
           )}
           {isEditable && (
             <div className="flex items-center">
@@ -111,13 +111,7 @@ export default function ProfileSkills({
           className="inline"
           onClick={() => {
             // Append new empty skill to current array of skills
-            setSkills((s) => [
-              ...s,
-              {
-                name: '',
-                description: '',
-              },
-            ]);
+            setSkills((s) => [...s, '']);
 
             setSkillsEditing((skeditds) => [...skeditds, true]);
           }}
