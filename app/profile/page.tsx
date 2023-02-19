@@ -5,6 +5,7 @@ import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeadi
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
 import ProfileExperience from '@/components/ProfilePage/ProfileExperience/ProfileExperience';
@@ -40,7 +41,11 @@ export default function PreviewProfile() {
   // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
+      <ProfileHeading
+        profilePictureURL={currentUser.profilePicture}
+        name={currentUser.name}
+        bio={currentUser.bio}
+      />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
@@ -52,7 +57,11 @@ export default function PreviewProfile() {
       <ProfileContact currentUser={currentUser} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+      <ProfileLanguages languages={currentUser.languages} />
+
+      {/* TODO: change coding languages picture */}
+      <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+      <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation education={currentUser.education} />
@@ -70,7 +79,7 @@ export default function PreviewProfile() {
       <ProfileSkills skills={currentUser.skills} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+      <ProfileAwards awards={currentUser.awards} />
     </div>
   );
 }

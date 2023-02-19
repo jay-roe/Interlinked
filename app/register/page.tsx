@@ -20,8 +20,6 @@ export default function Register() {
 
   // If user logged in, send them to home
   useEffect(() => {
-    console.log(authUser);
-
     if (authUser) {
       router.push('/');
     }
@@ -36,7 +34,6 @@ export default function Register() {
 
     try {
       setLoading(true);
-      console.log(register);
       await register(email, password);
       router.push('/edit-profile');
     } catch (err) {
@@ -50,7 +47,10 @@ export default function Register() {
     <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <h2 className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white">
+          <h2
+            className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
+            data-testid="register-title"
+          >
             Create an Account
           </h2>
         </div>
@@ -58,6 +58,7 @@ export default function Register() {
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               <input
+                data-testid="email"
                 id="email-address"
                 name="email"
                 type="email"
@@ -70,6 +71,7 @@ export default function Register() {
             </div>
             <div>
               <input
+                data-testid="pw"
                 id="password"
                 name="password"
                 type="password"
@@ -82,6 +84,7 @@ export default function Register() {
             </div>
             <div>
               <input
+                data-testid="confirm-pw"
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"

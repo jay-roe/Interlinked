@@ -1,3 +1,4 @@
+import CardStack from '@/components/CardStack/CardStack';
 import type { User } from '@/types/User';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import { Dispatch, SetStateAction } from 'react';

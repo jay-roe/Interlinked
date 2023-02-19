@@ -204,14 +204,18 @@ export default function ProfileProjects({
                 {project.repoLink && (
                   <div>
                     <a href={project.repoLink}>
-                      <Button>View Repo</Button>
+                      <Link href={project.repoLink}>
+                        <Button>View Repo</Button>
+                      </Link>
                     </a>
                   </div>
                 )}
                 {project.demoLink && (
                   <div>
                     <a href={project.demoLink}>
-                      <Button>Demo</Button>
+                      <Link href={project.demoLink}>
+                        <Button>View Demo</Button>
+                      </Link>
                     </a>{' '}
                   </div>
                 )}

@@ -23,8 +23,12 @@ export default async function ViewProfile({ params }) {
     return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
 
   return (
-    <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={user} bio={user.bio} />
+    <div data-testid="profile" className="container mx-auto text-white">
+      <ProfileHeading
+        profilePictureURL={user.profilePicture}
+        name={user.name}
+        bio={user.bio}
+      />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={user?.socials} />
       </div>
@@ -36,7 +40,7 @@ export default async function ViewProfile({ params }) {
       <ProfileContact currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={user} />
+      <ProfileLanguages languages={user.languages} />
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation education={user.education} />
@@ -54,7 +58,7 @@ export default async function ViewProfile({ params }) {
       <ProfileSkills skills={user.skills} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={user} />
+      <ProfileAwards awards={user.awards} />
     </div>
   );
 }
