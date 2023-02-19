@@ -40,11 +40,6 @@ export default function PreviewAttachement({
     hiddenFileInput.current.click();
   };
 
-  const handleFileSubmition = () => {
-    getImage(images);
-    setPreview([]);
-  };
-
   const removeImage = (value: string) => {
     if (confirm('Remove image?') == true) {
       setPreview((oldValues) => {
@@ -71,6 +66,7 @@ export default function PreviewAttachement({
                 return (
                   <li className="hover:border-red-900" key={key}>
                     <button
+                      data-testid={`remove-image-${key}`}
                       className="hover:border-red-900"
                       onClick={() => removeImage(imgPreview)}
                     >
@@ -85,11 +81,12 @@ export default function PreviewAttachement({
           </ul>
 
           <div className="flex justify-end">
-            <button onClick={handleClick}>
+            <button data-testid="upload-pic" onClick={handleClick}>
               <UploadMediaButton />
             </button>
             <input
               id="image_upload"
+              data-testid="image-upload"
               type="file"
               accept="image/*"
               ref={hiddenFileInput}
