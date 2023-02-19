@@ -16,7 +16,7 @@ export default function ProfileContact({
   isEditable?: boolean;
   email: string;
   setEmail?: (email: string) => void;
-  phone: string;
+  phone?: string;
   setPhone?: (phone: string) => void;
   contactEditing?: boolean;
   setContactEditing?: Dispatch<SetStateAction<boolean>>;

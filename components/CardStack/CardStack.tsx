@@ -2,7 +2,7 @@
 
 import { animated, useSprings, to as interpolate } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { GrNext, GrPowerReset } from 'react-icons/gr';
 import Button from '../Buttons/Button';
 

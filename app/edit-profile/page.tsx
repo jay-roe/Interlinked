@@ -149,7 +149,7 @@ export default function EditProfile() {
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
-    phone: phone,
+    phone: phone || '',
     email: !contactEditing ? email : currentUser.email,
     socials: socials,
     codingLanguages: codingLanguages,
@@ -169,7 +169,11 @@ export default function EditProfile() {
     // Remove previous profile picture
     if (currentUser.profilePicture) {
       const oldProfilePictureRef = ref(storage, currentUser.profilePicture);
-      await deleteObject(oldProfilePictureRef);
+      try {
+        await deleteObject(oldProfilePictureRef);
+      } catch (err) {
+        console.error(err);
+      }
     }
 
     // Upload new profile picture, update database with new link
