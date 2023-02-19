@@ -20,7 +20,7 @@ const PostBody = ({
       {post?.image_content ? (
         <img
           data-testid="test-image"
-          src={post?.image_content}
+          src={post?.image_content[0]}
           className="max-w-64 max-h-64 object-contain"
           alt="..."
         />
