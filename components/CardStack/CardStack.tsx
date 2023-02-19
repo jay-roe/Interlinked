@@ -148,8 +148,6 @@ export default function CardStack({
     { axis: 'x' }
   );
 
-  console.log(frontCardIndex);
-
   return (
     <div>
       <div

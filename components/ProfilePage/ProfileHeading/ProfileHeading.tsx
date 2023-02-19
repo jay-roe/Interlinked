@@ -47,7 +47,6 @@ export default function ProfileHeading({
     }
 
     setProfilePicture(images[0]);
-    console.log(images[0]);
   };
 
   return (

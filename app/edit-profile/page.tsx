@@ -66,7 +66,7 @@ export default function EditProfile() {
   const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
-  // Coding Languages component states
+  // Education component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
@@ -74,7 +74,7 @@ export default function EditProfile() {
     currentUser?.education.map(() => false)
   );
 
-  // Education component states
+  // Coding Languages component states
   const [codingLanguages, setCodingLanguages] = useState<
     User['codingLanguages']
   >(currentUser?.codingLanguages);
@@ -138,8 +138,9 @@ export default function EditProfile() {
       return;
     }
     try {
-      await uploadProfilePicture();
-      console.log(statesToUpdate);
+      if (profilePicture) {
+        await uploadProfilePicture();
+      }
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
       alert('Successfully updated your profile!');

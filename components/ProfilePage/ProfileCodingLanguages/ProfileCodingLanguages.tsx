@@ -129,7 +129,6 @@ export default function ProfileCodingLanguages({
         name="newCodingLanguage"
         className="flex max-w-xs"
         id="newCodingLanguage"
-        // rows={1}
         value={newCodingLanguage}
         onChange={(e) => setNewCodingLanguage(e.target.value)}
       />
