@@ -1,6 +1,6 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import CreatePostGroup from '../CreatePostGroup';
 
 jest.mock('contexts/AuthContext', () => ({
@@ -41,4 +41,23 @@ it('renders', async () => {
 
   const postDiv = await findByTestId('create-post');
   expect(postDiv).toBeInTheDocument();
+});
+
+it('can post', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      currentUser: {},
+    };
+  });
+  const { findByTestId } = render(<CreatePostGroup />);
+
+  const contentDiv = await findByTestId('post-content');
+  fireEvent.change(contentDiv, { target: { value: 'vjiegrwviugr' } });
+
+  expect(contentDiv).toBeInTheDocument();
+
+  const postButton = await findByTestId('post-button');
+  fireEvent.click(postButton);
+
+  expect(contentDiv).toHaveValue('');
 });
