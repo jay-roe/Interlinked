@@ -58,7 +58,7 @@ export default async function ViewProfile({ params }) {
       <ProfileSkills currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={user} />
+      <ProfileAwards awards={user.awards} />
     </div>
   );
 }
