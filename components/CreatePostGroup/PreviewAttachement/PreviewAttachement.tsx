@@ -1,11 +1,5 @@
-import Button from '@/components/Buttons/Button';
-import PostButton from '@/components/Buttons/PostButton/PostButton';
-import { useAuth } from '@/contexts/AuthContext';
-import type { Post } from '@/types/Post';
-import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
-import RemoveImageButton from '@/components/Buttons/RemoveImageButton/RemoveImageButton';
 
 export default function PreviewAttachement(props: any) {
   const [images, setImages] = useState<File[]>([]);

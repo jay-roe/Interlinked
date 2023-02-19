@@ -41,7 +41,6 @@ export default function PreviewProfile() {
   // Profile preview
   return (
     <div className="container mx-auto text-white">
-      <CreatePostGroup />
       <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={currentUser.socials} />
