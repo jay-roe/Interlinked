@@ -38,12 +38,14 @@ export default function ProfileSocials({
       >
         {/*If you're not editing AND at least one social exists, show it */}
         {!socialsEditing &&
+          socials &&
           Object.keys(socials).some((social) => socials[social].length > 0) && (
             <SocialIconGroup socials={socials} />
           )}
 
         {/*If you're not editing AND ALL socials are empty, show "No socials given" */}
         {!socialsEditing &&
+          socials &&
           Object.keys(socials).every(
             (social) => socials[social].length === 0
           ) && <p>No socials given</p>}
@@ -57,7 +59,7 @@ export default function ProfileSocials({
               type="text"
               name="github"
               id="githubLink"
-              value={socials.github}
+              value={socials?.github}
               onChange={(e) =>
                 setSocials((socials) => {
                   let tempObj = { ...socials };
@@ -73,7 +75,7 @@ export default function ProfileSocials({
               type="text"
               name="instagram"
               id="instagramLink"
-              value={socials.instagram}
+              value={socials?.instagram}
               onChange={(e) =>
                 setSocials((socials) => {
                   let tempObj = { ...socials };

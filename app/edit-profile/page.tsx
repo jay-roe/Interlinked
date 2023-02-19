@@ -59,12 +59,14 @@ export default function EditProfile() {
     return () => URL.revokeObjectURL(objectUrl);
   }, [profilePicture]);
 
-  const [name, setName] = useState<string>(currentUser?.name);
+  const [name, setName] = useState<string>(currentUser?.name || '');
   const [nameEditing, setNameEditing] = useState<boolean>(false);
 
-  const [bio, setBio] = useState<string>(currentUser?.bio);
+  const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
-  const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
+  const [languages, setLanguage] = useState<string[]>(
+    currentUser?.languages || []
+  );
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   //Socials component states
@@ -73,7 +75,7 @@ export default function EditProfile() {
 
   //Contact component states
   const [email, setEmail] = useState<string>(currentUser?.email);
-  const [phone, setPhone] = useState<string>(currentUser?.phone);
+  const [phone, setPhone] = useState<string>(currentUser?.phone || '');
   const [contactEditing, setContactEditing] = useState<boolean>(false);
 
   //Education component states
@@ -149,7 +151,7 @@ export default function EditProfile() {
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
-    phone: phone || '',
+    phone: phone,
     email: !contactEditing ? email : currentUser.email,
     socials: socials,
     codingLanguages: codingLanguages,
@@ -166,19 +168,25 @@ export default function EditProfile() {
       `users/${authUser.uid}/profilePicture/${profilePicture.name}`
     );
 
+    // Upload new profile picture, update database with new link
+    await uploadBytes(profilePictureRef, profilePicture);
+    statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
+
     // Remove previous profile picture
-    if (currentUser.profilePicture) {
-      const oldProfilePictureRef = ref(storage, currentUser.profilePicture);
+    let oldProfilePictureRef;
+    try {
+      oldProfilePictureRef = ref(storage, currentUser.profilePicture);
+    } catch (err) {
+      console.error(err);
+    }
+
+    if (oldProfilePictureRef) {
       try {
         await deleteObject(oldProfilePictureRef);
       } catch (err) {
         console.error(err);
       }
     }
-
-    // Upload new profile picture, update database with new link
-    await uploadBytes(profilePictureRef, profilePicture);
-    statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
   }
 
   async function updateAccount() {
