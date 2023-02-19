@@ -1,22 +1,36 @@
-import CardGrid from '@/components/Card/CardGrid';
-import FullPostCard from '@/components/Card/FullPostCard';
-import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import { getDocs, query, Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 import Feeds from '../page';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
 }));
 
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
+
 jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
+  setDoc: jest.fn(),
   updateDoc: jest.fn(),
   getDocs: jest.fn().mockResolvedValue({ docs: [] }),
   orderBy: jest.fn(),
   query: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
 }));
 
 jest.mock('contexts/AuthContext', () => ({
@@ -24,8 +38,6 @@ jest.mock('contexts/AuthContext', () => ({
 }));
 
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
-const mockedQuery = query as jest.Mock<any>;
-const mockedGetDocs = getDocs as jest.Mock<any>;
 
 let mockedDate = {
   toDate: () => {

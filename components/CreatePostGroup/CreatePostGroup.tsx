@@ -103,7 +103,7 @@ export default function CreatePostGroup() {
   }
 
   return (
-    <div className="my-7 flex flex-row align-top">
+    <div data-testid="create-post" className="my-7 flex flex-row align-top">
       <div className=" flex items-center gap-5 ">
         <div>
           <CreatePost getText={retrieveText} />
