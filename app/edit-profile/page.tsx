@@ -70,7 +70,9 @@ export default function EditProfile() {
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   //Socials component states
-  const [socials, setSocials] = useState<User['socials']>(currentUser?.socials);
+  const [socials, setSocials] = useState<User['socials']>(
+    currentUser?.socials || ({ github: '', instagram: '' } as User['socials'])
+  );
   const [socailsEditing, setSocialsEditing] = useState<boolean>(false);
 
   //Contact component states
