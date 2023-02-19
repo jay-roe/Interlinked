@@ -51,40 +51,38 @@ export default function ProfileHeading({
 
   return (
     <div className="mb-5 block min-h-full gap-5 md:flex md:max-w-xl">
-      {profilePictureURL && (
-        <div className="row-auto">
-          <div className="relative m-auto w-fit">
-            {isEditable ? (
-              <div>
-                <input
-                  accept="image/*"
-                  id="upload-profile-picture"
-                  type="file"
-                  style={{ display: 'none' }}
-                  onChange={handleFileSelected}
-                />
-                <label htmlFor="upload-profile-picture">
-                  <img
-                    className="h-40 w-40 max-w-none rounded-full"
-                    src={profilePictureURL}
-                    alt={name || 'Profile Picture'}
-                  />
-                  <FaRegEdit
-                    className="absolute -right-4 -bottom-4 p-2 text-yellow-600"
-                    size={45}
-                  />
-                </label>
-              </div>
-            ) : (
-              <img
-                className="h-40 w-40 max-w-none rounded-full"
-                src={profilePictureURL}
-                alt={name || 'Profile Picture'}
+      <div className="row-auto">
+        <div className="relative m-auto w-fit">
+          {isEditable ? (
+            <div>
+              <input
+                accept="image/*"
+                id="upload-profile-picture"
+                type="file"
+                style={{ display: 'none' }}
+                onChange={handleFileSelected}
               />
-            )}
-          </div>
+              <label htmlFor="upload-profile-picture">
+                <img
+                  className="h-40 w-40 max-w-none rounded-full"
+                  src={profilePictureURL}
+                  alt={name || 'Profile Picture'}
+                />
+                <FaRegEdit
+                  className="absolute -right-4 -bottom-4 p-2 text-yellow-600"
+                  size={45}
+                />
+              </label>
+            </div>
+          ) : (
+            <img
+              className="h-40 w-40 max-w-none rounded-full"
+              src={profilePictureURL}
+              alt={name || 'Profile Picture'}
+            />
+          )}
         </div>
-      )}
+      </div>
       <div className="row-auto place-self-start self-center text-center md:min-w-[80%] md:text-left">
         <div className="flex items-center">
           {nameEditing ? (
