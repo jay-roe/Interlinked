@@ -62,6 +62,8 @@ export default function EditProfile() {
 
   const [bio, setBio] = useState<string>(currentUser?.bio);
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+  const [languages, setLanguage] = useState<string[]>(currentUser?.languages);
+  const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   //Education component states
   const [education, setEducation] = useState<User['education']>(
@@ -92,6 +94,7 @@ export default function EditProfile() {
   const statesToUpdate: Partial<User> = {
     name: name,
     bio: bio,
+    languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
   };
 
@@ -177,8 +180,14 @@ export default function EditProfile() {
         </h1>
         <ProfileContact currentUser={currentUser} />
 
-        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-        <ProfileLanguages currentUser={currentUser} />
+        <h2 className="inline-block text-2xl font-extrabold">Languages 🗨 </h2>
+        <ProfileLanguages
+          isEditable
+          languages={languages}
+          languageEditing={languageEditing}
+          setLanguage={setLanguage}
+          setLanguageEditing={setLanguageEditing}
+        />
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation

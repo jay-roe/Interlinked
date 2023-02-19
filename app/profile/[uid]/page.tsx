@@ -40,7 +40,7 @@ export default async function ViewProfile({ params }) {
       <ProfileContact currentUser={user} />
 
       <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={user} />
+      <ProfileLanguages languages={user.languages} />
 
       <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation education={user.education} />
