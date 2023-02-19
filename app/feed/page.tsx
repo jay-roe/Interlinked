@@ -18,6 +18,7 @@ import CardGrid from '@/components/Card/CardGrid';
 import Button from '@/components/Buttons/Button';
 import { Post } from '@/types/Post';
 import { User } from '@/types/User';
+import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
 const Feeds = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,10 +35,10 @@ const Feeds = () => {
     getDocs(allPostsQuery)
       .then((docs) => {
         let postArray: Post[] = []; // we make this array first so we only update the state once and only when all the data is there
-        let postIdArray: string[] = []
+        let postIdArray: string[] = [];
         docs.forEach((doc) => {
           postArray.push(doc.data());
-          postIdArray.push(doc.id)
+          postIdArray.push(doc.id);
         });
         setPosts(postArray);
         setPostIDs(postIdArray);
@@ -92,6 +93,7 @@ const Feeds = () => {
 
   return (
     <div>
+      <CreatePostGroup />
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         Let&apos;s see what your links are talking about.
       </p>
