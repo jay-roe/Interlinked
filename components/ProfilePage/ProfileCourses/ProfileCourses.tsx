@@ -21,9 +21,10 @@ export default function ProfileCourses({
   setCoursesEditing?: Dispatch<SetStateAction<boolean[]>>;
   setCourses?: Dispatch<SetStateAction<User['courses']>>;
 }) {
+  // live version
   if (!isEditable) {
     return (
-      <CardStack height={10}>
+      <CardStack height={10} data-testid="live-courses">
         {courses.map((course, index) => (
           <div key={index}>
             <h3>{course.title}</h3>
@@ -34,11 +35,13 @@ export default function ProfileCourses({
       </CardStack>
     );
   }
+  // editable version
   return (
     <div>
       {courses.map((course, index) => (
         <form
           key={index}
+          data-testid="edit-courses-form"
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
           onSubmit={(e) => {
             e.preventDefault();
@@ -54,6 +57,7 @@ export default function ProfileCourses({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="course-title"
                 type="text"
                 name="skill"
                 id="profileSkill"
@@ -69,6 +73,7 @@ export default function ProfileCourses({
               />
               <p>Course Number</p>
               <TextArea
+                data-testid="course-number"
                 name="info"
                 value={course.courseNo}
                 onChange={(e) =>
@@ -81,6 +86,7 @@ export default function ProfileCourses({
               />
               <p>Description</p>
               <TextArea
+                data-testid="course-desc"
                 name="info"
                 value={course.description}
                 onChange={(e) =>
@@ -103,11 +109,16 @@ export default function ProfileCourses({
             <div className="flex items-center">
               {/* External edit course button */}
               {coursesEditing && coursesEditing[index] ? (
-                <Button className="mr-2" type="submit">
+                <Button
+                  className="mr-2"
+                  data-testid="save-course-button"
+                  type="submit"
+                >
                   Save Course
                 </Button>
               ) : (
                 <EditButton
+                  data-testid="edit-course-button"
                   onClick={(e) => {
                     e.preventDefault();
                     setCoursesEditing((cedits) =>
@@ -118,6 +129,7 @@ export default function ProfileCourses({
               )}
               {/* External delete course button */}
               <DeleteButton
+                data-testid="delete-course-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setCourses((c) => c.filter((_, i) => index !== i));
@@ -135,6 +147,7 @@ export default function ProfileCourses({
       {isEditable && (
         <Button
           className="inline"
+          data-testid="add-course-button"
           onClick={() => {
             // Append new empty course to current array of courses
             setCourses((c) => [
