@@ -25,7 +25,7 @@ export default function ProfileCodingLanguages({
   // Live version of Coding Languages component
   if (!isEditable) {
     return (
-      <ul className="inline-flex">
+      <ul className="inline-flex" data-testid="live-profile">
         {codingLanguages.map((cl, index) => (
           <li
             key={index}
@@ -46,6 +46,7 @@ export default function ProfileCodingLanguages({
           <ul className="inline-flex">
             <li>
               <form
+                data-testid="editable-profile-form"
                 action=""
                 className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
                 onSubmit={(e) => {
@@ -59,6 +60,7 @@ export default function ProfileCodingLanguages({
                   // On hover delete button
                   <div>
                     <div
+                      data-testid="code-lang-hovering-parent"
                       className="relative"
                       onMouseLeave={(e) => {
                         e.preventDefault();
@@ -68,6 +70,7 @@ export default function ProfileCodingLanguages({
                       }}
                     >
                       <div
+                        data-testid="code-lang-hovering-code-lang-name"
                         onMouseOver={(e) => {
                           e.preventDefault();
                           setCodingLanguagesHovering((clhover) =>
@@ -79,6 +82,7 @@ export default function ProfileCodingLanguages({
                       </div>
                       <div className="absolute -top-1 -right-8 items-center">
                         <DeleteButton
+                          data-testid="code-lang-hovering-delete"
                           size={18}
                           onClick={(e) => {
                             e.preventDefault();
@@ -103,16 +107,11 @@ export default function ProfileCodingLanguages({
                   </div>
                 ) : (
                   <div
+                    data-testid="code-lang-not-hovering"
                     onMouseOver={(e) => {
                       e.preventDefault();
                       setCodingLanguagesHovering((clhover) =>
                         clhover.map((cl, i) => (index === i ? true : false))
-                      );
-                    }}
-                    onMouseOut={(e) => {
-                      e.preventDefault();
-                      setCodingLanguagesHovering((clhover) =>
-                        clhover.map((cl, i) => (index === i ? false : false))
                       );
                     }}
                   >
@@ -129,11 +128,13 @@ export default function ProfileCodingLanguages({
         name="newCodingLanguage"
         className="flex max-w-xs"
         id="newCodingLanguage"
+        data-testid="new-code-lang-input"
         value={newCodingLanguage}
         onChange={(e) => setNewCodingLanguage(e.target.value)}
       />
       <Button
         className="inline"
+        data-testid="new-code-lang-button"
         onClick={() => {
           newCodingLanguage.length > 0 &&
             setCodingLanguages((cls) => [...cls, newCodingLanguage]);
