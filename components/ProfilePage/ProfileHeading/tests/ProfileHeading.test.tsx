@@ -2,25 +2,13 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import ProfileHeading from '../ProfileHeading';
 
-const currentUser = {
-  awards: [],
-  codingLanguages: [],
-  connections: [],
-  courses: [],
-  education: [],
-  email: '',
-  experience: [],
-  languages: [],
-  name: 'Melisa',
-  projects: [],
-  recommendations: [],
-  skills: [],
-  volunteering: [],
-};
-
 it('renders name given user', async () => {
   const { findByText } = render(
-    <ProfileHeading currentUser={currentUser} name="Melisa" bio="" />
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
+    />
   );
 
   const name = await findByText('Melisa', { exact: false });
@@ -33,9 +21,9 @@ it('can change bio', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      currentUser={currentUser}
-      name=""
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       bioEditing={true}
       isEditable={true}
       setBio={setBioMock}
@@ -55,9 +43,9 @@ it('can edit bio', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      name=""
-      currentUser={currentUser}
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       isEditable={true}
       setBioEditing={setBioEditingMock}
     />
@@ -72,24 +60,12 @@ it('can edit bio', async () => {
 });
 
 it('renders placeholder if user has no name', async () => {
-  let currUser = {
-    awards: [],
-    codingLanguages: [],
-    connections: [],
-    courses: [],
-    education: [],
-    email: '',
-    experience: [],
-    languages: [],
-    name: '',
-    projects: [],
-    recommendations: [],
-    skills: [],
-    volunteering: [],
-  };
-
   const { findByText } = render(
-    <ProfileHeading currentUser={currUser} name="" bio="" />
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name=""
+      bio="Insert some super interesting stuff here!"
+    />
   );
 
   const namePlaceholder = await findByText('No name provided.');
@@ -101,9 +77,9 @@ it('can set editing name', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      currentUser={currentUser}
-      name=""
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       isEditable={true}
       setNameEditing={setNameEditingMock}
     />
@@ -121,9 +97,9 @@ it('can set name', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      currentUser={currentUser}
-      name=""
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       isEditable={true}
       nameEditing={true}
       setName={setNameMock}
