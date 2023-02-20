@@ -7,7 +7,7 @@ import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 
 export default function ProfileSocials({
-  isEditable,
+  isEditable = false,
   socials,
   setSocials,
   socialsEditing,
@@ -19,6 +19,7 @@ export default function ProfileSocials({
   socialsEditing?: boolean;
   setSocialsEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  // live version
   if (!isEditable) {
     return (
       <div className="mx-auto mb-5">
@@ -27,6 +28,7 @@ export default function ProfileSocials({
     );
   }
 
+  // editable version
   return (
     <div className="flex flex-row">
       <form
@@ -40,7 +42,10 @@ export default function ProfileSocials({
         {!socialsEditing &&
           socials &&
           Object.keys(socials).some((social) => socials[social].length > 0) && (
-            <SocialIconGroup socials={socials} />
+            <SocialIconGroup
+              socials={socials}
+              data-testid="not-editing-at-least-one-social-exists"
+            />
           )}
 
         {/*If you're not editing AND ALL socials are empty, show "No socials given" */}
@@ -48,14 +53,17 @@ export default function ProfileSocials({
           socials &&
           Object.keys(socials).every(
             (social) => socials[social].length === 0
-          ) && <p>No socials given</p>}
+          ) && <p data-testid="not-editing-no-socials">No socials given</p>}
 
+        {/* Actual editing logic */}
         {socialsEditing && (
           <div>
+            {/* Edit github link */}
             <label>
               <SocialIcon social="github" />
             </label>
             <InputField
+              data-testid="edit-github"
               type="text"
               name="github"
               id="githubLink"
@@ -68,10 +76,12 @@ export default function ProfileSocials({
                 })
               }
             />
+            {/* Edit instagram link */}
             <label>
               <SocialIcon social="instagram" />
             </label>
             <InputField
+              data-testid="edit-instagram"
               type="text"
               name="instagram"
               id="instagramLink"
@@ -92,10 +102,12 @@ export default function ProfileSocials({
           </div>
         )}
       </form>
+      {/* Initiate editing session */}
       <div className="flex">
         {isEditable && !socialsEditing && (
           <EditButton
             className="inline"
+            data-testid="socials-edit-button"
             onClick={() => setSocialsEditing((curr) => !curr)}
           />
         )}
