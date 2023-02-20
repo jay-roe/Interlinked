@@ -35,12 +35,13 @@ export default function ProfileSkills({
       </ul>
     );
   }
-
+  // editable version
   return (
     <div>
       {skills.map((skill, index) => (
         <form
           action=""
+          data-testid="skills-form"
           key={index}
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
           onSubmit={(e) => {
@@ -56,6 +57,7 @@ export default function ProfileSkills({
                 Skill <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="skill-edit-box"
                 type="text"
                 name="skill"
                 id="profileSkill"
@@ -82,6 +84,7 @@ export default function ProfileSkills({
                 </Button>
               ) : (
                 <EditButton
+                  data-testid="skill-edit-button"
                   onClick={(e) => {
                     e.preventDefault();
                     setSkillsEditing((skeditds) =>
@@ -92,6 +95,7 @@ export default function ProfileSkills({
               )}
               {/* External delete skill button */}
               <DeleteButton
+                data-testid="skill-delete-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setSkills((s) => s.filter((_, i) => index !== i));
@@ -109,6 +113,7 @@ export default function ProfileSkills({
       {isEditable && (
         <Button
           className="inline"
+          data-testid="skill-add-button"
           onClick={() => {
             // Append new empty skill to current array of skills
             setSkills((s) => [...s, '']);
