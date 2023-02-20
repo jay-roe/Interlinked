@@ -21,9 +21,13 @@ export default function ProfileContact({
   contactEditing?: boolean;
   setContactEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  // Live version
   if (!isEditable) {
     return (
-      <div className="mt-2 mb-3 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4">
+      <div
+        className="mt-2 mb-3 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4"
+        data-testid="live-contact"
+      >
         <div className="flex">
           {email && (
             <p>
@@ -43,6 +47,7 @@ export default function ProfileContact({
     );
   }
 
+  // Editable version
   return (
     <div className="flex flex-row">
       <form
@@ -59,6 +64,7 @@ export default function ProfileContact({
               Email <span className="text-yellow-600">*</span>
             </label>
             <InputField
+              data-testid="edit-email"
               type="email"
               name="email"
               id="email"
@@ -70,6 +76,7 @@ export default function ProfileContact({
               Phone <span className="text-yellow-600"></span>
             </label>
             <InputField
+              data-testid="edit-phone"
               type="tel"
               name="phone"
               id="phone"
@@ -77,7 +84,11 @@ export default function ProfileContact({
               onChange={(e) => setPhone(e.target.value)}
             />
             <div>
-              <Button className="mt-3" type="submit">
+              <Button
+                className="mt-3"
+                data-testid="save-changes-button"
+                type="submit"
+              >
                 Save Contacts
               </Button>
             </div>
@@ -102,6 +113,7 @@ export default function ProfileContact({
       <div className="flex">
         {isEditable && !contactEditing && (
           <EditButton
+            data-testid="contact-edit-button"
             className="inline"
             onClick={() => setContactEditing((curr) => !curr)}
           />
