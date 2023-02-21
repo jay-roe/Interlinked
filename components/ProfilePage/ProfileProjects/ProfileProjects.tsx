@@ -26,7 +26,7 @@ export default function ProfileProjects({
     return (
       <CardStack height={20}>
         {projects.map((proj, index) => (
-          <div key={index}>
+          <div key={index} data-testid="live-proj">
             {proj.image && <img src={proj.image} alt={proj.title} />}
             <h3>{proj.title}</h3>
             <h6>
@@ -97,6 +97,7 @@ export default function ProfileProjects({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="edit-proj-title"
                 type="text"
                 name="project"
                 id="profileProject"
@@ -117,6 +118,7 @@ export default function ProfileProjects({
               {project.collaborators.map((co, index) => (
                 <form key={index}>
                   <InputField
+                    data-testid="edit-proj-collaborators"
                     type="text"
                     name="collab"
                     id="profileCollabs"
@@ -143,6 +145,7 @@ export default function ProfileProjects({
 
               <p>Description</p>
               <TextArea
+                data-testid="edit-proj-description"
                 name="info"
                 value={project.description}
                 onChange={(e) =>
@@ -159,6 +162,7 @@ export default function ProfileProjects({
                     Start Date <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
+                    data-testid="edit-proj-startDate"
                     type="date"
                     name="startdate"
                     value={project.startDate
@@ -183,6 +187,7 @@ export default function ProfileProjects({
                 <div className="w-full">
                   <label>End Date</label>
                   <InputField
+                    data-testid="edit-proj-endDate"
                     type="date"
                     name="enddate"
                     value={project.endDate
@@ -206,6 +211,7 @@ export default function ProfileProjects({
               </div>
               <label> Repo Link </label>
               <InputField
+                data-testid="edit-proj-repoLink"
                 type="link"
                 name="repoLink"
                 value={project.repoLink}
@@ -219,6 +225,7 @@ export default function ProfileProjects({
               ></InputField>
               <label> Demo Link </label>
               <InputField
+                data-testid="edit-proj-demoLink"
                 type="link"
                 name="demolink"
                 value={project.demoLink}
@@ -232,7 +239,7 @@ export default function ProfileProjects({
               ></InputField>
             </div>
           ) : (
-            <div>
+            <div data-testid="editable-proj">
               {project.image && <img src={project.image} alt={project.title} />}
               <h3>{project.title}</h3>
               <h6>
@@ -282,11 +289,16 @@ export default function ProfileProjects({
             <div className="flex items-center">
               {/* External edit project button */}
               {projectsEditing && projectsEditing[index] ? (
-                <Button className="mr-2" type="submit">
+                <Button
+                  className="mr-2"
+                  type="submit"
+                  data-testid="proj-save-button"
+                >
                   Save Project
                 </Button>
               ) : (
                 <EditButton
+                  data-testid="proj-edit-button"
                   onClick={(e) => {
                     e.preventDefault();
                     setProjectsEditing((proedits) =>
@@ -297,6 +309,7 @@ export default function ProfileProjects({
               )}
               {/* External delete project button */}
               <DeleteButton
+                data-testid="proj-delete-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setProjects((pro) => pro.filter((_, i) => index !== i));
@@ -313,6 +326,7 @@ export default function ProfileProjects({
       {/* Adding new skills, appears after all project list */}
       {isEditable && (
         <Button
+          data-testid="proj-add-button"
           className="inline"
           onClick={() => {
             // Append new empty skill to current array of projects

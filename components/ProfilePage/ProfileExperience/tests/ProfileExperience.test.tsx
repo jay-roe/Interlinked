@@ -1,23 +1,226 @@
+import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import {
+  findAllByTestId,
+  findByTestId,
+  fireEvent,
+  render,
+  waitFor,
+} from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import ProfileExperience from '../ProfileExperience';
 
-// let mockedDate = {
-//   toDate: () => {
-//     return new Date();
-//   },
-// } as unknown as Timestamp;
+jest.mock('contexts/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
 
-// it('renders education given user', async () => {
-//   const { findByText } = render(
-//     <ProfileExperience currentUser={currentUser} />
-//   );
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
 
-//   const courseTitle = await findByText('Jester', { exact: false });
-//   expect(courseTitle).toBeInTheDocument();
-// });
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
 
-it('exp', async () => {
-  expect(true);
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(),
+  setDoc: jest.fn(),
+  updateDoc: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
+}));
+
+let mockDate = {
+  toDate: () => {
+    return new Date();
+  },
+} as unknown as Timestamp;
+
+it('renders the live version of profile experience', async () => {
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          startDate: mockDate,
+        },
+      ]}
+    />
+  );
+  const exp = await findByTestId('live-exp');
+  expect(exp).toBeInTheDocument();
+});
+
+it('edits an experience', async () => {
+  const mockSet = jest.fn();
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      setExperience={mockSet}
+      isEditable={true}
+      experienceEditing={[true]}
+    />
+  );
+
+  const title = await findByTestId('edit-exp-title');
+  const location = await findByTestId('edit-exp-location');
+  const employer = await findByTestId('edit-exp-employer');
+  const description = await findByTestId('edit-exp-description');
+  // const image = await findByTestId("edit-exp-image");
+  const startDate = await findByTestId('edit-exp-startDate');
+  const endDate = await findByTestId('edit-exp-endDate');
+
+  fireEvent.change(title, { target: { value: 'something different' } });
+  fireEvent.change(location, { target: { value: 'something different' } });
+  fireEvent.change(employer, { target: { value: 'something different' } });
+  fireEvent.change(description, { target: { value: 'something different' } });
+  // fireEvent.change(image, { target: { value: 'something different' } });
+  fireEvent.change(startDate, { target: { value: mockDate } });
+  fireEvent.change(endDate, { target: { value: mockDate } });
+
+  await waitFor(() => expect(mockSet).toBeCalledTimes(6));
+});
+
+it('renders the editable version of profile experience', async () => {
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      isEditable={true}
+    />
+  );
+
+  const exps = await findByTestId('editable-exp');
+  expect(exps).toBeInTheDocument();
+});
+
+it('tests the experience save button', async () => {
+  const mockClick = jest.fn();
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      isEditable={true}
+      experienceEditing={[true]}
+      setExperienceEditing={mockClick}
+    />
+  );
+
+  const saveButton = await findByTestId('exp-save-button');
+  fireEvent.submit(saveButton);
+  await waitFor(() => expect(mockClick).toBeCalledTimes(1));
+});
+
+it('tests the experience edit button', async () => {
+  const mockClick = jest.fn();
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      isEditable={true}
+      setExperienceEditing={mockClick}
+    />
+  );
+
+  const editButton = await findByTestId('exp-edit-button');
+  fireEvent.click(editButton);
+  await waitFor(() => expect(mockClick).toBeCalledTimes(1));
+});
+
+it('tests the experience delete button', async () => {
+  const mockClick = jest.fn();
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      isEditable={true}
+      setExperience={mockClick}
+      setExperienceEditing={mockClick}
+    />
+  );
+
+  const deleteButton = await findByTestId('exp-delete-button');
+  fireEvent.click(deleteButton);
+  await waitFor(() => expect(mockClick).toBeCalledTimes(2));
+});
+
+it('tests the experience delete button', async () => {
+  const mockClick = jest.fn();
+  const { findByTestId } = render(
+    <ProfileExperience
+      experience={[
+        {
+          title: 'You killed a slime',
+          location: 'Narnia',
+          employer: 'God',
+          description: 'It was a green slime',
+          image: 'https://via.placeholder.com/100.png',
+          startDate: mockDate,
+          endDate: mockDate,
+        },
+      ]}
+      isEditable={true}
+      setExperience={mockClick}
+      setExperienceEditing={mockClick}
+    />
+  );
+
+  const addButton = await findByTestId('exp-add-button');
+  fireEvent.click(addButton);
+  await waitFor(() => expect(mockClick).toBeCalledTimes(2));
 });

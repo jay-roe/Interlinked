@@ -25,7 +25,7 @@ export default function ProfileExperience({
     return (
       <CardStack>
         {experience.map((exp, index) => (
-          <div key={index}>
+          <div key={index} data-testid="live-exp">
             {exp.image && <img src={exp.image} alt={exp.title} />}
             <h3>{exp.title}</h3>
             <h4>{exp.employer}</h4>
@@ -63,6 +63,7 @@ export default function ProfileExperience({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="edit-exp-title"
                 type="text"
                 name="title"
                 id="profileExperienceTitle"
@@ -80,6 +81,7 @@ export default function ProfileExperience({
                 Location <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="edit-exp-location"
                 name="location"
                 id="profileExperienceLocation"
                 value={exp.location}
@@ -96,6 +98,7 @@ export default function ProfileExperience({
                 employer <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="edit-exp-employer"
                 type="text"
                 id="employer"
                 name="employer"
@@ -115,6 +118,7 @@ export default function ProfileExperience({
                     Start Date <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
+                    data-testid="edit-exp-startDate"
                     type="date"
                     name="startdate"
                     value={exp.startDate
@@ -139,6 +143,7 @@ export default function ProfileExperience({
                 <div className="w-full">
                   <label>End Date</label>
                   <InputField
+                    data-testid="edit-exp-endDate"
                     type="date"
                     name="enddate"
                     value={exp.endDate?.toDate().toISOString().substring(0, 10)}
@@ -157,6 +162,7 @@ export default function ProfileExperience({
               </div>
               <p>Description</p>
               <TextArea
+                data-testid="edit-exp-description"
                 name="info"
                 value={exp.description}
                 onChange={(e) =>
@@ -169,7 +175,7 @@ export default function ProfileExperience({
               />
             </div>
           ) : (
-            <div>
+            <div data-testid="editable-exp">
               {exp.image && <img src={exp.image} alt={exp.title} />}
               <h3>{exp.title}</h3>
               <h4>{exp.employer}</h4>
@@ -187,11 +193,16 @@ export default function ProfileExperience({
             <div className="flex items-center">
               {/* External edit education button */}
               {experienceEditing && experienceEditing[index] ? (
-                <Button className="mr-2" type="submit">
+                <Button
+                  className="mr-2"
+                  type="submit"
+                  data-testid="exp-save-button"
+                >
                   Save Expererience
                 </Button>
               ) : (
                 <EditButton
+                  data-testid="exp-edit-button"
                   onClick={(e) => {
                     e.preventDefault();
                     setExperienceEditing((exedits) =>
@@ -202,6 +213,7 @@ export default function ProfileExperience({
               )}
               {/* External delete education button */}
               <DeleteButton
+                data-testid="exp-delete-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setExperience((exs) => exs.filter((_, i) => index !== i));
@@ -217,6 +229,7 @@ export default function ProfileExperience({
       ))}
       {isEditable && (
         <Button
+          data-testid="exp-add-button"
           className="inline"
           onClick={() => {
             // Append new empty education to current array of educations

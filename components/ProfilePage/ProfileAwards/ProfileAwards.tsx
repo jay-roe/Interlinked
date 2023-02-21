@@ -27,7 +27,7 @@ export default function ProfileAwards({
     return (
       <CardStack height={12}>
         {awards.map((award, index) => (
-          <div key={index}>
+          <div key={index} data-testid="live-awards">
             <h3 className="text-xl font-semibold">{award.title}</h3>
             <h6>
               {`${award.date.toDate().toLocaleString('default', {
@@ -63,6 +63,7 @@ export default function ProfileAwards({
                 Award Title<span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="awards-title-box"
                 type="text"
                 name="title"
                 id="awardTitle"
@@ -80,6 +81,7 @@ export default function ProfileAwards({
                 Date <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="awards-date-box"
                 type="date"
                 name="date"
                 value={award.date?.toDate().toISOString().substring(0, 10)}
@@ -97,6 +99,7 @@ export default function ProfileAwards({
               />
               <p>Description</p>
               <TextArea
+                data-testid="awards-desc-box"
                 name="info"
                 value={award.description}
                 onChange={(e) =>
@@ -109,7 +112,7 @@ export default function ProfileAwards({
               />
             </div>
           ) : (
-            <div key={index}>
+            <div key={index} data-testid="editable-awards">
               <h3>{award.title}</h3>
               <h6>
                 {`${award.date.toDate().toLocaleString('default', {
@@ -123,11 +126,16 @@ export default function ProfileAwards({
           <div className="flex items-center">
             {/* External edit award button */}
             {awardsEditing && awardsEditing[index] ? (
-              <Button className="mr-2" type="submit">
+              <Button
+                className="mr-2"
+                type="submit"
+                data-testid="awards-save-button"
+              >
                 Save Award
               </Button>
             ) : (
               <EditButton
+                data-testid="awards-edit-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setAwardsEditing((awdsedits) =>
@@ -138,6 +146,7 @@ export default function ProfileAwards({
             )}
             {/* External delete award button */}
             <DeleteButton
+              data-testid="awards-delete-button"
               onClick={(e) => {
                 e.preventDefault();
                 setAwards((awds) => awds.filter((_, i) => index !== i));
@@ -151,6 +160,7 @@ export default function ProfileAwards({
       ))}
       {/* Adding new award, appears after all award cards */}
       <Button
+        data-testid="awards-add-button"
         className="inline"
         onClick={() => {
           // Append new empty award to current array of awards
