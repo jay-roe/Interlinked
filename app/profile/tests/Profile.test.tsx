@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useAuth } from '@/contexts/AuthContext';
 import Profile from '../page';
@@ -7,14 +8,6 @@ import { useRouter } from 'next/navigation';
 // on the profile page, if you're logged in, it will show your profile and a delete account option
 // if you're not logged in, give the option to login instead
 
-jest.mock('@/config/firestore', () => ({
-  db: jest.fn(),
-}));
-
-jest.mock('firebase/firestore', () => ({
-  doc: jest.fn(),
-  updateDoc: jest.fn(),
-}));
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
@@ -66,6 +59,7 @@ const mockedRouter = useRouter as jest.Mock<any>;
 //     expect(profileInfo).toBeInTheDocument();
 
 // });
+
 
 it('check if user is logged out', async () => {
   mockedUseAuth.mockImplementation(() => {

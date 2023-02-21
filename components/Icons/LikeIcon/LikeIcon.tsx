@@ -1,11 +1,21 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { FaRegThumbsUp, FaThumbsUp } from 'react-icons/fa';
 
-function LikeIcon(props) {
+const LikeIcon = ({
+  likeState,
+  setLiked,
+  likes,
+}: {
+  likeState: boolean;
+  setLiked: Dispatch<SetStateAction<boolean>>;
+  likes: number;
+}) => {
   const [isLiked, setIsLiked] = useState(false);
-
   return (
-    <span className="flex flex-nowrap space-x-1 text-accent-orange ">
+    <span
+      data-testid="test-like-icon-footer"
+      className="flex flex-nowrap space-x-1 text-accent-orange "
+    >
       <button data-testid="like-btn" onClick={() => setIsLiked(!isLiked)}>
         {isLiked ? (
           <FaThumbsUp data-testid="liked" />
@@ -13,9 +23,9 @@ function LikeIcon(props) {
           <FaRegThumbsUp data-testid="not-liked" />
         )}
       </button>
-      <span className="text-white"> {props.likes} </span>
+      <span className="text-white"> {likeState ? likes + 1 : likes} </span>
     </span>
   );
-}
+};
 
 export default LikeIcon;

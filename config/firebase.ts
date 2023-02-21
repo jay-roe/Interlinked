@@ -2,7 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
-
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -22,7 +21,6 @@ auth.useDeviceLanguage();
 
 // Initialize firestore database
 export const firestore = getFirestore(app);
-
-export const storage = getStorage(app);
+export const storage = getStorage();
 
 export default auth;

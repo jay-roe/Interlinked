@@ -16,6 +16,7 @@ import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards'
 import Link from 'next/link';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
+import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
