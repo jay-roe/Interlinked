@@ -56,7 +56,7 @@ it('can edit an existing skill', async () => {
     <ProfileSkills
       skills={['dancing']}
       isEditable={true}
-      skillsEditing={[true]}
+      // skillsEditing={[true]}
       setSkillsEditing={mockClick}
     />
   );

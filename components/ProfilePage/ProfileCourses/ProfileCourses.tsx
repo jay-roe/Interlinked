@@ -24,9 +24,9 @@ export default function ProfileCourses({
   // live version
   if (!isEditable) {
     return (
-      <CardStack height={10} data-testid="live-courses">
+      <CardStack height={10}>
         {courses.map((course, index) => (
-          <div key={index}>
+          <div key={index} data-testid="live-courses">
             <h3>{course.title}</h3>
             <h4>{course.courseNo}</h4>
             <p>{course.description}</p>

@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
 import {
+  findAllByTestId,
   findByTestId,
   fireEvent,
   render,
@@ -9,7 +10,7 @@ import ProfileSocials from '../ProfileSocials';
 import { assert } from 'console';
 
 it('verifies social links are present in the live version', async () => {
-  const { findByText } = render(
+  const { findAllByTestId } = render(
     <ProfileSocials
       socials={{
         github: 'gitlink',
@@ -17,23 +18,22 @@ it('verifies social links are present in the live version', async () => {
       }}
     />
   );
-  const git = await findByText('gitlink', { exact: false });
-  const insta = await findByText('instalink', { exact: false });
-  expect(git).toBeInTheDocument();
-  expect(insta).toBeInTheDocument();
+  const links = await findAllByTestId('links');
+  expect(links[0].getAttribute('href')).toBe('gitlink');
+  expect(links[1].getAttribute('href')).toBe('instalink');
 });
 
 it('tests socials case: not editing and at least one social exists', async () => {
   const { findByTestId } = render(
     <ProfileSocials
+      isEditable={true}
       socials={{
         github: 'gitlink',
       }}
-      isEditable={true}
       // socialsEditing={false}
     />
   );
-  const exists = await findByTestId('not-editing-at-least-one-social-exists');
+  const exists = await findByTestId('socials');
   expect(exists).toBeInTheDocument();
 });
 
@@ -61,7 +61,7 @@ it('edits the github link', async () => {
       setSocials={mockSet}
     />
   );
-  const editgit = await findByTestId('edit-guthub');
+  const editgit = await findByTestId('edit-github');
   fireEvent.change(editgit, { target: { value: 'anotherGitLink' } });
   expect(mockSet).toBeCalledTimes(1);
 });

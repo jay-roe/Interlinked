@@ -42,10 +42,7 @@ export default function ProfileSocials({
         {!socialsEditing &&
           socials &&
           Object.keys(socials).some((social) => socials[social].length > 0) && (
-            <SocialIconGroup
-              socials={socials}
-              data-testid="not-editing-at-least-one-social-exists"
-            />
+            <SocialIconGroup socials={socials} />
           )}
 
         {/*If you're not editing AND ALL socials are empty, show "No socials given" */}

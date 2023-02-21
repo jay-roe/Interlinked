@@ -10,13 +10,8 @@ import ProfileCourses from '../ProfileCourses';
 it('renders live profile courses', async () => {
   const { findByTestId } = render(
     <ProfileCourses
-      isEditable={false}
+      // isEditable={false}
       courses={[
-        {
-          title: 'COURSE',
-          courseNo: '123',
-          description: 'very descriptive ;)',
-        },
         {
           title: 'Ride a horse on a carousell',
           courseNo: 'neigh, whinney',
@@ -54,6 +49,7 @@ it('tests filling input fields for adding/editing a course', async () => {
   const { findByTestId } = render(
     <ProfileCourses
       isEditable={true}
+      coursesEditing={[true]}
       courses={[
         {
           title: 'Ride a horse on a carousell',
@@ -72,12 +68,12 @@ it('tests filling input fields for adding/editing a course', async () => {
   await waitFor(() => expect(mockSet).toBeCalledTimes(1));
 
   fireEvent.change(couNum, { target: { value: '*unicorn sounds*' } });
-  await waitFor(() => expect(mockSet).toBeCalledTimes(1));
+  await waitFor(() => expect(mockSet).toBeCalledTimes(2));
 
   fireEvent.change(couDesc, {
     target: { value: "It's like a horse, but with a horn on its head" },
   });
-  await waitFor(() => expect(mockSet).toBeCalledTimes(1));
+  await waitFor(() => expect(mockSet).toBeCalledTimes(3));
 });
 
 it('tests the courses edit button', async () => {

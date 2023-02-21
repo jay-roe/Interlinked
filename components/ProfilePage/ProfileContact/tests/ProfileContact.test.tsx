@@ -30,6 +30,7 @@ it('tests changing email/phone fields', async () => {
       phone="123-456-7890"
       setEmail={mockSetEmail}
       setPhone={mockSetPhone}
+      setContactEditing={mockConfirm}
     />
   );
 
@@ -43,15 +44,15 @@ it('tests changing email/phone fields', async () => {
   await waitFor(() => expect(mockSetPhone).toBeCalledTimes(1));
 
   fireEvent.click(confirmButton); //this button has no functionality so the test is left out for now
-  // await waitFor(() => expect(mockConfirm).toBeCalled);
+  await waitFor(() => expect(mockConfirm).toBeCalled);
 });
 
-it('tests the edit button', async () => {
+it('tests the profile contact edit button', async () => {
   const mockClick = jest.fn();
   const { findByTestId } = render(
     <ProfileContact
       isEditable={true}
-      contactEditing={true}
+      // contactEditing={true}
       email="test@test.com"
       phone="123-456-7890"
       setContactEditing={mockClick}
