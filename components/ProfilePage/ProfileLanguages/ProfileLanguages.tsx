@@ -92,7 +92,7 @@ export default function ProfileLanguages({
                         {languages[index].proficiency &&
                           ' (' + languages[index].proficiency + ')'}
                       </div>
-                      <div className="absolute -top-1 -right-10 items-center">
+                      <div className="absolute -top-1 -right-52 items-center">
                         <DeleteButton
                           data-testid="lang-hovering-delete"
                           size={18}
@@ -108,7 +108,7 @@ export default function ProfileLanguages({
                           onMouseOver={(e) => {
                             e.preventDefault();
                             setLanguagesHovering((langhover) =>
-                              langhover.map((lang, i) =>
+                              langhover.map((_, i) =>
                                 index === i ? true : false
                               )
                             );
@@ -118,7 +118,7 @@ export default function ProfileLanguages({
                           onMouseOver={(e) => {
                             e.preventDefault();
                             setLanguagesHovering((langhover) =>
-                              langhover.map((lang, i) =>
+                              langhover.map((_, i) =>
                                 index === i ? true : false
                               )
                             );
@@ -130,13 +130,45 @@ export default function ProfileLanguages({
                               return tempArr;
                             })
                           }
+                          name="proficiency"
+                          id="proficiency-select"
                           className="m-2 inline-block min-h-[30px] appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                         >
-                          <option value="1">Elementary</option>
-                          <option value="2">Limited working</option>
-                          <option value="3">Professional working</option>
-                          <option value="4">Full professional</option>
-                          <option value="5">Native</option>
+                          {languages[index].proficiency === '1' ? (
+                            <option value="1" selected>
+                              Elementary
+                            </option>
+                          ) : (
+                            <option value="1">Elementary</option>
+                          )}
+                          {languages[index].proficiency === '2' ? (
+                            <option value="2" selected>
+                              Limited working
+                            </option>
+                          ) : (
+                            <option value="2">Limited working</option>
+                          )}
+                          {languages[index].proficiency === '3' ? (
+                            <option value="3" selected>
+                              Professional working
+                            </option>
+                          ) : (
+                            <option value="3">Professional working</option>
+                          )}
+                          {languages[index].proficiency === '4' ? (
+                            <option value="4" selected>
+                              Full professional
+                            </option>
+                          ) : (
+                            <option value="4">Full professional</option>
+                          )}
+                          {languages[index].proficiency === '5' ? (
+                            <option value="5" selected>
+                              Native
+                            </option>
+                          ) : (
+                            <option value="5">Native</option>
+                          )}
                         </select>
                       </div>
                     </div>
@@ -168,7 +200,9 @@ export default function ProfileLanguages({
         id="newLanguage"
         data-testid="new-lang-input"
         value={newLanguage.title}
-        onChange={(e) => setNewLanguage({ title: e.target.value })}
+        onChange={(e) =>
+          setNewLanguage({ title: e.target.value, proficiency: '1' })
+        }
       />
       <Button
         className="inline"
@@ -184,71 +218,4 @@ export default function ProfileLanguages({
       </Button>
     </div>
   );
-}
-
-{
-  /* {isEditable && (
-        <EditButton
-          className="inline"
-          onClick={() => setLanguageEditing((curr) => !curr)}
-        />
-      )}
-
-      {!languageEditing && isEditable && (
-        <ul>
-          {languages.map((lang, index) => (
-            <li key={index}>
-              {lang.slice(0, lang.length - 1)}
-              {lang.slice(-1) === '1' && ' - Elementary '}
-              {lang.slice(-1) === '2' && ' - Limited working '}
-              {lang.slice(-1) === '3' && ' - Professional working '}
-              {lang.slice(-1) === '4' && ' - Full professional '}
-              {lang.slice(-1) === '5' && ' - Native '}
-              proficiency
-            </li>
-          ))}
-        </ul>
-      )}
-
-      <div className="flex items-center">
-        {languageEditing && (
-          <>
-            <ul>
-              {languages.map((lang, index) => (
-                <li key={index} className="flex items-center">
-                  <Input
-                    className=""
-                    name="langauge"
-                    value={lang.slice(0, lang.length - 1)}
-                    onChange={(e) => updateLanguage(e.target.value, index)}
-                  />
-                  <div>
-                    <select
-                      onChange={(e) => changeProficiency(e.target.value, index)}
-                      value={lang.slice(-1)}
-                      className="m-2 inline-block min-h-[30px] appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-                    >
-                      <option value="1">Elementary</option>
-                      <option value="2">Limited working</option>
-                      <option value="3">Professional working</option>
-                      <option value="4">Full professional</option>
-                      <option value="5">Native</option>
-                    </select>
-                  </div>
-                  <div>
-                    <DeleteButton onClick={() => deleteLanguage(index)} />
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </>
-        )}
-      </div>
-
-      {languageEditing && (
-        <div className="mb-5">
-          <br />
-          <Button onClick={() => addStringToArray()}>Add Language</Button>
-        </div>
-      )} */
 }
