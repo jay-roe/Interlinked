@@ -36,9 +36,7 @@ import {
 
 export default function EditProfile() {
   const router = useRouter();
-
   const { currentUser, authUser, deleteAccount, refresh } = useAuth();
-
   const [isModalShow, setIsModalShow] = useState(false);
 
   // Profile component states
@@ -59,28 +57,31 @@ export default function EditProfile() {
     return () => URL.revokeObjectURL(objectUrl);
   }, [profilePicture]);
 
+  // Heading component states
   const [name, setName] = useState<string>(currentUser?.name || '');
   const [nameEditing, setNameEditing] = useState<boolean>(false);
 
   const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+
+  // Language component states
   const [languages, setLanguage] = useState<string[]>(
     currentUser?.languages || []
   );
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
-  //Socials component states
+  // Socials component states
   const [socials, setSocials] = useState<User['socials']>(
     currentUser?.socials || ({ github: '', instagram: '' } as User['socials'])
   );
   const [socailsEditing, setSocialsEditing] = useState<boolean>(false);
 
-  //Contact component states
+  // Contact component states
   const [email, setEmail] = useState<string>(currentUser?.email);
   const [phone, setPhone] = useState<string>(currentUser?.phone || '');
   const [contactEditing, setContactEditing] = useState<boolean>(false);
 
-  //Education component states
+  // Education component states
   const [education, setEducation] = useState<User['education']>(
     currentUser?.education
   );
@@ -96,38 +97,39 @@ export default function EditProfile() {
     boolean[]
   >(currentUser?.codingLanguages.map(() => false));
   const [newCodingLanguage, setNewCodingLanguage] = useState<string>('');
-  //Award component states
+
+  // Award component states
   const [awards, setAwards] = useState<User['awards']>(currentUser?.awards);
   const [awardsEditing, setAwardsEditing] = useState<boolean[]>(
-    awards.map(() => false)
+    currentUser?.awards.map(() => false)
   );
 
-  //Skills component states
+  // Skills component states
   const [skills, setSkills] = useState<User['skills']>(currentUser?.skills);
   const [skillsEditing, setSkillsEditing] = useState<boolean[]>(
-    skills.map(() => false)
+    currentUser?.skills.map(() => false)
   );
 
-  //Projects component states
+  // Projects component states
   const [projects, setProjects] = useState<User['projects']>(
     currentUser?.projects
   );
   const [projectsEditing, setProjectsEditing] = useState<boolean[]>(
-    projects.map(() => false)
+    currentUser?.projects.map(() => false)
   );
 
-  //Experience component states
+  // Experience component states
   const [experience, setExperience] = useState<User['experience']>(
     currentUser?.experience
   );
   const [experienceEditing, setExperienceEditing] = useState<boolean[]>(
-    experience.map(() => false)
+    currentUser?.experience.map(() => false)
   );
 
-  //Courses component states
+  // Courses component states
   const [courses, setCourses] = useState<User['courses']>(currentUser?.courses);
   const [coursesEditing, setCoursesEditing] = useState<boolean[]>(
-    courses.map(() => false)
+    currentUser?.courses.map(() => false)
   );
 
   // User not logged in
@@ -293,8 +295,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation
-          education={education}
           isEditable
+          education={education}
           educationEditing={educationEditing}
           setEducation={setEducation}
           setEducationEditing={setEducationEditing}
@@ -302,8 +304,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses
-          courses={courses}
           isEditable
+          courses={courses}
           coursesEditing={coursesEditing}
           setCoursesEditing={setCoursesEditing}
           setCourses={setCourses}
@@ -311,8 +313,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
         <ProfileExperience
-          experience={experience}
           isEditable
+          experience={experience}
           experienceEditing={experienceEditing}
           setExperience={setExperience}
           setExperienceEditing={setExperienceEditing}
@@ -320,8 +322,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
         <ProfileProjects
-          projects={projects}
           isEditable
+          projects={projects}
           projectsEditing={projectsEditing}
           setProjectsEditing={setProjectsEditing}
           setProjects={setProjects}
@@ -329,8 +331,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Skills 💪</h2>
         <ProfileSkills
-          skills={skills}
           isEditable
+          skills={skills}
           skillsEditing={skillsEditing}
           setSkills={setSkills}
           setSkillsEditing={setSkillsEditing}
@@ -338,8 +340,8 @@ export default function EditProfile() {
 
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
         <ProfileAwards
-          awards={awards}
           isEditable
+          awards={awards}
           awardsEditing={awardsEditing}
           setAwards={setAwards}
           setAwardsEditing={setAwardsEditing}
