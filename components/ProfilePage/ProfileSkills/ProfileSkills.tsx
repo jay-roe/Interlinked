@@ -25,19 +25,19 @@ export default function ProfileSkills({
     return (
       <ul className="inline-flex">
         {skills.map((skill, index) => (
-          <li
+          <p
             key={index}
             className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
           >
             {skill}
-          </li>
+          </p>
         ))}
       </ul>
     );
   }
   // editable version
   return (
-    <div>
+    <div className="mb-3">
       {skills.map((skill, index) => (
         <form
           action=""
@@ -73,7 +73,9 @@ export default function ProfileSkills({
               />
             </div>
           ) : (
-            <li key={index}>{skill}</li>
+            <p className="self-center text-xl" key={index}>
+              {skill}
+            </p>
           )}
           {isEditable && (
             <div className="flex items-center">

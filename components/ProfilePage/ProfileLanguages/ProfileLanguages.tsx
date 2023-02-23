@@ -30,8 +30,8 @@ export default function ProfileLanguages({
   // every language string ends with a number from 1-5 that represents proficiency
   if (!isEditable) {
     return (
-      <ul className="inline-flex" data-testid="live-lang-profile">
-        {languages.map((lang, index) => (
+      <ul className="mb-3 inline-flex" data-testid="live-lang-profile">
+        {languages?.map((lang, index) => (
           <li
             key={index}
             className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
@@ -46,8 +46,8 @@ export default function ProfileLanguages({
   }
 
   return (
-    <div>
-      {languages.map((lang, index) => (
+    <div className="mb-3">
+      {languages?.map((lang, index) => (
         <div key={index}>
           <ul className="inline-flex">
             <li>

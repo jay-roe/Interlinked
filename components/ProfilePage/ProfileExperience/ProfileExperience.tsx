@@ -43,7 +43,7 @@ export default function ProfileExperience({
     );
   }
   return (
-    <div>
+    <div className="mb-3">
       {experience.map((exp, index) => (
         <form
           key={index}

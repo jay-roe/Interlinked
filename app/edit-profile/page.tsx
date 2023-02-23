@@ -69,10 +69,10 @@ export default function EditProfile() {
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
 
   const [languages, setLanguages] = useState<User['languages']>(
-    currentUser?.languages
+    currentUser?.languages || []
   );
   const [languagesHovering, setLanguagesHovering] = useState<boolean[]>(
-    currentUser?.languages.map(() => false)
+    currentUser?.languages?.map(() => false)
   );
   const [newLanguage, setNewLanguage] = useState<Language>({ title: '' });
 
