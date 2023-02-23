@@ -18,12 +18,17 @@ const PostBody = ({
       </div>
       <div className="leading-normal">{post?.text_content || ''}</div>
       {post?.image_content ? (
-        <img
-          data-testid="test-image"
-          src={post?.image_content[0]}
-          className="max-w-64 max-h-64 object-contain"
-          alt="..."
-        />
+        post.image_content.map((image, index) => {
+          return (
+            <img
+              data-testid="test-image"
+              key={index}
+              src={image}
+              className="max-w-64 max-h-64 object-contain"
+              alt="..."
+            />
+          );
+        })
       ) : (
         <></>
       )}{' '}
