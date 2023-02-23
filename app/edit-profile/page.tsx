@@ -72,7 +72,7 @@ export default function EditProfile() {
     currentUser?.languages
   );
   const [languagesHovering, setLanguagesHovering] = useState<boolean[]>(
-    currentUser?.languages.map(() => false)
+    currentUser?.languages?.map(() => false)
   );
   const [newLanguage, setNewLanguage] = useState<Language>({ title: '' });
 
