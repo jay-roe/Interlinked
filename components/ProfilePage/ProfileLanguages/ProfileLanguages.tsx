@@ -66,7 +66,7 @@ export default function ProfileLanguages({
                   // On hover, reveal delete button and proficiency options
                   <div>
                     <div
-                      data-testid="lang-hovering-parent"
+                      data-testid={`lang-hovering-parent-${index}`}
                       className="relative"
                       onMouseLeave={(e) => {
                         e.preventDefault();
@@ -78,7 +78,7 @@ export default function ProfileLanguages({
                       }}
                     >
                       <div
-                        data-testid="lang-hovering-lang-name"
+                        data-testid={`lang-hovering-lang-name-${index}`}
                         onMouseOver={(e) => {
                           e.preventDefault();
                           setLanguagesHovering((langhover) =>
@@ -94,7 +94,7 @@ export default function ProfileLanguages({
                       </div>
                       <div className="absolute -top-1 -right-52 items-center">
                         <DeleteButton
-                          data-testid="lang-hovering-delete"
+                          data-testid={`lang-hovering-delete-${index}`}
                           size={18}
                           onClick={(e) => {
                             e.preventDefault();
@@ -175,7 +175,7 @@ export default function ProfileLanguages({
                   </div>
                 ) : (
                   <div
-                    data-testid="lang-not-hovering"
+                    data-testid={`lang-not-hovering-${index}`}
                     onMouseOver={(e) => {
                       e.preventDefault();
                       setLanguagesHovering((langhover) =>

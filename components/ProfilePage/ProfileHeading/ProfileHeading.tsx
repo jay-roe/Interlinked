@@ -125,7 +125,7 @@ export default function ProfileHeading({
             />
           ) : (
             // live bio
-            <p>{bio || 'No bio given.'}</p>
+            <p data-testid='profile-bio'>{bio || 'No bio given.'}</p>
           )}
           {isEditable && (
             <EditButton
