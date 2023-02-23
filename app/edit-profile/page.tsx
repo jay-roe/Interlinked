@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 
 import type { User } from '@/types/User';
+import type { Language } from '@/types/User';
 
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
@@ -65,10 +66,15 @@ export default function EditProfile() {
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
   // Language component states
-  const [languages, setLanguage] = useState<string[]>(
-    currentUser?.languages || []
-  );
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
+
+  const [languages, setLanguages] = useState<User['languages']>(
+    currentUser?.languages
+  );
+  const [languagesHovering, setLanguagesHovering] = useState<boolean[]>(
+    currentUser?.languages.map(() => false)
+  );
+  const [newLanguage, setNewLanguage] = useState<Language>({ title: '' });
 
   // Socials component states
   const [socials, setSocials] = useState<User['socials']>(
@@ -276,9 +282,11 @@ export default function EditProfile() {
         <ProfileLanguages
           isEditable
           languages={languages}
-          languageEditing={languageEditing}
-          setLanguage={setLanguage}
-          setLanguageEditing={setLanguageEditing}
+          languagesHovering={languagesHovering}
+          newLanguage={newLanguage}
+          setLanguages={setLanguages}
+          setLanguagesHovering={setLanguagesHovering}
+          setNewLanguage={setNewLanguage}
         />
 
         {/* TODO: change coding languages picture */}

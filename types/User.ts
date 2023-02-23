@@ -10,7 +10,7 @@ export type User = {
   education?: Education[];
   email: string;
   experience?: Experience[];
-  languages?: string[];
+  languages?: Language[];
   name: string;
   phone?: string;
   profilePicture?: string;
@@ -54,6 +54,11 @@ type Experience = {
   image?: string;
   startDate: Timestamp;
   endDate?: Timestamp;
+};
+
+export type Language = {
+  title: string;
+  proficiency?: string;
 };
 
 type Project = {
