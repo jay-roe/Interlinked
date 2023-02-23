@@ -25,7 +25,7 @@ export default function ProfileCodingLanguages({
   // Live version of Coding Languages component
   if (!isEditable) {
     return (
-      <ul className="inline-flex" data-testid="live-profile">
+      <ul className="mb-3 inline-flex" data-testid="live-profile">
         {codingLanguages.map((cl, index) => (
           <li
             key={index}
@@ -40,7 +40,7 @@ export default function ProfileCodingLanguages({
 
   // Editable version of Coding languages component
   return (
-    <div>
+    <div className="mb-3">
       {codingLanguages.map((cl, index) => (
         <div key={index}>
           <ul className="inline-flex">

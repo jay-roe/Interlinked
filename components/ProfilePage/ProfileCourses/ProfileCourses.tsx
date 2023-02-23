@@ -37,7 +37,7 @@ export default function ProfileCourses({
   }
   // editable version
   return (
-    <div>
+    <div className="mb-3">
       {courses.map((course, index) => (
         <form
           key={index}

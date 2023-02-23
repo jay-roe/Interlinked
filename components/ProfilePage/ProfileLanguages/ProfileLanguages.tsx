@@ -30,7 +30,7 @@ export default function ProfileLanguages({
   // every language string ends with a number from 1-5 that represents proficiency
   if (!isEditable) {
     return (
-      <ul className="inline-flex" data-testid="live-lang-profile">
+      <ul className="mb-3 inline-flex" data-testid="live-lang-profile">
         {languages?.map((lang, index) => (
           <li
             key={index}
@@ -46,7 +46,7 @@ export default function ProfileLanguages({
   }
 
   return (
-    <div>
+    <div className="mb-3">
       {languages?.map((lang, index) => (
         <div key={index}>
           <ul className="inline-flex">

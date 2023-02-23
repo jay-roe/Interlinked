@@ -78,7 +78,7 @@ export default function ProfileProjects({
     );
   }
   return (
-    <div>
+    <div className="mb-3">
       {projects.map((project, index) => (
         <form
           action=""
