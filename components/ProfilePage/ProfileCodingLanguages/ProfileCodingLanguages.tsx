@@ -60,7 +60,7 @@ export default function ProfileCodingLanguages({
                   // On hover delete button
                   <div>
                     <div
-                      data-testid="code-lang-hovering-parent"
+                      data-testid={`code-lang-hovering-parent-${index}`}
                       className="relative"
                       onMouseLeave={(e) => {
                         e.preventDefault();
@@ -70,7 +70,7 @@ export default function ProfileCodingLanguages({
                       }}
                     >
                       <div
-                        data-testid="code-lang-hovering-code-lang-name"
+                        data-testid={`code-lang-hovering-code-lang-name-${index}`}
                         onMouseOver={(e) => {
                           e.preventDefault();
                           setCodingLanguagesHovering((clhover) =>
@@ -82,7 +82,7 @@ export default function ProfileCodingLanguages({
                       </div>
                       <div className="absolute -top-1 -right-8 items-center">
                         <DeleteButton
-                          data-testid="code-lang-hovering-delete"
+                          data-testid={`code-lang-hovering-delete-${index}`}
                           size={18}
                           onClick={(e) => {
                             e.preventDefault();
@@ -107,7 +107,7 @@ export default function ProfileCodingLanguages({
                   </div>
                 ) : (
                   <div
-                    data-testid="code-lang-not-hovering"
+                    data-testid={`code-lang-not-hovering-${index}`}
                     onMouseOver={(e) => {
                       e.preventDefault();
                       setCodingLanguagesHovering((clhover) =>

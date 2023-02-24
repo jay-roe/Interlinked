@@ -64,6 +64,30 @@ describe('Full edit profile spec', () => {
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
   });
 
+  it('can edit coding languages', () => {
+    cy.visit('/edit-profile');
+
+    let newCodingLang1 = 'C++';
+    let newCodingLang2 = 'Assembly';
+
+    cy.get('[data-testid=new-code-lang-input').type(newCodingLang1);
+    cy.get('[data-testid=new-code-lang-button').click();
+
+    cy.get('[data-testid=new-code-lang-input').type(newCodingLang2);
+    cy.get('[data-testid=new-code-lang-button').click();
+
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.on('window:alert', () => {});
+
+    cy.get('[data-testid=live-profile]').should('contain', newCodingLang1);
+    cy.get('[data-testid=live-profile]').should('contain', newCodingLang2);
+  });
+
   after(() => {
     // Start reset name
     cy.visit('/edit-profile');
@@ -114,7 +138,7 @@ describe('Full edit profile spec', () => {
       .trigger('mouseover')
       .get('[data-testid=lang-hovering-delete-0]')
       .click();
-      
+
     cy.get('[data-testid=update-account-button]').click();
 
     cy.on('window:confirm', () => {
@@ -123,5 +147,33 @@ describe('Full edit profile spec', () => {
 
     cy.on('window:alert', () => {});
     // End reset languages
+
+    // Start reset coding languages
+    cy.visit('/edit-profile');
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.on('window:alert', () => {});
+    // End reset coding languages
+
+    // LOGOUT
+    cy.logout();
   });
 });
