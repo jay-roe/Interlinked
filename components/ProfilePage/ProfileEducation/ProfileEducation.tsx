@@ -27,7 +27,7 @@ export default function ProfileEducation({
     return (
       <CardStack data-testid="education-stack">
         {education.map((ed, index) => (
-          <div key={index}>
+          <div data-testid={`live-edu-${index}`} key={index}>
             <h3 className="text-xl font-semibold">{ed.program}</h3>
             {ed.image && <img src={ed.image} alt={ed.name} />}
             <h3>{ed.name}</h3>
@@ -56,7 +56,7 @@ export default function ProfileEducation({
     <div className="mb-3" data-testid="editable-edu">
       {education.map((ed, index) => (
         <form
-          data-testid={`submit-education-${index}`}
+          data-testid="submit-education"
           action=""
           key={index}
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
@@ -130,6 +130,7 @@ export default function ProfileEducation({
                   <InputField
                     type="date"
                     name="startdate"
+                    data-testid={`change-edu-startdate-${index}`}
                     value={ed.startDate
                       ?.toDate()
                       .toISOString()
@@ -154,6 +155,7 @@ export default function ProfileEducation({
                   <InputField
                     type="date"
                     name="enddate"
+                    data-testid={`change-edu-enddate-${index}`}
                     value={ed.endDate?.toDate().toISOString().substring(0, 10)}
                     onChange={(e) =>
                       setEducation((edus) => {
@@ -206,7 +208,11 @@ export default function ProfileEducation({
           <div className="flex items-center">
             {/* External edit education button */}
             {educationEditing && educationEditing[index] ? (
-              <Button className="mr-2" type="submit">
+              <Button
+                className="mr-2"
+                type="submit"
+                data-testid={`save-education-${index}`}
+              >
                 Save Education
               </Button>
             ) : (
