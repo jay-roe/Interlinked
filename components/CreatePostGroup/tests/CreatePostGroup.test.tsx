@@ -1,6 +1,6 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import CreatePostGroup from '../CreatePostGroup';
 
 jest.mock('contexts/AuthContext', () => ({
@@ -27,13 +27,17 @@ jest.mock('firebase/firestore', () => ({
       withConverter: jest.fn(),
     };
   },
+  serverTimestamp: () => {
+    return 5;
+  },
 }));
 
 global.URL.createObjectURL = jest.fn();
 jest.spyOn(window, 'confirm').mockImplementation(() => {
   return true;
 });
-jest.spyOn(window, 'alert').mockImplementation(() => {});
+const mockAlert = jest.fn().mockImplementation(() => {});
+jest.spyOn(window, 'alert').mockImplementation(mockAlert);
 
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 
@@ -53,18 +57,23 @@ it('can post', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
       currentUser: {},
+      authUser: {
+        uid: 'myuid',
+      },
     };
   });
   const { findByTestId } = render(<CreatePostGroup />);
 
   const contentDiv = await findByTestId('post-content');
-  fireEvent.change(contentDiv, { target: { value: 'vjiegrwviugr' } });
+  fireEvent.change(contentDiv, { target: { value: 'post' } });
 
   expect(contentDiv).toBeInTheDocument();
 
   const postButton = await findByTestId('post-button');
+
   fireEvent.click(postButton);
 
+  await waitFor(() => expect(mockAlert).toBeCalled);
   expect(contentDiv).toHaveValue('');
 });
 

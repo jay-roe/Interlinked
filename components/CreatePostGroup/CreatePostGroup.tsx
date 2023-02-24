@@ -55,6 +55,7 @@ export default function CreatePostGroup() {
     });
 
     setTrigger((trig) => trig + 1);
+    console.log('HI');
     alert('Posted!');
   };
 
@@ -87,7 +88,7 @@ export default function CreatePostGroup() {
 
   async function createPost(text: string) {
     try {
-      if (image != null) {
+      if (image.length != 0) {
         setText(text);
         image.forEach((img) => {
           upLoadImage(img, text);
