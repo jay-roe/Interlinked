@@ -51,7 +51,7 @@ it('tests hover state change from true to false upon leaving area', async () => 
       newLanguage={{ title: 'français' }}
     />
   );
-  const LangHovering = await findByTestId('lang-hovering-parent');
+  const LangHovering = await findByTestId('lang-hovering-parent-0');
   fireEvent.mouseLeave(LangHovering);
   await waitFor(() => expect(mockSetHovering).toBeCalled());
 });
@@ -67,7 +67,7 @@ it('tests hover state stays true on continuous hover on name', async () => {
       newLanguage={{ title: 'français' }}
     />
   );
-  const LangHoveringName = await findByTestId('lang-hovering-lang-name');
+  const LangHoveringName = await findByTestId('lang-hovering-lang-name-0');
   fireEvent.mouseOver(LangHoveringName);
   await waitFor(() => expect(mockSetHovering).toBeCalled());
 });
@@ -83,7 +83,7 @@ it('tests hover state stays true on continuous hover on delete', async () => {
       newLanguage={{ title: 'français' }}
     />
   );
-  const LangHoveringDelete = await findByTestId('lang-hovering-delete');
+  const LangHoveringDelete = await findByTestId('lang-hovering-delete-0');
   fireEvent.mouseOver(LangHoveringDelete);
   await waitFor(() => expect(mockSetHovering).toBeCalled());
 });
@@ -100,7 +100,7 @@ it('tests delete  lang button', async () => {
       newLanguage={{ title: 'français' }}
     />
   );
-  const LangHoveringDelete = await findByTestId('lang-hovering-delete');
+  const LangHoveringDelete = await findByTestId('lang-hovering-delete-0');
   fireEvent.click(LangHoveringDelete);
   await waitFor(() => expect(mockDelete).toBeCalled);
 });
@@ -116,7 +116,7 @@ it('tests hover state change from false', async () => {
       newLanguage={{ title: 'français' }}
     />
   );
-  const LangNotHovering = await findByTestId('lang-not-hovering');
+  const LangNotHovering = await findByTestId('lang-not-hovering-0');
   fireEvent.mouseOver(LangNotHovering);
   await waitFor(() => expect(mockSetHovering).toBeCalled());
 });
