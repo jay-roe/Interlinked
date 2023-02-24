@@ -26,7 +26,7 @@ export default function ProfileCourses({
     return (
       <CardStack height={10}>
         {courses.map((course, index) => (
-          <div key={index} data-testid="live-courses">
+          <div key={index} data-testid={`live-courses-${index}`}>
             <h3>{course.title}</h3>
             <h4>{course.courseNo}</h4>
             <p>{course.description}</p>
@@ -57,7 +57,7 @@ export default function ProfileCourses({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="course-title"
+                data-testid={`course-title-${index}`}
                 type="text"
                 name="skill"
                 id="profileSkill"
@@ -73,20 +73,20 @@ export default function ProfileCourses({
               />
               <p>Course Number</p>
               <TextArea
-                data-testid="course-number"
+                data-testid={`course-number-${index}`}
                 name="info"
                 value={course.courseNo}
                 onChange={(e) =>
                   setCourses((c) => {
                     let tempArr = [...c];
-                    tempArr[index].description = e.target.value;
+                    tempArr[index].courseNo = e.target.value;
                     return tempArr;
                   })
                 }
               />
               <p>Description</p>
               <TextArea
-                data-testid="course-desc"
+                data-testid={`course-desc-${index}`}
                 name="info"
                 value={course.description}
                 onChange={(e) =>
@@ -111,14 +111,14 @@ export default function ProfileCourses({
               {coursesEditing && coursesEditing[index] ? (
                 <Button
                   className="mr-2"
-                  data-testid="save-course-button"
+                  data-testid={`save-course-button-${index}`}
                   type="submit"
                 >
                   Save Course
                 </Button>
               ) : (
                 <EditButton
-                  data-testid="edit-course-button"
+                  data-testid={`edit-course-button-${index}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setCoursesEditing((cedits) =>
@@ -129,7 +129,7 @@ export default function ProfileCourses({
               )}
               {/* External delete course button */}
               <DeleteButton
-                data-testid="delete-course-button"
+                data-testid={`delete-course-button-${index}`}
                 onClick={(e) => {
                   e.preventDefault();
                   setCourses((c) => c.filter((_, i) => index !== i));

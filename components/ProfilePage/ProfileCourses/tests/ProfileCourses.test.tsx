@@ -20,7 +20,7 @@ it('renders live profile courses', async () => {
       ]}
     />
   );
-  const liveCourses = await findByTestId('live-courses');
+  const liveCourses = await findByTestId('live-courses-0');
   expect(liveCourses).toBeInTheDocument();
 });
 
@@ -60,9 +60,9 @@ it('tests filling input fields for adding/editing a course', async () => {
       setCourses={mockSet}
     />
   );
-  const couTitle = await findByTestId('course-title');
-  const couNum = await findByTestId('course-number');
-  const couDesc = await findByTestId('course-desc');
+  const couTitle = await findByTestId('course-title-0');
+  const couNum = await findByTestId('course-number-0');
+  const couDesc = await findByTestId('course-desc-0');
 
   fireEvent.change(couTitle, { target: { value: 'Ride a unicorn' } });
   await waitFor(() => expect(mockSet).toBeCalledTimes(1));
@@ -91,7 +91,7 @@ it('tests the courses edit button', async () => {
       setCoursesEditing={mockSubmit}
     />
   );
-  const couButton = await findByTestId('edit-course-button');
+  const couButton = await findByTestId('edit-course-button-0');
   fireEvent.click(couButton);
   await waitFor(() => expect(mockSubmit).toBeCalled);
 });
@@ -112,7 +112,7 @@ it('tests the courses delete button', async () => {
       setCoursesEditing={mockSubmit}
     />
   );
-  const couButton = await findByTestId('delete-course-button');
+  const couButton = await findByTestId('delete-course-button-0');
   fireEvent.click(couButton);
   await waitFor(() => expect(mockSubmit).toBeCalledTimes(2));
 });

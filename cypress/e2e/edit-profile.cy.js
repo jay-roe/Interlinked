@@ -126,6 +126,35 @@ describe('Full edit profile spec', () => {
       .should('contain', eduDescription);
   });
 
+  it('can add new course', () => {
+    cy.visit('/edit-profile');
+
+    let courseTitle = 'Underwater basket weaving VI';
+    let courseNumber = '506';
+    let courseDesc = 'You know what this is.';
+
+    cy.get('[data-testid=add-course-button').click();
+
+    cy.get('[data-testid=course-title-0').type(courseTitle);
+    cy.get('[data-testid=course-number-0').type(courseNumber);
+    cy.get('[data-testid=course-desc-0').type(courseDesc);
+
+    cy.get('[data-testid=save-course-button-0]').click();
+
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.on('window:alert', () => {});
+
+    cy.get('[data-testid=live-courses-0]')
+      .should('contain', courseTitle)
+      .should('contain', courseNumber)
+      .should('contain', courseDesc);
+  });
+
   after(() => {
     cy.visit('/edit-profile');
 
@@ -179,6 +208,10 @@ describe('Full edit profile spec', () => {
     cy.get('[data-testid=delete-edu-ext-0]').click();
     // End reset edu
 
+    // Start reset courses
+    cy.get('[data-testid=delete-course-button-0]').click();
+    // End reset courses
+
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
 
@@ -188,6 +221,7 @@ describe('Full edit profile spec', () => {
 
     cy.on('window:alert', () => {});
 
+    cy.get('[data-testid=profile-title]').should('exist');
     cy.logout();
   });
 });
