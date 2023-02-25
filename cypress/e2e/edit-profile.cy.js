@@ -155,6 +155,44 @@ describe('Full edit profile spec', () => {
       .should('contain', courseDesc);
   });
 
+  it('can add new experience', () => {
+    cy.visit('/edit-profile');
+
+    let expTitle = 'Sock trader';
+    let expLocation = 'Web3';
+    let expEmployer = 'Elon Musk';
+    let expStartDate = '2020-03-04';
+    let expEndDate = '2023-01-23';
+    let expDesc = 'Trading socks on the sock market. What else do you want to know.';
+
+    cy.get('[data-testid=exp-add-button').click();
+
+    cy.get('[data-testid=edit-exp-title-0').type(expTitle);
+    cy.get('[data-testid=edit-exp-location-0').type(expLocation);
+    cy.get('[data-testid=edit-exp-employer-0').type(expEmployer);
+    cy.get('[data-testid=edit-exp-startDate-0').type(expStartDate);
+    cy.get('[data-testid=edit-exp-endDate-0').type(expEndDate);
+    cy.get('[data-testid=edit-exp-description-0').type(expDesc);
+
+    cy.get('[data-testid=exp-save-btn-0]').click();
+
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.on('window:alert', () => {});
+
+    cy.get('[data-testid=live-exp-0]')
+      .should('contain', expTitle)
+      .should('contain', expLocation)
+      .should('contain', expEmployer)
+      .should('contain', '2020')
+      .should('contain', '2023')
+      .should('contain', expDesc);
+  });
+
   after(() => {
     cy.visit('/edit-profile');
 
@@ -211,6 +249,10 @@ describe('Full edit profile spec', () => {
     // Start reset courses
     cy.get('[data-testid=delete-course-button-0]').click();
     // End reset courses
+
+    // Start reset experience
+    cy.get('[data-testid=exp-delete-btn-0]').click();
+    // End reset experience
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();

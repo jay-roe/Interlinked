@@ -25,7 +25,7 @@ export default function ProfileExperience({
     return (
       <CardStack>
         {experience.map((exp, index) => (
-          <div key={index} data-testid="live-exp">
+          <div key={index} data-testid={`live-exp-${index}`}>
             {exp.image && <img src={exp.image} alt={exp.title} />}
             <h3>{exp.title}</h3>
             <h4>{exp.employer}</h4>
@@ -63,7 +63,7 @@ export default function ProfileExperience({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="edit-exp-title"
+                data-testid={`edit-exp-title-${index}`}
                 type="text"
                 name="title"
                 id="profileExperienceTitle"
@@ -81,7 +81,7 @@ export default function ProfileExperience({
                 Location <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="edit-exp-location"
+                data-testid={`edit-exp-location-${index}`}
                 name="location"
                 id="profileExperienceLocation"
                 value={exp.location}
@@ -98,7 +98,7 @@ export default function ProfileExperience({
                 employer <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="edit-exp-employer"
+                data-testid={`edit-exp-employer-${index}`}
                 type="text"
                 id="employer"
                 name="employer"
@@ -118,7 +118,7 @@ export default function ProfileExperience({
                     Start Date <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
-                    data-testid="edit-exp-startDate"
+                    data-testid={`edit-exp-startDate-${index}`}
                     type="date"
                     name="startdate"
                     value={exp.startDate
@@ -143,7 +143,7 @@ export default function ProfileExperience({
                 <div className="w-full">
                   <label>End Date</label>
                   <InputField
-                    data-testid="edit-exp-endDate"
+                    data-testid={`edit-exp-endDate-${index}`}
                     type="date"
                     name="enddate"
                     value={exp.endDate?.toDate().toISOString().substring(0, 10)}
@@ -162,7 +162,7 @@ export default function ProfileExperience({
               </div>
               <p>Description</p>
               <TextArea
-                data-testid="edit-exp-description"
+                data-testid={`edit-exp-description-${index}`}
                 name="info"
                 value={exp.description}
                 onChange={(e) =>
@@ -196,13 +196,13 @@ export default function ProfileExperience({
                 <Button
                   className="mr-2"
                   type="submit"
-                  data-testid="exp-save-button"
+                  data-testid={`exp-save-btn-${index}`}
                 >
                   Save Expererience
                 </Button>
               ) : (
                 <EditButton
-                  data-testid="exp-edit-button"
+                  data-testid={`exp-edit-btn-${index}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setExperienceEditing((exedits) =>
@@ -213,7 +213,7 @@ export default function ProfileExperience({
               )}
               {/* External delete education button */}
               <DeleteButton
-                data-testid="exp-delete-button"
+                data-testid={`exp-delete-btn-${index}`}
                 onClick={(e) => {
                   e.preventDefault();
                   setExperience((exs) => exs.filter((_, i) => index !== i));

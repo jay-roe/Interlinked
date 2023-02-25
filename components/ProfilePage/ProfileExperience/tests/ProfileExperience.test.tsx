@@ -56,7 +56,7 @@ it('renders the live version of profile experience', async () => {
       ]}
     />
   );
-  const exp = await findByTestId('live-exp');
+  const exp = await findByTestId('live-exp-0');
   expect(exp).toBeInTheDocument();
 });
 
@@ -81,13 +81,13 @@ it('edits an experience', async () => {
     />
   );
 
-  const title = await findByTestId('edit-exp-title');
-  const location = await findByTestId('edit-exp-location');
-  const employer = await findByTestId('edit-exp-employer');
-  const description = await findByTestId('edit-exp-description');
+  const title = await findByTestId('edit-exp-title-0');
+  const location = await findByTestId('edit-exp-location-0');
+  const employer = await findByTestId('edit-exp-employer-0');
+  const description = await findByTestId('edit-exp-description-0');
   // const image = await findByTestId("edit-exp-image");
-  const startDate = await findByTestId('edit-exp-startDate');
-  const endDate = await findByTestId('edit-exp-endDate');
+  const startDate = await findByTestId('edit-exp-startDate-0');
+  const endDate = await findByTestId('edit-exp-endDate-0');
 
   fireEvent.change(title, { target: { value: 'something different' } });
   fireEvent.change(location, { target: { value: 'something different' } });
@@ -143,7 +143,7 @@ it('tests the experience save button', async () => {
     />
   );
 
-  const saveButton = await findByTestId('exp-save-button');
+  const saveButton = await findByTestId('exp-save-btn-0');
   fireEvent.submit(saveButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -168,7 +168,7 @@ it('tests the experience edit button', async () => {
     />
   );
 
-  const editButton = await findByTestId('exp-edit-button');
+  const editButton = await findByTestId('exp-edit-btn-0');
   fireEvent.click(editButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -194,7 +194,7 @@ it('tests the experience delete button', async () => {
     />
   );
 
-  const deleteButton = await findByTestId('exp-delete-button');
+  const deleteButton = await findByTestId('exp-delete-btn-0');
   fireEvent.click(deleteButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(2));
 });
