@@ -34,7 +34,7 @@ jobs:
       - name: Run Next tests & test coverage
         run: |
           npm ci
-          npm run build --if-present
+          npm run build:instrumented --if-present
           npm run test:coverage
 
       - name: Run Frontend for Cypress
@@ -43,3 +43,7 @@ jobs:
 
       - name: Run e2e tests
         uses: cypress-io/github-action@v4
+
+      - name: Check Cypress coverage
+        run: |
+          npm run cy:coverage
