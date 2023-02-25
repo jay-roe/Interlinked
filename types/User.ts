@@ -1,4 +1,5 @@
 import type { Timestamp } from 'firebase/firestore';
+import type { Post } from '@/types/Post';
 
 export type User = {
   awards?: Award[];
@@ -22,6 +23,7 @@ export type User = {
     instagram?: string;
   };
   volunteering?: Experience[];
+  notifications?: Notifacation[];
 };
 
 type Award = {
@@ -80,4 +82,11 @@ type Recommendation = {
   title: string;
   description: string;
   recommender: User;
+};
+
+type Notifacation = {
+  notificationType: string; // post, comment, link, dm
+  linkedUser?: User;
+  post?: Post;
+  // dm?:  Dm;
 };
