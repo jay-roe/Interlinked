@@ -266,20 +266,16 @@ export default function ProfileProjects({
               <div className="flex gap-2">
                 {project.repoLink && (
                   <div>
-                    <a href={project.repoLink}>
-                      <Link href={project.repoLink}>
-                        <Button>View Repo</Button>
-                      </Link>
-                    </a>
+                    <Link href={project.repoLink}>
+                      <Button>View Repo</Button>
+                    </Link>
                   </div>
                 )}
                 {project.demoLink && (
                   <div>
-                    <a href={project.demoLink}>
-                      <Link href={project.demoLink}>
-                        <Button>View Demo</Button>
-                      </Link>
-                    </a>{' '}
+                    <Link href={project.demoLink}>
+                      <Button>View Demo</Button>
+                    </Link>
                   </div>
                 )}
               </div>

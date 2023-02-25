@@ -34,6 +34,8 @@ import {
   ref,
   uploadBytes,
 } from 'firebase/storage';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -138,6 +140,24 @@ export default function EditProfile() {
     currentUser?.courses.map(() => false)
   );
 
+  // Ceritifications component states
+  const [certifications, setCertifications] = useState<User['certifications']>(
+    currentUser?.certifications || []
+  );
+  const [certificationsEditing, setCertificationsEditing] = useState(
+    currentUser?.certifications
+      ? currentUser?.certifications.map(() => false)
+      : []
+  );
+
+  // Volunteering component states
+  const [volunteering, setVolunteering] = useState<User['volunteering']>(
+    currentUser?.volunteering
+  );
+  const [volunteeringEditing, setVolunteeringEditing] = useState(
+    currentUser?.volunteering.map(() => false)
+  );
+
   // User not logged in
   if (!currentUser || !authUser) {
     return (
@@ -170,6 +190,8 @@ export default function EditProfile() {
     projects: projects,
     experience: experience,
     courses: courses,
+    certifications: certifications.filter((_, i) => !certificationsEditing[i]),
+    volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
   };
 
   async function uploadProfilePicture() {
@@ -181,22 +203,6 @@ export default function EditProfile() {
     // Upload new profile picture, update database with new link
     await uploadBytes(profilePictureRef, profilePicture);
     statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
-
-    // TODO Remove previous profile picture
-    // let oldProfilePictureRef;
-    // try {
-    //   oldProfilePictureRef = ref(storage, currentUser.profilePicture);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-
-    // if (oldProfilePictureRef) {
-    //   try {
-    //     await deleteObject(oldProfilePictureRef);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // }
   }
 
   async function updateAccount() {
@@ -354,6 +360,24 @@ export default function EditProfile() {
           setAwards={setAwards}
           setAwardsEditing={setAwardsEditing}
         />
+
+        <h2 className="text-2xl font-extrabold">Certifications 📜</h2>
+        <ProfileCertifications
+          isEditable
+          certifications={certifications}
+          setCertifications={setCertifications}
+          certificationsEditing={certificationsEditing}
+          setCertificationsEditing={setCertificationsEditing}
+        />
+
+        <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+        <ProfileVolunteering
+          isEditable
+          volunteering={volunteering}
+          setVolunteering={setVolunteering}
+          volunteeringEditing={volunteeringEditing}
+          setVolunteeringEditing={setVolunteeringEditing}
+        />
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>
@@ -368,7 +392,7 @@ export default function EditProfile() {
       </p>
       <Button
         data-testid="danger-zone"
-        className="bg-red-600 hover:bg-red-500"
+        variant="danger"
         onClick={() => setIsModalShow(true)}
       >
         Delete account

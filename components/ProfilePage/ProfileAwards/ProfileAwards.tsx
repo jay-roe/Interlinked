@@ -18,9 +18,7 @@ export default function ProfileAwards({
   isEditable?: boolean;
   awardsEditing?: boolean[];
   setAwardsEditing?: Dispatch<SetStateAction<boolean[]>>;
-  addAwards?: Dispatch<SetStateAction<boolean>>;
   setAwards?: Dispatch<SetStateAction<User['awards']>>;
-  setNewAward?: (awards: User['awards']) => void;
 }) {
   // Live version of awards component
   if (!isEditable) {

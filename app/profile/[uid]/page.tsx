@@ -11,6 +11,8 @@ import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills'
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 import { db } from '@/config/firestore';
 import { doc, getDoc } from 'firebase/firestore';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -59,6 +61,20 @@ export default async function ViewProfile({ params }) {
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards awards={user.awards} />
+
+      {user.certifications && user.certifications[0] && (
+        <>
+          <h2 className="text-2xl font-extrabold">Certifications</h2>
+          <ProfileCertifications certifications={user.certifications} />
+        </>
+      )}
+
+      {user.volunteering && user.volunteering[0] && (
+        <>
+          <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+          <ProfileVolunteering volunteering={user.volunteering} />
+        </>
+      )}
     </div>
   );
 }

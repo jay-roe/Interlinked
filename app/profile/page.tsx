@@ -17,6 +17,8 @@ import Link from 'next/link';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
@@ -81,6 +83,20 @@ export default function PreviewProfile() {
 
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards awards={currentUser.awards} />
+
+      {currentUser.certifications && currentUser.certifications[0] && (
+        <>
+          <h2 className="text-2xl font-extrabold">Certifications</h2>
+          <ProfileCertifications certifications={currentUser.certifications} />
+        </>
+      )}
+
+      {currentUser.volunteering && currentUser.volunteering[0] && (
+        <>
+          <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+          <ProfileVolunteering volunteering={currentUser.volunteering} />
+        </>
+      )}
     </div>
   );
 }
