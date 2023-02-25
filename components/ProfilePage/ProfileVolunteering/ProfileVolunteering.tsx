@@ -22,28 +22,34 @@ export default function ProfileVolunteering({
   setVolunteering?: Dispatch<SetStateAction<User['volunteering']>>;
 }) {
   if (!isEditable) {
+    if (!volunteering || !volunteering[0]) return;
+
     return (
-      <CardStack>
-        {volunteering?.map((vol, index) => (
-          <div key={index} data-testid={`live-vol-${index}`}>
-            {vol.image && <img src={vol.image} alt={vol.title} />}
-            <h3>{vol.title}</h3>
-            <h4>{vol.organization}</h4>
-            <h5>{vol.location}</h5>
-            <h6>
-              {vol.startDate.toDate().toLocaleDateString()}
-              {vol.endDate
-                ? ' - ' + vol.endDate.toDate().toLocaleDateString()
-                : ''}
-            </h6>
-            <div>{vol.description}</div>
-          </div>
-        ))}
-      </CardStack>
+      <>
+        <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+        <CardStack>
+          {volunteering?.map((vol, index) => (
+            <div key={index} data-testid={`live-vol-${index}`}>
+              {vol.image && <img src={vol.image} alt={vol.title} />}
+              <h3 className="text-xl font-extrabold">{vol.title}</h3>
+              <h4>{vol.organization}</h4>
+              <h5>{vol.location}</h5>
+              <h6>
+                {vol.startDate.toDate().toLocaleDateString()}
+                {vol.endDate
+                  ? ' - ' + vol.endDate.toDate().toLocaleDateString()
+                  : ''}
+              </h6>
+              <div>{vol.description}</div>
+            </div>
+          ))}
+        </CardStack>
+      </>
     );
   }
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
       {volunteering.map((vol, index) => (
         <form
           key={index}
@@ -179,7 +185,7 @@ export default function ProfileVolunteering({
           ) : (
             <div data-testid="editable-vol">
               {vol.image && <img src={vol.image} alt={vol.title} />}
-              <h3>{vol.title}</h3>
+              <h3 className="text-xl font-semibold">{vol.title}</h3>
               <h4>{vol.organization}</h4>
               <h5>{vol.location}</h5>
               <h6>

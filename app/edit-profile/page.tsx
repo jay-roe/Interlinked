@@ -361,7 +361,6 @@ export default function EditProfile() {
           setAwardsEditing={setAwardsEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Certifications 📜</h2>
         <ProfileCertifications
           isEditable
           certifications={certifications}
@@ -370,7 +369,6 @@ export default function EditProfile() {
           setCertificationsEditing={setCertificationsEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
         <ProfileVolunteering
           isEditable
           volunteering={volunteering}

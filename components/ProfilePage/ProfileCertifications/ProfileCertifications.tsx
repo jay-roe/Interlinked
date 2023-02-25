@@ -23,32 +23,38 @@ export default function ProfileCertifications({
 }) {
   // Live version of certifications component
   if (!isEditable) {
+    if (!certifications || !certifications[0]) return;
+
     return (
-      <CardStack height={16}>
-        {certifications.map((cert, index) => (
-          <div key={index} data-testid="live-certifications">
-            <h3 className="text-xl font-bold">{cert.name}</h3>
-            <h4 className="text-lg">{cert.issuer}</h4>
-            <h6 className="mb-3">
-              {`${cert.date.toDate().toLocaleString('default', {
-                month: 'long',
-                year: 'numeric',
-              })}`}
-            </h6>
-            {cert.link && (
-              <Link href={cert.link}>
-                <Button>View Credential</Button>
-              </Link>
-            )}
-          </div>
-        ))}
-      </CardStack>
+      <>
+        <h2 className="text-2xl font-extrabold">Certifications</h2>
+        <CardStack height={16}>
+          {certifications.map((cert, index) => (
+            <div key={index} data-testid="live-certifications">
+              <h3 className="text-xl font-bold">{cert.name}</h3>
+              <h4 className="text-lg">{cert.issuer}</h4>
+              <h6 className="mb-3">
+                {`${cert.date.toDate().toLocaleString('default', {
+                  month: 'long',
+                  year: 'numeric',
+                })}`}
+              </h6>
+              {cert.link && (
+                <Link href={cert.link}>
+                  <Button>View Credential</Button>
+                </Link>
+              )}
+            </div>
+          ))}
+        </CardStack>
+      </>
     );
   }
 
   // Editable version of certifications component
   return (
     <div>
+      <h2 className="text-2xl font-extrabold">Certifications</h2>
       {certifications?.map((cert, index) => (
         <form
           action=""

@@ -84,19 +84,9 @@ export default function PreviewProfile() {
       <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards awards={currentUser.awards} />
 
-      {currentUser.certifications && currentUser.certifications[0] && (
-        <>
-          <h2 className="text-2xl font-extrabold">Certifications</h2>
-          <ProfileCertifications certifications={currentUser.certifications} />
-        </>
-      )}
+      <ProfileCertifications certifications={currentUser.certifications} />
 
-      {currentUser.volunteering && currentUser.volunteering[0] && (
-        <>
-          <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
-          <ProfileVolunteering volunteering={currentUser.volunteering} />
-        </>
-      )}
+      <ProfileVolunteering volunteering={currentUser.volunteering} />
     </div>
   );
 }
