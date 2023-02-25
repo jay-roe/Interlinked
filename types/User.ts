@@ -96,6 +96,7 @@ enum NotifType {
   POST = 'POST',
   COMMENT = 'COMMENT',
   LIKE = 'LIKE',
-  LINK_REQ = 'LINK_REQ',
+  LINK_REQ = 'LINK_REQ', //someone sends you request to link
+  LINK_ACC = 'LINK_ACC', //someone accepted your link request
   DM = 'DM',
 }
