@@ -1,4 +1,4 @@
-describe('Full edit profile spec', () => {
+describe('Full feed spec', () => {
   let email = 'test2+cypress@test.com';
   let pw = '123456';
 
