@@ -27,7 +27,7 @@ const Notification = () => {
     <div className="container mx-auto text-white">
     <div className="mb-2 flex justify-between">
       <h1 className="text-3xl font-extrabold">Notifications</h1>
-      <div>
+      <div className="flex start">
         <button>
           <FiBell/>
         </button>
