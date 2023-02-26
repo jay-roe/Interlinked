@@ -103,6 +103,7 @@ const Feeds = () => {
           return (
             <FullPostCard
               key={index}
+              testKey={index} // key is for React only and not included in the DOM, so we need this for testing.
               post={post}
               postID={postIDs[index]}
               author={authors[post.authorID]}
