@@ -2,7 +2,7 @@
 
 import { animated, useSprings, to as interpolate } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GrNext, GrPowerReset } from 'react-icons/gr';
 import Button from '../Buttons/Button';
 
@@ -148,6 +148,20 @@ export default function CardStack({
     { axis: 'x' }
   );
 
+  useEffect(() => {
+    let largestHeight = 0;
+    for (let i = 0; i < children.length; i++) {
+      const childHeight = document
+        .getElementById(`stack_card_${i}`)
+        .getBoundingClientRect().height;
+      if (childHeight > largestHeight) {
+        largestHeight = childHeight;
+      }
+    }
+    document.getElementById('card-stack-parent').style.height =
+      largestHeight + 'px';
+  }, [children]);
+
   if (children.length === 0) {
     return;
   }
@@ -156,6 +170,7 @@ export default function CardStack({
     <div>
       <div
         className="relative flex min-w-[15rem] max-w-xl items-center justify-center"
+        id="card-stack-parent"
         style={{ height: `${height}rem` }}
       >
         {children.map((child, index) => (
@@ -182,6 +197,7 @@ export default function CardStack({
               top: `${(index - frontCardIndex) * -1.25 + top}rem`,
             }}
             id={`stack_card_${index}`}
+            data-testid={`stack_card_${index}`}
             key={index}
           >
             {child}
@@ -189,10 +205,10 @@ export default function CardStack({
         ))}
       </div>
       <div className="flex gap-2">
-        <Button data-testid={'reset-button'} onClick={() => resetCards()}>
+        <Button data-testid="reset-button" onClick={() => resetCards()}>
           <GrPowerReset size={30} />
         </Button>
-        <Button data-testid={'next-button'} onClick={() => nextClick()}>
+        <Button data-testid="next-button" onClick={() => nextClick()}>
           <GrNext size={30} />
         </Button>
       </div>

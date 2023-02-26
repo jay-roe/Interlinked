@@ -24,36 +24,42 @@ export default function ProfileEducation({
 }) {
   // Live version of education component
   if (!isEditable) {
+    if (!education || !education[0]) return;
+
     return (
-      <CardStack data-testid="education-stack">
-        {education.map((ed, index) => (
-          <div data-testid={`live-edu-${index}`} key={index}>
-            <h3 className="text-xl font-semibold">{ed.program}</h3>
-            {ed.image && <img src={ed.image} alt={ed.name} />}
-            <h3>{ed.name}</h3>
-            <h4>{ed.location}</h4>
-            <h6>
-              {`${ed.startDate?.toDate().toLocaleString('default', {
-                month: 'long',
-                year: 'numeric',
-              })} - `}
-              {ed.endDate
-                ? `${ed.endDate?.toDate().toLocaleString('default', {
-                    month: 'long',
-                    year: 'numeric',
-                  })}`
-                : 'present'}
-            </h6>
-            <p>{ed.description}</p>
-          </div>
-        ))}
-      </CardStack>
+      <>
+        <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
+        <CardStack data-testid="education-stack">
+          {education.map((ed, index) => (
+            <div data-testid={`live-edu-${index}`} key={index}>
+              <h3 className="text-xl font-semibold">{ed.program}</h3>
+              {ed.image && <img src={ed.image} alt={ed.name} />}
+              <h3>{ed.name}</h3>
+              <h4>{ed.location}</h4>
+              <h6>
+                {`${ed.startDate?.toDate().toLocaleString('default', {
+                  month: 'long',
+                  year: 'numeric',
+                })} - `}
+                {ed.endDate
+                  ? `${ed.endDate?.toDate().toLocaleString('default', {
+                      month: 'long',
+                      year: 'numeric',
+                    })}`
+                  : 'present'}
+              </h6>
+              <p>{ed.description}</p>
+            </div>
+          ))}
+        </CardStack>
+      </>
     );
   }
 
   // Editable version of education component
   return (
     <div className="mb-3" data-testid="editable-edu">
+      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       {education.map((ed, index) => (
         <form
           data-testid="submit-education"

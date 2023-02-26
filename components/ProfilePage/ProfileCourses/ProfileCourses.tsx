@@ -2,7 +2,6 @@ import type { User } from '@/types/User';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
-import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Dispatch, SetStateAction } from 'react';
@@ -23,21 +22,27 @@ export default function ProfileCourses({
 }) {
   // live version
   if (!isEditable) {
+    if (!courses || !courses[0]) return;
+
     return (
-      <CardStack height={10}>
-        {courses.map((course, index) => (
-          <div key={index} data-testid={`live-courses-${index}`}>
-            <h3>{course.title}</h3>
-            <h4>{course.courseNo}</h4>
-            <p>{course.description}</p>
-          </div>
-        ))}
-      </CardStack>
+      <>
+        <h2 className="text-2xl font-extrabold">Courses 📚</h2>
+        <CardStack height={10}>
+          {courses.map((course, index) => (
+            <div key={index} data-testid={`live-courses-${index}`}>
+              <h3>{course.title}</h3>
+              <h4>{course.courseNo}</h4>
+              <p>{course.description}</p>
+            </div>
+          ))}
+        </CardStack>
+      </>
     );
   }
   // editable version
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
       {courses.map((course, index) => (
         <form
           key={index}

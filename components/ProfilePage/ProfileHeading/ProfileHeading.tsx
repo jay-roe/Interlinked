@@ -69,12 +69,12 @@ export default function ProfileHeading({
                 className="cursor-pointer"
               >
                 <img
-                  className="h-40 w-40 max-w-none rounded-full hover:brightness-150"
+                  className="h-40 w-40 max-w-none rounded-full transition-all hover:brightness-150"
                   src={profilePictureURL}
                   alt={name || 'Profile Picture'}
                 />
                 <FaRegEdit
-                  className="absolute -right-4 -bottom-4 p-2 text-yellow-600 hover:text-yellow-500"
+                  className="absolute -right-4 -bottom-4 p-2 text-yellow-600 transition-all hover:text-yellow-500"
                   size={45}
                 />
               </label>

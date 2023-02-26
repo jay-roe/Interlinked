@@ -17,7 +17,8 @@ const PostBody = ({
         {post?.title || ''}
       </div>
       <div className="leading-normal">{post?.text_content || ''}</div>
-      {post?.image_content ? (
+      {post?.image_content &&
+        post.image_content[0] &&
         post.image_content.map((image, index) => {
           return (
             <img
@@ -28,10 +29,7 @@ const PostBody = ({
               alt="..."
             />
           );
-        })
-      ) : (
-        <></>
-      )}{' '}
+        })}
       {/* object-contain is added to keep large images from taking up the entire body */}
     </div>
   );

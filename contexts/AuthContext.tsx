@@ -66,6 +66,7 @@ export function AuthProvider({ children }) {
     const newUser = credential.user;
     const emptyUser: User = {
       awards: [],
+      certifications: [],
       codingLanguages: [],
       connections: [],
       courses: [],

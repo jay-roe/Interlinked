@@ -10,7 +10,10 @@ export default function DeleteButton({
   ...props
 }: DeleteButtonProps) {
   return (
-    <button className="rounded-full bg-red-700 p-2 hover:bg-red-600" {...props}>
+    <button
+      className="rounded-full bg-red-700 p-2 transition-all hover:bg-red-600"
+      {...props}
+    >
       <FaTrash color="white" size={size} />
     </button>
   );

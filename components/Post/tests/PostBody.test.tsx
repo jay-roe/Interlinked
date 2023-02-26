@@ -30,7 +30,7 @@ const post = {
   author: '',
   title: 'test_title',
   text_content: 'test_content',
-  image_content: 'test_image',
+  image_content: ['test_image'],
   likes: [],
   comments: [],
   date: mockedDate,

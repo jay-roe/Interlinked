@@ -1,15 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  getDocs,
-  query,
-  where,
-  documentId,
-  orderBy,
-  collection,
-} from 'firebase/firestore';
-import { firestore } from '@/config/firebase';
+import { getDocs, query, where, documentId, orderBy } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
