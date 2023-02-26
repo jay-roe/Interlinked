@@ -1,13 +1,10 @@
-import type { ComponentProps } from 'react';
-import { FaRegEdit } from 'react-icons/fa';
 import { Notification } from '@/types/User';
 import PostNotification from '../Notification/PostNotification';
-import { NotifType } from '@/types/User';
-import { Timestamp } from 'firebase/firestore';
-import { MdDescription } from "react-icons/md";
-import { FaComment } from "react-icons/fa";
-import { AiFillLike } from "react-icons/ai";
-import LinkIcon from '../Icons/LinkIcon/LinkIcon';
+import { NotifType } from '@/types/User';import CommentNotification from './CommentNotification';
+import LikeNotification from './LikeNotification';
+import LinkRequestNotification from './LinkRequestNotification';
+import DmNotification from './DmNotification';
+import LinkAcceptNotification from './LinkAcceptNotification';
 
 
 export default function postNotification() {
@@ -72,7 +69,7 @@ export default function postNotification() {
       read: false
     },{
         notifType: NotifType.DM,
-        context: 'Welcome to my post',
+        context: 'You got a DM',
         sender: {
           awards: [],
           bio: '',
@@ -100,7 +97,7 @@ export default function postNotification() {
         read: false
       },{
         notifType: NotifType.LINK_ACC,
-        context: 'Welcome to my post',
+        context: 'your link request was accepted',
         sender: {
           awards: [],
           bio: '',
@@ -128,7 +125,7 @@ export default function postNotification() {
         read: false
       },{
         notifType: NotifType.LINK_REQ,
-        context: 'Welcome to my post',
+        context: 'you got a link request',
         sender: {
           awards: [],
           bio: '',
@@ -156,7 +153,7 @@ export default function postNotification() {
         read: false
       },{
         notifType: NotifType.LIKE,
-        context: 'Welcome to my post',
+        context: 'your post was liked',
         sender: {
           awards: [],
           bio: '',
@@ -187,23 +184,22 @@ export default function postNotification() {
 
 
   return (
-    <ul className="mb-3 inline-flex" data-testid="live-profile">
+    <ul className="mb-3" data-testid="live-profile">
         {notifications.map((notif, index) => (
           <li
             key={index}
-            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+            className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
           >
-
             {notif.notifType === NotifType.POST && <PostNotification Notification={notif}/>}
-            {notif.notifType === NotifType.COMMENT && <PostNotification Notification={notif}/>}
-            {notif.notifType === NotifType.LIKE && <PostNotification Notification={notif}/>}
-            {notif.notifType === NotifType.LINK_REQ && <PostNotification Notification={notif}/>}
-            {notif.notifType === NotifType.LINK_ACC && <PostNotification Notification={notif}/>}
-            {notif.notifType === NotifType.DM && <PostNotification Notification={notif}/>}
-
-
+            {notif.notifType === NotifType.COMMENT && <CommentNotification Notification={notif}/>}
+            {notif.notifType === NotifType.LIKE && <LikeNotification Notification={notif}/>}
+            {notif.notifType === NotifType.LINK_REQ && <LinkRequestNotification Notification={notif}/>}
+            {notif.notifType === NotifType.LINK_ACC && <LinkAcceptNotification Notification={notif}/>}
+            {notif.notifType === NotifType.DM && <DmNotification Notification={notif}/>}
           </li>
+          
         ))}
       </ul>
+    
   );
 }

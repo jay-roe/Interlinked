@@ -53,7 +53,7 @@ export default function ProfileEducation({
 
   // Editable version of education component
   return (
-    <div className="mb-3" data-testid="editable-edu">
+    <div className="container mx-auto text-white" data-testid="editable-edu">
       {education.map((ed, index) => (
         <form
           data-testid="submit-education"
