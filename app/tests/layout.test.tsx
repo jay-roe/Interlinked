@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
 import RootLayout from '../layout';
 
@@ -7,7 +8,10 @@ jest.mock('contexts/AuthContext', () => ({
 }));
 
 it('renders the root', async () => {
-  const { findByTestId } = render(<RootLayout children={''} />);
+
+    const { findByTestId } = render(
+        <RootLayout children={''} />
+    )
 
   const root = await findByTestId('root-container');
   expect(root).toBeInTheDocument();

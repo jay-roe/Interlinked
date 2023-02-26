@@ -5,10 +5,9 @@ export default function EditButton(props: ComponentProps<'button'>) {
   return (
     <button
       {...props}
-      data-testid="edit-button"
-      className="rounded-full p-2 text-yellow-600"
+      className={`${props.className} rounded-full p-2 text-yellow-600 transition-all hover:text-yellow-500`}
     >
-      <FaRegEdit size={30} />
+      <FaRegEdit data-testid="edit-icon" size={30} />
     </button>
   );
 }

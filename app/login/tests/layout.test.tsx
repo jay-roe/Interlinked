@@ -7,7 +7,11 @@ jest.mock('contexts/AuthContext', () => ({
 }));
 
 it('renders the root', async () => {
-  const { findByTestId } = render(<RootLayout children={''} />);
+  const { findByTestId } = render(
+    <RootLayout>
+      <></>
+    </RootLayout>
+  );
 
   const layoutDiv = await findByTestId('layout-div');
   expect(layoutDiv).toBeInTheDocument();

@@ -18,7 +18,7 @@ const PostHeader = ({
           data-testid="test-coverphoto"
           className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
           src={
-            author?.coverPhoto ||
+            author?.profilePicture ||
             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
           }
         ></img>

@@ -48,7 +48,7 @@ const Login = () => {
             Welcome back
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form action="" className="mt-8 space-y-6">
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               <input
@@ -91,7 +91,11 @@ const Login = () => {
           <div className={styles.HorizontalSeparator}></div>
           <div>
             <GoogleButton
-              onClick={() => loginWithGoogle()}
+              onClick={() => {
+                setEmail('');
+                setPassword('');
+                loginWithGoogle();
+              }}
               data-testid="googleLogin"
             >
               Login with Google

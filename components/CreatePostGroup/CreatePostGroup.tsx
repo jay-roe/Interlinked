@@ -55,6 +55,7 @@ export default function CreatePostGroup() {
     });
 
     setTrigger((trig) => trig + 1);
+    console.log('HI');
     alert('Posted!');
   };
 
@@ -87,7 +88,7 @@ export default function CreatePostGroup() {
 
   async function createPost(text: string) {
     try {
-      if (image != null) {
+      if (image.length != 0) {
         setText(text);
         image.forEach((img) => {
           upLoadImage(img, text);
@@ -101,20 +102,16 @@ export default function CreatePostGroup() {
   }
 
   return (
-    <div data-testid="create-post" className="my-7 flex flex-row align-top">
-      <div className=" flex items-center gap-5 ">
-        <div>
-          <CreatePost getText={retrieveText} />
-        </div>
-
-        <div>
-          <PreviewAttachement
-            clean={trigger}
-            deleteImage={removeImage}
-            getImage={retreiveImage}
-          />
-        </div>
-      </div>
+    <div
+      data-testid="create-post"
+      className="my-7 grid grid-cols-1 gap-x-8 gap-y-8 lg:grid-cols-2-1"
+    >
+      <CreatePost getText={retrieveText} />
+      <PreviewAttachement
+        clean={trigger}
+        deleteImage={removeImage}
+        getImage={retreiveImage}
+      />
     </div>
   );
 }

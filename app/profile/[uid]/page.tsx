@@ -11,6 +11,9 @@ import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills'
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 import { db } from '@/config/firestore';
 import { doc, getDoc } from 'firebase/firestore';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -24,37 +27,38 @@ export default async function ViewProfile({ params }) {
 
   return (
     <div data-testid="profile" className="container mx-auto text-white">
-      <ProfileHeading currentUser={user} bio={user.bio} />
+      <ProfileHeading
+        profilePictureURL={user.profilePicture}
+        name={user.name}
+        bio={user.bio}
+      />
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={user?.socials} />
       </div>
+
       <LinkButton currentUser={user} />
 
-      <h1 className="text-2xl font-extrabold">
-        Link with {user?.name?.split(' ')[0]}
-      </h1>
-      <ProfileContact currentUser={user} />
+      <ProfileContact email={user.email} phone={user.phone} />
 
-      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={user} />
+      <ProfileLanguages languages={user.languages} />
 
-      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-      <ProfileEducation currentUser={user} />
+      <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
 
-      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={user} />
+      <ProfileEducation education={user.education} />
 
-      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={user} />
+      <ProfileCourses courses={user.courses} />
 
-      <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={user} />
+      <ProfileExperience experience={user.experience} />
 
-      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={user} />
+      <ProfileProjects projects={user.projects} />
 
-      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={user} />
+      <ProfileSkills skills={user.skills} />
+
+      <ProfileAwards awards={user.awards} />
+
+      <ProfileCertifications certifications={user.certifications} />
+
+      <ProfileVolunteering volunteering={user.volunteering} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
-import RemoveImageButton from '@/components/Buttons/RemoveImageButton/RemoveImageButton';
 import { PreviewImageProps } from '@/types/PreviewImage';
 
 export default function PreviewAttachement({
@@ -55,47 +54,45 @@ export default function PreviewAttachement({
   };
 
   return (
-    <>
-      <div className=" flex ">
-        <div className=" px-7shadow-lg   rounded-lg bg-purple-component p-4 ">
-          <h1 className="text-2xl text-white">Preview Attachments</h1>
+    <div className="w-full">
+      <div className="rounded-lg bg-purple-component p-4 px-7 shadow-lg ">
+        <h1 className="text-2xl text-white">Preview Attachments</h1>
 
-          <ul className=" h-[12rem] overflow-y-auto ">
-            {preview != null &&
-              preview.map((imgPreview, key) => {
-                return (
-                  <li className="hover:border-red-900" key={key}>
-                    <button
-                      data-testid={`remove-image-${key}`}
-                      className="hover:border-red-900"
-                      onClick={() => removeImage(imgPreview)}
-                    >
-                      <img
-                        className="h-[13rem] w-[13rem] object-scale-down  "
-                        src={imgPreview}
-                      ></img>
-                    </button>
-                  </li>
-                );
-              })}
-          </ul>
+        <ul className="h-[12rem] overflow-y-auto">
+          {preview != null &&
+            preview.map((imgPreview, key) => {
+              return (
+                <li className="" key={key}>
+                  <button
+                    data-testid={`remove-image-${key}`}
+                    className="hover:bg-red-900"
+                    onClick={() => removeImage(imgPreview)}
+                  >
+                    <img
+                      className="h-[13rem] w-[13rem] object-scale-down hover:opacity-50"
+                      src={imgPreview}
+                    ></img>
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
 
-          <div className="flex justify-end">
-            <button data-testid="upload-pic" onClick={handleClick}>
-              <UploadMediaButton />
-            </button>
-            <input
-              id="image_upload"
-              data-testid="image-upload"
-              type="file"
-              accept="image/*"
-              ref={hiddenFileInput}
-              onChange={(files) => handleSelectedFile(files.target.files)}
-              style={{ display: 'none' }}
-            ></input>
-          </div>
+        <div className="flex justify-end">
+          <button data-testid="upload-pic" onClick={handleClick}>
+            <UploadMediaButton />
+          </button>
+          <input
+            id="image_upload"
+            data-testid="image-upload"
+            type="file"
+            accept="image/*"
+            ref={hiddenFileInput}
+            onChange={(files) => handleSelectedFile(files.target.files)}
+            style={{ display: 'none' }}
+          ></input>
         </div>
       </div>
-    </>
+    </div>
   );
 }

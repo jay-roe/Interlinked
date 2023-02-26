@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import 'intersection-observer';
 import { fireEvent, render, waitFor } from '@testing-library/react';
 import { useAuth } from '@/contexts/AuthContext';
 import EditProfile from '../page';
@@ -6,6 +7,7 @@ import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Timestamp } from 'firebase/firestore';
+import { act } from 'react-dom/test-utils';
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
@@ -17,11 +19,27 @@ jest.mock('@/config/firestore', () => ({
 
 jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
+  setDoc: jest.fn(),
   updateDoc: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
 }));
-
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+}));
+
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
 }));
 
 jest.spyOn(window, 'alert').mockImplementation(() => {});
@@ -52,7 +70,8 @@ const mockedRouter = useRouter as jest.Mock<any>;
 it('check if user is logged out', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
-      authUser: null, // There IS a current users
+      authUser: null,
+      currentUser: null,
     };
   });
 
@@ -63,6 +82,10 @@ it('check if user is logged out', async () => {
 });
 
 it('try to update account', async () => {
+  jest.spyOn(window, 'confirm').mockImplementation(() => {
+    return true;
+  });
+
   mockedUseAuth.mockImplementation(() => {
     return {
       refresh: jest.fn(),
@@ -73,19 +96,89 @@ it('try to update account', async () => {
           },
         ],
       }, // There IS a current users
+      // Need to fill in all the fields in user as it's being manually created instead of us creating a new User object
+      // If some fields are left empty, it tries to map a null object and crashes the test
       currentUser: {
-        profilePicture: '',
-        name: '',
-        email: '',
-        bio: '',
-        connections: [],
-        languages: ['lang'],
-        education: [],
-        courses: [],
-        experience: [],
-        projects: [],
-        skills: ['skill'],
-        awards: [],
+        awards: [
+          {
+            title: 'award',
+            description: 'desc',
+            date: dateMock,
+          },
+        ],
+        bio: 'LALALALA, something funny here (tee hee)',
+        codingLanguages: ['C++, Java, ScriptScript'],
+        connections: [''],
+        courses: [
+          {
+            title: 'course',
+            courseNo: 'courseYes!',
+            description: 'desc',
+          },
+        ],
+        coverPhoto: 'https://via.placeholder.com/100.png',
+        education: [
+          {
+            program: 'margorp',
+            name: 'eman',
+            location: 'noitacol',
+            description: 'noitpircsed',
+            image: 'https://via.placeholder.com/100.png',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
+        experience: [
+          {
+            title: 'CrossCode',
+            location: 'Hollow Knight',
+            employer: 'Celeste',
+            description: 'Baba Is You',
+            image: 'CHR$(143)',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        languages: ['lang', 'other lang'],
+        name: 'Bob Angelson',
+        phone: '555-555-5555',
+        profilePicture: 'https://via.placeholder.com/100.png',
+        projects: [
+          {
+            title: 'Kerbal Space Program',
+            collaborators: [
+              {
+                name: 'name',
+                profilePicture: 'https://via.placeholder.come/100.png',
+                id: '5',
+              },
+            ],
+            repoLink: 'Oneshot',
+            demoLink: 'FTL (Faster Than Light)',
+            description: 'Factorio (PLAY IT!)',
+            startDate: dateMock,
+            endDate: dateMock,
+            image:
+              "I've listed a bunch of real good games here, all highly recommended by Craig!",
+          },
+        ],
+        skills: ['skill', 'making bad jokes'],
+        socials: {
+          github: 'Poly Bridge 2',
+          instagram: 'Demoncrawl (minesweeper gone rogue)',
+        },
+        volunteering: [
+          {
+            title: 'Talos Principle',
+            location: 'The Witness',
+            employer: 'Taiji',
+            description: 'Understand',
+            image: 'Patricks Parabox',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
       },
     };
   });
@@ -105,4 +198,225 @@ it('try to update account', async () => {
   await waitFor(() => {
     expect(myPush).toBeCalled();
   });
+});
+
+it('can delete accont', async () => {
+  const myDelete = jest.fn();
+
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      deleteAccount: myDelete,
+      refresh: jest.fn(),
+      authUser: {
+        providerData: [
+          {
+            providerId: 'google.com',
+          },
+        ],
+      }, // There IS a current users
+      currentUser: {
+        awards: [
+          {
+            title: 'award',
+            description: 'desc',
+            date: dateMock,
+          },
+        ],
+        bio: 'LALALALA, something funny here (tee hee)',
+        codingLanguages: ['C++, Java, ScriptScript'],
+        connections: [''],
+        courses: [
+          {
+            title: 'course',
+            courseNo: 'courseYes!',
+            description: 'desc',
+          },
+        ],
+        coverPhoto: 'https://via.placeholder.com/100.png',
+        education: [
+          {
+            program: 'margorp',
+            name: 'eman',
+            location: 'noitacol',
+            description: 'noitpircsed',
+            image: 'https://via.placeholder.com/100.png',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
+        experience: [
+          {
+            title: 'CrossCode',
+            location: 'Hollow Knight',
+            employer: 'Celeste',
+            description: 'Baba Is You',
+            image: 'CHR$(143)',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        languages: ['lang', 'other lang'],
+        name: 'Bob Angelson',
+        phone: '555-555-5555',
+        profilePicture: 'https://via.placeholder.com/100.png',
+        projects: [
+          {
+            title: 'Kerbal Space Program',
+            collaborators: [
+              {
+                name: 'name',
+                profilePicture: 'https://via.placeholder.come/100.png',
+                id: '5',
+              },
+            ],
+            repoLink: 'Oneshot',
+            demoLink: 'FTL (Faster Than Light)',
+            description: 'Factorio (PLAY IT!)',
+            startDate: dateMock,
+            endDate: dateMock,
+            image:
+              "I've listed a bunch of real good games here, all highly recommended by Craig!",
+          },
+        ],
+        skills: ['skill', 'making bad jokes'],
+        socials: {
+          github: 'Poly Bridge 2',
+          instagram: 'Demoncrawl (minesweeper gone rogue)',
+        },
+        volunteering: [
+          {
+            title: 'Talos Principle',
+            location: 'The Witness',
+            employer: 'Taiji',
+            description: 'Understand',
+            image: 'Patricks Parabox',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+      },
+    };
+  });
+
+  const { findByTestId } = render(<EditProfile />);
+
+  const deleteAccountBtn = await findByTestId('danger-zone');
+
+  fireEvent.click(deleteAccountBtn);
+  // todo need to get into the popup somehow...
+});
+
+it('does not update without confirmation', async () => {
+  jest.spyOn(window, 'confirm').mockImplementation(() => {
+    return false;
+  });
+
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      refresh: jest.fn(),
+      authUser: {
+        providerData: [
+          {
+            providerId: 'google.com',
+          },
+        ],
+      }, // There IS a current users
+      currentUser: {
+        awards: [
+          {
+            title: 'award',
+            description: 'desc',
+            date: dateMock,
+          },
+        ],
+        bio: 'LALALALA, something funny here (tee hee)',
+        codingLanguages: ['C++, Java, ScriptScript'],
+        connections: [''],
+        courses: [
+          {
+            title: 'course',
+            courseNo: 'courseYes!',
+            description: 'desc',
+          },
+        ],
+        coverPhoto: 'https://via.placeholder.com/100.png',
+        education: [
+          {
+            program: 'margorp',
+            name: 'eman',
+            location: 'noitacol',
+            description: 'noitpircsed',
+            image: 'https://via.placeholder.com/100.png',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
+        experience: [
+          {
+            title: 'CrossCode',
+            location: 'Hollow Knight',
+            employer: 'Celeste',
+            description: 'Baba Is You',
+            image: 'CHR$(143)',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+        languages: ['lang', 'other lang'],
+        name: 'Bob Angelson',
+        phone: '555-555-5555',
+        profilePicture: 'https://via.placeholder.com/100.png',
+        projects: [
+          {
+            title: 'Kerbal Space Program',
+            collaborators: [
+              {
+                name: 'name',
+                profilePicture: 'https://via.placeholder.come/100.png',
+                id: '5',
+              },
+            ],
+            repoLink: 'Oneshot',
+            demoLink: 'FTL (Faster Than Light)',
+            description: 'Factorio (PLAY IT!)',
+            startDate: dateMock,
+            endDate: dateMock,
+            image:
+              "I've listed a bunch of real good games here, all highly recommended by Craig!",
+          },
+        ],
+        skills: ['skill', 'making bad jokes'],
+        socials: {
+          github: 'Poly Bridge 2',
+          instagram: 'Demoncrawl (minesweeper gone rogue)',
+        },
+        volunteering: [
+          {
+            title: 'Talos Principle',
+            location: 'The Witness',
+            employer: 'Taiji',
+            description: 'Understand',
+            image: 'Patricks Parabox',
+            startDate: dateMock,
+            endDate: dateMock,
+          },
+        ],
+      },
+    };
+  });
+
+  const myPush = jest.fn();
+  mockedRouter.mockImplementation(() => {
+    return {
+      push: myPush,
+    };
+  });
+
+  const { findByTestId } = render(<EditProfile />);
+
+  const updateAccountButton = await findByTestId('update-account-button');
+  fireEvent.click(updateAccountButton);
+  expect(myPush).not.toBeCalled();
 });

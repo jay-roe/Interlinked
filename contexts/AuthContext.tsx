@@ -16,7 +16,7 @@ import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
 import type { User } from '../types/User';
 import { db } from '../config/firestore';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 
 interface AuthContextType {
   currentUser: User;
@@ -66,6 +66,7 @@ export function AuthProvider({ children }) {
     const newUser = credential.user;
     const emptyUser: User = {
       awards: [],
+      certifications: [],
       codingLanguages: [],
       connections: [],
       courses: [],
@@ -159,6 +160,8 @@ export function AuthProvider({ children }) {
    * Deletes user.
    */
   async function deleteAccount() {
+    await deleteDoc(doc(db.users, auth.currentUser.uid));
+    // TODO: Delete all subcollections (if any)
     return await deleteUser(auth.currentUser);
   }
 

@@ -5,6 +5,7 @@ import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeadi
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
+import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
 import ProfileExperience from '@/components/ProfilePage/ProfileExperience/ProfileExperience';
@@ -16,6 +17,8 @@ import Link from 'next/link';
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
@@ -40,38 +43,39 @@ export default function PreviewProfile() {
 
   // Profile preview
   return (
-    <div className="container mx-auto text-white">
-      <ProfileHeading currentUser={currentUser} bio={currentUser.bio} />
-      <div className="mx-auto mb-3">
+    <div className="container mx-auto text-white" data-testid="profile-info">
+      <ProfileHeading
+        profilePictureURL={currentUser.profilePicture}
+        name={currentUser.name}
+        bio={currentUser.bio}
+      />
+      <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
       <LinkButton currentUser={currentUser} />
 
-      <h1 className="text-2xl font-extrabold">
-        Link with {currentUser.name?.split(' ')[0]}
-      </h1>
-      <ProfileContact currentUser={currentUser} />
+      <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
-      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-      <ProfileLanguages currentUser={currentUser} />
+      <ProfileLanguages languages={currentUser.languages} />
 
-      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
-      <ProfileEducation currentUser={currentUser} />
+      {/* TODO: change coding languages picture */}
+      <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
-      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-      <ProfileCourses currentUser={currentUser} />
+      <ProfileEducation education={currentUser.education} />
 
-      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
-      <ProfileExperience currentUser={currentUser} />
+      <ProfileCourses courses={currentUser.courses} />
 
-      <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-      <ProfileProjects currentUser={currentUser} />
+      <ProfileExperience experience={currentUser.experience} />
 
-      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-      <ProfileSkills currentUser={currentUser} />
+      <ProfileProjects projects={currentUser.projects} />
 
-      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-      <ProfileAwards currentUser={currentUser} />
+      <ProfileSkills skills={currentUser.skills} />
+
+      <ProfileAwards awards={currentUser.awards} />
+
+      <ProfileCertifications certifications={currentUser.certifications} />
+
+      <ProfileVolunteering volunteering={currentUser.volunteering} />
     </div>
   );
 }
