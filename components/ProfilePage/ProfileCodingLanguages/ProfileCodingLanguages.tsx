@@ -24,23 +24,29 @@ export default function ProfileCodingLanguages({
 }) {
   // Live version of Coding Languages component
   if (!isEditable) {
+    if (!codingLanguages || !codingLanguages[0]) return;
+
     return (
-      <ul className="mb-3 inline-flex" data-testid="live-profile">
-        {codingLanguages.map((cl, index) => (
-          <li
-            key={index}
-            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
-          >
-            {cl}
-          </li>
-        ))}
-      </ul>
+      <>
+        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <ul className="mb-3 inline-flex" data-testid="live-profile">
+          {codingLanguages.map((cl, index) => (
+            <li
+              key={index}
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+            >
+              {cl}
+            </li>
+          ))}
+        </ul>
+      </>
     );
   }
 
   // Editable version of Coding languages component
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
       {codingLanguages.map((cl, index) => (
         <div key={index}>
           <ul className="inline-flex">

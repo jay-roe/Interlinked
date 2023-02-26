@@ -54,34 +54,23 @@ export default function PreviewProfile() {
       </div>
       <LinkButton currentUser={currentUser} />
 
-      <h1 className="text-2xl font-extrabold">
-        Link with {currentUser.name?.split(' ')[0]}
-      </h1>
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
-      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       <ProfileLanguages languages={currentUser.languages} />
 
       {/* TODO: change coding languages picture */}
-      <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
       <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
-      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
       <ProfileEducation education={currentUser.education} />
 
-      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
       <ProfileCourses courses={currentUser.courses} />
 
-      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
       <ProfileExperience experience={currentUser.experience} />
 
-      <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
       <ProfileProjects projects={currentUser.projects} />
 
-      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
       <ProfileSkills skills={currentUser.skills} />
 
-      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       <ProfileAwards awards={currentUser.awards} />
 
       <ProfileCertifications certifications={currentUser.certifications} />

@@ -1,8 +1,5 @@
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
-import EditButton from '@/components/Buttons/EditButton/EditButton';
-import CardStack from '@/components/CardStack/CardStack';
-import Input from '@/components/InputFields/Input/Input';
 import type { User } from '@/types/User';
 import { Dispatch, SetStateAction } from 'react';
 import InputField from '@/components/InputFields/Input/Input';
@@ -29,24 +26,29 @@ export default function ProfileLanguages({
 }) {
   // every language string ends with a number from 1-5 that represents proficiency
   if (!isEditable) {
+    if (!languages || !languages[0]) return;
+
     return (
-      <ul className="mb-3 inline-flex" data-testid="live-lang-profile">
-        {languages?.map((lang, index) => (
-          <li
-            key={index}
-            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
-          >
-            {languages[index].title}
-            {languages[index].proficiency &&
-              ' (' + languages[index].proficiency + ')'}
-          </li>
-        ))}
-      </ul>
+      <>
+        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
+        <ul className="mb-3 inline-flex" data-testid="live-lang-profile">
+          {languages.map((lang, index) => (
+            <li
+              key={index}
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+            >
+              {lang.title}
+              {lang.proficiency && ' (' + lang.proficiency + ')'}
+            </li>
+          ))}
+        </ul>
+      </>
     );
   }
 
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
       {languages?.map((lang, index) => (
         <div key={index}>
           <ul className="inline-flex">
@@ -88,9 +90,8 @@ export default function ProfileLanguages({
                           );
                         }}
                       >
-                        {languages[index].title}
-                        {languages[index].proficiency &&
-                          ' (' + languages[index].proficiency + ')'}
+                        {lang.title}
+                        {lang.proficiency && ' (' + lang.proficiency + ')'}
                       </div>
                       <div className="absolute -top-1 -right-52 items-center">
                         <DeleteButton
@@ -183,9 +184,8 @@ export default function ProfileLanguages({
                       );
                     }}
                   >
-                    {languages[index].title}
-                    {languages[index].proficiency &&
-                      ' (' + languages[index].proficiency + ')'}
+                    {lang.title}
+                    {lang.proficiency && ' (' + lang.proficiency + ')'}
                   </div>
                 )}
               </form>

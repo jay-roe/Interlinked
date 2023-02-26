@@ -240,9 +240,13 @@ export default function EditProfile() {
   // User logged in
   return (
     <div className="container mx-auto text-white">
-      <div className="mb-2 flex justify-between">
-        <h1 className="text-3xl font-extrabold">Edit Profile</h1>
-        <Button data-testid="update-account-button" onClick={updateAccount}>
+      <div className="mb-3 flex justify-between">
+        <h1 className="text-7xl font-extrabold">Edit Profile</h1>
+        <Button
+          className="max-h-10 self-end"
+          data-testid="update-account-button"
+          onClick={updateAccount}
+        >
           Save Changes
         </Button>
       </div>
@@ -271,9 +275,6 @@ export default function EditProfile() {
 
         <LinkButton currentUser={currentUser} />
 
-        <h1 className="text-2xl font-extrabold">
-          Link with {currentUser.name?.split(' ')[0]}
-        </h1>
         <ProfileContact
           isEditable
           email={email}
@@ -284,7 +285,6 @@ export default function EditProfile() {
           setContactEditing={setContactEditing}
         />
 
-        <h2 className="inline-block text-2xl font-extrabold">Languages 🗨 </h2>
         <ProfileLanguages
           isEditable
           languages={languages}
@@ -296,7 +296,6 @@ export default function EditProfile() {
         />
 
         {/* TODO: change coding languages picture */}
-        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
         <ProfileCodingLanguages
           isEditable
           codingLanguages={codingLanguages}
@@ -307,7 +306,6 @@ export default function EditProfile() {
           setNewCodingLanguage={setNewCodingLanguage}
         />
 
-        <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation
           isEditable
           education={education}
@@ -316,7 +314,6 @@ export default function EditProfile() {
           setEducationEditing={setEducationEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses
           isEditable
           courses={courses}
@@ -325,7 +322,6 @@ export default function EditProfile() {
           setCourses={setCourses}
         />
 
-        <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
         <ProfileExperience
           isEditable
           experience={experience}
@@ -334,7 +330,6 @@ export default function EditProfile() {
           setExperienceEditing={setExperienceEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
         <ProfileProjects
           isEditable
           projects={projects}
@@ -343,7 +338,6 @@ export default function EditProfile() {
           setProjects={setProjects}
         />
 
-        <h2 className="text-2xl font-extrabold">Skills 💪</h2>
         <ProfileSkills
           isEditable
           skills={skills}
@@ -352,7 +346,6 @@ export default function EditProfile() {
           setSkillsEditing={setSkillsEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
         <ProfileAwards
           isEditable
           awards={awards}

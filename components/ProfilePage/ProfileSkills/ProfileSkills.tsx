@@ -3,9 +3,7 @@ import EditButton from '@/components/Buttons/EditButton/EditButton';
 import { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
-import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
-import TextArea from '@/components/InputFields/TextArea/TextArea';
 
 export default function ProfileSkills({
   skills,
@@ -22,22 +20,28 @@ export default function ProfileSkills({
 }) {
   // Live version of skills component
   if (!isEditable) {
+    if (!skills || !skills[0]) return;
+
     return (
-      <ul className="inline-flex">
-        {skills.map((skill, index) => (
-          <p
-            key={index}
-            className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
-          >
-            {skill}
-          </p>
-        ))}
-      </ul>
+      <>
+        <h2 className="text-2xl font-extrabold">Skills 💪</h2>
+        <ul className="inline-flex">
+          {skills.map((skill, index) => (
+            <p
+              key={index}
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+            >
+              {skill}
+            </p>
+          ))}
+        </ul>
+      </>
     );
   }
   // editable version
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
       {skills.map((skill, index) => (
         <form
           action=""

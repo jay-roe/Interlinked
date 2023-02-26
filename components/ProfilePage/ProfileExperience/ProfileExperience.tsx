@@ -22,24 +22,29 @@ export default function ProfileExperience({
   setExperience?: Dispatch<SetStateAction<User['experience']>>;
 }) {
   if (!isEditable) {
+    if (!experience || !experience[0]) return;
+
     return (
-      <CardStack>
-        {experience.map((exp, index) => (
-          <div key={index} data-testid={`live-exp-${index}`}>
-            {exp.image && <img src={exp.image} alt={exp.title} />}
-            <h3>{exp.title}</h3>
-            <h4>{exp.employer}</h4>
-            <h5>{exp.location}</h5>
-            <h6>
-              {exp.startDate.toDate().toLocaleDateString()}
-              {exp.endDate
-                ? ' - ' + exp.endDate.toDate().toLocaleDateString()
-                : ''}
-            </h6>
-            <div>{exp.description}</div>
-          </div>
-        ))}
-      </CardStack>
+      <>
+        <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
+        <CardStack>
+          {experience.map((exp, index) => (
+            <div key={index} data-testid={`live-exp-${index}`}>
+              {exp.image && <img src={exp.image} alt={exp.title} />}
+              <h3>{exp.title}</h3>
+              <h4>{exp.employer}</h4>
+              <h5>{exp.location}</h5>
+              <h6>
+                {exp.startDate.toDate().toLocaleDateString()}
+                {exp.endDate
+                  ? ' - ' + exp.endDate.toDate().toLocaleDateString()
+                  : ''}
+              </h6>
+              <div>{exp.description}</div>
+            </div>
+          ))}
+        </CardStack>
+      </>
     );
   }
   return (
