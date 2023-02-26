@@ -22,7 +22,7 @@ const PostBody = ({
         post.image_content.map((image, index) => {
           return (
             <img
-              data-testid="test-image"
+              data-testid={`test-image-${index}`}
               key={index}
               src={image}
               className="max-w-64 max-h-64 object-contain"

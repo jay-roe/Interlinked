@@ -67,7 +67,12 @@ export default function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   {/* // TODO Fix font family for logo */}
-                  <h1 className="font-sans text-white">INTERLINKED</h1>
+                  <h1
+                    data-testid="home-interlinked"
+                    className="font-sans text-white"
+                  >
+                    INTERLINKED
+                  </h1>
                   {/* <img
                     className="block h-8 w-auto lg:hidden"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"

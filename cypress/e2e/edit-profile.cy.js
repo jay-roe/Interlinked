@@ -4,6 +4,90 @@ describe('Full edit profile spec', () => {
 
   before(() => {
     cy.login(email, pw);
+    cy.visit('/edit-profile');
+
+    // Start reset name
+    let oldName = 'old, boring name';
+    cy.get('[data-testid=name-edit-button]').click();
+    cy.get('[data-testid=change-name]').clear().type(oldName);
+    cy.get('[data-testid=name-edit-button]').click();
+    // End reset name
+
+    // Start reset bio
+    let oldBio = 'Boring bio';
+    cy.get('[data-testid=bio-edit-button]').click();
+    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
+    cy.get('[data-testid=bio-edit-button]').click();
+    // End reset bio
+
+    // Start reset languages
+    for (let i = 0; i < 2; i++) {
+      cy.get('body').then((body) => {
+        if (body.find('[data-testid=lang-not-hovering-0]').length > 0) {
+          cy.get('[data-testid=lang-not-hovering-0]')
+            .trigger('mouseover')
+            .get('[data-testid=lang-hovering-parent-0]')
+            .trigger('mouseover')
+            .get('[data-testid=lang-hovering-delete-0]')
+            .click();
+        }
+      });
+    }
+    // End reset languages
+
+    // Start reset coding languages
+    for (let i = 0; i < 2; i++) {
+      cy.get('body').then((body) => {
+        if (body.find('[data-testid=code-lang-not-hovering-0]').length > 0) {
+          cy.get('[data-testid=code-lang-not-hovering-0]')
+            .trigger('mouseover')
+            .get('[data-testid=code-lang-hovering-parent-0]')
+            .trigger('mouseover')
+            .get('[data-testid=code-lang-hovering-delete-0]')
+            .click();
+        }
+      });
+    }
+    // End reset coding languages
+
+    // Start reset edu
+    cy.get('body').then((body) => {
+      if (body.find('[data-testid=delete-edu-ext-0]').length > 0) {
+        cy.get('[data-testid=delete-edu-ext-0]').click();
+      }
+    });
+    // End reset edu
+
+    // Start reset courses
+    cy.get('body').then((body) => {
+      if (body.find('[data-testid=delete-course-button-0]').length > 0) {
+        cy.get('[data-testid=delete-course-button-0]').click();
+      }
+    });
+    // End reset courses
+
+    // Start reset experience
+    cy.get('body').then((body) => {
+      if (body.find('[data-testid=exp-delete-btn-0]').length > 0) {
+        cy.get('[data-testid=exp-delete-btn-0]').click();
+      }
+    });
+    // End reset experience
+
+    // Save and logout
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.get('[data-testid=home-interlinked]').should('exist');
+
+    cy.get('[data-testid=live-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-coding-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-edu-0]').should('not.exist');
+    cy.get('[data-testid=live-courses-0]').should('not.exist');
+    cy.get('[data-testid=live-exp-0]').should('not.exist');
   });
 
   it('can edit profile name', () => {
@@ -163,7 +247,8 @@ describe('Full edit profile spec', () => {
     let expEmployer = 'Elon Musk';
     let expStartDate = '2020-03-04';
     let expEndDate = '2023-01-23';
-    let expDesc = 'Trading socks on the sock market. What else do you want to know.';
+    let expDesc =
+      'Trading socks on the sock market. What else do you want to know.';
 
     cy.get('[data-testid=exp-add-button').click();
 
@@ -191,79 +276,5 @@ describe('Full edit profile spec', () => {
       .should('contain', '2020')
       .should('contain', '2023')
       .should('contain', expDesc);
-  });
-
-  after(() => {
-    cy.visit('/edit-profile');
-
-    // Start reset name
-    let oldName = 'old, boring name';
-    cy.get('[data-testid=name-edit-button]').click();
-    cy.get('[data-testid=change-name]').clear().type(oldName);
-    cy.get('[data-testid=name-edit-button]').click();
-    // End reset name
-
-    // Start reset bio
-    let oldBio = 'Boring bio';
-    cy.get('[data-testid=bio-edit-button]').click();
-    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
-    cy.get('[data-testid=bio-edit-button]').click();
-    // End reset bio
-
-    // Start reset languages
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
-
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
-    // End reset languages
-
-    // Start reset coding languages
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-    // End reset coding languages
-
-    // Start reset edu
-    cy.get('[data-testid=delete-edu-ext-0]').click();
-    // End reset edu
-
-    // Start reset courses
-    cy.get('[data-testid=delete-course-button-0]').click();
-    // End reset courses
-
-    // Start reset experience
-    cy.get('[data-testid=exp-delete-btn-0]').click();
-    // End reset experience
-
-    // Save and logout
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=profile-title]').should('exist');
-    cy.logout();
   });
 });

@@ -35,6 +35,7 @@ export default function ProfileLanguages({
           {languages.map((lang, index) => (
             <li
               key={index}
+              data-testid={`live-lang-${index}`}
               className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
             >
               {lang.title}

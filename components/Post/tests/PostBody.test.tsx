@@ -61,6 +61,6 @@ it('renders content for given post', async () => {
 it('renders image for given post', async () => {
   const { findByTestId } = render(<PostBody post={post} />);
 
-  const postImage = await findByTestId('test-image');
+  const postImage = await findByTestId('test-image-0');
   expect(postImage).toBeInTheDocument();
 });
