@@ -42,6 +42,8 @@ Cypress.Commands.add('logout', () => {
       cy.get('[data-testid="nav-logout"').click();
 
       cy.get('[data-testid="base-msg"').should('exist');
+    } else {
+      cy.visit('');
     }
   });
 });
