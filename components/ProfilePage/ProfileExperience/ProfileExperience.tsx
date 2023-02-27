@@ -49,6 +49,7 @@ export default function ProfileExperience({
   }
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
       {experience.map((exp, index) => (
         <form
           key={index}
