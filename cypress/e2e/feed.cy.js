@@ -1,4 +1,4 @@
-describe('Full edit profile spec', () => {
+describe('Full feed spec', () => {
   let email = 'test2+cypress@test.com';
   let pw = '123456';
 
@@ -9,6 +9,10 @@ describe('Full edit profile spec', () => {
     cy.login(email, pw);
     cy.visit('/feed');
   });
+
+  after(() => {
+    cy.logout();
+  })
 
   it('can post', () => {
     cy.get('[data-testid=post-content]').type(postMessage);

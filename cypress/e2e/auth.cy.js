@@ -3,7 +3,6 @@ describe('Full auth spec', () => {
   let pw = '123456';
 
   it('can register', () => {
-    cy.logout();
     cy.visit('register');
 
     cy.get('input[name=email]').type(email);
