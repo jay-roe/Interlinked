@@ -18,10 +18,16 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import Notifications from '@/components/Notification/Notification';
 import { FiBell } from 'react-icons/fi';
+import { doc, updateDoc } from 'firebase/firestore';
+import { storage } from '@/config/firebase';
 
 const Notification = () => {
 
+  // set the current user
+  const { currentUser, authUser, deleteAccount, refresh } = useAuth();
+
   return (
+
 
     // tried a bunch of stuff but I can't get "read all" and the bell button side by side loll:')
     <div className="container mx-auto text-white">
@@ -37,7 +43,7 @@ const Notification = () => {
       
     </div>
     <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-      <Notifications></Notifications>
+      <Notifications notifications={currentUser.notifications}></Notifications>
     </div>
     </div>
       
