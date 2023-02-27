@@ -25,9 +25,9 @@ export default function ProfileAwards({
     if (!awards || !awards[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-        <CardStack height={12}>
+        <CardStack>
           {awards.map((award, index) => (
             <div key={index} data-testid="live-awards">
               <h3 className="text-xl font-semibold">{award.title}</h3>
@@ -41,7 +41,7 @@ export default function ProfileAwards({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
 

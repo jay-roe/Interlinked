@@ -26,9 +26,9 @@ export default function ProfileCertifications({
     if (!certifications || !certifications[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Certifications</h2>
-        <CardStack height={16}>
+        <CardStack>
           {certifications.map((cert, index) => (
             <div key={index} data-testid="live-certifications">
               <h3 className="text-xl font-bold">{cert.name}</h3>
@@ -47,7 +47,7 @@ export default function ProfileCertifications({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
 

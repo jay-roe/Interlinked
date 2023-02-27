@@ -24,10 +24,10 @@ export default function ProfileContact({
   // Live version
   if (!isEditable) {
     return (
-      <>
+      <div className="mb-8">
         <h1 className="text-2xl font-extrabold">Contact</h1>
         <div
-          className="mt-2 mb-3 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4"
+          className="mt-2 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4"
           data-testid="live-contact"
         >
           <div className="flex">
@@ -46,7 +46,7 @@ export default function ProfileContact({
             </div>
           )}
         </div>
-      </>
+      </div>
     );
   }
 

@@ -27,20 +27,20 @@ export default function ProfileCodingLanguages({
     if (!codingLanguages || !codingLanguages[0]) return;
 
     return (
-      <>
-        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
-        <ul className="mb-3 inline-flex" data-testid="live-profile">
+      <div className="mb-7">
+        <h2 className="mb-2 text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <ul className="inline-flex flex-wrap" data-testid="live-profile">
           {codingLanguages.map((cl, index) => (
             <li
               key={index}
               data-testid={`live-coding-lang-${index}`}
-              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
             >
               {cl}
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 
@@ -55,7 +55,7 @@ export default function ProfileCodingLanguages({
               <form
                 data-testid="editable-profile-form"
                 action=""
-                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
                 onSubmit={(e) => {
                   e.preventDefault();
                   setCodingLanguagesHovering((clsedits) =>

@@ -25,7 +25,7 @@ export default function ProfileExperience({
     if (!experience || !experience[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
         <CardStack>
           {experience.map((exp, index) => (
@@ -44,11 +44,12 @@ export default function ProfileExperience({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
   return (
     <div className="mb-3">
+      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
       {experience.map((exp, index) => (
         <form
           key={index}

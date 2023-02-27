@@ -26,9 +26,9 @@ export default function ProfileProjects({
     if (!projects || !projects[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
-        <CardStack height={20}>
+        <CardStack>
           {projects.map((proj, index) => (
             <div key={index} data-testid="live-proj">
               {proj.image && <img src={proj.image} alt={proj.title} />}
@@ -75,7 +75,7 @@ export default function ProfileProjects({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
   return (
