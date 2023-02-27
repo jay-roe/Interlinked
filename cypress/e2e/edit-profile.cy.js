@@ -1,4 +1,4 @@
-describe('Full edit profile spec', () => {
+describe('Full edit profile spec', async () => {
   let email = 'test2+cypress@test.com';
   let pw = '123456';
 
@@ -96,8 +96,6 @@ describe('Full edit profile spec', () => {
     cy.on('window:confirm', () => {
       return true;
     });
-
-    cy.on('window:alert', () => {});
 
     cy.get('[data-testid=profile-title]').should('contain', newName);
   });
