@@ -4,13 +4,14 @@ import type { Post } from '@/types/Post';
 export type User = {
   awards?: Award[];
   bio?: string;
+  certifications?: Certification[];
   codingLanguages?: string[];
   connections?: User[];
   courses?: Course[];
   coverPhoto?: string;
   education?: Education[];
   email: string;
-  experience?: Experience[];
+  experience?: WorkExperience[];
   languages?: Language[];
   name: string;
   phone?: string;
@@ -22,7 +23,7 @@ export type User = {
     github?: string;
     instagram?: string;
   };
-  volunteering?: Experience[];
+  volunteering?: VolunteeringExperience[];
   notifications?: Notification[];
 };
 
@@ -30,6 +31,13 @@ type Award = {
   title: string;
   description?: string;
   date: Timestamp;
+};
+
+type Certification = {
+  name: string;
+  issuer: string;
+  date: Timestamp;
+  link?: string;
 };
 
 type Course = {
@@ -51,12 +59,19 @@ type Education = {
 type Experience = {
   title: string;
   location: string;
-  employer: string;
   description?: string;
   image?: string;
   startDate: Timestamp;
   endDate?: Timestamp;
 };
+
+interface WorkExperience extends Experience {
+  employer: string;
+}
+
+interface VolunteeringExperience extends Experience {
+  organization: string;
+}
 
 export type Language = {
   title: string;

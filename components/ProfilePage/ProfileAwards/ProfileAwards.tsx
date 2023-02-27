@@ -18,33 +18,37 @@ export default function ProfileAwards({
   isEditable?: boolean;
   awardsEditing?: boolean[];
   setAwardsEditing?: Dispatch<SetStateAction<boolean[]>>;
-  addAwards?: Dispatch<SetStateAction<boolean>>;
   setAwards?: Dispatch<SetStateAction<User['awards']>>;
-  setNewAward?: (awards: User['awards']) => void;
 }) {
   // Live version of awards component
   if (!isEditable) {
+    if (!awards || !awards[0]) return;
+
     return (
-      <CardStack height={12}>
-        {awards.map((award, index) => (
-          <div key={index} data-testid="live-awards">
-            <h3 className="text-xl font-semibold">{award.title}</h3>
-            <h6>
-              {`${award.date.toDate().toLocaleString('default', {
-                month: 'long',
-                year: 'numeric',
-              })}`}
-            </h6>
-            <p>{award.description}</p>
-          </div>
-        ))}
-      </CardStack>
+      <div className="mb-10">
+        <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
+        <CardStack>
+          {awards.map((award, index) => (
+            <div key={index} data-testid="live-awards">
+              <h3 className="text-xl font-semibold">{award.title}</h3>
+              <h6>
+                {`${award.date.toDate().toLocaleString('default', {
+                  month: 'long',
+                  year: 'numeric',
+                })}`}
+              </h6>
+              <p>{award.description}</p>
+            </div>
+          ))}
+        </CardStack>
+      </div>
     );
   }
 
   // Editable version of awards component
   return (
     <div>
+      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
       {awards.map((award, index) => (
         <form
           action=""

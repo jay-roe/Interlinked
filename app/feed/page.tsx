@@ -1,15 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import {
-  getDocs,
-  query,
-  where,
-  documentId,
-  orderBy,
-  collection,
-} from 'firebase/firestore';
-import { firestore } from '@/config/firebase';
+import { getDocs, query, where, documentId, orderBy } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
@@ -20,7 +12,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
-const Feeds = () => {
+export default function Feeds() {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [postIDs, setPostIDs] = useState<string[]>([]);
@@ -103,6 +95,7 @@ const Feeds = () => {
           return (
             <FullPostCard
               key={index}
+              testKey={index} // key is for React only and not included in the DOM, so we need this for testing.
               post={post}
               postID={postIDs[index]}
               author={authors[post.authorID]}
@@ -114,6 +107,4 @@ const Feeds = () => {
       </CardGrid>
     </div>
   );
-};
-
-export default Feeds;
+}

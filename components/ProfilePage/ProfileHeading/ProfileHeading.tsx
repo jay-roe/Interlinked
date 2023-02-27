@@ -1,5 +1,6 @@
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import Input from '@/components/InputFields/Input/Input';
+import TextArea from '@/components/InputFields/TextArea/TextArea';
 import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
@@ -63,14 +64,17 @@ export default function ProfileHeading({
                 style={{ display: 'none' }}
                 onChange={handleFileSelected}
               />
-              <label htmlFor="upload-profile-picture">
+              <label
+                htmlFor="upload-profile-picture"
+                className="cursor-pointer"
+              >
                 <img
-                  className="h-40 w-40 max-w-none rounded-full"
+                  className="h-40 w-40 max-w-none rounded-full transition-all hover:brightness-150"
                   src={profilePictureURL}
                   alt={name || 'Profile Picture'}
                 />
                 <FaRegEdit
-                  className="absolute -right-4 -bottom-4 p-2 text-yellow-600"
+                  className="absolute -right-4 -bottom-4 p-2 text-yellow-600 transition-all hover:text-yellow-500"
                   size={45}
                 />
               </label>
@@ -115,9 +119,8 @@ export default function ProfileHeading({
         <div className="flex items-center">
           {bioEditing ? (
             // editable bio
-            <textarea
+            <TextArea
               data-testid="bio-editing"
-              className="mb-2 mt-2 block min-h-[75px] w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
               name="bio"
               rows={4}
               value={bio}
@@ -125,7 +128,9 @@ export default function ProfileHeading({
             />
           ) : (
             // live bio
-            <p data-testid='profile-bio'>{bio || 'No bio given.'}</p>
+            <p className="m-auto md:m-0" data-testid="profile-bio">
+              {bio || 'No bio given.'}
+            </p>
           )}
           {isEditable && (
             <EditButton

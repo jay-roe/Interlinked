@@ -34,6 +34,8 @@ import {
   ref,
   uploadBytes,
 } from 'firebase/storage';
+import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
+import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -138,6 +140,24 @@ export default function EditProfile() {
     currentUser?.courses.map(() => false)
   );
 
+  // Ceritifications component states
+  const [certifications, setCertifications] = useState<User['certifications']>(
+    currentUser?.certifications || []
+  );
+  const [certificationsEditing, setCertificationsEditing] = useState(
+    currentUser?.certifications
+      ? currentUser?.certifications.map(() => false)
+      : []
+  );
+
+  // Volunteering component states
+  const [volunteering, setVolunteering] = useState<User['volunteering']>(
+    currentUser?.volunteering
+  );
+  const [volunteeringEditing, setVolunteeringEditing] = useState(
+    currentUser?.volunteering.map(() => false)
+  );
+
   // User not logged in
   if (!currentUser || !authUser) {
     return (
@@ -170,6 +190,8 @@ export default function EditProfile() {
     projects: projects,
     experience: experience,
     courses: courses,
+    certifications: certifications.filter((_, i) => !certificationsEditing[i]),
+    volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
   };
 
   async function uploadProfilePicture() {
@@ -181,22 +203,6 @@ export default function EditProfile() {
     // Upload new profile picture, update database with new link
     await uploadBytes(profilePictureRef, profilePicture);
     statesToUpdate.profilePicture = await getDownloadURL(profilePictureRef);
-
-    // TODO Remove previous profile picture
-    // let oldProfilePictureRef;
-    // try {
-    //   oldProfilePictureRef = ref(storage, currentUser.profilePicture);
-    // } catch (err) {
-    //   console.error(err);
-    // }
-
-    // if (oldProfilePictureRef) {
-    //   try {
-    //     await deleteObject(oldProfilePictureRef);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // }
   }
 
   async function updateAccount() {
@@ -234,9 +240,13 @@ export default function EditProfile() {
   // User logged in
   return (
     <div className="container mx-auto text-white">
-      <div className="mb-2 flex justify-between">
-        <h1 className="text-3xl font-extrabold">Edit Profile</h1>
-        <Button data-testid="update-account-button" onClick={updateAccount}>
+      <div className="mb-3 flex justify-between">
+        <h1 className="text-7xl font-extrabold">Edit Profile</h1>
+        <Button
+          className="max-h-10 self-end"
+          data-testid="update-account-button"
+          onClick={updateAccount}
+        >
           Save Changes
         </Button>
       </div>
@@ -265,9 +275,6 @@ export default function EditProfile() {
 
         <LinkButton currentUser={currentUser} />
 
-        <h1 className="text-2xl font-extrabold">
-          Link with {currentUser.name?.split(' ')[0]}
-        </h1>
         <ProfileContact
           isEditable
           email={email}
@@ -278,7 +285,6 @@ export default function EditProfile() {
           setContactEditing={setContactEditing}
         />
 
-        <h2 className="inline-block text-2xl font-extrabold">Languages 🗨 </h2>
         <ProfileLanguages
           isEditable
           languages={languages}
@@ -290,7 +296,6 @@ export default function EditProfile() {
         />
 
         {/* TODO: change coding languages picture */}
-        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
         <ProfileCodingLanguages
           isEditable
           codingLanguages={codingLanguages}
@@ -301,7 +306,6 @@ export default function EditProfile() {
           setNewCodingLanguage={setNewCodingLanguage}
         />
 
-        <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <ProfileEducation
           isEditable
           education={education}
@@ -310,7 +314,6 @@ export default function EditProfile() {
           setEducationEditing={setEducationEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <ProfileCourses
           isEditable
           courses={courses}
@@ -319,7 +322,6 @@ export default function EditProfile() {
           setCourses={setCourses}
         />
 
-        <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
         <ProfileExperience
           isEditable
           experience={experience}
@@ -328,7 +330,6 @@ export default function EditProfile() {
           setExperienceEditing={setExperienceEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
         <ProfileProjects
           isEditable
           projects={projects}
@@ -337,7 +338,6 @@ export default function EditProfile() {
           setProjects={setProjects}
         />
 
-        <h2 className="text-2xl font-extrabold">Skills 💪</h2>
         <ProfileSkills
           isEditable
           skills={skills}
@@ -346,13 +346,28 @@ export default function EditProfile() {
           setSkillsEditing={setSkillsEditing}
         />
 
-        <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
         <ProfileAwards
           isEditable
           awards={awards}
           awardsEditing={awardsEditing}
           setAwards={setAwards}
           setAwardsEditing={setAwardsEditing}
+        />
+
+        <ProfileCertifications
+          isEditable
+          certifications={certifications}
+          setCertifications={setCertifications}
+          certificationsEditing={certificationsEditing}
+          setCertificationsEditing={setCertificationsEditing}
+        />
+
+        <ProfileVolunteering
+          isEditable
+          volunteering={volunteering}
+          setVolunteering={setVolunteering}
+          volunteeringEditing={volunteeringEditing}
+          setVolunteeringEditing={setVolunteeringEditing}
         />
       </div>
       <div className="flex justify-end">
@@ -368,7 +383,7 @@ export default function EditProfile() {
       </p>
       <Button
         data-testid="danger-zone"
-        className="bg-red-600 hover:bg-red-500"
+        variant="danger"
         onClick={() => setIsModalShow(true)}
       >
         Delete account

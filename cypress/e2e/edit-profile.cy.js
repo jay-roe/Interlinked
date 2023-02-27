@@ -1,9 +1,88 @@
-describe('Full edit profile spec', () => {
+describe('Full edit profile spec', async () => {
   let email = 'test2+cypress@test.com';
   let pw = '123456';
 
   before(() => {
     cy.login(email, pw);
+    cy.visit('/edit-profile');
+
+    // Start reset name
+    let oldName = 'old, boring name';
+    cy.get('[data-testid=name-edit-button]').click();
+    cy.get('[data-testid=change-name]').clear().type(oldName);
+    cy.get('[data-testid=name-edit-button]').click();
+    // End reset name
+
+    // Start reset bio
+    let oldBio = 'Boring bio';
+    cy.get('[data-testid=bio-edit-button]').click();
+    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
+    cy.get('[data-testid=bio-edit-button]').click();
+    // End reset bio
+
+    // Start reset languages
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
+    // End reset languages
+
+    // Start reset coding languages
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+    // End reset coding languages
+
+    // Start reset edu
+    cy.get('[data-testid=delete-edu-ext-0]').click();
+    // End reset edu
+
+    // Start reset courses
+    cy.get('[data-testid=delete-course-button-0]').click();
+    // End reset courses
+
+    // Start reset experience
+    cy.get('[data-testid=exp-delete-btn-0]').click();
+    // End reset experience
+
+    // Save and logout
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.get('[data-testid=home-interlinked]').should('exist');
+    cy.get('[data-testid=profile-info]').should('exist');
+
+    cy.get('[data-testid=live-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-coding-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-edu-0]').should('not.exist');
+    cy.get('[data-testid=live-courses-0]').should('not.exist');
+    cy.get('[data-testid=live-exp-0]').should('not.exist');
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   it('can edit profile name', () => {
@@ -17,8 +96,6 @@ describe('Full edit profile spec', () => {
     cy.on('window:confirm', () => {
       return true;
     });
-
-    cy.on('window:alert', () => {});
 
     cy.get('[data-testid=profile-title]').should('contain', newName);
   });
@@ -155,64 +232,28 @@ describe('Full edit profile spec', () => {
       .should('contain', courseDesc);
   });
 
-  after(() => {
+  it('can add new experience', () => {
     cy.visit('/edit-profile');
 
-    // Start reset name
-    let oldName = 'old, boring name';
-    cy.get('[data-testid=name-edit-button]').click();
-    cy.get('[data-testid=change-name]').clear().type(oldName);
-    cy.get('[data-testid=name-edit-button]').click();
-    // End reset name
+    let expTitle = 'Sock trader';
+    let expLocation = 'Web3';
+    let expEmployer = 'Elon Musk';
+    let expStartDate = '2020-03-04';
+    let expEndDate = '2023-01-23';
+    let expDesc =
+      'Trading socks on the sock market. What else do you want to know.';
 
-    // Start reset bio
-    let oldBio = 'Boring bio';
-    cy.get('[data-testid=bio-edit-button]').click();
-    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
-    cy.get('[data-testid=bio-edit-button]').click();
-    // End reset bio
+    cy.get('[data-testid=exp-add-button').click();
 
-    // Start reset languages
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
+    cy.get('[data-testid=edit-exp-title-0').type(expTitle);
+    cy.get('[data-testid=edit-exp-location-0').type(expLocation);
+    cy.get('[data-testid=edit-exp-employer-0').type(expEmployer);
+    cy.get('[data-testid=edit-exp-startDate-0').type(expStartDate);
+    cy.get('[data-testid=edit-exp-endDate-0').type(expEndDate);
+    cy.get('[data-testid=edit-exp-description-0').type(expDesc);
 
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
-    // End reset languages
+    cy.get('[data-testid=exp-save-btn-0]').click();
 
-    // Start reset coding languages
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-    // End reset coding languages
-
-    // Start reset edu
-    cy.get('[data-testid=delete-edu-ext-0]').click();
-    // End reset edu
-
-    // Start reset courses
-    cy.get('[data-testid=delete-course-button-0]').click();
-    // End reset courses
-
-    // Save and logout
     cy.get('[data-testid=update-account-button]').click();
 
     cy.on('window:confirm', () => {
@@ -221,7 +262,12 @@ describe('Full edit profile spec', () => {
 
     cy.on('window:alert', () => {});
 
-    cy.get('[data-testid=profile-title]').should('exist');
-    cy.logout();
+    cy.get('[data-testid=live-exp-0]')
+      .should('contain', expTitle)
+      .should('contain', expLocation)
+      .should('contain', expEmployer)
+      .should('contain', '2020')
+      .should('contain', '2023')
+      .should('contain', expDesc);
   });
 });

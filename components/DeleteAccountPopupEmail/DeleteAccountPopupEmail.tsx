@@ -53,16 +53,18 @@ export default function DeleteAccountPopupEmail({
           Incorrect password.
         </p>
       ) : null}
-      <Button
-        data-testid="del-acc"
-        onClick={() => handleDeleteClick()}
-        className="bg-red-500"
-      >
-        Delete account
-      </Button>
-      <Button data-testid="close-popup" onClick={onHideLocal}>
-        Close
-      </Button>
+      <div className="flex justify-between">
+        <Button
+          data-testid="del-acc"
+          variant="danger"
+          onClick={() => handleDeleteClick()}
+        >
+          Delete account
+        </Button>
+        <Button data-testid="close-popup" onClick={onHideLocal}>
+          Close
+        </Button>
+      </div>
     </div>
   );
 }

@@ -17,21 +17,19 @@ const PostBody = ({
         {post?.title || ''}
       </div>
       <div className="leading-normal">{post?.text_content || ''}</div>
-      {post?.image_content ? (
+      {post?.image_content &&
+        post.image_content[0] &&
         post.image_content.map((image, index) => {
           return (
             <img
-              data-testid="test-image"
+              data-testid={`test-image-${index}`}
               key={index}
               src={image}
               className="max-w-64 max-h-64 object-contain"
               alt="..."
             />
           );
-        })
-      ) : (
-        <></>
-      )}{' '}
+        })}
       {/* object-contain is added to keep large images from taking up the entire body */}
     </div>
   );
