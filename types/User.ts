@@ -86,7 +86,7 @@ type Recommendation = {
 
 export type Notification = {
   notifType: NotifType; // your link posts (post), comment or like on your post (interaction), link request (linkedReq), dm
-  context?: string; //small bit of text that describes the notif
+  context: string; //small bit of text that describes the notif
   sender: User; //User that caused notif
   notifTime?: Timestamp;
   read: boolean;

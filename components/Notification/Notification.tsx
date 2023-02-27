@@ -8,9 +8,10 @@ import DmNotification from './DmNotification';
 import LinkAcceptNotification from './LinkAcceptNotification';
 
 
-export default function notification({notifications,} : {notifications: Notification[]}) {
+export default function NotificationList({notifications,} : {notifications: Notification[]}) {
 
-
+  console.log(notifications);
+  
   return (
     
     <ul className="mb-3" data-testid="live-profile">

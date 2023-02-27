@@ -12,7 +12,7 @@ export default function notificationHeader({Notification:notif}) {
         </img>
         <div>
           <p>{notif.sender.name}</p>
-          <p>10.26/01</p>
+          <p>{/*notif.notifTime*/}</p>
         </div>
     </div>
   );
