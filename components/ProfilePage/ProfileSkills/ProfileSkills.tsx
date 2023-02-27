@@ -29,7 +29,7 @@ export default function ProfileSkills({
           {skills.map((skill, index) => (
             <p
               key={index}
-              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
             >
               {skill}
             </p>

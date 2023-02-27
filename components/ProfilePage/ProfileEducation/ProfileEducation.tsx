@@ -28,11 +28,11 @@ export default function ProfileEducation({
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
+        <h2 className="text-2xl font-extrabold">Education 🏫</h2>
         <CardStack data-testid="education-stack">
           {education.map((ed, index) => (
             <div data-testid={`live-edu-${index}`} key={index}>
-              <h3 className="text-xl font-semibold">{ed.program}</h3>
+              <h3 className="text-2xl font-semibold">{ed.program}</h3>
               {ed.image && <img src={ed.image} alt={ed.name} />}
               <h3>{ed.name}</h3>
               <h4>{ed.location}</h4>
