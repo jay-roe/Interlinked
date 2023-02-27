@@ -11,20 +11,18 @@ import {
 } from 'firebase/firestore';
 import { firestore } from '@/config/firebase';
 import { useEffect, useState } from 'react';
-import { db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import { Post } from '@/types/Post';
-import { User } from '@/types/User';
 import Notifications from '@/components/Notification/Notification';
 import { FiBell } from 'react-icons/fi';
+import { db } from '@/config/firestore';
 import { doc, updateDoc } from 'firebase/firestore';
 import { storage } from '@/config/firebase';
 
 const Notification = () => {
 
   // set the current user
-  const { currentUser, authUser, deleteAccount, refresh } = useAuth();
+  const { currentUser } = useAuth();
 
   return (
 
