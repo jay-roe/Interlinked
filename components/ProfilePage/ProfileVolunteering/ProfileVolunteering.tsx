@@ -25,7 +25,7 @@ export default function ProfileVolunteering({
     if (!volunteering || !volunteering[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
         <CardStack>
           {volunteering?.map((vol, index) => (
@@ -44,7 +44,7 @@ export default function ProfileVolunteering({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
   return (

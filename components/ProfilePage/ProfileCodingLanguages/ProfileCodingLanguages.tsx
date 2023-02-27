@@ -27,9 +27,9 @@ export default function ProfileCodingLanguages({
     if (!codingLanguages || !codingLanguages[0]) return;
 
     return (
-      <>
-        <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
-        <ul className="mb-3 inline-flex flex-wrap" data-testid="live-profile">
+      <div className="mb-7">
+        <h2 className="mb-2 text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <ul className="inline-flex flex-wrap" data-testid="live-profile">
           {codingLanguages.map((cl, index) => (
             <li
               key={index}
@@ -40,7 +40,7 @@ export default function ProfileCodingLanguages({
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 

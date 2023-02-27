@@ -26,7 +26,7 @@ export default function ProfileProjects({
     if (!projects || !projects[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
         <CardStack>
           {projects.map((proj, index) => (
@@ -75,7 +75,7 @@ export default function ProfileProjects({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
   return (

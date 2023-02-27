@@ -25,7 +25,7 @@ export default function ProfileCourses({
     if (!courses || !courses[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
         <CardStack>
           {courses.map((course, index) => (
@@ -36,7 +36,7 @@ export default function ProfileCourses({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
   // editable version

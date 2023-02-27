@@ -26,7 +26,7 @@ export default function ProfileCertifications({
     if (!certifications || !certifications[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Certifications</h2>
         <CardStack>
           {certifications.map((cert, index) => (
@@ -47,7 +47,7 @@ export default function ProfileCertifications({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
 

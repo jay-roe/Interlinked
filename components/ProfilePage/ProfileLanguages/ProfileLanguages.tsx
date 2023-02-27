@@ -29,12 +29,9 @@ export default function ProfileLanguages({
     if (!languages || !languages[0]) return;
 
     return (
-      <>
-        <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-        <ul
-          className="mb-3 inline-flex flex-wrap"
-          data-testid="live-lang-profile"
-        >
+      <div className="mb-7">
+        <h2 className="mb-2 text-2xl font-extrabold">Languages 🗨 </h2>
+        <ul className="inline-flex flex-wrap" data-testid="live-lang-profile">
           {languages.map((lang, index) => (
             <li
               key={index}
@@ -46,7 +43,7 @@ export default function ProfileLanguages({
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 

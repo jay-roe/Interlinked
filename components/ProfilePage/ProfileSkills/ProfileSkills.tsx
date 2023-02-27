@@ -23,8 +23,8 @@ export default function ProfileSkills({
     if (!skills || !skills[0]) return;
 
     return (
-      <>
-        <h2 className="text-2xl font-extrabold">Skills 💪</h2>
+      <div className="mb-7">
+        <h2 className="mb-2 text-2xl font-extrabold">Skills 💪</h2>
         <ul className="inline-flex flex-wrap">
           {skills.map((skill, index) => (
             <p
@@ -35,7 +35,7 @@ export default function ProfileSkills({
             </p>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
   // editable version

@@ -27,7 +27,7 @@ export default function ProfileEducation({
     if (!education || !education[0]) return;
 
     return (
-      <>
+      <div className="mb-10">
         <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
         <CardStack data-testid="education-stack">
           {education.map((ed, index) => (
@@ -52,7 +52,7 @@ export default function ProfileEducation({
             </div>
           ))}
         </CardStack>
-      </>
+      </div>
     );
   }
 
