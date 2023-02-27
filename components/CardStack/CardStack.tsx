@@ -113,7 +113,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
 
         // If let go with high velocity, or dragging too far, remove card
         if (
-          (!active && Math.abs(mx) > 50.0 && vx > 0.5) ||
+          (!active && Math.abs(mx) > 30.0 && vx > 0.3) ||
           (active && Math.abs(mx) > 300.0)
         ) {
           // Stop animating (avoids any unwanted physics)
@@ -149,17 +149,28 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
   );
 
   useEffect(() => {
-    let largestHeight = 0;
-    for (let i = 0; i < children.length; i++) {
-      const childHeight = document
-        .getElementById(`stack_card_${i}_${instanceID}`)
-        .getBoundingClientRect().height;
-      if (childHeight > largestHeight) {
-        largestHeight = childHeight;
+    function adjustCardHeight() {
+      let largestHeight = 0;
+      for (let i = 0; i < children.length; i++) {
+        const childHeight = document
+          .getElementById(`stack_card_${i}_${instanceID}`)
+          .getBoundingClientRect().height;
+        if (childHeight > largestHeight) {
+          largestHeight = childHeight;
+        }
       }
+      document.getElementById(`card-stack-parent-${instanceID}`).style.height =
+        largestHeight + (children.length + 1) * 20 + 'px';
     }
-    document.getElementById(`card-stack-parent-${instanceID}`).style.height =
-      largestHeight + (children.length + 1) * 20 + 'px';
+
+    // Trigger on window resize
+    window.addEventListener('resize', adjustCardHeight);
+
+    // Adjust immediately too
+    adjustCardHeight();
+
+    // Component cleanup -> remove window resize listener
+    return () => window.removeEventListener('resize', adjustCardHeight);
   }, [children, instanceID]);
 
   if (children.length === 0) {
