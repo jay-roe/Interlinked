@@ -27,7 +27,7 @@ export default function ProfileCourses({
     return (
       <>
         <h2 className="text-2xl font-extrabold">Courses 📚</h2>
-        <CardStack height={10}>
+        <CardStack>
           {courses.map((course, index) => (
             <div key={index} data-testid={`live-courses-${index}`}>
               <h3>{course.title}</h3>

@@ -27,7 +27,7 @@ export default function ProfileAwards({
     return (
       <>
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
-        <CardStack height={12}>
+        <CardStack>
           {awards.map((award, index) => (
             <div key={index} data-testid="live-awards">
               <h3 className="text-xl font-semibold">{award.title}</h3>

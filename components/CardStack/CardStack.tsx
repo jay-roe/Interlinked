@@ -6,6 +6,9 @@ import { useEffect, useState } from 'react';
 import { GrNext, GrPowerReset } from 'react-icons/gr';
 import Button from '../Buttons/Button';
 
+// Creates unique ID for each instance of Card Stack. Used for setting height to largest children's content.
+let uniqueCount = 0;
+
 // Background color by card index (Front = 0, Second = 1, Third = 2, Any other = none, not shown)
 const backgroundColors = ['#2F263B', '#251E2F', '#1E1825'];
 
@@ -16,15 +19,9 @@ const draggingSpring = () => ({
 });
 const trans = (s: number) => `scale(${s})`;
 
-export default function CardStack({
-  children,
-  top = 2.5,
-  height = 15,
-}: {
-  children: JSX.Element[];
-  top?: number;
-  height?: number;
-}) {
+export default function CardStack({ children }: { children: JSX.Element[] }) {
+  const [instanceID] = useState(uniqueCount++);
+
   // Set of thrown card indexes
   const [thrownCards] = useState(() => new Set<number>());
 
@@ -39,10 +36,10 @@ export default function CardStack({
 
   // Resets deck and clears thrown cards
   function resetCards() {
-    setFrontCardIndex(0);
     setTimeout(() => {
       thrownCards.clear();
       animator.start(() => draggingSpring());
+      setFrontCardIndex(0);
     }, 300);
   }
 
@@ -115,7 +112,10 @@ export default function CardStack({
         const isThrown = thrownCards.has(index);
 
         // If let go with high velocity, or dragging too far, remove card
-        if ((!active && vx > 0.2) || (active && Math.abs(mx) > 300.0)) {
+        if (
+          (!active && Math.abs(mx) > 50.0 && vx > 0.5) ||
+          (active && Math.abs(mx) > 300.0)
+        ) {
           // Stop animating (avoids any unwanted physics)
           cancel();
 
@@ -148,19 +148,23 @@ export default function CardStack({
     { axis: 'x' }
   );
 
+  console.log('front card index', frontCardIndex);
+
   useEffect(() => {
+    console.log('changing height');
+
     let largestHeight = 0;
     for (let i = 0; i < children.length; i++) {
       const childHeight = document
-        .getElementById(`stack_card_${i}`)
+        .getElementById(`stack_card_${i}_${instanceID}`)
         .getBoundingClientRect().height;
       if (childHeight > largestHeight) {
         largestHeight = childHeight;
       }
     }
-    document.getElementById('card-stack-parent').style.height =
-      largestHeight + 'px';
-  }, [children]);
+    document.getElementById(`card-stack-parent-${instanceID}`).style.height =
+      largestHeight + (children.length + 1) * 20 + 'px';
+  }, [children, instanceID]);
 
   if (children.length === 0) {
     return;
@@ -170,8 +174,8 @@ export default function CardStack({
     <div>
       <div
         className="relative flex min-w-[15rem] max-w-xl items-center justify-center"
-        id="card-stack-parent"
-        style={{ height: `${height}rem` }}
+        id={`card-stack-parent-${instanceID}`}
+        // style={{ height: `${height}rem` }}
       >
         {children.map((child, index) => (
           <animated.div
@@ -194,9 +198,11 @@ export default function CardStack({
                   ? backgroundColors[index - frontCardIndex]
                   : 'none',
               width: `calc(100% - ${(index - frontCardIndex) * 2.5}rem)`,
-              top: `${(index - frontCardIndex) * -1.25 + top}rem`,
+              top: `${
+                (index - frontCardIndex) * -1.25 + children.length * 1.25
+              }rem`,
             }}
-            id={`stack_card_${index}`}
+            id={`stack_card_${index}_${instanceID}`}
             data-testid={`stack_card_${index}`}
             key={index}
           >
