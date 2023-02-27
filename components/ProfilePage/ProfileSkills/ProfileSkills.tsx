@@ -25,7 +25,7 @@ export default function ProfileSkills({
     return (
       <>
         <h2 className="text-2xl font-extrabold">Skills 💪</h2>
-        <ul className="inline-flex">
+        <ul className="inline-flex flex-wrap">
           {skills.map((skill, index) => (
             <p
               key={index}

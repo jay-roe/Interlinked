@@ -29,7 +29,7 @@ export default function ProfileCodingLanguages({
     return (
       <>
         <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
-        <ul className="mb-3 inline-flex" data-testid="live-profile">
+        <ul className="mb-3 inline-flex flex-wrap" data-testid="live-profile">
           {codingLanguages.map((cl, index) => (
             <li
               key={index}

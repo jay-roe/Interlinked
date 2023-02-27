@@ -31,7 +31,10 @@ export default function ProfileLanguages({
     return (
       <>
         <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
-        <ul className="mb-3 inline-flex" data-testid="live-lang-profile">
+        <ul
+          className="mb-3 inline-flex flex-wrap"
+          data-testid="live-lang-profile"
+        >
           {languages.map((lang, index) => (
             <li
               key={index}
