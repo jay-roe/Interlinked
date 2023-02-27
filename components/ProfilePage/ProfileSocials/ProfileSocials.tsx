@@ -21,8 +21,6 @@ export default function ProfileSocials({
 }) {
   // live version
   if (!isEditable) {
-    if (!socials || !socials[0]) return;
-
     return (
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={socials} />

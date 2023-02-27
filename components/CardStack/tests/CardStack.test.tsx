@@ -63,29 +63,48 @@ it('resets the card stack after one skipped', async () => {
 
 // it('throws card when dragged', async () => {
 //   const { findByTestId } = render(<CardStack>{children}</CardStack>);
-//   const frontCard = await findByTestId('stack_card_0');
+//   const frontContent = await findByTestId('card_stack_test_1');
+//   const frontCard = frontContent.parentElement;
 
-//   const {left, top, width, height} = frontCard.getBoundingClientRect();
-//   let center = {
-//     clientX: left + width / 2,
-//     clientY: top + height / 2
-//   }
+//   const { left, top, right, bottom } = frontCard.getBoundingClientRect();
+//   const startCenter = {
+//     clientX: Math.floor((left + right) / 2),
+//     clientY: Math.floor((top + bottom) / 2),
+//   };
+
+//   const targetCenter = {
+//     clientX: Math.floor((left + right) / 2 + 350),
+//     clientY: Math.floor((top + bottom) / 2),
+//   };
 
 //   expect(frontCard).toHaveStyle({
-//     display: 'block'
+//     display: 'block',
 //   });
 
 //   await act(async () => {
-//     fireEvent.dragStart(frontCard, center);
-//     fireEvent.mouseDown(frontCard, center);
-//     center.clientX -= 350;
-//     fireEvent.mouseMove(frontCard, center);
-//     fireEvent.mouseUp(frontCard, center);
-//     fireEvent.dragEnd(frontCard, center);
+//     fireEvent.mouseMove(frontCard, startCenter);
+//     fireEvent.mouseEnter(frontCard, startCenter);
+//     fireEvent.mouseOver(frontCard, startCenter);
+//     fireEvent.mouseDown(frontCard, startCenter);
+
+//     const isDragStarted = fireEvent.dragStart(frontCard, startCenter);
+//     if (!isDragStarted) return;
+
+//     fireEvent.drag(frontCard, startCenter);
+//     fireEvent.mouseMove(frontCard, startCenter);
+
+//     fireEvent.drag(frontCard, targetCenter);
+//     fireEvent.mouseMove(frontCard, targetCenter);
+
+//     console.log(frontCard.getBoundingClientRect());
+
+//     fireEvent.drop(frontCard, targetCenter);
+//     fireEvent.dragEnd(frontCard, targetCenter);
+//     fireEvent.mouseUp(frontCard, targetCenter);
 //     await new Promise((r) => setTimeout(r, 600));
-//   })
+//   });
 
 //   expect(frontCard).toHaveStyle({
-//     display: 'none'
+//     display: 'none',
 //   });
-// })
+// });

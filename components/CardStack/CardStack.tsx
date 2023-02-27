@@ -148,11 +148,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
     { axis: 'x' }
   );
 
-  console.log('front card index', frontCardIndex);
-
   useEffect(() => {
-    console.log('changing height');
-
     let largestHeight = 0;
     for (let i = 0; i < children.length; i++) {
       const childHeight = document
