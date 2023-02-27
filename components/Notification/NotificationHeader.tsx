@@ -16,7 +16,15 @@ export default function notificationHeader({
       ></img>
       <div>
         <p>{notification.sender.name}</p>
-        <p>{/*notif.notifTime*/}</p>
+        <p>
+          {notification.notifTime?.toDate().toLocaleString('en-US', {
+            month: 'long',
+            year: 'numeric',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
+        </p>
       </div>
     </div>
   );
