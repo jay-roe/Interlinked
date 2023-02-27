@@ -10,6 +10,10 @@ describe('Full feed spec', () => {
     cy.visit('/feed');
   });
 
+  after(() => {
+    cy.logout();
+  })
+
   it('can post', () => {
     cy.get('[data-testid=post-content]').type(postMessage);
     cy.get('input[type=file]').attachFile('feed/test_image.jpeg');

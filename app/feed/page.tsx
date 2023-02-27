@@ -12,7 +12,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
-const Feeds = () => {
+export default function Feeds()  {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [postIDs, setPostIDs] = useState<string[]>([]);
@@ -108,5 +108,3 @@ const Feeds = () => {
     </div>
   );
 };
-
-export default Feeds;

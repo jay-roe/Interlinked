@@ -21,57 +21,47 @@ describe('Full edit profile spec', () => {
     // End reset bio
 
     // Start reset languages
-    for (let i = 0; i < 2; i++) {
-      cy.get('body').then((body) => {
-        if (body.find('[data-testid=lang-not-hovering-0]').length > 0) {
-          cy.get('[data-testid=lang-not-hovering-0]')
-            .trigger('mouseover')
-            .get('[data-testid=lang-hovering-parent-0]')
-            .trigger('mouseover')
-            .get('[data-testid=lang-hovering-delete-0]')
-            .click();
-        }
-      });
-    }
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
     // End reset languages
 
     // Start reset coding languages
-    for (let i = 0; i < 2; i++) {
-      cy.get('body').then((body) => {
-        if (body.find('[data-testid=code-lang-not-hovering-0]').length > 0) {
-          cy.get('[data-testid=code-lang-not-hovering-0]')
-            .trigger('mouseover')
-            .get('[data-testid=code-lang-hovering-parent-0]')
-            .trigger('mouseover')
-            .get('[data-testid=code-lang-hovering-delete-0]')
-            .click();
-        }
-      });
-    }
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
     // End reset coding languages
 
     // Start reset edu
-    cy.get('body').then((body) => {
-      if (body.find('[data-testid=delete-edu-ext-0]').length > 0) {
-        cy.get('[data-testid=delete-edu-ext-0]').click();
-      }
-    });
+    cy.get('[data-testid=delete-edu-ext-0]').click();
     // End reset edu
 
     // Start reset courses
-    cy.get('body').then((body) => {
-      if (body.find('[data-testid=delete-course-button-0]').length > 0) {
-        cy.get('[data-testid=delete-course-button-0]').click();
-      }
-    });
+    cy.get('[data-testid=delete-course-button-0]').click();
     // End reset courses
 
     // Start reset experience
-    cy.get('body').then((body) => {
-      if (body.find('[data-testid=exp-delete-btn-0]').length > 0) {
-        cy.get('[data-testid=exp-delete-btn-0]').click();
-      }
-    });
+    cy.get('[data-testid=exp-delete-btn-0]').click();
     // End reset experience
 
     // Save and logout
@@ -82,12 +72,17 @@ describe('Full edit profile spec', () => {
     });
 
     cy.get('[data-testid=home-interlinked]').should('exist');
+    cy.get('[data-testid=profile-info]').should('exist');
 
     cy.get('[data-testid=live-lang-0]').should('not.exist');
     cy.get('[data-testid=live-coding-lang-0]').should('not.exist');
     cy.get('[data-testid=live-edu-0]').should('not.exist');
     cy.get('[data-testid=live-courses-0]').should('not.exist');
     cy.get('[data-testid=live-exp-0]').should('not.exist');
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   it('can edit profile name', () => {
