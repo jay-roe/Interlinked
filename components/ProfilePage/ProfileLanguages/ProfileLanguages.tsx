@@ -36,7 +36,7 @@ export default function ProfileLanguages({
             <li
               key={index}
               data-testid={`live-lang-${index}`}
-              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+              className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
             >
               {lang.title}
               {lang.proficiency && ' (' + lang.proficiency + ')'}
@@ -57,7 +57,7 @@ export default function ProfileLanguages({
               <form
                 data-testid="editable-lang-form"
                 action=""
-                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-xl font-semibold"
+                className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
                 onSubmit={(e) => {
                   e.preventDefault();
                   setLanguagesHovering((langedits) =>
