@@ -70,7 +70,7 @@ it('renders the live version of profile projects', async () => {
       ]}
     />
   );
-  const proj = await findByTestId('live-proj');
+  const proj = await findByTestId('live-proj-0');
   expect(proj).toBeInTheDocument();
 });
 
@@ -102,14 +102,14 @@ it('edits a project', async () => {
     />
   );
 
-  const title = await findByTestId('edit-proj-title');
-  const repoLink = await findByTestId('edit-proj-repoLink');
-  const demoLink = await findByTestId('edit-proj-demoLink');
-  const description = await findByTestId('edit-proj-description');
+  const title = await findByTestId('edit-proj-title-0');
+  const repoLink = await findByTestId('edit-proj-repoLink-0');
+  const demoLink = await findByTestId('edit-proj-demoLink-0');
+  const description = await findByTestId('edit-proj-description-0');
   // const image = await findByTestId('edit-proj-image');
-  const startDate = await findByTestId('edit-proj-startDate');
-  const endDate = await findByTestId('edit-proj-endDate');
-  const collaborators = await findByTestId('edit-proj-collaborators');
+  const startDate = await findByTestId('edit-proj-startDate-0');
+  const endDate = await findByTestId('edit-proj-endDate-0');
+  const collaborators = await findByTestId('edit-proj-collaborators-0');
 
   fireEvent.change(title, { target: { value: 'something different' } });
   fireEvent.change(repoLink, { target: { value: 'something different' } });
@@ -187,7 +187,7 @@ it('tests the project save button', async () => {
     />
   );
 
-  const saveButton = await findByTestId('proj-save-button');
+  const saveButton = await findByTestId('proj-save-button-0');
   fireEvent.submit(saveButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -219,7 +219,7 @@ it('tests the project edit button', async () => {
     />
   );
 
-  const editButton = await findByTestId('proj-edit-button');
+  const editButton = await findByTestId('proj-edit-button-0');
   fireEvent.click(editButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -252,7 +252,7 @@ it('tests the project delete button', async () => {
     />
   );
 
-  const deleteButton = await findByTestId('proj-delete-button');
+  const deleteButton = await findByTestId('proj-delete-button-0');
   fireEvent.click(deleteButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(2));
 });
