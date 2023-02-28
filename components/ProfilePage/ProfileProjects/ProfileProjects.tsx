@@ -31,7 +31,7 @@ export default function ProfileProjects({
         <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
         <CardStack>
           {projects.map((proj, index) => (
-            <div key={index} data-testid="live-proj">
+            <div key={index} data-testid={`live-proj-${index}`}>
               {proj.image && (
                 <ImageOptimized
                   src={proj.image}
@@ -69,14 +69,20 @@ export default function ProfileProjects({
               <div className="flex gap-2">
                 {proj.repoLink && (
                   <div>
-                    <Link href={proj.repoLink}>
+                    <Link
+                      data-testid={`live-proj-repo-${index}`}
+                      href={proj.repoLink}
+                    >
                       <Button>View Repo</Button>
                     </Link>
                   </div>
                 )}
                 {proj.demoLink && (
                   <div>
-                    <Link href={proj.demoLink}>
+                    <Link
+                      data-testid={`live-proj-demo-${index}`}
+                      href={proj.demoLink}
+                    >
                       <Button>View Demo</Button>
                     </Link>
                   </div>
@@ -109,7 +115,7 @@ export default function ProfileProjects({
                 Title <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="edit-proj-title"
+                data-testid={`edit-proj-title-${index}`}
                 type="text"
                 name="project"
                 id="profileProject"
@@ -130,7 +136,7 @@ export default function ProfileProjects({
               {project.collaborators.map((co, index) => (
                 <form key={index}>
                   <InputField
-                    data-testid="edit-proj-collaborators"
+                    data-testid={`edit-proj-collaborators-${index}`}
                     type="text"
                     name="collab"
                     id="profileCollabs"
@@ -157,7 +163,7 @@ export default function ProfileProjects({
 
               <p>Description</p>
               <TextArea
-                data-testid="edit-proj-description"
+                data-testid={`edit-proj-description-${index}`}
                 name="info"
                 value={project.description}
                 onChange={(e) =>
@@ -174,7 +180,7 @@ export default function ProfileProjects({
                     Start Date <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
-                    data-testid="edit-proj-startDate"
+                    data-testid={`edit-proj-startDate-${index}`}
                     type="date"
                     name="startdate"
                     value={project.startDate
@@ -199,7 +205,7 @@ export default function ProfileProjects({
                 <div className="w-full">
                   <label>End Date</label>
                   <InputField
-                    data-testid="edit-proj-endDate"
+                    data-testid={`edit-proj-endDate-${index}`}
                     type="date"
                     name="enddate"
                     value={project.endDate
@@ -223,7 +229,7 @@ export default function ProfileProjects({
               </div>
               <label> Repo Link </label>
               <InputField
-                data-testid="edit-proj-repoLink"
+                data-testid={`edit-proj-repoLink-${index}`}
                 type="link"
                 name="repoLink"
                 value={project.repoLink}
@@ -237,7 +243,7 @@ export default function ProfileProjects({
               ></InputField>
               <label> Demo Link </label>
               <InputField
-                data-testid="edit-proj-demoLink"
+                data-testid={`edit-proj-demoLink-${index}`}
                 type="link"
                 name="demolink"
                 value={project.demoLink}
@@ -309,13 +315,13 @@ export default function ProfileProjects({
                 <Button
                   className="mr-2"
                   type="submit"
-                  data-testid="proj-save-button"
+                  data-testid={`proj-save-button-${index}`}
                 >
                   Save Project
                 </Button>
               ) : (
                 <EditButton
-                  data-testid="proj-edit-button"
+                  data-testid={`proj-edit-button-${index}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setProjectsEditing((proedits) =>
@@ -326,7 +332,7 @@ export default function ProfileProjects({
               )}
               {/* External delete project button */}
               <DeleteButton
-                data-testid="proj-delete-button"
+                data-testid={`proj-delete-button-${index}`}
                 onClick={(e) => {
                   e.preventDefault();
                   setProjects((pro) => pro.filter((_, i) => index !== i));

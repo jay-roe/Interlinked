@@ -64,6 +64,10 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=exp-delete-btn-0]').click();
     // End reset experience
 
+    // Start reset project
+    cy.get('[data-testid=proj-delete-button-0]').click();
+    // End reset project
+
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
 
@@ -85,41 +89,20 @@ describe('Full edit profile spec', async () => {
     cy.logout();
   });
 
-  it('can edit profile name', () => {
+  it('can edit EVERYTHING', () => {
     cy.visit('/edit-profile');
 
+    // name
     let newName = 'MY NEW NAME';
     cy.get('[data-testid=name-edit-button]').click();
     cy.get('[data-testid=change-name]').clear().type(newName);
-    cy.get('[data-testid=update-account-button]').click();
 
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.get('[data-testid=profile-title]').should('contain', newName);
-  });
-
-  it('can edit bio', () => {
-    cy.visit('/edit-profile');
-
+    // bio
     let newBio = 'I want to be the very best like no one ever was.';
     cy.get('[data-testid=bio-edit-button]').click();
     cy.get('[data-testid=bio-editing]').clear().type(newBio);
-    cy.get('[data-testid=update-account-button]').click();
 
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=profile-bio]').should('contain', newBio);
-  });
-
-  it('can edit languages', () => {
-    cy.visit('/edit-profile');
-
+    // languages
     let newLang1 = 'Klingon';
     let newLang2 = 'Vulkan';
 
@@ -129,21 +112,7 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=new-lang-input').type(newLang2);
     cy.get('[data-testid=new-lang-button').click();
 
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=live-lang-profile]').should('contain', newLang1);
-    cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
-  });
-
-  it('can edit coding languages', () => {
-    cy.visit('/edit-profile');
-
+    // coding languages
     let newCodingLang1 = 'C++';
     let newCodingLang2 = 'Assembly';
 
@@ -153,21 +122,7 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=new-code-lang-input').type(newCodingLang2);
     cy.get('[data-testid=new-code-lang-button').click();
 
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang1);
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang2);
-  });
-
-  it('can add new education', () => {
-    cy.visit('/edit-profile');
-
+    // education
     let eduProgram = 'Avada Kedavra-ing for Junior Deatheaters';
     let eduSchool = "Hogwarts' basement";
     let eduLocation = 'THE BASEMENT';
@@ -186,26 +141,7 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=save-education-0]').click();
 
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=live-edu-0]')
-      .should('contain', eduProgram)
-      .should('contain', eduSchool)
-      .should('contain', eduLocation)
-      .should('contain', '1998')
-      .should('contain', '2001')
-      .should('contain', eduDescription);
-  });
-
-  it('can add new course', () => {
-    cy.visit('/edit-profile');
-
+    // course
     let courseTitle = 'Underwater basket weaving VI';
     let courseNumber = '506';
     let courseDesc = 'You know what this is.';
@@ -218,23 +154,7 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=save-course-button-0]').click();
 
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.on('window:alert', () => {});
-
-    cy.get('[data-testid=live-courses-0]')
-      .should('contain', courseTitle)
-      .should('contain', courseNumber)
-      .should('contain', courseDesc);
-  });
-
-  it('can add new experience', () => {
-    cy.visit('/edit-profile');
-
+    // experience
     let expTitle = 'Sock trader';
     let expLocation = 'Web3';
     let expEmployer = 'Elon Musk';
@@ -254,14 +174,67 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=exp-save-btn-0]').click();
 
+    // projects
+    let projTitle = 'Finding Maidens';
+    let projCollab = ''; // this is broken as of writing this code
+    let projDescription = 'You know what it means.';
+    let projStartDate = '1998-07-29';
+    let projEndDate = '2023-02-14';
+    let projRepo = 'github.com';
+    let projDemo = 'interlinked.live';
+
+    cy.get('[data-testid=proj-add-button').click();
+
+    cy.get('[data-testid=edit-proj-title-0').type(projTitle);
+    cy.get('[data-testid=edit-proj-description-0').type(projDescription);
+    cy.get('[data-testid=edit-proj-startDate-0').type(projStartDate);
+    cy.get('[data-testid=edit-proj-endDate-0').type(projEndDate);
+    cy.get('[data-testid=edit-proj-repoLink-0').type(projRepo);
+    cy.get('[data-testid=edit-proj-demoLink-0').type(projDemo);
+
+    cy.get('[data-testid=proj-save-button-0]').click();
+    // skills
+
+    // awards
+
+    // certifications
+
+    // volunteering experience
+
+    // update
     cy.get('[data-testid=update-account-button]').click();
 
-    cy.on('window:confirm', () => {
-      return true;
-    });
+    // validate all
+    // name
+    cy.get('[data-testid=profile-title]').should('contain', newName);
 
-    cy.on('window:alert', () => {});
+    // bio
+    cy.get('[data-testid=profile-bio]').should('contain', newBio);
 
+    // languages
+    cy.get('[data-testid=live-lang-profile]').should('contain', newLang1);
+    cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
+
+    // coding languages
+    cy.get('[data-testid=live-profile]').should('contain', newCodingLang1);
+    cy.get('[data-testid=live-profile]').should('contain', newCodingLang2);
+
+    // education
+    cy.get('[data-testid=live-edu-0]')
+      .should('contain', eduProgram)
+      .should('contain', eduSchool)
+      .should('contain', eduLocation)
+      .should('contain', '1998')
+      .should('contain', '2001')
+      .should('contain', eduDescription);
+
+    // courses
+    cy.get('[data-testid=live-courses-0]')
+      .should('contain', courseTitle)
+      .should('contain', courseNumber)
+      .should('contain', courseDesc);
+
+    // experience
     cy.get('[data-testid=live-exp-0]')
       .should('contain', expTitle)
       .should('contain', expLocation)
@@ -269,5 +242,30 @@ describe('Full edit profile spec', async () => {
       .should('contain', '2020')
       .should('contain', '2023')
       .should('contain', expDesc);
+
+    // projects
+    cy.get('[data-testid=live-proj-0]')
+      .should('contain', projTitle)
+      .should('contain', projDescription)
+      .should('contain', '1998')
+      .should('contain', '2023');
+    cy.get('[data-testid=live-proj-repo-0]').should(
+      'have.attr',
+      'href',
+      projRepo
+    );
+    cy.get('[data-testid=live-proj-demo-0]').should(
+      'have.attr',
+      'href',
+      projDemo
+    );
+
+    // skills
+
+    // awards
+
+    // certifications
+
+    // volunteering experience
   });
 });
