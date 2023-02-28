@@ -1,10 +1,16 @@
 import { FaPaperPlane } from 'react-icons/fa';
-import { Comment } from '@/types/Post';
+import { Comment, Post } from '@/types/Post';
 import { User } from '@/types/User';
 import Button from '../Buttons/Button';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { db } from '@/config/firestore';
-import { arrayUnion, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
 import Card from '../Card/Card';
 import CommentHeader from './CommentHeader';
 import CommentBody from './CommentBody';
@@ -13,12 +19,14 @@ const AddComment = ({
   currentUser,
   authUser,
   postID,
+  postAuthorID,
   comments,
   setComments,
 }: {
   currentUser?: User;
   authUser?;
   postID?: string;
+  postAuthorID?: string;
   comments?: Comment[];
   setComments?: Dispatch<SetStateAction<Comment[]>>;
 }) => {
@@ -34,9 +42,15 @@ const AddComment = ({
       date: new Timestamp(Date.now() / 1000, 0),
     };
 
-    await updateDoc(doc(db.posts, postID), {
-      comments: arrayUnion(newComment),
-    });
+    await updateDoc(
+      doc(
+        typeCollection<Post>(collection(doc(db.users, postAuthorID), 'posts')),
+        postID
+      ),
+      {
+        comments: arrayUnion(newComment),
+      }
+    );
     setContent('');
     setComments([newComment, ...(comments || [])]);
   };

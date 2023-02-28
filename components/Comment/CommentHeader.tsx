@@ -2,6 +2,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import type { Comment } from '@/types/Post';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
+import Link from 'next/link';
 
 const CommentHeader = ({
   comment,
@@ -13,7 +14,9 @@ const CommentHeader = ({
   return (
     <div className="mb-1 flex flex-col justify-start">
       <div className="flex justify-between">
-        <p className="text-lg leading-10">{comment?.author || 'Unknown'}</p>
+        <Link href={`/profile/${comment.authorID}`}>
+          <p className="text-lg leading-10">{comment?.author || 'Unknown'}</p>
+        </Link>
         <div>
           <LinkButtonNoNumber currentUser={currentUser}></LinkButtonNoNumber>
         </div>

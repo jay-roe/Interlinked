@@ -12,6 +12,7 @@ import AddComment from '../Comment/AddComment';
 
 const FullPostCard = ({
   author,
+  authorID,
   post,
   postID,
   currentUser,
@@ -19,6 +20,7 @@ const FullPostCard = ({
   testKey,
 }: {
   author?: User;
+  authorID?: string;
   post?: Post;
   postID?: string;
   currentUser?: User;
@@ -46,9 +48,18 @@ const FullPostCard = ({
           commentsOpen ? 'col-span-1' : 'col-span-2'
         } transition-all`}
       >
-        <div data-testid={`post-card-${testKey}`} id="post-content" ref={postContainer}>
+        <div
+          data-testid={`post-card-${testKey}`}
+          id="post-content"
+          ref={postContainer}
+        >
           {/* <div>{postHeight}</div> */}
-          <PostHeader author={author} post={post} currentUser={currentUser} />
+          <PostHeader
+            author={author}
+            authorID={authorID}
+            post={post}
+            currentUser={currentUser}
+          />
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
             data-testid="post-footer"
@@ -73,6 +84,7 @@ const FullPostCard = ({
             authUser={authUser}
             currentUser={currentUser}
             postID={postID}
+            postAuthorID={authorID}
             comments={comments}
             setComments={setComments}
           />
