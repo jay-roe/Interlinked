@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { Timestamp } from 'firebase/firestore';
 import { act } from 'react-dom/test-utils';
 
+
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
@@ -65,6 +66,91 @@ let splitMock = {
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 const mockedRouter = useRouter as jest.Mock<any>;
 
+
+const fakeUser = {
+  awards: [
+    {
+      title: 'award',
+      description: 'desc',
+      date: dateMock,
+    },
+  ],
+  bio: 'LALALALA, something funny here (tee hee)',
+  codingLanguages: ['C++, Java, ScriptScript'],
+  connections: [''],
+  courses: [
+    {
+      title: 'course',
+      courseNo: 'courseYes!',
+      description: 'desc',
+    },
+  ],
+  coverPhoto: 'https://via.placeholder.com/100.png',
+  education: [
+    {
+      program: 'margorp',
+      name: 'eman',
+      location: 'noitacol',
+      description: 'noitpircsed',
+      image: 'https://via.placeholder.com/100.png',
+      startDate: dateMock,
+      endDate: dateMock,
+    },
+  ],
+  email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
+  experience: [
+    {
+      title: 'CrossCode',
+      location: 'Hollow Knight',
+      employer: 'Celeste',
+      description: 'Baba Is You',
+      image: 'CHR$(143)',
+      startDate: dateMock,
+      endDate: dateMock,
+    },
+  ],
+  languages: ['lang', 'other lang'],
+  name: 'Bob Angelson',
+  phone: '555-555-5555',
+  profilePicture: 'https://via.placeholder.com/100.png',
+  projects: [
+    {
+      title: 'Kerbal Space Program',
+      collaborators: [
+        {
+          name: 'name',
+          profilePicture: 'https://via.placeholder.come/100.png',
+          id: '5',
+        },
+      ],
+      repoLink: 'Oneshot',
+      demoLink: 'FTL (Faster Than Light)',
+      description: 'Factorio (PLAY IT!)',
+      startDate: dateMock,
+      endDate: dateMock,
+      image:
+        "I've listed a bunch of real good games here, all highly recommended by Craig!",
+    },
+  ],
+  skills: ['skill', 'making bad jokes'],
+  socials: {
+    github: 'Poly Bridge 2',
+    instagram: 'Demoncrawl (minesweeper gone rogue)',
+  },
+  volunteering: [
+    {
+      title: 'Talos Principle',
+      location: 'The Witness',
+      employer: 'Taiji',
+      description: 'Understand',
+      image: 'Patricks Parabox',
+      startDate: dateMock,
+      endDate: dateMock,
+    },
+  ],
+}
+
+
 // if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
 
 it('check if user is logged out', async () => {
@@ -98,88 +184,7 @@ it('try to update account', async () => {
       }, // There IS a current users
       // Need to fill in all the fields in user as it's being manually created instead of us creating a new User object
       // If some fields are left empty, it tries to map a null object and crashes the test
-      currentUser: {
-        awards: [
-          {
-            title: 'award',
-            description: 'desc',
-            date: dateMock,
-          },
-        ],
-        bio: 'LALALALA, something funny here (tee hee)',
-        codingLanguages: ['C++, Java, ScriptScript'],
-        connections: [''],
-        courses: [
-          {
-            title: 'course',
-            courseNo: 'courseYes!',
-            description: 'desc',
-          },
-        ],
-        coverPhoto: 'https://via.placeholder.com/100.png',
-        education: [
-          {
-            program: 'margorp',
-            name: 'eman',
-            location: 'noitacol',
-            description: 'noitpircsed',
-            image: 'https://via.placeholder.com/100.png',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
-        experience: [
-          {
-            title: 'CrossCode',
-            location: 'Hollow Knight',
-            employer: 'Celeste',
-            description: 'Baba Is You',
-            image: 'CHR$(143)',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        languages: ['lang', 'other lang'],
-        name: 'Bob Angelson',
-        phone: '555-555-5555',
-        profilePicture: 'https://via.placeholder.com/100.png',
-        projects: [
-          {
-            title: 'Kerbal Space Program',
-            collaborators: [
-              {
-                name: 'name',
-                profilePicture: 'https://via.placeholder.come/100.png',
-                id: '5',
-              },
-            ],
-            repoLink: 'Oneshot',
-            demoLink: 'FTL (Faster Than Light)',
-            description: 'Factorio (PLAY IT!)',
-            startDate: dateMock,
-            endDate: dateMock,
-            image:
-              "I've listed a bunch of real good games here, all highly recommended by Craig!",
-          },
-        ],
-        skills: ['skill', 'making bad jokes'],
-        socials: {
-          github: 'Poly Bridge 2',
-          instagram: 'Demoncrawl (minesweeper gone rogue)',
-        },
-        volunteering: [
-          {
-            title: 'Talos Principle',
-            location: 'The Witness',
-            employer: 'Taiji',
-            description: 'Understand',
-            image: 'Patricks Parabox',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-      },
+      currentUser: fakeUser,
     };
   });
 
@@ -214,88 +219,7 @@ it('can delete accont', async () => {
           },
         ],
       }, // There IS a current users
-      currentUser: {
-        awards: [
-          {
-            title: 'award',
-            description: 'desc',
-            date: dateMock,
-          },
-        ],
-        bio: 'LALALALA, something funny here (tee hee)',
-        codingLanguages: ['C++, Java, ScriptScript'],
-        connections: [''],
-        courses: [
-          {
-            title: 'course',
-            courseNo: 'courseYes!',
-            description: 'desc',
-          },
-        ],
-        coverPhoto: 'https://via.placeholder.com/100.png',
-        education: [
-          {
-            program: 'margorp',
-            name: 'eman',
-            location: 'noitacol',
-            description: 'noitpircsed',
-            image: 'https://via.placeholder.com/100.png',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
-        experience: [
-          {
-            title: 'CrossCode',
-            location: 'Hollow Knight',
-            employer: 'Celeste',
-            description: 'Baba Is You',
-            image: 'CHR$(143)',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        languages: ['lang', 'other lang'],
-        name: 'Bob Angelson',
-        phone: '555-555-5555',
-        profilePicture: 'https://via.placeholder.com/100.png',
-        projects: [
-          {
-            title: 'Kerbal Space Program',
-            collaborators: [
-              {
-                name: 'name',
-                profilePicture: 'https://via.placeholder.come/100.png',
-                id: '5',
-              },
-            ],
-            repoLink: 'Oneshot',
-            demoLink: 'FTL (Faster Than Light)',
-            description: 'Factorio (PLAY IT!)',
-            startDate: dateMock,
-            endDate: dateMock,
-            image:
-              "I've listed a bunch of real good games here, all highly recommended by Craig!",
-          },
-        ],
-        skills: ['skill', 'making bad jokes'],
-        socials: {
-          github: 'Poly Bridge 2',
-          instagram: 'Demoncrawl (minesweeper gone rogue)',
-        },
-        volunteering: [
-          {
-            title: 'Talos Principle',
-            location: 'The Witness',
-            employer: 'Taiji',
-            description: 'Understand',
-            image: 'Patricks Parabox',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-      },
+      currentUser: fakeUser,
     };
   });
 
@@ -322,88 +246,7 @@ it('does not update without confirmation', async () => {
           },
         ],
       }, // There IS a current users
-      currentUser: {
-        awards: [
-          {
-            title: 'award',
-            description: 'desc',
-            date: dateMock,
-          },
-        ],
-        bio: 'LALALALA, something funny here (tee hee)',
-        codingLanguages: ['C++, Java, ScriptScript'],
-        connections: [''],
-        courses: [
-          {
-            title: 'course',
-            courseNo: 'courseYes!',
-            description: 'desc',
-          },
-        ],
-        coverPhoto: 'https://via.placeholder.com/100.png',
-        education: [
-          {
-            program: 'margorp',
-            name: 'eman',
-            location: 'noitacol',
-            description: 'noitpircsed',
-            image: 'https://via.placeholder.com/100.png',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        email: 'eeeeeeeeeeeee@aaaaaaaaa.OoOoOoO',
-        experience: [
-          {
-            title: 'CrossCode',
-            location: 'Hollow Knight',
-            employer: 'Celeste',
-            description: 'Baba Is You',
-            image: 'CHR$(143)',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-        languages: ['lang', 'other lang'],
-        name: 'Bob Angelson',
-        phone: '555-555-5555',
-        profilePicture: 'https://via.placeholder.com/100.png',
-        projects: [
-          {
-            title: 'Kerbal Space Program',
-            collaborators: [
-              {
-                name: 'name',
-                profilePicture: 'https://via.placeholder.come/100.png',
-                id: '5',
-              },
-            ],
-            repoLink: 'Oneshot',
-            demoLink: 'FTL (Faster Than Light)',
-            description: 'Factorio (PLAY IT!)',
-            startDate: dateMock,
-            endDate: dateMock,
-            image:
-              "I've listed a bunch of real good games here, all highly recommended by Craig!",
-          },
-        ],
-        skills: ['skill', 'making bad jokes'],
-        socials: {
-          github: 'Poly Bridge 2',
-          instagram: 'Demoncrawl (minesweeper gone rogue)',
-        },
-        volunteering: [
-          {
-            title: 'Talos Principle',
-            location: 'The Witness',
-            employer: 'Taiji',
-            description: 'Understand',
-            image: 'Patricks Parabox',
-            startDate: dateMock,
-            endDate: dateMock,
-          },
-        ],
-      },
+      currentUser: fakeUser,
     };
   });
 
