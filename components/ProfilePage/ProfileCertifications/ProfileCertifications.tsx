@@ -40,7 +40,7 @@ export default function ProfileCertifications({
                 })}`}
               </h6>
               {cert.link && (
-                <Link href={cert.link}>
+                <Link data-testid={`live-cert-link-${index}`} href={cert.link}>
                   <Button>View Credential</Button>
                 </Link>
               )}

@@ -6,21 +6,19 @@ describe('Full edit profile spec', async () => {
     cy.login(email, pw);
     cy.visit('/edit-profile');
 
-    // Start reset name
+    // reset name
     let oldName = 'old, boring name';
     cy.get('[data-testid=name-edit-button]').click();
     cy.get('[data-testid=change-name]').clear().type(oldName);
     cy.get('[data-testid=name-edit-button]').click();
-    // End reset name
 
-    // Start reset bio
+    // reset bio
     let oldBio = 'Boring bio';
     cy.get('[data-testid=bio-edit-button]').click();
     cy.get('[data-testid=bio-editing]').clear().type(oldBio);
     cy.get('[data-testid=bio-edit-button]').click();
-    // End reset bio
 
-    // Start reset languages
+    // reset languages
     cy.get('[data-testid=lang-not-hovering-0]')
       .trigger('mouseover')
       .get('[data-testid=lang-hovering-parent-0]')
@@ -35,9 +33,7 @@ describe('Full edit profile spec', async () => {
       .get('[data-testid=lang-hovering-delete-0]')
       .click();
 
-    // End reset languages
-
-    // Start reset coding languages
+    // reset coding languages
     cy.get('[data-testid=code-lang-not-hovering-0]')
       .trigger('mouseover')
       .get('[data-testid=code-lang-hovering-parent-0]')
@@ -50,23 +46,30 @@ describe('Full edit profile spec', async () => {
       .trigger('mouseover')
       .get('[data-testid=code-lang-hovering-delete-0]')
       .click();
-    // End reset coding languages
 
-    // Start reset edu
+    // reset edu
     cy.get('[data-testid=delete-edu-ext-0]').click();
-    // End reset edu
 
-    // Start reset courses
+    // reset courses
     cy.get('[data-testid=delete-course-button-0]').click();
-    // End reset courses
 
-    // Start reset experience
+    // reset experience
     cy.get('[data-testid=exp-delete-btn-0]').click();
-    // End reset experience
 
-    // Start reset project
+    // reset project
     cy.get('[data-testid=proj-delete-button-0]').click();
-    // End reset project
+
+    // reset skills
+    cy.get('[data-testid=skill-delete-button-0]').click();
+
+    // reset awards
+    cy.get('[data-testid=awards-delete-btn-0]').click();
+
+    // reset certifications
+    cy.get('[data-testid=certifications-delete-btn-0]').click();
+
+    // reset volunteering
+    cy.get('[data-testid=vol-edit-btn-0]').click();
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
@@ -194,12 +197,59 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=proj-save-button-0]').click();
     // skills
+    let skill = 'dream walking';
+    cy.get('[data-testid=skill-add-button').click();
+
+    cy.get('[data-testid=skill-input-0').type(skill);
+
+    cy.get('[data-testid=skill-save-0').click();
 
     // awards
+    let awdTitle = 'Mirego Prize Winners';
+    let awdDate = '2023-01-22';
+    let awdDesc = 'Coded for 24 hours nonstop';
+
+    cy.get('[data-testid=awards-add-button').click();
+
+    cy.get('[data-testid=awards-title-box-0').type(awdTitle);
+    cy.get('[data-testid=awards-date-box-0').type(awdDate);
+    cy.get('[data-testid=awards-desc-box-0').type(awdDesc);
+
+    cy.get('[data-testid=awards-save-btn-0').click();
 
     // certifications
+    let certName = 'Certified Gangster';
+    let certIssuer = "Diego (Dora's cousin)";
+    let certDate = '2000-01-01';
+    let certLink = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+
+    cy.get('[data-testid=certifications-add-button').click();
+
+    cy.get('[data-testid=certifications-name-box-0').type(certName);
+    cy.get('[data-testid=certifications-issuer-box-0').type(certIssuer);
+    cy.get('[data-testid=certifications-date-box-0').type(certDate);
+    cy.get('[data-testid=certifications-link-box-0').type(certLink);
+
+    cy.get('[data-testid=certifications-save-btn-0').click();
 
     // volunteering experience
+    let volTitle = 'Fed the poor';
+    let volLocation = 'Country club'; // They're poor in their soul
+    let volOrganization = "Dude I don't know";
+    let volStartDate = '2000-08-10';
+    let volEndDate = '2001-09-11';
+    let volDescription = 'Some body once told me';
+
+    cy.get('[data-testid=vol-add-button').click();
+
+    cy.get('[data-testid=edit-vol-title-0').type(volTitle);
+    cy.get('[data-testid=edit-vol-location-0').type(volLocation);
+    cy.get('[data-testid=edit-vol-organization-0').type(volOrganization);
+    cy.get('[data-testid=edit-vol-startDate-0').type(volStartDate);
+    cy.get('[data-testid=edit-vol-endDate-0').type(volEndDate);
+    cy.get('[data-testid=edit-vol-description-0').type(volDescription);
+
+    cy.get('[data-testid=vol-save-btn-0').click();
 
     // update
     cy.get('[data-testid=update-account-button]').click();
@@ -248,16 +298,46 @@ describe('Full edit profile spec', async () => {
       .should('contain', projTitle)
       .should('contain', projDescription)
       .should('contain', '1998')
-      .should('contain', '2023')
-    cy.get('[data-testid=live-proj-repo-0]').should('have.attr', 'href', projRepo)
-    cy.get('[data-testid=live-proj-demo-0]').should('have.attr', 'href', projDemo)
+      .should('contain', '2023');
+    cy.get('[data-testid=live-proj-repo-0]').should(
+      'have.attr',
+      'href',
+      projRepo
+    );
+    cy.get('[data-testid=live-proj-demo-0]').should(
+      'have.attr',
+      'href',
+      projDemo
+    );
 
     // skills
+    cy.get('[data-testid=live-skill-0]').should('contain', skill);
 
     // awards
+    cy.get('[data-testid=live-award-0]')
+      .should('contain', awdTitle)
+      .should('contain', 'January 2023')
+      .should('contain', awdDesc);
 
     // certifications
+    cy.get('[data-testid=live-certification-0]')
+      .should('contain', certName)
+      .should('contain', certIssuer)
+      .should('contain', 'December 1999');
+
+    cy.get('[data-testid=live-cert-link-0]').should(
+      'have.attr',
+      'href',
+      certLink
+    );
 
     // volunteering experience
+    cy.get('[data-testid=live-vol-0]')
+      .should('contain', volTitle)
+      .should('contain', volLocation)
+      .should('contain', volOrganization)
+      .should('contain', '09/08/2000')
+      .should('contain', '10/09/2001')
+      .should('contain', volDescription);
   });
 });
