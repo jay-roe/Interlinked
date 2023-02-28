@@ -75,7 +75,6 @@ export function AuthProvider({ children }) {
       experience: [],
       languages: [],
       name: newUser.displayName,
-      notifications: [],
       profilePicture: newUser.photoURL,
       projects: [],
       recommendations: [],
