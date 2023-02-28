@@ -53,10 +53,10 @@ export default function ProfileHeading({
   return (
     <div className="mb-5 block min-h-full gap-5 md:flex md:max-w-xl">
       <div className="row-auto">
-        <div className="relative m-auto w-fit">
+        <div className="relative m-auto h-40 w-40">
           {isEditable ? (
             // editable picture
-            <div>
+            <>
               <input
                 accept="image/*"
                 id="upload-profile-picture"
@@ -74,21 +74,23 @@ export default function ProfileHeading({
                   alt={name || 'Profile Picture'}
                   width={160}
                   height={160}
+                  variant="cover"
                 />
                 <FaRegEdit
                   className="absolute -right-4 -bottom-4 p-2 text-yellow-600 transition-all hover:text-yellow-500"
                   size={45}
                 />
               </label>
-            </div>
+            </>
           ) : (
             // live picture
             <ImageOptimized
-              className="h-auto max-w-full rounded-full"
+              className="rounded-full"
               src={profilePictureURL}
               alt={name || 'Profile Picture'}
               width={160}
               height={160}
+              variant="cover"
             />
           )}
         </div>

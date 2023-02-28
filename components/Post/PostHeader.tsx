@@ -19,7 +19,7 @@ const PostHeader = ({
           data-testid="test-coverphoto"
           className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
           src={author?.profilePicture}
-          alt={author?.name}
+          alt={author?.name || author?.email || 'Author profile picture'}
           width={32}
           height={32}
         />
