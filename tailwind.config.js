@@ -21,8 +21,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Paralucent', 'Helvetica Neue', ...defaultTheme.fontFamily.sans],
-        'para-text': ['ParalucentText'],
-        logo: 'Orbitron',
+        logo: ['Orbitron', 'sans-serif'],
         'neue-machina': 'neue-machina',
       },
       gridTemplateColumns: {
