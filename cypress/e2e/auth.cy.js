@@ -14,7 +14,9 @@ describe('Full auth spec', async () => {
     cy.get('input[name=confirmPassword]').type('wrongPw');
 
     cy.get('[data-testid=register]').click();
-    cy.on('window:alert', (msg) => {expect(msg).to.contains('Passwords do not match')});
+    cy.on('window:alert', (msg) => {
+      expect(msg).to.contains('Passwords do not match');
+    });
 
     // matching
     cy.get('input[name=email]').clear().type(email);

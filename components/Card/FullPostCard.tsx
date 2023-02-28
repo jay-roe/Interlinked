@@ -46,7 +46,11 @@ const FullPostCard = ({
           commentsOpen ? 'col-span-1' : 'col-span-2'
         } transition-all`}
       >
-        <div data-testid={`post-card-${testKey}`} id="post-content" ref={postContainer}>
+        <div
+          data-testid={`post-card-${testKey}`}
+          id="post-content"
+          ref={postContainer}
+        >
           {/* <div>{postHeight}</div> */}
           <PostHeader author={author} post={post} currentUser={currentUser} />
           <PostBody author={author} post={post} currentUser={currentUser} />

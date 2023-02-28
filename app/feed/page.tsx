@@ -12,7 +12,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 
-export default function Feeds()  {
+export default function Feeds() {
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [postIDs, setPostIDs] = useState<string[]>([]);
@@ -107,4 +107,4 @@ export default function Feeds()  {
       </CardGrid>
     </div>
   );
-};
+}

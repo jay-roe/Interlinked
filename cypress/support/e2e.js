@@ -18,6 +18,5 @@ import '@cypress/code-coverage/support';
 import 'cypress-file-upload';
 import './commands';
 
-
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
