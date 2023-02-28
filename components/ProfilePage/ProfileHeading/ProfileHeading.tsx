@@ -1,7 +1,7 @@
 import EditButton from '@/components/Buttons/EditButton/EditButton';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Input from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
-import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
@@ -68,10 +68,12 @@ export default function ProfileHeading({
                 htmlFor="upload-profile-picture"
                 className="cursor-pointer"
               >
-                <img
-                  className="h-40 w-40 max-w-none rounded-full transition-all hover:brightness-150"
+                <ImageOptimized
+                  className="max-w-none rounded-full transition-all hover:brightness-150"
                   src={profilePictureURL}
                   alt={name || 'Profile Picture'}
+                  width={160}
+                  height={160}
                 />
                 <FaRegEdit
                   className="absolute -right-4 -bottom-4 p-2 text-yellow-600 transition-all hover:text-yellow-500"
@@ -81,10 +83,12 @@ export default function ProfileHeading({
             </div>
           ) : (
             // live picture
-            <img
-              className="h-40 w-40 max-w-none rounded-full"
+            <ImageOptimized
+              className="h-auto max-w-full rounded-full"
               src={profilePictureURL}
               alt={name || 'Profile Picture'}
+              width={160}
+              height={160}
             />
           )}
         </div>

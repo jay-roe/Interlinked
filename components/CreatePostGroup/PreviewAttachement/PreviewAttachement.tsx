@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
 import { PreviewImageProps } from '@/types/PreviewImage';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 
 export default function PreviewAttachement({
   clean,
@@ -68,10 +69,13 @@ export default function PreviewAttachement({
                     className="hover:bg-red-900"
                     onClick={() => removeImage(imgPreview)}
                   >
-                    <img
+                    <ImageOptimized
                       className="h-[13rem] w-[13rem] object-scale-down hover:opacity-50"
                       src={imgPreview}
-                    ></img>
+                      alt={imgPreview}
+                      width={208}
+                      height={208}
+                    />
                   </button>
                 </li>
               );
