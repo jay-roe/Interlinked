@@ -69,7 +69,7 @@ export default function NavBar() {
                   {/* // TODO Fix font family for logo */}
                   <h1
                     data-testid="home-interlinked"
-                    className="font-sans text-white"
+                    className="font-logo text-white lg:text-3xl xl:text-4xl"
                   >
                     INTERLINKED
                   </h1>

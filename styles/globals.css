@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @font-face {
+  font-family: 'Orbitron';
+  src: url('../fonts/Orbitron-VariableFont_wght.ttf');
+}
+
+@font-face {
   font-family: 'Paralucent';
   src: url('../fonts/ParalucentText-Book.otf');
   font-weight: normal;

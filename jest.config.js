@@ -35,6 +35,7 @@ const customJestConfig = {
       statements: 50,
     },
   },
+  setupFiles: ['./setupJestMock.js'],
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
