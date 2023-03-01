@@ -18,6 +18,22 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=bio-editing]').clear().type(oldBio);
     cy.get('[data-testid=bio-edit-button]').click();
 
+    // reset socials
+    cy.get('[data-testid=socials-edit-button]').click();
+
+    cy.get('[data-testid=edit-github]').clear();
+    cy.get('[data-testid=edit-instagram]').clear();
+
+    cy.get('[data-testid=save-socials]').click();
+
+    // reset contact
+    cy.get('[data-testid=contact-edit-button]').click();
+
+    cy.get('[data-testid=edit-email]').clear().type('old@contact.com');
+    cy.get('[data-testid=edit-phone]').clear();
+
+    cy.get('[data-testid=save-contacts-button]').click();
+
     // reset languages
     cy.get('[data-testid=lang-not-hovering-0]')
       .trigger('mouseover')
@@ -104,6 +120,28 @@ describe('Full edit profile spec', async () => {
     let newBio = 'I want to be the very best like no one ever was.';
     cy.get('[data-testid=bio-edit-button]').click();
     cy.get('[data-testid=bio-editing]').clear().type(newBio);
+
+    // socials
+    let socialsGithub = 'github.com/JR-prog';
+    let socialsInstagram = 'deadlink.com';
+
+    cy.get('[data-testid=socials-edit-button]').click();
+
+    cy.get('[data-testid=edit-github]').clear().type(socialsGithub);
+    cy.get('[data-testid=edit-instagram]').clear().type(socialsInstagram);
+
+    cy.get('[data-testid=save-socials]').click();
+
+    // contact
+    let contactEmail = 'contactEmail@test.com';
+    let contactPhone = '999-999-9999';
+
+    cy.get('[data-testid=contact-edit-button]').click();
+
+    cy.get('[data-testid=edit-email]').clear().type(contactEmail);
+    cy.get('[data-testid=edit-phone]').clear().type(contactPhone);
+
+    cy.get('[data-testid=save-contacts-button]').click();
 
     // languages
     let newLang1 = 'Klingon';
@@ -261,6 +299,24 @@ describe('Full edit profile spec', async () => {
     // bio
     cy.get('[data-testid=profile-bio]').should('contain', newBio);
 
+    // socials
+    cy.get(`[data-testid='socials-${socialsInstagram}']`).should(
+      'have.attr',
+      'href',
+      socialsInstagram
+    );
+    cy.get(`[data-testid='socials-${socialsGithub}']`).should(
+      'have.attr',
+      'href',
+      socialsGithub
+    );
+
+    // contact
+    cy.get('[data-testid=live-contact]')
+      .should('contain', contactEmail)
+      .should('contain', contactPhone);
+    cy.pause();
+
     // languages
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang1);
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
@@ -336,8 +392,8 @@ describe('Full edit profile spec', async () => {
       .should('contain', volTitle)
       .should('contain', volLocation)
       .should('contain', volOrganization)
-      .should('contain', '09/08/2000')
-      .should('contain', '10/09/2001')
+      .should('contain', '8/9/2000')
+      .should('contain', '9/10/2001')
       .should('contain', volDescription);
   });
 });
