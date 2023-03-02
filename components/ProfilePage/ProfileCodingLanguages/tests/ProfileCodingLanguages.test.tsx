@@ -13,7 +13,7 @@ it('tests the live version', async () => {
   const { findByTestId } = render(
     <ProfileCodingLanguages isEditable={false} codingLanguages={['HTML']} />
   );
-  const liveProfile = await findByTestId('live-profile');
+  const liveProfile = await findByTestId('live-code-langs');
   expect(liveProfile).toBeInTheDocument();
 });
 
