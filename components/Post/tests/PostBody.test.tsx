@@ -25,12 +25,15 @@ const currentUser = {
   volunteering: [],
 };
 
+const placeholderImage =
+  'https://firebasestorage.googleapis.com/v0/b/interlinked-420e3.appspot.com/o/users%2FgqQVl00qdOga4WOKmLYMi6eLZxx1%2FprofilePicture%2Frocket.png?alt=media&token=66508928-4b2c-4108-be59-91aced79e969';
+
 const post = {
   authorID: '',
   author: '',
   title: 'test_title',
   text_content: 'test_content',
-  image_content: ['test_image'],
+  image_content: [placeholderImage],
   likes: [],
   comments: [],
   date: mockedDate,
