@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { User } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -73,16 +74,6 @@ export default function NavBar() {
                   >
                     INTERLINKED
                   </h1>
-                  {/* <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  /> */}
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -123,10 +114,12 @@ export default function NavBar() {
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <ImageOptimized
                           className="h-8 w-8 rounded-full"
-                          src={currentUser.profilePicture || ''}
+                          src={currentUser.profilePicture}
                           alt={currentUser.name}
+                          width={32}
+                          height={32}
                         />
                       </Menu.Button>
                     </div>

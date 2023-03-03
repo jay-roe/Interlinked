@@ -28,7 +28,9 @@
     "eslint": "8.33.0",
     "eslint-config-next": "13.1.6",
     "firebase": "^9.16.0",
+    "md5": "^2.3.0",
     "next": "13.1.6",
+    "protobufjs": "^7.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1"
@@ -37,6 +39,7 @@
     "@cypress/code-coverage": "^3.10.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "@types/md5": "^2.3.2",
     "@types/node": "18.11.18",
     "@types/react": "18.0.27",
     "@types/react-dom": "18.0.10",

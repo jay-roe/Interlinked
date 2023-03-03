@@ -8,6 +8,7 @@ import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Timestamp } from 'firebase/firestore';
 import Link from 'next/link';
 import CardStack from '@/components/CardStack/CardStack';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 
 export default function ProfileProjects({
   projects,
@@ -31,7 +32,14 @@ export default function ProfileProjects({
         <CardStack>
           {projects.map((proj, index) => (
             <div key={index} data-testid={`live-proj-${index}`}>
-              {proj.image && <img src={proj.image} alt={proj.title} />}
+              {proj.image && (
+                <ImageOptimized
+                  src={proj.image}
+                  alt={proj.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{proj.title}</h3>
               <h6>
                 {proj.startDate.toDate().getFullYear()} -{' '}
@@ -46,10 +54,12 @@ export default function ProfileProjects({
                 >
                   <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
                     {co.profilePicture && (
-                      <img
+                      <ImageOptimized
                         className="h-10 w-10 rounded-full"
                         src={co.profilePicture}
                         alt={co.name}
+                        width={40}
+                        height={40}
                       />
                     )}
                     <p>{co.name} </p>
@@ -59,14 +69,20 @@ export default function ProfileProjects({
               <div className="flex gap-2">
                 {proj.repoLink && (
                   <div>
-                    <Link data-testid={`live-proj-repo-${index}`} href={proj.repoLink}>
+                    <Link
+                      data-testid={`live-proj-repo-${index}`}
+                      href={proj.repoLink}
+                    >
                       <Button>View Repo</Button>
                     </Link>
                   </div>
                 )}
                 {proj.demoLink && (
                   <div>
-                    <Link data-testid={`live-proj-demo-${index}`} href={proj.demoLink}>
+                    <Link
+                      data-testid={`live-proj-demo-${index}`}
+                      href={proj.demoLink}
+                    >
                       <Button>View Demo</Button>
                     </Link>
                   </div>
@@ -242,7 +258,14 @@ export default function ProfileProjects({
             </div>
           ) : (
             <div data-testid="editable-proj">
-              {project.image && <img src={project.image} alt={project.title} />}
+              {project.image && (
+                <ImageOptimized
+                  src={project.image}
+                  alt={project.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{project.title}</h3>
               <h6>
                 {project.startDate.toDate().getFullYear()} -{' '}
@@ -255,10 +278,12 @@ export default function ProfileProjects({
                 <Link key={index} href={`/profile/${co.id}`}>
                   <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
                     {co.profilePicture && (
-                      <img
+                      <ImageOptimized
                         className="h-10 w-10 rounded-full"
                         src={co.profilePicture}
                         alt={co.name}
+                        width={40}
+                        height={40}
                       />
                     )}
                     <p>{co.name} </p>
