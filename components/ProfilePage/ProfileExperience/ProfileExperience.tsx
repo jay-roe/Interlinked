@@ -7,6 +7,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 
 export default function ProfileExperience({
   experience,
@@ -30,7 +31,14 @@ export default function ProfileExperience({
         <CardStack>
           {experience.map((exp, index) => (
             <div key={index} data-testid={`live-exp-${index}`}>
-              {exp.image && <img src={exp.image} alt={exp.title} />}
+              {exp.image && (
+                <ImageOptimized
+                  src={exp.image}
+                  alt={exp.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{exp.title}</h3>
               <h4>{exp.employer}</h4>
               <h5>{exp.location}</h5>
@@ -182,7 +190,14 @@ export default function ProfileExperience({
             </div>
           ) : (
             <div data-testid="editable-exp">
-              {exp.image && <img src={exp.image} alt={exp.title} />}
+              {exp.image && (
+                <ImageOptimized
+                  src={exp.image}
+                  alt={exp.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{exp.title}</h3>
               <h4>{exp.employer}</h4>
               <h5>{exp.location}</h5>

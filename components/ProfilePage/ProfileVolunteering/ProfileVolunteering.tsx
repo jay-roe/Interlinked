@@ -7,6 +7,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 
 export default function ProfileVolunteering({
   volunteering,
@@ -30,7 +31,14 @@ export default function ProfileVolunteering({
         <CardStack>
           {volunteering?.map((vol, index) => (
             <div key={index} data-testid={`live-vol-${index}`}>
-              {vol.image && <img src={vol.image} alt={vol.title} />}
+              {vol.image && (
+                <ImageOptimized
+                  src={vol.image}
+                  alt={vol.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3 className="text-xl font-extrabold">{vol.title}</h3>
               <h4>{vol.organization}</h4>
               <h5>{vol.location}</h5>
@@ -184,7 +192,14 @@ export default function ProfileVolunteering({
             </div>
           ) : (
             <div data-testid="editable-vol">
-              {vol.image && <img src={vol.image} alt={vol.title} />}
+              {vol.image && (
+                <ImageOptimized
+                  src={vol.image}
+                  alt={vol.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3 className="text-xl font-semibold">{vol.title}</h3>
               <h4>{vol.organization}</h4>
               <h5>{vol.location}</h5>

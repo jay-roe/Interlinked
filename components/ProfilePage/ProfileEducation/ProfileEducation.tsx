@@ -7,6 +7,7 @@ import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 export default function ProfileEducation({
   education,
   isEditable = false,
@@ -33,7 +34,14 @@ export default function ProfileEducation({
           {education.map((ed, index) => (
             <div data-testid={`live-edu-${index}`} key={index}>
               <h3 className="text-2xl font-semibold">{ed.program}</h3>
-              {ed.image && <img src={ed.image} alt={ed.name} />}
+              {ed.image && (
+                <ImageOptimized
+                  src={ed.image}
+                  alt={ed.name}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{ed.name}</h3>
               <h4>{ed.location}</h4>
               <h6>
@@ -193,7 +201,14 @@ export default function ProfileEducation({
           ) : (
             <div>
               <h3 className="text-xl font-semibold">{ed.program}</h3>
-              {ed.image && <img src={ed.image} alt={ed.name} />}
+              {ed.image && (
+                <ImageOptimized
+                  src={ed.image}
+                  alt={ed.name}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{ed.name}</h3>
               <h4>{ed.location}</h4>
               <h6>

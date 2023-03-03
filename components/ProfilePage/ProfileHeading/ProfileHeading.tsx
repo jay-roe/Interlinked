@@ -1,7 +1,7 @@
 import EditButton from '@/components/Buttons/EditButton/EditButton';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Input from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
-import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
@@ -53,10 +53,10 @@ export default function ProfileHeading({
   return (
     <div className="mb-5 block min-h-full gap-5 md:flex md:max-w-xl">
       <div className="row-auto">
-        <div className="relative m-auto w-fit">
+        <div className="relative m-auto h-40 w-40">
           {isEditable ? (
             // editable picture
-            <div>
+            <>
               <input
                 accept="image/*"
                 id="upload-profile-picture"
@@ -68,23 +68,29 @@ export default function ProfileHeading({
                 htmlFor="upload-profile-picture"
                 className="cursor-pointer"
               >
-                <img
-                  className="h-40 w-40 max-w-none rounded-full transition-all hover:brightness-150"
+                <ImageOptimized
+                  className="max-w-none rounded-full transition-all hover:brightness-150"
                   src={profilePictureURL}
                   alt={name || 'Profile Picture'}
+                  width={160}
+                  height={160}
+                  variant="cover"
                 />
                 <FaRegEdit
                   className="absolute -right-4 -bottom-4 p-2 text-yellow-600 transition-all hover:text-yellow-500"
                   size={45}
                 />
               </label>
-            </div>
+            </>
           ) : (
             // live picture
-            <img
-              className="h-40 w-40 max-w-none rounded-full"
+            <ImageOptimized
+              className="rounded-full"
               src={profilePictureURL}
               alt={name || 'Profile Picture'}
+              width={160}
+              height={160}
+              variant="cover"
             />
           )}
         </div>
