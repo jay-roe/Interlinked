@@ -216,8 +216,8 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
 
     // coding languages
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang1);
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang2);
+    cy.get('[data-testid=live-code-langs]').should('contain', newCodingLang1);
+    cy.get('[data-testid=live-code-langs]').should('contain', newCodingLang2);
 
     // education
     cy.get('[data-testid=live-edu-0]')
@@ -248,9 +248,17 @@ describe('Full edit profile spec', async () => {
       .should('contain', projTitle)
       .should('contain', projDescription)
       .should('contain', '1998')
-      .should('contain', '2023')
-    cy.get('[data-testid=live-proj-repo-0]').should('have.attr', 'href', projRepo)
-    cy.get('[data-testid=live-proj-demo-0]').should('have.attr', 'href', projDemo)
+      .should('contain', '2023');
+    cy.get('[data-testid=live-proj-repo-0]').should(
+      'have.attr',
+      'href',
+      projRepo
+    );
+    cy.get('[data-testid=live-proj-demo-0]').should(
+      'have.attr',
+      'href',
+      projDemo
+    );
 
     // skills
 

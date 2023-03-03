@@ -2,6 +2,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import Link from 'next/link';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
+import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const PostHeader = ({
   author,
@@ -21,14 +22,14 @@ const PostHeader = ({
         className="flex items-center justify-start space-x-4"
       >
         <span>
-          <img
+          <ImageOptimized
             data-testid="test-coverphoto"
             className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
-            src={
-              author?.profilePicture ||
-              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
-            }
-          ></img>
+            src={author?.profilePicture}
+            alt={author?.name || author?.email || 'Author profile picture'}
+            width={32}
+            height={32}
+          />
         </span>
         <div className="flex flex-col">
           <div className="break-all text-sm md:text-lg">
