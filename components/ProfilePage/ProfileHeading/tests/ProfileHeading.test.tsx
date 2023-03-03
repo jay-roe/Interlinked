@@ -2,25 +2,13 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import ProfileHeading from '../ProfileHeading';
 
-const currentUser = {
-  awards: [],
-  codingLanguages: [],
-  connections: [],
-  courses: [],
-  education: [],
-  email: '',
-  experience: [],
-  languages: [],
-  name: 'Melisa',
-  projects: [],
-  recommendations: [],
-  skills: [],
-  volunteering: [],
-};
-
 it('renders name given user', async () => {
   const { findByText } = render(
-    <ProfileHeading currentUser={currentUser} bio="" />
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
+    />
   );
 
   const name = await findByText('Melisa', { exact: false });
@@ -33,8 +21,9 @@ it('can change bio', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      currentUser={currentUser}
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       bioEditing={true}
       isEditable={true}
       setBio={setBioMock}
@@ -54,14 +43,15 @@ it('can edit bio', async () => {
 
   const { findByTestId } = render(
     <ProfileHeading
-      currentUser={currentUser}
-      bio=""
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
       isEditable={true}
       setBioEditing={setBioEditingMock}
     />
   );
 
-  const editButton = await findByTestId('edit-button');
+  const editButton = await findByTestId('bio-edit-button');
   expect(editButton).toBeInTheDocument();
 
   fireEvent.click(editButton);
@@ -70,26 +60,54 @@ it('can edit bio', async () => {
 });
 
 it('renders placeholder if user has no name', async () => {
-  let currUser = {
-    awards: [],
-    codingLanguages: [],
-    connections: [],
-    courses: [],
-    education: [],
-    email: '',
-    experience: [],
-    languages: [],
-    name: '',
-    projects: [],
-    recommendations: [],
-    skills: [],
-    volunteering: [],
-  };
-
   const { findByText } = render(
-    <ProfileHeading currentUser={currUser} bio="" />
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name=""
+      bio="Insert some super interesting stuff here!"
+    />
   );
 
   const namePlaceholder = await findByText('No name provided.');
   expect(namePlaceholder).toBeInTheDocument();
+});
+
+it('can set editing name', async () => {
+  const setNameEditingMock = jest.fn();
+
+  const { findByTestId } = render(
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
+      isEditable={true}
+      setNameEditing={setNameEditingMock}
+    />
+  );
+
+  const nameEditBtn = await findByTestId('name-edit-button');
+  expect(nameEditBtn).toBeInTheDocument();
+
+  fireEvent.click(nameEditBtn);
+  expect(setNameEditingMock).toHaveBeenCalledTimes(1);
+});
+
+it('can set name', async () => {
+  const setNameMock = jest.fn();
+
+  const { findByTestId } = render(
+    <ProfileHeading
+      profilePictureURL="https://via.placeholder.com/100.png"
+      name="Melisa"
+      bio="Insert some super interesting stuff here!"
+      isEditable={true}
+      nameEditing={true}
+      setName={setNameMock}
+    />
+  );
+
+  const nameEditField = await findByTestId('change-name');
+  fireEvent.change(nameEditField, { target: { value: 'new nameeeee' } });
+
+  expect(setNameMock).toHaveBeenCalledTimes(1);
 });

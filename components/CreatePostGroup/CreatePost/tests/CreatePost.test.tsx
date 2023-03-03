@@ -18,7 +18,7 @@ it('displays profile pic if user has one', async () => {
     };
   });
 
-  const { findByTestId } = render(<CreatePost />);
+  const { findByTestId } = render(<CreatePost getText={jest.fn} />);
   const profilePic = await findByTestId('profile-pic');
 
   expect(profilePic).toHaveTextContent('yes');
@@ -31,21 +31,21 @@ it('displays placeholder if user has no profile pic', async () => {
     };
   });
 
-  const { findByTestId } = render(<CreatePost />);
+  const { findByTestId } = render(<CreatePost getText={jest.fn} />);
   const placeholderPic = await findByTestId('placeholder-pic');
 
   expect(placeholderPic).toBeInTheDocument();
 });
 
 it('renders', async () => {
-  const { findByText } = render(<CreatePost />);
+  const { findByText } = render(<CreatePost getText={jest.fn} />);
 
   const createPostPrompt = await findByText('Create a Post', { exact: false });
   expect(createPostPrompt).toBeInTheDocument; // Check if the router function was called (ie, user was redirected)
 });
 
 it('saves users input', async () => {
-  const { findByTestId } = render(<CreatePost />);
+  const { findByTestId } = render(<CreatePost getText={jest.fn} />);
 
   const postContent = await findByTestId('post-content');
 

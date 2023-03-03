@@ -27,10 +27,10 @@ const Home = () => {
   return (
     <div className="container mx-auto text-white">
       <h1
-        className="mb-3 text-center text-7xl font-extrabold"
+        className="mb-3 text-center font-logo text-7xl font-extrabold"
         data-testid="home-brand"
       >
-        Interlinked
+        INTERLINKED
       </h1>
       {/* Here goes the app's components */}
       {currentUser ? (

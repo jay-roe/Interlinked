@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -19,9 +20,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        logo: 'Orbitron',
-        'para-heavy': 'Paralucent-Heavy',
-        'para-med': 'Paralucent-Medium',
+        sans: ['Paralucent', 'Helvetica Neue', ...defaultTheme.fontFamily.sans],
+        logo: ['Orbitron', 'sans-serif'],
         'neue-machina': 'neue-machina',
       },
       gridTemplateColumns: {

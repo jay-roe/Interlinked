@@ -66,9 +66,9 @@ export default function DeleteAccountPopupOAuth({
       )}
       <Button
         data-testid="del-acc"
+        variant="danger"
         disabled={!credential}
         onClick={() => handleDeleteClick()}
-        variant="danger"
       >
         Delete account
       </Button>

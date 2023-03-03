@@ -30,7 +30,7 @@ const post = {
   author: '',
   title: 'test_title',
   text_content: 'test_content',
-  image_content: 'test_image',
+  image_content: ['test_image'],
   likes: [],
   comments: [],
   date: mockedDate,
@@ -61,6 +61,6 @@ it('renders content for given post', async () => {
 it('renders image for given post', async () => {
   const { findByTestId } = render(<PostBody post={post} />);
 
-  const postImage = await findByTestId('test-image');
+  const postImage = await findByTestId('test-image-0');
   expect(postImage).toBeInTheDocument();
 });

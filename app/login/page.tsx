@@ -8,7 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 
-const Login = () => {
+export default function Login() {
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -28,7 +28,6 @@ const Login = () => {
     try {
       setLoading(true);
       await login(email, password);
-      router.push('/');
     } catch (err) {
       console.error(err);
       alert('Failed to login');
@@ -48,7 +47,7 @@ const Login = () => {
             Welcome back
           </h2>
         </div>
-        <form className="mt-8 space-y-6">
+        <form action="" className="mt-8 space-y-6">
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               <input
@@ -57,6 +56,7 @@ const Login = () => {
                 name="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 autoComplete="email"
                 required
                 className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
@@ -69,6 +69,7 @@ const Login = () => {
                 data-testid="pw"
                 name="password"
                 type="password"
+                value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 autoComplete="current-password"
                 required
@@ -91,7 +92,11 @@ const Login = () => {
           <div className={styles.HorizontalSeparator}></div>
           <div>
             <GoogleButton
-              onClick={() => loginWithGoogle()}
+              onClick={() => {
+                setEmail('');
+                setPassword('');
+                loginWithGoogle();
+              }}
               data-testid="googleLogin"
             >
               Login with Google
@@ -112,4 +117,3 @@ const Login = () => {
     </div>
   );
 };
-export default Login;
