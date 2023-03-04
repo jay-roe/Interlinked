@@ -14,7 +14,7 @@ const CommentHeader = ({
   return (
     <div className="mb-1 flex flex-col justify-start">
       <div className="flex justify-between">
-        <Link href={`/profile/${comment.authorID}`}>
+        <Link href={`/profile/${comment?.authorID}`}>
           <p className="text-lg leading-10">{comment?.author || 'Unknown'}</p>
         </Link>
         <div>

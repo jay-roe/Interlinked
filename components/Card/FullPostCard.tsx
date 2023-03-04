@@ -16,7 +16,7 @@ const FullPostCard = ({
   post,
   postID,
   currentUser,
-  authUser,
+  userID,
   testKey,
 }: {
   author?: User;
@@ -24,7 +24,7 @@ const FullPostCard = ({
   post?: Post;
   postID?: string;
   currentUser?: User;
-  authUser?: any;
+  userID?: string;
   testKey?: number;
 }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
@@ -81,7 +81,7 @@ const FullPostCard = ({
         {/* Comments go here */}
         <div className={`flex flex-col space-y-3`}>
           <AddComment
-            authUser={authUser}
+            userID={userID}
             currentUser={currentUser}
             postID={postID}
             postAuthorID={authorID}

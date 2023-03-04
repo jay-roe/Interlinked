@@ -13,10 +13,7 @@ jest.mock('firebase/firestore', () => ({
   arrayUnion: jest.fn(),
 }));
 
-const user = {
-  uid: '123',
-  author: 'John',
-};
+const defaultUserId = 'qDIWdvP2J1dahsSzkLdmpTOfjGe2';
 
 const currentUser = {
   awards: [],
@@ -68,9 +65,10 @@ it('renders no content', async () => {
 it('renders comment with content with user name', async () => {
   const { findByTestId } = render(
     <AddComment
-      authUser={123}
+      userID={defaultUserId}
       currentUser={currentUser}
       setComments={jest.fn}
+      postAuthorID={defaultUserId}
     />
   );
 
@@ -87,9 +85,10 @@ it('renders comment with content with user name', async () => {
 it('renders comment with content with user email', async () => {
   const { findByTestId } = render(
     <AddComment
-      authUser={123}
+      userID={defaultUserId}
       currentUser={currentUser1}
       setComments={jest.fn}
+      postAuthorID={defaultUserId}
     />
   );
 

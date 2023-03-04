@@ -1,6 +1,7 @@
 import { FaPaperPlane } from 'react-icons/fa';
 import { Comment, Post } from '@/types/Post';
 import { User } from '@/types/User';
+import type { User as FirebaseUser } from 'firebase/auth';
 import Button from '../Buttons/Button';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { db, typeCollection } from '@/config/firestore';
@@ -17,14 +18,14 @@ import CommentBody from './CommentBody';
 
 const AddComment = ({
   currentUser,
-  authUser,
+  userID,
   postID,
   postAuthorID,
   comments,
   setComments,
 }: {
   currentUser?: User;
-  authUser?;
+  userID?: string;
   postID?: string;
   postAuthorID?: string;
   comments?: Comment[];
@@ -36,7 +37,7 @@ const AddComment = ({
     if (content === '') return;
 
     const newComment = {
-      authorID: authUser.uid,
+      authorID: userID,
       author: currentUser.name || currentUser.email,
       content: content,
       date: new Timestamp(Date.now() / 1000, 0),
@@ -44,7 +45,7 @@ const AddComment = ({
 
     await updateDoc(
       doc(
-        typeCollection<Post>(collection(doc(db.users, postAuthorID), 'posts')),
+        typeCollection<Post>(collection(db.users, postAuthorID, 'posts')),
         postID
       ),
       {

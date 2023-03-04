@@ -43,16 +43,21 @@ export default function Feeds() {
   // const router = useRouter();
 
   useEffect(() => {
-    getPostsOhAndAlsoAuthors().then((newPosts) => {
-      setPosts((current) => {
-        return [
-          ...current,
-          ...newPosts.sort(
-            (post1, post2) => post2.date.seconds - post1.date.seconds
-          ),
-        ];
-      });
-    });
+    if (currentUser?.linkedUserIds && currentUser.linkedUserIds[0]) {
+      getPostsOhAndAlsoAuthors()
+        .then((newPosts) => {
+          setPosts((current) => {
+            return [
+              ...current,
+              ...newPosts.sort(
+                (post1, post2) => post2.date.seconds - post1.date.seconds
+              ),
+            ];
+          });
+        })
+        .catch((err) => console.error(err));
+    }
+    // TODO should the loading be inside the .then() instead?
     setLoading(false);
   }, []);
 
@@ -61,7 +66,7 @@ export default function Feeds() {
       return [];
     }
     const numPostsBefore = posts.length;
-    if (linkedIndex.current === currentUser.linkedUserIds?.length) {
+    if (linkedIndex.current === currentUser.linkedUserIds.length) {
       // we went through all the users in this time interval and we have gotten all our author's info
       daysBack.current += DAYS_INTERVAL;
       linkedIndex.current = 0;
@@ -70,7 +75,7 @@ export default function Feeds() {
     let postArray: PostWithId[] = [];
     for (
       let i = linkedIndex.current;
-      i < currentUser.linkedUserIds?.length;
+      i < currentUser.linkedUserIds.length;
       i++
     ) {
       if (!allAuthorsInfo.current) {
@@ -167,7 +172,7 @@ export default function Feeds() {
               author={authors.find((author) => author.userId === post.authorID)}
               authorID={post.authorID}
               currentUser={currentUser}
-              authUser={authUser}
+              userID={authUser.uid}
             />
           );
         })}

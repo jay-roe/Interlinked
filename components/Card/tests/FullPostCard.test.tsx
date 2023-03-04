@@ -25,7 +25,7 @@ const post = {
   author: '',
   title: '',
   text_content: '',
-  image_content: '',
+  image_content: [''],
   likes: [],
   comments: [
     {
@@ -44,7 +44,7 @@ const post2 = {
   author: '',
   title: '',
   text_content: '',
-  image_content: '',
+  image_content: [''],
   likes: [],
   comments: [],
   date: mockedDate,

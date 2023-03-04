@@ -106,7 +106,7 @@ it('renders page with user and no loading', async () => {
   });
   const { findByTestId } = render(<Feeds />);
 
-  const feedNoUser = await findByTestId('base-msg');
+  const feedNoUser = await findByTestId('welcome-msg');
   expect(feedNoUser).toBeInTheDocument();
 });
 
