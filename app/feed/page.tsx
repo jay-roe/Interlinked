@@ -64,7 +64,7 @@ export default function Feeds() {
     setLoading(false);
   }, []);
 
-  const getPostsOhAndAlsoAuthors = async (countdown = 7) => {
+  const getPostsOhAndAlsoAuthors = async (countdown = 3) => {
     if (countdown === 0) {
       return [];
     }
@@ -120,14 +120,14 @@ export default function Feeds() {
     }
     // Deep search is a way to check in the past to see if there are any posts after a while. Its needed to check whether to say there are no more posts left
     // The thing is, this is recursive and queries n times the number of people the user is linked with which may become an issue at some point
-    // if (postArray.length === 0) {
-    //   // no posts found in given range
-    //   const deepSearch = await getPostsOhAndAlsoAuthors(countdown-1)
-    //   if (deepSearch.length === 0) {
-    //     setPostsLeft(false)
-    //   }
-    //   return deepSearch
-    // }
+    if (postArray.length === 0) {
+      // no posts found in given range
+      const deepSearch = await getPostsOhAndAlsoAuthors(countdown - 1);
+      if (deepSearch.length === 0) {
+        setPostsLeft(false);
+      }
+      return deepSearch;
+    }
     return postArray;
   };
 
