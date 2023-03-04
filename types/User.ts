@@ -5,13 +5,13 @@ export type User = {
   bio?: string;
   certifications?: Certification[];
   codingLanguages?: string[];
-  connections?: User[];
   courses?: Course[];
   coverPhoto?: string;
   education?: Education[];
   email: string;
   experience?: WorkExperience[];
   languages?: Language[];
+  linkedUserIds?: string[];
   name: string;
   phone?: string;
   profilePicture?: string;

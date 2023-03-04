@@ -52,6 +52,8 @@ let dateMock = {
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 const mockedRouter = useRouter as jest.Mock<any>;
 
+const placeholderImage =
+  'https://firebasestorage.googleapis.com/v0/b/interlinked-420e3.appspot.com/o/users%2FgqQVl00qdOga4WOKmLYMi6eLZxx1%2FprofilePicture%2Frocket.png?alt=media&token=66508928-4b2c-4108-be59-91aced79e969';
 
 const fakeUser = {
   awards: [
@@ -71,14 +73,14 @@ const fakeUser = {
       description: 'desc',
     },
   ],
-  coverPhoto: 'https://via.placeholder.com/100.png',
+  coverPhoto: placeholderImage,
   education: [
     {
       program: 'margorp',
       name: 'eman',
       location: 'noitacol',
       description: 'noitpircsed',
-      image: 'https://via.placeholder.com/100.png',
+      image: placeholderImage,
       startDate: dateMock,
       endDate: dateMock,
     },
@@ -90,7 +92,7 @@ const fakeUser = {
       location: 'Hollow Knight',
       employer: 'Celeste',
       description: 'Baba Is You',
-      image: 'CHR$(143)',
+      image: placeholderImage,
       startDate: dateMock,
       endDate: dateMock,
     },
@@ -98,14 +100,14 @@ const fakeUser = {
   languages: ['lang', 'other lang'],
   name: 'Bob Angelson',
   phone: '555-555-5555',
-  profilePicture: 'https://via.placeholder.com/100.png',
+  profilePicture: placeholderImage,
   projects: [
     {
       title: 'Kerbal Space Program',
       collaborators: [
         {
           name: 'name',
-          profilePicture: 'https://via.placeholder.come/100.png',
+          profilePicture: placeholderImage,
           id: '5',
         },
       ],
@@ -114,8 +116,7 @@ const fakeUser = {
       description: 'Factorio (PLAY IT!)',
       startDate: dateMock,
       endDate: dateMock,
-      image:
-        "I've listed a bunch of real good games here, all highly recommended by Craig!",
+      image: placeholderImage,
     },
   ],
   skills: ['skill', 'making bad jokes'],
@@ -129,12 +130,12 @@ const fakeUser = {
       location: 'The Witness',
       employer: 'Taiji',
       description: 'Understand',
-      image: 'Patricks Parabox',
+      image: placeholderImage,
       startDate: dateMock,
       endDate: dateMock,
     },
   ],
-}
+};
 
 // I have to figure out how to either pass the object in properly so the toDate() function can be called on dates
 // or I need to mock toDate() (TimeStamp.toDate())

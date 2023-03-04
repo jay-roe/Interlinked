@@ -1,5 +1,6 @@
 import { Post } from '@/types/Post';
 import { User } from '@/types/User';
+import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const PostBody = ({
   author,
@@ -21,12 +22,14 @@ const PostBody = ({
         post.image_content[0] &&
         post.image_content.map((image, index) => {
           return (
-            <img
+            <ImageOptimized
               data-testid={`test-image-${index}`}
               key={index}
               src={image}
               className="max-w-64 max-h-64 object-contain"
-              alt="..."
+              alt={post?.title || 'post image'}
+              width={256}
+              height={256}
             />
           );
         })}

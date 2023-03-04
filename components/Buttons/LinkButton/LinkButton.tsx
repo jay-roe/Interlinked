@@ -8,7 +8,7 @@ export default function LinkButton({ currentUser }: { currentUser: User }) {
       className="mb-3 flex max-w-fit items-center gap-2 rounded-md bg-white bg-opacity-[0.12] p-3 font-semibold"
     >
       <LinkIcon />
-      <p>{currentUser?.connections.length || 0} Links</p>
+      <p>{currentUser?.linkedUserIds?.length || 0} Links</p>
     </div>
   );
 }
