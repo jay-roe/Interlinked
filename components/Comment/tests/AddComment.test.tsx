@@ -4,6 +4,7 @@ import AddComment from '../AddComment';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
+  typeCollection: jest.fn(),
 }));
 
 jest.mock('firebase/firestore', () => ({
@@ -11,6 +12,11 @@ jest.mock('firebase/firestore', () => ({
   updateDoc: jest.fn(),
   Timestamp: jest.fn(),
   arrayUnion: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
 }));
 
 const defaultUserId = 'qDIWdvP2J1dahsSzkLdmpTOfjGe2';
