@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: 19.6
+        node-version: [19.6.0]
 
     steps:
       - uses: actions/checkout@v3
