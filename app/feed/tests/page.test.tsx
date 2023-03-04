@@ -1,11 +1,13 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { act, render } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import Feeds from '../page';
+import React from 'react';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
+  typeCollection: jest.fn(),
 }));
 
 jest.mock('config/firebase', () => ({
@@ -22,10 +24,12 @@ jest.mock('firebase/storage', () => ({
 jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
   setDoc: jest.fn(),
+  getDoc: jest.fn(),
   updateDoc: jest.fn(),
-  getDocs: jest.fn().mockResolvedValue({ docs: [] }),
+  getDocs: jest.fn().mockResolvedValue({ docs: [], forEach: jest.fn() }),
   orderBy: jest.fn(),
   query: jest.fn(),
+  where: jest.fn(),
   collection: () => {
     return {
       withConverter: jest.fn(),
@@ -61,6 +65,8 @@ const currentUser = {
   volunteering: [],
 };
 
+const authorWithId = { userId: '123', ...currentUser };
+
 const post = {
   authorID: '123',
   author: 'John',
@@ -72,6 +78,8 @@ const post = {
   date: mockedDate,
   meta_tags: [],
 };
+
+const postWithId = { postId: '0101', ...post };
 
 it('renders page with no user or loading', async () => {
   mockedUseAuth.mockImplementation(() => {
@@ -93,7 +101,7 @@ it('renders page with user and no loading', async () => {
         name: 'John',
         email: '',
         bio: '',
-        connections: [],
+        linkedUserIds: [],
         languages: [],
         education: [],
         courses: [],
@@ -102,12 +110,50 @@ it('renders page with user and no loading', async () => {
         skills: [],
         awards: [],
       },
+      authUser: {
+        uid: '123',
+      },
     };
   });
   const { findByTestId } = render(<Feeds />);
 
   const feedNoUser = await findByTestId('welcome-msg');
   expect(feedNoUser).toBeInTheDocument();
+});
+
+it('renders page with a post', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      currentUser: {
+        profilePicture: '',
+        name: 'John',
+        email: '',
+        bio: '',
+        linkedUserIds: [],
+        languages: [],
+        education: [],
+        courses: [],
+        experience: [],
+        projects: [],
+        skills: [],
+        awards: [],
+      },
+      authUser: {
+        uid: '1234',
+      },
+    };
+  });
+
+  jest
+    .spyOn(React, 'useState')
+    .mockImplementationOnce(() => [false, jest.fn()]) //loading state
+    .mockImplementationOnce(() => [[postWithId], jest.fn()]) //post with id state
+    .mockImplementationOnce(() => [[authorWithId], jest.fn()]) //authors with id state
+    .mockImplementationOnce(() => [true, jest.fn()]); //posts left state
+  const { findByTestId } = render(<Feeds />);
+
+  const loadMore = await findByTestId('load-more-button');
+  expect(loadMore).toBeInTheDocument();
 });
 
 // it('renders page with user and loading', async () => {

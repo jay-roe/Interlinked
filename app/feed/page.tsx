@@ -175,7 +175,7 @@ export default function Feeds() {
           );
         })}
       </CardGrid>
-      <div className="mt-4 flex justify-center">
+      <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {postsLeft ? (
           <Button
             className="mx-auto"
