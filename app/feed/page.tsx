@@ -30,20 +30,24 @@ interface UserWithId extends User {
 }
 
 export default function Feeds() {
+  const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<PostWithId[]>([]);
   const [authors, setAuthors] = useState<UserWithId[]>([]);
   const [postsLeft, setPostsLeft] = useState<boolean>(true);
   const linkedIndex = useRef<number>(0);
   const daysBack = useRef<number>(0);
+  const posterIds = useRef<string[]>([]);
   const allAuthorsInfo = useRef<boolean>(false);
-  const { currentUser, authUser } = useAuth();
-  const DAYS_INTERVAL: number = 1;
+  const DAYS_INTERVAL: number = 5;
   const POST_LIMIT: number = 20;
   // const router = useRouter();
 
   useEffect(() => {
-    if (currentUser?.linkedUserIds && currentUser.linkedUserIds[0]) {
+    if (currentUser?.linkedUserIds) {
+      posterIds.current = Array.from(
+        new Set([authUser?.uid, ...currentUser?.linkedUserIds])
+      ); // gets rid of any duplicated user ids
       getPostsOhAndAlsoAuthors()
         .then((newPosts) => {
           setPosts((current) => {
@@ -66,23 +70,17 @@ export default function Feeds() {
       return [];
     }
     const numPostsBefore = posts.length;
-    if (linkedIndex.current === currentUser.linkedUserIds.length) {
+    if (linkedIndex.current === posterIds.current.length) {
       // we went through all the users in this time interval and we have gotten all our author's info
       daysBack.current += DAYS_INTERVAL;
       linkedIndex.current = 0;
       allAuthorsInfo.current = true;
     }
     let postArray: PostWithId[] = [];
-    for (
-      let i = linkedIndex.current;
-      i < currentUser.linkedUserIds.length;
-      i++
-    ) {
+    for (let i = linkedIndex.current; i < posterIds.current.length; i++) {
       if (!allAuthorsInfo.current) {
         // get the selected user from the user collection and also their posts
-        const linkedUser = await getDoc(
-          doc(db.users, currentUser.linkedUserIds[i])
-        );
+        const linkedUser = await getDoc(doc(db.users, posterIds.current[i]));
         // add author to list
         setAuthors((current) => [
           ...current,
@@ -94,7 +92,7 @@ export default function Feeds() {
       // get the posts from that author
       const linkedUserPostsQuery = query(
         typeCollection<Post>(
-          collection(doc(db.users, currentUser.linkedUserIds[i]), 'posts')
+          collection(doc(db.users, posterIds.current[i]), 'posts')
         ),
         where(
           'date',
