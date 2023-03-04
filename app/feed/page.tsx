@@ -61,7 +61,6 @@ export default function Feeds() {
         })
         .catch((err) => console.error(err));
     }
-    // TODO should the loading be inside the .then() instead?
     setLoading(false);
   }, []);
 
