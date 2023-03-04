@@ -1,20 +1,22 @@
 'use client';
 
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { FiMenu, FiBell } from 'react-icons/fi';
+import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
 import { User } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
+import SearchBar from '../SearchBar/SearchBar';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 export default function NavBar() {
+  const [showSearch, setShowSearch] = useState(false);
   const { currentUser, logout } = useAuth();
   const pathname = usePathname();
 
@@ -22,16 +24,7 @@ export default function NavBar() {
     return currentUser
       ? [
           { name: 'Home', href: '/', current: true },
-          { name: 'Profile Preview', href: '/profile', current: false },
-          { name: 'Edit Profile', href: '/edit-profile', current: false },
           { name: 'Feed', href: '/feed', current: false },
-          {
-            name: 'Logout',
-            href: '#',
-            onClick: logout,
-            dataTestid: 'nav-logout',
-            current: false,
-          },
         ]
       : [
           { name: 'Home', href: '/', current: true },
@@ -100,7 +93,17 @@ export default function NavBar() {
                 </div>
               </div>
               {currentUser && (
+                //when FiSearch button is clicked, the search bar will appear/dissapear
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  <button
+                    type="button"
+                    className="mr-2 ml-2 rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    onClick={() => setShowSearch(!showSearch)}
+                  >
+                    <span className="sr-only">Search</span>
+                    <FiSearch className="h-6 w-6" aria-hidden="true" />
+                  </button>
+
                   <button
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -136,12 +139,24 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
+                              href="/profile"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
                             >
                               Your Profile
+                            </a>
+                          )}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (
+                            <a
+                              href="/edit-profile"
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block px-4 py-2 text-sm text-gray-700`}
+                            >
+                              Edit Profile
                             </a>
                           )}
                         </Menu.Item>
@@ -160,12 +175,13 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <a
-                              href="#"
+                              onClick={logout}
+                              data-testid="nav-logout"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
                             >
-                              Sign out
+                              Log out
                             </a>
                           )}
                         </Menu.Item>
@@ -174,6 +190,10 @@ export default function NavBar() {
                   </Menu>
                 </div>
               )}
+            </div>
+            <div className="mb-2 flex justify-end">
+              {/* search bar that appears when search button is clicked*/}
+              {showSearch && <SearchBar />}
             </div>
           </div>
 
