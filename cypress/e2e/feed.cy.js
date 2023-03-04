@@ -37,6 +37,10 @@ describe('Full feed spec', async () => {
       .should('have.attr', 'src')
       .should('include', 'test_image');
     //cy.get('[data-testid=test-image-1]').should('not.exist');  // Uncomment when double image bugfix is complete
+  });
+
+  it('can interact with posts', () => {
+    cy.visit('/feed');
 
     // liking
     cy.get('[data-testid=post-card-0]').within(() => {
