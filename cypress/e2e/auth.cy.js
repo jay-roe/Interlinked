@@ -3,8 +3,6 @@ describe('Full auth spec', async () => {
   let pw = '123456';
 
   it('can register, logout, login and delete', () => {
-    // register (oauth)
-
     // register (email and pw)
     cy.visit('register');
 
@@ -47,7 +45,11 @@ describe('Full auth spec', async () => {
     cy.visit('/edit-profile');
     cy.get('[data-testid=danger-zone]').click();
 
-    cy.get('[data-testid=pw-field]').type(pw);
+    cy.get('[data-testid=pw-field]').type('wrong pw');
+    cy.get('[data-testid=del-acc]').click();
+    cy.get('[data-testid=incorrect-pw]').should('contain', 'Incorrect password.');
+
+    cy.get('[data-testid=pw-field]').clear().type(pw);
     cy.get('[data-testid=del-acc]').click();
 
     cy.get('[data-testid=base-msg]').should(

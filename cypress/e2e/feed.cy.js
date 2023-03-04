@@ -20,6 +20,7 @@ describe('Full feed spec', async () => {
     cy.get('input[type=file]').attachFile('feed/test_image.jpeg');
     cy.get('input[type=file]').attachFile('feed/test_image2.png');
 
+    cy.get('[data-testid=post-content]').should('contain', postMessage);
     cy.get('[data-testid=remove-image-0]').click();
 
     cy.get('[data-testid=remove-image-1]').should('not.exist');
