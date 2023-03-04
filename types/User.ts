@@ -1,33 +1,41 @@
-import type { Timestamp } from "firebase/firestore";
+import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
-  awards: Award[];
+  awards?: Award[];
   bio?: string;
-  codingLanguages: string[];
-  connections: User[];
-  courses: Course[];
+  certifications?: Certification[];
+  codingLanguages?: string[];
+  courses?: Course[];
   coverPhoto?: string;
-  education: Education[];
+  education?: Education[];
   email: string;
-  experience: Experience[];
-  languages: string[];
+  experience?: WorkExperience[];
+  languages?: Language[];
+  linkedUserIds?: string[];
   name: string;
   phone?: string;
   profilePicture?: string;
-  projects: Project[];
-  recommendations: Recommendation[];
-  skills: Skill[];
+  projects?: Project[];
+  recommendations?: Recommendation[];
+  skills?: string[];
   socials?: {
     github?: string;
     instagram?: string;
   };
-  volunteering: Experience[];
+  volunteering?: VolunteeringExperience[];
 };
 
 type Award = {
   title: string;
   description?: string;
   date: Timestamp;
+};
+
+type Certification = {
+  name: string;
+  issuer: string;
+  date: Timestamp;
+  link?: string;
 };
 
 type Course = {
@@ -37,6 +45,7 @@ type Course = {
 };
 
 type Education = {
+  program: string;
   name: string;
   location: string;
   description?: string;
@@ -48,16 +57,32 @@ type Education = {
 type Experience = {
   title: string;
   location: string;
-  employer: string;
   description?: string;
   image?: string;
   startDate: Timestamp;
   endDate?: Timestamp;
 };
 
+interface WorkExperience extends Experience {
+  employer: string;
+}
+
+interface VolunteeringExperience extends Experience {
+  organization: string;
+}
+
+export type Language = {
+  title: string;
+  proficiency?: string;
+};
+
 type Project = {
   title: string;
-  collaborators: User[];
+  collaborators?: {
+    name: User['name'];
+    profilePicture?: User['profilePicture'];
+    id: string;
+  }[];
   repoLink?: string;
   demoLink?: string;
   description?: string;
@@ -70,8 +95,4 @@ type Recommendation = {
   title: string;
   description: string;
   recommender: User;
-};
-
-type Skill = {
-  name: string;
 };

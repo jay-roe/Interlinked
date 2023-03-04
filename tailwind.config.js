@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
@@ -11,6 +12,7 @@ module.exports = {
         'purple-background': '#130921',
         'accent-orange': '#E58F40',
         'purple-component': '#2F273C',
+        'purple-text-area': '#514A5B',
       },
       container: {
         padding: {
@@ -18,9 +20,13 @@ module.exports = {
         },
       },
       fontFamily: {
-        logo: 'Orbitron',
-        'para-heavy': 'Paralucent-Heavy',
-        'para-med': 'Paralucent-Medium',
+        sans: ['Paralucent', 'Helvetica Neue', ...defaultTheme.fontFamily.sans],
+        logo: ['Orbitron', 'sans-serif'],
+        'neue-machina': 'neue-machina',
+      },
+      gridTemplateColumns: {
+        1: 'minmax(0, 1fr)',
+        '2-1': 'minmax(0, 2fr) minmax(0, 1fr)',
       },
     },
   },

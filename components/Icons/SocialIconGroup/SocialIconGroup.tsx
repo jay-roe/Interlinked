@@ -7,19 +7,25 @@ export default function SocialIconGroup({
   socials: User['socials'];
 }) {
   return (
-    <div className="flex flex-row justify-center gap-2 md:justify-start">
+    <div
+      data-testid="socials"
+      className="flex flex-row justify-center gap-2 md:justify-start"
+    >
       {socials &&
-        Object.keys(socials).map((social: keyof User['socials'], index) => {
-          return (
-            <a
-              key={index}
-              className="text-white no-underline transition-all hover:text-accent-orange"
-              href={socials[social]}
-            >
-              <SocialIcon social={social} />
-            </a>
-          );
-        })}
+        Object.keys(socials)
+          .filter((social) => socials[social].length > 0)
+          .map((social: keyof User['socials'], index) => {
+            return (
+              <a
+                data-testid="links"
+                key={index}
+                className="text-white no-underline transition-all hover:text-accent-orange"
+                href={socials[social]}
+              >
+                <SocialIcon social={social} />
+              </a>
+            );
+          })}
     </div>
   );
 }

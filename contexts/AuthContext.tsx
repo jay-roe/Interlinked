@@ -16,7 +16,8 @@ import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
 import type { User } from '../types/User';
 import { db } from '../config/firestore';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import md5 from 'md5';
 
 interface AuthContextType {
   currentUser: User;
@@ -64,22 +65,29 @@ export function AuthProvider({ children }) {
   async function createUser(credential: UserCredential) {
     // Create a new user document in database using same user id as auth
     const newUser = credential.user;
+
     const emptyUser: User = {
       awards: [],
+      certifications: [],
       codingLanguages: [],
-      connections: [],
+      linkedUserIds: [],
       courses: [],
       education: [],
       email: newUser.email,
       experience: [],
       languages: [],
       name: newUser.displayName,
-      profilePicture: newUser.photoURL,
+      profilePicture:
+        newUser.photoURL ||
+        `https://www.gravatar.com/avatar/${md5(
+          newUser.email.trim().toLowerCase()
+        )}?d=identicon&s=160`,
       projects: [],
       recommendations: [],
       skills: [],
       volunteering: [],
     };
+
     await setDoc(doc(db.users, newUser.uid), emptyUser);
     setCurrentUser(emptyUser);
   }
@@ -159,6 +167,8 @@ export function AuthProvider({ children }) {
    * Deletes user.
    */
   async function deleteAccount() {
+    await deleteDoc(doc(db.users, auth.currentUser.uid));
+    // TODO: Delete all subcollections (if any)
     return await deleteUser(auth.currentUser);
   }
 

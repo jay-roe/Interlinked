@@ -5,7 +5,7 @@ export type Post = {
   author: string;
   title: string;
   text_content?: string;
-  image_content?: string;
+  image_content?: string[];
   likes?: Like[];
   comments?: Comment[];
   date: Timestamp;

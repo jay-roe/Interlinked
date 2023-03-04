@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { User } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -23,6 +24,7 @@ export default function NavBar() {
           { name: 'Home', href: '/', current: true },
           { name: 'Profile Preview', href: '/profile', current: false },
           { name: 'Edit Profile', href: '/edit-profile', current: false },
+          { name: 'Feed', href: '/feed', current: false },
           {
             name: 'Logout',
             href: '#',
@@ -66,17 +68,12 @@ export default function NavBar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
                   {/* // TODO Fix font family for logo */}
-                  <h1 className="font-sans text-white">INTERLINKED</h1>
-                  {/* <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  /> */}
+                  <h1
+                    data-testid="home-interlinked"
+                    className="font-logo text-white lg:text-3xl xl:text-4xl"
+                  >
+                    INTERLINKED
+                  </h1>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -90,7 +87,7 @@ export default function NavBar() {
                           item.href === pathname
                             ? 'bg-gray-900 text-white'
                             : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                          'rounded-md px-3 py-2 text-sm font-medium transition-all'
                         )}
                         aria-current={
                           item.href === pathname ? 'page' : undefined
@@ -106,7 +103,7 @@ export default function NavBar() {
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
                     <span className="sr-only">View notifications</span>
                     <FiBell className="h-6 w-6" aria-hidden="true" />
@@ -117,10 +114,12 @@ export default function NavBar() {
                     <div>
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
-                        <img
+                        <ImageOptimized
                           className="h-8 w-8 rounded-full"
-                          src={currentUser.profilePicture || ''}
+                          src={currentUser.profilePicture}
                           alt={currentUser.name}
+                          width={32}
+                          height={32}
                         />
                       </Menu.Button>
                     </div>
