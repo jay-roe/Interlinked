@@ -70,7 +70,7 @@ export function AuthProvider({ children }) {
       awards: [],
       certifications: [],
       codingLanguages: [],
-      connections: [],
+      linkedUserIds: [],
       courses: [],
       education: [],
       email: newUser.email,
