@@ -1,25 +1,34 @@
 import { FaPaperPlane } from 'react-icons/fa';
-import { Comment } from '@/types/Post';
+import { Comment, Post } from '@/types/Post';
 import { User } from '@/types/User';
+import type { User as FirebaseUser } from 'firebase/auth';
 import Button from '../Buttons/Button';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { db } from '@/config/firestore';
-import { arrayUnion, doc, Timestamp, updateDoc } from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
+import {
+  arrayUnion,
+  collection,
+  doc,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
 import Card from '../Card/Card';
 import CommentHeader from './CommentHeader';
 import CommentBody from './CommentBody';
 
 const AddComment = ({
   currentUser,
-  authUser,
+  userID,
   postID,
+  postAuthorID,
   comments,
   setComments,
   testKey,
 }: {
   currentUser?: User;
-  authUser?;
+  userID?: string;
   postID?: string;
+  postAuthorID?: string;
   comments?: Comment[];
   setComments?: Dispatch<SetStateAction<Comment[]>>;
   testKey?: number;
@@ -30,15 +39,21 @@ const AddComment = ({
     if (content === '') return;
 
     const newComment = {
-      authorID: authUser.uid,
+      authorID: userID,
       author: currentUser.name || currentUser.email,
       content: content,
       date: new Timestamp(Date.now() / 1000, 0),
     };
 
-    await updateDoc(doc(db.posts, postID), {
-      comments: arrayUnion(newComment),
-    });
+    await updateDoc(
+      doc(
+        typeCollection<Post>(collection(db.users, postAuthorID, 'posts')),
+        postID
+      ),
+      {
+        comments: arrayUnion(newComment),
+      }
+    );
     setContent('');
     setComments([newComment, ...(comments || [])]);
   };

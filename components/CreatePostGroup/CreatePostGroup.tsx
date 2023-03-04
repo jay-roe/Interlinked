@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
 import CreatePost from './CreatePost/CreatePost';
 import PreviewAttachement from './PreviewAttachement/PreviewAttachement';
-import { doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
-import { db } from '@/config/firestore';
+import {
+  collection,
+  doc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   StorageReference,
@@ -48,7 +54,9 @@ export default function CreatePostGroup() {
       meta_tags: null,
     };
 
-    const docRef = doc(db.posts);
+    const docRef = doc(
+      typeCollection<Post>(collection(doc(db.users, authUser.uid), 'posts'))
+    );
     await setDoc(docRef, definePost);
     await updateDoc(docRef, {
       date: serverTimestamp(),

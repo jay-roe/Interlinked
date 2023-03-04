@@ -4,6 +4,7 @@ import AddComment from '../AddComment';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
+  typeCollection: jest.fn(),
 }));
 
 jest.mock('firebase/firestore', () => ({
@@ -11,12 +12,14 @@ jest.mock('firebase/firestore', () => ({
   updateDoc: jest.fn(),
   Timestamp: jest.fn(),
   arrayUnion: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
 }));
 
-const user = {
-  uid: '123',
-  author: 'John',
-};
+const defaultUserId = 'qDIWdvP2J1dahsSzkLdmpTOfjGe2';
 
 const currentUser = {
   awards: [],
@@ -69,9 +72,10 @@ it('renders comment with content with user name', async () => {
   const { findByTestId } = render(
     <AddComment
       testKey={0}
-      authUser={123}
+      userID={defaultUserId}
       currentUser={currentUser}
       setComments={jest.fn}
+      postAuthorID={defaultUserId}
     />
   );
 
@@ -89,9 +93,10 @@ it('renders comment with content with user email', async () => {
   const { findByTestId } = render(
     <AddComment
       testKey={0}
-      authUser={123}
+      userID={defaultUserId}
       currentUser={currentUser1}
       setComments={jest.fn}
+      postAuthorID={defaultUserId}
     />
   );
 

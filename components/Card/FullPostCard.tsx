@@ -12,17 +12,19 @@ import AddComment from '../Comment/AddComment';
 
 const FullPostCard = ({
   author,
+  authorID,
   post,
   postID,
   currentUser,
-  authUser,
+  userID,
   testKey,
 }: {
   author?: User;
+  authorID?: string;
   post?: Post;
   postID?: string;
   currentUser?: User;
-  authUser?: any;
+  userID?: string;
   testKey?: number;
 }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
@@ -52,7 +54,12 @@ const FullPostCard = ({
           ref={postContainer}
         >
           {/* <div>{postHeight}</div> */}
-          <PostHeader author={author} post={post} currentUser={currentUser} />
+          <PostHeader
+            author={author}
+            authorID={authorID}
+            post={post}
+            currentUser={currentUser}
+          />
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
             data-testid="post-footer"
@@ -75,9 +82,10 @@ const FullPostCard = ({
         {/* Comments go here */}
         <div className={`flex flex-col space-y-3`}>
           <AddComment
-            authUser={authUser}
+            userID={userID}
             currentUser={currentUser}
             postID={postID}
+            postAuthorID={authorID}
             comments={comments}
             setComments={setComments}
             testKey={testKey}
