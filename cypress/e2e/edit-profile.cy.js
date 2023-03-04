@@ -322,8 +322,8 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang2);
 
     // coding languages
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang1);
-    cy.get('[data-testid=live-profile]').should('contain', newCodingLang2);
+    cy.get('[data-testid=live-code-langs]').should('contain', newCodingLang1);
+    cy.get('[data-testid=live-code-langs]').should('contain', newCodingLang2);
 
     // education
     cy.get('[data-testid=live-edu-0]')

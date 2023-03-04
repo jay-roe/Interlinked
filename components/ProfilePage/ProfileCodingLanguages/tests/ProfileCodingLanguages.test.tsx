@@ -13,16 +13,9 @@ it('tests the live version', async () => {
   const { findByTestId } = render(
     <ProfileCodingLanguages isEditable={false} codingLanguages={['HTML']} />
   );
-  const liveProfile = await findByTestId('live-profile');
+  const liveProfile = await findByTestId('live-code-langs');
   expect(liveProfile).toBeInTheDocument();
 });
-
-// tests on the editable version only have 1 language as having multiple
-// causes there to be multiple elements with the same data-testid
-
-// -> just make sure that the data-testid is on an element outside of the map
-// -> I want to verify that an exact component is rendered..
-// -> Is this necessary though? *(deep thoughts being thought...)*
 
 it('tests render of editable version', async () => {
   const mockSubmit = jest.fn();
