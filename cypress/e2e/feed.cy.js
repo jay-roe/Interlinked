@@ -21,9 +21,6 @@ describe('Full feed spec', async () => {
     cy.get('input[type=file]').attachFile('feed/test_image2.png');
 
     cy.get('[data-testid=remove-image-0]').click();
-    /*cy.on('window:confirm', () => {
-      return true;
-    });*/
 
     cy.get('[data-testid=remove-image-1]').should('not.exist');
 
@@ -40,5 +37,26 @@ describe('Full feed spec', async () => {
       .should('have.attr', 'src')
       .should('include', 'test_image');
     //cy.get('[data-testid=test-image-1]').should('not.exist');  // Uncomment when double image bugfix is complete
+
+    // liking
+    cy.get('[data-testid=post-card-0]').within(() => {
+      cy.get('[data-testid=like-btn]').click();
+    });
+    cy.get('[data-testid=post-card-0]').within(() => {
+      cy.get('[data-testid=like-btn]').within(() => {
+        cy.get('[data-testid=liked]');
+      });
+    });
+
+    // commenting
+    let comment = 'testComment';
+    cy.get('[data-testid=post-card-0]').within(() => {
+      cy.get('[data-testid=comment-btn]').click();
+    });
+
+    cy.get('[data-testid=add-comment-content-0]').type(comment);
+    cy.get('[data-testid=add-comment-to-post-0]').click();
+
+    cy.get('[data-testid=comment-body-0-0]').should('contain', comment);
   });
 });

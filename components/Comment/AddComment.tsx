@@ -15,12 +15,14 @@ const AddComment = ({
   postID,
   comments,
   setComments,
+  testKey,
 }: {
   currentUser?: User;
   authUser?;
   postID?: string;
   comments?: Comment[];
   setComments?: Dispatch<SetStateAction<Comment[]>>;
+  testKey?: number;
 }) => {
   const [content, setContent] = useState('');
 
@@ -50,14 +52,17 @@ const AddComment = ({
           className="flex items-center justify-between space-x-2"
         >
           <textarea
-            data-testid="add-comment-content"
+            data-testid={`add-comment-content-${testKey}`}
             value={content}
             className="block min-h-min w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
             placeholder="Say what's on your mind."
             required
             onChange={(e) => setContent(e.target.value)}
           />
-          <Button data-testid="add-comment-to-post" onClick={addCommentToPost}>
+          <Button
+            data-testid={`add-comment-to-post-${testKey}`}
+            onClick={addCommentToPost}
+          >
             <FaPaperPlane />
           </Button>
         </div>

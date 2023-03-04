@@ -58,9 +58,9 @@ it('renders the AddComment', async () => {
 });
 
 it('renders no content', async () => {
-  const { findByTestId } = render(<AddComment />);
+  const { findByTestId } = render(<AddComment testKey={0} />);
 
-  const addCommentToPost = await findByTestId('add-comment-to-post');
+  const addCommentToPost = await findByTestId('add-comment-to-post-0');
   fireEvent.click(addCommentToPost);
   expect(addCommentToPost).toBeInTheDocument();
 });
@@ -68,18 +68,19 @@ it('renders no content', async () => {
 it('renders comment with content with user name', async () => {
   const { findByTestId } = render(
     <AddComment
+      testKey={0}
       authUser={123}
       currentUser={currentUser}
       setComments={jest.fn}
     />
   );
 
-  const addCommentContent = await findByTestId('add-comment-content');
+  const addCommentContent = await findByTestId('add-comment-content-0');
   fireEvent.change(addCommentContent, { target: { value: 'testContent' } });
   expect(addCommentContent).toBeInTheDocument();
 
   await act(async () => {
-    const addCommentToPost = await findByTestId('add-comment-to-post');
+    const addCommentToPost = await findByTestId('add-comment-to-post-0');
     fireEvent.click(addCommentToPost);
   });
 });
@@ -87,18 +88,19 @@ it('renders comment with content with user name', async () => {
 it('renders comment with content with user email', async () => {
   const { findByTestId } = render(
     <AddComment
+      testKey={0}
       authUser={123}
       currentUser={currentUser1}
       setComments={jest.fn}
     />
   );
 
-  const addCommentContent = await findByTestId('add-comment-content');
+  const addCommentContent = await findByTestId('add-comment-content-0');
   fireEvent.change(addCommentContent, { target: { value: 'testContent' } });
   expect(addCommentContent).toBeInTheDocument();
 
   await act(async () => {
-    const addCommentToPost = await findByTestId('add-comment-to-post');
+    const addCommentToPost = await findByTestId('add-comment-to-post-0');
     fireEvent.click(addCommentToPost);
   });
 });
