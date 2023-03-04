@@ -315,7 +315,6 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=live-contact]')
       .should('contain', contactEmail)
       .should('contain', contactPhone);
-    cy.pause();
 
     // languages
     cy.get('[data-testid=live-lang-profile]').should('contain', newLang1);
@@ -392,8 +391,8 @@ describe('Full edit profile spec', async () => {
       .should('contain', volTitle)
       .should('contain', volLocation)
       .should('contain', volOrganization)
-      .should('contain', '8/9/2000')
-      .should('contain', '9/10/2001')
+      .should('contain', '09/08/2000')
+      .should('contain', '10/09/2001')
       .should('contain', volDescription);
   });
 });
