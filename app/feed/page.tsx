@@ -58,10 +58,11 @@ export default function Feeds() {
               ),
             ];
           });
-          setLoading(false);
         })
         .catch((err) => console.error(err));
     }
+    // TODO should the loading be inside the .then() instead?
+    setLoading(false);
   }, []);
 
   const getPostsOhAndAlsoAuthors = async (countdown = 7) => {
