@@ -76,10 +76,7 @@ const SearchBar = () => {
                 <span>
                   <ImageOptimized
                     className="h-8 min-h-[2rem] w-2 min-w-[2rem] rounded-full md:h-5 md:w-5"
-                    src={
-                      user?.profilePicture ||
-                      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
-                    }
+                    src={user?.profilePicture}
                     alt={''}
                     width={13}
                     height={13}
