@@ -13,15 +13,16 @@ import {
 import { db } from '@/config/firestore';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
+  const { handleSearch } = props;
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
   useEffect(() => {
     setSearchResults([]);
     const vals = query(
@@ -69,7 +70,7 @@ const SearchBar = () => {
             <Link
               key={user.name}
               href={`/profile/${user.id}`}
-              onClick={() => setShowSearch(!showSearch)}
+              onClick={handleSearch}
               className="block px-4 py-2 text-sm text-white"
             >
               <div className="flex items-center space-x-2">
@@ -77,7 +78,7 @@ const SearchBar = () => {
                   <ImageOptimized
                     className="h-8 min-h-[2rem] w-2 min-w-[2rem] rounded-full md:h-5 md:w-5"
                     src={user?.profilePicture}
-                    alt={''}
+                    alt={user?.profilePicture}
                     width={13}
                     height={13}
                   ></ImageOptimized>

@@ -20,6 +20,10 @@ export default function NavBar() {
   const { currentUser, logout } = useAuth();
   const pathname = usePathname();
 
+  const handleSearch = () => {
+    setShowSearch(!showSearch);
+  };
+
   const navLinks = (function navigation(currentUser: User) {
     return currentUser
       ? [
@@ -193,7 +197,7 @@ export default function NavBar() {
             </div>
             <div className="mb-2 flex justify-end">
               {/* search bar that appears when search button is clicked*/}
-              {showSearch && <SearchBar />}
+              {showSearch && <SearchBar handleSearch={handleSearch} />}
             </div>
           </div>
 
