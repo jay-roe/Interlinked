@@ -20,6 +20,7 @@ export default function NavBar() {
   const { currentUser, logout } = useAuth();
   const pathname = usePathname();
 
+  // Allow state access in SearchBar component
   const handleSearch = () => {
     setShowSearch(!showSearch);
   };

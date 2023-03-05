@@ -14,9 +14,9 @@ import { db } from '@/config/firestore';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const SearchBar = (props) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [searchResults, setSearchResults] = useState([]);
-  const [showResults, setShowResults] = useState(false);
+  const [searchTerm, setSearchTerm] = useState(''); // search input
+  const [searchResults, setSearchResults] = useState([]); // search results
+  const [showResults, setShowResults] = useState(false); // show search results
   const { handleSearch } = props;
 
   const handleChange = (e) => {
@@ -25,6 +25,7 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     setSearchResults([]);
+    // query for users with names that start with the search term
     const vals = query(
       db.users,
       where('name', '>=', searchTerm),
@@ -33,6 +34,7 @@ const SearchBar = (props) => {
       startAt(searchTerm),
       endAt(searchTerm + '\uf8ff')
     );
+    // if the search term is not empty, get the results and the user's profile id
     if (searchTerm.length > 0) {
       getDocs(vals).then((docs) => {
         docs.forEach((doc) => {
@@ -49,11 +51,11 @@ const SearchBar = (props) => {
   }, [searchTerm]);
 
   return (
+    // search input box
     <div className="relative">
       <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
         <FiSearch className="h-5 w-5 text-gray-400" aria-hidden="true" />
       </div>
-      {/* the input box fits the theme of this website using purple tones isntead of white*/}
       <input
         id="search"
         name="search"
@@ -64,6 +66,7 @@ const SearchBar = (props) => {
         onChange={handleChange}
       />
 
+      {/* Search results */}
       {showResults && (
         <div className="shadow-l absolute z-10 mt-1 w-full rounded-lg bg-gray-800">
           {searchResults.map((user) => (
