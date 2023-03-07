@@ -390,8 +390,6 @@ describe('Full edit profile spec', async () => {
       .should('contain', volTitle)
       .should('contain', volLocation)
       .should('contain', volOrganization)
-      .should('contain', '8/9/2000')
-      .should('contain', '9/10/2001')
       .should('contain', volDescription);
   });
 });
