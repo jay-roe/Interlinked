@@ -79,7 +79,6 @@ export default function NavBar() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        onClick={item.onClick}
                         data-testid={item.dataTestid}
                         className={classNames(
                           item.href === pathname
