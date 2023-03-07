@@ -58,6 +58,7 @@ const SearchBar = (props) => {
       </div>
       <input
         id="search"
+        data-testid="search-button"
         name="search"
         className="block w-full rounded-md  bg-gray-800 py-2 pl-10 pr-3 leading-6 text-white placeholder-gray-400 focus:placeholder-gray-500 focus:outline-none  "
         placeholder="Search"
