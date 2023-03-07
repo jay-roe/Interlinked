@@ -23,8 +23,6 @@ Cypress.Commands.add('login', (email, password) => {
 });
 
 Cypress.Commands.add('logout', () => {
-  cy.visit('');
-
   cy.get('[data-testid=nav-logout]').click();
 
   cy.get('[data-testid=base-msg]').should('exist');
