@@ -14,6 +14,7 @@ import { db } from '@/config/firestore';
 import { doc, getDoc } from '@firebase/firestore';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
+import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 
 export default function Links() {
   const PAGE_SIZE = 20;
@@ -116,17 +117,11 @@ export default function Links() {
       </CardGrid>
       <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {!allLinksFound ? (
-          // <LoadMoreButton onClick={
-          //   getPostsOhAndAlsoAuthors().then((newPosts) => {
-          //   setPosts((current) => {
-          //     return [
-          //       ...current,
-          //       ...newPosts.sort(
-          //         (post1, post2) => post2.date.seconds - post1.date.seconds
-          //       ),
-          //     ];
-          //   });
-          // })}/>
+          // <LoadMoreButton onClick={() =>
+          //   getLinkInfo().then((links) => {
+          //   setLinks((current) => [...current, ...links]);
+          // })
+          // }/>
           <Button
             className="mx-auto"
             onClick={() =>

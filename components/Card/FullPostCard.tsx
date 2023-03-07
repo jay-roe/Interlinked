@@ -34,13 +34,16 @@ const FullPostCard = ({
   const postContainer = useRef(null);
 
   useEffect(() => {
+    setTimeout(() => setPostHeight(postContainer.current.clientHeight), 2000);
+  }, []);
+  useEffect(() => {
     setPostHeight(postContainer.current.clientHeight);
   });
 
   return (
     <CardGrid
       data-testid="card-grid"
-      className={`grid-cols-1 lg:grid-cols-2-1 max-h-[${postHeight}px]`}
+      className={`grid-cols-1 lg:grid-cols-2-1`}
     >
       {/* Post card */}
       <Card
@@ -66,6 +69,9 @@ const FullPostCard = ({
             comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
+            post={post}
+            postId={postID}
+            currentUser={currentUser}
           />
         </div>
       </Card>
