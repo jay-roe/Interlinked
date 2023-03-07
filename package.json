@@ -16,7 +16,8 @@
     "test:coverage": "jest --coverage",
     "cy:run": "cypress run",
     "cy:open": "cypress open",
-    "cy:coverage": "rm -rf .nyc_output coverage && cypress run --browser chrome -e codeCoverageTasksRegistered=true && npx nyc report --reporter=text-summary",
+    "cy:coverage": "rm -rf .nyc_output coverage && cypress run && npx nyc report --reporter=text-summary",
+    "cy:ci": "rm -rf .nyc_output coverage && cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary",
     "prepare": "husky install"
   },
   "dependencies": {
