@@ -45,7 +45,7 @@ export default function CreatePostGroup() {
     let definePost: Post = {
       authorID: authUser.uid,
       author: currentUser.name || currentUser.email,
-      title: 'post', // is a title needed?
+      title: null, // is a title needed?
       text_content: text, // text from createPost component
       image_content: pics, // URL created after images has been uploaded to firestore storage
       likes: null,

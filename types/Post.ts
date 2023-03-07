@@ -13,6 +13,10 @@ export type Post = {
   // ex: meme, advertisement, python, lisp,
 };
 
+export interface PostWithId extends Post {
+  postId: string;
+}
+
 export type Comment = {
   authorID: string;
   author: string;
