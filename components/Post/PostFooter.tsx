@@ -27,7 +27,7 @@ const PostFooter = ({
   return (
     <div className="my-2 flex items-center space-x-4">
       <LikeIcon
-        likes={post.likes}
+        likes={post?.likes || []}
         userID={userID}
         postID={postID}
         postAuthorID={postAuthorID}
