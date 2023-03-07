@@ -19,15 +19,15 @@ Cypress.Commands.add('login', (email, password) => {
   // {enter} causes the form to submit
   cy.get('input[name=password]').type(`${password}{enter}`, { log: false });
 
-  cy.get('[data-testid="welcome-msg"').should('exist');
+  cy.get('[data-testid=welcome-msg]').should('exist');
 });
 
 Cypress.Commands.add('logout', () => {
   cy.visit('');
 
-  cy.get('[data-testid="nav-logout"').click();
+  cy.get('[data-testid=nav-logout]').click();
 
-  cy.get('[data-testid="base-msg"').should('exist');
+  cy.get('[data-testid=base-msg]').should('exist');
 });
 //
 // -- This is a child command --

@@ -147,21 +147,21 @@ describe('Full edit profile spec', async () => {
     let newLang1 = 'Klingon';
     let newLang2 = 'Vulkan';
 
-    cy.get('[data-testid=new-lang-input').type(newLang1);
-    cy.get('[data-testid=new-lang-button').click();
+    cy.get('[data-testid=new-lang-input]').type(newLang1);
+    cy.get('[data-testid=new-lang-button]').click();
 
-    cy.get('[data-testid=new-lang-input').type(newLang2);
-    cy.get('[data-testid=new-lang-button').click();
+    cy.get('[data-testid=new-lang-input]').type(newLang2);
+    cy.get('[data-testid=new-lang-button]').click();
 
     // coding languages
     let newCodingLang1 = 'C++';
     let newCodingLang2 = 'Assembly';
 
-    cy.get('[data-testid=new-code-lang-input').type(newCodingLang1);
-    cy.get('[data-testid=new-code-lang-button').click();
+    cy.get('[data-testid=new-code-lang-input]').type(newCodingLang1);
+    cy.get('[data-testid=new-code-lang-button]').click();
 
-    cy.get('[data-testid=new-code-lang-input').type(newCodingLang2);
-    cy.get('[data-testid=new-code-lang-button').click();
+    cy.get('[data-testid=new-code-lang-input]').type(newCodingLang2);
+    cy.get('[data-testid=new-code-lang-button]').click();
 
     // education
     let eduProgram = 'Avada Kedavra-ing for Junior Deatheaters';
@@ -171,14 +171,14 @@ describe('Full edit profile spec', async () => {
     let eduEnddate = '2001-12-31';
     let eduDescription = 'How to kill brats';
 
-    cy.get('[data-testid=add-new-edu').click();
+    cy.get('[data-testid=add-new-edu]').click();
 
-    cy.get('[data-testid=change-edu-program-0').type(eduProgram);
-    cy.get('[data-testid=change-edu-school-0').type(eduSchool);
-    cy.get('[data-testid=change-edu-location-0').type(eduLocation);
-    cy.get('[data-testid=change-edu-startdate-0').type(eduStartdate);
-    cy.get('[data-testid=change-edu-enddate-0').type(eduEnddate);
-    cy.get('[data-testid=change-edu-description-0').type(eduDescription);
+    cy.get('[data-testid=change-edu-program-0]').type(eduProgram);
+    cy.get('[data-testid=change-edu-school-0]').type(eduSchool);
+    cy.get('[data-testid=change-edu-location-0]').type(eduLocation);
+    cy.get('[data-testid=change-edu-startdate-0]').type(eduStartdate);
+    cy.get('[data-testid=change-edu-enddate-0]').type(eduEnddate);
+    cy.get('[data-testid=change-edu-description-0]').type(eduDescription);
 
     cy.get('[data-testid=save-education-0]').click();
 
@@ -187,11 +187,11 @@ describe('Full edit profile spec', async () => {
     let courseNumber = '506';
     let courseDesc = 'You know what this is.';
 
-    cy.get('[data-testid=add-course-button').click();
+    cy.get('[data-testid=add-course-button]').click();
 
-    cy.get('[data-testid=course-title-0').type(courseTitle);
-    cy.get('[data-testid=course-number-0').type(courseNumber);
-    cy.get('[data-testid=course-desc-0').type(courseDesc);
+    cy.get('[data-testid=course-title-0]').type(courseTitle);
+    cy.get('[data-testid=course-number-0]').type(courseNumber);
+    cy.get('[data-testid=course-desc-0]').type(courseDesc);
 
     cy.get('[data-testid=save-course-button-0]').click();
 
@@ -204,14 +204,14 @@ describe('Full edit profile spec', async () => {
     let expDesc =
       'Trading socks on the sock market. What else do you want to know.';
 
-    cy.get('[data-testid=exp-add-button').click();
+    cy.get('[data-testid=exp-add-button]').click();
 
-    cy.get('[data-testid=edit-exp-title-0').type(expTitle);
-    cy.get('[data-testid=edit-exp-location-0').type(expLocation);
-    cy.get('[data-testid=edit-exp-employer-0').type(expEmployer);
-    cy.get('[data-testid=edit-exp-startDate-0').type(expStartDate);
-    cy.get('[data-testid=edit-exp-endDate-0').type(expEndDate);
-    cy.get('[data-testid=edit-exp-description-0').type(expDesc);
+    cy.get('[data-testid=edit-exp-title-0]').type(expTitle);
+    cy.get('[data-testid=edit-exp-location-0]').type(expLocation);
+    cy.get('[data-testid=edit-exp-employer-0]').type(expEmployer);
+    cy.get('[data-testid=edit-exp-startDate-0]').type(expStartDate);
+    cy.get('[data-testid=edit-exp-endDate-0]').type(expEndDate);
+    cy.get('[data-testid=edit-exp-description-0]').type(expDesc);
 
     cy.get('[data-testid=exp-save-btn-0]').click();
 
@@ -224,36 +224,36 @@ describe('Full edit profile spec', async () => {
     let projRepo = 'github.com';
     let projDemo = 'interlinked.live';
 
-    cy.get('[data-testid=proj-add-button').click();
+    cy.get('[data-testid=proj-add-button]').click();
 
-    cy.get('[data-testid=edit-proj-title-0').type(projTitle);
-    cy.get('[data-testid=edit-proj-description-0').type(projDescription);
-    cy.get('[data-testid=edit-proj-startDate-0').type(projStartDate);
-    cy.get('[data-testid=edit-proj-endDate-0').type(projEndDate);
-    cy.get('[data-testid=edit-proj-repoLink-0').type(projRepo);
-    cy.get('[data-testid=edit-proj-demoLink-0').type(projDemo);
+    cy.get('[data-testid=edit-proj-title-0]').type(projTitle);
+    cy.get('[data-testid=edit-proj-description-0]').type(projDescription);
+    cy.get('[data-testid=edit-proj-startDate-0]').type(projStartDate);
+    cy.get('[data-testid=edit-proj-endDate-0]').type(projEndDate);
+    cy.get('[data-testid=edit-proj-repoLink-0]').type(projRepo);
+    cy.get('[data-testid=edit-proj-demoLink-0]').type(projDemo);
 
     cy.get('[data-testid=proj-save-button-0]').click();
     // skills
     let skill = 'dream walking';
-    cy.get('[data-testid=skill-add-button').click();
+    cy.get('[data-testid=skill-add-button]').click();
 
-    cy.get('[data-testid=skill-input-0').type(skill);
+    cy.get('[data-testid=skill-input-0]').type(skill);
 
-    cy.get('[data-testid=skill-save-0').click();
+    cy.get('[data-testid=skill-save-0]').click();
 
     // awards
     let awdTitle = 'Mirego Prize Winners';
     let awdDate = '2023-01-22';
     let awdDesc = 'Coded for 24 hours nonstop';
 
-    cy.get('[data-testid=awards-add-button').click();
+    cy.get('[data-testid=awards-add-button]').click();
 
-    cy.get('[data-testid=awards-title-box-0').type(awdTitle);
-    cy.get('[data-testid=awards-date-box-0').type(awdDate);
-    cy.get('[data-testid=awards-desc-box-0').type(awdDesc);
+    cy.get('[data-testid=awards-title-box-0]').type(awdTitle);
+    cy.get('[data-testid=awards-date-box-0]').type(awdDate);
+    cy.get('[data-testid=awards-desc-box-0]').type(awdDesc);
 
-    cy.get('[data-testid=awards-save-btn-0').click();
+    cy.get('[data-testid=awards-save-btn-0]').click();
 
     // certifications
     let certName = 'Certified Gangster';
@@ -261,14 +261,14 @@ describe('Full edit profile spec', async () => {
     let certDate = '2000-01-01';
     let certLink = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
 
-    cy.get('[data-testid=certifications-add-button').click();
+    cy.get('[data-testid=certifications-add-button]').click();
 
-    cy.get('[data-testid=certifications-name-box-0').type(certName);
-    cy.get('[data-testid=certifications-issuer-box-0').type(certIssuer);
-    cy.get('[data-testid=certifications-date-box-0').type(certDate);
-    cy.get('[data-testid=certifications-link-box-0').type(certLink);
+    cy.get('[data-testid=certifications-name-box-0]').type(certName);
+    cy.get('[data-testid=certifications-issuer-box-0]').type(certIssuer);
+    cy.get('[data-testid=certifications-date-box-0]').type(certDate);
+    cy.get('[data-testid=certifications-link-box-0]').type(certLink);
 
-    cy.get('[data-testid=certifications-save-btn-0').click();
+    cy.get('[data-testid=certifications-save-btn-0]').click();
 
     // volunteering experience
     let volTitle = 'Fed the poor';
@@ -278,16 +278,16 @@ describe('Full edit profile spec', async () => {
     let volEndDate = '2001-09-11';
     let volDescription = 'Some body once told me';
 
-    cy.get('[data-testid=vol-add-button').click();
+    cy.get('[data-testid=vol-add-button]').click();
 
-    cy.get('[data-testid=edit-vol-title-0').type(volTitle);
-    cy.get('[data-testid=edit-vol-location-0').type(volLocation);
-    cy.get('[data-testid=edit-vol-organization-0').type(volOrganization);
-    cy.get('[data-testid=edit-vol-startDate-0').type(volStartDate);
-    cy.get('[data-testid=edit-vol-endDate-0').type(volEndDate);
-    cy.get('[data-testid=edit-vol-description-0').type(volDescription);
+    cy.get('[data-testid=edit-vol-title-0]').type(volTitle);
+    cy.get('[data-testid=edit-vol-location-0]').type(volLocation);
+    cy.get('[data-testid=edit-vol-organization-0]').type(volOrganization);
+    cy.get('[data-testid=edit-vol-startDate-0]').type(volStartDate);
+    cy.get('[data-testid=edit-vol-endDate-0]').type(volEndDate);
+    cy.get('[data-testid=edit-vol-description-0]').type(volDescription);
 
-    cy.get('[data-testid=vol-save-btn-0').click();
+    cy.get('[data-testid=vol-save-btn-0]').click();
 
     // update
     cy.get('[data-testid=update-account-button]').click();
