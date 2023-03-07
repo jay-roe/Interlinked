@@ -48,10 +48,10 @@ export default function CreatePostGroup() {
       title: null, // is a title needed?
       text_content: text, // text from createPost component
       image_content: pics, // URL created after images has been uploaded to firestore storage
-      likes: null,
-      comments: null,
+      likes: [],
+      comments: [],
       date: null,
-      meta_tags: null,
+      meta_tags: [],
     };
 
     const docRef = doc(

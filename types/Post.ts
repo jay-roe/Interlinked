@@ -6,7 +6,7 @@ export type Post = {
   title: string;
   text_content?: string;
   image_content?: string[];
-  likes?: Like[];
+  likes?: string[]; // List of userids that have liked this post
   comments?: Comment[];
   date: Timestamp;
   meta_tags?: string[]; //descriptors of the post to help refine user's feed based on preference
@@ -24,7 +24,7 @@ export type Comment = {
   date: Timestamp;
 };
 
-export type Like = {
-  authorID: string;
-  author: string;
-};
+// export type Like = {
+//   authorID: string;
+//   author: string;
+// };

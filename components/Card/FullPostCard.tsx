@@ -66,11 +66,13 @@ const FullPostCard = ({
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
             data-testid="post-footer"
+            userID={userID}
             comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
             post={post}
-            postId={postID}
+            postID={postID}
+            postAuthorID={authorID}
             currentUser={currentUser}
           />
         </div>

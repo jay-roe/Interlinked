@@ -10,21 +10,28 @@ const PostFooter = ({
   commentState,
   setCommentState,
   post,
-  postId,
+  postID,
   currentUser,
+  userID,
+  postAuthorID,
 }: {
   comments?: Comment[];
   commentState?: boolean;
   setCommentState: Dispatch<SetStateAction<boolean>>;
   post?: Post;
-  postId?: string;
+  postID?: string;
   currentUser?: User;
+  userID?: string;
+  postAuthorID?: string;
 }) => {
-  const [liked, setLiked] = useState(false);
-
   return (
     <div className="my-2 flex items-center space-x-4">
-      <LikeIcon likes={2} likeState={liked} setLiked={setLiked} />
+      <LikeIcon
+        likes={post.likes}
+        userID={userID}
+        postID={postID}
+        postAuthorID={postAuthorID}
+      />
       <CommentIcon
         data-testid="comment-value"
         comments={
