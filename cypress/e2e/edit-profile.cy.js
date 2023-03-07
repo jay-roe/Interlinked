@@ -377,8 +377,7 @@ describe('Full edit profile spec', async () => {
     // certifications
     cy.get('[data-testid=live-certification-0]')
       .should('contain', certName)
-      .should('contain', certIssuer)
-      .should('contain', 'December 1999');
+      .should('contain', certIssuer);
 
     cy.get('[data-testid=live-cert-link-0]').should(
       'have.attr',

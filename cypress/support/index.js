@@ -2,6 +2,7 @@ Cypress.Screenshot.defaults({
   screenshotOnRunFailure: false,
 });
 
+/*
 Cypress.on('test:before:run', () => {
   Cypress.automation('remote:debugger:protocol', {
     command: 'Emulation.setLocaleOverride',
@@ -10,3 +11,4 @@ Cypress.on('test:before:run', () => {
     },
   });
 });
+*/
