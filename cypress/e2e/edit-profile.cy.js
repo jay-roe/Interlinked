@@ -67,15 +67,22 @@ describe('Full edit profile spec', async () => {
       .click();
 
     // reset edu
+    cy.get('[data-testid=edit-edu-ext-0]').click();
+    cy.get('[data-testid=delete-edu-ext-0]').click();
     cy.get('[data-testid=delete-edu-ext-0]').click();
 
     // reset courses
+    cy.get('[data-testid=edit-course-button-0]').click();
     cy.get('[data-testid=delete-course-button-0]').click();
 
     // reset experience
+    cy.get('[data-testid=exp-edit-btn-0]').click();
+    cy.get('[data-testid=exp-delete-btn-0]').click();
     cy.get('[data-testid=exp-delete-btn-0]').click();
 
     // reset project
+    cy.get('[data-testid=proj-edit-button-0]').click();
+    cy.get('[data-testid=proj-delete-button-0]').click();
     cy.get('[data-testid=proj-delete-button-0]').click();
 
     // reset skills
@@ -89,6 +96,9 @@ describe('Full edit profile spec', async () => {
 
     // reset volunteering
     cy.get('[data-testid=vol-edit-btn-0]').click();
+    cy.get('[data-testid=vol-delete-btn-0]').click();
+    cy.get('[data-testid=vol-edit-btn-0]').click();
+    cy.get('[data-testid=vol-delete-btn-0]').click();
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
@@ -196,6 +206,17 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=save-education-0]').click();
 
+    // add second edu with no end date
+    cy.get('[data-testid=add-new-edu]').click();
+
+    cy.get('[data-testid=change-edu-program-1]').type(eduProgram);
+    cy.get('[data-testid=change-edu-school-1]').type(eduSchool);
+    cy.get('[data-testid=change-edu-location-1]').type(eduLocation);
+    cy.get('[data-testid=change-edu-startdate-1]').type(eduStartdate);
+    cy.get('[data-testid=change-edu-description-1]').type(eduDescription);
+
+    cy.get('[data-testid=save-education-1]').click();
+
     // course
     let courseTitle = 'Underwater basket weaving VI';
     let courseNumber = '506';
@@ -229,6 +250,17 @@ describe('Full edit profile spec', async () => {
 
     cy.get('[data-testid=exp-save-btn-0]').click();
 
+    // add experience with no end date
+    cy.get('[data-testid=exp-add-button]').click();
+
+    cy.get('[data-testid=edit-exp-title-1]').type(expTitle);
+    cy.get('[data-testid=edit-exp-location-1]').type(expLocation);
+    cy.get('[data-testid=edit-exp-employer-1]').type(expEmployer);
+    cy.get('[data-testid=edit-exp-startDate-1]').type(expStartDate);
+    cy.get('[data-testid=edit-exp-description-1]').type(expDesc);
+
+    cy.get('[data-testid=exp-save-btn-1]').click();
+
     // projects
     let projTitle = 'Finding Maidens';
     let projCollab = ''; // this is broken as of writing this code
@@ -248,6 +280,18 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=edit-proj-demoLink-0]').type(projDemo);
 
     cy.get('[data-testid=proj-save-button-0]').click();
+
+    // add project with no end date
+    cy.get('[data-testid=proj-add-button]').click();
+
+    cy.get('[data-testid=edit-proj-title-1]').type(projTitle);
+    cy.get('[data-testid=edit-proj-description-1]').type(projDescription);
+    cy.get('[data-testid=edit-proj-startDate-1]').type(projStartDate);
+    cy.get('[data-testid=edit-proj-repoLink-1]').type(projRepo);
+    cy.get('[data-testid=edit-proj-demoLink-1]').type(projDemo);
+
+    cy.get('[data-testid=proj-save-button-1]').click();
+
     // skills
     let skill = 'dream walking';
     cy.get('[data-testid=skill-add-button]').click();
@@ -302,6 +346,17 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=edit-vol-description-0]').type(volDescription);
 
     cy.get('[data-testid=vol-save-btn-0]').click();
+
+    // add volunteering with no end date
+    cy.get('[data-testid=vol-add-button]').click();
+
+    cy.get('[data-testid=edit-vol-title-1]').type(volTitle);
+    cy.get('[data-testid=edit-vol-location-1]').type(volLocation);
+    cy.get('[data-testid=edit-vol-organization-1]').type(volOrganization);
+    cy.get('[data-testid=edit-vol-startDate-1]').type(volStartDate);
+    cy.get('[data-testid=edit-vol-description-1]').type(volDescription);
+
+    cy.get('[data-testid=vol-save-btn-1]').click();
 
     // update
     cy.get('[data-testid=update-account-button]').click();
