@@ -76,7 +76,7 @@ export function AuthProvider({ children }) {
       email: newUser.email,
       experience: [],
       languages: [],
-      name: newUser.email.split('@')[0],
+      name: '' || newUser.email.split('@')[0],
       profilePicture:
         newUser.photoURL ||
         `https://www.gravatar.com/avatar/${md5(
