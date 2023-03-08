@@ -12,7 +12,9 @@ describe('Full auth spec', async () => {
     cy.get('input[name=confirmPassword]').type('wrongPw');
 
     cy.get('[data-testid=register]').click();
-    cy.on('window:alert', (msg) => {expect(msg).to.contains('Passwords do not match')});
+    cy.on('window:alert', (msg) => {
+      expect(msg).to.contains('Passwords do not match');
+    });
 
     // matching
     cy.get('input[name=email]').clear().type(email);
@@ -47,7 +49,10 @@ describe('Full auth spec', async () => {
 
     cy.get('[data-testid=pw-field]').type('wrong pw');
     cy.get('[data-testid=del-acc]').click();
-    cy.get('[data-testid=incorrect-pw]').should('contain', 'Incorrect password.');
+    cy.get('[data-testid=incorrect-pw]').should(
+      'contain',
+      'Incorrect password.'
+    );
 
     cy.get('[data-testid=pw-field]').clear().type(pw);
     cy.get('[data-testid=del-acc]').click();

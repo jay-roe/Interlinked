@@ -153,6 +153,14 @@ describe('Full edit profile spec', async () => {
     cy.get('[data-testid=new-lang-input]').type(newLang2);
     cy.get('[data-testid=new-lang-button]').click();
 
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .trigger('mouseleave')
+      .get('[data-testid=select-proficiency-0]')
+      .select('3');
+
     // coding languages
     let newCodingLang1 = 'C++';
     let newCodingLang2 = 'Assembly';

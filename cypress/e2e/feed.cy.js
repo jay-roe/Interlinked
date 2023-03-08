@@ -59,5 +59,12 @@ describe('Full feed spec', async () => {
     cy.get('[data-testid=add-comment-to-post-0]').click();
 
     cy.get('[data-testid=comment-body-0-0]').should('contain', comment);
+
+    // get more posts
+    cy.get('[data-testid="load-more-button"]').click();
+    cy.get('[data-testid="load-more-button"]').should(
+      'contain',
+      'No more posts'
+    );
   });
 });
