@@ -85,7 +85,7 @@ const SearchBar = (props) => {
                     alt={user?.profilePicture}
                     width={13}
                     height={13}
-                  ></ImageOptimized>
+                  />
                 </span>
                 <span>{user.name}</span>
               </div>
