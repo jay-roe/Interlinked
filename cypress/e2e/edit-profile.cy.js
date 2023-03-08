@@ -6,6 +6,9 @@ describe('Full edit profile spec', async () => {
     cy.login(email, pw);
     cy.visit('/edit-profile');
 
+    // reset image
+    cy.get('input[type=file]').attachFile('feed/test_image2.png'); // new image
+
     // reset name
     let oldName = 'old, boring name';
     cy.get('[data-testid=name-edit-button]').click();
@@ -110,6 +113,9 @@ describe('Full edit profile spec', async () => {
 
   it('can edit EVERYTHING', () => {
     cy.visit('/edit-profile');
+
+    // image
+    cy.get('input[type=file]').attachFile('feed/test_image.jpeg'); // new image
 
     // name
     let newName = 'MY NEW NAME';
