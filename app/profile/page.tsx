@@ -52,9 +52,7 @@ export default function PreviewProfile() {
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
-      <Link href="/links">
-        <LinkButton currentUser={currentUser} />
-      </Link>
+      <LinkButton href="/links" currentUser={currentUser} />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
