@@ -21,7 +21,7 @@ import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/Pr
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function PreviewProfile() {
-  const { currentUser } = useAuth();
+  const { currentUser, authUser } = useAuth();
 
   // User not logged in, can't preview
   if (!currentUser) {
@@ -52,7 +52,10 @@ export default function PreviewProfile() {
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
-      <LinkButton href="/links" currentUser={currentUser} />
+      <LinkButton
+        href={`/profile/${authUser.uid}/links`}
+        currentUser={currentUser}
+      />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 

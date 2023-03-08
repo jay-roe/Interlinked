@@ -16,25 +16,36 @@ import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
 import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 
-export default function Links() {
+export default function Links({ params }) {
   const PAGE_SIZE = 20;
-  const { currentUser } = useAuth();
-  const linkedIds = Array.from(new Set(currentUser?.linkedUserIds.reverse())); // we reverse since the latest linked user is placed at the end of the array
+  const { currentUser, authUser } = useAuth();
+  const myPage = authUser.uid === params.uid;
   const linkedIndex = useRef(0); // keep track of index of linked ids
+  const linkedIds = useRef<string[]>(
+    myPage
+      ? Array.from(new Set(currentUser?.linkedUserIds?.reverse()))
+      : undefined
+  ); // we reverse since the latest linked user is placed at the end of the array
 
+  // const myPage = uid === authUser.uid
   const [loading, setLoading] = useState(true);
   const [allLinksFound, setAllLinksFound] = useState(false);
   const [links, setLinks] = useState<UserWithId[]>([]);
 
-  const getLinkInfo = async () => {
+  const getUserLinks = async (uid: string) => {
+    const user = await getDoc(doc(db.users, uid));
+    return user.data().linkedUserIds;
+  };
+
+  const getLinkInfo = async (uid: string) => {
     let count = 0;
     let links: UserWithId[] = [];
     for (
       let i = linkedIndex.current;
-      i < linkedIndex.current + PAGE_SIZE && i < linkedIds.length;
+      i < linkedIndex.current + PAGE_SIZE && i < linkedIds.current.length;
       i++
     ) {
-      const linkedUser = await getDoc(doc(db.users, linkedIds[i]));
+      const linkedUser = await getDoc(doc(db.users, linkedIds.current[i]));
       links.push({ userId: linkedUser.id, ...linkedUser.data() });
       count++;
     }
@@ -50,12 +61,15 @@ export default function Links() {
 
   useEffect(() => {
     if (currentUser && !allLinksFound) {
-      getLinkInfo().then((links) => {
-        setLinks((current) => [...current, ...links]);
-        setLoading(false);
+      getUserLinks(params.uid).then((linkIds) => {
+        linkedIds.current = linkIds;
+        getLinkInfo(params.uid).then((links) => {
+          setLinks((current) => [...current, ...links]);
+          setLoading(false);
+        });
       });
     }
-  }, [currentUser]);
+  }, []);
 
   if (!currentUser || loading) {
     // user isnt logged in or the page is still loading
@@ -77,6 +91,8 @@ export default function Links() {
     );
   }
 
+  // We don't have access to this profile, kick them to the profile that they came from
+  // TODO: Implement access control when profile visibility is added
   return (
     <>
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
@@ -125,7 +141,7 @@ export default function Links() {
           <Button
             className="mx-auto"
             onClick={() =>
-              getLinkInfo().then((links) => {
+              getLinkInfo(params.uid).then((links) => {
                 setLinks((current) => [...current, ...links]);
               })
             }
