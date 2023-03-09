@@ -44,6 +44,11 @@ jobs:
           npm run test:coverage
 
       - name: Run e2e tests & coverage
-        run: firebase emulators:exec 'INSTRUMENT_CODE=1 npm run dev & sleep 25 && npx cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary' --import=firebase_exports &
+        run: |
+          firebase emulators:start --import=firebase_exports
+          INSTRUMENT_CODE=1 npm run dev & 
+          sleep 25 
+          npx cypress run --spec cypress/e2e/all.cy.js
+          npx nyc report --reporter=text-summary 
           
 
