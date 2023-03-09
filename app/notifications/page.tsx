@@ -48,11 +48,10 @@ export default function Notifications() {
           <Button
             onClick={() => {
               createNotification({
-                authUserId: authUser.uid,
+                receiver: authUser.uid,
                 notifType: NotifType.COMMENT,
                 context: 'Hellloooo Coraline',
                 sender: currentUser,
-                targetAccount: currentUser,
               });
             }}
           >

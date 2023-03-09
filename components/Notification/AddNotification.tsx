@@ -4,25 +4,21 @@ import { addDoc, collection, doc, Timestamp } from 'firebase/firestore';
 
 // this function adds a notification to the database
 export async function createNotification({
-  authUserId,
   notifType,
   context,
   sender,
-  notifTime,
   read = false,
-  targetAccount,
+  receiver,
 }: {
-  authUserId: string; // TODO: Change 'authUserId' to 'receiver'
-  notifType: NotifType; // TODO: Remove since you're using Timestamp.now()
+  notifType: NotifType;
   context: string;
   sender: User;
-  notifTime?: Timestamp;
   read?: boolean;
-  targetAccount: User; // TODO: Remove since unused, will use the userid to get data
+  receiver: string; //User ID of the receiver User
 }) {
   // get notification subcollection in user
   const notificationRef = typeCollection<Notification>(
-    collection(doc(db.users, authUserId), 'notifications')
+    collection(doc(db.users, receiver), 'notifications')
   );
 
   const newNotification = {
