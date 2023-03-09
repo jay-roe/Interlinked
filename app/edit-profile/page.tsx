@@ -36,6 +36,7 @@ import {
 } from 'firebase/storage';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
+import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -66,6 +67,9 @@ export default function EditProfile() {
 
   const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+
+  const [privacy, setPrivacy] = useState<boolean>(false);
+  const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -192,6 +196,7 @@ export default function EditProfile() {
     courses: courses,
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
+    privacy: privacy,
   };
 
   async function uploadProfilePicture() {
@@ -263,6 +268,14 @@ export default function EditProfile() {
           setBio={setBio}
           bioEditing={bioEditing}
           setBioEditing={setBioEditing}
+        />
+
+        <ProfilePrivacy
+          isEditable
+          privacy={privacy}
+          setPrivacy={setPrivacy}
+          privacyEditing={privacyEditing}
+          setPrivacyEditing={setPrivacyEditing}
         />
 
         <ProfileSocials
