@@ -2,7 +2,7 @@ describe('Full auth spec', () => {
   let email = 'test+cypress@test.com';
   let pw = '123456';
 
-  it('can register, logout, login ', () => {
+  it('can register, logout, login and delete ', () => {
     // register (email and pw)
     cy.visit('register');
 
