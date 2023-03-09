@@ -33,25 +33,20 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      # Setup Java for firebase CLI
-      - name: Install Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
+      - name: Install Firestore CLI and start emulators
+        run: |
+          npm i -g firebase firebase-tools
+          firebase setup:emulators
+          firebase emulators:start --import=firebase_exports &
 
       - name: Run Next tests & test coverage
         run: |
           npm ci
           npm run test:coverage
 
-      - name: Setup Firebase Emulators
-        run: |
-          npm install -g firebase-tools && firebase --version
-
       - name: Run e2e tests & coverage
         run: |
-          firebase emulators:exec 'INSTRUMENT_CODE=1 npm run dev' --import=firebase_exports &
+          INSTRUMENT_CODE=1 npm run dev &
           sleep 25
           npx cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary
 
