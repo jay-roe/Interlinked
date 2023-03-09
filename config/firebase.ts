@@ -1,6 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { connectAuthEmulator, getAuth } from 'firebase/auth';
+import {
+  connectFirestoreEmulator,
+  enableIndexedDbPersistence,
+  getFirestore,
+} from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -22,5 +26,11 @@ auth.useDeviceLanguage();
 // Initialize firestore database
 export const firestore = getFirestore(app);
 export const storage = getStorage();
+
+// use firebase emulator when not in production (change this in .env.local)
+if (process.env.NEXT_PUBLIC_EMULATOR) {
+  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
+  connectFirestoreEmulator(firestore, '127.0.0.1', 8081);
+}
 
 export default auth;

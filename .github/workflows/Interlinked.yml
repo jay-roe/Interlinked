@@ -43,4 +43,4 @@ jobs:
 
       - name: Run e2e tests & coverage
         run: |
-          npm run cy:ci
+          npm run cy:coverage

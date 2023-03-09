@@ -1,126 +1,4 @@
 describe('Full edit profile spec', async () => {
-  let email = 'test2+cypress@test.com';
-  let pw = '123456';
-
-  before(() => {
-    cy.login(email, pw);
-    cy.visit('/edit-profile');
-
-    // reset image
-    cy.get('input[type=file]').attachFile('feed/test_image2.png'); // new image
-
-    // reset name
-    let oldName = 'old, boring name';
-    cy.get('[data-testid=name-edit-button]').click();
-    cy.get('[data-testid=change-name]').clear().type(oldName);
-    cy.get('[data-testid=name-edit-button]').click();
-
-    // reset bio
-    let oldBio = 'Boring bio';
-    cy.get('[data-testid=bio-edit-button]').click();
-    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
-    cy.get('[data-testid=bio-edit-button]').click();
-
-    // reset socials
-    cy.get('[data-testid=socials-edit-button]').click();
-
-    cy.get('[data-testid=edit-github]').clear();
-    cy.get('[data-testid=edit-instagram]').clear();
-
-    cy.get('[data-testid=save-socials]').click();
-
-    // reset contact
-    cy.get('[data-testid=contact-edit-button]').click();
-
-    cy.get('[data-testid=edit-email]').clear().type('old@contact.com');
-    cy.get('[data-testid=edit-phone]').clear();
-
-    cy.get('[data-testid=save-contacts-button]').click();
-
-    // reset languages
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
-
-    cy.get('[data-testid=lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=lang-hovering-delete-0]')
-      .click();
-
-    // reset coding languages
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-    cy.get('[data-testid=code-lang-not-hovering-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-parent-0]')
-      .trigger('mouseover')
-      .get('[data-testid=code-lang-hovering-delete-0]')
-      .click();
-
-    // reset edu
-    cy.get('[data-testid=edit-edu-ext-0]').click();
-    cy.get('[data-testid=delete-edu-ext-0]').click();
-    cy.get('[data-testid=delete-edu-ext-0]').click();
-
-    // reset courses
-    cy.get('[data-testid=edit-course-button-0]').click();
-    cy.get('[data-testid=delete-course-button-0]').click();
-
-    // reset experience
-    cy.get('[data-testid=exp-edit-btn-0]').click();
-    cy.get('[data-testid=exp-delete-btn-0]').click();
-    cy.get('[data-testid=exp-delete-btn-0]').click();
-
-    // reset project
-    cy.get('[data-testid=proj-edit-button-0]').click();
-    cy.get('[data-testid=proj-delete-button-0]').click();
-    cy.get('[data-testid=proj-delete-button-0]').click();
-
-    // reset skills
-    cy.get('[data-testid=skill-delete-button-0]').click();
-
-    // reset awards
-    cy.get('[data-testid=awards-delete-btn-0]').click();
-
-    // reset certifications
-    cy.get('[data-testid=certifications-delete-btn-0]').click();
-
-    // reset volunteering
-    cy.get('[data-testid=vol-edit-btn-0]').click();
-    cy.get('[data-testid=vol-delete-btn-0]').click();
-    cy.get('[data-testid=vol-edit-btn-0]').click();
-    cy.get('[data-testid=vol-delete-btn-0]').click();
-
-    // Save and logout
-    cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
-
-    cy.get('[data-testid=home-interlinked]').should('exist');
-    cy.get('[data-testid=profile-info]').should('exist');
-
-    cy.get('[data-testid=live-lang-0]').should('not.exist');
-    cy.get('[data-testid=live-coding-lang-0]').should('not.exist');
-    cy.get('[data-testid=live-edu-0]').should('not.exist');
-    cy.get('[data-testid=live-courses-0]').should('not.exist');
-    cy.get('[data-testid=live-exp-0]').should('not.exist');
-  });
-
-  after(() => {
-    cy.logout();
-  });
-
   it('can edit EVERYTHING', () => {
     cy.visit('/edit-profile');
 
@@ -460,5 +338,118 @@ describe('Full edit profile spec', async () => {
       .should('contain', volLocation)
       .should('contain', volOrganization)
       .should('contain', volDescription);
+
+    // go back and delet everythin.. with this fuck the coverage??
+    cy.visit('/edit-profile');
+
+    // reset image
+    cy.get('input[type=file]').attachFile('feed/test_image2.png'); // new image
+
+    // reset name
+    let oldName = 'old, boring name';
+    cy.get('[data-testid=name-edit-button]').click();
+    cy.get('[data-testid=change-name]').clear().type(oldName);
+    cy.get('[data-testid=name-edit-button]').click();
+
+    // reset bio
+    let oldBio = 'Boring bio';
+    cy.get('[data-testid=bio-edit-button]').click();
+    cy.get('[data-testid=bio-editing]').clear().type(oldBio);
+    cy.get('[data-testid=bio-edit-button]').click();
+
+    // reset socials
+    cy.get('[data-testid=socials-edit-button]').click();
+
+    cy.get('[data-testid=edit-github]').clear();
+    cy.get('[data-testid=edit-instagram]').clear();
+
+    cy.get('[data-testid=save-socials]').click();
+
+    // reset contact
+    cy.get('[data-testid=contact-edit-button]').click();
+
+    cy.get('[data-testid=edit-email]').clear().type('old@contact.com');
+    cy.get('[data-testid=edit-phone]').clear();
+
+    cy.get('[data-testid=save-contacts-button]').click();
+
+    // reset languages
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
+    cy.get('[data-testid=lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=lang-hovering-delete-0]')
+      .click();
+
+    // reset coding languages
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+    cy.get('[data-testid=code-lang-not-hovering-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-parent-0]')
+      .trigger('mouseover')
+      .get('[data-testid=code-lang-hovering-delete-0]')
+      .click();
+
+    // reset edu
+    cy.get('[data-testid=edit-edu-ext-0]').click();
+    cy.get('[data-testid=delete-edu-ext-0]').click();
+    cy.get('[data-testid=delete-edu-ext-0]').click();
+
+    // reset courses
+    cy.get('[data-testid=edit-course-button-0]').click();
+    cy.get('[data-testid=delete-course-button-0]').click();
+
+    // reset experience
+    cy.get('[data-testid=exp-edit-btn-0]').click();
+    cy.get('[data-testid=exp-delete-btn-0]').click();
+    cy.get('[data-testid=exp-delete-btn-0]').click();
+
+    // reset project
+    cy.get('[data-testid=proj-edit-button-0]').click();
+    cy.get('[data-testid=proj-delete-button-0]').click();
+    cy.get('[data-testid=proj-delete-button-0]').click();
+
+    // reset skills
+    cy.get('[data-testid=skill-delete-button-0]').click();
+
+    // reset awards
+    cy.get('[data-testid=awards-delete-btn-0]').click();
+
+    // reset certifications
+    cy.get('[data-testid=certifications-delete-btn-0]').click();
+
+    // reset volunteering
+    cy.get('[data-testid=vol-edit-btn-0]').click();
+    cy.get('[data-testid=vol-delete-btn-0]').click();
+    cy.get('[data-testid=vol-edit-btn-0]').click();
+    cy.get('[data-testid=vol-delete-btn-0]').click();
+
+    // Save and logout
+    cy.get('[data-testid=update-account-button]').click();
+
+    cy.on('window:confirm', () => {
+      return true;
+    });
+
+    cy.get('[data-testid=home-interlinked]').should('exist');
+    cy.get('[data-testid=profile-info]').should('exist');
+
+    cy.get('[data-testid=live-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-coding-lang-0]').should('not.exist');
+    cy.get('[data-testid=live-edu-0]').should('not.exist');
+    cy.get('[data-testid=live-courses-0]').should('not.exist');
+    cy.get('[data-testid=live-exp-0]').should('not.exist');
   });
 });
