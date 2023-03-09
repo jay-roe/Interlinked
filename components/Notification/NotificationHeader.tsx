@@ -27,9 +27,6 @@ export default function notificationHeader({
           })}
         </p>
       </div>
-      <div className="text-indigo-600">
-        {!notification.read && <RiCheckboxBlankCircleFill />}
-      </div>
     </div>
   );
 }

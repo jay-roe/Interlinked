@@ -81,7 +81,7 @@ export default function Notifications() {
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
-                notifType: NotifType.COMMENT,
+                notifType: NotifType.LINK_REQ,
                 context: '💖 sucks to be you',
                 sender: currentUser,
               });
