@@ -25,6 +25,7 @@ export default function NavBar() {
           { name: 'Profile Preview', href: '/profile', current: false },
           { name: 'Edit Profile', href: '/edit-profile', current: false },
           { name: 'Feed', href: '/feed', current: false },
+          { name: 'DM', href: '/DM', current: false },
           {
             name: 'Logout',
             href: '#',
