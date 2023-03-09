@@ -36,7 +36,7 @@ jobs:
       - name: Install Firestore CLI and start emulators
         run: |
           npm i -g firebase firebase-tools
-          firebase setup:emulators
+          firebase setup:emulators:database
           firebase emulators:start --import=firebase_exports &
 
       - name: Run Next tests & test coverage
