@@ -53,5 +53,5 @@ jobs:
         run: |
           firebase emulators:exec 'INSTRUMENT_CODE=1 npm run dev' --import=firebase_exports &
           sleep 25
-          cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary'
+          cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary
 
