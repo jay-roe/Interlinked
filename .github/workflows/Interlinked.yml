@@ -37,6 +37,7 @@ jobs:
         run: |
           npm i -g firebase firebase-tools
           firebase setup:emulators:database
+          firebase setup:emulators:firestore
 
       - name: Run Next tests & test coverage
         run: |
