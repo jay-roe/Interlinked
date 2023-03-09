@@ -33,11 +33,22 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      - name: Install Firestore stuff
-        run: |
-          npm i -g firebase firebase-tools
-          firebase setup:emulators:database
-          firebase setup:emulators:firestore
+      # Setup Java for firebase CLI
+      - name: Install Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '11'
+
+      - name: Firebase setup
+        uses: w9jds/firebase-action@v1.3.1
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+          #PROJECT_ID: ${{ secrets.nextFIREBASE_PROJECTID }}
+        with:
+        args: |
+          setup:emulators:firestore
+          setup:emulators:database
 
       - name: Run Next tests & test coverage
         run: |
