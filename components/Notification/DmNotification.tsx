@@ -8,7 +8,7 @@ export default function postNotification({
   notification: Notification;
 }) {
   return (
-    <div className="start flex">
+    <div className="start flex items-center">
       <div className="text-accent-orange">
         <SiGooglemessages size={60} className="align-self-center" />
       </div>

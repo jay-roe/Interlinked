@@ -8,7 +8,7 @@ export default function postNotification({
   notification: Notification;
 }) {
   return (
-    <div className="start flex">
+    <div className="start flex items-center">
       <div className="text-accent-orange">
         <LinkIcon linked size={60} />
       </div>

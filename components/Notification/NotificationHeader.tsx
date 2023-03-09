@@ -1,4 +1,5 @@
 import type { Notification } from '@/types/User';
+import { RiCheckboxBlankCircleFill } from 'react-icons/ri';
 
 export default function notificationHeader({
   notification,
@@ -25,6 +26,9 @@ export default function notificationHeader({
             minute: '2-digit',
           })}
         </p>
+      </div>
+      <div className="text-indigo-600">
+        {!notification.read && <RiCheckboxBlankCircleFill />}
       </div>
     </div>
   );

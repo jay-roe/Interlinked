@@ -9,8 +9,8 @@ export default function postNotification({
   notification: Notification;
 }) {
   return (
-    <div className="flex justify-between">
-      <div className="start flex">
+    <div className="flex items-center justify-between">
+      <div className="start flex items-center">
         <div className="text-accent-orange">
           <LinkIcon size={60} />
         </div>

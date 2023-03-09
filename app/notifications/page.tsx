@@ -1,6 +1,15 @@
 'use client';
 
-import { getDocs, collection, Timestamp, addDoc } from 'firebase/firestore';
+import {
+  getDocs,
+  collection,
+  Timestamp,
+  addDoc,
+  query,
+  where,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import NotificationList from '@/components/Notification/NotificationList';
@@ -39,28 +48,57 @@ export default function Notifications() {
   if (loading) {
     return <div>Loading...</div>;
   }
+
+  async function readAll() {
+    const notifUnreadQuery = query(
+      typeCollection<Notification>(
+        collection(doc(db.users, authUser.uid), 'notifications')
+      )
+      // where(
+      //   'read', '==', 'false'
+      // )
+    );
+    // console.log(notifUnreadQuery)
+    const unreadNotifs = await getDocs(notifUnreadQuery);
+    unreadNotifs.forEach(async (notif) => {
+      // alert(notif.data().read)
+      await updateDoc(
+        doc(collection(doc(db.users, authUser.uid), 'notifications'), notif.id),
+        {
+          read: true,
+        }
+      );
+    });
+  }
+
   return (
     // tried a bunch of stuff but I can't get "read all" and the bell button side by side loll:')
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
-        <div className="flex">
+        <div className="flex gap-3">
           <Button
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
                 notifType: NotifType.COMMENT,
-                context: 'Hellloooo Coraline',
+                context: '💖 sucks to be you',
                 sender: currentUser,
               });
             }}
           >
-            Add notification
+            Feeling Unpopular?
           </Button>
-          <button>
-            <FiBell />
+          <button
+            onClick={() => {
+              readAll();
+            }}
+          >
+            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+              <FiBell />
+              <p>Read all</p>
+            </div>
           </button>
-          <p>Read all</p>
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
