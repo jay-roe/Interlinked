@@ -47,8 +47,12 @@ jobs:
 
       - name: Setup Firebase Emulators
         run: |
-          npm install -g firebase-tools
+          npm install -g firebase-tools && firebase --version
 
       - name: Run e2e tests & coverage
-        run: INSTRUMENT_CODE=1 firebase emulators:exec 'next dev & cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary' --import=firebase_exports
+        run: |
+          INSTRUMENT_CODE=1 firebase emulators:start --import=firebase_exports &
+          npm run dev:instrumented & 
+          sleep 10
+          cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary'
 
