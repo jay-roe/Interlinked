@@ -1,4 +1,14 @@
+import { email, pw } from '../support/e2e';
+
 describe('Full edit profile spec', async () => {
+  before(() => {
+    cy.login(email, pw);
+  });
+
+  after(() => {
+    cy.logout();
+  });
+
   it('can edit EVERYTHING', () => {
     cy.visit('/edit-profile');
 

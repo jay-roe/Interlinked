@@ -18,6 +18,9 @@ import '@cypress/code-coverage/support';
 import 'cypress-file-upload';
 import './commands';
 
+export const email = 'test2+cypress@test.com';
+export const pw = '123456';
+
 Cypress.Commands.add('login', (email, pw) => {
   cy.visit('login');
   cy.get('input[name=email]').type(email);

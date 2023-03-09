@@ -1,20 +1,19 @@
+import { email, pw } from '../support/e2e';
+
 describe('Full feed spec', async () => {
-  let email = 'test2+cypress@test.com';
-  let pw = '123456';
-
-  let postMessage = 'Test Post';
-  // TODO this should include deleting posts once we have the capability
-
   before(() => {
     cy.login(email, pw);
-    cy.visit('/feed');
   });
 
   after(() => {
     cy.logout();
   });
 
+  let postMessage = 'Test Post';
+  // TODO this should include deleting posts once we have the capability
+
   it('can post', () => {
+    cy.visit('feed');
     // create post
     cy.get('[data-testid=post-content]').type(postMessage);
     cy.get('input[type=file]').attachFile('feed/test_image.jpeg');
