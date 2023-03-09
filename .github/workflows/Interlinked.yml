@@ -46,9 +46,9 @@ jobs:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
           #PROJECT_ID: ${{ secrets.nextFIREBASE_PROJECTID }}
         with:
-        args: |
-          setup:emulators:firestore
-          setup:emulators:database
+          args: |
+            setup:emulators:firestore
+            setup:emulators:database
 
       - name: Run Next tests & test coverage
         run: |
