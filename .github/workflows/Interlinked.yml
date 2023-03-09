@@ -33,11 +33,10 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      - name: Install Firestore CLI and start emulators
+      - name: Install Firestore stuff
         run: |
           npm i -g firebase firebase-tools
           firebase setup:emulators:database
-          firebase emulators:start --import=firebase_exports &
 
       - name: Run Next tests & test coverage
         run: |
@@ -45,8 +44,6 @@ jobs:
           npm run test:coverage
 
       - name: Run e2e tests & coverage
-        run: |
-          INSTRUMENT_CODE=1 npm run dev &
-          sleep 25
-          npx cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary
+        run: firebase emulators:exec 'INSTRUMENT_CODE=1 npm run dev & sleep 25 && npx cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary' --import=firebase_exports &
+          
 
