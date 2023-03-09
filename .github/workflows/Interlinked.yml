@@ -49,9 +49,6 @@ jobs:
         run: |
           npm install -g firebase-tools
 
-      - name: Run Frontend for Cypress
-        run: INSTRUMENT_CODE=1 firebase emulators:exec 'next dev' --import=firebase_exports &
-
       - name: Run e2e tests & coverage
-        run: |
-          npm run cy:coverage
+        run: INSTRUMENT_CODE=1 firebase emulators:exec 'next dev & cypress run --spec cypress/e2e/all.cy.js && npx nyc report --reporter=text-summary' --import=firebase_exports
+
