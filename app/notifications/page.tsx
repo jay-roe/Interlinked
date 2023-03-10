@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react';
 import { createNotification } from '@/components/Notification/AddNotification';
 
 export default function Notifications() {
+  console.log('in getNotifications');
   // set the current user
   const { authUser, currentUser } = useAuth();
 
@@ -78,12 +79,13 @@ export default function Notifications() {
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
           <Button
+            data-testid="ITS-THIS-BUTTON"
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
                 notifType: NotifType.LINK_REQ,
                 context: '💖 sucks to be you',
-                sender: currentUser,
+                sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
               });
             }}
           >

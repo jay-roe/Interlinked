@@ -12,7 +12,7 @@ export async function createNotification({
 }: {
   notifType: NotifType;
   context: string;
-  sender: User;
+  sender: string; // User ID of sending user
   read?: boolean;
   receiver: string; //User ID of the receiver User
 }) {
