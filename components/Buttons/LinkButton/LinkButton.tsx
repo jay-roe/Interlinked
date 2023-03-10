@@ -18,7 +18,7 @@ export default function LinkButton({
 
   return (
     <button
-      data-testid="button"
+      data-testid="link-btn"
       className="mb-3 flex max-w-fit items-center gap-2 rounded-md bg-white bg-opacity-[0.12] p-3 font-semibold"
       onClick={() => {
         profileOwnerUID &&
