@@ -2,7 +2,7 @@ name: Interlinked CI
 
 on:
   push:
-    branches: [main, production]
+    branches: [main, production, 123-testing-revamp]
   pull_request:
     branches: [main, production]
 
