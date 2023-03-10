@@ -11,23 +11,25 @@
 //
 // -- This is a parent command --
 
-Cypress.Commands.add('login', (email, password) => {
-  cy.visit('/login');
-
+Cypress.Commands.add('login', (email, pw) => {
+  cy.visit('login');
   cy.get('input[name=email]').type(email);
+  cy.get('input[name=password]').type(pw);
 
-  // {enter} causes the form to submit
-  cy.get('input[name=password]').type(`${password}{enter}`, { log: false });
+  cy.get('[data-testid=login]').click();
 
-  cy.get('[data-testid="welcome-msg"').should('exist');
+  cy.get('[data-testid=welcome-msg]').should('contain', 'Welcome');
 });
 
 Cypress.Commands.add('logout', () => {
   cy.visit('');
+  cy.get('[data-testid=nav-menu]').click();
+  cy.get('[data-testid=nav-logout]').click();
 
-  cy.get('[data-testid="nav-logout"').click();
-
-  cy.get('[data-testid="base-msg"').should('exist');
+  cy.get('[data-testid=base-msg]').should(
+    'contain',
+    'We will become interlinked.'
+  );
 });
 //
 // -- This is a child command --
