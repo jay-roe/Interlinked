@@ -61,9 +61,9 @@ it('renders the AddComment', async () => {
 });
 
 it('renders no content', async () => {
-  const { findByTestId } = render(<AddComment testKey={0} />);
+  const { findByTestId } = render(<AddComment />);
 
-  const addCommentToPost = await findByTestId('add-comment-to-post-0');
+  const addCommentToPost = await findByTestId('add-comment-to-post');
   fireEvent.click(addCommentToPost);
   expect(addCommentToPost).toBeInTheDocument();
 });
@@ -71,7 +71,6 @@ it('renders no content', async () => {
 it('renders comment with content with user name', async () => {
   const { findByTestId } = render(
     <AddComment
-      testKey={0}
       userID={defaultUserId}
       currentUser={currentUser}
       setComments={jest.fn}
@@ -79,12 +78,12 @@ it('renders comment with content with user name', async () => {
     />
   );
 
-  const addCommentContent = await findByTestId('add-comment-content-0');
+  const addCommentContent = await findByTestId('add-comment-content');
   fireEvent.change(addCommentContent, { target: { value: 'testContent' } });
   expect(addCommentContent).toBeInTheDocument();
 
   await act(async () => {
-    const addCommentToPost = await findByTestId('add-comment-to-post-0');
+    const addCommentToPost = await findByTestId('add-comment-to-post');
     fireEvent.click(addCommentToPost);
   });
 });
@@ -92,7 +91,6 @@ it('renders comment with content with user name', async () => {
 it('renders comment with content with user email', async () => {
   const { findByTestId } = render(
     <AddComment
-      testKey={0}
       userID={defaultUserId}
       currentUser={currentUser1}
       setComments={jest.fn}
@@ -100,12 +98,12 @@ it('renders comment with content with user email', async () => {
     />
   );
 
-  const addCommentContent = await findByTestId('add-comment-content-0');
+  const addCommentContent = await findByTestId('add-comment-content');
   fireEvent.change(addCommentContent, { target: { value: 'testContent' } });
   expect(addCommentContent).toBeInTheDocument();
 
   await act(async () => {
-    const addCommentToPost = await findByTestId('add-comment-to-post-0');
+    const addCommentToPost = await findByTestId('add-comment-to-post');
     fireEvent.click(addCommentToPost);
   });
 });

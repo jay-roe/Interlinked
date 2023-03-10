@@ -10,7 +10,7 @@ import ProfileSocials from '../ProfileSocials';
 import { assert } from 'console';
 
 it('verifies social links are present in the live version', async () => {
-  const { findByTestId } = render(
+  const { findAllByTestId } = render(
     <ProfileSocials
       socials={{
         github: 'gitlink',
@@ -18,11 +18,9 @@ it('verifies social links are present in the live version', async () => {
       }}
     />
   );
-  const githubLink = await findByTestId('socials-gitlink');
-  const instagramLink = await findByTestId('socials-instalink');
-
-  expect(githubLink.getAttribute('href')).toBe('gitlink');
-  expect(instagramLink.getAttribute('href')).toBe('instalink');
+  const links = await findAllByTestId('links');
+  expect(links[0].getAttribute('href')).toBe('gitlink');
+  expect(links[1].getAttribute('href')).toBe('instalink');
 });
 
 it('tests socials case: not editing and at least one social exists', async () => {

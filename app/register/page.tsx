@@ -35,7 +35,7 @@ export default function Register() {
     try {
       setLoading(true);
       await register(email, password);
-      router.push('/');
+      router.push('/edit-profile');
     } catch (err) {
       alert(err.message);
     }

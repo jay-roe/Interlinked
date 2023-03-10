@@ -91,7 +91,7 @@ export default function ProfileContact({
               <div>
                 <Button
                   className="mt-3"
-                  data-testid="save-contacts-button"
+                  data-testid="save-changes-button"
                   type="submit"
                 >
                   Save Contacts

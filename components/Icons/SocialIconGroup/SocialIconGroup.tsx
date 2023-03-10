@@ -17,7 +17,7 @@ export default function SocialIconGroup({
           .map((social: keyof User['socials'], index) => {
             return (
               <a
-                data-testid={`socials-${socials[social]}`}
+                data-testid="links"
                 key={index}
                 className="text-white no-underline transition-all hover:text-accent-orange"
                 href={socials[social]}

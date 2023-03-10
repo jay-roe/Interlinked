@@ -10,7 +10,6 @@ const nextConfig = {
       'firebasestorage.googleapis.com',
       'lh3.googleusercontent.com',
       'www.gravatar.com',
-      '127.0.0.1', // for emulator testing!
     ],
     remotePatterns: [
       {
