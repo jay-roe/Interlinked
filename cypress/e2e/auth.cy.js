@@ -26,6 +26,7 @@ describe('Full auth spec', () => {
     cy.get('[data-testid=welcome-msg]').should('contain', 'Welcome'); // Makes sure we made it to the profile
 
     // logout
+    cy.get('[data-testid=nav-menu]').click();
     cy.get('[data-testid=nav-logout]').click();
 
     cy.get('[data-testid=base-msg]').should(

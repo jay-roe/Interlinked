@@ -159,7 +159,7 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              data-testid="nav-menu-settings"
+                              data-testid="nav-menu-edit-profile"
                               href="/edit-profile"
                               className={`${
                                 active ? 'bg-gray-100' : ''
@@ -173,6 +173,7 @@ export default function NavBar() {
                           {({ active }) => (
                             <Link
                               href="#"
+                              data-testid="nav-menu-settings"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
@@ -183,16 +184,15 @@ export default function NavBar() {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <Link
+                            <button
                               onClick={logout}
                               data-testid="nav-logout"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
-                              href={''}
                             >
                               Log out
-                            </Link>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>
