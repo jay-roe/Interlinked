@@ -1,7 +1,6 @@
 import { createNotification } from '@/components/Notification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { NotifType } from '@/types/Notification';
-import type { User } from '@/types/User';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
 const LinkButtonNoNumber = ({

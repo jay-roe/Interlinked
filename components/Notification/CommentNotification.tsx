@@ -1,5 +1,6 @@
 import type { Notification } from '@/types/Notification';
 import { FaComment } from 'react-icons/fa';
+import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
 
@@ -21,7 +22,8 @@ export default function postNotification({
           </div>
         </div>
       </div>
-      <div className="m-4">
+      <div className="m-4 flex items-center justify-between">
+        <NotificationDeleteButton notification={notification} />
         <NotifBlueDot notification={notification} />
       </div>
     </div>

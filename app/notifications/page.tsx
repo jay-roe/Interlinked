@@ -1,15 +1,6 @@
 'use client';
 
-import {
-  getDocs,
-  collection,
-  Timestamp,
-  addDoc,
-  query,
-  where,
-  setDoc,
-  updateDoc,
-} from 'firebase/firestore';
+import { getDocs, collection, query, updateDoc } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import NotificationList from '@/components/Notification/NotificationList';
@@ -17,7 +8,6 @@ import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
 import { NotifType, Notification } from '@/types/Notification';
-import type { User } from '@/types/User';
 import { useEffect, useState } from 'react';
 import { createNotification } from '@/components/Notification/AddNotification';
 

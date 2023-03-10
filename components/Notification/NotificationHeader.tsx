@@ -4,7 +4,6 @@ import type { Notification } from '@/types/Notification';
 import { User } from '@/types/User';
 import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { RiCheckboxBlankCircleFill } from 'react-icons/ri';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 export default function notificationHeader({

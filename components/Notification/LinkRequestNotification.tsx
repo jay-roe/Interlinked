@@ -8,8 +8,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import { deleteNotification } from './DeleteNotification';
-import { useState } from 'react';
-import React from 'react';
 
 export default function postNotification({
   notification,
