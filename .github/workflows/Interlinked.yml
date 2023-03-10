@@ -56,5 +56,5 @@ jobs:
 
       - name: Run e2e tests & coverage
         run: |
-          npx cypress run --spec cypress/e2e/all.cy.js --config requestTimeout=45000 commandTimeout=45000
+          npx cypress run --spec cypress/e2e/all.cy.js
           npx nyc report --reporter=text-summary
