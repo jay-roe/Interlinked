@@ -14,10 +14,10 @@ export default function NotificationList({
 }: {
   notifications: Notification[];
 }) {
-  console.log(notifications);
+  // console.log(notifications);
 
   return (
-    <ul className="mb-3" data-testid="live-profile">
+    <ul className="mb-3" data-testid="live-notifications">
       {notifications?.map((notif, index) => (
         <li
           key={index}

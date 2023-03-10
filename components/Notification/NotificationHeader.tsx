@@ -17,7 +17,6 @@ export default function notificationHeader({
   useEffect(() => {
     getDoc(doc(db.users, notification.sender)).then((res) => {
       setSender(res.data());
-      console.log('res.data', res.data());
       setLoading(false);
     });
   }, []);
@@ -28,7 +27,6 @@ export default function notificationHeader({
       </div>
     );
   }
-  console.log('sender', sender);
   return (
     <div className="start flex">
       <ImageOptimized

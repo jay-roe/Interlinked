@@ -1,6 +1,12 @@
 import type { Notification, NotifType } from '@/types/Notification';
 import { typeCollection, db } from '@/config/firestore';
-import { addDoc, collection, doc, Timestamp } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  Timestamp,
+  updateDoc,
+} from 'firebase/firestore';
 
 // this function adds a notification to the database
 export async function createNotification({
@@ -30,5 +36,9 @@ export async function createNotification({
   };
 
   // add new doc to collection "notification"
-  await addDoc(notificationRef, newNotification);
+  const newDoc = await addDoc(notificationRef, newNotification);
+
+  await updateDoc(newDoc, {
+    notificationId: newDoc.id,
+  });
 }

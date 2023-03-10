@@ -6,6 +6,7 @@ export type Notification = {
   sender: string; // User ID that caused notif
   notifTime?: Timestamp;
   read: boolean;
+  notificationId?: string;
 };
 
 export enum NotifType {

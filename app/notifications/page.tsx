@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 import { createNotification } from '@/components/Notification/AddNotification';
 
 export default function Notifications() {
-  console.log('in getNotifications');
+  // console.log('in getNotifications');
   // set the current user
   const { authUser, currentUser } = useAuth();
 
@@ -35,7 +35,7 @@ export default function Notifications() {
           collection(doc(db.users, authUser.uid), 'notifications')
         )
       );
-      console.log('in getNotifications res.docs', res.docs);
+      // console.log('in getNotifications res.docs', res.docs);
 
       return res.docs.map((resData) => resData.data());
     }

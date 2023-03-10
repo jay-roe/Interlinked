@@ -7,6 +7,9 @@ import { createNotification } from '@/components/Notification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
+import { deleteNotification } from './DeleteNotification';
+import { useState } from 'react';
+import React from 'react';
 
 export default function postNotification({
   notification,
@@ -14,8 +17,6 @@ export default function postNotification({
   notification: Notification;
 }) {
   const { currentUser, authUser } = useAuth();
-  console.log('before', currentUser.linkedUserIds);
-
   return (
     <div className="flex items-center justify-between">
       <div className="start flex items-center">
@@ -49,6 +50,8 @@ export default function postNotification({
             await updateDoc(doc(db.users, authUser.uid), {
               linkedUserIds: arrayUnion(notification.sender),
             });
+
+            deleteNotification(notification.notificationId, authUser.uid);
           }}
         >
           <BsCheckLg className="m-4" size={30} />
@@ -63,6 +66,8 @@ export default function postNotification({
               sender: authUser.uid, // sender
               receiver: notification.sender, // receiver
             });
+
+            deleteNotification(notification.notificationId, authUser.uid);
           }}
         >
           <BsXLg className="m-4" size={30} />
