@@ -10,7 +10,7 @@ export default function postNotification({
   notification: Notification;
 }) {
   return (
-    <div className="start flex items-center">
+    <div className="start flex items-center justify-between">
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
           <LinkIcon linked size={60} />

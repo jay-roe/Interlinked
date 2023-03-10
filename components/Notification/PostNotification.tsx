@@ -1,5 +1,6 @@
 import type { Notification } from '@/types/Notification';
 import { MdDescription } from 'react-icons/md';
+import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
 
@@ -9,7 +10,7 @@ export default function postNotification({
   notification: Notification;
 }) {
   return (
-    <div className="start flex items-center">
+    <div className="start flex items-center justify-between">
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
           <MdDescription size={60} className="align-self-center" />
@@ -21,7 +22,8 @@ export default function postNotification({
           </div>
         </div>
       </div>
-      <div className="m-4">
+      <div className="m-4 flex items-center justify-between">
+        <NotificationDeleteButton notification={notification} />
         <NotifBlueDot notification={notification} />
       </div>
     </div>
