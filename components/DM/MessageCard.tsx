@@ -1,6 +1,7 @@
-import Card from '../../Card/Card';
+import Card from '../Card/Card';
 import { Message } from '@/types/Message';
 import { useAuth } from '@/contexts/AuthContext';
+import { User } from '@/types/User';
 
 const MessageCard = ({ message }: { message: Message }) => {
   const { currentUser } = useAuth();
