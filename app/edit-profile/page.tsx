@@ -68,7 +68,7 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
-  const [privacy, setPrivacy] = useState<boolean>(false);
+  const [privacy, setPrivacy] = useState<boolean>(); //deafults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
 
   // Language component states

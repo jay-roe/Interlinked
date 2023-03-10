@@ -9,7 +9,7 @@ export default function PrivacyIcon({ privacy }: { privacy: boolean }) {
       className="flex flex-wrap items-center justify-center gap-2 md:justify-start "
     >
       {privacy && ( //Private acc
-        <div className="justify-between">
+        <div className="flex items-center justify-between gap-2">
           <MdOutlinePublicOff size={30} />
           <div className="ml-2 self-center">
             <p>Your profile is private</p>
@@ -19,7 +19,9 @@ export default function PrivacyIcon({ privacy }: { privacy: boolean }) {
       {!privacy && ( //Public acc
         <div className="flex items-center justify-between gap-2">
           <MdOutlinePublic size={30} />
-          Your profile is public
+          <div className="ml-2 self-center">
+            <p>Your profile is public</p>
+          </div>
         </div>
       )}
     </div>

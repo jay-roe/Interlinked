@@ -19,6 +19,7 @@ import Button from '@/components/Buttons/Button';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
+import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 
 export default function PreviewProfile() {
   const { currentUser } = useAuth();
@@ -49,6 +50,9 @@ export default function PreviewProfile() {
         name={currentUser.name}
         bio={currentUser.bio}
       />
+
+      <ProfilePrivacy privacy={currentUser.privacy} />
+
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
