@@ -50,7 +50,9 @@ jobs:
           npm run test:coverage
 
       - name: Run app for Cypress
-        run: INSTRUMENT_CODE=1 npm run dev &
+        run: |
+          npm run build:instrumented
+          npm run start:instrumented &
 
       - name: Run e2e tests & coverage
         run: |
