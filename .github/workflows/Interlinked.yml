@@ -54,5 +54,5 @@ jobs:
 
       - name: Run e2e tests & coverage
         run: |
-          firebase emulators:exec --project test 'npx cypress run --spec cypress/e2e/all.cy.js' --import=firebase_exports
+          firebase emulators:exec 'npx cypress run --spec cypress/e2e/all.cy.js' --import=firebase_exports
           npx nyc report --reporter=text-summary
