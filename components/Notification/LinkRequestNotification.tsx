@@ -2,7 +2,7 @@ import LinkIcon from '../Icons/LinkIcon/LinkIcon';
 import NotificationHeader from './NotificationHeader';
 import { BsCheckLg } from 'react-icons/bs';
 import { Notification, NotifType } from '@/types/Notification';
-import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
+import NotifBlueDot from '../Icons/NotifBlueDot/NotifBlueDot';
 import { createNotification } from '@/components/Notification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';

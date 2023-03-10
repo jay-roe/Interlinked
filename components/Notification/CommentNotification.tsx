@@ -1,7 +1,7 @@
 import type { Notification } from '@/types/Notification';
 import { FaComment } from 'react-icons/fa';
 import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
+import NotifBlueDot from '../Icons/NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
 
