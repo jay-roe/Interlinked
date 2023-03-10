@@ -39,7 +39,12 @@ export default function LinkButton({
           unlink(authUser.uid, profileOwnerUID);
       }}
     >
-      <LinkIcon />
+      <LinkIcon
+        linked={currentUser.linkedUserIds.some(
+          (receiverID) => receiverID === profileOwnerUID
+        )}
+        showText={true}
+      />
       <p>{profileOwner?.linkedUserIds?.length || 0} Links</p>
     </button>
   );
