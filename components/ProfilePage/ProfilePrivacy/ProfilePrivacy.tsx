@@ -1,8 +1,5 @@
 import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
-import InputField from '@/components/InputFields/Input/Input';
-import SocialIcon from '@/components/Icons/SocialIcon/SocialIcon';
-import SocialIconGroup from '../../Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import PrivacyIcon from '@/components/Icons/PrivacyIcon/PrivacyIcon';
