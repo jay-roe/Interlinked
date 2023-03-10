@@ -94,7 +94,10 @@ export default function Notifications() {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        <NotificationList notifications={notifications} />
+        <NotificationList
+          notifications={notifications}
+          setNotifications={setNotifications}
+        />
       </div>
     </div>
   );

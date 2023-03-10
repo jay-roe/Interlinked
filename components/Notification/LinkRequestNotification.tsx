@@ -9,11 +9,14 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import { deleteNotification } from './DeleteNotification';
 import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function linkRequestNotification({
   notification,
+  setNotification,
 }: {
   notification: Notification;
+  setNotification: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { currentUser, authUser } = useAuth();
   return (
@@ -51,6 +54,12 @@ export default function linkRequestNotification({
             });
 
             deleteNotification(notification.notificationId, authUser.uid);
+            setNotification((notifs) =>
+              notifs.filter(
+                (notif, _) =>
+                  notif.notificationId !== notification.notificationId
+              )
+            );
           }}
         >
           <BsCheckLg className="m-4" size={30} />
@@ -65,7 +74,10 @@ export default function linkRequestNotification({
           <BsXLg className="m-4" size={30} />
         </button> */}
         <div className="m-4 flex items-center justify-between">
-          <NotificationDeleteButton notification={notification} />
+          <NotificationDeleteButton
+            notification={notification}
+            setNotification={setNotification}
+          />
           <NotifBlueDot notification={notification} />
         </div>
       </div>

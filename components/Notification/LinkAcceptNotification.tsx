@@ -3,11 +3,14 @@ import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/Notifi
 import LinkIcon from '../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function linkAcceptNotification({
   notification,
+  setNotification,
 }: {
   notification: Notification;
+  setNotification: Dispatch<SetStateAction<Notification[]>>;
 }) {
   return (
     <div className="start flex items-center justify-between">
@@ -23,7 +26,10 @@ export default function linkAcceptNotification({
         </div>
       </div>
       <div className="m-4 flex items-center justify-between">
-        <NotificationDeleteButton notification={notification} />
+        <NotificationDeleteButton
+          notification={notification}
+          setNotification={setNotification}
+        />
         <NotifBlueDot notification={notification} />
       </div>
     </div>

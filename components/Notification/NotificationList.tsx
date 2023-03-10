@@ -8,13 +8,18 @@ import LikeNotification from './LikeNotification';
 import LinkRequestNotification from './LinkRequestNotification';
 import DmNotification from './DmNotification';
 import LinkAcceptNotification from './LinkAcceptNotification';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function NotificationList({
   notifications,
+  setNotifications,
 }: {
   notifications: Notification[];
+  setNotifications: Dispatch<SetStateAction<Notification[]>>;
 }) {
   // console.log(notifications);
+  console.log('set notif list', setNotifications);
+  console.log('set notif 0 list', setNotifications[0]);
 
   return (
     <ul className="mb-3" data-testid="live-notifications">
@@ -24,22 +29,40 @@ export default function NotificationList({
           className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
         >
           {notif.notifType === NotifType.POST && (
-            <PostNotification notification={notif} />
+            <PostNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
           {notif.notifType === NotifType.COMMENT && (
-            <CommentNotification notification={notif} />
+            <CommentNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
           {notif.notifType === NotifType.LIKE && (
-            <LikeNotification notification={notif} />
+            <LikeNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
           {notif.notifType === NotifType.LINK_REQ && (
-            <LinkRequestNotification notification={notif} />
+            <LinkRequestNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
           {notif.notifType === NotifType.LINK_ACC && (
-            <LinkAcceptNotification notification={notif} />
+            <LinkAcceptNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
           {notif.notifType === NotifType.DM && (
-            <DmNotification notification={notif} />
+            <DmNotification
+              notification={notif}
+              setNotification={setNotifications}
+            />
           )}
         </li>
       ))}

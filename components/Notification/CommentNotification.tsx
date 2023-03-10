@@ -3,11 +3,14 @@ import { FaComment } from 'react-icons/fa';
 import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
+import { Dispatch, SetStateAction } from 'react';
 
 export default function commentNotification({
   notification,
+  setNotification,
 }: {
   notification: Notification;
+  setNotification: Dispatch<SetStateAction<Notification[]>>;
 }) {
   return (
     <div className="start flex items-center justify-between">
@@ -23,7 +26,10 @@ export default function commentNotification({
         </div>
       </div>
       <div className="m-4 flex items-center justify-between">
-        <NotificationDeleteButton notification={notification} />
+        <NotificationDeleteButton
+          notification={notification}
+          setNotification={setNotification}
+        />
         <NotifBlueDot notification={notification} />
       </div>
     </div>
