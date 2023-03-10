@@ -7,10 +7,8 @@ import { NotifType } from '@/types/Notification';
 import { unlink } from './Unlink';
 
 export default function LinkButton({
-  profileOwner /* Owner of profile page - receiver */,
   profileOwnerUID,
 }: {
-  profileOwner: User;
   profileOwnerUID?: string;
 }) {
   // set the current user
@@ -45,7 +43,6 @@ export default function LinkButton({
         )}
         showText={true}
       />
-      <p>{profileOwner?.linkedUserIds?.length || 0} Links</p>
     </button>
   );
 }

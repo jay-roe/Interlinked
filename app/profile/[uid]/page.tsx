@@ -36,7 +36,8 @@ export default async function ViewProfile({ params }) {
         <SocialIconGroup socials={user?.socials} />
       </div>
 
-      <LinkButton profileOwner={user} profileOwnerUID={params.uid} />
+      <LinkButton profileOwnerUID={params.uid} />
+      <p>{user?.linkedUserIds?.length || 0} Links</p>
 
       <ProfileContact email={user.email} phone={user.phone} />
 

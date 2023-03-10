@@ -273,7 +273,7 @@ export default function EditProfile() {
           setSocialsEditing={setSocialsEditing}
         />
 
-        <LinkButton profileOwner={currentUser} />
+        <LinkButton />
 
         <ProfileContact
           isEditable
