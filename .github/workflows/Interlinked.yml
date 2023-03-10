@@ -51,10 +51,9 @@ jobs:
 
       - name: Run app for Cypress
         run: |
-          npm run build:instrumented
-          npm run start:instrumented &
+          npm run dev:instrumented &
 
       - name: Run e2e tests & coverage
         run: |
           npx cypress run --spec cypress/e2e/all.cy.js
-          npx nyc report --reporter=text-summary
+          npx nyc report --reporter=text-summary --config requestTimeout=45000 commandTimeout=45000
