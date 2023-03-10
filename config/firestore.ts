@@ -7,6 +7,7 @@ import type {
   CollectionReference,
   DocumentData,
 } from 'firebase/firestore';
+import { Message } from '@/types/Message';
 
 // Visit this article for a description of the approach to get types in Firestore: https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
 
@@ -29,4 +30,5 @@ export const typeCollection = <T>(
 export const db = {
   users: dataPoint<User>('users'),
   posts: dataPoint<Post>('posts'),
+  messages: dataPoint<Message>('messages'),
 };
