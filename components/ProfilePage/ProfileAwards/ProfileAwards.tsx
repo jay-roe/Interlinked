@@ -29,7 +29,7 @@ export default function ProfileAwards({
         <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
         <CardStack>
           {awards.map((award, index) => (
-            <div key={index} data-testid={`live-award-${index}`}>
+            <div key={index} data-testid="live-awards">
               <h3 className="text-xl font-semibold">{award.title}</h3>
               <h6>
                 {`${award.date.toDate().toLocaleString('default', {
@@ -67,7 +67,7 @@ export default function ProfileAwards({
                 Award Title<span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid={`awards-title-box-${index}`}
+                data-testid="awards-title-box"
                 type="text"
                 name="title"
                 id="awardTitle"
@@ -85,7 +85,7 @@ export default function ProfileAwards({
                 Date <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid={`awards-date-box-${index}`}
+                data-testid="awards-date-box"
                 type="date"
                 name="date"
                 value={award.date?.toDate().toISOString().substring(0, 10)}
@@ -103,7 +103,7 @@ export default function ProfileAwards({
               />
               <p>Description</p>
               <TextArea
-                data-testid={`awards-desc-box-${index}`}
+                data-testid="awards-desc-box"
                 name="info"
                 value={award.description}
                 onChange={(e) =>
@@ -133,13 +133,13 @@ export default function ProfileAwards({
               <Button
                 className="mr-2"
                 type="submit"
-                data-testid={`awards-save-btn-${index}`}
+                data-testid="awards-save-button"
               >
                 Save Award
               </Button>
             ) : (
               <EditButton
-                data-testid={`awards-edit-btn-${index}`}
+                data-testid="awards-edit-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setAwardsEditing((awdsedits) =>
@@ -150,7 +150,7 @@ export default function ProfileAwards({
             )}
             {/* External delete award button */}
             <DeleteButton
-              data-testid={`awards-delete-btn-${index}`}
+              data-testid="awards-delete-button"
               onClick={(e) => {
                 e.preventDefault();
                 setAwards((awds) => awds.filter((_, i) => index !== i));

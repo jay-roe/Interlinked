@@ -92,7 +92,7 @@ export default function ProfileSocials({
               }
             />
             <div>
-              <Button data-testid="save-socials" className="mt-3" type="submit">
+              <Button className="mt-3" type="submit">
                 Save Socials
               </Button>
             </div>

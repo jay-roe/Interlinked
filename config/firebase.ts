@@ -1,10 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { connectAuthEmulator, getAuth } from 'firebase/auth';
-import {
-  connectFirestoreEmulator,
-  initializeFirestore,
-} from 'firebase/firestore';
-import { connectStorageEmulator, getStorage } from 'firebase/storage';
+import { getAuth } from 'firebase/auth';
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -23,16 +20,7 @@ const auth = getAuth(app);
 auth.useDeviceLanguage();
 
 // Initialize firestore database
-export const firestore = initializeFirestore(app, {
-  experimentalAutoDetectLongPolling: true,
-});
+export const firestore = getFirestore(app);
 export const storage = getStorage();
-
-// use firebase emulator when not in production (change this in .env.local)
-if (process.env.NEXT_PUBLIC_EMULATOR) {
-  connectAuthEmulator(auth, 'http://127.0.0.1:9099');
-  connectFirestoreEmulator(firestore, '127.0.0.1', 8081);
-  connectStorageEmulator(storage, '127.0.0.1', 9199);
-}
 
 export default auth;

@@ -30,7 +30,7 @@ export default function ProfileCertifications({
         <h2 className="text-2xl font-extrabold">Certifications</h2>
         <CardStack>
           {certifications.map((cert, index) => (
-            <div key={index} data-testid={`live-certification-${index}`}>
+            <div key={index} data-testid="live-certifications">
               <h3 className="text-xl font-bold">{cert.name}</h3>
               <h4 className="text-lg">{cert.issuer}</h4>
               <h6 className="mb-3">
@@ -40,7 +40,7 @@ export default function ProfileCertifications({
                 })}`}
               </h6>
               {cert.link && (
-                <Link data-testid={`live-cert-link-${index}`} href={cert.link}>
+                <Link href={cert.link}>
                   <Button>View Credential</Button>
                 </Link>
               )}
@@ -73,7 +73,7 @@ export default function ProfileCertifications({
                 Certification Name <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid={`certifications-name-box-${index}`}
+                data-testid="certifications-title-box"
                 type="text"
                 name="name"
                 id="certName"
@@ -91,7 +91,7 @@ export default function ProfileCertifications({
                 Issuer <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid={`certifications-issuer-box-${index}`}
+                data-testid="certifications-title-box"
                 type="text"
                 name="issuer"
                 id="certIssuer"
@@ -109,7 +109,7 @@ export default function ProfileCertifications({
                 Date <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid={`certifications-date-box-${index}`}
+                data-testid="certifications-date-box"
                 type="date"
                 name="date"
                 value={cert.date?.toDate().toISOString().substring(0, 10)}
@@ -127,7 +127,7 @@ export default function ProfileCertifications({
               />
               <label>Certification Link</label>
               <InputField
-                data-testid={`certifications-link-box-${index}`}
+                data-testid="certifications-link-box"
                 type="text"
                 name="link"
                 id="certLink"
@@ -164,13 +164,13 @@ export default function ProfileCertifications({
               <Button
                 className="mr-2"
                 type="submit"
-                data-testid={`certifications-save-btn-${index}`}
+                data-testid="certifications-save-button"
               >
-                Save Certification
+                Save Award
               </Button>
             ) : (
               <EditButton
-                data-testid={`certifications-edit-btn-${index}`}
+                data-testid="certifications-edit-button"
                 onClick={(e) => {
                   e.preventDefault();
                   setCertificationsEditing((awdsedits) =>
@@ -181,7 +181,7 @@ export default function ProfileCertifications({
             )}
             {/* External delete award button */}
             <DeleteButton
-              data-testid={`certifications-delete-btn-${index}`}
+              data-testid="certifications-delete-button"
               onClick={(e) => {
                 e.preventDefault();
                 setCertifications((awds) => awds.filter((_, i) => index !== i));

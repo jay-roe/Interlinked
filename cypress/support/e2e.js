@@ -18,8 +18,6 @@ import '@cypress/code-coverage/support';
 import 'cypress-file-upload';
 import './commands';
 
-export const email = 'test2+cypress@test.com';
-export const pw = '123456';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

@@ -24,19 +24,15 @@ const no_comment = {
 };
 
 it('renders body for given comment', async () => {
-  const { findByTestId } = render(
-    <CommentBody testKey="comment-body-0-0" comment={comment} />
-  );
+  const { findByTestId } = render(<CommentBody comment={comment} />);
 
-  const commentBody = await findByTestId('comment-body-0-0', { exact: false });
+  const commentBody = await findByTestId('comment-body', { exact: false });
   expect(commentBody).toBeInTheDocument();
 });
 
 it('renders no body for given comment', async () => {
-  const { findByTestId } = render(
-    <CommentBody testKey="comment-body-0-0" comment={no_comment} />
-  );
+  const { findByTestId } = render(<CommentBody comment={no_comment} />);
 
-  const commentBody = await findByTestId('comment-body-0-0', { exact: false });
+  const commentBody = await findByTestId('comment-body', { exact: false });
   expect(commentBody).toBeInTheDocument();
 });

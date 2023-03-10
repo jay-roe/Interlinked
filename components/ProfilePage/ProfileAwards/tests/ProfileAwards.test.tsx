@@ -54,7 +54,7 @@ it('renders the live version of profile awards', async () => {
       ]}
     />
   );
-  const awards = await findByTestId('live-award-0');
+  const awards = await findByTestId('live-awards');
   expect(awards).toBeInTheDocument();
 });
 
@@ -80,9 +80,9 @@ it('edits an award', async () => {
     />
   );
 
-  const title = await findByTestId('awards-title-box-0');
-  const date = await findByTestId('awards-date-box-0');
-  const desc = await findByTestId('awards-desc-box-0');
+  const title = await findByTestId('awards-title-box');
+  const date = await findByTestId('awards-date-box');
+  const desc = await findByTestId('awards-desc-box');
 
   fireEvent.change(title, { target: { value: 'something different' } });
   fireEvent.change(date, { target: { value: mockDate } });
@@ -132,7 +132,7 @@ it('tests the awards save button', async () => {
     />
   );
 
-  const saveButton = await findByTestId('awards-save-btn-0');
+  const saveButton = await findByTestId('awards-save-button');
   fireEvent.submit(saveButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -159,7 +159,7 @@ it('tests the awards edit button', async () => {
     />
   );
 
-  const editButton = await findByTestId('awards-edit-btn-1');
+  const editButton = await findByTestId('awards-edit-button');
   fireEvent.click(editButton);
   await waitFor(() => expect(mockClick).toBeCalledTimes(1));
 });
@@ -186,7 +186,7 @@ it('tests the awards delete button', async () => {
     />
   );
 
-  const deleteButton = await findAllByTestId('awards-delete-btn-0');
+  const deleteButton = await findAllByTestId('awards-delete-button');
   fireEvent.click(deleteButton[0]);
   await waitFor(() => expect(mockClick).toBeCalledTimes(2));
 });

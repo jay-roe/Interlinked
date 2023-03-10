@@ -34,6 +34,14 @@ export default function ProfileEducation({
           {education.map((ed, index) => (
             <div data-testid={`live-edu-${index}`} key={index}>
               <h3 className="text-2xl font-semibold">{ed.program}</h3>
+              {ed.image && (
+                <ImageOptimized
+                  src={ed.image}
+                  alt={ed.name}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{ed.name}</h3>
               <h4>{ed.location}</h4>
               <h6>
@@ -193,6 +201,14 @@ export default function ProfileEducation({
           ) : (
             <div>
               <h3 className="text-xl font-semibold">{ed.program}</h3>
+              {ed.image && (
+                <ImageOptimized
+                  src={ed.image}
+                  alt={ed.name}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{ed.name}</h3>
               <h4>{ed.location}</h4>
               <h6>

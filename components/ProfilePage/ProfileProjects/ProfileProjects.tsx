@@ -32,6 +32,14 @@ export default function ProfileProjects({
         <CardStack>
           {projects.map((proj, index) => (
             <div key={index} data-testid={`live-proj-${index}`}>
+              {proj.image && (
+                <ImageOptimized
+                  src={proj.image}
+                  alt={proj.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{proj.title}</h3>
               <h6>
                 {proj.startDate.toDate().getFullYear()} -{' '}
@@ -250,6 +258,14 @@ export default function ProfileProjects({
             </div>
           ) : (
             <div data-testid="editable-proj">
+              {project.image && (
+                <ImageOptimized
+                  src={project.image}
+                  alt={project.title}
+                  width={40}
+                  height={40}
+                />
+              )}
               <h3>{project.title}</h3>
               <h6>
                 {project.startDate.toDate().getFullYear()} -{' '}
@@ -346,6 +362,7 @@ export default function ProfileProjects({
                 repoLink: '',
                 demoLink: '',
                 startDate: Timestamp.now(),
+                endDate: Timestamp.now(),
                 image: '',
               },
             ]);

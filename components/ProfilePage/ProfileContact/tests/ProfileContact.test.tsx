@@ -36,7 +36,7 @@ it('tests changing email/phone fields', async () => {
 
   const email = await findByTestId('edit-email');
   const phone = await findByTestId('edit-phone');
-  const confirmButton = await findByTestId('save-contacts-button');
+  const confirmButton = await findByTestId('save-changes-button');
   fireEvent.change(email, { target: { value: 'test@test.com2' } });
   await waitFor(() => expect(mockSetEmail).toBeCalledTimes(1));
 
