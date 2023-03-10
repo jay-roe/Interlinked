@@ -16,8 +16,8 @@ import NotificationList from '@/components/Notification/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
-import { NotifType } from '@/types/User';
-import type { Notification, User } from '@/types/User';
+import { NotifType, Notification } from '@/types/Notification';
+import type { User } from '@/types/User';
 import { useEffect, useState } from 'react';
 import { createNotification } from '@/components/Notification/AddNotification';
 

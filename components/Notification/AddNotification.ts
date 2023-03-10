@@ -1,4 +1,4 @@
-import type { Notification, NotifType, User } from '@/types/User';
+import type { Notification, NotifType } from '@/types/Notification';
 import { typeCollection, db } from '@/config/firestore';
 import { addDoc, collection, doc, Timestamp } from 'firebase/firestore';
 

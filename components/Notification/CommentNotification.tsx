@@ -1,4 +1,4 @@
-import type { Notification } from '@/types/User';
+import type { Notification } from '@/types/Notification';
 import { FaComment } from 'react-icons/fa';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';

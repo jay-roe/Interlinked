@@ -1,7 +1,7 @@
 'use client';
 
-import { NotifType } from '@/types/User';
-import type { Notification } from '@/types/User';
+import { NotifType } from '@/types/Notification';
+import type { Notification } from '@/types/Notification';
 import PostNotification from './PostNotification';
 import CommentNotification from './CommentNotification';
 import LikeNotification from './LikeNotification';

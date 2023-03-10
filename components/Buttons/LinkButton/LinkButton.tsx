@@ -1,9 +1,10 @@
 'use client';
-import { NotifType, User } from '@/types/User';
+import { User } from '@/types/User';
 import type { ComponentProps } from 'react';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import { createNotification } from '@/components/Notification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
+import { NotifType } from '@/types/Notification';
 
 export default function LinkButton({
   profileOwner /* Owner of profile page - receiver */,

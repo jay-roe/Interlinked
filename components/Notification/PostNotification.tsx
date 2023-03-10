@@ -1,4 +1,4 @@
-import type { Notification } from '@/types/User';
+import type { Notification } from '@/types/Notification';
 import { MdDescription } from 'react-icons/md';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';

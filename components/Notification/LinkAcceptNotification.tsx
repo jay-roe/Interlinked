@@ -1,4 +1,4 @@
-import type { Notification } from '@/types/User';
+import type { Notification } from '@/types/Notification';
 import LinkIcon from '../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
