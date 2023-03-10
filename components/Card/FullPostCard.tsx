@@ -70,7 +70,11 @@ const FullPostCard = ({
         </div>
       </Card>
       {/* Comment Card */}
-      <Card className={`relative ${commentsOpen ? 'break-words' : 'hidden'}`}>
+      <Card
+        className={`relative row-span-2 ${
+          commentsOpen ? 'break-words' : 'hidden'
+        }`}
+      >
         {/* Triangle of hell */}
         <div
           className="
