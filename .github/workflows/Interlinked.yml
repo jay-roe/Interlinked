@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [19.6.0]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v3
@@ -55,12 +55,10 @@ jobs:
           npm ci
           npm run test:coverage
 
+      - name: Run app for Cypress
+        run: INSTRUMENT_CODE=1 npm run dev &
+
       - name: Run e2e tests & coverage
         run: |
-          firebase emulators:start --import=firebase_exports
-          INSTRUMENT_CODE=1 npm run dev & 
-          sleep 25 
-          npx cypress run --spec cypress/e2e/all.cy.js
-          npx nyc report --reporter=text-summary 
-          
-
+          firebase emulators:exec 'npx cypress run --spec cypress/e2e/all.cy.js' --import=firebase_exports
+          npx nyc report --reporter=text-summary
