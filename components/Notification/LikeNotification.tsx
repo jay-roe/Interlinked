@@ -4,7 +4,7 @@ import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/Notifi
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
 
-export default function postNotification({
+export default function likeNotification({
   notification,
 }: {
   notification: Notification;

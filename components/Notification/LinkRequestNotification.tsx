@@ -10,7 +10,7 @@ import { db } from '@/config/firestore';
 import { deleteNotification } from './DeleteNotification';
 import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 
-export default function postNotification({
+export default function linkRequestNotification({
   notification,
 }: {
   notification: Notification;

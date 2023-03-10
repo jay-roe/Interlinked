@@ -4,7 +4,7 @@ import LinkIcon from '../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
 import NotificationHeader from './NotificationHeader';
 
-export default function postNotification({
+export default function linkAcceptNotification({
   notification,
 }: {
   notification: Notification;
