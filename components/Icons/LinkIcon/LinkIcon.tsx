@@ -14,7 +14,7 @@ export default function LinkIcon({
     return (
       <div className="flex min-w-min basis-4">
         <div
-          data-testid="unlink-btn"
+          data-testid="unlink-icon-btn"
           className="flex min-w-min basis-4 text-accent-orange"
         >
           <FaLink size={size} />
@@ -33,7 +33,7 @@ export default function LinkIcon({
   // Not yet linked, show 'Link' button
   return (
     <div className="flex min-w-min basis-4">
-      <div data-testid="link-btn" className="flex min-w-min basis-4">
+      <div data-testid="link-icon-btn" className="flex min-w-min basis-4">
         <FaLink
           size={size}
           viewBox="-21 -21 554 554"

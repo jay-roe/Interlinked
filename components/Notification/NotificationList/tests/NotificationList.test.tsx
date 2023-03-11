@@ -11,8 +11,36 @@ jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
 
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
+
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(),
+  setDoc: jest.fn(),
+  updateDoc: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
+}));
+
+let mockedDate = {
+  toDate: () => {
+    return new Date();
+  },
+} as unknown as Timestamp;
+
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
-const mockClick = jest.fn();
+const mockSet = jest.fn();
 
 // if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
 it('all notification types are rendered from the notification list', async () => {
@@ -23,25 +51,6 @@ it('all notification types are rendered from the notification list', async () =>
     };
   });
 
-  jest.mock('@/config/firestore', () => ({
-    db: jest.fn(),
-  }));
-
-  jest.mock('firebase/firestore', () => ({
-    doc: jest.fn(),
-    updateDoc: jest.fn(),
-    deleteDoc: jest.fn(),
-    getDoc: jest.fn(),
-  }));
-
-  jest.mock('react', () => ({
-    useEffect: jest.fn(),
-  }));
-
-  jest.mock('config/firebase', () => ({
-    storage: jest.fn(),
-  }));
-
   const useEffect = jest.spyOn(React, 'useEffect').mockImplementation(() => {});
 
   const { findByTestId } = render(
@@ -51,7 +60,7 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.POST,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
@@ -59,7 +68,7 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.COMMENT,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
@@ -67,7 +76,7 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.LIKE,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
@@ -75,7 +84,7 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.LINK_REQ,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
@@ -83,7 +92,7 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.LINK_ACC,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
@@ -91,12 +100,12 @@ it('all notification types are rendered from the notification list', async () =>
           notifType: NotifType.DM,
           context: '',
           sender: '',
-          notifTime: Timestamp.now(),
+          notifTime: mockedDate,
           read: false,
           notificationId: '',
         },
       ]}
-      setNotifications={mockClick}
+      setNotifications={mockSet}
     />
   );
 

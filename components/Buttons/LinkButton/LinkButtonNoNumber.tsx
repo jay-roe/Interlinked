@@ -2,6 +2,7 @@ import { createNotification } from '@/components/Notification/AddNotification/Ad
 import { useAuth } from '@/contexts/AuthContext';
 import { NotifType } from '@/types/Notification';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
+import { unlink } from './Unlink';
 
 const LinkButtonNoNumber = ({
   posterUID,
@@ -20,7 +21,7 @@ const LinkButtonNoNumber = ({
         onClick={() => {
           posterUID &&
             posterUID !== authUser.uid &&
-            !currentUser.linkedUserIds.some(
+            !currentUser.linkedUserIds?.some(
               (receiverID) => receiverID === posterUID
             ) &&
             createNotification({
@@ -29,10 +30,16 @@ const LinkButtonNoNumber = ({
               sender: authUser.uid, // sender
               receiver: posterUID, // receiver
             });
+
+          posterUID &&
+            currentUser.linkedUserIds?.some(
+              (receiverID) => receiverID === posterUID
+            ) &&
+            unlink(authUser.uid, posterUID);
         }}
       >
         <LinkIcon
-          linked={currentUser.linkedUserIds.some(
+          linked={currentUser.linkedUserIds?.some(
             (receiverID) => receiverID === posterUID
           )}
           showText={true}
