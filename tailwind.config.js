@@ -13,6 +13,7 @@ module.exports = {
         'accent-orange': '#E58F40',
         'purple-component': '#2F273C',
         'purple-text-area': '#514A5B',
+        'light-white-text': '#d0ced3',
       },
       container: {
         padding: {
