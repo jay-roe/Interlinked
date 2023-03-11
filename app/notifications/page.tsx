@@ -18,7 +18,9 @@ export default function Notifications() {
 
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
+
   useEffect(() => {
+    alert('hey');
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
@@ -45,9 +47,6 @@ export default function Notifications() {
       typeCollection<Notification>(
         collection(doc(db.users, authUser.uid), 'notifications')
       )
-      // where(
-      //   'read', '==', 'false'
-      // )
     );
     // console.log(notifUnreadQuery)
     const unreadNotifs = await getDocs(notifUnreadQuery);
@@ -60,6 +59,16 @@ export default function Notifications() {
         }
       );
     });
+
+    const newNotifs = notifications.map((notif) => {
+      if (!notif.read) {
+        notif.read = true;
+        return notif;
+      } else {
+        return notif;
+      }
+    });
+    setNotifications(newNotifs);
   }
 
   return (
@@ -73,8 +82,8 @@ export default function Notifications() {
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
-                notifType: NotifType.LINK_REQ,
-                context: '💖 sucks to be you',
+                notifType: NotifType.COMMENT,
+                context: '💖 hi, have an amazing day :)',
                 sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
               });
             }}
