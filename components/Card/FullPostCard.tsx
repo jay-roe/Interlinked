@@ -66,6 +66,7 @@ const FullPostCard = ({
             comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
+            testKey={testKey}
           />
         </div>
       </Card>
@@ -91,12 +92,13 @@ const FullPostCard = ({
             postAuthorID={authorID}
             comments={comments}
             setComments={setComments}
+            testKey={testKey}
           />
           {comments?.length === 0 ||
           comments === null ||
           comments === undefined ? (
             <>
-              <Card>
+              <Card data-testid={`comments-${testKey}`}>
                 There are no comments here.
                 <br /> Now is the time to make your voice heard.
               </Card>
@@ -111,7 +113,10 @@ const FullPostCard = ({
                       comment={comment}
                       currentUser={currentUser}
                     />
-                    <CommentBody comment={comment} />
+                    <CommentBody
+                      testKey={`comment-body-${testKey}-${index}`}
+                      comment={comment}
+                    />
                   </Card>
                 );
               })}

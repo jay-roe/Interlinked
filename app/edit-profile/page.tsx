@@ -216,8 +216,8 @@ export default function EditProfile() {
       }
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
-      alert('Successfully updated your profile!');
       await refresh();
+      alert('Successfully updated your profile!');
       router.push('/profile');
     } catch (err) {
       console.error(err);
