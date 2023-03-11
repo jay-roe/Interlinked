@@ -5,8 +5,15 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
 import CreateChatModal from '@/components/DM/CreateChatModal';
+import Button from '../Buttons/Button';
 
-export default function MessageModal({ userUID }: { userUID: string }) {
+export default function MessageModal({
+  userUID,
+  userName,
+}: {
+  userUID: string;
+  userName: string;
+}) {
   const [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
@@ -56,9 +63,15 @@ export default function MessageModal({ userUID }: { userUID: string }) {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-purple-component p-5 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title></Dialog.Title>
+                  <Dialog.Title className="pb-3 text-white">
+                    Send {userName} a message !
+                  </Dialog.Title>
 
                   <CreateChatModal userUID={userUID} />
+
+                  <Button className="mt-2" type="button" onClick={closeModal}>
+                    Close
+                  </Button>
 
                   {/* <div className="mt-2">
                     <button
