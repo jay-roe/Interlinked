@@ -91,7 +91,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area px-3">
+        <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area py-2 px-3">
           <input
             className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none"
             type="text"
