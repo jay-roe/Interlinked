@@ -1,6 +1,5 @@
 'use client';
 import { FaRegCommentDots, FaCommentDots } from 'react-icons/fa';
-import { Disclosure } from '@headlessui/react';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 
@@ -30,7 +29,7 @@ export default function MessageModal({
         <button
           type="button"
           onClick={openModal}
-          className="flex inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none "
+          className=" inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none "
         >
           {isOpen ? <FaCommentDots /> : <FaRegCommentDots />}
           Message
