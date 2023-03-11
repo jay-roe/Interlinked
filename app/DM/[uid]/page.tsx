@@ -4,7 +4,6 @@ import { FaRegPaperPlane } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   doc,
-  getDoc,
   onSnapshot,
   Timestamp,
   updateDoc,
@@ -45,8 +44,6 @@ export default function ChatRoom({ params }) {
   };
 
   useEffect(() => {
-    const getChatMessages = getDoc(chatRoomRef);
-
     const unsub = onSnapshot(chatRoomRef, (doc) => {
       setChatMessages(doc.data().messages);
     });
