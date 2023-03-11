@@ -20,7 +20,6 @@ export default function Notifications() {
   const [notifications, setNotifications] = useState<Notification[]>();
 
   useEffect(() => {
-    alert('hey');
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
@@ -43,10 +42,8 @@ export default function Notifications() {
   }
 
   async function readAll() {
-    const notifUnreadQuery = query(
-      typeCollection<Notification>(
-        collection(doc(db.users, authUser.uid), 'notifications')
-      )
+    const notifUnreadQuery = typeCollection<Notification>(
+      collection(doc(db.users, authUser.uid), 'notifications')
     );
     // console.log(notifUnreadQuery)
     const unreadNotifs = await getDocs(notifUnreadQuery);
@@ -77,7 +74,7 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          <Button
+          {/* <Button
             data-testid="ITS-THIS-BUTTON"
             onClick={() => {
               createNotification({
@@ -89,7 +86,7 @@ export default function Notifications() {
             }}
           >
             Feeling Unpopular?
-          </Button>
+          </Button> */}
           <button
             onClick={() => {
               readAll();
