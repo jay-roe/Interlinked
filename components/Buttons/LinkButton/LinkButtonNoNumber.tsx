@@ -1,4 +1,4 @@
-import { createNotification } from '@/components/Notification/AddNotification';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { NotifType } from '@/types/Notification';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';

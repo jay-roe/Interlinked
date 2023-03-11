@@ -3,7 +3,7 @@
 import { getDocs, collection, query, updateDoc } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import NotificationList from '@/components/Notification/NotificationList';
+import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';

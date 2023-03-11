@@ -1,11 +1,11 @@
 import type { Notification } from '@/types/Notification';
-import { MdDescription } from 'react-icons/md';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import NotifBlueDot from '../Icons/NotifBlueDot/NotifBlueDot';
-import NotificationHeader from './NotificationHeader';
+import { FaComment } from 'react-icons/fa';
+import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
+import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function postNotification({
+export default function commentNotification({
   notification,
   setNotification,
 }: {
@@ -16,7 +16,7 @@ export default function postNotification({
     <div className="start flex items-center justify-between">
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
-          <MdDescription size={60} className="align-self-center" />
+          <FaComment size={60} className="align-self-center" />
         </div>
         <div className="ml-5">
           <NotificationHeader notification={notification} />

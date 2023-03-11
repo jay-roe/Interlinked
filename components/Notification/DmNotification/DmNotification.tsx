@@ -1,8 +1,8 @@
 import type { Notification } from '@/types/Notification';
 import { SiGooglemessages } from 'react-icons/si';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import NotifBlueDot from '../Icons/NotifBlueDot/NotifBlueDot';
-import NotificationHeader from './NotificationHeader';
+import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
+import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function dmNotification({

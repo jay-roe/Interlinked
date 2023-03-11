@@ -1,11 +1,11 @@
 import type { Notification } from '@/types/Notification';
-import { AiFillLike } from 'react-icons/ai';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import NotifBlueDot from '../Icons/NotifBlueDot/NotifBlueDot';
-import NotificationHeader from './NotificationHeader';
+import { MdDescription } from 'react-icons/md';
+import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
+import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function likeNotification({
+export default function postNotification({
   notification,
   setNotification,
 }: {
@@ -16,7 +16,7 @@ export default function likeNotification({
     <div className="start flex items-center justify-between">
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
-          <AiFillLike size={60} className="align-self-center" />
+          <MdDescription size={60} className="align-self-center" />
         </div>
         <div className="ml-5">
           <NotificationHeader notification={notification} />
