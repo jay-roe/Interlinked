@@ -5,7 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Card from '@/components/Card/Card';
 import CardGrid from '@/components/Card/CardGrid';
 
-import type { UserWithId } from '@/types/User';
+import type { User, UserWithId } from '@/types/User';
 
 import Link from 'next/link';
 import { useState, useRef, useEffect } from 'react';
@@ -27,13 +27,14 @@ export default function Links({ params }) {
       : undefined
   ); // we reverse since the latest linked user is placed at the end of the array
 
-  // const myPage = uid === authUser.uid
   const [loading, setLoading] = useState(true);
   const [allLinksFound, setAllLinksFound] = useState(false);
   const [links, setLinks] = useState<UserWithId[]>([]);
+  const [user, setUser] = useState<User>(currentUser);
 
   const getUserLinks = async (uid: string) => {
     const user = await getDoc(doc(db.users, uid));
+    setUser(user.data());
     return user.data().linkedUserIds;
   };
 
@@ -96,38 +97,43 @@ export default function Links({ params }) {
   return (
     <>
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
-        Let&apos;s see what your links are talking about.
+        {myPage
+          ? `Let's see who your links are.`
+          : `Let's see who ${user.name}'s links are.`}
       </p>
       <CardGrid className="gap-y-4">
         {links?.map((link, index) => {
           return (
-            <Card key={index} className="w-full">
-              <div className="flex items-center justify-between space-x-4">
-                <Link
-                  href={`/profile/${link.userId}`}
-                  className="flex items-center justify-start space-x-4"
-                >
-                  <span>
-                    <ImageOptimized
-                      data-testid="test-coverphoto"
-                      className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
-                      src={link?.profilePicture}
-                      alt={link?.name || link?.email || 'Link profile picture'}
-                      width={32}
-                      height={32}
-                    />
-                  </span>
-                  <div className="flex flex-col">
-                    <div className="break-all text-sm md:text-lg">
-                      {link?.name || link?.email || 'Unknown'}
+            <Link
+              href={`/profile/${link.userId}`}
+              className="flex items-center justify-start space-x-4"
+              key={index}
+            >
+              <Card className="w-full hover:bg-opacity-[0.18]">
+                <div className="flex items-center justify-between space-x-4">
+                  <div className="flex items-center space-x-4">
+                    <span>
+                      <ImageOptimized
+                        data-testid="test-coverphoto"
+                        className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
+                        src={link?.profilePicture}
+                        alt={
+                          link?.name || link?.email || 'Link profile picture'
+                        }
+                        width={32}
+                        height={32}
+                      />
+                    </span>
+                    <div className="flex flex-col">
+                      <div className="break-all text-sm md:text-lg">
+                        {link?.name || link?.email || 'Unknown'}
+                      </div>
                     </div>
                   </div>
-                </Link>
-                <LinkButtonNoNumber
-                  currentUser={currentUser}
-                ></LinkButtonNoNumber>
-              </div>
-            </Card>
+                  <LinkButtonNoNumber currentUser={currentUser} />
+                </div>
+              </Card>
+            </Link>
           );
         })}
       </CardGrid>

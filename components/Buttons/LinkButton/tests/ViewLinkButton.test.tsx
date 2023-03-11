@@ -1,15 +1,15 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import LinkButton from '../LinkButton';
+import ViewLinkButton from '../LinkButton';
 
 it('renders edit button correctly', async () => {
   const { findByTestId } = render(
-    <LinkButton
+    <ViewLinkButton
       currentUser={{
         awards: [],
         bio: '',
         codingLanguages: [],
-        connections: [],
+        linkedUserIds: [],
         courses: [],
         coverPhoto: '',
         education: [],

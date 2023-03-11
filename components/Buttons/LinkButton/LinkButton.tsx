@@ -2,7 +2,7 @@ import type { User } from '@/types/User';
 import Link from 'next/link';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
-export default function LinkButton({
+export default function ViewLinkButton({
   currentUser,
   href,
 }: {
