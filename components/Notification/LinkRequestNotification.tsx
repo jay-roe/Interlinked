@@ -64,15 +64,6 @@ export default function linkRequestNotification({
         >
           <BsCheckLg className="m-4" size={30} />
         </button>
-        {/* <button
-          data-testid="accept-link-button"
-          className="mb-3 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
-          onClick={() => {
-            deleteNotification(notification.notificationId, authUser.uid);
-          }}
-        >
-          <BsXLg className="m-4" size={30} />
-        </button> */}
         <div className="m-4 flex items-center justify-between">
           <NotificationDeleteButton
             notification={notification}

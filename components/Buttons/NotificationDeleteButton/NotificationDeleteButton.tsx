@@ -12,8 +12,6 @@ export default function NotificationDeleteButton({
   setNotification: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { authUser } = useAuth();
-  console.log('set notif ndb', setNotification);
-  console.log('set notif 0 ndb', setNotification[0]);
   return (
     <button
       data-testid="clear-notif-btn"
