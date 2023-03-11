@@ -19,7 +19,7 @@ import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 export default function Links({ params }) {
   const PAGE_SIZE = 20;
   const { currentUser, authUser } = useAuth();
-  const myPage = authUser.uid === params.uid;
+  const myPage = authUser?.uid === params.uid || false;
   const linkedIndex = useRef(0); // keep track of index of linked ids
   const linkedIds = useRef<string[]>(
     myPage
@@ -50,7 +50,6 @@ export default function Links({ params }) {
       links.push({ userId: linkedUser.id, ...linkedUser.data() });
       count++;
     }
-    console.log(count);
     if (count !== PAGE_SIZE) {
       setAllLinksFound(true);
     } // if we finished the loop without getting to the page size, we must have hit the end of the linkedIds array
@@ -66,10 +65,10 @@ export default function Links({ params }) {
         linkedIds.current = linkIds;
         getLinkInfo(params.uid).then((links) => {
           setLinks((current) => [...current, ...links]);
-          setLoading(false);
         });
       });
     }
+    setLoading(false);
   }, []);
 
   if (!currentUser || loading) {
@@ -108,6 +107,7 @@ export default function Links({ params }) {
               href={`/profile/${link.userId}`}
               className="flex items-center justify-start space-x-4"
               key={index}
+              data-testid={`profile-card-${index}`}
             >
               <Card className="w-full hover:bg-opacity-[0.18]">
                 <div className="flex items-center justify-between space-x-4">
@@ -137,7 +137,7 @@ export default function Links({ params }) {
           );
         })}
       </CardGrid>
-      <div className="mt-4 flex justify-center" data-testid="load-more-button">
+      <div className="mt-4 flex justify-center" data-testid="load-more-button-container">
         {!allLinksFound ? (
           // <LoadMoreButton onClick={() =>
           //   getLinkInfo().then((links) => {
@@ -146,6 +146,7 @@ export default function Links({ params }) {
           // }/>
           <Button
             className="mx-auto"
+            data-testid="load-more"
             onClick={() =>
               getLinkInfo(params.uid).then((links) => {
                 setLinks((current) => [...current, ...links]);
@@ -155,7 +156,7 @@ export default function Links({ params }) {
             Load More...
           </Button>
         ) : (
-          <p>No more links 😥</p>
+          <p data-testid="no-load-more">No more links 😥</p>
         )}
       </div>
     </>

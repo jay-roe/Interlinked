@@ -55,6 +55,7 @@ export default function PreviewProfile() {
       <ViewLinkButton
         href={`/profile/${authUser.uid}/links`}
         currentUser={currentUser}
+        data-testid="view-link-button"
       />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />

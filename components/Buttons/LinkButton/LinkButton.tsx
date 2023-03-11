@@ -12,7 +12,7 @@ export default function ViewLinkButton({
   return (
     <button
       data-testid="button"
-      className="mb-3 max-w-fit rounded-md bg-white bg-opacity-[0.12] p-3 font-semibold"
+      className="mb-3 max-w-fit rounded-md bg-white bg-opacity-[0.12] hover:bg-opacity-[0.18] p-3 font-semibold transition-all"
     >
       <Link href={href || ''}>
         <span className="flex items-center gap-2">
