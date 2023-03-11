@@ -1,26 +1,29 @@
-import LinkIcon from '../Icons/LinkIcon/LinkIcon';
-import NotificationHeader from './NotificationHeader';
+import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
+import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { BsCheckLg } from 'react-icons/bs';
 import { Notification, NotifType } from '@/types/Notification';
-import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
-import { createNotification } from '@/components/Notification/AddNotification';
+import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
-import { deleteNotification } from './DeleteNotification';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import { deleteNotification } from '../DeleteNotification/DeleteNotification';
+import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function linkRequestNotification({
+export default function LinkRequestNotification({
   notification,
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { currentUser, authUser } = useAuth();
   return (
-    <div className="flex items-center justify-between">
+    <div
+      className="flex items-center justify-between"
+      data-testid="link-req-notification"
+    >
       <div className="start flex items-center">
         <div className="ml-4 text-accent-orange">
           <LinkIcon size={60} />

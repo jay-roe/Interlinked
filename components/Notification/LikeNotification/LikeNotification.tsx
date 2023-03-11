@@ -1,22 +1,25 @@
 import type { Notification } from '@/types/Notification';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import LinkIcon from '../Icons/LinkIcon/LinkIcon';
-import NotifBlueDot from '../NotifBlueDot/NotifBlueDot';
-import NotificationHeader from './NotificationHeader';
+import { AiFillLike } from 'react-icons/ai';
+import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
+import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
+import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function linkAcceptNotification({
+export default function likeNotification({
   notification,
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   return (
-    <div className="start flex items-center justify-between">
+    <div
+      className="start flex items-center justify-between"
+      data-testid="like-notification"
+    >
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
-          <LinkIcon linked size={60} />
+          <AiFillLike size={60} className="align-self-center" />
         </div>
         <div className="ml-5">
           <NotificationHeader notification={notification} />

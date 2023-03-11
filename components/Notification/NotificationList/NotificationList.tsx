@@ -2,12 +2,12 @@
 
 import { NotifType } from '@/types/Notification';
 import type { Notification } from '@/types/Notification';
-import PostNotification from './PostNotification';
-import CommentNotification from './CommentNotification';
-import LikeNotification from './LikeNotification';
-import LinkRequestNotification from './LinkRequestNotification';
-import DmNotification from './DmNotification';
-import LinkAcceptNotification from './LinkAcceptNotification';
+import PostNotification from '../PostNotification/PostNotification';
+import CommentNotification from '../CommentNotification/CommentNotification';
+import LikeNotification from '../LikeNotification/LikeNotification';
+import LinkRequestNotification from '../LinkRequestNotification/LinkRequestNotification';
+import DmNotification from '../DmNotification/DmNotification';
+import LinkAcceptNotification from '../LinkAcceptNotification/LinkAcceptNotification';
 import { Dispatch, SetStateAction } from 'react';
 
 export default function NotificationList({
@@ -15,8 +15,10 @@ export default function NotificationList({
   setNotifications,
 }: {
   notifications: Notification[];
-  setNotifications: Dispatch<SetStateAction<Notification[]>>;
+  setNotifications?: Dispatch<SetStateAction<Notification[]>>;
 }) {
+  // console.log(notifications);
+
   return (
     <ul className="mb-3" data-testid="live-notifications">
       {notifications?.map((notif, index) => (

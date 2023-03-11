@@ -3,33 +3,52 @@
 import { getDocs, collection, query, updateDoc } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import NotificationList from '@/components/Notification/NotificationList';
+import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
-import { NotifType, Notification } from '@/types/Notification';
 import { useEffect, useState } from 'react';
-import { createNotification } from '@/components/Notification/AddNotification';
+import Link from 'next/link';
+import type { Notification } from '@/types/Notification';
 
 export default function Notifications() {
   // console.log('in getNotifications');
   // set the current user
   const { authUser, currentUser } = useAuth();
 
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Notifications</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to view your notifications.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
+
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
+
+  async function getNotifications() {
+    const res = await getDocs(
+      typeCollection<Notification>(
+        collection(doc(db.users, authUser.uid), 'notifications')
+      )
+    );
+    console.log('in getNotifications res', res);
+
+    return res.docs.map((resData) => resData.data());
+  }
+
   useEffect(() => {
-    async function getNotifications() {
-      const res = await getDocs(
-        typeCollection<Notification>(
-          collection(doc(db.users, authUser.uid), 'notifications')
-        )
-      );
-      // console.log('in getNotifications res.docs', res.docs);
-
-      return res.docs.map((resData) => resData.data());
-    }
-
     getNotifications().then((notifs) => {
       setNotifications(notifs);
       setLoading(false);
@@ -41,13 +60,8 @@ export default function Notifications() {
   }
 
   async function readAll() {
-    const notifUnreadQuery = query(
-      typeCollection<Notification>(
-        collection(doc(db.users, authUser.uid), 'notifications')
-      )
-      // where(
-      //   'read', '==', 'false'
-      // )
+    const notifUnreadQuery = typeCollection<Notification>(
+      collection(doc(db.users, authUser.uid), 'notifications')
     );
     // console.log(notifUnreadQuery)
     const unreadNotifs = await getDocs(notifUnreadQuery);
@@ -60,6 +74,16 @@ export default function Notifications() {
         }
       );
     });
+
+    const newNotifs = notifications.map((notif) => {
+      if (!notif.read) {
+        notif.read = true;
+        return notif;
+      } else {
+        return notif;
+      }
+    });
+    setNotifications(newNotifs);
   }
 
   return (
@@ -68,19 +92,18 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          <Button
-            data-testid="ITS-THIS-BUTTON"
+          {/* <Button
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
-                notifType: NotifType.LINK_REQ,
-                context: '💖 sucks to be you',
+                notifType: NotifType.COMMENT,
+                context: '💖 hi, have an amazing day :)',
                 sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
               });
             }}
           >
             Feeling Unpopular?
-          </Button>
+          </Button> */}
           <button
             onClick={() => {
               readAll();
@@ -98,6 +121,9 @@ export default function Notifications() {
           notifications={notifications}
           setNotifications={setNotifications}
         />
+        {notifications.length == 0 && (
+          <p data-testid="no-notifications">Wow, such empty</p>
+        )}
       </div>
     </div>
   );

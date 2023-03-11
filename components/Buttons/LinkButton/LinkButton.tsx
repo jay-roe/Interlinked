@@ -1,7 +1,7 @@
 'use client';
 import { User } from '@/types/User';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
-import { createNotification } from '@/components/Notification/AddNotification';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { NotifType } from '@/types/Notification';
 import { unlink } from './Unlink';

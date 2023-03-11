@@ -1,4 +1,4 @@
-import { deleteNotification } from '@/components/Notification/DeleteNotification';
+import { deleteNotification } from '@/components/Notification/DeleteNotification/DeleteNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { BsXLg } from 'react-icons/bs';
 import { Notification } from '@/types/Notification';
@@ -9,7 +9,7 @@ export default function NotificationDeleteButton({
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { authUser } = useAuth();
   return (

@@ -8,7 +8,9 @@ export default function NotifBlueDot({
 }) {
   return (
     <div className="text-indigo-600">
-      {!notification.read && <RiCheckboxBlankCircleFill size={30} />}
+      {!notification.read && (
+        <RiCheckboxBlankCircleFill size={30} data-testid="blue-dot" />
+      )}
     </div>
   );
 }
