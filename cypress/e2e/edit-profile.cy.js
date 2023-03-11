@@ -1,6 +1,8 @@
 import { email, pw } from '../support/e2e';
 
-describe('Full edit profile spec', async () => {
+describe('Full edit profile spec', () => {
+  cy.on('window:confirm', () => true);
+
   before(() => {
     cy.login(email, pw);
   });
@@ -448,10 +450,6 @@ describe('Full edit profile spec', async () => {
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
-
-    cy.on('window:confirm', () => {
-      return true;
-    });
 
     cy.get('[data-testid=home-interlinked]').should('exist');
     cy.get('[data-testid=profile-info]').should('exist');

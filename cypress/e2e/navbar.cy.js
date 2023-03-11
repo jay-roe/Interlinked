@@ -1,6 +1,6 @@
 import { email, pw } from '../support/e2e';
 
-describe('Full navbar spec', async () => {
+describe('Full navbar spec', () => {
   before(() => {
     cy.login(email, pw);
   });

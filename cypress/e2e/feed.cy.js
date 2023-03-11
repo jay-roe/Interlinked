@@ -1,6 +1,6 @@
 import { email, pw } from '../support/e2e';
 
-describe('Full feed spec', async () => {
+describe('Full feed spec', () => {
   before(() => {
     cy.login(email, pw);
   });
