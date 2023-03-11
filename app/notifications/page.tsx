@@ -9,6 +9,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import type { Notification } from '@/types/Notification';
 
 export default function Notifications() {
   // console.log('in getNotifications');
