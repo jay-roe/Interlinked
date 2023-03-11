@@ -1,4 +1,3 @@
-import { User } from './User';
 import type { Timestamp } from 'firebase/firestore';
 
 export type Message = {
@@ -17,4 +16,9 @@ export type ChatRoom = {
   messages: Message[]; // all messages sent
   lastMessage: Message; // last message sent
   participants: string[]; // uid of participants
+};
+
+export type KeyedChatRoom = {
+  room: ChatRoom;
+  key: string;
 };
