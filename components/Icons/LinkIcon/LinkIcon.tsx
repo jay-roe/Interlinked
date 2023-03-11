@@ -9,14 +9,8 @@ export default function LinkIcon({
   showText?: boolean;
   size?: number;
 }) {
-  {
-    console.log('status', linked, showText);
-  }
   // Linked, show 'Unlink' button
   if (linked) {
-    {
-      console.log('good');
-    }
     return (
       <div className="flex min-w-min basis-4">
         <div
@@ -36,10 +30,6 @@ export default function LinkIcon({
     );
   }
 
-  // Not yet linked, show 'Link' button
-  {
-    console.log('bad');
-  }
   return (
     <div className="flex min-w-min basis-4">
       <div data-testid="link-btn" className="flex min-w-min basis-4">

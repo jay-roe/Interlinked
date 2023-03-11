@@ -50,3 +50,18 @@ it('check if user is logged out', async () => {
   const loginPrompt = await findByTestId('profile-login-prompt');
   expect(loginPrompt).toBeInTheDocument();
 });
+
+// if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
+it('check if user is logged out', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      authUser: {},
+      currentUser: {},
+    };
+  });
+
+  const { findByTestId } = render(<Notifications />);
+
+  const loginPrompt = await findByTestId('profile-login-prompt');
+  expect(loginPrompt).toBeInTheDocument();
+});

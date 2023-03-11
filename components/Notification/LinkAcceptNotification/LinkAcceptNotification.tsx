@@ -10,10 +10,13 @@ export default function linkAcceptNotification({
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   return (
-    <div className="start flex items-center justify-between">
+    <div
+      className="start flex items-center justify-between"
+      data-testid="link-acc-notification"
+    >
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
           <LinkIcon linked size={60} />

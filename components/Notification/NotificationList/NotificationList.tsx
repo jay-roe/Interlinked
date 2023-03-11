@@ -15,11 +15,9 @@ export default function NotificationList({
   setNotifications,
 }: {
   notifications: Notification[];
-  setNotifications: Dispatch<SetStateAction<Notification[]>>;
+  setNotifications?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   // console.log(notifications);
-  console.log('set notif list', setNotifications);
-  console.log('set notif 0 list', setNotifications[0]);
 
   return (
     <ul className="mb-3" data-testid="live-notifications">

@@ -10,10 +10,13 @@ export default function dmNotification({
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   return (
-    <div className="start flex items-center justify-between">
+    <div
+      className="start flex items-center justify-between"
+      data-testid="dm-notification"
+    >
       <div className="flex items-center justify-center">
         <div className="ml-4 text-accent-orange">
           <SiGooglemessages size={60} className="align-self-center" />

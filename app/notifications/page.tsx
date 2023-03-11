@@ -93,7 +93,6 @@ export default function Notifications() {
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
           {/* <Button
-            data-testid="ITS-THIS-BUTTON"
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,

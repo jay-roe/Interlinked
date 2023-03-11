@@ -16,11 +16,14 @@ export default function LinkRequestNotification({
   setNotification,
 }: {
   notification: Notification;
-  setNotification: Dispatch<SetStateAction<Notification[]>>;
+  setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { currentUser, authUser } = useAuth();
   return (
-    <div className="flex items-center justify-between">
+    <div
+      className="flex items-center justify-between"
+      data-testid="link-req-notification"
+    >
       <div className="start flex items-center">
         <div className="ml-4 text-accent-orange">
           <LinkIcon size={60} />
