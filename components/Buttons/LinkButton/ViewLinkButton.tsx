@@ -11,7 +11,7 @@ export default function ViewLinkButton({
 }) {
   return (
     <button
-      data-testid="button"
+      data-testid="view-link-button"
       className="mb-3 max-w-fit rounded-md bg-white bg-opacity-[0.12] p-3 font-semibold transition-all hover:bg-opacity-[0.18]"
     >
       <Link href={href || ''}>

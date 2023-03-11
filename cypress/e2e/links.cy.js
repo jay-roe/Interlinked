@@ -4,18 +4,26 @@ describe('View Links Spec', async () => {
 
   before(() => {
     cy.login(email, pw);
-    cy.visit('/profile');
   });
 
   after(() => {
     cy.logout();
   });
 
-  it('can visit link page', async () => {
-    cy.get('[data-testid=view-link-button]').click();
+  it('can visit link page', () => {
+    cy.visit('profile');
 
+    cy.get('[data-testid=view-link-button]').click();
     cy.get('[data-testid=welcome-msg]').should(
       'contain',
+      "Let's see who your links are."
+    );
+    cy.get('[data-testid=no-load-more]').should('contain', 'No more links 😥');
+
+    cy.get('[data-testid=profile-card-0]').click();
+    cy.get(cy.get('[data-testid=view-link-button]').click());
+    cy.get('[data-testid=welcome-msg]').should(
+      'not.contain',
       "Let's see who your links are."
     );
   });
