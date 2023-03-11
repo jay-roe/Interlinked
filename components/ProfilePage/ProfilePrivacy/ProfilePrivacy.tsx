@@ -7,14 +7,14 @@ import { setPriority } from 'os';
 
 export default function ProfilePrivacy({
   isEditable = false,
-  privacy,
-  setPrivacy,
+  isPrivate,
+  setIsPrivate,
   privacyEditing = false,
   setPrivacyEditing,
 }: {
   isEditable?: boolean;
-  privacy: boolean;
-  setPrivacy?: Dispatch<SetStateAction<boolean>>;
+  isPrivate: boolean;
+  setIsPrivate?: Dispatch<SetStateAction<boolean>>;
   privacyEditing?: boolean;
   setPrivacyEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -22,7 +22,7 @@ export default function ProfilePrivacy({
   if (!isEditable) {
     return (
       <div className="mx-auto mb-5">
-        <PrivacyIcon privacy={privacy} />
+        <PrivacyIcon isPrivate={isPrivate} />
       </div>
     );
   }
@@ -33,7 +33,7 @@ export default function ProfilePrivacy({
       {!privacyEditing ? (
         <div className="flex">
           <div className="mt-2 mb-3 flex flex-wrap items-center justify-between rounded-xl bg-white bg-opacity-[8%] p-4">
-            <PrivacyIcon privacy={privacy} />
+            <PrivacyIcon isPrivate={isPrivate} />
           </div>
           <EditButton
             data-testid="name-edit-button"
@@ -51,14 +51,14 @@ export default function ProfilePrivacy({
           >
             <div className="">
               <label>
-                <PrivacyIcon privacy={privacy} />
+                <PrivacyIcon isPrivate={isPrivate} />
               </label>
               <div className="mt-3 flex items-center gap-3">
                 <input
                   type="checkbox"
                   id="privacy"
                   value="Change Privacy Settings"
-                  onChange={() => setPrivacy((curr) => !curr)}
+                  onChange={() => setIsPrivate((curr) => !curr)}
                 />
                 <label htmlFor="privacy">Change Privacy Settings</label>
               </div>

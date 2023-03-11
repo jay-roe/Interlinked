@@ -23,7 +23,7 @@ export type User = {
     instagram?: string;
   };
   volunteering?: VolunteeringExperience[];
-  privacy?: boolean;
+  isPrivate?: boolean;
 };
 
 type Award = {

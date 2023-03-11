@@ -68,8 +68,8 @@ export default function EditProfile() {
   const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
 
-  const [privacy, setPrivacy] = useState<boolean>(
-    currentUser?.privacy || false
+  const [isPrivate, setIsPrivate] = useState<boolean>(
+    currentUser?.isPrivate || false
   ); //deafults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
 
@@ -198,7 +198,7 @@ export default function EditProfile() {
     courses: courses,
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
-    privacy: privacy,
+    isPrivate: isPrivate,
   };
 
   async function uploadProfilePicture() {
@@ -274,8 +274,8 @@ export default function EditProfile() {
 
         <ProfilePrivacy
           isEditable
-          privacy={privacy}
-          setPrivacy={setPrivacy}
+          isPrivate={isPrivate}
+          setIsPrivate={setIsPrivate}
           privacyEditing={privacyEditing}
           setPrivacyEditing={setPrivacyEditing}
         />

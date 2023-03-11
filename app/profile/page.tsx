@@ -51,7 +51,7 @@ export default function PreviewProfile() {
         bio={currentUser.bio}
       />
 
-      <ProfilePrivacy privacy={currentUser.privacy} />
+      <ProfilePrivacy isPrivate={currentUser.isPrivate} />
 
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
