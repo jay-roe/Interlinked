@@ -5,41 +5,23 @@ import { useAuth } from '@/contexts/AuthContext';
 import {
   doc,
   getDoc,
-  addDoc,
-  where,
-  serverTimestamp,
   onSnapshot,
-  query,
-  orderBy,
   Timestamp,
-  collection,
+  updateDoc,
+  arrayUnion,
 } from 'firebase/firestore';
 
-import { db, typeCollection } from '@/config/firestore';
+import { db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
-import { Message, ChatMessage } from '@/types/Message';
-import { firestore } from '@/config/firebase';
+import { Message } from '@/types/Message';
 
-export default async function ChatRoom({ params }) {
+export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
-  // let combinedID: string = '';
 
-  // // Higher alphabetical order string always goes first in concatination
-  // // This ensures that twos users will share the same chatroom ID :)
-  // if (authUser.uid.localeCompare(params.uid) == 1)
-  //   combinedID = params.uid + authUser.uid;
-  // else combinedID = authUser.uid + params.uid;
-
-  // const senderRef = typeCollection<Message>(
-  //   collection(doc(db.chatrooms, authUser.uid), params.uid)
-  // ); // messages -> userID -> participantID
-
-  // const receiverRef = typeCollection<Message>(
-  //   collection(doc(db.chatrooms, params.uid), authUser.uid)
-  // ); // messages -> participantID -> userID
+  const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
   const [message, setMessage] = useState<string>(''); // message to be sent
-  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // messages seen by both parties
+  const [chatMessages, setChatMessages] = useState<Message[]>([]); // messages seen by both parties
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,34 +37,32 @@ export default async function ChatRoom({ params }) {
       time_stamp: Timestamp.now(),
     };
 
-    // await addDoc(receiverRef, newMessage); // add message to chatroom collection
-    // await addDoc(senderRef, newMessage); // add message to chatroom collection
+    updateDoc(chatRoomRef, {
+      lastMessage: newMessage,
+      messages: arrayUnion(newMessage),
+    });
     setMessage('');
   };
 
-  // useEffect(() => {
-  //   // const getChatMessages = query(senderRef, orderBy('time_stamp'));
+  useEffect(() => {
+    const getChatMessages = getDoc(chatRoomRef);
 
-  //   // const unsubscribe = onSnapshot(getChatMessages, (snapshot) => {
-  //   //   let messages: ChatMessage[] = [];
-  //   //   snapshot.forEach((doc) => {
-  //   //     messages.push({ message: doc.data(), id: doc.id });
-  //   //   });
-  //   //   setChatMessages(messages);
-  //   // });
+    const unsub = onSnapshot(chatRoomRef, (doc) => {
+      setChatMessages(doc.data().messages);
+    });
 
-  //   // return () => unsubscribe(); // removes listener
-  // }, []);
+    return () => unsub(); // removes listener
+  }, []);
 
   return (
     <div className="grid grid-cols-8 ">
       <div className="col-span-4 col-start-3">
         Your dms
         <div>
-          {chatMessages.map((m) => {
+          {chatMessages.map((m, id) => {
             return (
-              <div key={m.id}>
-                <MessageCard message={m.message} />
+              <div key={id}>
+                <MessageCard message={m} />
               </div>
             );
           })}
