@@ -83,28 +83,28 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
     if (message === '') return;
     const roomID = await createChatRoom();
     setMessage('');
-    router.push('/DM/' + roomID); // send to chatroom
+    if (confirm('Go to chats?'))
+      router.push('/DM/' + roomID); // send to chatroom
+    else alert('Message sent!');
   };
 
   return (
     <>
-      <Card className="max-w-sm">
-        <form onSubmit={handleSubmit}>
-          <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area px-3">
-            <input
-              className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none"
-              type="text"
-              placeholder="Write your message..."
-              value={message}
-              onChange={(event) => setMessage(event.target.value)}
-            />
+      <form onSubmit={handleSubmit}>
+        <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area px-3">
+          <input
+            className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none"
+            type="text"
+            placeholder="Write your message..."
+            value={message}
+            onChange={(event) => setMessage(event.target.value)}
+          />
 
-            <button type="submit" className="hover:text-accent-orange">
-              <FaRegPaperPlane />
-            </button>
-          </div>
-        </form>
-      </Card>
+          <button type="submit" className="hover:text-accent-orange">
+            <FaRegPaperPlane />
+          </button>
+        </div>
+      </form>
     </>
   );
 }
