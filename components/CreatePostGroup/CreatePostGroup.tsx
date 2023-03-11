@@ -63,7 +63,6 @@ export default function CreatePostGroup() {
     });
 
     setTrigger((trig) => trig + 1);
-    console.log('HI');
     alert('Posted!');
   };
 
