@@ -14,6 +14,7 @@ const PostFooter = ({
   currentUser,
   userID,
   postAuthorID,
+  testKey,
 }: {
   comments?: Comment[];
   commentState?: boolean;
@@ -23,6 +24,7 @@ const PostFooter = ({
   currentUser?: User;
   userID?: string;
   postAuthorID?: string;
+  testKey?: number;
 }) => {
   return (
     <div className="my-2 flex items-center space-x-4">
@@ -31,9 +33,10 @@ const PostFooter = ({
         userID={userID}
         postID={postID}
         postAuthorID={postAuthorID}
+        data-testid={`like-${testKey}`}
       />
       <CommentIcon
-        data-testid="comment-value"
+        data-testid={`comment-${testKey}`}
         comments={
           comments?.length === 0 || comments === null || comments === undefined
             ? 0
