@@ -18,19 +18,25 @@ import {
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Message, ChatMessage } from '@/types/Message';
-
-async function getUser(uid: string) {
-  const res = await getDoc(doc(db.users, uid));
-  return res.data();
-}
+import { firestore } from '@/config/firebase';
 
 export default async function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
-  const participant = await getUser(params.uid); // user to whom is being talked to
+  let combinedID: string = '';
 
-  const messageRef = typeCollection<Message>(
+  // Higher alphabetical order string always goes first in concatination
+  // This ensures that twos users will share the same chatroom ID :)
+  if (authUser.uid.localeCompare(params.uid) == 1)
+    combinedID = params.uid + authUser.uid;
+  else combinedID = authUser.uid + params.uid;
+
+  const senderRef = typeCollection<Message>(
     collection(doc(db.messages, authUser.uid), params.uid)
   ); // messages -> userID -> participantID
+
+  const receiverRef = typeCollection<Message>(
+    collection(doc(db.messages, params.uid), authUser.uid)
+  ); // messages -> participantID -> userID
 
   const [message, setMessage] = useState<string>(''); // message to be sent
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]); // messages seen by both parties
@@ -49,12 +55,13 @@ export default async function ChatRoom({ params }) {
       time_stamp: Timestamp.now(),
     };
 
-    await addDoc(messageRef, newMessage);
+    await addDoc(receiverRef, newMessage); // add message to chatroom collection
+    await addDoc(senderRef, newMessage); // add message to chatroom collection
     setMessage('');
   };
 
   useEffect(() => {
-    const getChatMessages = query(messageRef, orderBy('time_stamp'));
+    const getChatMessages = query(senderRef, orderBy('time_stamp'));
 
     const unsubscribe = onSnapshot(getChatMessages, (snapshot) => {
       let messages: ChatMessage[] = [];
