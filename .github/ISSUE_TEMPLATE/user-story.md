@@ -1,18 +1,15 @@
 # User Story
 
 ### Description
-
-As a user, I want to DM a user in my web, so that I can socialize and web
+Insert text
 
 Story points:
 Priority:
 Risk:
 Subtasks:
-
 - [ ]
 - [ ]
 
 ### Acceptance Tests
-
 - [ ] Test 1
 - [ ] Test 2
