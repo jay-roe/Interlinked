@@ -49,6 +49,10 @@ export const testUser = {
   volunteering: null,
 };
 
+export interface UserWithId extends User {
+  userId: string;
+}
+
 type Award = {
   title: string;
   description?: string;

@@ -2,9 +2,52 @@ import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
 import LikeIcon from '../LikeIcon';
 
-it('renders dislike icon by default', async () => {
+jest.mock('@/config/firestore', () => ({
+  db: jest.fn(),
+  typeCollection: jest.fn(),
+}));
+
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
+
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(),
+  setDoc: jest.fn(),
+  getDoc: jest.fn(),
+  updateDoc: jest.fn(),
+  getDocs: jest.fn().mockResolvedValue({ docs: [], forEach: jest.fn() }),
+  orderBy: jest.fn(),
+  query: jest.fn(),
+  where: jest.fn(),
+  arrayRemove: jest.fn(),
+  arrayUnion: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
+}));
+
+jest.mock('contexts/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
+
+it('renders not liked icon by default', async () => {
   const { findByText, findByTestId } = render(
-    <LikeIcon likeState={false} setLiked={jest.fn} likes={5} />
+    <LikeIcon
+      userID=""
+      postID=""
+      postAuthorID=""
+      likes={['user1', 'user2', 'user3', 'user4', 'user5']}
+    />
   );
 
   const likeCount = await findByText('5', { exact: false });
@@ -16,7 +59,12 @@ it('renders dislike icon by default', async () => {
 
 it('renders like icon', async () => {
   const { findByTestId } = render(
-    <LikeIcon likeState={true} setLiked={jest.fn} likes={5} />
+    <LikeIcon
+      userID=""
+      postID=""
+      postAuthorID=""
+      likes={['user1', 'user2', 'user3', 'user4', 'user5']}
+    />
   );
 
   const likeButton = await findByTestId('like-btn');
