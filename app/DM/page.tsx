@@ -4,7 +4,7 @@ import { ChatMessage, Message, ChatRoom } from '@/types/Message';
 import { User, testUser } from '@/types/User';
 import { useAuth } from '@/contexts/AuthContext';
 import TimeDivider from '@/components/DM/TimeDivider';
-import MessageButton from '@/components/Buttons/MessageButton/MessageButton';
+import MessageButton from '@/components/MessageModal/MessageModal';
 import {
   doc,
   getDoc,
@@ -27,12 +27,13 @@ import { useEffect, useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { firestore } from '@/config/firebase';
 import CreateChatModal from '@/components/DM/CreateChatModal';
+import MessageModal from '@/components/MessageModal/MessageModal';
 
 export default function DMs({ params }) {
   const s: string = 'hello';
   return (
     <>
-      <MessageButton userUID={s} />
+      <MessageModal userUID={s} />
     </>
   );
 
