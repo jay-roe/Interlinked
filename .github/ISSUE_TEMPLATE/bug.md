@@ -1,6 +1,12 @@
 ---
+name: Bug
+about: Bug template
+title: ''
 labels: bug
+assignees: ''
+
 ---
+
 ### Description
 Insert text
 

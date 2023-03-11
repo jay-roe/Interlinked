@@ -1,6 +1,12 @@
 ---
+name: User story
+about: User story template
+title: ''
 labels: user story
+assignees: ''
+
 ---
+
 # User Story
 
 ### Description
