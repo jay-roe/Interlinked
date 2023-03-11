@@ -31,6 +31,6 @@ it('renders edit button correctly', async () => {
     />
   );
 
-  const button = await findByTestId('button');
+  const button = await findByTestId('view-link-button');
   expect(button).toBeInTheDocument();
 });
