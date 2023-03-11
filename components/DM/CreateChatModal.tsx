@@ -1,11 +1,9 @@
 'use client';
-import Card from '@/components/Card/Card';
-import { db, typeCollection } from '@/config/firestore';
+import { db } from '@/config/firestore';
 import { ChatRoom, Message } from '@/types/Message';
 import {
   Timestamp,
   arrayUnion,
-  collection,
   doc,
   getDocs,
   query,
@@ -16,7 +14,6 @@ import {
 import { useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
-import { timeStamp } from 'console';
 import { useRouter } from 'next/navigation';
 export default function CreateChatModal({ userUID }: { userUID: string }) {
   const { currentUser, authUser } = useAuth();
