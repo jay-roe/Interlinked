@@ -1,3 +1,6 @@
+---
+labels: bug
+---
 ### Description
 Insert text
 

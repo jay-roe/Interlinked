@@ -1,3 +1,6 @@
+---
+labels: user story
+---
 # User Story
 
 ### Description

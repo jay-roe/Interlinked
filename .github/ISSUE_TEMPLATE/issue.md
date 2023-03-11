@@ -1,3 +1,6 @@
+---
+labels: task
+---
 ### Description
 Insert text
 
