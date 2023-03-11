@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import ViewLinkButton from '../LinkButton';
+import ViewLinkButton from '../ViewLinkButton';
 
 it('renders edit button correctly', async () => {
   const { findByTestId } = render(

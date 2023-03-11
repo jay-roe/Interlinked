@@ -7,8 +7,8 @@ import React from 'react';
 import Links from '../page';
 
 const params = {
-  uid: 1
-}
+  uid: 1,
+};
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
@@ -48,7 +48,6 @@ jest.mock('contexts/AuthContext', () => ({
 
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 
-
 const currentUser = {
   awards: [],
   codingLanguages: [],
@@ -82,12 +81,10 @@ const useAuthMock = {
   },
   authUser: {
     uid: '123',
-  }
-}
+  },
+};
 
 const userWithId = { userId: '123', ...currentUser };
-
-
 
 it('renders page with no user or loading', async () => {
   mockedUseAuth.mockImplementation(() => {
@@ -101,18 +98,17 @@ it('renders page with no user or loading', async () => {
   expect(linkNoUser).toBeInTheDocument();
 });
 
-
 it('renders page with user and no loading', async () => {
   mockedUseAuth.mockImplementation(() => {
-    return useAuthMock
+    return useAuthMock;
   }); // logged in
   jest
     .spyOn(React, 'useState')
     .mockImplementationOnce(() => [false, jest.fn()]) //loading state
     .mockImplementationOnce(() => [true, jest.fn()]) //allLinksFound state
     .mockImplementationOnce(() => [[], jest.fn()]) //links state
-    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]) //user state
-    
+    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]); //user state
+
   const { findByTestId } = render(<Links params={params} />);
   const linkUser = await findByTestId('welcome-msg');
   expect(linkUser).toBeInTheDocument();
@@ -120,7 +116,7 @@ it('renders page with user and no loading', async () => {
 
 it('renders page with user and one link', async () => {
   mockedUseAuth.mockImplementation(() => {
-    return useAuthMock
+    return useAuthMock;
   }); // logged in
   jest.spyOn(React, 'useEffect').mockImplementation(() => {});
   jest
@@ -128,18 +124,18 @@ it('renders page with user and one link', async () => {
     .mockImplementationOnce(() => [false, jest.fn()]) //loading state
     .mockImplementationOnce(() => [false, jest.fn()]) //allLinksFound state
     .mockImplementationOnce(() => [[userWithId], jest.fn()]) //links state
-    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]) //user state
+    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]); //user state
 
   const { findByTestId } = render(<Links params={params} />);
-  const linkCard = await findByTestId('profile-card-0')
-  const loadMoreButton = await findByTestId('load-more-button-container')
+  const linkCard = await findByTestId('profile-card-0');
+  const loadMoreButton = await findByTestId('load-more-button-container');
   expect(linkCard).toBeInTheDocument();
   expect(loadMoreButton).toBeInTheDocument();
-})
+});
 
 it('renders page with user and 1 link with more links', async () => {
   mockedUseAuth.mockImplementation(() => {
-    return useAuthMock
+    return useAuthMock;
   }); // logged in
   // jest.spyOn(React, 'useEffect').mockImplementation(() => {});
   jest
@@ -147,16 +143,16 @@ it('renders page with user and 1 link with more links', async () => {
     .mockImplementationOnce(() => [false, jest.fn()]) //loading state
     .mockImplementationOnce(() => [false, jest.fn()]) //allLinksFound state
     .mockImplementationOnce(() => [[userWithId], jest.fn()]) //links state
-    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]) //user state
+    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]); //user state
 
   const { findByTestId } = render(<Links params={params} />);
-  const linkCard = await findByTestId('load-more')
+  const linkCard = await findByTestId('load-more');
   expect(linkCard).toBeInTheDocument();
-})
+});
 
 it('renders page with user and 1 link with no more links', async () => {
   mockedUseAuth.mockImplementation(() => {
-    return useAuthMock
+    return useAuthMock;
   }); // logged in
   // jest.spyOn(React, 'useEffect').mockImplementation(() => {});
   jest
@@ -164,9 +160,9 @@ it('renders page with user and 1 link with no more links', async () => {
     .mockImplementationOnce(() => [false, jest.fn()]) //loading state
     .mockImplementationOnce(() => [true, jest.fn()]) //allLinksFound state
     .mockImplementationOnce(() => [[userWithId], jest.fn()]) //links state
-    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]) //user state
+    .mockImplementationOnce(() => [useAuthMock.currentUser, jest.fn()]); //user state
 
   const { findByTestId } = render(<Links params={params} />);
-  const linkCard = await findByTestId('no-load-more')
+  const linkCard = await findByTestId('no-load-more');
   expect(linkCard).toBeInTheDocument();
-})
+});

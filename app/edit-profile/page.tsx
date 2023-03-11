@@ -12,7 +12,7 @@ import type { Language } from '@/types/User';
 
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import ViewLinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';

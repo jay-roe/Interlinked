@@ -137,7 +137,10 @@ export default function Links({ params }) {
           );
         })}
       </CardGrid>
-      <div className="mt-4 flex justify-center" data-testid="load-more-button-container">
+      <div
+        className="mt-4 flex justify-center"
+        data-testid="load-more-button-container"
+      >
         {!allLinksFound ? (
           // <LoadMoreButton onClick={() =>
           //   getLinkInfo().then((links) => {
