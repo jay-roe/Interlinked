@@ -121,6 +121,7 @@ export default function Notifications() {
           notifications={notifications}
           setNotifications={setNotifications}
         />
+        {notifications.length == 0 && <p>Wow, such empty</p>}
       </div>
     </div>
   );
