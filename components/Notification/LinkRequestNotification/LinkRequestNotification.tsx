@@ -11,7 +11,7 @@ import { deleteNotification } from '../DeleteNotification/DeleteNotification';
 import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import { Dispatch, SetStateAction } from 'react';
 
-export default function linkRequestNotification({
+export default function LinkRequestNotification({
   notification,
   setNotification,
 }: {

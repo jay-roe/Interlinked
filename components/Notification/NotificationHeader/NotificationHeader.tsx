@@ -6,7 +6,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import ImageOptimized from '../../ImageOptimized/ImageOptimized';
 
-export default function notificationHeader({
+export default function NotificationHeader({
   notification,
 }: {
   notification: Notification;
