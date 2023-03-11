@@ -37,18 +37,18 @@ export default function Notifications() {
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
 
+  async function getNotifications() {
+    const res = await getDocs(
+      typeCollection<Notification>(
+        collection(doc(db.users, authUser.uid), 'notifications')
+      )
+    );
+    console.log('in getNotifications res', res);
+
+    return res.docs.map((resData) => resData.data());
+  }
+
   useEffect(() => {
-    async function getNotifications() {
-      const res = await getDocs(
-        typeCollection<Notification>(
-          collection(doc(db.users, authUser.uid), 'notifications')
-        )
-      );
-      // console.log('in getNotifications res.docs', res.docs);
-
-      return res.docs.map((resData) => resData.data());
-    }
-
     getNotifications().then((notifs) => {
       setNotifications(notifs);
       setLoading(false);
