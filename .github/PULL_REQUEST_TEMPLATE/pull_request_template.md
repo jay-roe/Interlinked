@@ -1,11 +1,3 @@
----
-name: PR
-about: Basic PR template. Please fill out all the fields.
-title: ''
-labels: Medium
-assignees: ''
----
-
 # Description
 
 Insert text
