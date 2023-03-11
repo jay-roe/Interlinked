@@ -14,6 +14,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
+import MessageModal from '@/components/MessageModal/MessageModal';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -31,7 +32,9 @@ export default async function ViewProfile({ params }) {
         profilePictureURL={user.profilePicture}
         name={user.name}
         bio={user.bio}
+        uid={params.uid}
       />
+
       <div className="mx-auto mb-3">
         <SocialIconGroup socials={user?.socials} />
       </div>
