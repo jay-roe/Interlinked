@@ -4,6 +4,7 @@ import { ChatMessage, Message, ChatRoom } from '@/types/Message';
 import { User, testUser } from '@/types/User';
 import { useAuth } from '@/contexts/AuthContext';
 import TimeDivider from '@/components/DM/TimeDivider';
+import MessageButton from '@/components/Buttons/MessageButton/MessageButton';
 import {
   doc,
   getDoc,
@@ -25,8 +26,16 @@ import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { firestore } from '@/config/firebase';
+import CreateChatModal from '@/components/DM/CreateChatModal';
 
 export default function DMs({ params }) {
+  const s: string = 'hello';
+  return (
+    <>
+      <MessageButton userUID={s} />
+    </>
+  );
+
   //     const { currentUser, authUser } = useAuth();
   //     const chatsRef = typeCollection<Message>(
   //         collection(doc(db.messages, authUser.uid), authUser.uid)
@@ -36,6 +45,7 @@ export default function DMs({ params }) {
   //       }, []);
   //   return (<div>
   //   </div>);
+
   // const { currentUser, authUser } = useAuth();
   // let combinedID : string= "";
   // let id = "FvfPPYhtKbalIp9eGO9OrMGRRNz1";
