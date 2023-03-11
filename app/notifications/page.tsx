@@ -7,14 +7,31 @@ import NotificationList from '@/components/Notification/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
-import { NotifType, Notification } from '@/types/Notification';
 import { useEffect, useState } from 'react';
-import { createNotification } from '@/components/Notification/AddNotification';
+import Link from 'next/link';
 
 export default function Notifications() {
   // console.log('in getNotifications');
   // set the current user
   const { authUser, currentUser } = useAuth();
+
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Notifications</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to view your notifications.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
 
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
