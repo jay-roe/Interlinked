@@ -1,5 +1,5 @@
 'use client';
-
+import { FaRegCommentDots } from 'react-icons/fa';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
@@ -30,7 +30,6 @@ export default function NavBar() {
       ? [
           { name: 'Home', href: '/', current: true },
           { name: 'Feed', href: '/feed', current: false },
-          { name: 'DM', href: '/DM', current: false },
         ]
       : [
           { name: 'Home', href: '/', current: true },
@@ -108,6 +107,15 @@ export default function NavBar() {
                     <span className="sr-only">Search</span>
                     <FiSearch className="h-6 w-6" aria-hidden="true" />
                   </button>
+
+                  <Link
+                    type="button"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
+                    href={'/DM'}
+                  >
+                    <span className="sr-only">DMs</span>
+                    <FaRegCommentDots className="h-6 w-6" aria-hidden="true" />
+                  </Link>
 
                   <button
                     type="button"
