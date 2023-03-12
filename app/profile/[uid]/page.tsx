@@ -15,6 +15,7 @@ import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/Pr
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import { useAuth } from '@/contexts/AuthContext';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -23,8 +24,15 @@ async function getUser(uid: string) {
 
 export default async function ViewProfile({ params }) {
   const user = await getUser(params.uid);
+
+  // User is private and not linked with auth user -> Private profile symbol
+  const { authUser } = useAuth();
+
   if (!user || !user.name || !user.email)
     return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
+
+  if (user.isPrivate) {
+  }
 
   return (
     <div data-testid="profile" className="container mx-auto text-white">
