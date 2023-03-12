@@ -1,9 +1,6 @@
 const DMLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="container mx-auto text-white">
-      {children}
-      <div className="h-32"></div>
-    </div>
+    <div className="container mx-auto min-h-[80vh] text-white">{children}</div>
   );
 };
 
