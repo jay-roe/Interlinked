@@ -16,22 +16,6 @@ export default function Notifications() {
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
 
-  useEffect(() => {
-    async function getNotifications() {
-      const res = await getDocs(
-        typeCollection<Notification>(
-          collection(doc(db.users, authUser.uid), 'notifications')
-        )
-      );
-      return res.docs.map((resData) => resData.data());
-    }
-
-    getNotifications().then((notifs) => {
-      setNotifications(notifs);
-      setLoading(false);
-    });
-  }, [authUser?.uid]);
-
   // User not logged in
   if (!currentUser || !authUser) {
     return (
@@ -49,6 +33,22 @@ export default function Notifications() {
       </div>
     );
   }
+
+  useEffect(() => {
+    async function getNotifications() {
+      const res = await getDocs(
+        typeCollection<Notification>(
+          collection(doc(db.users, authUser.uid), 'notifications')
+        )
+      );
+      return res.docs.map((resData) => resData.data());
+    }
+
+    getNotifications().then((notifs) => {
+      setNotifications(notifs);
+      setLoading(false);
+    });
+  }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
