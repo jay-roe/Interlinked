@@ -8,6 +8,7 @@ import {
   Timestamp,
   updateDoc,
   arrayUnion,
+  getDoc,
 } from 'firebase/firestore';
 
 import { db } from '@/config/firestore';
@@ -15,6 +16,8 @@ import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
 import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
+import { NotifType } from '@/types/Notification';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -43,6 +46,28 @@ export default function ChatRoom({ params }) {
       lastMessage: newMessage,
       messages: arrayUnion(newMessage),
     });
+
+    //send notification to user using ID from chat
+    getDoc(chatRoomRef).then((room) => {
+      let participants = room.data().participants;
+
+      let id = ''; // id of message notification receiver
+
+      //parsing out receiver from participants[]
+      participants.forEach((uid) => {
+        if (uid !== authUser.uid) {
+          id = uid;
+        }
+      });
+
+      createNotification({
+        notifType: NotifType.DM,
+        context: newMessage.content,
+        sender: authUser.uid,
+        receiver: id,
+      });
+    });
+
     setMessage('');
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };

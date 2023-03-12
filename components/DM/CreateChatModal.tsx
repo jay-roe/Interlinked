@@ -15,6 +15,8 @@ import { useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { createNotification } from '../Notification/AddNotification/AddNotification';
+import { NotifType } from '@/types/Notification';
 export default function CreateChatModal({ userUID }: { userUID: string }) {
   const { currentUser, authUser } = useAuth();
   const [message, setMessage] = useState<string>('');
@@ -80,6 +82,14 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
     event.preventDefault();
     if (message === '') return;
     const roomID = await createChatRoom();
+
+    createNotification({
+      notifType: NotifType.DM,
+      context: message,
+      sender: authUser.uid,
+      receiver: userUID,
+    });
+
     setMessage('');
     if (confirm('Go to chats?'))
       router.push('/DM/' + roomID); // send to chatroom

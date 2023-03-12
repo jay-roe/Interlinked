@@ -23,7 +23,8 @@ it('renders with name not equal', async () => {
         content: 'hi',
         sender: {
           name: 'me',
-          profilePicture: 'no pic',
+          profilePicture:
+            'gs://interlinked-420e3.appspot.com/`image/1637773583.png`',
         },
         time_stamp: Timestamp.now(),
       }}
@@ -47,7 +48,8 @@ it('renders with name equal', async () => {
         content: 'hi',
         sender: {
           name: 'me',
-          profilePicture: 'no pic',
+          profilePicture:
+            'gs://interlinked-420e3.appspot.com/`image/1637773583.png`',
         },
         time_stamp: Timestamp.now(),
       }}
