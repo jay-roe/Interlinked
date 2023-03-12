@@ -13,6 +13,7 @@ export type User = {
   languages?: Language[];
   linkedUserIds?: string[];
   name: string;
+  nameCaseInsensitive?: string;
   phone?: string;
   profilePicture?: string;
   projects?: Project[];
@@ -24,6 +25,30 @@ export type User = {
   };
   volunteering?: VolunteeringExperience[];
   isPrivate?: boolean;
+};
+export const testUser = {
+  awards: null,
+  bio: 'string;',
+  certifications: null,
+  codingLanguages: null,
+  courses: null,
+  coverPhoto: null,
+  education: null,
+  email: 'bobsaget@unicorn.bob',
+  experience: null,
+  languages: null,
+  linkedUserIds: null,
+  name: 'bob saget',
+  phone: '514-463-5924',
+  profilePicture: null,
+  projects: null,
+  recommendations: null,
+  skills: null,
+  socials: {
+    github: null,
+    instagram: null,
+  },
+  volunteering: null,
 };
 
 export interface UserWithId extends User {

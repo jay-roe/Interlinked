@@ -49,6 +49,7 @@ export default function PreviewProfile() {
         profilePictureURL={currentUser.profilePicture}
         name={currentUser.name}
         bio={currentUser.bio}
+        uid={''}
       />
 
       <ProfilePrivacy isPrivate={currentUser.isPrivate} />

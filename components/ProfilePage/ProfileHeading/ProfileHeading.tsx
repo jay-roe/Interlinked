@@ -2,6 +2,7 @@ import EditButton from '@/components/Buttons/EditButton/EditButton';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Input from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
+import MessageModal from '@/components/MessageModal/MessageModal';
 import type { Dispatch, SetStateAction } from 'react';
 import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
@@ -27,6 +28,7 @@ export default function ProfileHeading({
   bioEditing = false,
   setBio,
   setBioEditing,
+  uid,
 }: {
   isEditable?: boolean;
   profilePictureURL: string;
@@ -39,6 +41,7 @@ export default function ProfileHeading({
   bioEditing?: boolean;
   setBio?: (bio: string) => void;
   setBioEditing?: Dispatch<SetStateAction<boolean>>;
+  uid: string;
 }) {
   // Set profile picture preview if not empty file
   const handleFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -146,6 +149,7 @@ export default function ProfileHeading({
             />
           )}
         </div>
+        {uid && <MessageModal userName={name} userUID={uid} />}
       </div>
     </div>
   );

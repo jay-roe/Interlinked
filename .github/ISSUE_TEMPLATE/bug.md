@@ -4,10 +4,10 @@ about: Bug template
 title: ''
 labels: bug
 assignees: ''
-
 ---
 
 ### Description
+
 Insert text
 
 Fixes bug from: #(link to issue)

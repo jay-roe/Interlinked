@@ -1,5 +1,5 @@
 'use client';
-
+import { FaRegCommentDots } from 'react-icons/fa';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
@@ -108,6 +108,15 @@ export default function NavBar() {
                     <FiSearch className="h-6 w-6" aria-hidden="true" />
                   </button>
 
+                  <Link
+                    type="button"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
+                    href={'/DM'}
+                  >
+                    <span className="sr-only">DMs</span>
+                    <FaRegCommentDots className="h-6 w-6" aria-hidden="true" />
+                  </Link>
+
                   <Link href="/notifications">
                     <button
                       type="button"
@@ -191,7 +200,7 @@ export default function NavBar() {
                               data-testid="nav-logout"
                               className={`${
                                 active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
+                              } block w-full px-4 py-2 text-left text-sm text-gray-700`}
                             >
                               Log out
                             </button>

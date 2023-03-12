@@ -30,6 +30,7 @@ export default function linkAcceptNotification({
       </div>
       <div className="m-4 flex items-center justify-between">
         <NotificationDeleteButton
+          data-testid="delete-button"
           notification={notification}
           setNotification={setNotification}
         />
