@@ -4,14 +4,36 @@ import Card from '../Card';
 import CardGrid from '../CardGrid';
 import FullPostCard from '../FullPostCard';
 import '@testing-library/jest-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
 }));
 
+jest.mock('contexts/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
+
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
+
 jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
+  setDoc: jest.fn(),
   updateDoc: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
 }));
 
 let mockedDate = {
@@ -51,6 +73,15 @@ const post2 = {
   meta_tags: [],
 };
 
+const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
+mockedUseAuth.mockImplementation(() => {
+  return {
+    authUser: {
+      uid: 'notPosterID',
+    },
+    currentUser: {},
+  };
+});
 it('renders author in header for given comment', async () => {
   const { findByText } = render(<FullPostCard post={post} />);
 

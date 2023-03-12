@@ -50,7 +50,7 @@ it('renders title for given post', async () => {
 it('renders no title for given post', async () => {
   const { findByTestId } = render(<PostBody />);
 
-  const postNoTitle = await findByTestId('no-title', { exact: false });
+  const postNoTitle = await findByTestId('no-post-title', { exact: false });
   expect(postNoTitle).toBeInTheDocument();
 });
 

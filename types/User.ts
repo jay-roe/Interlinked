@@ -25,6 +25,10 @@ export type User = {
   volunteering?: VolunteeringExperience[];
 };
 
+export interface UserWithId extends User {
+  userId: string;
+}
+
 type Award = {
   title: string;
   description?: string;

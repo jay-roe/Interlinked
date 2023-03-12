@@ -7,11 +7,13 @@
   },
   "scripts": {
     "dev": "next dev",
-    "dev:instrumented": "rm -rf .next && INSTRUMENT_CODE=1 firebase emulators:exec 'next dev' --import=firebase_exports",
-    "build:instrumented": "rm -rf .next && INSTRUMENT_CODE=1 firebase emulators:exec 'next build' --import=firebase_exports",
+    "dev:instrumented": "rm -rf .next && env INSTRUMENT_CODE=1 firebase emulators:exec 'next dev' --import=firebase_exports",
+    "build:instrumented": "rm -rf .next && env INSTRUMENT_CODE=1 firebase emulators:exec 'next build' --import=firebase_exports",
     "build": "next build",
     "start": "next start",
     "start:instrumented": "firebase emulators:exec 'next start' --import=firebase_exports",
+    "emulator:start": "firebase emulators:start --import=firebase_exports",
+    "emulator:export": "firebase emulators:export ./firebase_exports",
     "lint": "next lint",
     "test": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -33,7 +35,7 @@
     "protobufjs": "^7.2.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-icons": "^4.7.1"
+    "react-icons": "^4.8.0"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",

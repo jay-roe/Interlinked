@@ -17,17 +17,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import FullPostCard from '@/components/Card/FullPostCard';
 import CardGrid from '@/components/Card/CardGrid';
 import Button from '@/components/Buttons/Button';
-import { Post } from '@/types/Post';
-import { User } from '@/types/User';
+import { Post, PostWithId } from '@/types/Post';
+import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
-
-interface PostWithId extends Post {
-  postId: string;
-}
-
-interface UserWithId extends User {
-  userId: string;
-}
+import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
@@ -176,6 +169,17 @@ export default function Feeds() {
       </CardGrid>
       <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {postsLeft ? (
+          // <LoadMoreButton onClick={
+          //   getPostsOhAndAlsoAuthors().then((newPosts) => {
+          //   setPosts((current) => {
+          //     return [
+          //       ...current,
+          //       ...newPosts.sort(
+          //         (post1, post2) => post2.date.seconds - post1.date.seconds
+          //       ),
+          //     ];
+          //   });
+          // })}/>
           <Button
             className="mx-auto"
             onClick={() =>
