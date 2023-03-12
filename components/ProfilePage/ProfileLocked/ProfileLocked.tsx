@@ -15,7 +15,7 @@ export default function ProfileLocked({
   bio: User['bio'];
 }) {
   return (
-    <div data-testid="profile" className="container mx-auto text-white">
+    <div className="container mx-auto text-white">
       <ProfileHeading
         name={name}
         profilePictureURL={profilePictureURL}
