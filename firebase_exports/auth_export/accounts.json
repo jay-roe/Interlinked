@@ -2,12 +2,32 @@
   "kind": "identitytoolkit#DownloadAccountResponse",
   "users": [
     {
+      "localId": "5AyB9OTr9HkI8ZVDfj24SYZh0mv4",
+      "lastLoginAt": "1678577459011",
+      "emailVerified": false,
+      "email": "verycool@test.com",
+      "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
+      "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
+      "passwordUpdatedAt": 1678577459012,
+      "validSince": "1678577459",
+      "createdAt": "1678577459011",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "verycool@test.com",
+          "federatedId": "verycool@test.com",
+          "rawId": "verycool@test.com"
+        }
+      ],
+      "lastRefreshAt": "2023-03-11T23:30:59.013Z"
+    },
+    {
       "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
       "createdAt": "1678390113242",
       "lastLoginAt": "1678390113242",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1678562532120,
+      "passwordUpdatedAt": 1678577309464,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,30 +36,10 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1678562532",
+      "validSince": "1678577309",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
       "disabled": false
-    },
-    {
-      "localId": "tIN8i6N2MpcTvLrSVU9zG6ke7ljL",
-      "lastLoginAt": "1678562864465",
-      "emailVerified": false,
-      "email": "melisa@melisa.ca",
-      "salt": "fakeSaltoTBA6SQHWVgl9mzMl2cC",
-      "passwordHash": "fakeHash:salt=fakeSaltoTBA6SQHWVgl9mzMl2cC:password=123456",
-      "passwordUpdatedAt": 1678562864465,
-      "validSince": "1678562864",
-      "createdAt": "1678562864465",
-      "providerUserInfo": [
-        {
-          "providerId": "password",
-          "email": "melisa@melisa.ca",
-          "federatedId": "melisa@melisa.ca",
-          "rawId": "melisa@melisa.ca"
-        }
-      ],
-      "lastRefreshAt": "2023-03-11T19:27:44.467Z"
     }
   ]
 }

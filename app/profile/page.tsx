@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
@@ -21,7 +21,7 @@ import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/Pr
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 
 export default function PreviewProfile() {
-  const { currentUser } = useAuth();
+  const { currentUser, authUser } = useAuth();
 
   // User not logged in, can't preview
   if (!currentUser) {
@@ -52,7 +52,12 @@ export default function PreviewProfile() {
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
-      <LinkButton />
+
+      <ViewLinkButton
+        href={`/profile/${authUser.uid}/links`}
+        linkedUserIds={currentUser?.linkedUserIds}
+        data-testid="view-link-button"
+      />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 

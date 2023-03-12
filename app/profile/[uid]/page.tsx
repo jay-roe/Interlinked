@@ -1,7 +1,7 @@
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
 import ProfileCourses from '@/components/ProfilePage/ProfileCourses/ProfileCourses';
@@ -14,6 +14,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
+import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -36,8 +37,13 @@ export default async function ViewProfile({ params }) {
         <SocialIconGroup socials={user?.socials} />
       </div>
 
-      <LinkButton data-testid="link-button" profileOwnerUID={params.uid} />
-      <p>{user?.linkedUserIds?.length || 0} Links</p>
+      <div className="flex space-x-4">
+        <ViewLinkButton
+          href={`/profile/${params.uid}/links`}
+          linkedUserIds={user?.linkedUserIds}
+        />
+        <LinkButton profileOwnerUID={params.uid} />
+      </div>
 
       <ProfileContact email={user.email} phone={user.phone} />
 
