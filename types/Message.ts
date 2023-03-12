@@ -13,6 +13,7 @@ export type ChatMessage = {
 
 export type ChatRoom = {
   roomName?: string;
+  recentTimeStamp: Timestamp;
   messages: Message[]; // all messages sent
   lastMessage: Message; // last message sent
   participants: string[]; // uid of participants
