@@ -1,12 +1,11 @@
-import type { User } from '@/types/User';
 import Link from 'next/link';
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
 export default function ViewLinkButton({
-  currentUser,
+  linkedUserIds,
   href,
 }: {
-  currentUser: User;
+  linkedUserIds: string[];
   href?: string;
 }) {
   return (
@@ -17,7 +16,7 @@ export default function ViewLinkButton({
       <Link href={href || ''}>
         <span className="flex items-center gap-2">
           <LinkIcon />
-          <p>{currentUser?.linkedUserIds?.length || 0} Links</p>
+          <p>{linkedUserIds?.length || 0} Links</p>
         </span>
       </Link>
     </button>

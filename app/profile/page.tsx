@@ -55,7 +55,7 @@ export default function PreviewProfile() {
 
       <ViewLinkButton
         href={`/profile/${authUser.uid}/links`}
-        currentUser={currentUser}
+        linkedUserIds={currentUser?.linkedUserIds}
         data-testid="view-link-button"
       />
 

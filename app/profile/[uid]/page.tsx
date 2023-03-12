@@ -40,7 +40,7 @@ export default async function ViewProfile({ params }) {
       <div className="flex space-x-4">
         <ViewLinkButton
           href={`/profile/${params.uid}/links`}
-          currentUser={user}
+          linkedUserIds={user?.linkedUserIds}
         />
         <LinkButton profileOwnerUID={params.uid} />
       </div>
