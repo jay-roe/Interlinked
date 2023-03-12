@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom';
-import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import RootLayout from '../layout';
+import DMLayout from '../layout';
 
 jest.mock('contexts/AuthContext', () => ({
   AuthProvider: ({ children }) => '<div>{children}</div>', // create mock function
@@ -9,11 +8,11 @@ jest.mock('contexts/AuthContext', () => ({
 
 it('renders the root', async () => {
   const { findByTestId } = render(
-    <RootLayout>
+    <DMLayout>
       <></>
-    </RootLayout>
+    </DMLayout>
   );
 
-  const root = await findByTestId('root-container');
+  const root = await findByTestId('dm-layout');
   expect(root).toBeInTheDocument();
 });

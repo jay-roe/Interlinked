@@ -1,18 +1,59 @@
 import '@testing-library/jest-dom';
 import { render } from '@testing-library/react';
-import TimeDivider from '../TimeDivider';
+import MessageCard from '../MessageCard';
 import { Timestamp } from 'firebase/firestore';
+import { useAuth } from '@/contexts/AuthContext';
 
-it('renders with timestamp', async () => {
-  const date = Timestamp.now();
-  const { findByText } = render(<TimeDivider time={date} />);
+jest.mock('contexts/AuthContext', () => ({
+  useAuth: jest.fn(),
+}));
 
-  const timeDivider = await findByText(
-    date.toDate().toLocaleString('en-US', {
-      month: 'long',
-      year: 'numeric',
-      day: '2-digit',
-    })
+const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
+
+it('renders with name not equal', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      currentUser: 'SOMEThING',
+    };
+  });
+
+  const { findByText } = render(
+    <MessageCard
+      message={{
+        content: 'hi',
+        sender: {
+          name: 'me',
+          profilePicture: 'no pic',
+        },
+        time_stamp: Timestamp.now(),
+      }}
+    />
   );
-  expect(timeDivider).toBeInTheDocument();
+
+  const messageCard = await findByText('hi');
+  expect(messageCard).toBeInTheDocument();
+});
+
+it('renders with name equal', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      currentUser: 'me',
+    };
+  });
+
+  const { findByText } = render(
+    <MessageCard
+      message={{
+        content: 'hi',
+        sender: {
+          name: 'me',
+          profilePicture: 'no pic',
+        },
+        time_stamp: Timestamp.now(),
+      }}
+    />
+  );
+
+  const messageCard = await findByText('hi');
+  expect(messageCard).toBeInTheDocument();
 });
