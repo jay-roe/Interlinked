@@ -105,6 +105,7 @@ export default function Notifications() {
             Feeling Unpopular?
           </Button> */}
           <button
+            data-testid="read-all-button"
             onClick={() => {
               readAll();
             }}
