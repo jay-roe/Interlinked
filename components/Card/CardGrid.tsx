@@ -1,3 +1,5 @@
+import { ComponentProps } from 'react';
+
 const CardGrid = ({
   children,
   className = 'grid-cols-1',
