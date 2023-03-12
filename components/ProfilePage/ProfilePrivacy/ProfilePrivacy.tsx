@@ -35,7 +35,7 @@ export default function ProfilePrivacy({
             <PrivacyIcon isPrivate={isPrivate} />
           </div>
           <EditButton
-            data-testid="name-edit-button"
+            data-testid="privacy-edit-button"
             onClick={() => setPrivacyEditing((curr) => !curr)}
           />
         </div>

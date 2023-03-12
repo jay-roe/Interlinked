@@ -20,6 +20,7 @@ export default function ProfileLocked({
         name={name}
         profilePictureURL={profilePictureURL}
         bio={bio}
+        uid={userID}
       />
       <LinkButton profileOwnerUID={userID} />
       <div className="text-center">

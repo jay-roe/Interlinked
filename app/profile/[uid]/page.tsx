@@ -16,7 +16,6 @@ import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
-import MessageModal from '@/components/MessageModal/MessageModal';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked';
 import { useAuth } from '@/contexts/AuthContext';
