@@ -12,12 +12,12 @@ import {
 } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
+import type { UserWithId } from '@/types/User';
 
-const SearchBar = (props) => {
+const SearchBar = ({ handleSearch }: { handleSearch: () => void }) => {
   const [searchTerm, setSearchTerm] = useState(''); // search input
-  const [searchResults, setSearchResults] = useState([]); // search results
+  const [searchResults, setSearchResults] = useState<UserWithId[]>([]); // search results
   const [showResults, setShowResults] = useState(false); // show search results
-  const { handleSearch } = props;
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
@@ -25,24 +25,31 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     setSearchResults([]);
+
+    const searchTermLowerCase = searchTerm.toLowerCase();
+
     // query for users with names that start with the search term
     const vals = query(
       db.users,
-      where('name', '>=', searchTerm),
-      orderBy('name'),
+      where('nameCaseInsensitive', '>=', searchTermLowerCase),
+      orderBy('nameCaseInsensitive'),
       limit(10),
-      startAt(searchTerm),
-      endAt(searchTerm + '\uf8ff')
+      startAt(searchTermLowerCase),
+      endAt(searchTermLowerCase + '\uf8ff')
     );
     // if the search term is not empty, get the results and the user's profile id
     if (searchTerm.length > 0) {
       getDocs(vals).then((docs) => {
-        docs.forEach((doc) => {
-          setSearchResults((current) => [
-            ...current,
-            { ...doc.data(), id: doc.id },
-          ]);
-        });
+        // Add user id to each doc, then set it as search result object
+        setSearchResults(
+          docs.docs.map(
+            (userDoc) =>
+              ({
+                ...userDoc.data(),
+                userId: userDoc.id,
+              } as UserWithId)
+          )
+        );
         setShowResults(true);
       });
     } else {
@@ -72,8 +79,8 @@ const SearchBar = (props) => {
         <div className="shadow-l absolute z-10 mt-1 w-full rounded-lg bg-gray-800">
           {searchResults.map((user) => (
             <Link
-              key={user.name}
-              href={`/profile/${user.id}`}
+              key={user.userId}
+              href={`/profile/${user.userId}`}
               onClick={handleSearch}
               className="block px-4 py-2 text-sm text-white"
             >
@@ -82,7 +89,7 @@ const SearchBar = (props) => {
                   <ImageOptimized
                     className="h-8 min-h-[2rem] w-2 min-w-[2rem] rounded-full md:h-5 md:w-5"
                     src={user?.profilePicture}
-                    alt={user?.profilePicture}
+                    alt={user.name}
                     width={13}
                     height={13}
                   />

@@ -24,7 +24,7 @@ import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards'
 import Link from 'next/link';
 
 import { db } from '@/config/firestore';
-import { doc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, Query, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
 import ProfileSocials from '@/components/ProfilePage/ProfileSocials/ProfileSocials';
 import { storage } from '@/config/firebase';
@@ -178,6 +178,7 @@ export default function EditProfile() {
 
   const statesToUpdate: Partial<User> = {
     name: name,
+    nameCaseInsensitive: name?.toLowerCase(),
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
@@ -216,6 +217,7 @@ export default function EditProfile() {
       }
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
+
       await refresh();
       alert('Successfully updated your profile!');
       router.push('/profile');

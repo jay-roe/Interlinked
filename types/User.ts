@@ -13,6 +13,7 @@ export type User = {
   languages?: Language[];
   linkedUserIds?: string[];
   name: string;
+  nameCaseInsensitive?: string;
   phone?: string;
   profilePicture?: string;
   projects?: Project[];
