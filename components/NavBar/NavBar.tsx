@@ -117,18 +117,23 @@ export default function NavBar() {
                     <FaRegCommentDots className="h-6 w-6" aria-hidden="true" />
                   </Link>
 
-                  <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <FiBell className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  <Link href="/notifications">
+                    <button
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <FiBell className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </Link>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button
+                        data-testid="nav-menu"
+                        className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
                         <span className="sr-only">Open user menu</span>
                         <ImageOptimized
                           className="h-8 w-8 rounded-full"
@@ -153,6 +158,7 @@ export default function NavBar() {
                           {({ active }) => (
                             <Link
                               href="/profile"
+                              data-testid="nav-menu-profile"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
@@ -164,6 +170,7 @@ export default function NavBar() {
                         <Menu.Item>
                           {({ active }) => (
                             <Link
+                              data-testid="nav-menu-edit-profile"
                               href="/edit-profile"
                               className={`${
                                 active ? 'bg-gray-100' : ''
@@ -177,6 +184,7 @@ export default function NavBar() {
                           {({ active }) => (
                             <Link
                               href="#"
+                              data-testid="nav-menu-settings"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
@@ -187,16 +195,15 @@ export default function NavBar() {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <Link
+                            <button
                               onClick={logout}
                               data-testid="nav-logout"
                               className={`${
                                 active ? 'bg-gray-100' : ''
                               } block px-4 py-2 text-sm text-gray-700`}
-                              href={''}
                             >
                               Log out
-                            </Link>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>

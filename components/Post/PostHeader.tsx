@@ -60,7 +60,7 @@ const PostHeader = ({
         </div>
       </Link>
       <div>
-        <LinkButtonNoNumber currentUser={currentUser}></LinkButtonNoNumber>
+        <LinkButtonNoNumber posterUID={authorID}></LinkButtonNoNumber>
       </div>
     </div>
   );

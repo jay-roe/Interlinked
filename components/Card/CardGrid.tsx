@@ -4,8 +4,8 @@ const CardGrid = ({
   style,
 }: {
   children?: React.ReactNode | React.ReactNode[];
-  className?: string;
-  style?: any;
+  className?: ComponentProps<'div'>['className'];
+  style?: ComponentProps<'div'>['style'];
 }) => {
   return (
     <div

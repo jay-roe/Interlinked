@@ -1,20 +1,26 @@
 ---
-name: User Story
-about: Basic user story template. Please fill out all the fields.
+name: User story
+about: User story template
 title: ''
-labels: Medium
+labels: user story
 assignees: ''
-
 ---
 
-# User Story (X points)
-### Description
-As a W, I want X, because Y, so that Z.
+# User Story
 
-### Acceptance Test
+### Description
+
+Insert text
+
+Story points:
+Priority:
+Risk:
+Subtasks:
+
+- [ ]
+- [ ]
+
+### Acceptance Tests
+
 - [ ] Test 1
 - [ ] Test 2
-
-### Tasks
-- [ ] #1 (1 point)
-- [ ] #2 (2 point)
