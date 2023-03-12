@@ -8,7 +8,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { doc, getDoc } from '@firebase/firestore';
 import { db } from '@/config/firestore';
 
-export default function postNotification({ room }: { room: ChatRoom }) {
+export default function ChatRoomCard({ room }: { room: ChatRoom }) {
   const [user, setUser] = useState<User>();
   const { authUser } = useAuth();
   let id = '';
@@ -19,9 +19,6 @@ export default function postNotification({ room }: { room: ChatRoom }) {
   });
 
   useEffect(() => {
-    console.log(room.participants);
-
-    // console.log(authUser.uid)
     getUser.then((data) => {
       setUser(data);
     });
@@ -36,7 +33,7 @@ export default function postNotification({ room }: { room: ChatRoom }) {
   });
 
   return (
-    <>
+    <div data-testid="chatroom-card-test-id">
       {user && (
         <div className="start my-5 flex items-center rounded-md bg-purple-text-area p-2">
           <div className="flex items-center justify-center">
@@ -52,6 +49,6 @@ export default function postNotification({ room }: { room: ChatRoom }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

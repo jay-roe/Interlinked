@@ -1,7 +1,8 @@
 import { ChatRoom, Message } from '@/types/Message';
 import { User } from '@/types/User';
+import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
-export default function notificationHeader({
+export default function ChatroomCardHeader({
   room,
   user,
 }: {
@@ -9,14 +10,14 @@ export default function notificationHeader({
   user: User;
 }) {
   return (
-    <div className="start flex">
-      <img
+    <div className="start flex" data-testid="chat-room-header">
+      <ImageOptimized
         className="h-25 min-h-[2rem] w-8 min-w-[2rem] rounded-full p-2 md:h-12 md:w-12"
-        src={
-          user.profilePicture ||
-          'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
-        }
-      ></img>
+        src={user.profilePicture}
+        alt={'profile picture'}
+        height={48}
+        width={48}
+      />
       <div>
         <p>{user.name}</p>
         <p>

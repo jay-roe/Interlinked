@@ -40,7 +40,7 @@ export default function DMs() {
   }, []);
 
   return (
-    <div className="pb-12">
+    <div className="pb-12" data-testid="dms-page">
       <h1 className="text-4xl font-black ">
         <b>Your DMs</b>
       </h1>

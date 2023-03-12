@@ -48,6 +48,7 @@ export default function PreviewProfile() {
         profilePictureURL={currentUser.profilePicture}
         name={currentUser.name}
         bio={currentUser.bio}
+        uid={''}
       />
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />

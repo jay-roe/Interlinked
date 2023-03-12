@@ -87,22 +87,27 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
   };
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit}>
         <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area py-2 px-3">
           <input
             className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none"
+            data-testid="chat-modal-input"
             type="text"
             placeholder="Write your message..."
             value={message}
             onChange={(event) => setMessage(event.target.value)}
           />
 
-          <button type="submit" className="hover:text-accent-orange">
+          <button
+            data-testid="chat-modal-button"
+            type="submit"
+            className="hover:text-accent-orange"
+          >
             <FaRegPaperPlane />
           </button>
         </div>
       </form>
-    </>
+    </div>
   );
 }

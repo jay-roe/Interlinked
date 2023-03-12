@@ -149,7 +149,7 @@ export default function ProfileHeading({
             />
           )}
         </div>
-        <MessageModal userName={name} userUID={uid} />
+        {uid && <MessageModal userName={name} userUID={uid} />}
       </div>
     </div>
   );

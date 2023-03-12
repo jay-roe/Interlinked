@@ -1,4 +1,4 @@
-import type { Timestamp } from 'firebase/firestore';
+import { Timestamp } from 'firebase/firestore';
 
 export type Message = {
   content: string;
@@ -22,4 +22,18 @@ export type ChatRoom = {
 export type KeyedChatRoom = {
   room: ChatRoom;
   key: string;
+};
+
+export const testMessage = {
+  content: 'some beautiful content',
+  sender: { name: 'bob', profilePicture: 'test' },
+  time_stamp: Timestamp.now(),
+};
+
+export const testChatRoom = {
+  roomName: '',
+  recentTimeStamp: Timestamp.now(),
+  messages: [testMessage],
+  lastMessage: testMessage,
+  participants: ['bob', 'sally'],
 };
