@@ -52,7 +52,7 @@ const LikeIcon = ({
       <button
         data-testid="like-btn"
         onClick={() => {
-          setLiked(curr => !curr);
+          setLiked((curr) => !curr);
           toggleLike();
         }}
       >
