@@ -34,13 +34,16 @@ const FullPostCard = ({
   const postContainer = useRef(null);
 
   useEffect(() => {
+    setTimeout(() => setPostHeight(postContainer.current.clientHeight), 2000);
+  }, []);
+  useEffect(() => {
     setPostHeight(postContainer.current.clientHeight);
   });
 
   return (
     <CardGrid
       data-testid="card-grid"
-      className={`grid-cols-1 lg:grid-cols-2-1 max-h-[${postHeight}px]`}
+      className={`grid-cols-1 lg:grid-cols-2-1`}
     >
       {/* Post card */}
       <Card
@@ -63,14 +66,24 @@ const FullPostCard = ({
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
             data-testid="post-footer"
+            userID={userID}
             comments={comments}
             commentState={commentsOpen}
             setCommentState={setCommentsOpen}
+            post={post}
+            postID={postID}
+            postAuthorID={authorID}
+            currentUser={currentUser}
+            testKey={testKey}
           />
         </div>
       </Card>
       {/* Comment Card */}
-      <Card className={`relative ${commentsOpen ? 'break-words' : 'hidden'}`}>
+      <Card
+        className={`relative row-span-2 ${
+          commentsOpen ? 'break-words' : 'hidden'
+        }`}
+      >
         {/* Triangle of hell */}
         <div
           className="
@@ -87,12 +100,13 @@ const FullPostCard = ({
             postAuthorID={authorID}
             comments={comments}
             setComments={setComments}
+            testKey={testKey}
           />
           {comments?.length === 0 ||
           comments === null ||
           comments === undefined ? (
             <>
-              <Card>
+              <Card data-testid={`comments-${testKey}`}>
                 There are no comments here.
                 <br /> Now is the time to make your voice heard.
               </Card>
@@ -107,7 +121,10 @@ const FullPostCard = ({
                       comment={comment}
                       currentUser={currentUser}
                     />
-                    <CommentBody comment={comment} />
+                    <CommentBody
+                      testKey={`comment-body-${testKey}-${index}`}
+                      comment={comment}
+                    />
                   </Card>
                 );
               })}
