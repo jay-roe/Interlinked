@@ -30,7 +30,7 @@ export default function Notifications() {
       setNotifications(notifs);
       setLoading(false);
     });
-  }, [authUser.uid]);
+  }, [authUser?.uid]);
 
   // User not logged in
   if (!currentUser || !authUser) {
