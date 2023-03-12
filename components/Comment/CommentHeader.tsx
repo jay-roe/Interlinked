@@ -18,7 +18,9 @@ const CommentHeader = ({
           <p className="text-lg leading-10">{comment?.author || 'Unknown'}</p>
         </Link>
         <div>
-          <LinkButtonNoNumber currentUser={currentUser}></LinkButtonNoNumber>
+          <LinkButtonNoNumber
+            posterUID={comment?.authorID}
+          ></LinkButtonNoNumber>
         </div>
       </div>
       <div data-testid="test-comment-date" className="text-sm font-light">

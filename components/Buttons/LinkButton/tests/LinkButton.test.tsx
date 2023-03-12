@@ -2,7 +2,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import '@testing-library/jest-dom';
 import { fireEvent, render, waitFor } from '@testing-library/react';
-import LinkButtonNoNumber from '../LinkButtonNoNumber';
+import LinkButton from '../LinkButton';
 import { unlink } from 'components/Buttons/LinkButton/Unlink';
 
 jest.mock('contexts/AuthContext', () => ({
@@ -31,11 +31,9 @@ it('renders link button correctly', async () => {
     };
   });
   mockedCreateNotif.mockImplementation(() => {});
-  const { findByTestId } = render(
-    <LinkButtonNoNumber posterUID="someUserID" />
-  );
+  const { findByTestId } = render(<LinkButton profileOwnerUID="someUserID" />);
 
-  const button = await findByTestId('link-btn-no-number');
+  const button = await findByTestId('link-btn');
   fireEvent.click(button);
   await waitFor(() => expect(mockedCreateNotif).toBeCalledTimes(1));
 });
@@ -50,11 +48,9 @@ it('renders unlink button correctly', async () => {
     };
   });
   mockedUnlink.mockImplementation(() => {});
-  const { findByTestId } = render(
-    <LinkButtonNoNumber posterUID="someUserID" />
-  );
+  const { findByTestId } = render(<LinkButton profileOwnerUID="someUserID" />);
 
-  const button = await findByTestId('link-btn-no-number');
+  const button = await findByTestId('link-btn');
   fireEvent.click(button);
   await waitFor(() => expect(mockedUnlink).toBeCalledTimes(1));
 });

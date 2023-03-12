@@ -52,6 +52,7 @@ export default function PreviewProfile() {
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
+
       <ViewLinkButton
         href={`/profile/${authUser.uid}/links`}
         currentUser={currentUser}

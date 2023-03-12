@@ -1,54 +1,49 @@
+'use client';
+import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { useAuth } from '@/contexts/AuthContext';
 import { NotifType } from '@/types/Notification';
-import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import { unlink } from './Unlink';
 
-const LinkButtonNoNumber = ({
-  posterUID,
-  small = false,
+export default function LinkButton({
+  profileOwnerUID,
 }: {
-  posterUID?: string;
-  small?: boolean;
-}) => {
+  profileOwnerUID?: string;
+}) {
+  // set the current user
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
   return (
-    posterUID !== authUser.uid && (
+    profileOwnerUID !== authUser.uid && (
       <button
-        data-testid="link-btn-no-number"
-        className="flex max-w-fit items-center gap-1 rounded-md bg-white bg-opacity-0 p-2 transition-all hover:bg-opacity-10 active:bg-opacity-20"
+        data-testid="link-btn"
+        className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
         onClick={() => {
-          posterUID &&
-            posterUID !== authUser.uid &&
+          profileOwnerUID &&
             !currentUser.linkedUserIds?.some(
-              (receiverID) => receiverID === posterUID
+              (receiverID) => receiverID === profileOwnerUID
             ) &&
             createNotification({
               notifType: NotifType.LINK_REQ,
               context: currentUser.name + ' would like to link with you!',
               sender: authUser.uid, // sender
-              receiver: posterUID, // receiver
+              receiver: profileOwnerUID, // receiver
             });
 
-          posterUID &&
+          profileOwnerUID &&
             currentUser.linkedUserIds?.some(
-              (receiverID) => receiverID === posterUID
+              (receiverID) => receiverID === profileOwnerUID
             ) &&
-            unlink(authUser.uid, posterUID);
+            unlink(authUser.uid, profileOwnerUID);
         }}
       >
         <LinkIcon
           linked={currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === posterUID
+            (receiverID) => receiverID === profileOwnerUID
           )}
           showText={true}
-          size={small ? 10 : 20}
         />
-        {/* <p>Link</p> */}
       </button>
     )
   );
-};
-
-export default LinkButtonNoNumber;
+}

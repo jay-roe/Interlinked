@@ -14,6 +14,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
+import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 
 async function getUser(uid: string) {
   const res = await getDoc(doc(db.users, uid));
@@ -36,10 +37,13 @@ export default async function ViewProfile({ params }) {
         <SocialIconGroup socials={user?.socials} />
       </div>
 
-      <ViewLinkButton
-        href={`/profile/${params.uid}/links`}
-        currentUser={user}
-      />
+      <div className="flex space-x-4">
+        <ViewLinkButton
+          href={`/profile/${params.uid}/links`}
+          currentUser={user}
+        />
+        <LinkButton profileOwnerUID={params.uid} />
+      </div>
 
       <ProfileContact email={user.email} phone={user.phone} />
 

@@ -130,7 +130,7 @@ export default function Links({ params }) {
                       </div>
                     </div>
                   </div>
-                  <LinkButtonNoNumber currentUser={currentUser} />
+                  <LinkButtonNoNumber posterUID={link.userId} />
                 </div>
               </Card>
             </Link>
