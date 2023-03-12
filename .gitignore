@@ -40,3 +40,4 @@ next-env.d.ts
 # IDEs
 .idea/
 .vscode/
+env.test.local
