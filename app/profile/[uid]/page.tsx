@@ -1,3 +1,5 @@
+'use client';
+
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
@@ -14,18 +16,54 @@ import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
-import MessageModal from '@/components/MessageModal/MessageModal';
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked';
+import { useAuth } from '@/contexts/AuthContext';
+import { useEffect, useState } from 'react';
+import { User } from '@/types/User';
 
-async function getUser(uid: string) {
-  const res = await getDoc(doc(db.users, uid));
-  return res.data();
-}
+export default function ViewProfile({ params }) {
+  const { currentUser, authUser } = useAuth();
+  const [user, setUser] = useState<User>();
+  const [loading, setLoading] = useState(true);
 
-export default async function ViewProfile({ params }) {
-  const user = await getUser(params.uid);
+  useEffect(() => {
+    async function getUser(uid: string) {
+      const res = await getDoc(doc(db.users, uid));
+      return res.data();
+    }
+
+    getUser(params.uid).then((user) => {
+      setUser(user);
+      setLoading(false);
+    });
+  }, [params.uid]);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
   if (!user || !user.name || !user.email)
     return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
+
+  // User is private and not linked with auth user -> Locked out
+  // User is currently logged in -> Show normal page
+  if (
+    user.isPrivate &&
+    !currentUser.linkedUserIds?.some(
+      (linkedUser) => linkedUser === params.uid
+    ) &&
+    authUser.uid !== params.uid
+  ) {
+    return (
+      <ProfileLocked
+        userID={params.uid}
+        name={user.name}
+        profilePictureURL={user.profilePicture}
+        bio={user.bio}
+      />
+    );
+  }
 
   return (
     <div data-testid="profile" className="container mx-auto text-white">

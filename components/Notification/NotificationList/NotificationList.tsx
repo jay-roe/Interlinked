@@ -17,10 +17,8 @@ export default function NotificationList({
   notifications: Notification[];
   setNotifications?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  // console.log(notifications);
-
   return (
-    <ul className="mb-3" data-testid="live-notifications">
+    <ul className="pt-3" data-testid="live-notifications">
       {notifications?.map((notif, index) => (
         <li
           key={index}

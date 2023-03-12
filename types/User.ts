@@ -24,6 +24,7 @@ export type User = {
     instagram?: string;
   };
   volunteering?: VolunteeringExperience[];
+  isPrivate?: boolean;
 };
 export const testUser = {
   awards: null,
