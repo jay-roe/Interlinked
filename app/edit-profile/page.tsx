@@ -263,6 +263,7 @@ export default function EditProfile() {
           setBio={setBio}
           bioEditing={bioEditing}
           setBioEditing={setBioEditing}
+          uid={''}
         />
 
         <ProfileSocials
