@@ -11,9 +11,8 @@ import { db } from '@/config/firestore';
 export default function postNotification({ room }: { room: ChatRoom }) {
   const [user, setUser] = useState<User>();
   const { authUser } = useAuth();
-  //const [ID, setID] = useState<string>(room.participants.filter((uid) => {!uid.includes(authUser.uid)}).at(0));
   let id = '';
-  room.participants.forEach((uid, key) => {
+  room.participants.forEach((uid) => {
     if (uid !== authUser.uid) {
       id = uid;
     }
@@ -41,9 +40,6 @@ export default function postNotification({ room }: { room: ChatRoom }) {
       {user && (
         <div className="start my-5 flex items-center rounded-md bg-purple-text-area p-2">
           <div className="flex items-center justify-center">
-            <div className="ml-4 text-accent-orange">
-              <LinkIcon linked size={60} />
-            </div>
             <div className="ml-5">
               <ChatroomCardHeader user={user} room={room} />
               <div className="m-3">
