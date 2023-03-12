@@ -12,9 +12,25 @@ import Link from 'next/link';
 import type { Notification } from '@/types/Notification';
 
 export default function Notifications() {
-  // console.log('in getNotifications');
-  // set the current user
   const { authUser, currentUser } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [notifications, setNotifications] = useState<Notification[]>();
+
+  useEffect(() => {
+    async function getNotifications() {
+      const res = await getDocs(
+        typeCollection<Notification>(
+          collection(doc(db.users, authUser.uid), 'notifications')
+        )
+      );
+      return res.docs.map((resData) => resData.data());
+    }
+
+    getNotifications().then((notifs) => {
+      setNotifications(notifs);
+      setLoading(false);
+    });
+  }, [authUser.uid]);
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -34,27 +50,6 @@ export default function Notifications() {
     );
   }
 
-  const [loading, setLoading] = useState(true);
-  const [notifications, setNotifications] = useState<Notification[]>();
-
-  async function getNotifications() {
-    const res = await getDocs(
-      typeCollection<Notification>(
-        collection(doc(db.users, authUser.uid), 'notifications')
-      )
-    );
-    console.log('in getNotifications res', res);
-
-    return res.docs.map((resData) => resData.data());
-  }
-
-  useEffect(() => {
-    getNotifications().then((notifs) => {
-      setNotifications(notifs);
-      setLoading(false);
-    });
-  }, []);
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -63,10 +58,8 @@ export default function Notifications() {
     const notifUnreadQuery = typeCollection<Notification>(
       collection(doc(db.users, authUser.uid), 'notifications')
     );
-    // console.log(notifUnreadQuery)
     const unreadNotifs = await getDocs(notifUnreadQuery);
     unreadNotifs.forEach(async (notif) => {
-      // alert(notif.data().read)
       await updateDoc(
         doc(collection(doc(db.users, authUser.uid), 'notifications'), notif.id),
         {
@@ -92,18 +85,6 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          {/* <Button
-            onClick={() => {
-              createNotification({
-                receiver: authUser.uid,
-                notifType: NotifType.COMMENT,
-                context: '💖 hi, have an amazing day :)',
-                sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
-              });
-            }}
-          >
-            Feeling Unpopular?
-          </Button> */}
           <button
             data-testid="read-all-button"
             onClick={() => {
@@ -118,11 +99,12 @@ export default function Notifications() {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        <NotificationList
-          notifications={notifications}
-          setNotifications={setNotifications}
-        />
-        {notifications.length == 0 && (
+        {notifications.length > 0 ? (
+          <NotificationList
+            notifications={notifications}
+            setNotifications={setNotifications}
+          />
+        ) : (
           <p data-testid="no-notifications">Wow, such empty</p>
         )}
       </div>
