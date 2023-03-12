@@ -63,6 +63,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
       // otherwise, create new chatroom with message
 
       const newChat: ChatRoom = {
+        recentTimeStamp: newMessage.time_stamp,
         roomName: null,
         messages: [newMessage],
         lastMessage: newMessage,
