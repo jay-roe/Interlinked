@@ -58,7 +58,7 @@ export default function ChatRoom({ params }) {
   const dummy = useRef<HTMLDivElement>();
 
   return (
-    <div className="grid grid-cols-8 ">
+    <div data-testid="chat-room-root" className="grid grid-cols-8 ">
       <div className="col-span-4 col-start-3">
         Your dms
         <Card className=" h-chat-size overflow-y-auto rounded-b-none">

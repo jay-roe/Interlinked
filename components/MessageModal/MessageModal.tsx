@@ -24,9 +24,10 @@ export default function MessageModal({
   }
 
   return (
-    <>
-      <div className=" flex items-center">
+    <div>
+      <div data-testid="message-modal" className=" flex items-center">
         <button
+          data-testid="modal-button"
           type="button"
           onClick={openModal}
           className=" inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none "
@@ -61,7 +62,10 @@ export default function MessageModal({
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-purple-component p-5 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel
+                  data-testid="create-modal-button"
+                  className="w-full max-w-md transform overflow-hidden rounded-2xl bg-purple-component p-5 text-left align-middle shadow-xl transition-all"
+                >
                   <Dialog.Title className="pb-3 text-white">
                     Send {userName} a message !
                   </Dialog.Title>
@@ -71,22 +75,12 @@ export default function MessageModal({
                   <Button className="mt-2" type="button" onClick={closeModal}>
                     Close
                   </Button>
-
-                  {/* <div className="mt-2">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      Got it, thanks!
-                    </button>
-                  </div> */}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
           </div>
         </Dialog>
       </Transition>
-    </>
+    </div>
   );
 }
