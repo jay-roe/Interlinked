@@ -4,6 +4,7 @@ import { act, render } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import Feeds from '../page';
 import React from 'react';
+import { User } from '@/types/User';
 
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
@@ -52,18 +53,18 @@ let mockedDate = {
 const currentUser = {
   awards: [],
   codingLanguages: [],
-  connections: [],
   courses: [],
   education: [],
   email: '',
   experience: [],
   languages: [],
+  linkedUserIds: [],
   name: '',
   projects: [],
   recommendations: [],
   skills: [],
   volunteering: [],
-};
+} satisfies User;
 
 const authorWithId = { userId: '123', ...currentUser };
 

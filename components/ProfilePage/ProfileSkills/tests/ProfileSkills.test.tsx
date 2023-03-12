@@ -45,7 +45,7 @@ it('can modify a skill', async () => {
       setSkills={mockSet}
     />
   );
-  const editBox = await findByTestId('skill-edit-box');
+  const editBox = await findByTestId('skill-input-0');
   fireEvent.change(editBox, { target: { value: 'karaoke' } });
   await waitFor(() => expect(mockSet).toBeCalled());
 });
@@ -60,7 +60,7 @@ it('can edit an existing skill', async () => {
       setSkillsEditing={mockClick}
     />
   );
-  const editButton = await findByTestId('skill-edit-button');
+  const editButton = await findByTestId('skill-edit-0');
   fireEvent.click(editButton);
   await waitFor(() => expect(mockClick).toBeCalled());
 });
@@ -77,7 +77,7 @@ it('can delete an existing skill', async () => {
       setSkillsEditing={mockClick}
     />
   );
-  const deleteButton = await findByTestId('skill-delete-button');
+  const deleteButton = await findByTestId('skill-delete-button-0');
   fireEvent.click(deleteButton);
   await waitFor(() => expect(mockSet).toBeCalled());
   await waitFor(() => expect(mockClick).toBeCalled());

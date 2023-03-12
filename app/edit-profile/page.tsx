@@ -12,7 +12,7 @@ import type { Language } from '@/types/User';
 
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
@@ -223,8 +223,8 @@ export default function EditProfile() {
       }
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
-      alert('Successfully updated your profile!');
       await refresh();
+      alert('Successfully updated your profile!');
       router.push('/profile');
     } catch (err) {
       console.error(err);
@@ -288,7 +288,10 @@ export default function EditProfile() {
           setSocialsEditing={setSocialsEditing}
         />
 
-        <LinkButton currentUser={currentUser} />
+        <ViewLinkButton
+          linkedUserIds={currentUser.linkedUserIds}
+          href="javascript:void(0)"
+        />
 
         <ProfileContact
           isEditable
