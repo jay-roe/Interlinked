@@ -13,6 +13,7 @@ export type User = {
   languages?: Language[];
   linkedUserIds?: string[];
   name: string;
+  nameCaseInsensitive?: string;
   phone?: string;
   profilePicture?: string;
   projects?: Project[];
@@ -24,6 +25,10 @@ export type User = {
   };
   volunteering?: VolunteeringExperience[];
 };
+
+export interface UserWithId extends User {
+  userId: string;
+}
 
 type Award = {
   title: string;
