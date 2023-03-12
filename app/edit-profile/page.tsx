@@ -218,14 +218,6 @@ export default function EditProfile() {
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
 
-      // // ! REMOVE
-      // const allUsers = await getDocs(db.users);
-      // allUsers.forEach(async user => {
-      //   await updateDoc(user.ref, {
-      //     nameCaseInsensitive: user.data().name.toLowerCase()
-      //   })
-      // })
-
       await refresh();
       alert('Successfully updated your profile!');
       router.push('/profile');
