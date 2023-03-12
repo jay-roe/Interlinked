@@ -8,27 +8,43 @@ jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
 
+jest.mock('config/firebase', () => ({
+  storage: jest.fn(),
+}));
+
+jest.mock('firebase/storage', () => ({
+  getStorage: jest.fn(),
+  getDownloadURL: jest.fn(),
+  ref: jest.fn(),
+  uploadBytesResumable: jest.fn(),
+}));
+
+jest.mock('firebase/firestore', () => ({
+  doc: jest.fn(),
+  setDoc: jest.fn(),
+  updateDoc: jest.fn(),
+  collection: () => {
+    return {
+      withConverter: jest.fn(),
+    };
+  },
+}));
+
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
+mockedUseAuth.mockImplementation(() => {
+  return {
+    authUser: null,
+    currentUser: null,
+  };
+});
 
 it('render nav bar component without a user', async () => {
-  mockedUseAuth.mockImplementation(() => {
-    return {
-      currentUser: null,
-    };
-  });
-
   const { findByText } = render(<NavBar />);
   const navbarElement = await findByText('Register', { exact: false });
   expect(navbarElement).toBeInTheDocument();
 });
 
 it('render nav bar component without a user', async () => {
-  mockedUseAuth.mockImplementation(() => {
-    return {
-      currentUser: null,
-    };
-  });
-
   const { findByText } = render(<NavBar />);
   const navbarElement = await findByText('Register', { exact: false });
   expect(navbarElement).toBeInTheDocument();

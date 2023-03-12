@@ -2,15 +2,32 @@
   "kind": "identitytoolkit#DownloadAccountResponse",
   "users": [
     {
-      "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
-      "lastLoginAt": "1678390113242",
+      "localId": "5AyB9OTr9HkI8ZVDfj24SYZh0mv4",
+      "lastLoginAt": "1678577459011",
       "emailVerified": false,
-      "email": "test2+cypress@test.com",
-      "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
-      "passwordUpdatedAt": 1678390113242,
-      "validSince": "1678390113",
+      "email": "verycool@test.com",
+      "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
+      "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
+      "passwordUpdatedAt": 1678577459012,
+      "validSince": "1678577459",
+      "createdAt": "1678577459011",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "verycool@test.com",
+          "federatedId": "verycool@test.com",
+          "rawId": "verycool@test.com"
+        }
+      ],
+      "lastRefreshAt": "2023-03-11T23:30:59.013Z"
+    },
+    {
+      "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
       "createdAt": "1678390113242",
+      "lastLoginAt": "1678390113242",
+      "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
+      "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
+      "passwordUpdatedAt": 1678577309464,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -19,7 +36,10 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "lastRefreshAt": "2023-03-09T19:28:33.242Z"
+      "validSince": "1678577309",
+      "email": "test2+cypress@test.com",
+      "emailVerified": false,
+      "disabled": false
     }
   ]
 }

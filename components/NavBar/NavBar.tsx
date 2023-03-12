@@ -108,13 +108,15 @@ export default function NavBar() {
                     <FiSearch className="h-6 w-6" aria-hidden="true" />
                   </button>
 
-                  <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <FiBell className="h-6 w-6" aria-hidden="true" />
-                  </button>
+                  <Link href="/notifications">
+                    <button
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <FiBell className="h-6 w-6" aria-hidden="true" />
+                    </button>
+                  </Link>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">

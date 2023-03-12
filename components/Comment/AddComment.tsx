@@ -37,7 +37,6 @@ const AddComment = ({
 
   const addCommentToPost = async () => {
     if (content === '') return;
-
     const newComment = {
       authorID: userID,
       author: currentUser.name || currentUser.email,

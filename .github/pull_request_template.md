@@ -1,8 +1,3 @@
----
-name: Pull request
-about: Pull request template
----
-
 # Description
 Insert text
 
