@@ -178,7 +178,7 @@ export default function EditProfile() {
 
   const statesToUpdate: Partial<User> = {
     name: name,
-    nameCaseInsensitive: name.toLowerCase(),
+    nameCaseInsensitive: name?.toLowerCase(),
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),

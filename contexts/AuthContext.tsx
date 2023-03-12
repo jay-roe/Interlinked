@@ -78,8 +78,8 @@ export function AuthProvider({ children }) {
       languages: [],
       name: newUser.displayName || newUser.email.split('@')[0] || '',
       nameCaseInsensitive:
-        newUser.displayName.toLowerCase() ||
-        newUser.email.split('@')[0].toLowerCase() ||
+        newUser.displayName?.toLowerCase() ||
+        newUser.email.split('@')[0]?.toLowerCase() ||
         '',
       profilePicture:
         newUser.photoURL ||
