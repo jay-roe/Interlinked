@@ -11,8 +11,10 @@ import {
 } from 'firebase/firestore';
 
 import { db } from '@/config/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
+import Card from '@/components/Card/Card';
+import TimeDivider from '@/components/DM/TimeDivider';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -37,10 +39,12 @@ export default function ChatRoom({ params }) {
     };
 
     updateDoc(chatRoomRef, {
+      recentTimeStamp: newMessage.time_stamp,
       lastMessage: newMessage,
       messages: arrayUnion(newMessage),
     });
     setMessage('');
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -51,36 +55,44 @@ export default function ChatRoom({ params }) {
     return () => unsub(); // removes listener
   }, []);
 
+  const dummy = useRef<HTMLDivElement>();
+
   return (
     <div className="grid grid-cols-8 ">
       <div className="col-span-4 col-start-3">
         Your dms
-        <div>
+        <Card className=" h-chat-size overflow-y-auto rounded-b-none">
           {chatMessages.map((m, id) => {
             return (
+              //{ m , m+ 1, m +2}
               <div key={id}>
                 <MessageCard message={m} />
+
+                {id !== chatMessages.length - 1 &&
+                  chatMessages[id + 1].time_stamp.seconds -
+                    m.time_stamp.seconds >=
+                    1800 && (
+                    <TimeDivider time={chatMessages[id + 1].time_stamp} />
+                  )}
               </div>
             );
           })}
-        </div>
-        <div>
-          <form onSubmit={handleSubmit}>
-            <div className="flex flex-row">
-              <div>
-                <input
-                  className=""
-                  type="text"
-                  placeholder="Write your message..."
-                  value={message}
-                  onChange={(event) => setMessage(event.target.value)}
-                />
-              </div>
-              <div>
-                <button type="submit">
-                  <FaRegPaperPlane />
-                </button>
-              </div>
+          <div className="pb-12" ref={dummy}></div>
+        </Card>
+        <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
+          <form onSubmit={handleSubmit} className="w-full">
+            <div className="flex flex-row  rounded-md bg-chat-text-input p-1 ">
+              <input
+                className=" w-full bg-chat-text-input focus:outline-none"
+                type="text"
+                placeholder="Write your message..."
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+              />
+
+              <button type="submit">
+                <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
+              </button>
             </div>
           </form>
         </div>
