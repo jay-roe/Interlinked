@@ -19,49 +19,62 @@ export default function NotificationList({
 }) {
   return (
     <ul className="pt-3" data-testid="live-notifications">
-      {notifications?.map((notif, index) => (
-        <li
-          key={index}
-          className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
-        >
-          {notif.notifType === NotifType.POST && (
-            <PostNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-          {notif.notifType === NotifType.COMMENT && (
-            <CommentNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-          {notif.notifType === NotifType.LIKE && (
-            <LikeNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-          {notif.notifType === NotifType.LINK_REQ && (
-            <LinkRequestNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-          {notif.notifType === NotifType.LINK_ACC && (
-            <LinkAcceptNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-          {notif.notifType === NotifType.DM && (
-            <DmNotification
-              notification={notif}
-              setNotification={setNotifications}
-            />
-          )}
-        </li>
-      ))}
+      {
+        // Remove duplicate link request notifications (from the same sender)
+        notifications
+          ?.filter(
+            (notif, index, self) =>
+              notif.notifType === NotifType.LINK_REQ &&
+              index ===
+                self.findIndex(
+                  (n) =>
+                    n.notifType === notif.notifType && n.sender === notif.sender
+                )
+          )
+          .map((notif, index) => (
+            <li
+              key={index}
+              className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
+            >
+              {notif.notifType === NotifType.POST && (
+                <PostNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.COMMENT && (
+                <CommentNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.LIKE && (
+                <LikeNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.LINK_REQ && (
+                <LinkRequestNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.LINK_ACC && (
+                <LinkAcceptNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.DM && (
+                <DmNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+            </li>
+          ))
+      }
     </ul>
   );
 }
