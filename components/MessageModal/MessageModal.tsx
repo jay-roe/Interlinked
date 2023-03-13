@@ -67,7 +67,7 @@ export default function MessageModal({
                   className="w-full max-w-md transform overflow-hidden rounded-2xl bg-purple-component p-5 text-left align-middle shadow-xl transition-all"
                 >
                   <Dialog.Title className="pb-3 text-white">
-                    Send {userName} a message !
+                    Send <b>{userName}</b> a message!
                   </Dialog.Title>
 
                   <CreateChatModal userUID={userUID} />

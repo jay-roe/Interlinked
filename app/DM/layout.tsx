@@ -1,7 +1,7 @@
 const DMLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div
-      className="container mx-auto min-h-[80vh] text-white"
+      className="container mx-auto flex max-h-[85vh] flex-grow flex-col text-white"
       data-testid="dm-layout"
     >
       {children}

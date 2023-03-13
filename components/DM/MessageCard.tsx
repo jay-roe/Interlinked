@@ -1,8 +1,5 @@
-import Card from '../Card/Card';
 import { Message } from '@/types/Message';
 import { useAuth } from '@/contexts/AuthContext';
-import { User } from '@/types/User';
-import { Disclosure } from '@headlessui/react';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const MessageCard = ({ message }: { message: Message }) => {

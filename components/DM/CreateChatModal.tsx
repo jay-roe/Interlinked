@@ -101,7 +101,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
       <form onSubmit={handleSubmit}>
         <div className="flex-inline flex max-w-sm rounded-md bg-purple-text-area py-2 px-3">
           <input
-            className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none"
+            className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
             data-testid="chat-modal-input"
             type="text"
             placeholder="Write your message..."
@@ -112,7 +112,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
           <button
             data-testid="chat-modal-button"
             type="submit"
-            className="hover:text-accent-orange"
+            className="text-white hover:text-accent-orange"
           >
             <FaRegPaperPlane />
           </button>

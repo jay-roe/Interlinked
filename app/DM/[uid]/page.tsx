@@ -18,6 +18,9 @@ import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
+import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import type { UserWithId } from '@/types/User';
+import Link from 'next/link';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -26,6 +29,10 @@ export default function ChatRoom({ params }) {
 
   const [message, setMessage] = useState<string>(''); // message to be sent
   const [chatMessages, setChatMessages] = useState<Message[]>([]); // messages seen by both parties
+
+  // Participants (not including current user)
+  const [participants, setParticipants] = useState<UserWithId[]>([]);
+  const [participantsLoading, setParticipantsLoading] = useState(true);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,47 +87,81 @@ export default function ChatRoom({ params }) {
     return () => unsub(); // removes listener
   }, []);
 
+  useEffect(() => {
+    getDoc(chatRoomRef).then((room) => {
+      room
+        .data()
+        .participants.filter((participantID) => participantID !== authUser.uid)
+        .forEach((participantID) => {
+          getDoc(doc(db.users, participantID)).then((user) => {
+            console.log(user.data().name);
+            setParticipants((curr) => {
+              if (curr.some((usr) => usr.userId === user.id)) return curr;
+              return [...curr, { ...user.data(), userId: user.id }];
+            });
+          });
+        });
+      setParticipantsLoading(false);
+    });
+  }, []);
+
   const dummy = useRef<HTMLDivElement>();
 
   return (
-    <div data-testid="chat-room-root" className="grid grid-cols-8 ">
-      <div className="col-span-4 col-start-3">
-        Your dms
-        <Card className=" h-chat-size overflow-y-auto rounded-b-none">
-          {chatMessages.map((m, id) => {
-            return (
-              //{ m , m+ 1, m +2}
-              <div key={id}>
-                <MessageCard message={m} />
-
-                {id !== chatMessages.length - 1 &&
-                  chatMessages[id + 1].time_stamp.seconds -
-                    m.time_stamp.seconds >=
-                    1800 && (
-                    <TimeDivider time={chatMessages[id + 1].time_stamp} />
-                  )}
-              </div>
-            );
-          })}
-          <div className="pb-12" ref={dummy}></div>
-        </Card>
-        <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
-          <form onSubmit={handleSubmit} className="w-full">
-            <div className="flex flex-row  rounded-md bg-chat-text-input p-1 ">
-              <input
-                className=" w-full bg-chat-text-input focus:outline-none"
-                type="text"
-                placeholder="Write your message..."
-                value={message}
-                onChange={(event) => setMessage(event.target.value)}
+    <div data-testid="chat-room-root" className="flex h-[85vh] flex-col">
+      <div className="flex gap-4">
+        {/* TODO: Adjust this when group chats are added. */}
+        {!participantsLoading &&
+          participants.map((person) => (
+            <Link
+              key={person.userId}
+              className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
+              href={`/profile/${person.userId}`}
+            >
+              <ImageOptimized
+                className="rounded-full"
+                src={person.profilePicture}
+                alt={person.name}
+                width={50}
+                height={50}
               />
+              <h1 className="text-2xl font-bold">{person.name}</h1>
+            </Link>
+          ))}
+      </div>
+      <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">
+        {chatMessages.map((m, id) => {
+          return (
+            <div key={id}>
+              <MessageCard message={m} />
 
-              <button type="submit">
-                <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
-              </button>
+              {id !== chatMessages.length - 1 &&
+                chatMessages[id + 1].time_stamp.seconds -
+                  m.time_stamp.seconds >=
+                  1800 && (
+                  <TimeDivider time={chatMessages[id + 1].time_stamp} />
+                )}
             </div>
-          </form>
-        </div>
+          );
+        })}
+        <div className="pb-12" ref={dummy}></div>
+      </Card>
+      <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
+        <form onSubmit={handleSubmit} className="w-full">
+          <div className="flex flex-row  rounded-md bg-chat-text-input p-1 ">
+            <input
+              className="w-full bg-chat-text-input p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
+              type="text"
+              placeholder="Write your message..."
+              value={message}
+              onChange={(event) => setMessage(event.target.value)}
+            />
+
+            <button type="submit">
+              <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

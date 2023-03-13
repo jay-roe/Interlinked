@@ -41,7 +41,7 @@ export default function ProfileHeading({
   bioEditing?: boolean;
   setBio?: (bio: string) => void;
   setBioEditing?: Dispatch<SetStateAction<boolean>>;
-  uid: string;
+  uid?: string;
 }) {
   // Set profile picture preview if not empty file
   const handleFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
