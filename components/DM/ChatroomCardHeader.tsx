@@ -10,16 +10,16 @@ export default function ChatroomCardHeader({
   user: User;
 }) {
   return (
-    <div className="start flex" data-testid="chat-room-header">
+    <div className="start flex items-center" data-testid="chat-room-header">
       <ImageOptimized
-        className="h-25 min-h-[2rem] w-8 min-w-[2rem] rounded-full p-2 md:h-12 md:w-12"
+        className="h-24 w-24 rounded-full p-2"
         src={user.profilePicture}
         alt={'profile picture'}
-        height={48}
-        width={48}
+        height={96}
+        width={96}
       />
       <div>
-        <p>{user.name}</p>
+        <h2 className="text-xl font-bold">{user.name}</h2>
         <p>
           {room.lastMessage.time_stamp?.toDate().toLocaleString('en-US', {
             month: 'long',

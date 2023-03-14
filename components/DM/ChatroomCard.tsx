@@ -37,7 +37,7 @@ export default function ChatRoomCard({ room }: { room: ChatRoom }) {
       {user && (
         <div className="start my-5 flex items-center rounded-md bg-purple-text-area p-2">
           <div className="flex items-center justify-center">
-            <div className="ml-5">
+            <div>
               <ChatroomCardHeader user={user} room={room} />
               <div className="m-3">
                 <p>{room.lastMessage.content}</p>

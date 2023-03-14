@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
 import Link from 'next/link';
-import MessageModal from '@/components/MessageModal/MessageModal';
 
 export default function DMs() {
   const { authUser } = useAuth();
@@ -30,8 +29,8 @@ export default function DMs() {
       //sort chats by most recent
       tempChats.sort((c1: KeyedChatRoom, c2: KeyedChatRoom) => {
         return c1.room.recentTimeStamp.seconds > c2.room.recentTimeStamp.seconds
-          ? 1
-          : -1;
+          ? -1
+          : 1;
       });
 
       setChats(tempChats);
@@ -40,15 +39,15 @@ export default function DMs() {
   }, []);
 
   return (
-    <div className="pb-12" data-testid="dms-page">
+    <div className="flex max-h-[85vh] flex-col" data-testid="dms-page">
       <h1 className="text-4xl font-black ">
         <b>Your DMs</b>
       </h1>
       <p className="mb-3 text-light-white-text">Strengthen your web</p>
-      <Card>
+      <Card className="flex flex-grow flex-col overflow-scroll">
         {chats?.map((keyRoom) => {
           return (
-            <Link href={'/DM/' + keyRoom.key}>
+            <Link key={keyRoom.key} href={'/DM/' + keyRoom.key}>
               <ChatroomCard key={keyRoom.key} room={keyRoom.room} />
             </Link>
           );
