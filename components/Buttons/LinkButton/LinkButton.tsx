@@ -61,10 +61,12 @@ export default function LinkButton({
         }
 
         profileOwnerUID &&
+          confirm('Are you sure you want to unlink?') &&
           currentUser.linkedUserIds?.some(
             (receiverID) => receiverID === profileOwnerUID
           ) &&
-          unlink(authUser.uid, profileOwnerUID);
+          unlink(authUser.uid, profileOwnerUID) &&
+          window.location.reload();
       }}
     >
       <LinkIcon
