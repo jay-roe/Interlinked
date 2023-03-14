@@ -41,4 +41,6 @@ export async function createNotification({
   await updateDoc(newDoc, {
     notificationId: newDoc.id,
   });
+
+  return newDoc.id;
 }

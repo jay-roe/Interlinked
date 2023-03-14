@@ -7,6 +7,8 @@ import { unlink } from './Unlink';
 import { useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
+import { ImCancelCircle } from 'react-icons/im';
+import { deleteNotification } from '@/components/Notification/DeleteNotification/DeleteNotification';
 
 export default function LinkButton({
   profileOwnerUID,
@@ -17,7 +19,6 @@ export default function LinkButton({
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
   const [notification, setNotification] = useState<Notification>();
-  const [loading, setLoading] = useState(true);
 
   // Get the link request notification to visited user
   useEffect(() => {
@@ -33,7 +34,6 @@ export default function LinkButton({
       if (!notifDoc.empty) {
         setNotification(notifDoc.docs[0].data());
       }
-      setLoading(false);
     });
   }, []);
 
@@ -55,8 +55,9 @@ export default function LinkButton({
             receiver: profileOwnerUID, // receiver
           };
 
-          createNotification(notif);
-          setNotification({ ...notif, read: false });
+          createNotification(notif).then((notifID) => {
+            setNotification({ ...notif, read: false, notificationId: notifID });
+          });
         }
 
         profileOwnerUID &&
@@ -75,10 +76,17 @@ export default function LinkButton({
     </button>
   ) : (
     <button
-      className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.05] p-3 font-semibold text-accent-orange"
-      disabled
+      className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
+      onClick={() => {
+        deleteNotification(notification.notificationId, profileOwnerUID).then(
+          () => {
+            setNotification(null);
+          }
+        );
+      }}
     >
-      Link request pending...
+      <ImCancelCircle size={30} />
+      Cancel Link Request
     </button>
   );
 }
