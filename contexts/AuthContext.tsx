@@ -93,6 +93,9 @@ export function AuthProvider({ children }) {
     };
 
     await setDoc(doc(db.users, newUser.uid), emptyUser);
+
+    // Refresh auth user state with signed in user
+    setAuthUser(credential.user);
     setCurrentUser(emptyUser);
   }
 
