@@ -31,14 +31,6 @@ export default function ProfileExperience({
         <CardStack>
           {experience.map((exp, index) => (
             <div key={index} data-testid={`live-exp-${index}`}>
-              {exp.image && (
-                <ImageOptimized
-                  src={exp.image}
-                  alt={exp.title}
-                  width={40}
-                  height={40}
-                />
-              )}
               <h3>{exp.title}</h3>
               <h4>{exp.employer}</h4>
               <h5>{exp.location}</h5>
@@ -190,14 +182,6 @@ export default function ProfileExperience({
             </div>
           ) : (
             <div data-testid="editable-exp">
-              {exp.image && (
-                <ImageOptimized
-                  src={exp.image}
-                  alt={exp.title}
-                  width={40}
-                  height={40}
-                />
-              )}
               <h3>{exp.title}</h3>
               <h4>{exp.employer}</h4>
               <h5>{exp.location}</h5>

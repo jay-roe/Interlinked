@@ -28,6 +28,7 @@ export default function ProfileSkills({
         <ul className="inline-flex flex-wrap">
           {skills.map((skill, index) => (
             <p
+              data-testid={`live-skill-${index}`}
               key={index}
               className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-semibold"
             >
@@ -61,7 +62,7 @@ export default function ProfileSkills({
                 Skill <span className="text-yellow-600">*</span>
               </label>
               <InputField
-                data-testid="skill-edit-box"
+                data-testid={`skill-input-${index}`}
                 type="text"
                 name="skill"
                 id="profileSkill"
@@ -85,12 +86,16 @@ export default function ProfileSkills({
             <div className="flex items-center">
               {/* External edit skill button */}
               {skillsEditing && skillsEditing[index] ? (
-                <Button className="mr-2" type="submit">
+                <Button
+                  data-testid={`skill-save-${index}`}
+                  className="mr-2"
+                  type="submit"
+                >
                   Save Skill
                 </Button>
               ) : (
                 <EditButton
-                  data-testid="skill-edit-button"
+                  data-testid={`skill-edit-${index}`}
                   onClick={(e) => {
                     e.preventDefault();
                     setSkillsEditing((skeditds) =>
@@ -101,7 +106,7 @@ export default function ProfileSkills({
               )}
               {/* External delete skill button */}
               <DeleteButton
-                data-testid="skill-delete-button"
+                data-testid={`skill-delete-button-${index}`}
                 onClick={(e) => {
                   e.preventDefault();
                   setSkills((s) => s.filter((_, i) => index !== i));

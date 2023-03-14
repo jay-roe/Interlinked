@@ -76,7 +76,11 @@ export function AuthProvider({ children }) {
       email: newUser.email,
       experience: [],
       languages: [],
-      name: newUser.displayName,
+      name: newUser.displayName || newUser.email.split('@')[0] || '',
+      nameCaseInsensitive:
+        newUser.displayName?.toLowerCase() ||
+        newUser.email.split('@')[0]?.toLowerCase() ||
+        '',
       profilePicture:
         newUser.photoURL ||
         `https://www.gravatar.com/avatar/${md5(

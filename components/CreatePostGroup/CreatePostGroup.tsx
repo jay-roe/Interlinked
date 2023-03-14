@@ -45,13 +45,13 @@ export default function CreatePostGroup() {
     let definePost: Post = {
       authorID: authUser.uid,
       author: currentUser.name || currentUser.email,
-      title: 'post', // is a title needed?
+      title: null, // is a title needed?
       text_content: text, // text from createPost component
       image_content: pics, // URL created after images has been uploaded to firestore storage
-      likes: null,
-      comments: null,
+      likes: [],
+      comments: [],
       date: null,
-      meta_tags: null,
+      meta_tags: [],
     };
 
     const docRef = doc(
@@ -63,7 +63,6 @@ export default function CreatePostGroup() {
     });
 
     setTrigger((trig) => trig + 1);
-    console.log('HI');
     alert('Posted!');
   };
 

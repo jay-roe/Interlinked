@@ -3,7 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
@@ -19,9 +19,10 @@ import Button from '@/components/Buttons/Button';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
+import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 
 export default function PreviewProfile() {
-  const { currentUser } = useAuth();
+  const { currentUser, authUser } = useAuth();
 
   // User not logged in, can't preview
   if (!currentUser) {
@@ -48,11 +49,20 @@ export default function PreviewProfile() {
         profilePictureURL={currentUser.profilePicture}
         name={currentUser.name}
         bio={currentUser.bio}
+        uid={''}
       />
+
+      <ProfilePrivacy isPrivate={currentUser.isPrivate} />
+
       <div className="mx-auto mb-5">
         <SocialIconGroup socials={currentUser.socials} />
       </div>
-      <LinkButton currentUser={currentUser} />
+
+      <ViewLinkButton
+        href={`/profile/${authUser.uid}/links`}
+        linkedUserIds={currentUser?.linkedUserIds}
+        data-testid="view-link-button"
+      />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 

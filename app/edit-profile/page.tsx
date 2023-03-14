@@ -12,7 +12,7 @@ import type { Language } from '@/types/User';
 
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
-import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
+import ViewLinkButton from '@/components/Buttons/LinkButton/ViewLinkButton';
 import ProfileLanguages from '@/components/ProfilePage/ProfileLanguages/ProfileLanguages';
 import ProfileCodingLanguages from '@/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages';
 import ProfileEducation from '@/components/ProfilePage/ProfileEducation/ProfileEducation';
@@ -24,7 +24,7 @@ import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards'
 import Link from 'next/link';
 
 import { db } from '@/config/firestore';
-import { doc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, Query, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
 import ProfileSocials from '@/components/ProfilePage/ProfileSocials/ProfileSocials';
 import { storage } from '@/config/firebase';
@@ -36,6 +36,7 @@ import {
 } from 'firebase/storage';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
+import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -66,6 +67,11 @@ export default function EditProfile() {
 
   const [bio, setBio] = useState<string>(currentUser?.bio || '');
   const [bioEditing, setBioEditing] = useState<boolean>(false);
+
+  const [isPrivate, setIsPrivate] = useState<boolean>(
+    currentUser?.isPrivate || false
+  ); //deafults to false
+  const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -178,6 +184,7 @@ export default function EditProfile() {
 
   const statesToUpdate: Partial<User> = {
     name: name,
+    nameCaseInsensitive: name?.toLowerCase(),
     bio: bio,
     languages: languages,
     education: education.filter((_, i) => !educationEditing[i]),
@@ -192,6 +199,7 @@ export default function EditProfile() {
     courses: courses,
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
+    isPrivate: isPrivate,
   };
 
   async function uploadProfilePicture() {
@@ -216,8 +224,9 @@ export default function EditProfile() {
       }
 
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
-      alert('Successfully updated your profile!');
+
       await refresh();
+      alert('Successfully updated your profile!');
       router.push('/profile');
     } catch (err) {
       console.error(err);
@@ -263,6 +272,15 @@ export default function EditProfile() {
           setBio={setBio}
           bioEditing={bioEditing}
           setBioEditing={setBioEditing}
+          uid={''}
+        />
+
+        <ProfilePrivacy
+          isEditable
+          isPrivate={isPrivate}
+          setIsPrivate={setIsPrivate}
+          privacyEditing={privacyEditing}
+          setPrivacyEditing={setPrivacyEditing}
         />
 
         <ProfileSocials
@@ -273,7 +291,10 @@ export default function EditProfile() {
           setSocialsEditing={setSocialsEditing}
         />
 
-        <LinkButton currentUser={currentUser} />
+        <ViewLinkButton
+          linkedUserIds={currentUser.linkedUserIds}
+          href="javascript:void(0)"
+        />
 
         <ProfileContact
           isEditable
