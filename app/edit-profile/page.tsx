@@ -291,10 +291,7 @@ export default function EditProfile() {
           setSocialsEditing={setSocialsEditing}
         />
 
-        <ViewLinkButton
-          linkedUserIds={currentUser.linkedUserIds}
-          href="javascript:void(0)"
-        />
+        <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
 
         <ProfileContact
           isEditable
