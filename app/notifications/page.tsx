@@ -9,7 +9,8 @@ import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import type { Notification } from '@/types/Notification';
+import { Notification, NotifType } from '@/types/Notification';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 
 export default function Notifications() {
   // console.log('in getNotifications');
@@ -92,18 +93,18 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          {/* <Button
+          <Button
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
-                notifType: NotifType.COMMENT,
+                notifType: NotifType.LINK_ACC,
                 context: '💖 hi, have an amazing day :)',
                 sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
               });
             }}
           >
             Feeling Unpopular?
-          </Button> */}
+          </Button>
           <button
             data-testid="read-all-button"
             onClick={() => {

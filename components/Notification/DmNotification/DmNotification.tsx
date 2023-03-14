@@ -17,8 +17,14 @@ export default function dmNotification({
       className="start flex items-center justify-between"
       data-testid="dm-notification"
     >
-      <div className="flex items-center justify-center">
-        <div className="ml-4 text-accent-orange">
+      <div
+        className="flex items-center justify-center"
+        onClick={() => alert('helloooo coraline')}
+      >
+        <div
+          className="ml-4 text-accent-orange"
+          data-testid="redirect-onclick-location"
+        >
           <SiGooglemessages size={60} className="align-self-center" />
         </div>
         <div className="ml-5">

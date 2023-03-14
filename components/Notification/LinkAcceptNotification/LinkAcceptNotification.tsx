@@ -17,7 +17,10 @@ export default function linkAcceptNotification({
       className="start flex items-center justify-between"
       data-testid="link-acc-notification"
     >
-      <div className="flex items-center justify-center">
+      <div
+        className="flex items-center justify-center"
+        onClick={() => alert('helloooo coraline')}
+      >
         <div className="ml-4 text-accent-orange">
           <LinkIcon linked size={60} />
         </div>
