@@ -16,7 +16,13 @@ import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
 import type { User } from '../types/User';
 import { db } from '../config/firestore';
-import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
+import {
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocFromServer,
+  setDoc,
+} from 'firebase/firestore';
 import md5 from 'md5';
 
 interface AuthContextType {
@@ -135,7 +141,7 @@ export function AuthProvider({ children }) {
     const credential = await signInWithPopup(auth, googleProvider);
 
     // Get user from database
-    const userDoc = await getDoc(doc(db.users, credential.user.uid));
+    const userDoc = await getDocFromServer(doc(db.users, credential.user.uid));
 
     // User exists -> set user as state
     if (userDoc.exists()) {
