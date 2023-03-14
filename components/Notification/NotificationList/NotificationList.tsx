@@ -22,14 +22,14 @@ export default function NotificationList({
       {
         // Remove duplicate link request notifications (from the same sender)
         notifications
-          ?.filter(
-            (notif, index, self) =>
-              notif.notifType === NotifType.LINK_REQ &&
-              index ===
+          ?.filter((notif, index, self) =>
+            notif.notifType === NotifType.LINK_REQ
+              ? index ===
                 self.findIndex(
                   (n) =>
                     n.notifType === notif.notifType && n.sender === notif.sender
                 )
+              : true
           )
           .map((notif, index) => (
             <li
