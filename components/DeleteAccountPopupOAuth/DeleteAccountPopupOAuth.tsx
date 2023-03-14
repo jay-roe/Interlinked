@@ -6,6 +6,7 @@ import type { UserCredential } from 'firebase/auth';
 
 import { Dialog } from '@headlessui/react';
 import Button from '../Buttons/Button';
+import GoogleButton from '../Buttons/GoogleButton/GoogleButton';
 
 export default function DeleteAccountPopupOAuth({
   onHide,
@@ -47,31 +48,41 @@ export default function DeleteAccountPopupOAuth({
 
   return (
     <div data-testid="delete-acc-oauth">
-      <h5>Please login with one of the methods below.</h5>
-      <p className="text-red-500">
-        This action is irreversible. Your account, and all of its data, will be
-        permanently deleted.
-      </p>
       {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
-      <Button
-        data-testid="update-credentials-oauth"
-        onClick={() => updateCredential()}
-      >
-        <FaGoogle /> Login with Google
-      </Button>
-      {isAuthError && (
-        <p data-testid="auth-error" className="text-red-500">
-          Authentication error. Please try logging in again.
-        </p>
+      {!credential ? (
+        <div>
+          <h5 className="mb-2">
+            Please log in with one of the methods below before deleting.
+          </h5>
+          <GoogleButton
+            data-testid="update-credentials-oauth"
+            onClick={() => updateCredential()}
+          >
+            Login with Google
+          </GoogleButton>
+          {isAuthError && (
+            <p data-testid="auth-error" className="text-red-500">
+              Authentication error. Please try logging in again.
+            </p>
+          )}
+        </div>
+      ) : (
+        <div>
+          <p className="mb-2 text-sm text-red-500">
+            This action is irreversible. Your account, and all of its data, will
+            be permanently deleted.
+          </p>
+          <Button
+            data-testid="del-acc"
+            variant="danger"
+            className="mb-2"
+            disabled={!credential}
+            onClick={() => handleDeleteClick()}
+          >
+            Delete account
+          </Button>
+        </div>
       )}
-      <Button
-        data-testid="del-acc"
-        variant="danger"
-        disabled={!credential}
-        onClick={() => handleDeleteClick()}
-      >
-        Delete account
-      </Button>
       <Button data-testid="close-popup-oauth" onClick={onHideLocal}>
         Close
       </Button>
