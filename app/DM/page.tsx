@@ -29,8 +29,8 @@ export default function DMs() {
       //sort chats by most recent
       tempChats.sort((c1: KeyedChatRoom, c2: KeyedChatRoom) => {
         return c1.room.recentTimeStamp.seconds > c2.room.recentTimeStamp.seconds
-          ? 1
-          : -1;
+          ? -1
+          : 1;
       });
 
       setChats(tempChats);
