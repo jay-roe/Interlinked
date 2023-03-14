@@ -86,7 +86,7 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          <Button
+          {/* <Button
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
@@ -98,7 +98,7 @@ export default function Notifications() {
             }}
           >
             Feeling Unpopular?
-          </Button>
+          </Button> */}
           <button
             data-testid="read-all-button"
             onClick={() => {
