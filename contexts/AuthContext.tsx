@@ -204,8 +204,6 @@ export function AuthProvider({ children }) {
 
       setAuthUser(user);
 
-      console.log('auth state changed. AuthUser: ', user);
-
       // User just logged out
       if (!user) {
         setCurrentUser(null);
