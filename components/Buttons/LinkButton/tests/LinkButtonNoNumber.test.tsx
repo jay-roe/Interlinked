@@ -54,7 +54,8 @@ it('renders unlink button correctly', async () => {
     <LinkButtonNoNumber posterUID="someUserID" />
   );
 
+  window.confirm = jest.fn(() => true); // always click 'yes'
   const button = await findByTestId('link-btn-no-number');
-  fireEvent.click(button);
+  await fireEvent.click(button);
   await waitFor(() => expect(mockedUnlink).toBeCalledTimes(1));
 });

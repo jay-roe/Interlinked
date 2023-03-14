@@ -17,15 +17,13 @@ export default function LinkIcon({
           data-testid="unlink-btn-icon"
           className="flex min-w-min basis-4 text-accent-orange"
         >
-          <FaLink size={size} />
+          <FaLink className="my-auto" size={size} />
         </div>
-        <div>
-          {showText && (
-            <p className="ml-2 mt-2 flex min-w-min basis-4 text-accent-orange">
-              Unlink
-            </p>
-          )}
-        </div>
+        {showText && (
+          <p className="my-auto ml-2 min-w-min basis-4 text-accent-orange">
+            Unlink
+          </p>
+        )}
       </div>
     );
   }
@@ -38,20 +36,19 @@ export default function LinkIcon({
           size={size}
           viewBox="-21 -21 554 554"
           color="transparent"
+          className="my-auto"
           stroke="orange"
           strokeWidth="1rem"
         />
       </div>
-      <div>
-        {showText && (
-          <p
-            data-testid="link-prompt"
-            className="ml-2 mt-2 flex min-w-min basis-4 text-accent-orange"
-          >
-            Link
-          </p>
-        )}
-      </div>
+      {showText && (
+        <p
+          data-testid="link-prompt"
+          className="my-auto ml-2 flex min-w-min basis-4 text-accent-orange"
+        >
+          Link
+        </p>
+      )}
     </div>
   );
 }

@@ -12,12 +12,11 @@ const LinkButtonNoNumber = ({
   small?: boolean;
 }) => {
   const { currentUser, authUser } = useAuth(); // User sending out the request
-
   return (
     posterUID !== authUser.uid && (
       <button
         data-testid="link-btn-no-number"
-        className="flex max-w-fit items-center gap-1 rounded-md bg-white bg-opacity-0 p-2 transition-all hover:bg-opacity-10 active:bg-opacity-20"
+        className="z-50 flex max-w-fit items-center gap-1 rounded-md bg-white bg-opacity-0 p-2 transition-all hover:bg-opacity-10 active:bg-opacity-20"
         onClick={() => {
           posterUID &&
             posterUID !== authUser.uid &&
@@ -29,13 +28,16 @@ const LinkButtonNoNumber = ({
               context: currentUser.name + ' would like to link with you!',
               sender: authUser.uid, // sender
               receiver: posterUID, // receiver
-            });
+            }) &&
+            alert('Link request sent!');
 
           posterUID &&
+            confirm('Are you sure you want to unlink?') &&
             currentUser.linkedUserIds?.some(
               (receiverID) => receiverID === posterUID
             ) &&
-            unlink(authUser.uid, posterUID);
+            unlink(authUser.uid, posterUID) &&
+            window.location.reload();
         }}
       >
         <LinkIcon
