@@ -103,6 +103,8 @@ export function AuthProvider({ children }) {
     // Refresh auth user state with signed in user
     setAuthUser(credential.user);
     setCurrentUser(emptyUser);
+
+    console.log('new user created. current and auth user updated.', emptyUser);
   }
 
   /**
@@ -145,10 +147,14 @@ export function AuthProvider({ children }) {
 
     // User exists -> set user as state
     if (userDoc.exists()) {
+      console.log('user doc exists: ', userDoc.data());
+
       setCurrentUser(userDoc.data());
     }
     // User doesn't exist -> create user
     else {
+      console.log('user doc does not exist. Creating it.');
+
       await createUser(credential);
     }
 
@@ -206,6 +212,8 @@ export function AuthProvider({ children }) {
   // On first load of the page, prepare an unsubscribe function
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log('auth state changed triggered!');
+
       setLoading(true);
 
       setAuthUser(user);
