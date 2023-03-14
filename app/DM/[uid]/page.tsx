@@ -138,7 +138,7 @@ export default function ChatRoom({ params }) {
               {id !== chatMessages.length - 1 &&
                 chatMessages[id + 1].time_stamp.seconds -
                   m.time_stamp.seconds >=
-                  1800 && (
+                  14400 && (
                   <TimeDivider time={chatMessages[id + 1].time_stamp} />
                 )}
             </div>
