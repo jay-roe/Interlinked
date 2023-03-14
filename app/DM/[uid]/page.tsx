@@ -72,6 +72,7 @@ export default function ChatRoom({ params }) {
         context: newMessage.content,
         sender: authUser.uid,
         receiver: id,
+        chatroomId: params.uid,
       });
     });
 

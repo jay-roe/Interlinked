@@ -90,9 +90,10 @@ export default function Notifications() {
             onClick={() => {
               createNotification({
                 receiver: authUser.uid,
-                notifType: NotifType.LINK_ACC,
+                notifType: NotifType.DM,
                 context: '💖 hi, have an amazing day :)',
                 sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
+                chatroomId: 'o5QyE6713sr8lfNdX9G2',
               });
             }}
           >

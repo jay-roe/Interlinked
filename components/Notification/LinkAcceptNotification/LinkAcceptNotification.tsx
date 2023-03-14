@@ -4,6 +4,7 @@ import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
 import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
+import Link from 'next/link';
 
 export default function linkAcceptNotification({
   notification,
@@ -12,25 +13,26 @@ export default function linkAcceptNotification({
   notification: Notification;
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
+  const senderRedirect = 'profile/' + notification.sender;
+
   return (
     <div
       className="start flex items-center justify-between"
       data-testid="link-acc-notification"
     >
-      <div
-        className="flex items-center justify-center"
-        onClick={() => alert('helloooo coraline')}
-      >
-        <div className="ml-4 text-accent-orange">
-          <LinkIcon linked size={60} />
-        </div>
-        <div className="ml-5">
-          <NotificationHeader notification={notification} />
-          <div className="m-3">
-            <p>{notification.context}</p>
+      <Link href={senderRedirect}>
+        <div className="flex items-center justify-center">
+          <div className="ml-4 text-accent-orange">
+            <LinkIcon linked size={60} />
+          </div>
+          <div className="ml-5">
+            <NotificationHeader notification={notification} />
+            <div className="m-3">
+              <p>{notification.context}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="m-4 flex items-center justify-between">
         <NotificationDeleteButton
           data-testid="delete-button"
