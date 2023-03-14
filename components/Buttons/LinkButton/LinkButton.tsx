@@ -76,6 +76,7 @@ export default function LinkButton({
     </button>
   ) : (
     <button
+      data-testid="unlink-btn"
       className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
       onClick={() => {
         deleteNotification(notification.notificationId, profileOwnerUID).then(
