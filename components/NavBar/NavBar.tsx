@@ -1,5 +1,5 @@
 'use client';
-
+import { FaRegCommentDots } from 'react-icons/fa';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
@@ -98,28 +98,36 @@ export default function NavBar() {
               </div>
               {currentUser && (
                 //when FiSearch button is clicked, the search bar will appear/dissapear
-                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                   <button
                     type="button"
-                    className="mr-2 ml-2 rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     onClick={() => setShowSearch(!showSearch)}
                   >
                     <span className="sr-only">Search</span>
-                    <FiSearch className="h-6 w-6" aria-hidden="true" />
+                    <FiSearch size={24} aria-hidden="true" />
                   </button>
 
-                  <Link href="/notifications">
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <FiBell className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                  <Link
+                    type="button"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
+                    href={'/DM'}
+                  >
+                    <span className="sr-only">DMs</span>
+                    <FaRegCommentDots size={24} aria-hidden="true" />
+                  </Link>
+
+                  <Link
+                    href="/notifications"
+                    type="button"
+                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <FiBell size={24} aria-hidden="true" />
                   </Link>
 
                   {/* Profile dropdown */}
-                  <Menu as="div" className="relative ml-3">
+                  <Menu as="div" className="relative">
                     <div>
                       <Menu.Button
                         data-testid="nav-menu"

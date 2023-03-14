@@ -13,9 +13,9 @@ import { Notification, NotifType } from '@/types/Notification';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 
 export default function Notifications() {
-  // console.log('in getNotifications');
-  // set the current user
   const { authUser, currentUser } = useAuth();
+  const [loading, setLoading] = useState(true);
+  const [notifications, setNotifications] = useState<Notification[]>();
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -35,26 +35,21 @@ export default function Notifications() {
     );
   }
 
-  const [loading, setLoading] = useState(true);
-  const [notifications, setNotifications] = useState<Notification[]>();
-
-  async function getNotifications() {
-    const res = await getDocs(
-      typeCollection<Notification>(
-        collection(doc(db.users, authUser.uid), 'notifications')
-      )
-    );
-    console.log('in getNotifications res', res);
-
-    return res.docs.map((resData) => resData.data());
-  }
-
   useEffect(() => {
+    async function getNotifications() {
+      const res = await getDocs(
+        typeCollection<Notification>(
+          collection(doc(db.users, authUser.uid), 'notifications')
+        )
+      );
+      return res.docs.map((resData) => resData.data());
+    }
+
     getNotifications().then((notifs) => {
       setNotifications(notifs);
       setLoading(false);
     });
-  }, []);
+  }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -64,10 +59,8 @@ export default function Notifications() {
     const notifUnreadQuery = typeCollection<Notification>(
       collection(doc(db.users, authUser.uid), 'notifications')
     );
-    // console.log(notifUnreadQuery)
     const unreadNotifs = await getDocs(notifUnreadQuery);
     unreadNotifs.forEach(async (notif) => {
-      // alert(notif.data().read)
       await updateDoc(
         doc(collection(doc(db.users, authUser.uid), 'notifications'), notif.id),
         {
@@ -119,11 +112,12 @@ export default function Notifications() {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        <NotificationList
-          notifications={notifications}
-          setNotifications={setNotifications}
-        />
-        {notifications.length == 0 && (
+        {notifications.length > 0 ? (
+          <NotificationList
+            notifications={notifications}
+            setNotifications={setNotifications}
+          />
+        ) : (
           <p data-testid="no-notifications">Wow, such empty</p>
         )}
       </div>

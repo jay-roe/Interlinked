@@ -4,10 +4,10 @@ about: Task template
 title: ''
 labels: task
 assignees: ''
-
 ---
 
 ### Description
+
 Insert text
 
 Story points:

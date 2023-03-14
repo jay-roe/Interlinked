@@ -5,6 +5,10 @@ import { fireEvent, render, waitFor } from '@testing-library/react';
 import LinkButton from '../LinkButton';
 import { unlink } from 'components/Buttons/LinkButton/Unlink';
 
+const testUserID = 'test';
+const testUserID2 = 'test2';
+const testNotificationID = 'testNotif';
+
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
@@ -24,14 +28,18 @@ const mockedUnlink = unlink as jest.Mock<any>;
 it('renders link button correctly', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
-      authUser: {},
+      authUser: {
+        uid: testUserID2,
+      },
       currentUser: {
         linkedUserIds: [],
       },
     };
   });
-  mockedCreateNotif.mockImplementation(() => {});
-  const { findByTestId } = render(<LinkButton profileOwnerUID="someUserID" />);
+  mockedCreateNotif.mockImplementation(() =>
+    Promise.resolve({ data: testNotificationID })
+  );
+  const { findByTestId } = render(<LinkButton profileOwnerUID={testUserID} />);
 
   const button = await findByTestId('link-btn');
   fireEvent.click(button);
@@ -41,14 +49,16 @@ it('renders link button correctly', async () => {
 it('renders unlink button correctly', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
-      authUser: {},
+      authUser: {
+        uid: testUserID2,
+      },
       currentUser: {
-        linkedUserIds: ['someUserID'],
+        linkedUserIds: [testUserID],
       },
     };
   });
   mockedUnlink.mockImplementation(() => {});
-  const { findByTestId } = render(<LinkButton profileOwnerUID="someUserID" />);
+  const { findByTestId } = render(<LinkButton profileOwnerUID={testUserID} />);
 
   const button = await findByTestId('link-btn');
   fireEvent.click(button);
