@@ -8,18 +8,18 @@ const TimeDivider = ({ time }: { time: Timestamp }) => {
     const timeDifference = (Date.now() - time.toMillis()) / 1000;
     let timeToShow = '';
     console.log(timeDifference);
-    if (timeDifference < 43200) {
+    if (timeDifference < 86400) {
       // less than 1 day
       timeToShow = time.toDate().toLocaleTimeString('en-US', {
         hour: '2-digit',
         minute: '2-digit',
       });
       console.log('les sthan 1');
-    } else if (timeDifference < 86400) {
+    } else if (timeDifference < 172800) {
       // over 1 day less than 2
       timeToShow = '1 day ago';
       console.log('1 days');
-    } else if (timeDifference < 129600) {
+    } else if (timeDifference < 259200) {
       // less than 3 days
       timeToShow = '2 days ago';
       console.log('2 days');
