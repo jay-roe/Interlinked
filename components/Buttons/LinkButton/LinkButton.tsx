@@ -19,6 +19,7 @@ export default function LinkButton({
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
   const [notification, setNotification] = useState<Notification>();
+  const [linkIds, setLinkIds] = useState(currentUser.linkedUserIds);
 
   // Get the link request notification to visited user
   useEffect(() => {
@@ -44,9 +45,7 @@ export default function LinkButton({
       onClick={() => {
         if (
           profileOwnerUID &&
-          !currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === profileOwnerUID
-          )
+          !linkIds?.some((receiverID) => receiverID === profileOwnerUID)
         ) {
           const notif = {
             notifType: NotifType.LINK_REQ,
@@ -62,17 +61,13 @@ export default function LinkButton({
 
         profileOwnerUID &&
           confirm('Are you sure you want to unlink?') &&
-          currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === profileOwnerUID
-          ) &&
+          linkIds?.some((receiverID) => receiverID === profileOwnerUID) &&
           unlink(authUser.uid, profileOwnerUID) &&
-          window.location.reload();
+          setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
       }}
     >
       <LinkIcon
-        linked={currentUser.linkedUserIds?.some(
-          (receiverID) => receiverID === profileOwnerUID
-        )}
+        linked={linkIds?.some((receiverID) => receiverID === profileOwnerUID)}
         showText={true}
       />
     </button>
