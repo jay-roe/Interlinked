@@ -44,4 +44,5 @@ env.test.local
 
 # Firebase emulator stuff
 firebase-debug.log
+firestore-debug.log
 ui-debug.log
