@@ -15,12 +15,14 @@ export async function createNotification({
   sender,
   read = false,
   receiver,
+  chatroomId,
 }: {
   notifType: NotifType;
   context: string;
   sender: string; // User ID of sending user
   read?: boolean;
   receiver: string; //User ID of the receiver User
+  chatroomId?: string;
 }) {
   // get notification subcollection in user
   const notificationRef = typeCollection<Notification>(
@@ -32,7 +34,8 @@ export async function createNotification({
     notifTime: Timestamp.now(),
     context: context,
     sender: sender,
-    read: read,
+    read: read || false,
+    chatroomId: chatroomId || '',
   };
 
   // add new doc to collection "notification"

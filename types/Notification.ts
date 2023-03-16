@@ -7,6 +7,7 @@ export type Notification = {
   notifTime?: Timestamp;
   read: boolean;
   notificationId?: string;
+  chatroomId?: string;
 };
 
 export enum NotifType {
