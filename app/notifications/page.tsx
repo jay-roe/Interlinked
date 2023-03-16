@@ -9,12 +9,14 @@ import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import type { Notification } from '@/types/Notification';
+import { Notification, NotifType } from '@/types/Notification';
+import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 
 export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
+  const [newNotification, setNewNotification] = useState<boolean>(false);
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -68,15 +70,13 @@ export default function Notifications() {
       );
     });
 
-    const newNotifs = notifications.map((notif) => {
-      if (!notif.read) {
-        notif.read = true;
-        return notif;
-      } else {
-        return notif;
-      }
-    });
-    setNotifications(newNotifs);
+    setNotifications((curr) =>
+      curr.map((notif) => ({
+        ...notif,
+        read: true,
+      }))
+    );
+    setNewNotification((curr) => !curr);
   }
 
   return (

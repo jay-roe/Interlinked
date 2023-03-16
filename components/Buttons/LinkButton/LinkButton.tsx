@@ -57,13 +57,15 @@ export default function LinkButton({
           createNotification(notif).then((notifID) => {
             setNotification({ ...notif, read: false, notificationId: notifID });
           });
-        }
+        } else {
+          // After completely unlinked -> refresh window (in case they're viewing a private account)
+          if (confirm('Are you sure you want to unlink?')) {
+            unlink(authUser.uid, profileOwnerUID) &&
+              setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
 
-        profileOwnerUID &&
-          confirm('Are you sure you want to unlink?') &&
-          linkIds?.some((receiverID) => receiverID === profileOwnerUID) &&
-          unlink(authUser.uid, profileOwnerUID) &&
-          setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
+            window.location.reload();
+          }
+        }
       }}
     >
       <LinkIcon

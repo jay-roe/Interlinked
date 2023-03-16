@@ -10,6 +10,7 @@ import { db } from '@/config/firestore';
 import { deleteNotification } from '../DeleteNotification/DeleteNotification';
 import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import { Dispatch, SetStateAction } from 'react';
+import Link from 'next/link';
 
 export default function LinkRequestNotification({
   notification,
@@ -19,22 +20,25 @@ export default function LinkRequestNotification({
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { currentUser, authUser } = useAuth();
+  const senderRedirect = 'profile/' + notification.sender;
   return (
     <div
       className="flex items-center justify-between"
       data-testid="link-req-notification"
     >
-      <div className="start flex items-center">
-        <div className="ml-4 text-accent-orange">
-          <LinkIcon size={60} />
-        </div>
-        <div className="ml-5">
-          <NotificationHeader notification={notification} />
-          <div className="m-3">
-            <p>{notification.context}</p>
+      <Link href={senderRedirect}>
+        <div className="start flex items-center">
+          <div className="ml-4 text-accent-orange">
+            <LinkIcon size={60} />
+          </div>
+          <div className="ml-5">
+            <NotificationHeader notification={notification} />
+            <div className="m-3">
+              <p>{notification.context}</p>
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
       <div className="start flex items-center text-accent-orange">
         <button
           data-testid="accept-link-button"
@@ -72,7 +76,11 @@ export default function LinkRequestNotification({
             notification={notification}
             setNotification={setNotification}
           />
-          <NotifBlueDot notification={notification} />
+          <NotifBlueDot
+            notificationRead={notification.read}
+            notificationId={notification.notificationId}
+            setNotification={setNotification}
+          />
         </div>
       </div>
     </div>

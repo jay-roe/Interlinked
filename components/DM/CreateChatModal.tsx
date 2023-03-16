@@ -88,6 +88,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
       context: message,
       sender: authUser.uid,
       receiver: userUID,
+      chatroomId: roomID,
     });
 
     setMessage('');
