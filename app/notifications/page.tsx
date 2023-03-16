@@ -16,6 +16,7 @@ export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
+  const [newNotification, setNewNotification] = useState<boolean>(false);
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -69,15 +70,22 @@ export default function Notifications() {
       );
     });
 
-    const newNotifs = notifications.map((notif) => {
-      if (!notif.read) {
-        notif.read = true;
-        return notif;
-      } else {
-        return notif;
-      }
-    });
-    setNotifications(newNotifs);
+    // const newNotifs = notifications.map((notif) => {
+    //   // if (!notif.read) {
+    //   // notif.read = true;
+    //   // const newNotif = {...notif, read: true}
+    //   return { ...notif, read: true };
+    //   // } else {
+    //   //   return notif;
+    //   // }
+    // });
+    setNotifications((curr) =>
+      curr.map((notif) => ({
+        ...notif,
+        read: true,
+      }))
+    );
+    setNewNotification((curr) => !curr);
   }
 
   return (

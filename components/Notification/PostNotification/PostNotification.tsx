@@ -34,7 +34,8 @@ export default function postNotification({
           setNotification={setNotification}
         />
         <NotifBlueDot
-          notification={notification}
+          notificationRead={notification.read}
+          notificationId={notification.notificationId}
           setNotification={setNotification}
         />
       </div>

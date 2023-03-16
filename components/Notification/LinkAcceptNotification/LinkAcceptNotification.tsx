@@ -40,7 +40,8 @@ export default function linkAcceptNotification({
           setNotification={setNotification}
         />
         <NotifBlueDot
-          notification={notification}
+          notificationRead={notification.read}
+          notificationId={notification.notificationId}
           setNotification={setNotification}
         />
       </div>
