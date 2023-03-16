@@ -70,15 +70,6 @@ export default function Notifications() {
       );
     });
 
-    // const newNotifs = notifications.map((notif) => {
-    //   // if (!notif.read) {
-    //   // notif.read = true;
-    //   // const newNotif = {...notif, read: true}
-    //   return { ...notif, read: true };
-    //   // } else {
-    //   //   return notif;
-    //   // }
-    // });
     setNotifications((curr) =>
       curr.map((notif) => ({
         ...notif,
@@ -94,19 +85,6 @@ export default function Notifications() {
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">Notifications</h1>
         <div className="flex gap-3">
-          {/* <Button
-            onClick={() => {
-              createNotification({
-                receiver: authUser.uid,
-                notifType: NotifType.DM,
-                context: '💖 hi, have an amazing day :)',
-                sender: 'IPx2hseMaCgAzH9gm0NidFHLETo2',
-                chatroomId: 'o5QyE6713sr8lfNdX9G2',
-              });
-            }}
-          >
-            Feeling Unpopular?
-          </Button> */}
           <button
             data-testid="read-all-button"
             onClick={() => {

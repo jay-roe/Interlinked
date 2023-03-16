@@ -34,8 +34,8 @@ export async function createNotification({
     notifTime: Timestamp.now(),
     context: context,
     sender: sender,
-    read: read,
-    chatroomId: chatroomId,
+    read: read || false,
+    chatroomId: chatroomId || '',
   };
 
   // add new doc to collection "notification"

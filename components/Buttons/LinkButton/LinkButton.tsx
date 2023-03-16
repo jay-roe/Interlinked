@@ -58,13 +58,12 @@ export default function LinkButton({
           createNotification(notif).then((notifID) => {
             setNotification({ ...notif, read: false, notificationId: notifID });
           });
+        } else {
+          // After completely unlinked -> refresh window (in case they're viewing a private account)
+          unlink(authUser.uid, profileOwnerUID).then(() => {
+            window.location.reload();
+          });
         }
-
-        profileOwnerUID &&
-          currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === profileOwnerUID
-          ) &&
-          unlink(authUser.uid, profileOwnerUID);
       }}
     >
       <LinkIcon
