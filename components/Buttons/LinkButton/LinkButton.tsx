@@ -19,6 +19,7 @@ export default function LinkButton({
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
   const [notification, setNotification] = useState<Notification>();
+  const [linkIds, setLinkIds] = useState(currentUser.linkedUserIds);
 
   // Get the link request notification to visited user
   useEffect(() => {
@@ -44,9 +45,7 @@ export default function LinkButton({
       onClick={() => {
         if (
           profileOwnerUID &&
-          !currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === profileOwnerUID
-          )
+          !linkIds?.some((receiverID) => receiverID === profileOwnerUID)
         ) {
           const notif = {
             notifType: NotifType.LINK_REQ,
@@ -61,33 +60,33 @@ export default function LinkButton({
         }
 
         profileOwnerUID &&
-          currentUser.linkedUserIds?.some(
-            (receiverID) => receiverID === profileOwnerUID
-          ) &&
-          unlink(authUser.uid, profileOwnerUID);
+          confirm('Are you sure you want to unlink?') &&
+          linkIds?.some((receiverID) => receiverID === profileOwnerUID) &&
+          unlink(authUser.uid, profileOwnerUID) &&
+          setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
       }}
     >
       <LinkIcon
-        linked={currentUser.linkedUserIds?.some(
-          (receiverID) => receiverID === profileOwnerUID
-        )}
+        linked={linkIds?.some((receiverID) => receiverID === profileOwnerUID)}
         showText={true}
       />
     </button>
   ) : (
-    <button
-      data-testid="unlink-btn"
-      className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
-      onClick={() => {
-        deleteNotification(notification.notificationId, profileOwnerUID).then(
-          () => {
-            setNotification(null);
-          }
-        );
-      }}
-    >
-      <ImCancelCircle size={30} />
-      Cancel Link Request
-    </button>
+    profileOwnerUID !== authUser.uid && (
+      <button
+        data-testid="unlink-btn"
+        className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
+        onClick={() => {
+          deleteNotification(notification.notificationId, profileOwnerUID).then(
+            () => {
+              setNotification(null);
+            }
+          );
+        }}
+      >
+        <ImCancelCircle size={30} />
+        Cancel Link Request
+      </button>
+    )
   );
 }

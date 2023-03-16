@@ -58,6 +58,8 @@ it('renders unlink button correctly', async () => {
     };
   });
   mockedUnlink.mockImplementation(() => {});
+  window.confirm = jest.fn(() => true); // always click 'yes'
+
   const { findByTestId } = render(<LinkButton profileOwnerUID={testUserID} />);
 
   const button = await findByTestId('link-btn');
