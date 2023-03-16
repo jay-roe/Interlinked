@@ -44,7 +44,7 @@ export default function DMs() {
         <b>Your DMs</b>
       </h1>
       <p className="mb-3 text-light-white-text">Strengthen your web</p>
-      <Card className="flex flex-grow flex-col overflow-scroll">
+      <Card className="flex flex-grow flex-col overflow-auto">
         {chats?.map((keyRoom) => {
           return (
             <Link key={keyRoom.key} href={'/DM/' + keyRoom.key}>
