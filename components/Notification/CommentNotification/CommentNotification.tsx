@@ -33,7 +33,10 @@ export default function commentNotification({
           notification={notification}
           setNotification={setNotification}
         />
-        <NotifBlueDot notification={notification} />
+        <NotifBlueDot
+          notification={notification}
+          setNotification={setNotification}
+        />
       </div>
     </div>
   );
