@@ -169,10 +169,12 @@ export function AuthProvider({ children }) {
     await auth.currentUser.reload();
 
     // Refresh current user
-    const userDoc = await getDoc(doc(db.users, auth.currentUser.uid));
-    setCurrentUser(userDoc.data());
+    if (auth.currentUser) {
+      const userDoc = await getDoc(doc(db.users, auth.currentUser.uid));
+      setCurrentUser(userDoc.data());
 
-    return userDoc.data();
+      return userDoc.data();
+    }
   }
 
   /**
