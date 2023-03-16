@@ -60,10 +60,10 @@ export default function LinkButton({
         } else {
           // After completely unlinked -> refresh window (in case they're viewing a private account)
           if (confirm('Are you sure you want to unlink?')) {
-            unlink(authUser.uid, profileOwnerUID).then(() => {
+            unlink(authUser.uid, profileOwnerUID) &&
               setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
-              window.location.reload();
-            });
+
+            window.location.reload();
           }
         }
       }}
