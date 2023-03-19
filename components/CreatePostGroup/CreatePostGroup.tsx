@@ -32,8 +32,6 @@ export default function CreatePostGroup() {
   };
 
   const removeImage = (value: imageIdentifier) => {
-    alert('deleted' + value.name);
-
     setImage((oldValues) => {
       return oldValues.filter(
         (img) => !(img.name == value.name && img.size == value.size)
