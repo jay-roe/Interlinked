@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
 import { PreviewImageProps } from '@/types/PreviewImage';
+import { imageIdentifier } from '@/types/ImageIdentifier';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 
 export default function PreviewAttachement({
@@ -9,7 +10,7 @@ export default function PreviewAttachement({
   getImage,
 }: PreviewImageProps) {
   const [images, setImages] = useState<File[]>([]);
-  const [preview, setPreview] = useState<string[]>([]);
+  const [preview, setPreview] = useState<imageIdentifier[]>([]);
 
   useEffect(() => {
     getImage(images);
@@ -25,10 +26,26 @@ export default function PreviewAttachement({
   const handleSelectedFile = (files: FileList) => {
     if (files && files[0].size < 10000000) {
       const file = Array.from(files);
+      console.log(files[0].size);
       if (images == null) setImages(file);
       else setImages((prevImage) => prevImage.concat(file));
-      if (preview == null) setPreview([URL.createObjectURL(files[0])]);
-      else setPreview((prev) => prev.concat(URL.createObjectURL(files[0])));
+
+      if (preview == null)
+        setPreview([
+          {
+            url: URL.createObjectURL(files[0]),
+            name: files[0].name,
+            size: file[0].size,
+          },
+        ]);
+      else
+        setPreview((prev) =>
+          prev.concat({
+            url: URL.createObjectURL(files[0]),
+            name: files[0].name,
+            size: file[0].size,
+          })
+        );
     }
   };
 
@@ -40,14 +57,16 @@ export default function PreviewAttachement({
     hiddenFileInput.current.click();
   };
 
-  const removeImage = (value: string) => {
+  const removeImage = (value: imageIdentifier) => {
     if (confirm('Remove image?') == true) {
       setPreview((oldValues) => {
-        return oldValues.filter((img) => img !== value);
+        return oldValues.filter((img) => img.url !== value.url);
       });
 
       setImages((oldValues) => {
-        return oldValues.filter((img) => URL.createObjectURL(img) !== value);
+        return oldValues.filter(
+          (img) => !(img.name == value.name && img.size == value.size)
+        );
       });
 
       deleteImage(value);
@@ -71,8 +90,8 @@ export default function PreviewAttachement({
                   >
                     <ImageOptimized
                       className="h-[13rem] w-[13rem] object-scale-down hover:opacity-50"
-                      src={imgPreview}
-                      alt={imgPreview}
+                      src={imgPreview.url}
+                      alt={imgPreview.url}
                       width={208}
                       height={208}
                     />
