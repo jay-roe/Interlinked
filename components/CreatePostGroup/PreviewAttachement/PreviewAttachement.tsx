@@ -26,7 +26,6 @@ export default function PreviewAttachement({
   const handleSelectedFile = (files: FileList) => {
     if (files && files[0].size < 10000000) {
       const file = Array.from(files);
-      console.log(files[0].size);
       if (images == null) setImages(file);
       else setImages((prevImage) => prevImage.concat(file));
 
