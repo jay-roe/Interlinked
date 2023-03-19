@@ -86,7 +86,6 @@ export default function Feeds() {
         typeCollection<Post>(
           collection(doc(db.users, posterIds.current[i]), 'posts')
         ),
-        where('isCompany', '!=', true),
         where(
           'date',
           '<',
