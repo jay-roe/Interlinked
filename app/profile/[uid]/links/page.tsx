@@ -34,8 +34,10 @@ export default function Links({ params }) {
 
   const getUserLinks = async (uid: string) => {
     const user = await getDoc(doc(db.users, uid));
-    setUser(user.data());
-    return user.data().linkedUserIds;
+    if (!user.data().isCompany) {
+      setUser(user.data());
+      return user.data().linkedUserIds;
+    }
   };
 
   const getLinkInfo = async (uid: string) => {

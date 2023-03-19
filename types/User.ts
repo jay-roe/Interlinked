@@ -25,7 +25,11 @@ export type User = {
   };
   volunteering?: VolunteeringExperience[];
   isPrivate?: boolean;
+  isCompany?: boolean;
 };
+
+export type Company = User & { isCompany: true };
+
 export const testUser = {
   awards: null,
   bio: 'string;',
