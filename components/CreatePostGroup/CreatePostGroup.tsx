@@ -28,6 +28,11 @@ export default function CreatePostGroup() {
   const [trigger, setTrigger] = useState(0);
 
   const retrieveText = async (text: string) => {
+    if (text == '' && !image) {
+      alert('No content to post');
+      return;
+    }
+
     await createPost(text).then(() => {});
   };
 

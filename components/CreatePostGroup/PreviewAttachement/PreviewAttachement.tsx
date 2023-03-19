@@ -11,6 +11,7 @@ export default function PreviewAttachement({
 }: PreviewImageProps) {
   const [images, setImages] = useState<File[]>([]);
   const [preview, setPreview] = useState<imageIdentifier[]>([]);
+  const FILE_SIZE_MAXIMUM = 10000000;
 
   useEffect(() => {
     getImage(images);
@@ -24,7 +25,7 @@ export default function PreviewAttachement({
   }, [clean]);
 
   const handleSelectedFile = (files: FileList) => {
-    if (files && files[0].size < 10000000) {
+    if (files && files[0].size < FILE_SIZE_MAXIMUM) {
       const file = Array.from(files);
       if (images == null) setImages(file);
       else setImages((prevImage) => prevImage.concat(file));
