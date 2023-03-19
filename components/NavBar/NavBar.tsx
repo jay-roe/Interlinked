@@ -1,5 +1,5 @@
 'use client';
-import { FaRegCommentDots } from 'react-icons/fa';
+import { FaLock, FaRegCommentDots } from 'react-icons/fa';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
@@ -40,6 +40,11 @@ export default function NavBar() {
             current: false,
           },
           { name: 'Register', href: '/register', current: false },
+          {
+            name: <FaLock size={20} />,
+            href: '/admin',
+            current: false,
+          },
         ];
   })(currentUser);
 
