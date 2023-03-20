@@ -15,14 +15,17 @@ import type { UserCredential } from 'firebase/auth';
 import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
 import type { User } from '../types/User';
+import type { Admin } from '../types/Admin';
 import { db } from '../config/firestore';
 import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
 
 interface AuthContextType {
   currentUser: User;
+  currentAdmin: Admin;
   authUser: AuthUser;
   login: (email: string, password: string) => Promise<UserCredential>;
+  loginAdmin: (email: string, password: string) => Promise<UserCredential>;
   loginWithGoogle: () => Promise<UserCredential>;
   register: (email: string, password: string) => Promise<UserCredential>;
   refresh: () => Promise<User>;
@@ -38,8 +41,10 @@ interface AuthContextType {
 // Creates a context that will be passed down to all routes, allowing authentication functions to be used
 const AuthContext = createContext({
   currentUser: null,
+  currentAdmin: null,
   authUser: null,
   login: null,
+  loginAdmin: null,
   loginWithGoogle: null,
   register: null,
   logout: null,
@@ -54,6 +59,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   // User data from Firestore database. Use this for most data.
   const [currentUser, setCurrentUser] = useState<User>();
+  const [currentAdmin, setCurrentAdmin] = useState<Admin>();
 
   // User data from Firebase Auth. Use this for email verification or provider data.
   const [authUser, setAuthUser] = useState<AuthUser>();
@@ -123,6 +129,16 @@ export function AuthProvider({ children }) {
     // Set user as state from database
     const userDoc = await getDoc(doc(db.users, credential.user.uid));
     setCurrentUser(userDoc.data());
+
+    return credential;
+  }
+
+  async function loginAdmin(email: string, password: string) {
+    const credential = await signInWithEmailAndPassword(auth, email, password);
+
+    // Set admin as state from database
+    const adminDoc = await getDoc(doc(db.admin, credential.user.uid));
+    setCurrentAdmin(adminDoc.data());
 
     return credential;
   }
@@ -207,13 +223,19 @@ export function AuthProvider({ children }) {
       // User just logged out
       if (!user) {
         setCurrentUser(null);
+        setCurrentAdmin(null);
         setLoading(false);
       }
 
       // Ensure user data is loaded if user logged in
-      else if (!currentUser) {
-        getDoc(doc(db.users, user.uid)).then((res) => {
-          setCurrentUser(res.data());
+      else if (!getDoc || (!currentUser && !currentAdmin)) {
+        const collectionRef = currentUser ? db.users : db.admin;
+        getDoc(doc(collectionRef, user.uid)).then((res) => {
+          if (currentUser) {
+            setCurrentUser(res.data());
+          } else {
+            setCurrentAdmin(res.data());
+          }
           setLoading(false);
         });
       }
@@ -226,8 +248,10 @@ export function AuthProvider({ children }) {
   const value = useMemo(
     () => ({
       currentUser,
+      currentAdmin,
       authUser,
       login,
+      loginAdmin,
       loginWithGoogle,
       register,
       refresh,
@@ -236,7 +260,7 @@ export function AuthProvider({ children }) {
       reauthenticateEmail,
       reauthenticateOAuth,
     }),
-    [currentUser, authUser]
+    [currentUser, currentAdmin, authUser]
   );
 
   return (

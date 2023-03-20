@@ -1,4 +1,5 @@
 import { User } from '../types/User';
+import { Admin } from '../types/Admin';
 import { Post, Comment } from '../types/Post';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
@@ -31,4 +32,5 @@ export const db = {
   users: dataPoint<User>('users'),
   posts: dataPoint<Post>('posts'),
   chatrooms: dataPoint<ChatRoom>('chatrooms'),
+  admin: dataPoint<Admin>('admin'),
 };
