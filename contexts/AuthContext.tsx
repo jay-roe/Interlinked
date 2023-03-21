@@ -68,10 +68,8 @@ export function AuthProvider({ children }) {
   /**
    * Creates user in Firestore and updates current user state
    */
-  async function createUser(credential: UserCredential) {
+  async function createUser(newUser: AuthUser) {
     // Create a new user document in database using same user id as auth
-    const newUser = credential.user;
-
     const emptyUser: User = {
       awards: [],
       certifications: [],
@@ -101,7 +99,7 @@ export function AuthProvider({ children }) {
     await setDoc(doc(db.users, newUser.uid), emptyUser);
 
     // Refresh auth user state with signed in user
-    setAuthUser(credential.user);
+    setAuthUser(newUser);
     setCurrentUser(emptyUser);
 
     console.log('new user created. current and auth user updated.', emptyUser);
@@ -117,7 +115,7 @@ export function AuthProvider({ children }) {
       password
     );
 
-    await createUser(credential);
+    await createUser(credential.user);
 
     return credential;
   }
@@ -155,7 +153,7 @@ export function AuthProvider({ children }) {
     else {
       console.log('user doc does not exist. Creating it.');
 
-      await createUser(credential);
+      await createUser(credential.user);
     }
 
     return credential;
@@ -171,7 +169,11 @@ export function AuthProvider({ children }) {
     // Refresh current user
     if (auth.currentUser) {
       const userDoc = await getDoc(doc(db.users, auth.currentUser.uid));
-      setCurrentUser(userDoc.data());
+      if (!userDoc.exists()) {
+        await createUser(auth.currentUser);
+      } else {
+        setCurrentUser(userDoc.data());
+      }
 
       return userDoc.data();
     }
