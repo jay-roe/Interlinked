@@ -1,6 +1,6 @@
-import { User } from '../types/User';
 import { Admin } from '../types/Admin';
 import { Post, Comment } from '../types/Post';
+import { User, Company } from '../types/User';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
 import type {
@@ -30,6 +30,7 @@ export const typeCollection = <T>(
 // List of supported collections exported as 'db'
 export const db = {
   users: dataPoint<User>('users'),
+  companies: dataPoint<Company>('users'),
   posts: dataPoint<Post>('posts'),
   chatrooms: dataPoint<ChatRoom>('chatrooms'),
   admin: dataPoint<Admin>('admin'),
