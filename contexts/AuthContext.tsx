@@ -232,7 +232,12 @@ export function AuthProvider({ children }) {
       // Ensure user data is loaded if user logged in
       else if (!currentUser) {
         getDoc(doc(db.users, user.uid)).then((res) => {
-          setCurrentUser(res.data());
+          if (!res.exists()) {
+            console.log('creating user from auth state changed');
+            createUser(auth.currentUser);
+          } else {
+            setCurrentUser(res.data());
+          }
           setLoading(false);
         });
       }
