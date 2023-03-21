@@ -170,6 +170,7 @@ export function AuthProvider({ children }) {
     if (auth.currentUser) {
       const userDoc = await getDoc(doc(db.users, auth.currentUser.uid));
       if (!userDoc.exists()) {
+        console.log('creating user from refresh()');
         await createUser(auth.currentUser);
       } else {
         setCurrentUser(userDoc.data());
