@@ -170,7 +170,6 @@ export function AuthProvider({ children }) {
     if (auth.currentUser) {
       const userDoc = await getDoc(doc(db.users, auth.currentUser.uid));
       if (!userDoc.exists()) {
-        console.log('creating user from refresh()');
         await createUser(auth.currentUser);
       } else {
         setCurrentUser(userDoc.data());
@@ -233,7 +232,6 @@ export function AuthProvider({ children }) {
       else if (!currentUser) {
         getDoc(doc(db.users, user.uid)).then((res) => {
           if (!res.exists()) {
-            console.log('creating user from auth state changed');
             createUser(auth.currentUser);
           } else {
             setCurrentUser(res.data());

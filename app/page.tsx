@@ -1,18 +1,9 @@
 'use client';
 
-import auth from '@/config/firebase';
-import { useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Home = () => {
   const { currentUser } = useAuth();
-  // const { currentUser, refresh } = useAuth();
-
-  // useEffect(() => {
-  //   if (auth.currentUser) {
-  //     refresh();
-  //   }
-  // }, []);
 
   return (
     <div className="container mx-auto text-white">
