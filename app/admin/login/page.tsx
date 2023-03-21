@@ -36,7 +36,7 @@ export default function LoginAdmin() {
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2
-            data-testid="login-title"
+            data-testid="admin-login-title"
             className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
           >
             Welcome Admin
@@ -47,7 +47,7 @@ export default function LoginAdmin() {
             <div>
               <input
                 id="email-address"
-                data-testid="email"
+                data-testid="admin-email"
                 name="email"
                 type="email"
                 onChange={(e) => setEmail(e.target.value)}
@@ -61,7 +61,7 @@ export default function LoginAdmin() {
             <div>
               <input
                 id="password"
-                data-testid="pw"
+                data-testid="admin-pw"
                 name="password"
                 type="password"
                 value={password}
@@ -75,7 +75,7 @@ export default function LoginAdmin() {
           </div>
           <div>
             <Button
-              data-testid="login"
+              data-testid="admin-login"
               type="submit"
               onClick={handleFormSubmit}
               disabled={loading}

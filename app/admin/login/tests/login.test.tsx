@@ -45,7 +45,7 @@ it('check if user is logged out', async () => {
 
   const { findByTestId } = render(<Login />);
 
-  const modalTitle = await findByTestId('login-title');
+  const modalTitle = await findByTestId('admin-login-title');
   expect(modalTitle).toBeInTheDocument();
 });
 
@@ -65,7 +65,7 @@ it('can attempt to log in', async () => {
 
   const { findByTestId } = render(<Login />);
 
-  const loginButton = await findByTestId('login');
+  const loginButton = await findByTestId('admin-login');
   fireEvent.click(loginButton);
   await waitFor(() => expect(myLogin).toBeCalledTimes(2));
 });
@@ -79,12 +79,30 @@ it('can enter email and pw', async () => {
 
   const { findByTestId } = render(<Login />);
 
-  const emailField = await findByTestId('email');
-  const pwField = await findByTestId('pw');
+  const emailField = await findByTestId('admin-email');
+  const pwField = await findByTestId('admin-pw');
 
   fireEvent.change(emailField, { target: { value: 'test@test.com' } });
   fireEvent.change(pwField, { target: { value: '123456' } });
 
   expect(emailField).toHaveValue('test@test.com');
   expect(pwField).toHaveValue('123456');
+});
+
+it('admin logged in', async () => {
+  mockedUseAuth.mockImplementation(() => {
+    return {
+      currentAdmin: {}, // There is no current user
+      authUser: {},
+    };
+  });
+  const myPush = jest.fn();
+  mockedRouter.mockImplementation((path) => {
+    return {
+      push: myPush,
+    };
+  });
+
+  const {} = render(<Login />);
+  await waitFor(() => expect(myPush).toBeCalledTimes(1));
 });

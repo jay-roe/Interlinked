@@ -20,7 +20,7 @@ const Admin = () => {
   }, [currentAdmin, router]);
 
   return (
-    <div className="container mx-auto text-white">
+    <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
         <h1 className="text-3xl font-extrabold">Reports</h1>
       </div>
