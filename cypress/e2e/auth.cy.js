@@ -63,4 +63,18 @@ describe('Full auth spec', () => {
       'We will become interlinked.'
     );
   });
+
+  it('can not login with invalid credentials', () => {
+    cy.visit('login');
+    cy.get('[data-testid="nav-login"]').click();
+
+    cy.get('input[name=email]').type(email);
+    cy.get('input[name=password]').type('wrong pw');
+
+    cy.get('[data-testid=login]').click();
+
+    cy.on('window:alert', (str) => {
+      expect(str).to.equal('Failed to login');
+    });
+  });
 });

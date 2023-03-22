@@ -5,7 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
-import { User } from '@/types/User';
+import { User, Admin } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [showSearch, setShowSearch] = useState(false);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, currentAdmin, logout } = useAuth();
   const pathname = usePathname();
 
   // Allow state access in SearchBar component
@@ -25,23 +25,30 @@ export default function NavBar() {
     setShowSearch(!showSearch);
   };
 
-  const navLinks = (function navigation(currentUser: User) {
-    return currentUser
-      ? [
-          { name: 'Home', href: '/', current: true },
-          { name: 'Feed', href: '/feed', current: false },
-        ]
-      : [
-          { name: 'Home', href: '/', current: true },
-          {
-            name: 'Login',
-            href: '/login',
-            dataTestid: 'nav-login',
-            current: false,
-          },
-          { name: 'Register', href: '/register', current: false },
-        ];
-  })(currentUser);
+  const navLinks = (function navigation(
+    currentUser: User,
+    currentAdmin: Admin
+  ) {
+    if (currentUser) {
+      return [
+        { name: 'Home', href: '/', current: true },
+        { name: 'Feed', href: '/feed', current: false },
+      ];
+    } else if (currentAdmin) {
+      return [{ name: 'Reports', href: '/admin', current: true }];
+    } else {
+      return [
+        { name: 'Home', href: '/', current: true },
+        {
+          name: 'Login',
+          href: '/login',
+          dataTestid: 'nav-login',
+          current: false,
+        },
+        { name: 'Register', href: '/register', current: false },
+      ];
+    }
+  })(currentUser, currentAdmin);
 
   return (
     <Disclosure as="nav" className="">
@@ -75,9 +82,9 @@ export default function NavBar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navLinks.map((item) => (
+                    {navLinks.map((item, index) => (
                       <Link
-                        key={item.name}
+                        key={index}
                         href={item.href}
                         data-testid={item.dataTestid}
                         className={classNames(
@@ -210,6 +217,53 @@ export default function NavBar() {
                   </Menu>
                 </div>
               )}
+              {currentAdmin && (
+                <div>
+                  {/* Profile dropdown */}
+                  <Menu as="div" className="relative">
+                    <div>
+                      <Menu.Button
+                        data-testid="nav-menu"
+                        className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">Open user menu</span>
+                        <ImageOptimized
+                          className="h-8 w-8 rounded-full"
+                          src={currentAdmin.profilePicture}
+                          alt={currentAdmin.name}
+                          width={32}
+                          height={32}
+                        />
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={logout}
+                              data-testid="nav-logout"
+                              className={`${
+                                active ? 'bg-gray-100' : ''
+                              } block w-full px-4 py-2 text-left text-sm text-gray-700`}
+                            >
+                              Log out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
+              )}
             </div>
             <div className="mb-2 flex justify-end">
               {/* search bar that appears when search button is clicked*/}
@@ -219,9 +273,9 @@ export default function NavBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navLinks.map((item) => (
+              {navLinks.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={index}
                   href={item.href}
                   className={classNames(
                     item.href === pathname

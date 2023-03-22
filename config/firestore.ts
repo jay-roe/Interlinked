@@ -1,5 +1,5 @@
-import { User, Company } from '../types/User';
-import { Post } from '../types/Post';
+import { Post, Comment } from '../types/Post';
+import { User, Company, Admin } from '../types/User';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
 import type {
@@ -28,8 +28,10 @@ export const typeCollection = <T>(
 
 // List of supported collections exported as 'db'
 export const db = {
+  genericUser: dataPoint<User | Company | Admin>('users'),
   users: dataPoint<User>('users'),
   companies: dataPoint<Company>('users'),
+  admin: dataPoint<Admin>('users'),
   posts: dataPoint<Post>('posts'),
   chatrooms: dataPoint<ChatRoom>('chatrooms'),
 };
