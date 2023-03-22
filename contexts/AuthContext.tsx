@@ -124,6 +124,10 @@ export function AuthProvider({ children }) {
    * Login user with email and password. Passes logic to firebase function
    */
   async function login(email: string, password: string) {
+    // Prevent admin login
+    if (email === 'admin@interlinked.live') {
+      throw new Error('Admin login not allowed here.');
+    }
     const credential = await signInWithEmailAndPassword(auth, email, password);
 
     // Set user as state from database
