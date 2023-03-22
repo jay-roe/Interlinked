@@ -16,13 +16,7 @@ import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
 import type { User, Admin } from '../types/User';
 import { db } from '../config/firestore';
-import {
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocFromServer,
-  setDoc,
-} from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
 
 interface AuthContextType {

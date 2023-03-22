@@ -1,5 +1,5 @@
 'use client';
-import { FaLock, FaRegCommentDots } from 'react-icons/fa';
+import { FaRegCommentDots } from 'react-icons/fa';
 import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
