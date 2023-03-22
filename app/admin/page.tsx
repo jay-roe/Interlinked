@@ -13,9 +13,9 @@ const Admin = () => {
   // const [reports, setReports] = useState<Reports[]>();
 
   useEffect(() => {
-    // if not logged in, redirect to login page
+    // if not logged in, redirect to home page
     if (!currentAdmin) {
-      router.push('/admin/login');
+      router.push('/');
     }
   }, [currentAdmin, router]);
 

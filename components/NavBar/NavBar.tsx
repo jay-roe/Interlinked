@@ -46,11 +46,6 @@ export default function NavBar() {
           current: false,
         },
         { name: 'Register', href: '/register', current: false },
-        {
-          name: <FaLock size={18} />,
-          href: '/admin/login',
-          current: false,
-        },
       ];
     }
   })(currentUser, currentAdmin);

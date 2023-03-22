@@ -30,7 +30,6 @@ interface AuthContextType {
   currentAdmin: Admin;
   authUser: AuthUser;
   login: (email: string, password: string) => Promise<UserCredential>;
-  loginAdmin: (email: string, password: string) => Promise<UserCredential>;
   loginWithGoogle: () => Promise<UserCredential>;
   register: (email: string, password: string) => Promise<UserCredential>;
   refresh: () => Promise<User>;
@@ -49,7 +48,6 @@ const AuthContext = createContext({
   currentAdmin: null,
   authUser: null,
   login: null,
-  loginAdmin: null,
   loginWithGoogle: null,
   register: null,
   logout: null,
@@ -130,16 +128,6 @@ export function AuthProvider({ children }) {
    */
   async function login(email: string, password: string) {
     return await signInWithEmailAndPassword(auth, email, password);
-  }
-
-  async function loginAdmin(email: string, password: string) {
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-
-    // Set admin as state from database
-    const adminDoc = await getDoc(doc(db.admin, credential.user.uid));
-    setCurrentAdmin(adminDoc.data());
-
-    return credential;
   }
 
   /**
@@ -249,7 +237,6 @@ export function AuthProvider({ children }) {
       currentAdmin,
       authUser,
       login,
-      loginAdmin,
       loginWithGoogle,
       register,
       refresh,
