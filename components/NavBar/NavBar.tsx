@@ -5,8 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
-import { User } from '@/types/User';
-import { Admin } from '@/types/Admin';
+import { User, Admin } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
@@ -88,9 +87,9 @@ export default function NavBar() {
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navLinks.map((item) => (
+                    {navLinks.map((item, index) => (
                       <Link
-                        key={item.name}
+                        key={index}
                         href={item.href}
                         data-testid={item.dataTestid}
                         className={classNames(
@@ -279,9 +278,9 @@ export default function NavBar() {
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navLinks.map((item) => (
+              {navLinks.map((item, index) => (
                 <Link
-                  key={item.name}
+                  key={index}
                   href={item.href}
                   className={classNames(
                     item.href === pathname

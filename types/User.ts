@@ -30,6 +30,13 @@ export type User = {
 
 export type Company = User & { isCompany: true };
 
+export type Admin = {
+  isAdmin: true;
+  email: string;
+  name: string;
+  profilePicture?: string;
+};
+
 export const testUser = {
   awards: null,
   bio: 'string;',

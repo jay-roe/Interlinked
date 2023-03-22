@@ -1,28 +1,9 @@
 'use client';
 
-// import { Inter } from '@next/font/google';
-// import { Alert } from "react-bootstrap";
 import { useAuth } from '../contexts/AuthContext';
-// import { useEffect, useState } from 'react';
-
-// const inter = Inter({ subsets: ['latin'] });
 
 const Home = () => {
   const { currentUser } = useAuth();
-  // const location = useLocation();
-  //   const ALERT_TIMEOUT = 5000; // Deleted alert timeout in milliseconds
-  //   const [isDeletedAlertShow, setIsDeletedAlertShow] = useState(false);
-
-  // TODO reintroduce deleted account alert
-  /*useEffect(() => {
-        if (location.state?.deletedAccount) {
-            setIsDeletedAlertShow(true);
-            setTimeout(async () => {
-                setIsDeletedAlertShow(false);
-            }, ALERT_TIMEOUT);
-            location.state.deletedAccount = false;
-        }
-    }, [location.state])*/
 
   return (
     <div className="container mx-auto text-white">
@@ -45,9 +26,6 @@ const Home = () => {
           </p>
         </>
       )}
-      {/* <Alert variant='danger' show={isDeletedAlertShow}>
-                Successfully deleted your account.
-            </Alert> */}
     </div>
   );
 };
