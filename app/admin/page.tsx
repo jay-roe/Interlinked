@@ -24,15 +24,19 @@ const Admin = () => {
       router.push('/');
     }
 
+    // get all the reports of the admin
     async function getReports() {
-      const res = await getDocs(
-        typeCollection<Report>(
-          collection(doc(db.users, authUser.uid), 'report')
-        )
-      );
-      return res.docs.map((resData) => resData.data());
+      if (currentAdmin) {
+        const res = await getDocs(
+          typeCollection<Report>(
+            collection(doc(db.users, authUser.uid), 'report')
+          )
+        );
+        return res.docs.map((resData) => resData.data());
+      } else return [];
     }
 
+    // set the reports of the admin
     getReports().then((rep) => {
       setReports(rep);
       setLoading(false);

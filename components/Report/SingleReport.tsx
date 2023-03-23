@@ -4,6 +4,8 @@ import { Report } from '@/types/Report';
 import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import NotifBlueDot from '../Icons/NotifBlueDotIcon/NotifBlueDotIcon';
 import ReportHeader from './ReportHeader';
+import ReportDeleteButton from '../Buttons/ReportDeleteButton';
+import ReportBlueDot from '../Icons/ReportBlueDot';
 
 export default function postNotification({
   report,
@@ -29,14 +31,12 @@ export default function postNotification({
         </div>
       </div>
       <div className="m-4 flex items-center justify-between">
-        {/* not implemented yet
-        <ReportDeleteButton
-          notification={notification}
-          setNotification={setNotification}
+        <ReportDeleteButton report={report} setReports={setReports} />
+        <ReportBlueDot
+          reportRead={report.read}
+          reportId={report.reportId}
+          setReports={setReports}
         />
-        <ReportsBlueDot
-          read={report.read}
-        /> */}
       </div>
     </div>
   );

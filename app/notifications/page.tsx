@@ -43,6 +43,7 @@ export default function Notifications() {
       router.push('/');
     }
 
+    // get the notifications from the database
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
@@ -52,6 +53,7 @@ export default function Notifications() {
       return res.docs.map((resData) => resData.data());
     }
 
+    // set the notifications
     getNotifications().then((notifs) => {
       setNotifications(notifs);
       setLoading(false);
@@ -62,6 +64,7 @@ export default function Notifications() {
     return <div>Loading...</div>;
   }
 
+  // mark all the user's notifications as read
   async function readAll() {
     const notifUnreadQuery = typeCollection<Notification>(
       collection(doc(db.users, authUser.uid), 'notifications')
@@ -76,6 +79,7 @@ export default function Notifications() {
       );
     });
 
+    // set the notifications to a new value
     setNotifications((curr) =>
       curr.map((notif) => ({
         ...notif,
