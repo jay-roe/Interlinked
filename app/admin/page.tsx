@@ -8,6 +8,7 @@ import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
 import { collection, doc, getDocs } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
+import ReportList from '@/components/Report/ReportList';
 
 const Admin = () => {
   const router = useRouter();
@@ -46,34 +47,41 @@ const Admin = () => {
     <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
         <h1 className="text-3xl font-extrabold">Reports</h1>
-        <button
-          data-testid="read-all-button"
-          onClick={() => {
-            //readAll();
-          }}
-        >
-          <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
-            <FiBell />
-            <p>Read all</p>
-          </div>
-        </button>
-
-        <button
-          data-testid="read-all-button"
-          onClick={() => {
-            createReport({
-              reporter: authUser.uid,
-              reported: authUser.uid,
-              context: '💖 A user has been saying inappropriate things :)',
-              chatroomId: '',
-              adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
-            });
-          }}
-        >
-          <p>Report myself</p>
-        </button>
+        <div>
+          <button
+            data-testid="read-all-button"
+            onClick={() => {
+              //readAll();
+            }}
+          >
+            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+              <FiBell />
+              <p>Read all</p>
+            </div>
+          </button>
+          <button
+            data-testid="read-all-button"
+            onClick={() => {
+              createReport({
+                reporter: authUser.uid,
+                reported: authUser.uid,
+                context: "I did some things I shouldn't have done 🤭",
+                chatroomId: '',
+                adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
+              });
+            }}
+          >
+            <p>Report myself</p>
+          </button>
+        </div>
       </div>
-      <div className="rounded-xl bg-white bg-opacity-[8%] p-5"></div>
+      <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
+        {reports.length > 0 ? (
+          <ReportList reports={reports} setReports={setReports} />
+        ) : (
+          <p data-testid="no-reports">Wow, such empty</p>
+        )}
+      </div>
     </div>
   );
 };
