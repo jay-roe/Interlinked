@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Notification, NotifType } from '@/types/Notification';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
+import router from 'next/router';
 
 export default function Notifications() {
   const { authUser, currentUser } = useAuth();
@@ -37,6 +38,11 @@ export default function Notifications() {
   }
 
   useEffect(() => {
+    // if not logged in, redirect to home page
+    if (!currentUser || !authUser) {
+      router.push('/');
+    }
+
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(

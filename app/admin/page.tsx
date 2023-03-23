@@ -1,24 +1,46 @@
 'use client';
 
 import { useAuth } from '@/contexts/AuthContext';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiBell } from 'react-icons/fi';
+import { createReport } from '@/components/Report/AddReport';
+import { Report } from '@/types/Report';
+import { collection, doc, getDocs } from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
 
 const Admin = () => {
   const router = useRouter();
-  const { currentAdmin } = useAuth();
+  const { authUser, currentAdmin } = useAuth();
 
   // Uncomment for implementation
-  // const [loading, setLoading] = useState(true);
-  // const [reports, setReports] = useState<Reports[]>();
+  const [loading, setLoading] = useState(true);
+  const [reports, setReports] = useState<Report[]>();
 
   useEffect(() => {
     // if not logged in, redirect to home page
     if (!currentAdmin) {
       router.push('/');
     }
+
+    async function getReports() {
+      const res = await getDocs(
+        typeCollection<Report>(
+          collection(doc(db.users, authUser.uid), 'report')
+        )
+      );
+      return res.docs.map((resData) => resData.data());
+    }
+
+    getReports().then((rep) => {
+      setReports(rep);
+      setLoading(false);
+    });
   }, [currentAdmin, router]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="container mx-auto text-white" data-testid="admin-home">
@@ -34,6 +56,21 @@ const Admin = () => {
             <FiBell />
             <p>Read all</p>
           </div>
+        </button>
+
+        <button
+          data-testid="read-all-button"
+          onClick={() => {
+            createReport({
+              reporter: authUser.uid,
+              reported: authUser.uid,
+              context: '💖 A user has been saying inappropriate things :)',
+              chatroomId: '',
+              adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
+            });
+          }}
+        >
+          <p>Report myself</p>
         </button>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5"></div>
