@@ -32,8 +32,6 @@ describe('DM spec', () => {
     let testMessage = 'This is a test message!';
     cy.get('[data-testid=chat-modal-input]').type(testMessage);
     cy.get('[data-testid=chat-modal-button]').click();
-
-    // should auto accept the alert
     cy.get('[data-testid=chat-room-root]').should('contain', testMessage);
 
     // visit dm room
@@ -47,5 +45,8 @@ describe('DM spec', () => {
     cy.get('[data-testid=dm-page-message]').type(newMessage);
     cy.get('[data-testid=send-dm]').click();
     cy.get('[data-testid=chat-room-root]').should('contain', newMessage);
+
+    let timeDividerText = "March 10, 2023";  // This is directly from emulator export please do not change
+    cy.get('[data-testid=chat-room-root]').should('contain', timeDividerText);
   });
 });
