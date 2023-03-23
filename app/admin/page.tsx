@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { FiBell } from 'react-icons/fi';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 
@@ -47,6 +47,30 @@ const Admin = () => {
     return <div>Loading...</div>;
   }
 
+  // mark all the admins's reports as read
+  async function readAll() {
+    const reportCollectionReference = typeCollection<Report>(
+      collection(doc(db.users, authUser.uid), 'report')
+    );
+    const allReports = await getDocs(reportCollectionReference);
+    allReports.forEach(async (rep) => {
+      await updateDoc(
+        doc(collection(doc(db.users, authUser.uid), 'report'), rep.id),
+        {
+          read: true,
+        }
+      );
+    });
+
+    // set the notifications to a new value
+    setReports((curr) =>
+      curr.map((rep) => ({
+        ...rep,
+        read: true,
+      }))
+    );
+  }
+
   return (
     <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
@@ -55,7 +79,7 @@ const Admin = () => {
           <button
             data-testid="read-all-button"
             onClick={() => {
-              //readAll();
+              readAll();
             }}
           >
             <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
@@ -63,6 +87,7 @@ const Admin = () => {
               <p>Read all</p>
             </div>
           </button>
+          {/* this button is for testing purposes and will be removed */}
           <button
             data-testid="read-all-button"
             onClick={() => {
