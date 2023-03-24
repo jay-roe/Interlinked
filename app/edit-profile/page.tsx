@@ -37,6 +37,7 @@ import {
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -72,6 +73,15 @@ export default function EditProfile() {
     currentUser?.isPrivate || false
   ); //deafults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
+
+  // Documents component states
+  const [documents, setDocuments] = useState<User['documents']>(
+    currentUser?.documents || []
+  );
+  const [documentsEditing, setDocumentsEditing] = useState<boolean[]>(
+    currentUser?.documents?.map(() => false) || []
+  );
+  const [documentLink, setDocumentFile] = useState<File>();
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -200,6 +210,7 @@ export default function EditProfile() {
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
     isPrivate: isPrivate,
+    documents: documents?.filter((_, i) => !documentsEditing[i]),
   };
 
   async function uploadProfilePicture() {
@@ -301,6 +312,15 @@ export default function EditProfile() {
           setPhone={setPhone}
           contactEditing={contactEditing}
           setContactEditing={setContactEditing}
+        />
+
+        <ProfileDocuments
+          isEditable
+          documents={documents}
+          setDocuments={setDocuments}
+          documentsEditing={documentsEditing}
+          setDocumentsEditing={setDocumentsEditing}
+          uid={authUser.uid}
         />
 
         <ProfileLanguages

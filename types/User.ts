@@ -26,6 +26,7 @@ export type User = {
   volunteering?: VolunteeringExperience[];
   isPrivate?: boolean;
   isCompany?: boolean;
+  documents?: Document[];
 };
 
 export type Company = User & { isCompany: true };
@@ -136,4 +137,15 @@ type Recommendation = {
   title: string;
   description: string;
   recommender: User;
+};
+
+type Document = {
+  resume?: {
+    link: string;
+    isPrivate?: boolean;
+  };
+  coverLetter?: {
+    link: string;
+    isPrivate?: boolean;
+  };
 };

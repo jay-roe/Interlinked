@@ -20,6 +20,7 @@ import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function PreviewProfile() {
   const { currentUser, authUser } = useAuth();
@@ -65,6 +66,8 @@ export default function PreviewProfile() {
       />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
+
+      <ProfileDocuments documents={currentUser.documents} />
 
       <ProfileLanguages languages={currentUser.languages} />
 

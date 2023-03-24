@@ -11,6 +11,7 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 import { db } from '@/config/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
@@ -89,6 +90,8 @@ export default function ViewProfile({ params }) {
       <ProfileContact email={user.email} phone={user.phone} />
 
       <ProfileLanguages languages={user.languages} />
+
+      <ProfileDocuments documents={user.documents} />
 
       <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
 
