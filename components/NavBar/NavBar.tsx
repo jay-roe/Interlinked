@@ -25,6 +25,10 @@ export default function NavBar() {
     setShowSearch(!showSearch);
   };
 
+  const hideSearch = () => {
+    setShowSearch(false);
+  };
+
   const navLinks = (function navigation(
     currentUser: User,
     currentAdmin: Admin
@@ -86,6 +90,7 @@ export default function NavBar() {
                       <Link
                         key={index}
                         href={item.href}
+                        onClick={hideSearch}
                         data-testid={item.dataTestid}
                         className={classNames(
                           item.href === pathname
@@ -109,7 +114,7 @@ export default function NavBar() {
                   <button
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    onClick={() => setShowSearch(!showSearch)}
+                    onClick={handleSearch}
                   >
                     <span className="sr-only">Search</span>
                     <FiSearch size={24} aria-hidden="true" />
@@ -119,6 +124,7 @@ export default function NavBar() {
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
                     href={'/DM'}
+                    onClick={hideSearch}
                   >
                     <span className="sr-only">DMs</span>
                     <FaRegCommentDots size={24} aria-hidden="true" />
@@ -126,6 +132,7 @@ export default function NavBar() {
 
                   <Link
                     href="/notifications"
+                    onClick={hideSearch}
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                   >
@@ -137,6 +144,7 @@ export default function NavBar() {
                   <Menu as="div" className="relative">
                     <div>
                       <Menu.Button
+                        onClick={hideSearch}
                         data-testid="nav-menu"
                         className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       >
