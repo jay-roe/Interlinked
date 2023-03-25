@@ -1,214 +1,309 @@
 import type { User } from '@/types/User';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
-import CardStack from '@/components/CardStack/CardStack';
-import TextArea from '@/components/InputFields/TextArea/TextArea';
-import Link from 'next/link';
-import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMediaButton';
 import { FaCloudUploadAlt } from 'react-icons/fa';
-import React from 'react';
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytes,
+} from 'firebase/storage';
 import { storage } from '@/config/firebase';
+import FileButton from '@/components/Buttons/FileButton/FileButton';
 
 export default function ProfileDocuments({
   isEditable = false,
-  documents,
-  setDocuments,
-  documentsEditing,
-  setDocumentsEditing,
+  resume,
+  coverLetter,
+  resumeEditing,
+  coverLetterEditing,
+  setResumeEditing,
+  setCoverLetterEditing,
+  setResume,
+  setCoverLetter,
   uid,
 }: {
   isEditable?: boolean;
-  documents: User['documents'];
-  documentsEditing?: boolean[];
-  setDocumentsEditing?: Dispatch<SetStateAction<boolean[]>>;
-  setDocuments?: Dispatch<SetStateAction<User['documents']>>;
-  uid: string;
+  resume: User['resume'];
+  coverLetter: User['coverLetter'];
+  resumeEditing?: boolean;
+  coverLetterEditing?: boolean;
+  setResumeEditing?: Dispatch<SetStateAction<boolean>>;
+  setCoverLetterEditing?: Dispatch<SetStateAction<boolean>>;
+  setResume?: Dispatch<SetStateAction<User['resume']>>;
+  setCoverLetter?: Dispatch<SetStateAction<User['coverLetter']>>;
+  uid?: string;
 }) {
   // uploading a file from button
 
-  const [resume, setResume] = useState<File>();
+  const resumeInputRef = useRef(null);
+  const coverLetterInputRef = useRef(null);
 
-  const hiddenFileInput = React.useRef(null);
-  const hiddenFileInput2 = React.useRef(null);
-  const handleUploadClick = (event) => {
-    hiddenFileInput.current.click();
-  };
-  const handleChange = (event) => {
-    const fileUploaded = event.target.files[0];
+  const handleResumeUploadClick = () => {
+    resumeInputRef.current.click();
   };
 
-  const handleResumeUpload = async (resumeIndex: number) => {
-    //const links = Array.from(event.target.files);
-    // if (!links || !links[0]) {
-    //   return;
-    //  }
-    const resumeRef = ref(storage, `users/${uid}/resume/${resume.name}`);
-    await uploadBytes(resumeRef, resume);
-    const resumeURL = await getDownloadURL(resumeRef);
+  const handleCoverLetterUploadClick = () => {
+    coverLetterInputRef.current.click();
+  };
 
-    setDocuments((docs) => {
-      let tempArr = [...docs];
-      tempArr[resumeIndex].resume.link = resumeURL;
-      return tempArr;
-    });
+  const handleFileUpload = async (
+    event: ChangeEvent<HTMLInputElement>,
+    fileType: 'resume' | 'coverLetter'
+  ) => {
+    const links = Array.from(event.target.files);
+    if (!links || !links[0]) {
+      return;
+    }
 
-    // setResume(links[0]);
+    const fileRef = ref(storage, `users/${uid}/${fileType}/${links[0].name}`);
+
+    // Check if file already exists
+    getDownloadURL(fileRef)
+      .then((res) => {
+        // File already exists, delete it
+        deleteObject(fileRef).then((res) => {
+          console.log('duplicate file deleted');
+        });
+      })
+      .catch((err) => console.error(err));
+
+    await uploadBytes(fileRef, links[0]);
+    const fileURL = await getDownloadURL(fileRef);
+
+    if (fileType === 'resume') {
+      setResume((resume) => {
+        let tempResume = { ...resume };
+        tempResume.link = fileURL;
+        return tempResume;
+      });
+    } else if (fileType === 'coverLetter') {
+      setCoverLetter((coverLetter) => {
+        let tempCoverLetter = { ...coverLetter };
+        tempCoverLetter.link = fileURL;
+        return tempCoverLetter;
+      });
+    }
   };
 
   // Live version of documents component
   if (!isEditable) {
-    if (!documents || !documents[0]) return;
-
     //****CardStack has to output first the resume , then the coverletter*****
     return (
       <div className="mb-10">
         <h2 className="text-2xl font-extrabold"> Docs </h2>
-        <CardStack>
-          {documents.map((doc, index) => (
-            <div key={index}>
-              <p> {doc.resume.link} </p>
-              <p> {doc.coverLetter.link} </p>
-            </div>
-          ))}
-        </CardStack>
+        <div className="flex gap-2">
+          {resume && <FileButton link={resume.link}>{resume.name}</FileButton>}
+          {coverLetter && (
+            <FileButton link={coverLetter.link}>{coverLetter.name}</FileButton>
+          )}
+        </div>
       </div>
     );
   }
 
   // Editable version of documents component
   return (
-    <div>
-      <h2 className="text-2xl font-extrabold"> Your Documents</h2>
-      {documents?.map((docs, index) => (
+    <div className="mb-3">
+      <h2 className="mb-1 text-2xl font-extrabold">Your Documents</h2>
+
+      {/* Resume */}
+      {resume ? (
         <form
           action=""
-          key={index}
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
           onSubmit={(e) => {
             e.preventDefault();
-            setDocumentsEditing((docedits) =>
-              docedits.map((doc, i) => (i === index ? !doc : doc))
-            );
+            if (!resume.link) {
+              alert('You must upload a resume before continuing.');
+              return;
+            }
+            setResumeEditing((curr) => !curr);
           }}
         >
-          {documentsEditing && documentsEditing[index] ? (
+          {resumeEditing ? (
             <div className="mr-2 mb-3 w-full max-w-xs">
               <label>
                 Resume <span className="text-yellow-600">*</span>
               </label>
               <div>
-                <label htmlFor="resume-upload">
-                  <Button>
-                    Upload Resume <FaCloudUploadAlt />
-                  </Button>
-                </label>
+                <InputField
+                  placeholder="Public resume display name"
+                  defaultValue={resume.name}
+                  onChange={(e) =>
+                    setResume((res) => {
+                      let tempRes = { ...res };
+                      tempRes.name = e.target.value;
+                      return tempRes;
+                    })
+                  }
+                />
+                <Button onClick={handleResumeUploadClick} type="button">
+                  Upload Resume &nbsp; <FaCloudUploadAlt size={25} />
+                </Button>
 
                 <input
-                  id="resume-upload"
                   type="file"
-                  ref={hiddenFileInput}
+                  ref={resumeInputRef}
                   style={{ display: 'none' }}
-                  value={docs.resume.link}
-                  onChange={
-                    (e) => handleResumeUpload(index)
-                    //  {const links = Array.from(e.target.files);
-                    //    if (!links || !links[0]) {
-                    //      return;
-                    //    }
-                    //   setResume(links[0])}
-                  }
-                  required
+                  onChange={(e) => handleFileUpload(e, 'resume')}
                 />
-              </div>
-
-              <label>
-                Cover Letter <span className="text-yellow-600">*</span>
-              </label>
-
-              <div>
-                <InputField
-                  data-testid={`coverletter-link-box-${index}`}
-                  type="text"
-                  name="coverletter"
-                  value={docs.coverLetter.link}
-                  readOnly
-                />
-                <Button>
-                  Upload Cover Letter <FaCloudUploadAlt />
-                </Button>
               </div>
             </div>
           ) : (
-            <div key={index} data-testid="editable-docs">
-              <p> resume: {docs.resume.link}</p>
-              <h6></h6>
-              <p>cover: {docs.coverLetter.link}</p>
+            <div data-testid="editable-resume">
+              <FileButton link={resume.link}>{resume.name}</FileButton>
             </div>
           )}
           <div className="flex items-center">
-            {/* External edit award button */}
-            {documentsEditing && documentsEditing[index] ? (
+            {/* Edit resume button */}
+            {resumeEditing ? (
               <Button
                 className="mr-2"
                 type="submit"
-                data-testid={`docs-save-btn-${index}`}
+                data-testid="resume-save-btn"
               >
-                Save Document
+                Save Resume
               </Button>
             ) : (
               <EditButton
-                data-testid={`awards-edit-btn-${index}`}
+                data-testid="resume-edit-button"
                 onClick={(e) => {
                   e.preventDefault();
-                  setDocumentsEditing((docedits) =>
-                    docedits.map((doc, i) => (i === index ? !doc : doc))
-                  );
+                  setResumeEditing((curr) => !curr);
                 }}
               />
             )}
-            {/* External delete award button */}
+            {/* Delete resume */}
             <DeleteButton
-              data-testid={`docs-delete-btn-${index}`}
+              data-testid="delete-resume-btn"
               onClick={(e) => {
                 e.preventDefault();
-                setDocuments((docs) => docs.filter((_, i) => index !== i));
-                setDocumentsEditing((docedits) =>
-                  docedits.filter((_, i) => index !== i)
-                );
+                setResume(null);
+                setResumeEditing((curr) => !curr);
               }}
             />
           </div>
         </form>
-      ))}
-      {/* Adding new document, appears after all docs cards */}
-      <Button
-        data-testid="doc-add-button"
-        className="inline"
-        type="button"
-        onClick={() => {
-          // Append new empty document to current array of document
-          setDocuments((docs) => [
-            ...docs,
-            {
-              resume: {
-                link: '',
-                isPrivate: false,
-              },
-              coverLetter: {
-                link: '',
-                isPrivate: false,
-              },
-            },
-          ]);
-          setDocumentsEditing((docs) => [...docs, true]);
-        }}
-      >
-        Add New Document
-      </Button>
+      ) : (
+        <Button
+          data-testid="doc-add-resume-button"
+          className="mr-2 mb-2 inline"
+          type="button"
+          onClick={() => {
+            // Add new resume
+            setResume({
+              name: 'resume',
+              link: '',
+              isPrivate: false,
+            });
+            setResumeEditing(true);
+          }}
+        >
+          Add Resume
+        </Button>
+      )}
+
+      {/* Cover letter */}
+
+      {coverLetter ? (
+        <form
+          action=""
+          className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!coverLetter.link) {
+              alert('You must upload a cover letter before continuing.');
+              return;
+            }
+            setCoverLetterEditing((curr) => !curr);
+          }}
+        >
+          {coverLetterEditing ? (
+            <div>
+              <label>
+                Cover Letter <span className="text-yellow-600">*</span>
+              </label>
+              <InputField
+                placeholder="Public cover letter display name"
+                defaultValue={coverLetter.name}
+                onChange={(e) =>
+                  setCoverLetter((res) => {
+                    let tempRes = { ...res };
+                    tempRes.name = e.target.value;
+                    return tempRes;
+                  })
+                }
+              />
+              <Button onClick={handleCoverLetterUploadClick} type="button">
+                Upload Cover Letter &nbsp; <FaCloudUploadAlt size={25} />
+              </Button>
+
+              <input
+                type="file"
+                ref={coverLetterInputRef}
+                style={{ display: 'none' }}
+                onChange={(e) => handleFileUpload(e, 'coverLetter')}
+              />
+            </div>
+          ) : (
+            <div data-testid="editable-cover-letter">
+              <FileButton link={coverLetter.link}>
+                {coverLetter.name}
+              </FileButton>
+            </div>
+          )}
+          <div className="flex items-center">
+            {/* Edit cover letter button */}
+            {coverLetterEditing ? (
+              <Button
+                className="mr-2"
+                type="submit"
+                data-testid="cover-letter-save-btn"
+              >
+                Save Cover Letter
+              </Button>
+            ) : (
+              <EditButton
+                data-testid="cover-letter-edit-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setCoverLetterEditing((curr) => !curr);
+                }}
+              />
+            )}
+            {/* Delete cover letter */}
+            <DeleteButton
+              data-testid="delete-cover-letter-btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setCoverLetter(null);
+                setCoverLetterEditing((curr) => !curr);
+              }}
+            />
+          </div>
+        </form>
+      ) : (
+        <Button
+          data-testid="doc-add-cover-letter-button"
+          className="inline"
+          type="button"
+          onClick={() => {
+            // Add cover letter
+            setCoverLetter({
+              name: 'cover letter',
+              link: '',
+              isPrivate: false,
+            });
+            setCoverLetterEditing(true);
+          }}
+        >
+          Add Cover Letter
+        </Button>
+      )}
     </div>
   );
 }

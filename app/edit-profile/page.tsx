@@ -75,13 +75,13 @@ export default function EditProfile() {
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
 
   // Documents component states
-  const [documents, setDocuments] = useState<User['documents']>(
-    currentUser?.documents || []
+  const [resume, setResume] = useState<User['resume']>(currentUser?.resume);
+  const [resumeEditing, setResumeEditing] = useState<boolean>(false);
+
+  const [coverLetter, setCoverLetter] = useState<User['coverLetter']>(
+    currentUser?.coverLetter
   );
-  const [documentsEditing, setDocumentsEditing] = useState<boolean[]>(
-    currentUser?.documents?.map(() => false) || []
-  );
-  const [documentLink, setDocumentFile] = useState<File>();
+  const [coverLetterEditing, setCoverLetterEditing] = useState<boolean>(false);
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -210,7 +210,8 @@ export default function EditProfile() {
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
     isPrivate: isPrivate,
-    documents: documents?.filter((_, i) => !documentsEditing[i]),
+    resume: resume,
+    coverLetter: coverLetter,
   };
 
   async function uploadProfilePicture() {
@@ -316,10 +317,14 @@ export default function EditProfile() {
 
         <ProfileDocuments
           isEditable
-          documents={documents}
-          setDocuments={setDocuments}
-          documentsEditing={documentsEditing}
-          setDocumentsEditing={setDocumentsEditing}
+          resume={resume}
+          setResume={setResume}
+          coverLetter={coverLetter}
+          setCoverLetter={setCoverLetter}
+          resumeEditing={resumeEditing}
+          setResumeEditing={setResumeEditing}
+          coverLetterEditing={coverLetterEditing}
+          setCoverLetterEditing={setCoverLetterEditing}
           uid={authUser.uid}
         />
 

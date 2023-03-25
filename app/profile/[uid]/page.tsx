@@ -91,7 +91,10 @@ export default function ViewProfile({ params }) {
 
       <ProfileLanguages languages={user.languages} />
 
-      <ProfileDocuments documents={user.documents} />
+      <ProfileDocuments
+        resume={currentUser.resume}
+        coverLetter={currentUser.coverLetter}
+      />
 
       <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
 

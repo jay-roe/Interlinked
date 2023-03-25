@@ -67,7 +67,10 @@ export default function PreviewProfile() {
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
-      <ProfileDocuments documents={currentUser.documents} />
+      <ProfileDocuments
+        resume={currentUser.resume}
+        coverLetter={currentUser.coverLetter}
+      />
 
       <ProfileLanguages languages={currentUser.languages} />
 
