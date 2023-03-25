@@ -12,9 +12,14 @@ export type JobPosting = {
   deadline: Timestamp;
   cvRequired: boolean;
   coverLetterRequired: boolean;
-  externalApplicationLink?: string;
+  externalApplications?: ApplicationLink[];
   hidden: boolean;
   applications: Application[];
+};
+
+type ApplicationLink = {
+  name: string;
+  url: string;
 };
 
 export interface JobPostingWithId extends JobPosting {

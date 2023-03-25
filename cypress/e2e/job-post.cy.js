@@ -47,9 +47,16 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=external-check]').click();
 
     cy.get('[data-testid=external-application]').should('exist');
-    cy.get('[data-testid=external-application]').type(
-      'https://interlinked.live'
-    );
+    cy.get('[data-testid=job-add-button]').click();
+    cy.get('[data-testid=job-platform-input-0]').type('InterLinked');
+    cy.get('[data-testid=job-url-input-0]').type('https://interlinked.live');
+    cy.get('[data-testid=job-add-button]').click();
+    cy.get('[data-testid=job-platform-input-1]').type('InterLinked2');
+    cy.get('[data-testid=job-url-input-1]').type('https://interlinked2.live');
+    cy.get('[data-testid=job-save-1]').click();
+    cy.get('[data-testid=job-edit-1]').click();
+    cy.get('[data-testid=job-delete-1]').click();
+    cy.get('[data-testid=job-save-0]').click();
 
     cy.get('[data-testid=new-job-submit]').click();
     // job is now posted

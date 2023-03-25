@@ -7,8 +7,9 @@ import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import { FaRegPaperPlane } from 'react-icons/fa';
+
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
-  // Creates the body of the post constaining the title, body text, and image if there is one
+  // Creates the body of the post constaining the title, body text and also handles editing logic
   return (
     <div className="mb-3 flex flex-col space-y-2 border-y-2 border-y-white border-opacity-10 p-2">
       {jobPost?.title ? (
@@ -85,10 +86,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         <FaRegPaperPlane className="my-auto text-accent-orange" />
         <p>
           {'External Job: ' +
-            (jobPost?.externalApplicationLink &&
-            jobPost?.externalApplicationLink !== ''
-              ? 'Yes'
-              : 'No')}
+            (jobPost?.externalApplications.length !== 0 ? 'Yes' : 'No')}
         </p>
       </div>
       <div

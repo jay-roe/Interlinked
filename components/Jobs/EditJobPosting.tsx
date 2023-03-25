@@ -17,6 +17,7 @@ import CheckBox from '../InputFields/CheckBox/CheckBox';
 import Input from '../InputFields/Input/Input';
 import TextArea from '../InputFields/TextArea/TextArea';
 import ProfileSkills from '../ProfilePage/ProfileSkills/ProfileSkills';
+import ExternalApplication from './ExternalApplication';
 
 const EditJobPosting = ({
   newJob,
@@ -55,11 +56,15 @@ const EditJobPosting = ({
     jobPosting?.hidden || false
   );
   const [externalApp, setExternalApp] = useState<boolean>(
-    jobPosting?.externalApplicationLink ? true : false || false
+    jobPosting?.externalApplications.length !== 0 ? true : false || false
   );
-  const [externalAppLink, setExternalAppLink] = useState<string>(
-    jobPosting?.externalApplicationLink || null
-  );
+  const [externalApplications, setExternalApplications] = useState<
+    JobPosting['externalApplications']
+  >(jobPosting?.externalApplications || []);
+  const [externalApplicationsEditing, setExternalApplicationsEditing] =
+    useState<boolean[]>(
+      jobPosting?.externalApplications.map(() => false) || []
+    );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -68,7 +73,7 @@ const EditJobPosting = ({
       postTitle === '' ||
       postDescription === '' ||
       postLocation === '' ||
-      (externalApp && externalAppLink === null)
+      (externalApp && externalApplications === null)
     ) {
       alert('Job Posting Not Complete');
       return;
@@ -88,7 +93,7 @@ const EditJobPosting = ({
       cvRequired: postCV,
       hidden: postHidden,
       datePosted: jobPosting?.datePosted || null,
-      externalApplicationLink: externalApp ? externalAppLink : '',
+      externalApplications: externalApp ? externalApplications : [],
     };
 
     if (newJob && !jobPosting) {
@@ -212,7 +217,7 @@ const EditJobPosting = ({
           name="coverletter"
           checked={postCoverLetter}
           onChange={() => setPostCoverLetter((curr) => !curr)}
-          label="Coverletter Required?"
+          label="Cover Letter Required?"
         />
         <CheckBox
           name="external"
@@ -230,15 +235,13 @@ const EditJobPosting = ({
 
       {externalApp && (
         <div className="flex flex-col align-middle">
-          <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-            External Application Link 🔗
-          </p>
-          <Input
-            type="text"
-            required={externalApp}
+          <ExternalApplication
             data-testid="external-application"
-            value={externalAppLink}
-            onChange={(e) => setExternalAppLink(e.target.value)}
+            externalApplications={externalApplications}
+            applicationEditing={externalApplicationsEditing}
+            setApplication={setExternalApplications}
+            setApplicationEditing={setExternalApplicationsEditing}
+            isEditable
           />
         </div>
       )}

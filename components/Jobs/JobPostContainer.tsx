@@ -26,7 +26,7 @@ const FullPostCard = ({
   const postContainer = useRef(null);
 
   return (
-    <Card>
+    <Card className="mb-4">
       <div
         data-testid={`post-card-${testKey}`}
         id="post-content"
