@@ -22,7 +22,7 @@ export default function NavBar() {
 
   // Allow state access in SearchBar component
   const toggleSearch = () => {
-    setShowSearch(!showSearch);
+    setShowSearch((curr) => !curr);
   };
 
   const hideSearch = () => {
