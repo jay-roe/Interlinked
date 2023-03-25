@@ -56,7 +56,9 @@ const EditJobPosting = ({
     jobPosting?.hidden || false
   );
   const [externalApp, setExternalApp] = useState<boolean>(
-    jobPosting?.externalApplications.length !== 0 ? true : false || false
+    jobPosting && jobPosting?.externalApplications.length !== 0
+      ? true
+      : false || false
   );
   const [externalApplications, setExternalApplications] = useState<
     JobPosting['externalApplications']
