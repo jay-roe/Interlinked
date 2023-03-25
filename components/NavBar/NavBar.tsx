@@ -21,7 +21,7 @@ export default function NavBar() {
   const pathname = usePathname();
 
   // Allow state access in SearchBar component
-  const handleSearch = () => {
+  const toggleSearch = () => {
     setShowSearch(!showSearch);
   };
 
@@ -114,7 +114,7 @@ export default function NavBar() {
                   <button
                     type="button"
                     className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    onClick={handleSearch}
+                    onClick={toggleSearch}
                   >
                     <span className="sr-only">Search</span>
                     <FiSearch size={24} aria-hidden="true" />
@@ -275,7 +275,7 @@ export default function NavBar() {
             </div>
             <div className="mb-2 flex justify-end">
               {/* search bar that appears when search button is clicked*/}
-              {showSearch && <SearchBar handleSearch={handleSearch} />}
+              {showSearch && <SearchBar toggleSearch={toggleSearch} />}
             </div>
           </div>
 
