@@ -28,7 +28,6 @@ describe('Full notification spec', async () => {
   it('notifications are sent and displayed', () => {
     cy.visit('/profile/' + melUserId);
     cy.get('[data-testid=link-btn]').click();
-    cy.visit('/profile');
 
     cy.logout();
     cy.login(melEmail, pw);
@@ -36,7 +35,6 @@ describe('Full notification spec', async () => {
     cy.visit('/notifications');
 
     cy.get('[data-testid=accept-link-button]').click();
-    cy.visit('');
 
     cy.logout();
     cy.login(email, pw);
