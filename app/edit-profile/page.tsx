@@ -303,7 +303,9 @@ export default function EditProfile() {
           setSocialsEditing={setSocialsEditing}
         />
 
-        <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
+        {!currentUser.isCompany && (
+          <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
+        )}
 
         <ProfileContact
           isEditable
@@ -315,103 +317,125 @@ export default function EditProfile() {
           setContactEditing={setContactEditing}
         />
 
-        <ProfileDocuments
-          isEditable
-          resume={resume}
-          setResume={setResume}
-          coverLetter={coverLetter}
-          setCoverLetter={setCoverLetter}
-          resumeEditing={resumeEditing}
-          setResumeEditing={setResumeEditing}
-          coverLetterEditing={coverLetterEditing}
-          setCoverLetterEditing={setCoverLetterEditing}
-          uid={authUser.uid}
-        />
+        {!currentUser.isCompany && (
+          <ProfileDocuments
+            isEditable
+            resume={resume}
+            setResume={setResume}
+            coverLetter={coverLetter}
+            setCoverLetter={setCoverLetter}
+            resumeEditing={resumeEditing}
+            setResumeEditing={setResumeEditing}
+            coverLetterEditing={coverLetterEditing}
+            setCoverLetterEditing={setCoverLetterEditing}
+            uid={authUser.uid}
+          />
+        )}
 
-        <ProfileLanguages
-          isEditable
-          languages={languages}
-          languagesHovering={languagesHovering}
-          newLanguage={newLanguage}
-          setLanguages={setLanguages}
-          setLanguagesHovering={setLanguagesHovering}
-          setNewLanguage={setNewLanguage}
-        />
+        {!currentUser.isCompany && (
+          <ProfileLanguages
+            isEditable
+            languages={languages}
+            languagesHovering={languagesHovering}
+            newLanguage={newLanguage}
+            setLanguages={setLanguages}
+            setLanguagesHovering={setLanguagesHovering}
+            setNewLanguage={setNewLanguage}
+          />
+        )}
 
         {/* TODO: change coding languages picture */}
-        <ProfileCodingLanguages
-          isEditable
-          codingLanguages={codingLanguages}
-          codingLanguagesHovering={codingLanguagesHovering}
-          newCodingLanguage={newCodingLanguage}
-          setCodingLanguages={setCodingLanguages}
-          setCodingLanguagesHovering={setCodingLanguagesHovering}
-          setNewCodingLanguage={setNewCodingLanguage}
-        />
+        {!currentUser.isCompany && (
+          <ProfileCodingLanguages
+            isEditable
+            codingLanguages={codingLanguages}
+            codingLanguagesHovering={codingLanguagesHovering}
+            newCodingLanguage={newCodingLanguage}
+            setCodingLanguages={setCodingLanguages}
+            setCodingLanguagesHovering={setCodingLanguagesHovering}
+            setNewCodingLanguage={setNewCodingLanguage}
+          />
+        )}
 
-        <ProfileEducation
-          isEditable
-          education={education}
-          educationEditing={educationEditing}
-          setEducation={setEducation}
-          setEducationEditing={setEducationEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileEducation
+            isEditable
+            education={education}
+            educationEditing={educationEditing}
+            setEducation={setEducation}
+            setEducationEditing={setEducationEditing}
+          />
+        )}
 
-        <ProfileCourses
-          isEditable
-          courses={courses}
-          coursesEditing={coursesEditing}
-          setCoursesEditing={setCoursesEditing}
-          setCourses={setCourses}
-        />
+        {!currentUser.isCompany && (
+          <ProfileCourses
+            isEditable
+            courses={courses}
+            coursesEditing={coursesEditing}
+            setCoursesEditing={setCoursesEditing}
+            setCourses={setCourses}
+          />
+        )}
 
-        <ProfileExperience
-          isEditable
-          experience={experience}
-          experienceEditing={experienceEditing}
-          setExperience={setExperience}
-          setExperienceEditing={setExperienceEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileExperience
+            isEditable
+            experience={experience}
+            experienceEditing={experienceEditing}
+            setExperience={setExperience}
+            setExperienceEditing={setExperienceEditing}
+          />
+        )}
 
-        <ProfileProjects
-          isEditable
-          projects={projects}
-          projectsEditing={projectsEditing}
-          setProjectsEditing={setProjectsEditing}
-          setProjects={setProjects}
-        />
+        {!currentUser.isCompany && (
+          <ProfileProjects
+            isEditable
+            projects={projects}
+            projectsEditing={projectsEditing}
+            setProjectsEditing={setProjectsEditing}
+            setProjects={setProjects}
+          />
+        )}
 
-        <ProfileSkills
-          isEditable
-          skills={skills}
-          skillsEditing={skillsEditing}
-          setSkills={setSkills}
-          setSkillsEditing={setSkillsEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileSkills
+            isEditable
+            skills={skills}
+            skillsEditing={skillsEditing}
+            setSkills={setSkills}
+            setSkillsEditing={setSkillsEditing}
+          />
+        )}
 
-        <ProfileAwards
-          isEditable
-          awards={awards}
-          awardsEditing={awardsEditing}
-          setAwards={setAwards}
-          setAwardsEditing={setAwardsEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileAwards
+            isEditable
+            awards={awards}
+            awardsEditing={awardsEditing}
+            setAwards={setAwards}
+            setAwardsEditing={setAwardsEditing}
+          />
+        )}
 
-        <ProfileCertifications
-          isEditable
-          certifications={certifications}
-          setCertifications={setCertifications}
-          certificationsEditing={certificationsEditing}
-          setCertificationsEditing={setCertificationsEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileCertifications
+            isEditable
+            certifications={certifications}
+            setCertifications={setCertifications}
+            certificationsEditing={certificationsEditing}
+            setCertificationsEditing={setCertificationsEditing}
+          />
+        )}
 
-        <ProfileVolunteering
-          isEditable
-          volunteering={volunteering}
-          setVolunteering={setVolunteering}
-          volunteeringEditing={volunteeringEditing}
-          setVolunteeringEditing={setVolunteeringEditing}
-        />
+        {!currentUser.isCompany && (
+          <ProfileVolunteering
+            isEditable
+            volunteering={volunteering}
+            setVolunteering={setVolunteering}
+            volunteeringEditing={volunteeringEditing}
+            setVolunteeringEditing={setVolunteeringEditing}
+          />
+        )}
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>

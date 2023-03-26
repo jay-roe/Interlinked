@@ -59,39 +59,66 @@ export default function PreviewProfile() {
         <SocialIconGroup socials={currentUser.socials} />
       </div>
 
-      <ViewLinkButton
-        href={`/profile/${authUser.uid}/links`}
-        linkedUserIds={currentUser?.linkedUserIds}
-        data-testid="view-link-button"
-      />
+      {!currentUser.isCompany && (
+        <ViewLinkButton
+          href={`/profile/${authUser.uid}/links`}
+          linkedUserIds={currentUser?.linkedUserIds}
+          data-testid="view-link-button"
+        />
+      )}
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
 
-      <ProfileDocuments
-        resume={currentUser.resume}
-        coverLetter={currentUser.coverLetter}
-      />
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
 
-      <ProfileLanguages languages={currentUser.languages} />
+      {/* The check is done on each section to make it less confusing to change the visibility of one of the profile components if we want to */}
+      {!currentUser.isCompany && (
+        <ProfileLanguages languages={currentUser.languages} />
+      )}
 
       {/* TODO: change coding languages picture */}
-      <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
+      {!currentUser.isCompany && (
+        <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
+      )}
 
-      <ProfileEducation education={currentUser.education} />
+      {!currentUser.isCompany && (
+        <ProfileEducation education={currentUser.education} />
+      )}
 
-      <ProfileCourses courses={currentUser.courses} />
+      {!currentUser.isCompany && (
+        <ProfileCourses courses={currentUser.courses} />
+      )}
 
-      <ProfileExperience experience={currentUser.experience} />
+      {!currentUser.isCompany && (
+        <ProfileExperience experience={currentUser.experience} />
+      )}
 
-      <ProfileProjects projects={currentUser.projects} />
+      {!currentUser.isCompany && (
+        <ProfileProjects projects={currentUser.projects} />
+      )}
 
-      <ProfileSkills skills={currentUser.skills} />
+      {!currentUser.isCompany && <ProfileSkills skills={currentUser.skills} />}
 
-      <ProfileAwards awards={currentUser.awards} />
+      {!currentUser.isCompany && <ProfileAwards awards={currentUser.awards} />}
 
-      <ProfileCertifications certifications={currentUser.certifications} />
+      {!currentUser.isCompany && (
+        <ProfileCertifications certifications={currentUser.certifications} />
+      )}
 
-      <ProfileVolunteering volunteering={currentUser.volunteering} />
+      {!currentUser.isCompany && (
+        <ProfileVolunteering volunteering={currentUser.volunteering} />
+      )}
     </div>
   );
 }

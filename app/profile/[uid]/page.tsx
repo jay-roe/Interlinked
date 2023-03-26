@@ -79,40 +79,50 @@ export default function ViewProfile({ params }) {
         <SocialIconGroup socials={user?.socials} />
       </div>
 
-      <div className="flex space-x-4">
-        <ViewLinkButton
-          href={`/profile/${params.uid}/links`}
-          linkedUserIds={user?.linkedUserIds}
-        />
-        <LinkButton profileOwnerUID={params.uid} />
-      </div>
+      {!user.isCompany && (
+        <div className="flex space-x-4">
+          <ViewLinkButton
+            href={`/profile/${params.uid}/links`}
+            linkedUserIds={user?.linkedUserIds}
+          />
+          <LinkButton profileOwnerUID={params.uid} />
+        </div>
+      )}
 
       <ProfileContact email={user.email} phone={user.phone} />
 
-      <ProfileLanguages languages={user.languages} />
+      {!user.isCompany && <ProfileLanguages languages={user.languages} />}
 
-      <ProfileDocuments
-        resume={currentUser.resume}
-        coverLetter={currentUser.coverLetter}
-      />
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
 
-      <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
+      {!user.isCompany && (
+        <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
+      )}
 
-      <ProfileEducation education={user.education} />
+      {!user.isCompany && <ProfileEducation education={user.education} />}
 
-      <ProfileCourses courses={user.courses} />
+      {!user.isCompany && <ProfileCourses courses={user.courses} />}
 
-      <ProfileExperience experience={user.experience} />
+      {!user.isCompany && <ProfileExperience experience={user.experience} />}
 
-      <ProfileProjects projects={user.projects} />
+      {!user.isCompany && <ProfileProjects projects={user.projects} />}
 
-      <ProfileSkills skills={user.skills} />
+      {!user.isCompany && <ProfileSkills skills={user.skills} />}
 
-      <ProfileAwards awards={user.awards} />
+      {!user.isCompany && <ProfileAwards awards={user.awards} />}
 
-      <ProfileCertifications certifications={user.certifications} />
+      {!user.isCompany && (
+        <ProfileCertifications certifications={user.certifications} />
+      )}
 
-      <ProfileVolunteering volunteering={user.volunteering} />
+      {!user.isCompany && (
+        <ProfileVolunteering volunteering={user.volunteering} />
+      )}
     </div>
   );
 }
