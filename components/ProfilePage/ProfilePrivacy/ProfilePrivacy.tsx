@@ -3,6 +3,7 @@ import type { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import PrivacyIcon from '@/components/Icons/PrivacyIcon/PrivacyIcon';
+import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 
 export default function ProfilePrivacy({
   isEditable = false,
@@ -53,14 +54,12 @@ export default function ProfilePrivacy({
                 <PrivacyIcon isPrivate={isPrivate} />
               </label>
               <div className="mt-3 flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  id="privacy"
-                  value="Private profile"
+                <CheckBox
+                  name="privacy"
+                  label="Private profile"
                   checked={isPrivate}
                   onChange={(e) => setIsPrivate(e.target.checked)}
                 />
-                <label htmlFor="privacy">Private profile</label>
               </div>
               <div>
                 <Button className="mt-3" type="submit">

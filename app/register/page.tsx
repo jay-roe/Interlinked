@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
+import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 
 export default function Register() {
   const router = useRouter();
@@ -17,6 +18,7 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isCompany, setIsCompany] = useState(false);
 
   // If user logged in, send them to home
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function Register() {
 
     try {
       setLoading(true);
-      await register(email, password);
+      await register(email, password, isCompany);
       router.push('/');
     } catch (err) {
       alert(err.message);
@@ -93,6 +95,14 @@ export default function Register() {
                 required
                 className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
                 placeholder="Confirm Password"
+              />
+            </div>
+            <div>
+              <CheckBox
+                name="company"
+                label="Register as Recruiter"
+                onChange={() => setIsCompany((curr) => !curr)}
+                checked={isCompany}
               />
             </div>
           </div>

@@ -271,32 +271,30 @@ export default function EditProfile() {
           Save Changes
         </Button>
       </div>
-      <div className="r)}ounded-xl mb-3 bg-white bg-opacity-[8%] p-5">
-        {!currentUser.isCompany && (
-          <ProfileHeading
-            isEditable
-            profilePictureURL={profilePictureURL}
-            setProfilePicture={setProfilePicture}
-            name={name}
-            setName={setName}
-            nameEditing={nameEditing}
-            setNameEditing={setNameEditing}
-            bio={bio}
-            setBio={setBio}
-            bioEditing={bioEditing}
-            setBioEditing={setBioEditing}
-            uid={''}
-          />
-        )}
-        {!currentUser.isCompany && (
-          <ProfilePrivacy
-            isEditable
-            isPrivate={isPrivate}
-            setIsPrivate={setIsPrivate}
-            privacyEditing={privacyEditing}
-            setPrivacyEditing={setPrivacyEditing}
-          />
-        )}
+      <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
+        <ProfileHeading
+          isEditable
+          profilePictureURL={profilePictureURL}
+          setProfilePicture={setProfilePicture}
+          name={name}
+          setName={setName}
+          nameEditing={nameEditing}
+          setNameEditing={setNameEditing}
+          bio={bio}
+          setBio={setBio}
+          bioEditing={bioEditing}
+          setBioEditing={setBioEditing}
+          uid={''}
+        />
+
+        <ProfilePrivacy
+          isEditable
+          isPrivate={isPrivate}
+          setIsPrivate={setIsPrivate}
+          privacyEditing={privacyEditing}
+          setPrivacyEditing={setPrivacyEditing}
+        />
+
         {!currentUser.isCompany && (
           <ProfileSocials
             isEditable
@@ -309,15 +307,29 @@ export default function EditProfile() {
         {!currentUser.isCompany && (
           <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
         )}
+
+        <ProfileContact
+          isEditable
+          email={email}
+          setEmail={setEmail}
+          phone={phone}
+          setPhone={setPhone}
+          contactEditing={contactEditing}
+          setContactEditing={setContactEditing}
+        />
+
         {!currentUser.isCompany && (
-          <ProfileContact
+          <ProfileDocuments
             isEditable
-            email={email}
-            setEmail={setEmail}
-            phone={phone}
-            setPhone={setPhone}
-            contactEditing={contactEditing}
-            setContactEditing={setContactEditing}
+            resume={resume}
+            setResume={setResume}
+            coverLetter={coverLetter}
+            setCoverLetter={setCoverLetter}
+            resumeEditing={resumeEditing}
+            setResumeEditing={setResumeEditing}
+            coverLetterEditing={coverLetterEditing}
+            setCoverLetterEditing={setCoverLetterEditing}
+            uid={authUser.uid}
           />
         )}
 
@@ -348,7 +360,7 @@ export default function EditProfile() {
           />
         )}
 
-        {/* TODO: change coding lang)}uages picture */}
+        {/* TODO: change coding languages picture */}
         {!currentUser.isCompany && (
           <ProfileCodingLanguages
             isEditable
@@ -360,6 +372,7 @@ export default function EditProfile() {
             setNewCodingLanguage={setNewCodingLanguage}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileEducation
             isEditable
@@ -369,6 +382,7 @@ export default function EditProfile() {
             setEducationEditing={setEducationEditing}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileCourses
             isEditable
@@ -378,6 +392,7 @@ export default function EditProfile() {
             setCourses={setCourses}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileExperience
             isEditable
@@ -387,6 +402,7 @@ export default function EditProfile() {
             setExperienceEditing={setExperienceEditing}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileProjects
             isEditable
@@ -396,6 +412,7 @@ export default function EditProfile() {
             setProjects={setProjects}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileSkills
             isEditable
@@ -405,6 +422,7 @@ export default function EditProfile() {
             setSkillsEditing={setSkillsEditing}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileAwards
             isEditable
@@ -414,6 +432,7 @@ export default function EditProfile() {
             setAwardsEditing={setAwardsEditing}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileCertifications
             isEditable
@@ -423,6 +442,7 @@ export default function EditProfile() {
             setCertificationsEditing={setCertificationsEditing}
           />
         )}
+
         {!currentUser.isCompany && (
           <ProfileVolunteering
             isEditable
