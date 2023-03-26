@@ -11,6 +11,7 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 import { db } from '@/config/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
@@ -67,46 +68,59 @@ export default function ViewProfile({ params }) {
 
   return (
     <div data-testid="profile" className="container mx-auto text-white">
-      <ProfileHeading
-        profilePictureURL={user.profilePicture}
-        name={user.name}
-        bio={user.bio}
-        uid={params.uid}
-      />
-
-      <div className="mx-auto mb-3">
-        <SocialIconGroup socials={user?.socials} />
-      </div>
-
-      <div className="flex space-x-4">
-        <ViewLinkButton
-          href={`/profile/${params.uid}/links`}
-          linkedUserIds={user?.linkedUserIds}
+      {!currentUser.isCompany && (
+        <ProfileHeading
+          profilePictureURL={user.profilePicture}
+          name={user.name}
+          bio={user.bio}
+          uid={params.uid}
         />
-        <LinkButton profileOwnerUID={params.uid} />
-      </div>
-
-      <ProfileContact email={user.email} phone={user.phone} />
-
-      <ProfileLanguages languages={user.languages} />
-
-      <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
-
-      <ProfileEducation education={user.education} />
-
-      <ProfileCourses courses={user.courses} />
-
-      <ProfileExperience experience={user.experience} />
-
-      <ProfileProjects projects={user.projects} />
-
-      <ProfileSkills skills={user.skills} />
-
-      <ProfileAwards awards={user.awards} />
-
-      <ProfileCertifications certifications={user.certifications} />
-
-      <ProfileVolunteering volunteering={user.volunteering} />
+      )}
+      {!currentUser.isCompany && (
+        <div className="mx-auto mb-3">
+          <SocialIconGroup socials={user?.socials} />
+        </div>
+      )}
+      {!currentUser.isCompany && (
+        <div className="flex space-x-4">
+          <ViewLinkButton
+            href={`/profile/${params.uid}/links`}
+            linkedUserIds={user?.linkedUserIds}
+          />
+          <LinkButton profileOwnerUID={params.uid} />
+        </div>
+      )}
+      {!currentUser.isCompany && (
+        <ProfileContact email={user.email} phone={user.phone} />
+      )}
+      {!currentUser.isCompany && (
+        <ProfileLanguages languages={user.languages} />
+      )}
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
+      {!currentUser.isCompany && (
+        <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
+      )}
+      {!currentUser.isCompany && (
+        <ProfileEducation education={user.education} />
+      )}
+      {!currentUser.isCompany && <ProfileCourses courses={user.courses} />}
+      {!currentUser.isCompany && (
+        <ProfileExperience experience={user.experience} />
+      )}
+      {!currentUser.isCompany && <ProfileProjects projects={user.projects} />}
+      {!currentUser.isCompany && <ProfileSkills skills={user.skills} />}
+      {!currentUser.isCompany && <ProfileAwards awards={user.awards} />}
+      {!currentUser.isCompany && (
+        <ProfileCertifications certifications={user.certifications} />
+      )}
+      {!currentUser.isCompany && (
+        <ProfileVolunteering volunteering={user.volunteering} />
+      )}
     </div>
   );
 }
