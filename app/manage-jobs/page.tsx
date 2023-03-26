@@ -18,7 +18,6 @@ export default function ManagePostings() {
   const [loading, setLoading] = useState<boolean>(true);
   const [jobPostings, setJobPostings] = useState<JobPostingWithId[]>([]);
   const [newJob, setNewJob] = useState(false);
-  const user: UserWithId = { userId: authUser.uid, ...currentUser };
 
   useEffect(() => {
     if (currentUser && currentUser.isCompany) {
@@ -44,9 +43,13 @@ export default function ManagePostings() {
     return jobArray;
   };
 
-  if (!currentUser || loading) {
-    // user isnt logged in or the page is still loading
+  if (loading) {
     // TODO make a better loading page
+    return <p>Loading...</p>;
+  }
+
+  if (!currentUser) {
+    // user isnt logged in or the page is still loading
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
@@ -63,6 +66,10 @@ export default function ManagePostings() {
       </div>
     );
   }
+
+  const user: UserWithId = authUser
+    ? { userId: authUser.uid, ...currentUser }
+    : null;
 
   return (
     <div>

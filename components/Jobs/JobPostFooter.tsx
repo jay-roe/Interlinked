@@ -35,7 +35,7 @@ const PostFooter = ({
   };
 
   return (
-    <div className="mt-4 flex items-center space-x-4">
+    <div className="mt-4 flex flex-wrap items-center gap-2">
       <Button
         data-testid="job-post-edit"
         onClick={() => {

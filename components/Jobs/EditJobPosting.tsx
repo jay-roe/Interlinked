@@ -56,7 +56,7 @@ const EditJobPosting = ({
     jobPosting?.hidden || false
   );
   const [externalApp, setExternalApp] = useState<boolean>(
-    jobPosting && jobPosting?.externalApplications.length !== 0
+    jobPosting && jobPosting?.externalApplications?.length !== 0
       ? true
       : false || false
   );
@@ -65,7 +65,7 @@ const EditJobPosting = ({
   >(jobPosting?.externalApplications || []);
   const [externalApplicationsEditing, setExternalApplicationsEditing] =
     useState<boolean[]>(
-      jobPosting?.externalApplications.map(() => false) || []
+      jobPosting?.externalApplications?.map(() => false) || []
     );
 
   const handleSubmit = async (e) => {
