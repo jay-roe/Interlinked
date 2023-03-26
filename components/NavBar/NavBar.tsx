@@ -35,7 +35,10 @@ export default function NavBar() {
         { name: 'Feed', href: '/feed', current: false },
       ];
     } else if (currentAdmin) {
-      return [{ name: 'Reports', href: '/admin', current: true }];
+      return [
+        { name: 'Reports', href: '/admin', current: true },
+        { name: 'Report', href: '/admin/report', current: false }, //remove before PR
+      ];
     } else {
       return [
         { name: 'Home', href: '/', current: true },

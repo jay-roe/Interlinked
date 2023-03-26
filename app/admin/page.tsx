@@ -96,7 +96,8 @@ const Admin = () => {
                 reported: authUser.uid,
                 context: "I did some things I shouldn't have done 🤭",
                 chatroomId: '',
-                adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
+                // adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1', // actual database admin ID
+                adminId: 'HvAOuFbE5diXp0ayCpqwUjDXOfBy', // emulator database admin ID
               });
             }}
           >

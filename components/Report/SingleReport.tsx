@@ -6,6 +6,8 @@ import NotifBlueDot from '../Icons/NotifBlueDotIcon/NotifBlueDotIcon';
 import ReportHeader from './ReportHeader';
 import ReportDeleteButton from '../Buttons/ReportDeleteButton';
 import ReportBlueDot from '../Icons/ReportBlueDot';
+import Link from 'next/link';
+import Card from '../Card/Card';
 
 export default function postNotification({
   report,
@@ -19,6 +21,13 @@ export default function postNotification({
       className="start flex items-center justify-between"
       data-testid="post-notification"
     >
+      {/* <Link
+        href={{
+          pathname: '/admin/${report.reportId}',
+          query: { reporter: report.reporter },
+        }}
+        as={'/admin/${report.reportId}'}
+      > */}
       <div className="flex items-center justify-center">
         <div className="my-2 ml-4 text-red-600">
           <BsExclamationLg size={60} className="align-self-center" />
@@ -30,6 +39,8 @@ export default function postNotification({
           </div>
         </div>
       </div>
+      );
+      {/* </Link> */}
       <div className="m-4 flex items-center justify-between">
         <ReportDeleteButton report={report} setReports={setReports} />
         <ReportBlueDot
