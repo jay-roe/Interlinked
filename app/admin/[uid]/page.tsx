@@ -1,40 +1,45 @@
 'use client';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  doc,
-  onSnapshot,
-  Timestamp,
-  updateDoc,
-  arrayUnion,
-  getDoc,
-  getDocs,
-  collection,
-} from 'firebase/firestore';
+import { doc, getDoc, collection } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
-import { useEffect, useRef, useState } from 'react';
-import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
-import type { UserWithId } from '@/types/User';
+import { useEffect, useState } from 'react';
 import { Report } from '@/types/Report';
-import { Dispatch, SetStateAction } from 'react';
-import SingleReport from '@/components/Report/SingleReport';
-import { useRouter } from 'next/router';
 
-const ReportTest = ({}) => {
-  const { currentUser, authUser } = useAuth();
-  const [reports, setReports] = useState<Report[]>();
+const ViewReport = ({ params }) => {
+  const { authUser } = useAuth();
+  const [report, setReport] = useState<Report>();
+  const [loading, setLoading] = useState(true);
 
-  const router = useRouter();
+  const reportCollectionReference = typeCollection<Report>(
+    collection(doc(db.users, authUser.uid), 'report')
+  );
+  const reportRef = doc(reportCollectionReference, params.uid);
 
-  // const query = qs.parse(asPath.split(/\?/)[1]);
-  //  const data = query.report;
-  //const data2 = router.prefetch;
-  // console.log('url?', data2);
-  // console.log('rep', data);
+  useEffect(() => {
+    async function getReport() {
+      const reportDoc = await getDoc(reportRef);
+      if (reportDoc.exists()) {
+        const reportData = reportDoc.data();
+        console.log(reportData);
+        setReport(reportData);
+        setLoading(false);
+      } else {
+        console.log('No such document!');
+      }
+    }
+    getReport();
+  }, [reportRef]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    // <SingleReport report={} setReports={} />
     <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
-        <h2 className="text-3xl font-extrabold">{}</h2>
+        <h2 className="text-3xl font-extrabold">
+          {report.reporter} has reported {report.reported}
+        </h2>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
         Report message DM window Descision
@@ -48,4 +53,4 @@ const ReportTest = ({}) => {
   );
 };
 
-export default ReportTest;
+export default ViewReport;
