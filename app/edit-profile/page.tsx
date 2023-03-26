@@ -37,6 +37,7 @@ import {
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -72,6 +73,15 @@ export default function EditProfile() {
     currentUser?.isPrivate || false
   ); //deafults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
+
+  // Documents component states
+  const [resume, setResume] = useState<User['resume']>(currentUser?.resume);
+  const [resumeEditing, setResumeEditing] = useState<boolean>(false);
+
+  const [coverLetter, setCoverLetter] = useState<User['coverLetter']>(
+    currentUser?.coverLetter
+  );
+  const [coverLetterEditing, setCoverLetterEditing] = useState<boolean>(false);
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -200,6 +210,8 @@ export default function EditProfile() {
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
     isPrivate: isPrivate,
+    resume: resume,
+    coverLetter: coverLetter,
   };
 
   async function uploadProfilePicture() {
@@ -283,14 +295,15 @@ export default function EditProfile() {
           setPrivacyEditing={setPrivacyEditing}
         />
 
-        <ProfileSocials
-          isEditable
-          socials={socials}
-          setSocials={setSocials}
-          socialsEditing={socailsEditing}
-          setSocialsEditing={setSocialsEditing}
-        />
-
+        {!currentUser.isCompany && (
+          <ProfileSocials
+            isEditable
+            socials={socials}
+            setSocials={setSocials}
+            socialsEditing={socailsEditing}
+            setSocialsEditing={setSocialsEditing}
+          />
+        )}
         {!currentUser.isCompany && (
           <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
         )}
@@ -304,6 +317,36 @@ export default function EditProfile() {
           contactEditing={contactEditing}
           setContactEditing={setContactEditing}
         />
+
+        {!currentUser.isCompany && (
+          <ProfileDocuments
+            isEditable
+            resume={resume}
+            setResume={setResume}
+            coverLetter={coverLetter}
+            setCoverLetter={setCoverLetter}
+            resumeEditing={resumeEditing}
+            setResumeEditing={setResumeEditing}
+            coverLetterEditing={coverLetterEditing}
+            setCoverLetterEditing={setCoverLetterEditing}
+            uid={authUser.uid}
+          />
+        )}
+
+        {!currentUser.isCompany && (
+          <ProfileDocuments
+            isEditable
+            resume={resume}
+            setResume={setResume}
+            coverLetter={coverLetter}
+            setCoverLetter={setCoverLetter}
+            resumeEditing={resumeEditing}
+            setResumeEditing={setResumeEditing}
+            coverLetterEditing={coverLetterEditing}
+            setCoverLetterEditing={setCoverLetterEditing}
+            uid={authUser.uid}
+          />
+        )}
 
         {!currentUser.isCompany && (
           <ProfileLanguages

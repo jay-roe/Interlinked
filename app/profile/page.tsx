@@ -20,6 +20,7 @@ import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function PreviewProfile() {
   const { currentUser, authUser } = useAuth();
@@ -67,6 +68,13 @@ export default function PreviewProfile() {
       )}
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
+
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
 
       {/* The check is done on each section to make it less confusing to change the visibility of one of the profile components if we want to */}
       {!currentUser.isCompany && (
