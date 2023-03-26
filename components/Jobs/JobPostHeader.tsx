@@ -1,24 +1,23 @@
 import { JobPosting } from '@/types/JobPost';
 import { User, UserWithId } from '@/types/User';
-import Link from 'next/link';
-import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const JobPostHeader = ({
   author,
   jobPost,
-  currentUser,
 }: {
   author?: UserWithId;
   jobPost?: JobPosting;
-  currentUser?: User;
 }) => {
   return (
     <div className="mb-3 flex items-center justify-start space-x-4">
-      {/* <Link
+      {
+        // TODO: Implement link to profile page IF company profile page made
+        /* <Link
         href={`/profile/${author.userId}`}
         className="flex items-center justify-start space-x-4"
-      > */}
+      > */
+      }
       <span>
         <ImageOptimized
           data-testid="test-coverphoto"

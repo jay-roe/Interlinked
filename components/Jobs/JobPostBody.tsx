@@ -1,12 +1,10 @@
 import { JobPostingWithId } from '@/types/JobPost';
-
 import { HiLocationMarker } from 'react-icons/hi';
 import {
   AiOutlineClockCircle,
   AiOutlinePaperClip,
   AiOutlineEye,
 } from 'react-icons/ai';
-import { FaRegPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {

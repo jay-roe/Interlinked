@@ -1,13 +1,8 @@
-import CardStack from '@/components/CardStack/CardStack';
-import type { User } from '@/types/User';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
-import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
-import TextArea from '@/components/InputFields/TextArea/TextArea';
-import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import { JobPosting } from '@/types/JobPost';
 import Link from 'next/link';
 

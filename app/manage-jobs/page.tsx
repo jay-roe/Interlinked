@@ -8,7 +8,6 @@ import EditJobPosting from '@/components/Jobs/EditJobPosting';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import Card from '@/components/Card/Card';
 import { typeCollection, db } from '@/config/firestore';
-import { Post } from '@/types/Post';
 import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
