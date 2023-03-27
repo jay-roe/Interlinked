@@ -15,7 +15,7 @@ describe('Full notification spec', async () => {
   let email = 'test2+cypress@test.com';
   let melEmail = 'melisa@melisa.ca';
   let pw = '123456';
-  let melUserId = 'tIN8i6N2MpcTvLrSVU9zG6ke7ljL';
+  let melUserId = 'Jc9kqYwRz2WaxnyVFomnxdmKbZaw';
 
   before(() => {
     cy.login(email, pw);
