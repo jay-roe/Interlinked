@@ -143,20 +143,14 @@ const ViewReport = ({ params }) => {
           })}
         </Card>
         <div className="flex justify-center space-x-4">
-          <button>
-            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
-              Lock {report.reportedName}&apos;s Account
-            </div>
+          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+            Lock {report.reportedName}&apos;s Account
           </button>
-          <button>
-            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
-              Timeout {report.reportedName}&apos;s Account
-            </div>
+          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+            Timeout {report.reportedName}&apos;s Account
           </button>
-          <button>
-            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
-              Discard Report
-            </div>
+          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+            Discard Report
           </button>
         </div>
       </div>
