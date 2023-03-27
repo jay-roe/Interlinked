@@ -12,14 +12,18 @@ import {
 export async function createReport({
   context,
   reporter,
+  reporterName,
   reported,
+  reportedName,
   read = false,
   chatroomId,
   adminId,
 }: {
   context: string;
   reporter: string; // User ID of person that reported
+  reporterName: string; // name of person that reported
   reported: string; // User ID of person that got reported
+  reportedName: string; // name of person that got reported
   read?: boolean;
   chatroomId?: string;
   adminId: string;
@@ -33,7 +37,9 @@ export async function createReport({
     reportTime: Timestamp.now(),
     context: context,
     reporter: reporter,
+    reporterName: reporterName,
     reported: reported,
+    reportedName: reportedName,
     read: read || false,
     chatroomId: chatroomId || '',
   };

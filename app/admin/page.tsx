@@ -93,7 +93,9 @@ const Admin = () => {
             onClick={() => {
               createReport({
                 reporter: authUser.uid,
+                reporterName: 'reporter',
                 reported: authUser.uid,
+                reportedName: 'reported',
                 context: "I did some things I shouldn't have done 🤭",
                 chatroomId: '',
                 // adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1', // actual database admin ID
