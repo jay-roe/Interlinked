@@ -14,9 +14,6 @@ const ReportMessageCard = ({
   report: Report;
   participants: UserWithId[];
 }) => {
-  useEffect(() => {
-    console.log(participants);
-  }, [participants]);
   return (
     <div
       className={`my-3 flex gap-x-3 

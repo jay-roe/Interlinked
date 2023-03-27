@@ -92,6 +92,17 @@ const ViewReport = ({ params }) => {
     }
   }, [authUser, chatRoomRef, report]);
 
+  async function lockAccount() {
+    console.log('Locking account');
+  }
+  async function timeoutAccount() {
+    console.log('Timeing out account');
+  }
+
+  async function discardReport() {
+    console.log('Discard report');
+  }
+
   if (loading || participantsLoading) {
     return <div>Loading...</div>;
   }
@@ -143,13 +154,28 @@ const ViewReport = ({ params }) => {
           })}
         </Card>
         <div className="flex justify-center space-x-4">
-          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+          <button
+            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
+            onClick={() => {
+              lockAccount();
+            }}
+          >
             Lock {report.reportedName}&apos;s Account
           </button>
-          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+          <button
+            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
+            onClick={() => {
+              timeoutAccount();
+            }}
+          >
             Timeout {report.reportedName}&apos;s Account
           </button>
-          <button className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+          <button
+            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
+            onClick={() => {
+              discardReport();
+            }}
+          >
             Discard Report
           </button>
         </div>
