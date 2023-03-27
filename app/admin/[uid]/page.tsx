@@ -6,6 +6,7 @@ import {
   collection,
   onSnapshot,
   DocumentSnapshot,
+  deleteDoc,
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
@@ -101,6 +102,10 @@ const ViewReport = ({ params }) => {
 
   async function discardReport() {
     console.log('Discard report');
+    await deleteDoc(
+      doc(collection(doc(db.users, authUser.uid), 'report'), report.reportId)
+    );
+    router.push('/admin');
   }
 
   if (loading || participantsLoading) {

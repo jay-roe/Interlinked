@@ -41,7 +41,7 @@ const Admin = () => {
       setReports(rep);
       setLoading(false);
     });
-  }, [currentAdmin, router, authUser.uid]);
+  }, [currentAdmin, router, authUser]);
 
   if (loading) {
     return <div>Loading...</div>;
