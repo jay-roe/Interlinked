@@ -11,7 +11,7 @@ describe('Full edit profile spec', () => {
     cy.logout();
   });
 
-  it('can edit EVERYTHING', () => {
+  it('can edit profile', () => {
     cy.visit('/edit-profile');
 
     // image
