@@ -4,10 +4,10 @@
     {
       "localId": "5AyB9OTr9HkI8ZVDfj24SYZh0mv4",
       "createdAt": "1678577459011",
-      "lastLoginAt": "1678577459011",
+      "lastLoginAt": "1679875397309",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
-      "passwordUpdatedAt": 1679762088244,
+      "passwordUpdatedAt": 1679875439538,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,7 +16,7 @@
           "rawId": "verycool@test.com"
         }
       ],
-      "validSince": "1679762088",
+      "validSince": "1679875439",
       "email": "verycool@test.com",
       "emailVerified": false,
       "disabled": false
@@ -24,10 +24,10 @@
     {
       "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
       "createdAt": "1678390113242",
-      "lastLoginAt": "1678390113242",
+      "lastLoginAt": "1679875340869",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1679762088244,
+      "passwordUpdatedAt": 1679875439539,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -36,7 +36,7 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1679762088",
+      "validSince": "1679875439",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
       "disabled": false
@@ -44,12 +44,12 @@
     {
       "localId": "HvAOuFbE5diXp0ayCpqwUjDXOfBy",
       "createdAt": "1679507408769",
-      "lastLoginAt": "1679762036419",
+      "lastLoginAt": "1679875313402",
       "displayName": "admin",
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
       "salt": "fakeSalt7sr6nhhBFxv17Dsk7oAb",
-      "passwordUpdatedAt": 1679762088244,
+      "passwordUpdatedAt": 1679875439539,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -60,7 +60,7 @@
           "photoUrl": ""
         }
       ],
-      "validSince": "1679762088",
+      "validSince": "1679875439",
       "email": "admin@interlinked.live",
       "emailVerified": false,
       "disabled": false
