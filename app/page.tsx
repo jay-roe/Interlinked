@@ -1,9 +1,18 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Home = () => {
+  const router = useRouter();
   const { currentUser } = useAuth();
+
+  useEffect(() => {
+    if (currentUser?.accountLocked) {
+      router.push('/locked');
+    }
+  }, [currentUser, router]);
 
   return (
     <div className="container mx-auto text-white">

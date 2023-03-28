@@ -11,13 +11,14 @@ import {
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Report } from '@/types/Report';
-import { UserWithId } from '@/types/User';
+import { User, UserWithId } from '@/types/User';
 import { Message } from '@/types/Message';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
 import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import Button from '@/components/Buttons/Button';
 
 const ViewReport = ({ params }) => {
   const { authUser } = useAuth();
@@ -31,6 +32,8 @@ const ViewReport = ({ params }) => {
 
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
+
+  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     // if not logged in, redirect to home page
@@ -92,7 +95,9 @@ const ViewReport = ({ params }) => {
 
   async function lockAccount() {
     console.log('Locking account');
+    //get account of the person reported and set accountLocked to true
   }
+
   async function timeoutAccount() {
     console.log('Timeing out account');
   }
@@ -160,30 +165,30 @@ const ViewReport = ({ params }) => {
           })}
         </Card>
         <div className="flex justify-center space-x-4">
-          <button
+          <Button
             className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               lockAccount();
             }}
           >
             Lock {report.reportedName}&apos;s Account
-          </button>
-          <button
+          </Button>
+          <Button
             className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               timeoutAccount();
             }}
           >
             Timeout {report.reportedName}&apos;s Account
-          </button>
-          <button
+          </Button>
+          <Button
             className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               discardReport();
             }}
           >
             Discard Report
-          </button>
+          </Button>
         </div>
       </div>
     </div>
