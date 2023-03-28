@@ -33,13 +33,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: package-lock.json
 
-      # Setup Java for firebase CLI
-      - name: Install Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: '11'
-
       - name: Firebase setup
         run: |
           npm i -g firebase-tools
