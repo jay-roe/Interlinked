@@ -1,8 +1,6 @@
 import { email, pw } from '../support/e2e';
 
 describe('Full edit profile spec', () => {
-  cy.on('window:confirm', () => true);
-
   before(() => {
     cy.login(email, pw);
   });
@@ -250,6 +248,7 @@ describe('Full edit profile spec', () => {
 
     // update
     cy.get('[data-testid=update-account-button]').click();
+    cy.on('window:confirm', () => true);
 
     // validate all
     // name
@@ -450,8 +449,8 @@ describe('Full edit profile spec', () => {
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
-
-    cy.get('[data-testid=home-interlinked]').should('exist');
+    cy.on('window:confirm', () => true);
+    cy.url().should('contain', '/profile', { timeout: 120000 });
     cy.get('[data-testid=profile-info]').should('exist');
 
     cy.get('[data-testid=live-lang-0]').should('not.exist');
