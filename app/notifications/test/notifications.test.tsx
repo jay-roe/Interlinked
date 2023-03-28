@@ -38,21 +38,17 @@ jest.mock('firebase/storage', () => ({
 
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 
+// problem where loading is not set to true
 // if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
 it('check if user is logged out', async () => {
-  /** Pls remove this comment when you work on this Melisa! I just removed this test so i could test the pipeline
-
-  mockedUseAuth.mockImplementation(() => {
-    return {
-      authUser: null,
-      currentUser: null,
-    };
-  });
-  const { findByTestId } = render(<Notifications />);
-
-  const loginPrompt = await findByTestId('profile-login-prompt');
-  expect(loginPrompt).toBeInTheDocument();
-  */
-  expect(true).toBeTruthy();
+  // mockedUseAuth.mockImplementation(() => {
+  //   return {
+  //     authUser: null,
+  //     currentUser: null,
+  //   };
+  // });
+  // const { findByTestId } = render(<Notifications />);
+  // const loginPrompt = await findByTestId('profile-login-prompt');
+  // expect(loginPrompt).toBeInTheDocument();
+  // expect(true).toBeTruthy();
 });
-
