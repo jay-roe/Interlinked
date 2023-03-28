@@ -450,7 +450,7 @@ describe('Full edit profile spec', () => {
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
     cy.on('window:confirm', () => true);
-    cy.url().should('contain', '/profile', { timeout: 120000 });
+    cy.url().should('contain', '/profile');
     cy.get('[data-testid=profile-info]').should('exist');
 
     cy.get('[data-testid=live-lang-0]').should('not.exist');
