@@ -7,6 +7,7 @@ import {
   onSnapshot,
   DocumentSnapshot,
   deleteDoc,
+  updateDoc,
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
@@ -95,6 +96,7 @@ const ViewReport = ({ params }) => {
 
   async function lockAccount() {
     console.log('Locking account');
+    updateDoc(doc(db.users, report.reported), {});
     //get account of the person reported and set accountLocked to true
   }
 
