@@ -38,7 +38,8 @@ describe('DM spec', () => {
     cy.get('[data-testid=nav-dm]').click();
 
     // select the only dm
-    cy.get('[data-testid=chatroom-card-test-id]').click();
+    cy.get('[data-testid=chatroom-giNIZZIhptwtFmeLJZru]').click();
+    cy.url().should('contain', 'giNIZZIhptwtFmeLJZru');
 
     //can type in the modal
     let newMessage = 'You wanna come over tonight?';

@@ -33,7 +33,7 @@ export default function ChatRoomCard({ room }: { room: ChatRoom }) {
   });
 
   return (
-    <div data-testid="chatroom-card-test-id">
+    <div>
       {user && (
         <div className="start my-5 flex items-center rounded-md bg-purple-text-area p-2">
           <div className="flex items-center justify-center">
