@@ -28,17 +28,9 @@ const FullPostCard = ({
   testKey?: number;
 }) => {
   const [commentsOpen, setCommentsOpen] = useState(false);
-  const [postHeight, setPostHeight] = useState(0);
   const [comments, setComments] = useState(post?.comments);
 
   const postContainer = useRef(null);
-
-  useEffect(() => {
-    setTimeout(() => setPostHeight(postContainer.current.clientHeight), 2000);
-  }, []);
-  useEffect(() => {
-    setPostHeight(postContainer.current.clientHeight);
-  });
 
   return (
     <CardGrid
@@ -56,7 +48,6 @@ const FullPostCard = ({
           id="post-content"
           ref={postContainer}
         >
-          {/* <div>{postHeight}</div> */}
           <PostHeader
             author={author}
             authorID={authorID}

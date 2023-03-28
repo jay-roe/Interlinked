@@ -8,7 +8,7 @@ async function getUser(uid: string) {
 
 export default async function linkLayout({ params, children }) {
   const user = await getUser(params.uid);
-  if (!user || !user.name || !user.email)
+  if (!user || !user.name || !user.email || user.isCompany === true)
     return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
 
   return (
