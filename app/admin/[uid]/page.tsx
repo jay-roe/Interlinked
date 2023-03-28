@@ -95,9 +95,10 @@ const ViewReport = ({ params }) => {
   }, [authUser, chatRoomRef, report]);
 
   async function lockAccount() {
-    console.log('Locking account');
-    updateDoc(doc(db.users, report.reported), {});
     //get account of the person reported and set accountLocked to true
+    updateDoc(doc(db.users, report.reported), {
+      accountLocked: true,
+    });
   }
 
   async function timeoutAccount() {
@@ -105,7 +106,6 @@ const ViewReport = ({ params }) => {
   }
 
   async function discardReport() {
-    console.log('Discard report');
     await deleteDoc(
       doc(collection(doc(db.users, authUser.uid), 'report'), report.reportId)
     );
