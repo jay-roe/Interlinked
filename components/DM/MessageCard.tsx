@@ -32,13 +32,17 @@ const MessageCard = ({ message }: { message: Message }) => {
 
       <Disclosure as="div">
         <Disclosure.Button>
-          <div className="rounded-xl bg-purple-message-area p-4 ">
+          <div
+            className={`rounded-xl ${
+              message.content == '' ? '' : 'bg-purple-message-area'
+            }  p-4 `}
+          >
             {message.content && <p>{message.content}</p>}
             {message.file &&
               message.fileType &&
               (message.fileType.includes('image') ? (
                 <ImageOptimized
-                  className="mt-1 h-[13rem] w-[13rem] object-scale-down"
+                  className="mt-1 h-[13rem] w-[13rem] rounded-md object-scale-down"
                   src={message.file}
                   alt={message.file}
                   width={208}

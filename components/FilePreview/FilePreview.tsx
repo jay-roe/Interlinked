@@ -9,7 +9,7 @@ export default function FilePreview({
 }) {
   return (
     <div className="rounded-md border-2 border-white bg-gray-600 p-2 ">
-      <a href={url} type={type} download>
+      <a href={url} type={type} target="_blank" download>
         <p>{name}</p>
       </a>
     </div>
