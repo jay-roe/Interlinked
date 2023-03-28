@@ -7,7 +7,7 @@
       "lastLoginAt": "1679943112776",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
-      "passwordUpdatedAt": 1679940635699,
+      "passwordUpdatedAt": 1679959903518,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,11 +16,10 @@
           "rawId": "verycool@test.com"
         }
       ],
-      "validSince": "1679940635",
+      "validSince": "1679959903",
       "email": "verycool@test.com",
       "emailVerified": false,
-      "disabled": false,
-      "lastRefreshAt": "2023-03-27T18:51:52.776Z"
+      "disabled": false
     },
     {
       "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
@@ -28,7 +27,7 @@
       "lastLoginAt": "1679875340869",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1679940635700,
+      "passwordUpdatedAt": 1679959903518,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -37,7 +36,7 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1679940635",
+      "validSince": "1679959903",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
       "disabled": false
@@ -45,12 +44,12 @@
     {
       "localId": "HvAOuFbE5diXp0ayCpqwUjDXOfBy",
       "createdAt": "1679507408769",
-      "lastLoginAt": "1679942702112",
+      "lastLoginAt": "1679959276084",
       "displayName": "admin",
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
       "salt": "fakeSalt7sr6nhhBFxv17Dsk7oAb",
-      "passwordUpdatedAt": 1679940635700,
+      "passwordUpdatedAt": 1679959903519,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -61,11 +60,30 @@
           "photoUrl": ""
         }
       ],
-      "validSince": "1679940635",
+      "validSince": "1679959903",
       "email": "admin@interlinked.live",
       "emailVerified": false,
-      "disabled": false,
-      "lastRefreshAt": "2023-03-27T18:45:02.112Z"
+      "disabled": false
+    },
+    {
+      "localId": "jIbhpJs6o533pTE1IENifbVdwjhK",
+      "createdAt": "1679959862982",
+      "lastLoginAt": "1679959862982",
+      "passwordHash": "fakeHash:salt=fakeSaltAPyZ7YoW1l2BnNrDZ7td:password=123456",
+      "salt": "fakeSaltAPyZ7YoW1l2BnNrDZ7td",
+      "passwordUpdatedAt": 1679959903519,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "lockedaccount@test.com",
+          "federatedId": "lockedaccount@test.com",
+          "rawId": "lockedaccount@test.com"
+        }
+      ],
+      "validSince": "1679959903",
+      "email": "lockedaccount@test.com",
+      "emailVerified": false,
+      "disabled": false
     }
   ]
 }
