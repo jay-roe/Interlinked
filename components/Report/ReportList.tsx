@@ -1,7 +1,9 @@
 'use client';
 
 import { Report } from '@/types/Report';
-import { Dispatch, SetStateAction } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import SingleReport from './SingleReport';
 
 export default function ReportList({
@@ -11,6 +13,8 @@ export default function ReportList({
   reports: Report[];
   setReports?: Dispatch<SetStateAction<Report[]>>;
 }) {
+  const router = useRouter();
+
   return (
     <ul className="pt-3" data-testid="live-notifications">
       {reports.map((rep, index) => (
