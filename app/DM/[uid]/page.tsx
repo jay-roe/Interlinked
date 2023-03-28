@@ -24,9 +24,11 @@ import Link from 'next/link';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';
+import { useRouter } from 'next/navigation';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
+  const router = useRouter();
 
   const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
@@ -113,6 +115,19 @@ export default function ChatRoom({ params }) {
 
   useEffect(() => {
     getDoc(chatRoomRef).then((room) => {
+      //make sure user is in chatroom
+      let belongs = false;
+      room.data().participants.forEach((participantID) => {
+        if (participantID == authUser.uid) {
+          belongs = true;
+        }
+      });
+
+      if (!belongs) {
+        alert("you don't belong here!");
+        router.push('/');
+      }
+
       room
         .data()
         .participants.filter((participantID) => participantID !== authUser.uid)
