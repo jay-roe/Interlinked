@@ -44,8 +44,8 @@ jobs:
 
       - name: Run app for Cypress
         run: |
-          npm run build:instrumented
-          npm run start:instrumented &
+          npm run dev:instrumented & 
+          sleep 15
 
       - name: Run e2e tests & coverage
         run: |
