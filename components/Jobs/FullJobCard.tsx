@@ -1,7 +1,8 @@
-import { JobPosting } from '@/types/JobPost';
+import { JobPosting, JobType } from '@/types/JobPost';
 import Card from '../Card/Card';
 import CardGrid from '../Card/CardGrid';
 import { GoLocation } from 'react-icons/go';
+import { BsCalendar3 } from 'react-icons/bs';
 import {
   AiOutlineExclamationCircle,
   AiOutlineClockCircle,
@@ -41,6 +42,26 @@ export default function jobs({ job }: { job: JobPosting }) {
             <GoLocation className="text-accent-orange" /> {job.location}
           </div>
           <div>
+            {job.jobType === JobType.FULLTIME && (
+              <div>
+                <BsCalendar3 className="text-accent-orange" />
+                Full-time
+              </div>
+            )}
+            {job.jobType === JobType.PARTTIME && (
+              <div>
+                <BsCalendar3 className="text-accent-orange" />
+                Part-time
+              </div>
+            )}
+            {job.jobType === JobType.INTERNSHIP && (
+              <div>
+                <BsCalendar3 className="text-accent-orange" />
+                Internship
+              </div>
+            )}
+          </div>
+          <div>
             <AiOutlineClockCircle className="text-accent-orange" />
             <div>
               {'Apply before ' +
@@ -53,19 +74,19 @@ export default function jobs({ job }: { job: JobPosting }) {
           </div>
           {job.coverLetterRequired && job.cvRequired && (
             <div>
-              <AiOutlineExclamationCircle className="text-accent-orange" />{' '}
+              <AiOutlineExclamationCircle className="text-accent-orange" />
               Submit with resume and cover letter
             </div>
           )}
           {job.coverLetterRequired && !job.cvRequired && (
             <div>
-              <AiOutlineExclamationCircle className="text-accent-orange" />{' '}
+              <AiOutlineExclamationCircle className="text-accent-orange" />
               Submit with cover letter
             </div>
           )}
           {!job.coverLetterRequired && job.cvRequired && (
             <div>
-              <AiOutlineExclamationCircle className="text-accent-orange" />{' '}
+              <AiOutlineExclamationCircle className="text-accent-orange" />
               Submit with resume
             </div>
           )}
