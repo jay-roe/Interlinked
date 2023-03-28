@@ -24,7 +24,7 @@ auth.useDeviceLanguage();
 
 // Initialize firestore database
 export const firestore = initializeFirestore(app, {
-  experimentalAutoDetectLongPolling: true,
+  experimentalAutoDetectLongPolling: !!process.env.NEXT_PUBLIC_EMULATOR,
 });
 export const storage = getStorage();
 
