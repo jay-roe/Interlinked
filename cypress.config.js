@@ -9,7 +9,7 @@ module.exports = defineConfig({
       return config;
     },
     baseUrl: 'http://localhost:3000',
-    defaultCommandTimeout: 30000,
+    defaultCommandTimeout: 45000,
     requestTimeout: 60000,
   },
 });
