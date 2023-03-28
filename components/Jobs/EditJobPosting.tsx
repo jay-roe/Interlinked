@@ -2,7 +2,7 @@
 
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import { JobPosting, JobPostingWithId } from '@/types/JobPost';
+import { JobPosting, JobPostingWithId, JobType } from '@/types/JobPost';
 import {
   collection,
   doc,
@@ -67,6 +67,9 @@ const EditJobPosting = ({
     useState<boolean[]>(
       jobPosting?.externalApplications?.map(() => false) || []
     );
+  const [jobType, setJobType] = useState<JobType>(
+    jobPosting?.jobType || JobType.FULLTIME
+  );
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -96,6 +99,7 @@ const EditJobPosting = ({
       hidden: postHidden,
       datePosted: jobPosting?.datePosted || null,
       externalApplications: externalApp ? externalApplications : [],
+      jobType: jobType,
     };
 
     if (newJob && !jobPosting) {
@@ -142,6 +146,27 @@ const EditJobPosting = ({
           data-testid="change-title"
           value={postTitle}
           onChange={(e) => setPostTitle(e.target.value)}
+        />
+      </div>
+
+      <div className="flex flex-col align-middle text-xl sm:flex-row sm:space-x-4">
+        <CheckBox
+          name="FullTime"
+          checked={jobType == 'FULLTIME'}
+          onChange={() => setJobType(() => JobType.FULLTIME)}
+          label="Full-time"
+        />
+        <CheckBox
+          name="PartTime"
+          checked={jobType == 'PARTTIME'}
+          onChange={() => setJobType(() => JobType.PARTTIME)}
+          label="Part-Time"
+        />
+        <CheckBox
+          name="Internship"
+          checked={jobType == 'INTERNSHIP'}
+          onChange={() => setJobType(() => JobType.INTERNSHIP)}
+          label="Internship"
         />
       </div>
 

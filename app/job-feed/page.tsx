@@ -19,7 +19,7 @@ export default function Feeds() {
     async function getJobPostings() {
       const res = await getDocs(
         typeCollection<JobPosting>(
-          collection(doc(db.users, authUser.uid), 'jobPosts')
+          collection(doc(db.users, '3YVgyoUXkSeBM4bGlsSc5lwPwCt1'), 'jobPosts')
         )
       );
       return res.docs.map((resData) => resData.data());
