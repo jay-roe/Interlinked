@@ -22,7 +22,9 @@ export default function ReportList({
           key={index}
           className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
         >
-          <SingleReport report={rep} setReports={setReports} />
+          <Link href={'/admin/' + reports[index].reportId}>
+            <SingleReport report={rep} setReports={setReports} />
+          </Link>
         </li>
       ))}
     </ul>

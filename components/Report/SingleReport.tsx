@@ -16,26 +16,22 @@ export default function postNotification({
   report: Report;
   setReports?: Dispatch<SetStateAction<Report[]>>;
 }) {
-  const reportRedirect = '/admin/' + report.reportId;
-
   return (
     <div
       className="start flex items-center justify-between"
       data-testid="post-notification"
     >
-      <Link href={reportRedirect}>
-        <div className="flex items-center justify-center">
-          <div className="my-2 ml-4 text-red-600">
-            <BsExclamationLg size={60} className="align-self-center" />
-          </div>
-          <div className="ml-5">
-            <ReportHeader report={report} />
-            <div className="m-3">
-              <p>{report.context}</p>
-            </div>
+      <div className="flex items-center justify-center">
+        <div className="my-2 ml-4 text-red-600">
+          <BsExclamationLg size={60} className="align-self-center" />
+        </div>
+        <div className="ml-5">
+          <ReportHeader report={report} />
+          <div className="m-3">
+            <p>{report.context}</p>
           </div>
         </div>
-      </Link>
+      </div>
       <div className="m-4 flex items-center justify-between">
         <ReportDeleteButton report={report} setReports={setReports} />
         <ReportBlueDot

@@ -26,7 +26,8 @@ export default function ReportBlueDot({
   }, [reportRead]);
   return (
     <button
-      onClick={async () => {
+      onClick={async (e) => {
+        e.preventDefault();
         await updateDoc(
           doc(collection(doc(db.users, authUser.uid), 'report'), reportId),
           {
