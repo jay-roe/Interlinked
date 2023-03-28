@@ -1,8 +1,16 @@
-export default function FilePreview({ file }: { file: File }) {
+export default function FilePreview({
+  url,
+  type,
+  name,
+}: {
+  url: string;
+  type: string;
+  name: string;
+}) {
   return (
-    <div className="border-red-200">
-      <a href={URL.createObjectURL(file)} type={file.type} download>
-        <p>{file.name}</p>
+    <div className="rounded-md border-2 border-white bg-gray-600 p-2 ">
+      <a href={url} type={type} download>
+        <p>{name}</p>
       </a>
     </div>
   );
