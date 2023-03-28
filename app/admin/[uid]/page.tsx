@@ -166,7 +166,6 @@ const ViewReport = ({ params }) => {
         </Card>
         <div className="flex justify-center space-x-4">
           <Button
-            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               lockAccount();
             }}
@@ -174,7 +173,6 @@ const ViewReport = ({ params }) => {
             Lock {report.reportedName}&apos;s Account
           </Button>
           <Button
-            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               timeoutAccount();
             }}
@@ -182,7 +180,6 @@ const ViewReport = ({ params }) => {
             Timeout {report.reportedName}&apos;s Account
           </Button>
           <Button
-            className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3"
             onClick={() => {
               discardReport();
             }}

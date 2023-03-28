@@ -47,12 +47,7 @@ const Locked = () => {
           <br /> <br />
         </p>
         <Link href="/" className="flex justify-center">
-          <Button
-            className="rounded-lg bg-yellow-600 px-5 py-2.5 text-lg font-bold text-purple-background hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300"
-            onClick={logout}
-          >
-            Return to homepage
-          </Button>
+          <Button onClick={logout}>Return to homepage</Button>
         </Link>
       </div>
     </div>
