@@ -51,6 +51,7 @@ export default function PreviewAttachement({
       });
 
       deleteImage(value);
+      hiddenFileInput.current.value = '';
     }
   };
 
