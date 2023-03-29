@@ -1,3 +1,6 @@
+import { Suspense } from 'react';
+import Loading from './loading';
+
 const feedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="container mx-auto text-white">
@@ -7,7 +10,7 @@ const feedLayout = ({ children }: { children: React.ReactNode }) => {
       >
         Your feed
       </h1>
-      {children}
+      <Suspense fallback={<Loading />}>{children}</Suspense>
       <div className="h-32"></div>
     </div>
   );

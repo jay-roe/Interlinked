@@ -21,10 +21,12 @@ import { Post, PostWithId } from '@/types/Post';
 import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
+import { BounceLoader, PacmanLoader, PropagateLoader } from 'react-spinners';
 
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingPosts, setLoadingPosts] = useState(true);
   const [posts, setPosts] = useState<PostWithId[]>([]);
   const [authors, setAuthors] = useState<UserWithId[]>([]);
   const [postsLeft, setPostsLeft] = useState<boolean>(true);
@@ -115,7 +117,9 @@ export default function Feeds() {
     // The thing is, this is recursive and queries n times the number of people the user is linked with which may become an issue at some point
     if (postArray.length === 0) {
       // no posts found in given range
+      setLoadingPosts(true);
       const deepSearch = await getPostsOhAndAlsoAuthors(countdown - 1);
+      setLoadingPosts(false);
       if (deepSearch.length === 0) {
         setPostsLeft(false);
       }
@@ -124,7 +128,11 @@ export default function Feeds() {
     return postArray;
   };
 
-  if (!currentUser || loading) {
+  if (loading) {
+    <PacmanLoader color="#e58f40" />;
+  }
+
+  if (!currentUser) {
     // user isnt logged in or the page is still loading
     // TODO make a better loading page
     return (
@@ -132,7 +140,7 @@ export default function Feeds() {
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
           You should login first.
         </p>
-        <div className="flex space-x-1.5">
+        <div className="text-or flex space-x-1.5">
           <Link href="/login">
             <Button>Sign In</Button>
           </Link>
@@ -166,6 +174,10 @@ export default function Feeds() {
             />
           );
         })}
+        {
+          loadingPosts && <BounceLoader color="#e58f40" />
+          // loadingPosts && <PacmanLoader color='#e58f40' />
+        }
       </CardGrid>
       <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {postsLeft ? (
@@ -182,7 +194,8 @@ export default function Feeds() {
           // })}/>
           <Button
             className="mx-auto"
-            onClick={() =>
+            onClick={() => {
+              setLoadingPosts(true);
               getPostsOhAndAlsoAuthors().then((newPosts) => {
                 setPosts((current) => {
                   return [
@@ -192,8 +205,9 @@ export default function Feeds() {
                     ),
                   ];
                 });
-              })
-            }
+                setLoadingPosts(false);
+              });
+            }}
           >
             Load More...
           </Button>
