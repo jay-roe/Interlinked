@@ -50,7 +50,7 @@ export default function NavBar() {
     }
   })(currentUser, currentAdmin);
 
-  if (!currentUser?.accountLocked) {
+  if (!currentUser?.accountLocked && !currentUser?.accountTimeout) {
     return (
       <Disclosure as="nav" className="">
         {({ open }) => (

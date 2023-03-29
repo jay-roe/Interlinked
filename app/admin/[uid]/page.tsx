@@ -8,11 +8,12 @@ import {
   DocumentSnapshot,
   deleteDoc,
   updateDoc,
+  Timestamp,
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Report } from '@/types/Report';
-import { User, UserWithId } from '@/types/User';
+import { UserWithId } from '@/types/User';
 import { Message } from '@/types/Message';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/Card/Card';
@@ -33,8 +34,6 @@ const ViewReport = ({ params }) => {
 
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
-
-  const [user, setUser] = useState<User>();
 
   useEffect(() => {
     // if not logged in, redirect to home page
@@ -95,15 +94,20 @@ const ViewReport = ({ params }) => {
   }, [authUser, chatRoomRef, report]);
 
   async function lockAccount() {
-    // Get account of the person reported and set accountLocked to true
-    updateDoc(doc(db.users, report.reported), {
+    await updateDoc(doc(db.users, report.reported), {
       accountLocked: true,
-    });
-    discardReport();
+    }); //set accountLocked to true
+    discardReport(); //delete the report
   }
 
-  async function timeoutAccount() {
-    console.log('Timeing out account');
+  async function timeoutAccount(time: number) {
+    console.log('Timing out account');
+    const timeoutUntil = Timestamp.fromDate(new Date(Date.now() + time));
+    await updateDoc(doc(db.users, report.reported), {
+      accountTimeout: time,
+      accountTimeoutUntil: timeoutUntil,
+    }); //set accountTimeout value
+    discardReport(); //delete the report
   }
 
   async function discardReport() {
@@ -177,7 +181,7 @@ const ViewReport = ({ params }) => {
           </Button>
           <Button
             onClick={() => {
-              timeoutAccount();
+              timeoutAccount(120000);
             }}
           >
             Timeout {report.reportedName}&apos;s Account

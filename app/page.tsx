@@ -9,7 +9,7 @@ const Home = () => {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    if (currentUser?.accountLocked) {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
       router.push('/locked');
     }
   }, [currentUser, router]);
