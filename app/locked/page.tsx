@@ -42,10 +42,6 @@ const Locked = () => {
         });
       }
     }
-
-    console.log('Timeout set' + currentUser?.accountTimeoutUntil);
-    console.log('Timeout set' + currentUser?.accountTimeout);
-    console.log('user' + currentUser);
   }, [authUser]);
 
   return (

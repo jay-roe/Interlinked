@@ -101,7 +101,6 @@ const ViewReport = ({ params }) => {
   }
 
   async function timeoutAccount(time: number) {
-    console.log('Timing out account');
     const timeoutUntil = Timestamp.fromDate(new Date(Date.now() + time));
     await updateDoc(doc(db.users, report.reported), {
       accountTimeout: time,
