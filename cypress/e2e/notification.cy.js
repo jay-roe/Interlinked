@@ -28,6 +28,7 @@ describe('Full notification spec', async () => {
   it('notifications are sent and displayed', () => {
     cy.visit('/profile/' + melUserId);
     cy.get('[data-testid=link-btn]').click();
+    cy.get('[data-testid=unlink-btn]').should('exist');
 
     cy.logout();
     cy.login(melEmail, pw);

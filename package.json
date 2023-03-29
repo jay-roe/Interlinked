@@ -11,7 +11,7 @@
     "build:instrumented": "rm -rf .next && env INSTRUMENT_CODE=1 firebase emulators:exec 'next build' --import=firebase_exports",
     "build": "next build",
     "start": "next start",
-    "start:instrumented": "firebase emulators:exec 'next start' --import=firebase_exports",
+    "start:instrumented": "env firebase emulators:exec 'next start' --import=firebase_exports",
     "emulator:start": "firebase emulators:start --import=firebase_exports",
     "emulator:export": "firebase emulators:export ./firebase_exports",
     "lint": "next lint",
