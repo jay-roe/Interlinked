@@ -16,6 +16,7 @@ import { Report } from '@/types/Report';
 import { UserWithId } from '@/types/User';
 import { Message } from '@/types/Message';
 import { useRouter } from 'next/navigation';
+import { Menu } from '@headlessui/react';
 import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
 import ReportMessageCard from '@/components/Report/ReportMessageCard';
@@ -23,6 +24,12 @@ import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
 
 const ViewReport = ({ params }) => {
+  const TIMEOUT_OPTIONS = [
+    { value: 120000, label: '2 minutes' },
+    { value: 86400000, label: '1 day' },
+    { value: 2592000000, label: '1 month' },
+  ];
+
   const { authUser } = useAuth();
   const router = useRouter();
 
@@ -178,13 +185,30 @@ const ViewReport = ({ params }) => {
           >
             Lock {report.reportedName}&apos;s Account
           </Button>
-          <Button
-            onClick={() => {
-              timeoutAccount(120000);
-            }}
-          >
-            Timeout {report.reportedName}&apos;s Account
-          </Button>
+          <Menu>
+            <Menu.Button
+              className={
+                ' inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900'
+              }
+            >
+              Timeout {report.reportedName}&apos;s Account
+            </Menu.Button>
+            <Menu.Items>
+              {TIMEOUT_OPTIONS.map((option) => (
+                <Menu.Item key={option.value}>
+                  {({ active }) => (
+                    <div
+                      className={`
+                         m-1 inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900`}
+                      onClick={() => timeoutAccount(option.value)}
+                    >
+                      {option.label}
+                    </div>
+                  )}
+                </Menu.Item>
+              ))}
+            </Menu.Items>
+          </Menu>
           <Button
             onClick={() => {
               discardReport();
