@@ -95,10 +95,11 @@ const ViewReport = ({ params }) => {
   }, [authUser, chatRoomRef, report]);
 
   async function lockAccount() {
-    //get account of the person reported and set accountLocked to true
+    // Get account of the person reported and set accountLocked to true
     updateDoc(doc(db.users, report.reported), {
       accountLocked: true,
     });
+    discardReport();
   }
 
   async function timeoutAccount() {
