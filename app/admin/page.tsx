@@ -87,24 +87,6 @@ const Admin = () => {
               <p>Read all</p>
             </div>
           </button>
-          {/* this button is for testing purposes and will be removed */}
-          <button
-            data-testid="read-all-button"
-            onClick={() => {
-              createReport({
-                reporter: authUser.uid,
-                reporterName: 'reporter',
-                reported: authUser.uid,
-                reportedName: 'reported',
-                context: "I did some things I shouldn't have done 🤭",
-                chatroomId: '',
-                // adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1', // actual database admin ID
-                adminId: 'HvAOuFbE5diXp0ayCpqwUjDXOfBy', // emulator database admin ID
-              });
-            }}
-          >
-            <p>Report myself</p>
-          </button>
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">

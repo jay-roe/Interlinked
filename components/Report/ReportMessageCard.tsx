@@ -1,18 +1,14 @@
 import { Message } from '@/types/Message';
 import { Disclosure } from '@headlessui/react';
 import { Report } from '@/types/Report';
-import { UserWithId } from '@/types/User';
-import { useEffect } from 'react';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const ReportMessageCard = ({
   message,
   report,
-  participants,
 }: {
   message: Message;
   report: Report;
-  participants: UserWithId[];
 }) => {
   return (
     <div

@@ -4,7 +4,7 @@ export type Report = {
   context: string; // Small bit of text that describes the report
   reporter: string; // User ID that reported
   reporterName: string;
-  reported: string;
+  reported: string; // User ID that was reported
   reportedName: string;
   reportTime: Timestamp;
   read: boolean;

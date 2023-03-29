@@ -8,6 +8,7 @@ const Home = () => {
   const router = useRouter();
   const { currentUser } = useAuth();
 
+  // if account is locked or timed out, redirect to locked page
   useEffect(() => {
     if (currentUser?.accountLocked || currentUser?.accountTimeout) {
       router.push('/locked');

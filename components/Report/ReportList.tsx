@@ -3,7 +3,7 @@
 import { Report } from '@/types/Report';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Button from '../Buttons/Button';
 import SingleReport from './SingleReport';
 

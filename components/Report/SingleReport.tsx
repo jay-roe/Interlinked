@@ -1,13 +1,9 @@
 import { BsExclamationLg } from 'react-icons/bs';
 import { Dispatch, SetStateAction } from 'react';
 import { Report } from '@/types/Report';
-import NotificationDeleteButton from '../Buttons/NotificationDeleteButton/NotificationDeleteButton';
-import NotifBlueDot from '../Icons/NotifBlueDotIcon/NotifBlueDotIcon';
 import ReportHeader from './ReportHeader';
 import ReportDeleteButton from '../Buttons/ReportDeleteButton';
 import ReportBlueDot from '../Icons/ReportBlueDot';
-import Link from 'next/link';
-import Card from '../Card/Card';
 
 export default function postNotification({
   report,

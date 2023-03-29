@@ -50,6 +50,7 @@ export default function NavBar() {
     }
   })(currentUser, currentAdmin);
 
+  // if user account is not locked or timed out
   if (!currentUser?.accountLocked && !currentUser?.accountTimeout) {
     return (
       <Disclosure as="nav" className="">
@@ -218,6 +219,7 @@ export default function NavBar() {
                     </Menu>
                   </div>
                 )}
+                {/* admin navbar */}
                 {currentAdmin && (
                   <div>
                     {/* Profile dropdown */}

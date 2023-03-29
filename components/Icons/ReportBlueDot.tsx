@@ -1,6 +1,5 @@
 'use client';
 import { db } from '@/config/firestore';
-import type { Notification } from '@/types/Notification';
 import { collection, updateDoc, doc } from '@firebase/firestore';
 import {
   RiCheckboxBlankCircleFill,

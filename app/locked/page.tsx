@@ -12,6 +12,7 @@ const Locked = () => {
   const router = useRouter();
   const { authUser, currentUser, logout } = useAuth();
 
+  // if account is not locked, timed out, or not logged in, redirect to home page
   useEffect(() => {
     if (
       (!currentUser?.accountLocked && !currentUser?.accountTimeout) ||
@@ -21,6 +22,7 @@ const Locked = () => {
     }
   }, [currentUser, router]);
 
+  // calculate time left until account is unlocked
   function timeLeft() {
     const now = new Date();
     const timeoutUntil = currentUser.accountTimeoutUntil.toDate();
@@ -29,13 +31,14 @@ const Locked = () => {
     return timeLeftMin;
   }
 
+  // if account is timed out, check if timeout has expired and unlock account
   useEffect(() => {
     if (currentUser?.accountTimeoutUntil) {
       const now = new Date();
       const timeoutUntil = currentUser.accountTimeoutUntil.toDate();
 
+      // if timeout has expired set accountTimeout to null and accountTimeoutUntil to null
       if (now > timeoutUntil) {
-        // if timeout has expired
         updateDoc(doc(db.users, authUser.uid), {
           accountTimeout: null,
           accountTimeoutUntil: null,
@@ -45,6 +48,7 @@ const Locked = () => {
   }, [authUser]);
 
   return (
+    // blurred background
     <div className="container mx-auto text-white">
       <div className="blur">
         <h1
@@ -66,6 +70,7 @@ const Locked = () => {
           </>
         )}
       </div>
+      {/* if account is locked, show locked message */}
       {currentUser?.accountLocked && (
         <div>
           <p data-testid="welcome-msg" className="text-center text-2xl">
@@ -80,6 +85,7 @@ const Locked = () => {
           </Link>
         </div>
       )}
+      {/* if account is timed out, show timed out message */}
       {currentUser?.accountTimeout && (
         <div>
           <p data-testid="welcome-msg" className="text-center text-2xl">

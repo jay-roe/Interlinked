@@ -24,6 +24,7 @@ import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
 
 const ViewReport = ({ params }) => {
+  // timeout options
   const TIMEOUT_OPTIONS = [
     { value: 120000, label: '2 minutes' },
     { value: 86400000, label: '1 day' },
@@ -36,19 +37,20 @@ const ViewReport = ({ params }) => {
   const [report, setReport] = useState<Report>();
   const [loading, setLoading] = useState(true);
 
+  // DM chatroom
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
-
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
 
+  // if not logged in, redirect to home page
   useEffect(() => {
-    // if not logged in, redirect to home page
     if (!authUser?.uid) {
       router.push('/');
     }
   }, [authUser, router]);
 
+  // get the report
   useEffect(() => {
     getDoc(
       doc(
@@ -61,14 +63,16 @@ const ViewReport = ({ params }) => {
       setReport(res.data());
       setLoading(false);
     });
-  }, []);
+  }, [authUser, params]);
 
+  // get the chatroom
   useEffect(() => {
     if (report) {
       setChatRoomRef(doc(db.chatrooms, report.chatroomId));
     }
   }, [report]);
 
+  // get the messages
   useEffect(() => {
     if (chatRoomRef) {
       const unsub = onSnapshot(chatRoomRef, (doc) => {
@@ -78,6 +82,7 @@ const ViewReport = ({ params }) => {
     }
   }, [chatRoomRef]);
 
+  // get the participants
   useEffect(() => {
     if (!authUser) return;
     if (chatRoomRef) {
@@ -100,6 +105,7 @@ const ViewReport = ({ params }) => {
     }
   }, [authUser, chatRoomRef, report]);
 
+  // lock the account
   async function lockAccount() {
     await updateDoc(doc(db.users, report.reported), {
       accountLocked: true,
@@ -107,8 +113,9 @@ const ViewReport = ({ params }) => {
     discardReport(); //delete the report
   }
 
+  // timeout the account
   async function timeoutAccount(time: number) {
-    const timeoutUntil = Timestamp.fromDate(new Date(Date.now() + time));
+    const timeoutUntil = Timestamp.fromDate(new Date(Date.now() + time)); //calculate timeoutUntil
     await updateDoc(doc(db.users, report.reported), {
       accountTimeout: time,
       accountTimeoutUntil: timeoutUntil,
@@ -116,11 +123,12 @@ const ViewReport = ({ params }) => {
     discardReport(); //delete the report
   }
 
+  // discard the report
   async function discardReport() {
     await deleteDoc(
       doc(collection(doc(db.users, authUser.uid), 'report'), report.reportId)
     );
-    router.push('/admin');
+    router.push('/admin'); //redirect to admin home
   }
 
   if (loading) {
@@ -131,7 +139,9 @@ const ViewReport = ({ params }) => {
     return <div>Participants Loading...</div>;
   }
 
+  // display the report
   return (
+    // display the participants and their profile pictures
     <div className="container mx-auto text-white" data-testid="admin-home">
       Participants:
       <div className="flex gap-4">
@@ -153,20 +163,17 @@ const ViewReport = ({ params }) => {
           ))}
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
+        {/* display who reported the conversation and the report message */}
         <h3 className="text-3xl font-extrabold">
           {report.reporterName} has reported this conversation
         </h3>
         <div>Report message: {report.context}</div>
+        {/* display the chat messages */}
         <Card className="m-5 flex h-96 flex-grow flex-col overflow-y-auto">
           {chatMessages.map((m, id) => {
             return (
               <div key={id}>
-                <ReportMessageCard
-                  message={m}
-                  report={report}
-                  participants={participants}
-                />
-
+                <ReportMessageCard message={m} report={report} />
                 {id !== chatMessages.length - 1 &&
                   chatMessages[id + 1].time_stamp.seconds -
                     m.time_stamp.seconds >=
@@ -177,6 +184,7 @@ const ViewReport = ({ params }) => {
             );
           })}
         </Card>
+        {/* display the buttons to lock or timeout the account */}
         <div className="flex justify-center space-x-4">
           <Button
             onClick={() => {
@@ -185,6 +193,7 @@ const ViewReport = ({ params }) => {
           >
             Lock {report.reportedName}&apos;s Account
           </Button>
+          {/* timeout button and dropdown menu to select the timeout duration */}
           <Menu>
             <Menu.Button
               className={
@@ -209,6 +218,7 @@ const ViewReport = ({ params }) => {
               ))}
             </Menu.Items>
           </Menu>
+          {/* discard report button */}
           <Button
             onClick={() => {
               discardReport();

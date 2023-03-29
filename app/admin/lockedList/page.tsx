@@ -7,7 +7,7 @@ import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-export default function lockedList({}) {
+export default function LockedList() {
   const [loading, setLoading] = useState(true);
   const [banned, setBanned] = useState<UserWithId[]>([]);
 
@@ -67,12 +67,3 @@ export default function lockedList({}) {
     </div>
   );
 }
-
-//   (acct) => {
-//     setBanned((cur) => {
-//         return [
-//             ...cur,
-//             acct
-//         ]
-//     })
-//   }
