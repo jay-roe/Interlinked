@@ -21,6 +21,8 @@ import { NotifType } from '@/types/Notification';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import type { UserWithId } from '@/types/User';
 import Link from 'next/link';
+import Button from '@/components/Buttons/Button';
+import { createReport } from '@/components/Report/AddReport';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -114,20 +116,42 @@ export default function ChatRoom({ params }) {
         {/* TODO: Adjust this when group chats are added. */}
         {!participantsLoading &&
           participants.map((person) => (
-            <Link
-              key={person.userId}
-              className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
-              href={`/profile/${person.userId}`}
-            >
-              <ImageOptimized
-                className="rounded-full"
-                src={person.profilePicture}
-                alt={person.name}
-                width={50}
-                height={50}
-              />
-              <h1 className="text-2xl font-bold">{person.name}</h1>
-            </Link>
+            <div key={person.userId}>
+              <Link
+                className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
+                href={`/profile/${person.userId}`}
+              >
+                <ImageOptimized
+                  className="rounded-full"
+                  src={person.profilePicture}
+                  alt={person.name}
+                  width={50}
+                  height={50}
+                />
+                <h1 className="text-2xl font-bold">{person.name}</h1>
+              </Link>
+              <Button
+                onClick={() => {
+                  const report = {
+                    context:
+                      'User ' +
+                      person.name +
+                      ' has been reported for bad DM etiquette.',
+                    reporter: authUser.uid, // User ID of person that reported
+                    reporterName: currentUser.name, // name of person that reported
+                    reported: person.userId, // User ID of person that got reported
+                    reportedName: person.name, // name of person that got reported
+                    chatroomId: params.uid,
+                    adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
+                  };
+
+                  createReport(report);
+                  alert('User reported!');
+                }}
+              >
+                Report this user
+              </Button>
+            </div>
           ))}
       </div>
       <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">

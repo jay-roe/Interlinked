@@ -9,5 +9,5 @@ export type Report = {
   reportTime: Timestamp;
   read: boolean;
   chatroomId?: string;
-  reportId: string;
+  reportId?: string;
 };
