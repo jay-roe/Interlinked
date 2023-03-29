@@ -131,6 +131,7 @@ export default function ChatRoom({ params }) {
                 <h1 className="text-2xl font-bold">{person.name}</h1>
               </Link>
               <Button
+                className="mb-3"
                 onClick={() => {
                   const report = {
                     context:
