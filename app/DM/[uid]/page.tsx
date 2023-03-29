@@ -25,6 +25,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';
 import { useRouter } from 'next/navigation';
+import Button from '@/components/Buttons/Button';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -40,6 +41,24 @@ export default function ChatRoom({ params }) {
   // Participants (not including current user)
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
+
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your Notifications</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to view your messages.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
 
   const uploadFile = async () => {
     if (fileBuffer == null) return null;
@@ -146,6 +165,7 @@ export default function ChatRoom({ params }) {
 
   async function handleSelectedFile(fileList: FileList) {
     const file: File = fileList[0];
+    if (file == null) return;
     setFileBuffer(file);
     setImgPreview(URL.createObjectURL(file));
   }
