@@ -21,8 +21,12 @@ export default function NavBar() {
   const pathname = usePathname();
 
   // Allow state access in SearchBar component
-  const handleSearch = () => {
-    setShowSearch(!showSearch);
+  const toggleSearch = () => {
+    setShowSearch((curr) => !curr);
+  };
+
+  const hideSearch = () => {
+    setShowSearch(false);
   };
 
   const navLinks = (function navigation(
@@ -88,6 +92,7 @@ export default function NavBar() {
                         <Link
                           key={index}
                           href={item.href}
+                          onClick={hideSearch}
                           data-testid={item.dataTestid}
                           className={classNames(
                             item.href === pathname
@@ -111,7 +116,7 @@ export default function NavBar() {
                     <button
                       type="button"
                       className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      onClick={() => setShowSearch(!showSearch)}
+                      onClick={toggleSearch}
                     >
                       <span className="sr-only">Search</span>
                       <FiSearch size={24} aria-hidden="true" />
@@ -121,6 +126,7 @@ export default function NavBar() {
                       type="button"
                       className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
                       href={'/DM'}
+                      onClick={hideSearch}
                     >
                       <span className="sr-only">DMs</span>
                       <FaRegCommentDots size={24} aria-hidden="true" />
@@ -128,6 +134,7 @@ export default function NavBar() {
 
                     <Link
                       href="/notifications"
+                      onClick={hideSearch}
                       type="button"
                       className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
@@ -139,6 +146,7 @@ export default function NavBar() {
                     <Menu as="div" className="relative">
                       <div>
                         <Menu.Button
+                          onClick={hideSearch}
                           data-testid="nav-menu"
                           className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                         >
@@ -270,7 +278,7 @@ export default function NavBar() {
               </div>
               <div className="mb-2 flex justify-end">
                 {/* search bar that appears when search button is clicked*/}
-                {showSearch && <SearchBar handleSearch={handleSearch} />}
+                {showSearch && <SearchBar toggleSearch={toggleSearch} />}
               </div>
             </div>
 
