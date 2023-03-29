@@ -187,6 +187,7 @@ const ViewReport = ({ params }) => {
         {/* display the buttons to lock or timeout the account */}
         <div className="flex justify-center space-x-4">
           <Button
+            data-testid="lock-report"
             onClick={() => {
               lockAccount();
             }}
@@ -196,6 +197,7 @@ const ViewReport = ({ params }) => {
           {/* timeout button and dropdown menu to select the timeout duration */}
           <Menu>
             <Menu.Button
+              data-testid="timeout-report"
               className={
                 ' inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900'
               }
@@ -204,7 +206,10 @@ const ViewReport = ({ params }) => {
             </Menu.Button>
             <Menu.Items>
               {TIMEOUT_OPTIONS.map((option) => (
-                <Menu.Item key={option.value}>
+                <Menu.Item
+                  key={option.value}
+                  data-testid={`timeout-report-${option.value}`}
+                >
                   {({ active }) => (
                     <div
                       className={`
@@ -220,6 +225,7 @@ const ViewReport = ({ params }) => {
           </Menu>
           {/* discard report button */}
           <Button
+            data-testid="discard-report"
             onClick={() => {
               discardReport();
             }}

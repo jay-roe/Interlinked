@@ -15,7 +15,7 @@ export default function ReportDeleteButton({
   const { authUser } = useAuth();
   return (
     <button
-      data-testid="clear-notif-btn"
+      data-testid="delete-report-btn"
       className="mb-3 mr-2 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
       onClick={(e) => {
         e.preventDefault();

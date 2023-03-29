@@ -26,6 +26,7 @@ import { createReport } from '@/components/Report/AddReport';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
+  let adminId = '85C6Pe9p0VehxlqlQqNJlSP55Wn1';
 
   const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
@@ -97,7 +98,6 @@ export default function ChatRoom({ params }) {
         .participants.filter((participantID) => participantID !== authUser.uid)
         .forEach((participantID) => {
           getDoc(doc(db.users, participantID)).then((user) => {
-            console.log(user.data().name);
             setParticipants((curr) => {
               if (curr.some((usr) => usr.userId === user.id)) return curr;
               return [...curr, { ...user.data(), userId: user.id }];
@@ -132,7 +132,11 @@ export default function ChatRoom({ params }) {
               </Link>
               <Button
                 className="mb-3"
+                data-testid="report-user-btn"
                 onClick={() => {
+                  if (!!process.env.NEXT_PUBLIC_EMULATOR) {
+                    adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
+                  }
                   const report = {
                     context:
                       'User ' +
@@ -143,7 +147,7 @@ export default function ChatRoom({ params }) {
                     reported: person.userId, // User ID of person that got reported
                     reportedName: person.name, // name of person that got reported
                     chatroomId: params.uid,
-                    adminId: '85C6Pe9p0VehxlqlQqNJlSP55Wn1',
+                    adminId: adminId,
                   };
 
                   createReport(report);
