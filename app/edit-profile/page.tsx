@@ -37,6 +37,7 @@ import {
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -72,6 +73,15 @@ export default function EditProfile() {
     currentUser?.isPrivate || false
   ); //deafults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
+
+  // Documents component states
+  const [resume, setResume] = useState<User['resume']>(currentUser?.resume);
+  const [resumeEditing, setResumeEditing] = useState<boolean>(false);
+
+  const [coverLetter, setCoverLetter] = useState<User['coverLetter']>(
+    currentUser?.coverLetter
+  );
+  const [coverLetterEditing, setCoverLetterEditing] = useState<boolean>(false);
 
   // Language component states
   const [languageEditing, setLanguageEditing] = useState<boolean>(false);
@@ -200,6 +210,8 @@ export default function EditProfile() {
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
     isPrivate: isPrivate,
+    resume: resume,
+    coverLetter: coverLetter,
   };
 
   async function uploadProfilePicture() {
@@ -244,6 +256,88 @@ export default function EditProfile() {
       console.error(err);
       return false;
     }
+  }
+
+  if (currentUser.isCompany) {
+    return (
+      <div className="container mx-auto text-white">
+        <div className="mb-3 flex justify-between">
+          <h1 className="text-7xl font-extrabold">Edit Profile</h1>
+          <Button
+            className="max-h-10 self-end"
+            data-testid="update-account-button"
+            onClick={updateAccount}
+          >
+            Save Changes
+          </Button>
+        </div>
+        <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
+          <ProfileHeading
+            isEditable
+            profilePictureURL={profilePictureURL}
+            setProfilePicture={setProfilePicture}
+            name={name}
+            setName={setName}
+            nameEditing={nameEditing}
+            setNameEditing={setNameEditing}
+            bio={bio}
+            setBio={setBio}
+            bioEditing={bioEditing}
+            setBioEditing={setBioEditing}
+            uid={''}
+          />
+
+          <ProfilePrivacy
+            isEditable
+            isPrivate={isPrivate}
+            setIsPrivate={setIsPrivate}
+            privacyEditing={privacyEditing}
+            setPrivacyEditing={setPrivacyEditing}
+          />
+
+          <ProfileSocials
+            isEditable
+            socials={socials}
+            setSocials={setSocials}
+            socialsEditing={socailsEditing}
+            setSocialsEditing={setSocialsEditing}
+          />
+
+          <ProfileContact
+            isEditable
+            email={email}
+            setEmail={setEmail}
+            phone={phone}
+            setPhone={setPhone}
+            contactEditing={contactEditing}
+            setContactEditing={setContactEditing}
+          />
+        </div>
+        <div className="flex justify-end">
+          <Button data-testid="update-account-button2" onClick={updateAccount}>
+            Save Changes
+          </Button>
+        </div>
+
+        <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
+        <p className="mb-1">
+          We&apos;re sorry to see you go. Click the button below to permanently
+          delete your account and all of its information.
+        </p>
+        <Button
+          data-testid="danger-zone"
+          variant="danger"
+          onClick={() => setIsModalShow(true)}
+        >
+          Delete account
+        </Button>
+        <DeleteAccountPopup
+          show={isModalShow}
+          onHide={() => setIsModalShow(false)}
+          onDeleteAccount={onDeleteAccount}
+        />
+      </div>
+    );
   }
 
   // User logged in
@@ -303,6 +397,32 @@ export default function EditProfile() {
           setContactEditing={setContactEditing}
         />
 
+        <ProfileDocuments
+          isEditable
+          resume={resume}
+          setResume={setResume}
+          coverLetter={coverLetter}
+          setCoverLetter={setCoverLetter}
+          resumeEditing={resumeEditing}
+          setResumeEditing={setResumeEditing}
+          coverLetterEditing={coverLetterEditing}
+          setCoverLetterEditing={setCoverLetterEditing}
+          uid={authUser.uid}
+        />
+
+        <ProfileDocuments
+          isEditable
+          resume={resume}
+          setResume={setResume}
+          coverLetter={coverLetter}
+          setCoverLetter={setCoverLetter}
+          resumeEditing={resumeEditing}
+          setResumeEditing={setResumeEditing}
+          coverLetterEditing={coverLetterEditing}
+          setCoverLetterEditing={setCoverLetterEditing}
+          uid={authUser.uid}
+        />
+
         <ProfileLanguages
           isEditable
           languages={languages}
@@ -314,6 +434,7 @@ export default function EditProfile() {
         />
 
         {/* TODO: change coding languages picture */}
+
         <ProfileCodingLanguages
           isEditable
           codingLanguages={codingLanguages}

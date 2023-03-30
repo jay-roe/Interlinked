@@ -20,6 +20,7 @@ import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 
 export default function PreviewProfile() {
   const { currentUser, authUser } = useAuth();
@@ -39,6 +40,25 @@ export default function PreviewProfile() {
           <Button>Register</Button>
         </Link>
       </>
+    );
+  }
+
+  if (currentUser.isCompany) {
+    return (
+      <div className="container mx-auto text-white" data-testid="profile-info">
+        <ProfileHeading
+          profilePictureURL={currentUser.profilePicture}
+          name={currentUser.name}
+          bio={currentUser.bio}
+          uid={''}
+        />
+
+        <ProfilePrivacy isPrivate={currentUser.isPrivate} />
+
+        <div className="mx-auto mb-5">
+          <SocialIconGroup socials={currentUser.socials} />
+        </div>
+      </div>
     );
   }
 
@@ -66,9 +86,17 @@ export default function PreviewProfile() {
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
 
+      <ProfileDocuments
+        resume={currentUser.resume}
+        coverLetter={currentUser.coverLetter}
+      />
+
+      {/* The check is done on each section to make it less confusing to change the visibility of one of the profile components if we want to */}
+
       <ProfileLanguages languages={currentUser.languages} />
 
       {/* TODO: change coding languages picture */}
+
       <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
       <ProfileEducation education={currentUser.education} />
