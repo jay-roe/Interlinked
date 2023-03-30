@@ -25,6 +25,7 @@ export default function ManagePostings() {
         setLoading(false);
       });
     }
+    setLoading(false);
   }, []);
 
   const fetchJobPostings = async () => {
