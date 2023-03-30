@@ -410,19 +410,6 @@ export default function EditProfile() {
           uid={authUser.uid}
         />
 
-        <ProfileDocuments
-          isEditable
-          resume={resume}
-          setResume={setResume}
-          coverLetter={coverLetter}
-          setCoverLetter={setCoverLetter}
-          resumeEditing={resumeEditing}
-          setResumeEditing={setResumeEditing}
-          coverLetterEditing={coverLetterEditing}
-          setCoverLetterEditing={setCoverLetterEditing}
-          uid={authUser.uid}
-        />
-
         <ProfileLanguages
           isEditable
           languages={languages}
