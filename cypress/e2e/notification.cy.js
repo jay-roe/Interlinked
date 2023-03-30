@@ -36,6 +36,7 @@ describe('Full notification spec', async () => {
     cy.visit('/notifications');
 
     cy.get('[data-testid=accept-link-button]').click();
+    cy.get('[data-testid=no-notifications]').should('exist');
 
     cy.logout();
     cy.login(email, pw);
@@ -45,6 +46,7 @@ describe('Full notification spec', async () => {
     cy.get('[data-testid=link-acc-notification]').should('exist');
     cy.get('[data-testid=read-all-button]').click();
     cy.get('[data-testid=clear-notif-btn]').click();
+    cy.get('[data-testid=no-notifications]').should('exist');
 
     cy.visit('/');
   });

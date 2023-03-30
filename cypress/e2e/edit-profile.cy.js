@@ -249,6 +249,10 @@ describe('Full edit profile spec', () => {
     // update
     cy.get('[data-testid=update-account-button]').click();
     cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('Successfully updated your profile!');
+    });
 
     // validate all
     // name
@@ -450,6 +454,11 @@ describe('Full edit profile spec', () => {
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
     cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('Successfully updated your profile!');
+    });
+    
     cy.url().should('contain', '/profile');
     cy.get('[data-testid=profile-info]').should('exist');
 
