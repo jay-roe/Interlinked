@@ -19,7 +19,7 @@ export default function Feeds() {
     async function getJobPostings() {
       const res = await getDocs(
         typeCollection<JobPosting>(
-          collection(doc(db.users, '3YVgyoUXkSeBM4bGlsSc5lwPwCt1'), 'jobPosts')
+          collection(doc(db.companies, authUser.uid), 'jobPosts')
         )
       );
       return res.docs.map((resData) => resData.data());
@@ -61,8 +61,11 @@ export default function Feeds() {
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         Find new jobs.
       </p>
-      {jobs[0] && <FullJobCard job={jobs[0]}></FullJobCard>}
       {/* job postings go here */}
+      {jobs?.map((jb, index) => {
+        return <FullJobCard job={jb} />;
+      })}
+      {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>
   );
 }
