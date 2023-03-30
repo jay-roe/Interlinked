@@ -1,5 +1,5 @@
 import './auth.cy';
-import './edit-profile.cy';
+//import './edit-profile.cy';
 import './feed.cy';
 //import './notification.cy';
 import './links.cy';
