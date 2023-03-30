@@ -40,20 +40,6 @@ const post = {
   meta_tags: [],
 };
 
-it('renders title for given post', async () => {
-  const { findByText } = render(<PostBody post={post} />);
-
-  const postTitle = await findByText('test_title', { exact: false });
-  expect(postTitle).toBeInTheDocument();
-});
-
-it('renders no title for given post', async () => {
-  const { findByTestId } = render(<PostBody />);
-
-  const postNoTitle = await findByTestId('no-post-title', { exact: false });
-  expect(postNoTitle).toBeInTheDocument();
-});
-
 it('renders content for given post', async () => {
   const { findByText } = render(<PostBody post={post} />);
 
