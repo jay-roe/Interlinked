@@ -25,6 +25,7 @@ export type User = {
   };
   volunteering?: VolunteeringExperience[];
   isPrivate?: boolean;
+  isWantJobNotif?: boolean;
   isCompany?: boolean;
   resume?: Document;
   coverLetter?: Document;
