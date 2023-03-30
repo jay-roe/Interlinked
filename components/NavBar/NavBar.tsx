@@ -39,6 +39,7 @@ export default function NavBar() {
       return [
         { name: 'Home', href: '/', current: true },
         { name: 'Feed', href: '/feed', current: false },
+        { name: 'Jobs', href: '/job-feed', current: false },
       ];
     } else if (currentAdmin) {
       return [{ name: 'Reports', href: '/admin', current: true }];

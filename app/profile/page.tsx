@@ -43,6 +43,25 @@ export default function PreviewProfile() {
     );
   }
 
+  if (currentUser.isCompany) {
+    return (
+      <div className="container mx-auto text-white" data-testid="profile-info">
+        <ProfileHeading
+          profilePictureURL={currentUser.profilePicture}
+          name={currentUser.name}
+          bio={currentUser.bio}
+          uid={''}
+        />
+
+        <ProfilePrivacy isPrivate={currentUser.isPrivate} />
+
+        <div className="mx-auto mb-5">
+          <SocialIconGroup socials={currentUser.socials} />
+        </div>
+      </div>
+    );
+  }
+
   // Profile preview
   return (
     <div className="container mx-auto text-white" data-testid="profile-info">
@@ -59,13 +78,11 @@ export default function PreviewProfile() {
         <SocialIconGroup socials={currentUser.socials} />
       </div>
 
-      {!currentUser.isCompany && (
-        <ViewLinkButton
-          href={`/profile/${authUser.uid}/links`}
-          linkedUserIds={currentUser?.linkedUserIds}
-          data-testid="view-link-button"
-        />
-      )}
+      <ViewLinkButton
+        href={`/profile/${authUser.uid}/links`}
+        linkedUserIds={currentUser?.linkedUserIds}
+        data-testid="view-link-button"
+      />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
       {!currentUser.isCompany && (
@@ -75,50 +92,34 @@ export default function PreviewProfile() {
         />
       )}
 
-      {!currentUser.isCompany && (
-        <ProfileDocuments
-          resume={currentUser.resume}
-          coverLetter={currentUser.coverLetter}
-        />
-      )}
+      <ProfileDocuments
+        resume={currentUser.resume}
+        coverLetter={currentUser.coverLetter}
+      />
 
       {/* The check is done on each section to make it less confusing to change the visibility of one of the profile components if we want to */}
-      {!currentUser.isCompany && (
-        <ProfileLanguages languages={currentUser.languages} />
-      )}
+
+      <ProfileLanguages languages={currentUser.languages} />
 
       {/* TODO: change coding languages picture */}
-      {!currentUser.isCompany && (
-        <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
-      )}
 
-      {!currentUser.isCompany && (
-        <ProfileEducation education={currentUser.education} />
-      )}
+      <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
-      {!currentUser.isCompany && (
-        <ProfileCourses courses={currentUser.courses} />
-      )}
+      <ProfileEducation education={currentUser.education} />
 
-      {!currentUser.isCompany && (
-        <ProfileExperience experience={currentUser.experience} />
-      )}
+      <ProfileCourses courses={currentUser.courses} />
 
-      {!currentUser.isCompany && (
-        <ProfileProjects projects={currentUser.projects} />
-      )}
+      <ProfileExperience experience={currentUser.experience} />
 
-      {!currentUser.isCompany && <ProfileSkills skills={currentUser.skills} />}
+      <ProfileProjects projects={currentUser.projects} />
 
-      {!currentUser.isCompany && <ProfileAwards awards={currentUser.awards} />}
+      <ProfileSkills skills={currentUser.skills} />
 
-      {!currentUser.isCompany && (
-        <ProfileCertifications certifications={currentUser.certifications} />
-      )}
+      <ProfileAwards awards={currentUser.awards} />
 
-      {!currentUser.isCompany && (
-        <ProfileVolunteering volunteering={currentUser.volunteering} />
-      )}
+      <ProfileCertifications certifications={currentUser.certifications} />
+
+      <ProfileVolunteering volunteering={currentUser.volunteering} />
     </div>
   );
 }

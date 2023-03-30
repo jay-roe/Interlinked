@@ -1,4 +1,3 @@
-import type { Post } from '@/types/Post';
 import { User, UserWithId } from '@/types/User';
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import Card from '../Card/Card';
@@ -32,11 +31,7 @@ const FullPostCard = ({
         id="post-content"
         ref={postContainer}
       >
-        <JobPostHeader
-          author={author}
-          jobPost={jobPost}
-          currentUser={currentUser}
-        />
+        <JobPostHeader author={author} jobPost={jobPost} />
         {editsOpen ? (
           <div className="border-b-2 border-y-white border-opacity-10 pb-2">
             <EditJobPosting

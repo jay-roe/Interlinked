@@ -66,6 +66,26 @@ export default function ViewProfile({ params }) {
     );
   }
 
+  // user is a company
+  if (user.isCompany) {
+    return (
+      <div data-testid="profile" className="container mx-auto text-white">
+        <ProfileHeading
+          profilePictureURL={user.profilePicture}
+          name={user.name}
+          bio={user.bio}
+          uid={params.uid}
+        />
+
+        <div className="mx-auto mb-3">
+          <SocialIconGroup socials={user?.socials} />
+        </div>
+
+        <ProfileContact email={user.email} phone={user.phone} />
+      </div>
+    );
+  }
+
   return (
     <div data-testid="profile" className="container mx-auto text-white">
       <ProfileHeading
@@ -79,50 +99,40 @@ export default function ViewProfile({ params }) {
         <SocialIconGroup socials={user?.socials} />
       </div>
 
-      {!user.isCompany && (
-        <div className="flex space-x-4">
-          <ViewLinkButton
-            href={`/profile/${params.uid}/links`}
-            linkedUserIds={user?.linkedUserIds}
-          />
-          <LinkButton profileOwnerUID={params.uid} />
-        </div>
-      )}
+      <div className="flex space-x-4">
+        <ViewLinkButton
+          href={`/profile/${params.uid}/links`}
+          linkedUserIds={user?.linkedUserIds}
+        />
+        <LinkButton profileOwnerUID={params.uid} />
+      </div>
 
       <ProfileContact email={user.email} phone={user.phone} />
 
-      {!user.isCompany && <ProfileLanguages languages={user.languages} />}
+      <ProfileDocuments
+        resume={currentUser.resume}
+        coverLetter={currentUser.coverLetter}
+      />
 
-      {!currentUser.isCompany && (
-        <ProfileDocuments
-          resume={currentUser.resume}
-          coverLetter={currentUser.coverLetter}
-        />
-      )}
+      <ProfileLanguages languages={user.languages} />
 
-      {!user.isCompany && (
-        <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
-      )}
+      <ProfileCodingLanguages codingLanguages={user.codingLanguages} />
 
-      {!user.isCompany && <ProfileEducation education={user.education} />}
+      <ProfileEducation education={user.education} />
 
-      {!user.isCompany && <ProfileCourses courses={user.courses} />}
+      <ProfileCourses courses={user.courses} />
 
-      {!user.isCompany && <ProfileExperience experience={user.experience} />}
+      <ProfileExperience experience={user.experience} />
 
-      {!user.isCompany && <ProfileProjects projects={user.projects} />}
+      <ProfileProjects projects={user.projects} />
 
-      {!user.isCompany && <ProfileSkills skills={user.skills} />}
+      <ProfileSkills skills={user.skills} />
 
-      {!user.isCompany && <ProfileAwards awards={user.awards} />}
+      <ProfileAwards awards={user.awards} />
 
-      {!user.isCompany && (
-        <ProfileCertifications certifications={user.certifications} />
-      )}
+      <ProfileCertifications certifications={user.certifications} />
 
-      {!user.isCompany && (
-        <ProfileVolunteering volunteering={user.volunteering} />
-      )}
+      <ProfileVolunteering volunteering={user.volunteering} />
     </div>
   );
 }

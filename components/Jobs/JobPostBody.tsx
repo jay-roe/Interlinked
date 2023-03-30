@@ -1,12 +1,11 @@
 import { JobPostingWithId } from '@/types/JobPost';
-
 import { HiLocationMarker } from 'react-icons/hi';
 import {
   AiOutlineClockCircle,
   AiOutlinePaperClip,
   AiOutlineEye,
 } from 'react-icons/ai';
-import { FaRegPaperPlane } from 'react-icons/fa';
+import Button from '../Buttons/Button';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic
@@ -79,15 +78,20 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         <AiOutlineEye className="my-auto text-accent-orange" />
         <p>{'Hidden: ' + (jobPost?.hidden ? 'Yes' : 'No')}</p>
       </div>
-      <div
-        className="flex space-x-1 align-middle"
-        data-testid="job-post-external"
-      >
-        <FaRegPaperPlane className="my-auto text-accent-orange" />
-        <p>
-          {'External Job: ' +
-            (jobPost?.externalApplications.length !== 0 ? 'Yes' : 'No')}
-        </p>
+      <div data-testid="job-post-external">
+        {jobPost?.externalApplications?.map((externalApp, index) => (
+          <div className="mb-2" key={index}>
+            <a
+              href={externalApp.url}
+              target="_blank"
+              rel="noreferrer"
+              className="inline"
+            >
+              <Button>Apply via {externalApp.name}</Button>
+            </a>
+            <br />
+          </div>
+        ))}
       </div>
       <div
         className="flex space-x-1 align-middle"

@@ -77,7 +77,6 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=job-post-cv]').should('contain', 'Yes');
     cy.get('[data-testid=job-post-cl]').should('contain', 'Yes');
     cy.get('[data-testid=job-post-hidden]').should('contain', 'Yes');
-    cy.get('[data-testid=job-post-external]').should('contain', 'Yes');
 
     // footer
     cy.get('[data-testid=job-post-applicants]').should('exist');
@@ -115,7 +114,6 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=job-post-cv]').should('contain', 'No');
     cy.get('[data-testid=job-post-cl]').should('contain', 'No');
     cy.get('[data-testid=job-post-hidden]').should('contain', 'No');
-    cy.get('[data-testid=job-post-external]').should('contain', 'No');
 
     // delete posting
     cy.get('[data-testid=job-post-delete]').click();

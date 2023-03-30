@@ -65,9 +65,7 @@ export default function ProfileDocuments({
     getDownloadURL(fileRef)
       .then((res) => {
         // File already exists, delete it
-        deleteObject(fileRef).then((res) => {
-          console.log('duplicate file deleted');
-        });
+        deleteObject(fileRef).then((res) => {});
       })
       .catch((err) => console.error(err));
 

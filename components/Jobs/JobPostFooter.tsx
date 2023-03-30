@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-
 import Button from '../Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import { typeCollection, db } from '@/config/firestore';
@@ -35,7 +34,7 @@ const PostFooter = ({
   };
 
   return (
-    <div className="mt-4 flex items-center space-x-4">
+    <div className="mt-4 flex flex-wrap items-center gap-2">
       <Button
         data-testid="job-post-edit"
         onClick={() => {

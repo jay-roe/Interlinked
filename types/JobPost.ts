@@ -15,7 +15,14 @@ export type JobPosting = {
   externalApplications?: ApplicationLink[];
   hidden: boolean;
   applications: Application[];
+  jobType: JobType;
 };
+
+export enum JobType {
+  FULLTIME = 'FULLTIME',
+  PARTTIME = 'PARTTIME',
+  INTERNSHIP = 'INTERNSHIP',
+}
 
 type ApplicationLink = {
   name: string;
