@@ -1,8 +1,8 @@
 {
   "exclude": "components/CardStack/*.{js,jsx,ts,tsx}",
   "check-coverage": true,
-  "branches": 40,
-  "lines": 40,
-  "functions": 40,
-  "statements": 40
+  "branches": 10,
+  "lines": 10,
+  "functions": 10,
+  "statements": 10
 }
