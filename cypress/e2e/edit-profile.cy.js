@@ -1,8 +1,6 @@
 import { email, pw } from '../support/e2e';
 
 describe('Full edit profile spec', () => {
-  cy.on('window:confirm', () => true);
-
   before(() => {
     cy.login(email, pw);
   });
@@ -11,7 +9,7 @@ describe('Full edit profile spec', () => {
     cy.logout();
   });
 
-  it('can edit EVERYTHING', () => {
+  it('can edit profile', () => {
     cy.visit('/edit-profile');
 
     // image
@@ -250,6 +248,11 @@ describe('Full edit profile spec', () => {
 
     // update
     cy.get('[data-testid=update-account-button]').click();
+    cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('Successfully updated your profile!');
+    });
 
     // validate all
     // name
@@ -450,8 +453,13 @@ describe('Full edit profile spec', () => {
 
     // Save and logout
     cy.get('[data-testid=update-account-button]').click();
-
-    cy.get('[data-testid=home-interlinked]').should('exist');
+    cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('Successfully updated your profile!');
+    });
+    
+    cy.url().should('contain', '/profile');
     cy.get('[data-testid=profile-info]').should('exist');
 
     cy.get('[data-testid=live-lang-0]').should('not.exist');

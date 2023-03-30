@@ -47,7 +47,7 @@ export default function DMs() {
       <Card className="flex flex-grow flex-col overflow-auto">
         {chats?.map((keyRoom) => {
           return (
-            <Link key={keyRoom.key} href={'/DM/' + keyRoom.key}>
+            <Link data-testid={`chatroom-${keyRoom.key}`} key={keyRoom.key} href={'/DM/' + keyRoom.key}>
               <ChatroomCard key={keyRoom.key} room={keyRoom.room} />
             </Link>
           );

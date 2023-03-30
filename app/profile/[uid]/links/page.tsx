@@ -119,16 +119,14 @@ export default function Links({ params }) {
                         data-testid="test-coverphoto"
                         className="h-8 min-h-[2rem] w-8 min-w-[2rem] rounded-full md:h-12 md:w-12"
                         src={link?.profilePicture}
-                        alt={
-                          link?.name || link?.email || 'Link profile picture'
-                        }
+                        alt={link?.name}
                         width={32}
                         height={32}
                       />
                     </span>
                     <div className="flex flex-col">
                       <div className="break-all text-sm md:text-lg">
-                        {link?.name || link?.email || 'Unknown'}
+                        {link?.name}
                       </div>
                     </div>
                   </div>

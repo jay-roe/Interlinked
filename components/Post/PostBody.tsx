@@ -14,16 +14,6 @@ const PostBody = ({
   // Creates the body of the post constaining the title, body text, and image if there is one
   return (
     <div className="mb-3 flex flex-col space-y-2 border-y-2 border-y-white border-opacity-10 p-2">
-      {post?.title ? (
-        <div
-          data-testid="post-title"
-          className="text-2xl font-medium leading-10"
-        >
-          {post?.title || ''}
-        </div>
-      ) : (
-        <div data-testid="no-post-title"></div>
-      )}
       <div className="leading-normal">{post?.text_content || ''}</div>
       {post?.image_content &&
         post.image_content[0] &&
