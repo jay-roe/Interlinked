@@ -4,7 +4,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiBell } from 'react-icons/fi';
-import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
 import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
