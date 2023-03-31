@@ -20,7 +20,7 @@ import { User } from 'firebase/auth';
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
-  const [jobs, setJobs] = useState<JobPosting[]>([]);
+  const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
   const [companies, setCompanies] = useState<string[]>([]);
 
   // const router = useRouter();
