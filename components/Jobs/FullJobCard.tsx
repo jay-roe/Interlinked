@@ -35,7 +35,7 @@ export default function jobs({
         <div>
           <Card>
             <div className="mb-7 text-sm font-light max-md:hidden">
-              {job.datePosted.toDate().toLocaleString('en-US', {
+              {job?.datePosted?.toDate().toLocaleString('en-US', {
                 month: 'long',
                 year: 'numeric',
                 day: '2-digit',
