@@ -21,27 +21,12 @@ export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<JobPostingWithId[]>([]);
+  const [fullTime, setFullTime] = useState<boolean>(false);
+  const [partTime, setPartTime] = useState<boolean>(false);
+  const [internship, setInternship] = useState<boolean>(false);
+  const [searchKey, setSearchKey] = useState<string>();
   const [companies, setCompanies] = useState<string[]>([]);
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   async function getJobPostings() {
-  //     const res = await getDocs(
-  //       query(
-  //       typeCollection<JobPosting>(
-  //         collection(doc(db.users), 'jobPosts')
-  //       )
-  //       )
-  //     );
-  //     return res.docs.map((resData) => resData.data());
-  //   }
-
-  //   getJobPostings().then((jobs) => {
-  //     setJobs(jobs);
-  //     setLoading(false);
-  //   });
-  // }, [authUser?.uid]);
 
   useEffect(() => {
     async function getUsers() {
@@ -81,9 +66,6 @@ export default function Feeds() {
     setLoading(false);
     // }
   }, [companies]);
-
-  console.log('postss2', companies);
-  console.log('jobs', jobs);
 
   if (loading) {
     return <div>Loading...</div>;
