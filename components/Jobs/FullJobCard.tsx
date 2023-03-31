@@ -54,12 +54,12 @@ export default function jobs({
               </Card>
               <ul
                 className="inline-flex flex-wrap"
-                data-testid="live-code-langs"
+                data-testid="live-code-langs" // MUST CHANGE DATA-TESTID
               >
                 {job.skills.map((sk, index) => (
                   <li
                     key={index}
-                    data-testid={`live-coding-lang-${index}`}
+                    data-testid={`live-coding-lang-${index}`} // MUST CHANGE DATA-TESTID
                     className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-light"
                   >
                     {sk}
