@@ -8,6 +8,7 @@ import type {
   DocumentData,
 } from 'firebase/firestore';
 import { ChatRoom } from '@/types/Message';
+import { JobKeyword } from '@/types/JobKeyword';
 
 // Visit this article for a description of the approach to get types in Firestore: https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
 
@@ -34,4 +35,5 @@ export const db = {
   admin: dataPoint<Admin>('users'),
   posts: dataPoint<Post>('posts'),
   chatrooms: dataPoint<ChatRoom>('chatrooms'),
+  jobKeywords: dataPoint<JobKeyword>('jobkeywords'),
 };

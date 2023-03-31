@@ -397,6 +397,7 @@ export default function EditProfile() {
 
         <ProfileJobHunt
           isEditable
+          userid={authUser.uid}
           isWantJobNotif={isWantJobNotif}
           setIsWantJobNotif={setIsWantJobNotif}
           jobNotifEditing={jobNotifEditing}
