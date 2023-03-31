@@ -3,6 +3,7 @@
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { JobPosting, JobPostingWithId, JobType } from '@/types/JobPost';
+import { NotifType } from '@/types/Notification';
 import {
   collection,
   doc,
@@ -16,6 +17,7 @@ import Button from '../Buttons/Button';
 import CheckBox from '../InputFields/CheckBox/CheckBox';
 import Input from '../InputFields/Input/Input';
 import TextArea from '../InputFields/TextArea/TextArea';
+import { createNotification } from '../Notification/AddNotification/AddNotification';
 import ProfileSkills from '../ProfilePage/ProfileSkills/ProfileSkills';
 import ExternalApplication from './ExternalApplication';
 
@@ -113,6 +115,14 @@ const EditJobPosting = ({
         datePosted: serverTimestamp(),
       });
       window.location.reload();
+
+      createNotification({
+        notifType: NotifType.JOB,
+        context: definedJob.title,
+        sender: definedJob.companyId,
+        receiver: 'qDIWdvP2J1dahsSzkLdmpTOfjGe2',
+      });
+      //add postingId to the notification here
     } else {
       const docRef = doc(
         typeCollection<JobPosting>(
