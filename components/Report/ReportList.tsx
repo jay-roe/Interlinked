@@ -18,7 +18,7 @@ export default function ReportList({
 
   return (
     <div>
-      <ul className="pt-3" data-testid="live-notifications">
+      <ul className="pt-3" data-testid="live-reports">
         {reports.map((rep, index) => (
           <li
             key={index}
