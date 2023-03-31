@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import { JobPosting } from '@/types/JobPost';
+import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
 import {
   collection,
@@ -66,14 +66,14 @@ export default function Feeds() {
     companies.forEach((comp) => {
       getDocs(
         query(
-          typeCollection<JobPosting>(
+          typeCollection<JobPostingWithId>(
             collection(doc(db.companies, comp), 'jobPosts')
           )
         )
       ).then((jobs) => {
         jobs.forEach((job) => {
           setJobs((cur) => {
-            return [...cur, { ...job.data() }];
+            return [...cur, { ...job.data(), postingId: job.id }];
           });
         });
       });
@@ -83,6 +83,7 @@ export default function Feeds() {
   }, [companies]);
 
   console.log('postss2', companies);
+  console.log('jobs', jobs);
 
   if (loading) {
     return <div>Loading...</div>;
