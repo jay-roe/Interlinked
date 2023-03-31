@@ -20,7 +20,7 @@ import { User } from 'firebase/auth';
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
-  const [jobs, setJobs] = useState<JobPosting[]>([]);
+  const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
   const [companies, setCompanies] = useState<string[]>([]);
 
   // const router = useRouter();
@@ -58,11 +58,8 @@ export default function Feeds() {
     getUsers();
   }, []);
 
-  console.log('post1', companies);
-
   useEffect(() => {
     // if (loading) {
-    console.log('reach');
     companies.forEach((comp) => {
       getDocs(
         query(
@@ -81,9 +78,6 @@ export default function Feeds() {
     setLoading(false);
     // }
   }, [companies]);
-
-  console.log('postss2', companies);
-  console.log('jobs', jobs);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -117,7 +111,9 @@ export default function Feeds() {
       </p>
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
-        return <FullJobCard job={jb} setJob={setJobs} />;
+        return (
+          <FullJobCard job={jb} setJob={setJobs} postingId={jb.postingId} />
+        );
       })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>
