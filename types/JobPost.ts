@@ -1,4 +1,5 @@
 import type { Timestamp } from 'firebase/firestore';
+import type { Document } from './User';
 
 export type JobPosting = {
   title: string;
@@ -37,6 +38,6 @@ export type Application = {
   applicantId: string;
   applicantName: string;
   applicantProfilePic?: string;
-  documents: never;
+  documents: Document[];
   // TODO: this type is not complete, the people working on job applications will finish this
 };

@@ -11,8 +11,18 @@ import { FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
 import FileButton from '../Buttons/FileButton/FileButton';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
+import { collection, doc, updateDoc } from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
 
-export default function jobs({ job }: { job: JobPosting }) {
+export default function jobs({
+  job,
+  setJob,
+}: {
+  job: JobPosting;
+  setJob: Dispatch<SetStateAction<JobPosting[]>>;
+}) {
+  const { currentUser, authUser } = useAuth();
   const [isEditable, setEditing] = useState<boolean>(true);
   return (
     <div className="mb-3 flex items-stretch justify-between">
@@ -25,7 +35,7 @@ export default function jobs({ job }: { job: JobPosting }) {
         <div>
           <Card>
             <div className="mb-7 text-sm font-light max-md:hidden">
-              {job.datePosted.toDate().toLocaleString('en-US', {
+              {job?.datePosted?.toDate().toLocaleString('en-US', {
                 month: 'long',
                 year: 'numeric',
                 day: '2-digit',
@@ -44,12 +54,12 @@ export default function jobs({ job }: { job: JobPosting }) {
               </Card>
               <ul
                 className="inline-flex flex-wrap"
-                data-testid="live-code-langs"
+                data-testid="live-code-langs" // MUST CHANGE DATA-TESTID
               >
                 {job.skills.map((sk, index) => (
                   <li
                     key={index}
-                    data-testid={`live-coding-lang-${index}`}
+                    data-testid={`live-coding-lang-${index}`} // MUST CHANGE DATA-TESTID
                     className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-light"
                   >
                     {sk}
@@ -113,7 +123,7 @@ export default function jobs({ job }: { job: JobPosting }) {
             </Card>
             {/* Quick apply to job button */}
             {isEditable && (
-              <div className="flex justify-end">
+              <div className="flex justify-end gap-3">
                 <Button
                   type="button"
                   style={{ float: 'right' }}
@@ -123,6 +133,38 @@ export default function jobs({ job }: { job: JobPosting }) {
                   }}
                 >
                   Apply <FaPaperPlane className="ml-2" />
+                </Button>
+                <Button
+                  type="button"
+                  style={{ float: 'right' }}
+                  onClick={() => {
+                    // e.preventDefault();
+                    setJob((jobs) => {
+                      let actJob = jobs.find((tempJob) => job === tempJob);
+                      let newApp = {
+                        applicantId: authUser.uid,
+                        applicantName: currentUser.name,
+                        applicantProfilePic: currentUser.profilePicture,
+                        documents: [
+                          currentUser.resume,
+                          currentUser.coverLetter,
+                        ],
+                      };
+                      actJob.applications.push(newApp);
+                      return jobs;
+                    });
+                    updateDoc(
+                      doc(
+                        collection(doc(db.users, job.companyId), 'jobPosts'),
+                        'P3IlUBNr3Q3ignfIJOLd' // job posting ID -> talk to Koosha about how to get it
+                      ),
+                      job
+                    );
+                    alert('application sent!');
+                  }}
+                >
+                  {' '}
+                  Quick Apply <FaPaperPlane className="ml-2" />
                 </Button>
               </div>
             )}

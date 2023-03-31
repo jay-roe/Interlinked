@@ -140,7 +140,7 @@ type Recommendation = {
   recommender: User;
 };
 
-type Document = {
+export type Document = {
   name: string;
   link: string;
   isPrivate: boolean;

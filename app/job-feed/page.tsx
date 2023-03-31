@@ -99,7 +99,7 @@ export default function Feeds() {
       </p>
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
-        return <FullJobCard job={jb} />;
+        return <FullJobCard job={jb} setJob={setJobs} />;
       })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>
