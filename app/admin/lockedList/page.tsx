@@ -2,14 +2,25 @@
 import Button from '@/components/Buttons/Button';
 import Card from '@/components/Card/Card';
 import { db, typeCollection } from '@/config/firestore';
+import { useAuth } from '@/contexts/AuthContext';
 import { User, UserWithId } from '@/types/User';
 import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function LockedList() {
   const [loading, setLoading] = useState(true);
   const [banned, setBanned] = useState<UserWithId[]>([]);
+
+  const { authUser } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!authUser?.uid) {
+      router.push('/');
+    }
+  }, [authUser, router]);
 
   useEffect(() => {
     getDocs(
