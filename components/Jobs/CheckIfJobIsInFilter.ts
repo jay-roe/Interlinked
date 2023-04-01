@@ -15,50 +15,34 @@ export function checkIfJobIsInFilter({
   internship: boolean;
   job: JobPostingWithId;
 }) {
+  // check if the job matches the job type
   let jobTypeMatches = false;
+
   // if there is no filter applied, return true
-  if (
-    !fullTime &&
-    !partTime &&
-    !internship &&
-    (searchKey == null || searchKey == '')
-  )
-    return true;
+  if (!fullTime && !partTime && !internship) jobTypeMatches = true;
   // find out if any job types match
   else if (job.jobType == 'FULLTIME' && fullTime == true) jobTypeMatches = true;
   else if (job.jobType == 'PARTTIME' && partTime == true) jobTypeMatches = true;
   else if (job.jobType == 'INTERNSHIP' && internship == true)
     jobTypeMatches = true;
 
-  if (!jobTypeMatches) {
-    return false;
-  }
-  // if the job types match, check if the job search matches
-  else {
-    // if there is no search key, return true
-    if (searchKey == null || searchKey == '') {
-      return true;
-    } else {
-      return checkIfJobMatchesSearchKey({ job, searchKey });
-    }
-  }
-}
+  // check if the job matches the search
+  let searchMatches = false;
 
-function checkIfJobMatchesSearchKey({
-  job,
-  searchKey,
-}: {
-  job: JobPostingWithId;
-  searchKey: string;
-}) {
   // check if the key is in the title
-  if (job.title.includes(searchKey)) return true;
+  if (job.title.includes(searchKey)) searchMatches = true;
   // check if the key is in the company name
-  else if (job.companyName.includes(searchKey)) return true;
+  else if (job.companyName.includes(searchKey)) searchMatches = true;
   // check if the key is in the description
-  else if (job.description.includes(searchKey)) return true;
+  else if (job.description.includes(searchKey)) searchMatches = true;
   // check if the key is in the skills
-  else if (job.skills.includes(searchKey)) return true;
-  // no (descriptive) components contain the search key?
+  else {
+    let existInSkills = true;
+    job.skills.forEach((skill) => {
+      if (skill.includes(searchKey)) searchMatches = true;
+    });
+  }
+
+  if (jobTypeMatches && searchMatches) return true;
   else return false;
 }
