@@ -4,6 +4,7 @@ import { render } from '@testing-library/react';
 import { useAuth } from '@/contexts/AuthContext';
 import Notifications from '../page';
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
@@ -36,10 +37,25 @@ jest.mock('firebase/storage', () => ({
   uploadBytesResumable: jest.fn(),
 }));
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
+jest.spyOn(window, 'alert').mockImplementation(() => {});
+
+const mockedRouter = useRouter as jest.Mock<any>;
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 
+// problem where loading is not set to true
 // if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
 it('check if user is logged out', async () => {
+  const myPush = jest.fn();
+  mockedRouter.mockImplementation(() => {
+    return {
+      push: myPush,
+    };
+  });
+
   mockedUseAuth.mockImplementation(() => {
     return {
       authUser: null,
@@ -47,7 +63,5 @@ it('check if user is logged out', async () => {
     };
   });
   const { findByTestId } = render(<Notifications />);
-
-  const loginPrompt = await findByTestId('profile-login-prompt');
-  expect(loginPrompt).toBeInTheDocument();
+  expect(myPush).toBeCalled();
 });
