@@ -2,6 +2,7 @@
 
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
+import type { JobKeyword } from '@/types/JobKeyword';
 import { JobPosting, JobPostingWithId, JobType } from '@/types/JobPost';
 import { NotifType } from '@/types/Notification';
 import {
@@ -17,6 +18,7 @@ import Button from '../Buttons/Button';
 import CheckBox from '../InputFields/CheckBox/CheckBox';
 import Input from '../InputFields/Input/Input';
 import TextArea from '../InputFields/TextArea/TextArea';
+import JobKeywordSearch from '../JobKeyword/JobKeyword';
 import { createNotification } from '../Notification/AddNotification/AddNotification';
 import ProfileSkills from '../ProfilePage/ProfileSkills/ProfileSkills';
 import ExternalApplication from './ExternalApplication';
@@ -72,6 +74,17 @@ const EditJobPosting = ({
   const [jobType, setJobType] = useState<JobType>(
     jobPosting?.jobType || JobType.FULLTIME
   );
+  const [keywords, setKeywords] = useState(jobPosting?.keywords || []);
+
+  const addKeywordToJob = (keyword: JobKeyword) => {
+    setKeywords((currKeys) => [...currKeys, keyword]);
+  };
+
+  const removeKeywordFromJob = (keywordId: string) => {
+    setKeywords((currKeys) =>
+      currKeys.filter((keyword) => keyword.id !== keywordId)
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -102,6 +115,7 @@ const EditJobPosting = ({
       datePosted: jobPosting?.datePosted || null,
       externalApplications: externalApp ? externalApplications : [],
       jobType: jobType,
+      keywords: keywords,
     };
 
     if (newJob && !jobPosting) {
@@ -148,7 +162,7 @@ const EditJobPosting = ({
     <div className="flex-col space-y-2">
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Name:
+          Job Name <span className="text-red-500">*</span>
         </p>
         <Input
           type="text"
@@ -182,7 +196,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Description:
+          Job Description <span className="text-red-500">*</span>
         </p>
         <TextArea
           required
@@ -195,7 +209,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Location 📍
+          Location <span className="text-red-500">*</span> 📍
         </p>
         <Input
           type="text"
@@ -208,7 +222,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Application Deadline 📆
+          Application Deadline <span className="text-red-500">*</span> 📆
         </p>
         <Input
           type="date"
@@ -221,6 +235,18 @@ const EditJobPosting = ({
               Timestamp.fromDate(new Date(e.target.value || Date.now()))
             )
           }
+        />
+      </div>
+
+      <div className="flex-col">
+        <p className="my-auto mb-2 whitespace-nowrap text-2xl font-extrabold">
+          Keywords 🔑
+        </p>
+        <JobKeywordSearch
+          jobKeywords={keywords}
+          addKeyword={addKeywordToJob}
+          removeKeyword={removeKeywordFromJob}
+          canCreateKeywords
         />
       </div>
 

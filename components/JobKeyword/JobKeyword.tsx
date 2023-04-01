@@ -1,7 +1,8 @@
 import { db } from '@/config/firestore';
 import type { JobKeyword } from '@/types/JobKeyword';
-import { query } from '@firebase/firestore';
+import { query, setDoc } from '@firebase/firestore';
 import {
+  doc,
   endAt,
   getDocs,
   limit,
@@ -11,16 +12,20 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
+import Button from '../Buttons/Button';
 import DeleteButton from '../Buttons/DeleteButton/DeleteButton';
+import Input from '../InputFields/Input/Input';
 
 export default function JobKeywordSearch({
   jobKeywords,
   addKeyword,
   removeKeyword,
+  canCreateKeywords,
 }: {
   jobKeywords: JobKeyword[];
   addKeyword: (keyword: JobKeyword) => void;
   removeKeyword: (keywordId: string) => void;
+  canCreateKeywords?: boolean;
 }) {
   const [searchTerm, setSearchTerm] = useState(''); // search input
   const [searchResults, setSearchResults] = useState<JobKeyword[]>([]); // search results
@@ -41,6 +46,18 @@ export default function JobKeywordSearch({
   const removeSubscriberKeyword = (keywordId: string) => {
     setSelectedKeywords((s) => s.filter((keyword) => keyword.id !== keywordId));
     removeKeyword(keywordId);
+  };
+
+  const createKeyword = (keyword: string) => {
+    const newKeywordRef = doc(db.jobKeywords);
+    const newJobKeyword = {
+      id: newKeywordRef.id,
+      keyword,
+      subscribers: [],
+    };
+    setDoc(newKeywordRef, newJobKeyword).then(() => {
+      addSubscriberKeyword(newJobKeyword);
+    });
   };
 
   useEffect(() => {
@@ -82,20 +99,32 @@ export default function JobKeywordSearch({
     // search input box
     <div>
       {/* Search bar */}
-      <div className="relative mb-3">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-          <FiSearch className="h-5 w-5 text-gray-400" aria-hidden="true" />
+      <div className="relative mb-3 flex h-16 items-center gap-3 rounded-lg bg-gray-50 p-4 dark:bg-gray-700">
+        {/* <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"> */}
+        <div>
+          <FiSearch size={20} className="text-gray-400" aria-hidden="true" />
         </div>
-        <input
+        {/* </div> */}
+        <Input
           id="search"
-          data-testid="search-button"
+          data-testid="job-keywords-button"
           name="search"
-          className="block w-full rounded-md  bg-gray-800 py-2 pl-10 pr-3 leading-6 text-white placeholder-gray-400 focus:placeholder-gray-500 focus:outline-none  "
-          placeholder="Search"
+          className="inline w-full rounded-md border-none bg-inherit leading-6 text-white placeholder-gray-400 focus:placeholder-gray-500 focus:outline-none  "
+          placeholder="Search keywords"
           type="search"
           value={searchTerm}
           onChange={handleSearchTermChange}
         />
+        {canCreateKeywords &&
+          searchTerm &&
+          !searchResults.some((result) => result.keyword === searchTerm) && (
+            <Button
+              className="whitespace-nowrap"
+              onClick={() => createKeyword(searchTerm.toLowerCase())}
+            >
+              Create keyword
+            </Button>
+          )}
       </div>
 
       {/* Search results */}
@@ -113,7 +142,7 @@ export default function JobKeywordSearch({
                 type="button"
                 key={index}
                 onClick={() => addSubscriberKeyword(keyword)}
-                className="mb-1 block w-full rounded-md bg-gray-800 px-4 py-2 text-start text-sm text-white"
+                className="mb-1 block w-full rounded-md bg-gray-700 px-4 py-2 text-start text-sm text-white transition-all hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
               >
                 <p className="">{keyword.keyword}</p>
               </button>
