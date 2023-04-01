@@ -82,11 +82,13 @@ export default function EditProfile() {
   const [jobNotifEditing, setJobNotifEditing] = useState<boolean>(false);
 
   // Documents component states
-  const [resume, setResume] = useState<User['resume']>(currentUser?.resume);
+  const [resume, setResume] = useState<User['resume']>(
+    currentUser?.resume || null
+  );
   const [resumeEditing, setResumeEditing] = useState<boolean>(false);
 
   const [coverLetter, setCoverLetter] = useState<User['coverLetter']>(
-    currentUser?.coverLetter
+    currentUser?.coverLetter || null
   );
   const [coverLetterEditing, setCoverLetterEditing] = useState<boolean>(false);
 
