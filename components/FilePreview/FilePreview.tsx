@@ -12,7 +12,7 @@ export default function FilePreview({
       data-testid="file-preview-test"
       className="rounded-md border-2 border-white bg-gray-600 p-2 "
     >
-      <a href={url} type={type} target="_blank" download>
+      <a href={url} type={type} target="_blank" rel="noreferrer" download>
         <p>{name}</p>
       </a>
     </div>
