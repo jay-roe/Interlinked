@@ -7,7 +7,7 @@
       "lastLoginAt": "1678577459011",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
-      "passwordUpdatedAt": 1679608242072,
+      "passwordUpdatedAt": 1679934099836,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,7 +16,7 @@
           "rawId": "verycool@test.com"
         }
       ],
-      "validSince": "1679608242",
+      "validSince": "1679934099",
       "email": "verycool@test.com",
       "emailVerified": false,
       "disabled": false
@@ -24,10 +24,10 @@
     {
       "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
       "createdAt": "1678390113242",
-      "lastLoginAt": "1678390113242",
+      "lastLoginAt": "1679933174586",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1679608242073,
+      "passwordUpdatedAt": 1679934099836,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -36,7 +36,7 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1679608242",
+      "validSince": "1679934099",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
       "disabled": false
@@ -49,7 +49,7 @@
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
       "salt": "fakeSalt7sr6nhhBFxv17Dsk7oAb",
-      "passwordUpdatedAt": 1679608242073,
+      "passwordUpdatedAt": 1679934099836,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -60,10 +60,30 @@
           "photoUrl": ""
         }
       ],
-      "validSince": "1679608242",
+      "validSince": "1679934099",
       "email": "admin@interlinked.live",
       "emailVerified": false,
       "disabled": false
+    },
+    {
+      "localId": "Jc9kqYwRz2WaxnyVFomnxdmKbZaw",
+      "lastLoginAt": "1679934366407",
+      "emailVerified": false,
+      "email": "melisa@melisa.ca",
+      "salt": "fakeSaltakCTGhp09NQikYcbgI6j",
+      "passwordHash": "fakeHash:salt=fakeSaltakCTGhp09NQikYcbgI6j:password=123456",
+      "passwordUpdatedAt": 1679934366407,
+      "validSince": "1679934366",
+      "createdAt": "1679934366407",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "melisa@melisa.ca",
+          "federatedId": "melisa@melisa.ca",
+          "rawId": "melisa@melisa.ca"
+        }
+      ],
+      "lastRefreshAt": "2023-03-27T16:26:06.409Z"
     }
   ]
 }

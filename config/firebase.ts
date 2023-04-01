@@ -24,14 +24,14 @@ auth.useDeviceLanguage();
 
 // Initialize firestore database
 export const firestore = initializeFirestore(app, {
-  experimentalAutoDetectLongPolling: !!process.env.NEXT_PUBLIC_EMULATOR,
+  experimentalForceLongPolling: !!process.env.NEXT_PUBLIC_EMULATOR,
 });
 export const storage = getStorage();
 
 // use firebase emulator when not in production (change this in .env.local)
 if (process.env.NEXT_PUBLIC_EMULATOR) {
   connectAuthEmulator(auth, 'http://127.0.0.1:9099');
-  connectFirestoreEmulator(firestore, '127.0.0.1', 8081);
+  connectFirestoreEmulator(firestore, '127.0.0.1', 8080);
   connectStorageEmulator(storage, '127.0.0.1', 9199);
 }
 

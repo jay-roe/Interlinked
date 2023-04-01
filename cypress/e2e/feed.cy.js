@@ -36,7 +36,7 @@ describe('Full feed spec', () => {
     cy.get('[data-testid=test-image-0]')
       .should('have.attr', 'src')
       .should('include', 'test_image');
-    //cy.get('[data-testid=test-image-1]').should('not.exist');  // Uncomment when double image bugfix is complete
+    cy.get('[data-testid=test-image-1]').should('not.exist'); // Uncomment when double image bugfix is complete
 
     // liking
     cy.get('[data-testid=post-card-0]').within(() => {
