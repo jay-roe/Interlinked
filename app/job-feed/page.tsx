@@ -6,8 +6,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
-import { filterJobList } from '@/components/Jobs/FilterJobList';
-import { checkIfJobIsInFiler } from '@/components/Jobs/CheckIfJobIsInFilter';
 import {
   collection,
   collectionGroup,
@@ -23,15 +21,13 @@ export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
-  const [filteredJobs, setFilteredJobs] = useState<JobPostingWithId[]>([]);
-  const [fullTime, setFullTime] = useState<boolean>(false);
-  const [partTime, setPartTime] = useState<boolean>(false);
-  const [internship, setInternship] = useState<boolean>(false);
-  const [searchKey, setSearchKey] = useState<string>();
   const [companies, setCompanies] = useState<string[]>([]);
+  const [displayJobs, setDisplayJobs] = useState<boolean>(false);
 
   useEffect(() => {
     async function getUsers() {
+      setCompanies([]);
+      setJobs([]);
       const res = await getDocs(db.companies);
       res.forEach((doc) => {
         if (doc.data().isCompany) {
@@ -42,7 +38,7 @@ export default function Feeds() {
         }
       });
     }
-    getUsers();
+    getUsers().then(() => setDisplayJobs(true));
   }, []);
 
   useEffect(() => {
@@ -56,25 +52,35 @@ export default function Feeds() {
         )
       ).then((jobs) => {
         jobs.forEach((job) => {
-          if (
-            checkIfJobIsInFiler({
-              searchKey: searchKey,
-              fullTime: fullTime,
-              partTime: partTime,
-              internship: internship,
-              job: job.data(),
-            })
-          ) {
-            setJobs((cur) => {
-              return [...cur, { ...job.data(), postingId: job.id }];
-            });
-          }
+          setJobs((cur) => {
+            return [...cur, { ...job.data(), postingId: job.id }];
+          });
         });
       });
     });
     setLoading(false);
     // }
-  }, [companies]);
+  }, [displayJobs]);
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   async function getJobPostings() {
+  //     const res = await getDocs(
+  //       query(
+  //       typeCollection<JobPosting>(
+  //         collection(doc(db.users), 'jobPosts')
+  //       )
+  //       )
+  //     );
+  //     return res.docs.map((resData) => resData.data());
+  //   }
+
+  //   getJobPostings().then((jobs) => {
+  //     setJobs(jobs);
+  //     setLoading(false);
+  //   });
+  // }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
