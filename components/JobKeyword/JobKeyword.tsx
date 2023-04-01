@@ -1,6 +1,7 @@
-import { db } from '@/config/firestore';
+import { firestore } from '@/config/firebase';
+import { db, typeCollection } from '@/config/firestore';
 import type { JobKeyword } from '@/types/JobKeyword';
-import { query, setDoc } from '@firebase/firestore';
+import { collection, query, setDoc } from '@firebase/firestore';
 import {
   doc,
   endAt,
@@ -79,6 +80,7 @@ export default function JobKeywordSearch({
 
     // Search for job keyword
     const vals = query(
+      // typeCollection<JobKeyword>(collection(firestore, 'jobkeywords')),
       db.jobKeywords,
       where('keyword', '>=', searchTermLowerCase),
       orderBy('keyword'),
@@ -129,7 +131,13 @@ export default function JobKeywordSearch({
         />
         {canCreateKeywords &&
           searchTerm &&
-          !searchResults.some((result) => result.keyword === searchTerm) && (
+          !searchResults.some(
+            (result) => result.keyword === searchTerm.toLowerCase()
+          ) &&
+          !selectedKeywords.some(
+            (selectedKeyword) =>
+              selectedKeyword.keyword === searchTerm.toLowerCase()
+          ) && (
             <Button
               className="whitespace-nowrap"
               onClick={() => createKeyword(searchTerm.toLowerCase())}
