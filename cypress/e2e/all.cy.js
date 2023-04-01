@@ -5,5 +5,5 @@ import './feed.cy';
 import './links.cy';
 import './dm.cy';
 import './navbar.cy';
-import './admin.cy';
-import './report.cy';
+// import './admin.cy';
+// import './report.cy';

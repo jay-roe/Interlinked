@@ -1,39 +1,39 @@
-// describe('Admin discard report', () => {
-//   let email = 'admin@interlinked.live';
-//   let pw = '1234567';
+describe('Admin discard report', () => {
+  let email = 'admin@interlinked.live';
+  let pw = '1234567';
 
-//   //Login
-//   before(() => {
-//     cy.visit('login');
-//     cy.get('input[name=email]').type(email);
-//     cy.get('input[name=password]').type(pw);
+  //Login
+  before(() => {
+    cy.visit('login');
+    cy.get('input[name=email]').type(email);
+    cy.get('input[name=password]').type(pw);
 
-//     cy.get('[data-testid=login]').click();
-//   });
+    cy.get('[data-testid=login]').click();
+  });
 
-//   //Logout
-//   after(() => {
-//     cy.visit('');
-//     cy.get('[data-testid=nav-menu]')
-//       .should('be.visible')
-//       .click({ force: true });
-//     cy.get('[data-testid=nav-logout]')
-//       .should('be.visible')
-//       .click({ force: true });
-//   });
+  //Logout
+  after(() => {
+    cy.visit('');
+    cy.get('[data-testid=nav-menu]')
+      .should('be.visible')
+      .click({ force: true });
+    cy.get('[data-testid=nav-logout]')
+      .should('be.visible')
+      .click({ force: true });
+  });
 
-//   it('can visit admin page', () => {
-//     cy.visit('/admin');
-//   });
+  it('can visit admin page', () => {
+    cy.visit('/admin');
+  });
 
-//   //Discard report
-//   it('click report and discard', () => {
-//     cy.visit('/admin');
-//     cy.get('[data-testid=post-notification]').click();
-//     cy.get('[data-testid=discard-report]').click();
-//     cy.visit('/admin');
-//   });
-// });
+  //Discard report
+  it('click report and discard', () => {
+    cy.visit('/admin');
+    cy.get('[data-testid=post-notification]').click();
+    cy.get('[data-testid=discard-report]').click();
+    cy.visit('/admin');
+  });
+});
 
 describe('Admin lock account in report', () => {
   let emailAdmin = 'admin@interlinked.live';
