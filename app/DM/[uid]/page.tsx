@@ -10,7 +10,6 @@ import {
   arrayUnion,
   getDoc,
 } from 'firebase/firestore';
-
 import { db } from '@/config/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
@@ -24,12 +23,10 @@ import Link from 'next/link';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';
-import { useRouter } from 'next/navigation';
 import Button from '@/components/Buttons/Button';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
-  const router = useRouter();
 
   const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
@@ -46,7 +43,7 @@ export default function ChatRoom({ params }) {
   if (!currentUser || !authUser) {
     return (
       <div className="text-white">
-        <h1 className="text-lg font-bold">Your Notifications</h1>
+        <h1 className="text-lg font-bold">Your DMs</h1>
         <h2 data-testid="profile-login-prompt">
           You must be logged in to view your messages.
         </h2>
@@ -142,11 +139,6 @@ export default function ChatRoom({ params }) {
         }
       });
 
-      if (!belongs) {
-        alert("you don't belong here!");
-        router.push('/');
-      }
-
       room
         .data()
         .participants.filter((participantID) => participantID !== authUser.uid)
@@ -165,7 +157,6 @@ export default function ChatRoom({ params }) {
 
   async function handleSelectedFile(fileList: FileList) {
     const file: File = fileList[0];
-    if (file == null) return;
     setFileBuffer(file);
     setImgPreview(URL.createObjectURL(file));
   }
@@ -230,6 +221,7 @@ export default function ChatRoom({ params }) {
           <div className="flex flex-col  rounded-md bg-chat-text-input ">
             <div className="flex flex-row p-1 ">
               <input
+                data-testid="dm-text-input"
                 className="w-full bg-chat-text-input p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
                 type="text"
                 placeholder="Write your message..."
@@ -237,7 +229,7 @@ export default function ChatRoom({ params }) {
                 onChange={(event) => setMessage(event.target.value)}
               />
 
-              <button type="submit" className="pr-2">
+              <button data-testid="send-dm" type="submit" className="pr-2">
                 <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
               </button>
             </div>
@@ -265,6 +257,7 @@ export default function ChatRoom({ params }) {
               ) : (
                 <div className="flex gap-2 self-center">
                   <FilePreview
+                    data-testid="file-preview-dm"
                     url={URL.createObjectURL(fileBuffer)}
                     name={fileBuffer.name}
                     type={fileBuffer.type}
@@ -289,7 +282,7 @@ export default function ChatRoom({ params }) {
         </button>
 
         <input
-          id="dm-image_upload"
+          id="dm-image-upload"
           data-testid="dm-image-upload"
           type="file"
           ref={hiddenFileInput}

@@ -8,6 +8,7 @@ describe('DM spec', () => {
 
   after(() => {
     cy.logout();
+    cy.visit('DM/giNIZZIhptwtFmeLJZru');
   });
 
   it('can dm', () => {
@@ -42,11 +43,43 @@ describe('DM spec', () => {
     cy.url().should('contain', 'giNIZZIhptwtFmeLJZru');
 
     //can type in the modal
-    let newMessage = 'You wanna come over tonight?';
-    cy.get('[data-testid=dm-page-message]').type(newMessage);
+    let newMessage = 'This message has an image';
+    let otherMessage = 'this message is alone';
+    cy.get('[data-testid=dm-text-input]').type(newMessage);
+
+    //attach then remove image
+    cy.get('input[type=file]').attachFile('feed/test_image.jpeg');
+    cy.get('[data-testid=dm-remove-image-button]').click(); //remove image
+    cy.get('[data-testid=dm-remove-image-button]').should('not.exist'); // button should not exist
+
+    //attach then remove file
+    cy.get('input[type=file]').attachFile('feed/changes.txt');
+    cy.get('[data-testid=dm-remove-file-button]').click();
+    cy.get('[data-testid=dm-remove-file-button]').should('not.exist');
+
+    // attach image then post
+    cy.get('input[type=file]').attachFile('feed/test_image.jpeg');
     cy.get('[data-testid=send-dm]').click();
     cy.get('[data-testid=chat-room-root]').should('contain', newMessage);
 
+    // create new message only text
+    cy.get('[data-testid=dm-text-input]').type(otherMessage);
+    cy.get('[data-testid=send-dm]').click();
+    cy.get('[data-testid=chat-room-root]').should('contain', newMessage);
+
+    // creat new message with file only
+    cy.get('input[type=file]').attachFile('feed/changes.txt');
+    cy.get('[data-testid=dm-remove-file-button]').should('exist');
+    cy.get('[data-testid=send-dm]').click();
+    cy.get('[data-testid=file-preview-dm]').should('not.exist');
+
+    //send empty message
+    // cy.get('[data-testid=dm-text-input]').should('contain','')
+    cy.get('[data-testid=dm-text-input]').invoke('val', '');
+    cy.get('[data-testid=send-dm]').click();
+    cy.get('[data-testid=send-dm]').should('exist');
+
+    cy.get('[data-testid=dm-button-file-upload]').click();
     let timeDividerText = 'March 10, 2023'; // This is directly from emulator export please do not change
     cy.get('[data-testid=chat-room-root]').should('contain', timeDividerText);
   });
