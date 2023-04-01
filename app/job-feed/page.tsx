@@ -61,19 +61,19 @@ export default function Feeds() {
       ).then((jobs) => {
         jobs.forEach((job) => {
           // check if the job is in the filtered options
-          if (
-            checkIfJobIsInFilter({
-              fullTime: fullTime,
-              partTime: partTime,
-              internship: internship,
-              job: job.data(),
-              searchKey: searchKey,
-            })
-          ) {
-            setJobs((cur) => {
-              return [...cur, { ...job.data(), postingId: job.id }];
-            });
-          }
+          // if (
+          //   checkIfJobIsInFilter({
+          //     fullTime: fullTime,
+          //     partTime: partTime,
+          //     internship: internship,
+          //     job: job.data(),
+          //     searchKey: searchKey,
+          //   })
+          // ) {
+          setJobs((cur) => {
+            return [...cur, { ...job.data(), postingId: job.id }];
+          });
+          // }
         });
       });
     });
@@ -81,6 +81,26 @@ export default function Feeds() {
     setLoading(false);
     // }
   }, [displayJobs]);
+
+  useEffect(() => {
+    setFilteredJobs([]);
+    let tempFiltered = jobs;
+    tempFiltered.forEach((job) => {
+      if (
+        checkIfJobIsInFilter({
+          fullTime: fullTime,
+          partTime: partTime,
+          internship: internship,
+          job: job,
+          searchKey: searchKey,
+        })
+      ) {
+        setFilteredJobs((cur) => {
+          return [...cur, job];
+        });
+      }
+    });
+  }, [partTime, fullTime, internship, searchKey]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -113,19 +133,12 @@ export default function Feeds() {
         Find new jobs.
       </p>
       <div className="my-4 flex flex-col items-center align-middle text-xl sm:flex-row sm:space-x-4">
-        <JobSearchBar
-          setSearchKey={setSearchKey}
-          setDisplayJobs={setDisplayJobs}
-          setJobs={setJobs}
-          searchKey={searchKey}
-        />
+        <JobSearchBar setSearchKey={setSearchKey} searchKey={searchKey} />
         <CheckBox
           name="FullTime"
           checked={fullTime}
           onChange={() => {
             setFullTime((curr) => !curr);
-            setJobs([]);
-            setDisplayJobs((curr) => !curr);
           }}
           label="Full-time"
         />
@@ -134,8 +147,6 @@ export default function Feeds() {
           checked={partTime}
           onChange={() => {
             setPartTime((curr) => !curr);
-            setJobs([]);
-            setDisplayJobs((curr) => !curr);
           }}
           label="Part-Time"
         />
@@ -144,14 +155,12 @@ export default function Feeds() {
           checked={internship}
           onChange={() => {
             setInternship((curr) => !curr);
-            setJobs([]);
-            setDisplayJobs((curr) => !curr);
           }}
           label="Internship"
         />
       </div>
       {/* job postings go here */}
-      {jobs?.map((jb, index) => {
+      {filteredJobs?.map((jb, index) => {
         return (
           <FullJobCard
             key={index}

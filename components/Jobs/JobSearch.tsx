@@ -17,13 +17,9 @@ import { JobPostingWithId } from '@/types/JobPost';
 
 const JobSearchBar = ({
   setSearchKey,
-  setDisplayJobs,
-  setJobs,
   searchKey,
 }: {
   setSearchKey: Dispatch<SetStateAction<string>>;
-  setDisplayJobs: Dispatch<SetStateAction<boolean>>;
-  setJobs: Dispatch<SetStateAction<JobPostingWithId[]>>;
   searchKey: string;
 }) => {
   const [searchTerm, setSearchTerm] = useState(''); // search input
@@ -32,8 +28,6 @@ const JobSearchBar = ({
 
   const handleChange = (e) => {
     setSearchKey(e.target.value);
-    setJobs([]);
-    setDisplayJobs((curr) => !curr);
   };
 
   useEffect(() => {
