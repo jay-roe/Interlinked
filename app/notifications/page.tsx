@@ -21,11 +21,6 @@ export default function Notifications() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!authUser) {
-      alert('You need to be logged in to view your notifications.');
-      router.push('/login');
-    }
-
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
