@@ -73,13 +73,12 @@ export default function Feeds() {
           setJobs((cur) => {
             return [...cur, { ...job.data(), postingId: job.id }];
           });
-          setFilteredJobs((cur) => {
-            return [...cur, { ...job.data(), postingId: job.id }];
-          });
           // }
         });
       });
     });
+    console.log(jobs);
+    setFilteredJobs(jobs);
     setLoading(false);
     // }
   }, [displayJobs]);
@@ -137,6 +136,7 @@ export default function Feeds() {
       <div className="my-4 flex flex-col items-center align-middle text-xl sm:flex-row sm:space-x-4">
         <JobSearchBar setSearchKey={setSearchKey} searchKey={searchKey} />
         <CheckBox
+          data-testid="full-time-filter"
           name="FullTime"
           checked={fullTime}
           onChange={() => {
@@ -145,6 +145,7 @@ export default function Feeds() {
           label="Full-time"
         />
         <CheckBox
+          data-testid="part-time-filter"
           name="PartTime"
           checked={partTime}
           onChange={() => {
@@ -153,6 +154,7 @@ export default function Feeds() {
           label="Part-Time"
         />
         <CheckBox
+          data-testid="internship-filter"
           name="Internship"
           checked={internship}
           onChange={() => {
@@ -162,16 +164,33 @@ export default function Feeds() {
         />
       </div>
       {/* job postings go here */}
-      {filteredJobs?.map((jb, index) => {
-        return (
-          <FullJobCard
-            key={index}
-            job={jb}
-            setJob={setJobs}
-            postingId={jb.postingId}
-          />
-        );
-      })}
+      {/*if there is no filter, display jobs*/}
+      {!fullTime &&
+        !partTime &&
+        !internship &&
+        searchKey == '' &&
+        jobs?.map((jb, index) => {
+          return (
+            <FullJobCard
+              key={index}
+              job={jb}
+              setJob={setJobs}
+              postingId={jb.postingId}
+            />
+          );
+        })}
+      {/*if there is a filter, display jobs*/}
+      {(fullTime || partTime || internship || searchKey != '') &&
+        filteredJobs?.map((jb, index) => {
+          return (
+            <FullJobCard
+              key={index}
+              job={jb}
+              setJob={setJobs}
+              postingId={jb.postingId}
+            />
+          );
+        })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>
   );
