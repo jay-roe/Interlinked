@@ -15,7 +15,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 
-export default function jobs({
+export default function Jobs({
   job,
   setJob,
   postingId,

@@ -112,7 +112,12 @@ export default function Feeds() {
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
         return (
-          <FullJobCard job={jb} setJob={setJobs} postingId={jb.postingId} />
+          <FullJobCard
+            key={index}
+            job={jb}
+            setJob={setJobs}
+            postingId={jb.postingId}
+          />
         );
       })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
