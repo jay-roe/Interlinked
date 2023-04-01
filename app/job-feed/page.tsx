@@ -6,6 +6,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
+import { filterJobList } from '@/components/Jobs/FilterJobList';
+import { checkIfJobIsInFiler } from '@/components/Jobs/CheckIfJobIsInFilter';
 import {
   collection,
   collectionGroup,
@@ -47,7 +49,7 @@ export default function Feeds() {
 
   useEffect(() => {
     // if (loading) {
-    console.log('reach');
+    setJobs([]);
     companies.forEach((comp) => {
       getDocs(
         query(
@@ -57,9 +59,19 @@ export default function Feeds() {
         )
       ).then((jobs) => {
         jobs.forEach((job) => {
-          setJobs((cur) => {
-            return [...cur, { ...job.data(), postingId: job.id }];
-          });
+          if (
+            checkIfJobIsInFiler({
+              searchKey: searchKey,
+              fullTime: fullTime,
+              partTime: partTime,
+              internship: internship,
+              job: job.data(),
+            })
+          ) {
+            setJobs((cur) => {
+              return [...cur, { ...job.data(), postingId: job.id }];
+            });
+          }
         });
       });
     });
