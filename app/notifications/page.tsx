@@ -2,23 +2,17 @@
 
 import { getDocs, collection, query, updateDoc } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import Button from '@/components/Buttons/Button';
 import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
 import { doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Notification, NotifType } from '@/types/Notification';
-import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
-import { useRouter } from 'next/navigation';
+import type { Notification } from '@/types/Notification';
 
 export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
-  const [newNotification, setNewNotification] = useState<boolean>(false);
-  const router = useRouter();
 
   useEffect(() => {
     async function getNotifications() {
@@ -62,7 +56,6 @@ export default function Notifications() {
         read: true,
       }))
     );
-    setNewNotification((curr) => !curr);
   }
 
   return (
