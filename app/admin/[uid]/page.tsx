@@ -22,6 +22,7 @@ import TimeDivider from '@/components/DM/TimeDivider';
 import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
+import Link from 'next/link';
 
 const ViewReport = ({ params }) => {
   // timeout options
@@ -147,8 +148,9 @@ const ViewReport = ({ params }) => {
       <div className="flex gap-4">
         {!participantsLoading &&
           participants.map((person) => (
-            <div
+            <Link
               key={person.userId}
+              href={`/profile/${person.userId}`}
               className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
             >
               <ImageOptimized
@@ -159,7 +161,7 @@ const ViewReport = ({ params }) => {
                 height={50}
               />
               <h1 className="text-2xl font-bold">{person.name}</h1>
-            </div>
+            </Link>
           ))}
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
