@@ -132,6 +132,7 @@ export default function NavBar() {
                     className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
                     href={'/DM'}
                     onClick={hideSearch}
+                    data-testid="nav-dm"
                   >
                     <span className="sr-only">DMs</span>
                     <FaRegCommentDots size={24} aria-hidden="true" />
@@ -176,56 +177,31 @@ export default function NavBar() {
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="/profile"
-                              data-testid="nav-menu-profile"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
-                            >
-                              Your Profile
-                            </Link>
-                          )}
+                          <Link
+                            href="/profile"
+                            data-testid="nav-menu-profile"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Your Profile
+                          </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              data-testid="nav-menu-edit-profile"
-                              href="/edit-profile"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
-                            >
-                              Edit Profile
-                            </Link>
-                          )}
+                          <Link
+                            data-testid="nav-menu-edit-profile"
+                            href="/edit-profile"
+                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Edit Profile
+                          </Link>
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="#"
-                              data-testid="nav-menu-settings"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
-                            >
-                              Settings
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <button
-                              onClick={logout}
-                              data-testid="nav-logout"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block w-full px-4 py-2 text-left text-sm text-gray-700`}
-                            >
-                              Log out
-                            </button>
-                          )}
+                          <button
+                            onClick={logout}
+                            data-testid="nav-logout"
+                            className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                          >
+                            Log out
+                          </button>
                         </Menu.Item>
                       </Menu.Items>
                     </Transition>

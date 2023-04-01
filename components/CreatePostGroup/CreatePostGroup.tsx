@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import CreatePost from './CreatePost/CreatePost';
+import { imageIdentifier } from '@/types/ImageIdentifier';
 import PreviewAttachement from './PreviewAttachement/PreviewAttachement';
 import {
   collection,
@@ -27,13 +28,19 @@ export default function CreatePostGroup() {
   const [trigger, setTrigger] = useState(0);
 
   const retrieveText = async (text: string) => {
+    if (text == '' && !image) {
+      alert('No content to post');
+      return;
+    }
+
     await createPost(text).then(() => {});
   };
 
-  const removeImage = (value: string) => {
-    alert('deleted' + value);
+  const removeImage = (value: imageIdentifier) => {
     setImage((oldValues) => {
-      return oldValues.filter((img) => URL.createObjectURL(img) !== value);
+      return oldValues.filter(
+        (img) => !(img.name == value.name && img.size == value.size)
+      );
     });
   };
 

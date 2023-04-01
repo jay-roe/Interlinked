@@ -4,32 +4,83 @@ import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import { JobPosting } from '@/types/JobPost';
+import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
-import { collection, doc, getDocs, Timestamp } from 'firebase/firestore';
+import {
+  collection,
+  collectionGroup,
+  doc,
+  getDocs,
+  query,
+  Timestamp,
+} from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
+import { User } from 'firebase/auth';
 
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
-  const [jobs, setJobs] = useState<JobPosting[]>([]);
-  // const router = useRouter();
+  const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
+  const [companies, setCompanies] = useState<string[]>([]);
+  const [displayJobs, setDisplayJobs] = useState<boolean>(false);
 
   useEffect(() => {
-    async function getJobPostings() {
-      const res = await getDocs(
-        typeCollection<JobPosting>(
-          collection(doc(db.companies, authUser.uid), 'jobPosts')
-        )
-      );
-      return res.docs.map((resData) => resData.data());
+    async function getUsers() {
+      setCompanies([]);
+      setJobs([]);
+      const res = await getDocs(db.companies);
+      res.forEach((doc) => {
+        if (doc.data().isCompany) {
+          // companies.push(doc.id);
+          setCompanies((cur) => {
+            return [...cur, doc.id];
+          });
+        }
+      });
     }
+    getUsers().then(() => setDisplayJobs(true));
+  }, []);
 
-    getJobPostings().then((jobs) => {
-      setJobs(jobs);
-      setLoading(false);
+  useEffect(() => {
+    // if (loading) {
+    companies.forEach((comp) => {
+      getDocs(
+        query(
+          typeCollection<JobPostingWithId>(
+            collection(doc(db.companies, comp), 'jobPosts')
+          )
+        )
+      ).then((jobs) => {
+        jobs.forEach((job) => {
+          setJobs((cur) => {
+            return [...cur, { ...job.data(), postingId: job.id }];
+          });
+        });
+      });
     });
-  }, [authUser?.uid]);
+    setLoading(false);
+    // }
+  }, [displayJobs]);
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   async function getJobPostings() {
+  //     const res = await getDocs(
+  //       query(
+  //       typeCollection<JobPosting>(
+  //         collection(doc(db.users), 'jobPosts')
+  //       )
+  //       )
+  //     );
+  //     return res.docs.map((resData) => resData.data());
+  //   }
+
+  //   getJobPostings().then((jobs) => {
+  //     setJobs(jobs);
+  //     setLoading(false);
+  //   });
+  // }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -63,7 +114,14 @@ export default function Feeds() {
       </p>
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
-        return <FullJobCard job={jb} />;
+        return (
+          <FullJobCard
+            key={index}
+            job={jb}
+            setJob={setJobs}
+            postingId={jb.postingId}
+          />
+        );
       })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>

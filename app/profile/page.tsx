@@ -85,6 +85,12 @@ export default function PreviewProfile() {
       />
 
       <ProfileContact email={currentUser.email} phone={currentUser.phone} />
+      {!currentUser.isCompany && (
+        <ProfileDocuments
+          resume={currentUser.resume}
+          coverLetter={currentUser.coverLetter}
+        />
+      )}
 
       <ProfileDocuments
         resume={currentUser.resume}

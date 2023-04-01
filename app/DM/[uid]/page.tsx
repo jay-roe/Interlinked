@@ -155,10 +155,11 @@ export default function ChatRoom({ params }) {
               type="text"
               placeholder="Write your message..."
               value={message}
+              data-testid="dm-page-message"
               onChange={(event) => setMessage(event.target.value)}
             />
 
-            <button type="submit">
+            <button type="submit" data-testid="send-dm">
               <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
             </button>
           </div>
