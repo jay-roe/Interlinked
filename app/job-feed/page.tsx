@@ -73,11 +73,13 @@ export default function Feeds() {
           setJobs((cur) => {
             return [...cur, { ...job.data(), postingId: job.id }];
           });
+          setFilteredJobs((cur) => {
+            return [...cur, { ...job.data(), postingId: job.id }];
+          });
           // }
         });
       });
     });
-    setFilteredJobs(jobs);
     setLoading(false);
     // }
   }, [displayJobs]);
