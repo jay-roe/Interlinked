@@ -2,7 +2,7 @@ import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
   accountLocked?: boolean;
-  accountTimeout?: number;
+  accountTimeout?: boolean;
   accountTimeoutUntil?: Timestamp;
   awards?: Award[];
   bio?: string;
@@ -42,7 +42,7 @@ export type Admin = {
 
 export const testUser = {
   accountLocked: false,
-  accountTimeout: null,
+  accountTimeout: false,
   accountTimeoutUntil: null,
   awards: null,
   bio: 'string;',

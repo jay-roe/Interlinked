@@ -21,7 +21,7 @@ describe('Locked', () => {
     name: 'Testy Test',
     email: 'testy.test@example.com',
     accountLocked: true,
-    accountTimeout: null,
+    accountTimeout: false,
   };
   const useAuthMock = {
     authUser: { uid: '123' },
@@ -50,7 +50,7 @@ describe('Locked', () => {
     useAuthMock.currentUser = {
       ...currentUserMock,
       accountLocked: false,
-      accountTimeout: null,
+      accountTimeout: false,
     };
 
     render(<Locked />);
@@ -74,7 +74,7 @@ describe('Locked', () => {
     useAuthMock.currentUser = {
       ...currentUserMock,
       accountLocked: false,
-      accountTimeout: 1600,
+      accountTimeout: true,
     };
     const { getByTestId } = render(<Locked />);
 

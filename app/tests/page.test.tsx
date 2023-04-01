@@ -51,7 +51,7 @@ it('redirects to locked page when account is locked', () => {
 
 it('redirects to locked page when account is timed out', () => {
   mockedUseAuth.mockReturnValue({
-    currentUser: { accountTimeout: 1600 },
+    currentUser: { accountTimeout: true },
   });
   mockedUseRouter.mockReturnValue({
     push: jest.fn(),

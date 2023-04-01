@@ -117,7 +117,7 @@ const ViewReport = ({ params }) => {
   async function timeoutAccount(time: number) {
     const timeoutUntil = Timestamp.fromDate(new Date(Date.now() + time)); //calculate timeoutUntil
     await updateDoc(doc(db.users, report.reported), {
-      accountTimeout: time,
+      accountTimeout: true,
       accountTimeoutUntil: timeoutUntil,
     }); //set accountTimeout value
     discardReport(); //delete the report

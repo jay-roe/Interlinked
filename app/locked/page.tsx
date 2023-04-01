@@ -44,7 +44,7 @@ const Locked = () => {
       // if timeout has expired set accountTimeout to null and accountTimeoutUntil to null
       if (now > timeoutUntil) {
         updateDoc(doc(db.users, authUser.uid), {
-          accountTimeout: null,
+          accountTimeout: false,
           accountTimeoutUntil: null,
         });
       }
