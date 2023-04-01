@@ -40,7 +40,7 @@ const Admin = () => {
             typeCollection<Report>(
               collection(doc(db.users, authUser.uid), 'report')
             ),
-            orderBy('reportTime')
+            orderBy('reportTime', 'desc')
           )
         );
         return res.docs.map((resData) => resData.data());
