@@ -11,32 +11,21 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Notification, NotifType } from '@/types/Notification';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
+import { useRouter } from 'next/navigation';
 
 export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
   const [newNotification, setNewNotification] = useState<boolean>(false);
-
-  // User not logged in
-  if (!currentUser || !authUser) {
-    return (
-      <div className="text-white">
-        <h1 className="text-lg font-bold">Your Notifications</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to view your notifications.
-        </h2>
-        <Link href="/login">
-          <Button>Login</Button>
-        </Link>
-        <Link href="/register">
-          <Button>Register</Button>
-        </Link>
-      </div>
-    );
-  }
+  const router = useRouter();
 
   useEffect(() => {
+    if (!authUser) {
+      alert('You need to be logged in to view your notifications.');
+      router.push('/login');
+    }
+
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
@@ -46,10 +35,12 @@ export default function Notifications() {
       return res.docs.map((resData) => resData.data());
     }
 
-    getNotifications().then((notifs) => {
-      setNotifications(notifs);
-      setLoading(false);
-    });
+    if (currentUser) {
+      getNotifications().then((notifs) => {
+        setNotifications(notifs);
+        setLoading(false);
+      });
+    }
   }, [authUser?.uid]);
 
   if (loading) {
