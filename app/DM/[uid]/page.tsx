@@ -83,8 +83,8 @@ export default function ChatRoom({ params }) {
       },
       time_stamp: Timestamp.now(),
       file: fileURL,
-      fileType: fileBuffer?.type || null,
-      fileName: fileBuffer?.name || null,
+      fileType: fileBuffer?.type,
+      fileName: fileBuffer?.name,
     };
 
     updateDoc(chatRoomRef, {
