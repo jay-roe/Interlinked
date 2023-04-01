@@ -22,29 +22,12 @@ export default function Feeds() {
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
   const [companies, setCompanies] = useState<string[]>([]);
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   async function getJobPostings() {
-  //     const res = await getDocs(
-  //       query(
-  //       typeCollection<JobPosting>(
-  //         collection(doc(db.users), 'jobPosts')
-  //       )
-  //       )
-  //     );
-  //     return res.docs.map((resData) => resData.data());
-  //   }
-
-  //   getJobPostings().then((jobs) => {
-  //     setJobs(jobs);
-  //     setLoading(false);
-  //   });
-  // }, [authUser?.uid]);
+  const [displayJobs, setDisplayJobs] = useState<boolean>(false);
 
   useEffect(() => {
     async function getUsers() {
+      setCompanies([]);
+      setJobs([]);
       const res = await getDocs(db.companies);
       res.forEach((doc) => {
         if (doc.data().isCompany) {
@@ -55,7 +38,7 @@ export default function Feeds() {
         }
       });
     }
-    getUsers();
+    getUsers().then(() => setDisplayJobs(true));
   }, []);
 
   useEffect(() => {
@@ -77,7 +60,27 @@ export default function Feeds() {
     });
     setLoading(false);
     // }
-  }, [companies]);
+  }, [displayJobs]);
+
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   async function getJobPostings() {
+  //     const res = await getDocs(
+  //       query(
+  //       typeCollection<JobPosting>(
+  //         collection(doc(db.users), 'jobPosts')
+  //       )
+  //       )
+  //     );
+  //     return res.docs.map((resData) => resData.data());
+  //   }
+
+  //   getJobPostings().then((jobs) => {
+  //     setJobs(jobs);
+  //     setLoading(false);
+  //   });
+  // }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
