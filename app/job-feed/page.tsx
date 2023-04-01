@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, SetStateAction } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
@@ -16,13 +16,21 @@ import {
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { User } from 'firebase/auth';
+import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
+import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
+import JobSearchBar from '@/components/Jobs/JobSearch';
 
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
+  const [filteredJobs, setFilteredJobs] = useState<JobPostingWithId[]>([]);
   const [companies, setCompanies] = useState<string[]>([]);
   const [displayJobs, setDisplayJobs] = useState<boolean>(false);
+  const [fullTime, setFullTime] = useState<boolean>(false);
+  const [partTime, setPartTime] = useState<boolean>(false);
+  const [internship, setInternship] = useState<boolean>(false);
+  const [searchKey, setSearchKey] = useState<string>('');
 
   useEffect(() => {
     async function getUsers() {
@@ -52,35 +60,27 @@ export default function Feeds() {
         )
       ).then((jobs) => {
         jobs.forEach((job) => {
-          setJobs((cur) => {
-            return [...cur, { ...job.data(), postingId: job.id }];
-          });
+          // check if the job is in the filtered options
+          if (
+            checkIfJobIsInFilter({
+              fullTime: fullTime,
+              partTime: partTime,
+              internship: internship,
+              job: job.data(),
+              searchKey: searchKey,
+            })
+          ) {
+            setJobs((cur) => {
+              return [...cur, { ...job.data(), postingId: job.id }];
+            });
+          }
         });
       });
     });
+    setFilteredJobs(jobs);
     setLoading(false);
     // }
   }, [displayJobs]);
-
-  // const router = useRouter();
-
-  // useEffect(() => {
-  //   async function getJobPostings() {
-  //     const res = await getDocs(
-  //       query(
-  //       typeCollection<JobPosting>(
-  //         collection(doc(db.users), 'jobPosts')
-  //       )
-  //       )
-  //     );
-  //     return res.docs.map((resData) => resData.data());
-  //   }
-
-  //   getJobPostings().then((jobs) => {
-  //     setJobs(jobs);
-  //     setLoading(false);
-  //   });
-  // }, [authUser?.uid]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -112,6 +112,44 @@ export default function Feeds() {
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         Find new jobs.
       </p>
+      <div className="my-4 flex flex-col items-center align-middle text-xl sm:flex-row sm:space-x-4">
+        <JobSearchBar
+          setSearchKey={setSearchKey}
+          setDisplayJobs={setDisplayJobs}
+          setJobs={setJobs}
+          searchKey={searchKey}
+        />
+        <CheckBox
+          name="FullTime"
+          checked={fullTime}
+          onChange={() => {
+            setFullTime((curr) => !curr);
+            setJobs([]);
+            setDisplayJobs((curr) => !curr);
+          }}
+          label="Full-time"
+        />
+        <CheckBox
+          name="PartTime"
+          checked={partTime}
+          onChange={() => {
+            setPartTime((curr) => !curr);
+            setJobs([]);
+            setDisplayJobs((curr) => !curr);
+          }}
+          label="Part-Time"
+        />
+        <CheckBox
+          name="Internship"
+          checked={internship}
+          onChange={() => {
+            setInternship((curr) => !curr);
+            setJobs([]);
+            setDisplayJobs((curr) => !curr);
+          }}
+          label="Internship"
+        />
+      </div>
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
         return (

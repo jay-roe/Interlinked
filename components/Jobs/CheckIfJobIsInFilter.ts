@@ -2,7 +2,7 @@ import type { JobPostingWithId, JobType } from '@/types/JobPost';
 import { Dispatch, SetStateAction } from 'react';
 
 // this function takes the search and job type parameters and filters jobs
-export function checkIfJobIsInFiler({
+export function checkIfJobIsInFilter({
   searchKey,
   fullTime,
   partTime,
@@ -39,7 +39,26 @@ export function checkIfJobIsInFiler({
     if (searchKey == null || searchKey == '') {
       return true;
     } else {
-      // TODO: check if string exists
+      return checkIfJobMatchesSearchKey({ job, searchKey });
     }
   }
+}
+
+function checkIfJobMatchesSearchKey({
+  job,
+  searchKey,
+}: {
+  job: JobPostingWithId;
+  searchKey: string;
+}) {
+  // check if the key is in the title
+  if (job.title.includes(searchKey)) return true;
+  // check if the key is in the company name
+  else if (job.companyName.includes(searchKey)) return true;
+  // check if the key is in the description
+  else if (job.description.includes(searchKey)) return true;
+  // check if the key is in the skills
+  else if (job.skills.includes(searchKey)) return true;
+  // no (descriptive) components contain the search key?
+  else return false;
 }
