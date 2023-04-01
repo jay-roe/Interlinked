@@ -31,8 +31,6 @@ export default function ProfileJobHunt({
   jobNotifEditing?: boolean;
   setJobNotifEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
-  // does not appear in live version
-
   const [jobKeywords, setJobKeywords] = useState<JobKeyword[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -51,42 +49,26 @@ export default function ProfileJobHunt({
     });
   }, []);
 
+  /**
+   * Add user id to keyword document
+   * @param keyword JobKeyword object
+   */
   const addSubscriberKeyword = (keyword: JobKeyword) => {
-    // Add userid to selected job keyword for updates!
     updateDoc(doc(db.jobKeywords, keyword.id), {
       subscribers: arrayUnion(userid),
     });
-    setJobKeywords((curr) =>
-      curr.map((currkeyword) => {
-        console.log(`checking keyword:`, currkeyword);
-
-        if (currkeyword.id === keyword.id) {
-          keyword.subscribers = [...keyword.subscribers, userid];
-          console.log(
-            `adding new sub to keyword. subs: ${keyword.subscribers}`
-          );
-        }
-        return keyword;
-      })
-    );
+    setJobKeywords((curr) => [...curr, keyword]);
   };
 
+  /**
+   * Remove subscribed user from keyword document
+   * @param keywordId JobKeyword document id
+   */
   const removeSubscriberKeyword = (keywordId: string) => {
-    // Remove subscribed user from job keyword
     updateDoc(doc(db.jobKeywords, keywordId), {
       subscribers: arrayRemove(userid),
     });
-    setJobKeywords((curr) =>
-      curr.map((keyword) => {
-        if (keyword.id === keywordId) {
-          keyword.subscribers = keyword.subscribers.filter(
-            (subscriber) => subscriber !== userid
-          );
-          console.log(`deleting sub from keyword. subs:`, keyword.subscribers);
-        }
-        return keyword;
-      })
-    );
+    setJobKeywords((curr) => curr.filter((kw) => kw.id !== keywordId));
   };
 
   // editable version

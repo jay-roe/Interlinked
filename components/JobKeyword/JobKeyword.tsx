@@ -38,16 +38,28 @@ export default function JobKeywordSearch({
     setSearchTerm(e.target.value);
   };
 
-  const addSubscriberKeyword = (keyword: JobKeyword) => {
+  /**
+   * Add keyword to local state, then trigger `addKeyword` from props
+   * @param keyword JobKeyword to add to
+   */
+  const addKeywordLocal = (keyword: JobKeyword) => {
     setSelectedKeywords((currentKeywords) => [...currentKeywords, keyword]);
     addKeyword(keyword);
   };
 
-  const removeSubscriberKeyword = (keywordId: string) => {
+  /**
+   * Remove keyword form local state, then trigger `removeKeyword` from props
+   * @param keywordId JobKeyword document id to remove
+   */
+  const removeKeywordLocal = (keywordId: string) => {
     setSelectedKeywords((s) => s.filter((keyword) => keyword.id !== keywordId));
     removeKeyword(keywordId);
   };
 
+  /**
+   * Create new keyword in jobkeywords collection of database
+   * @param keyword New JobKeyword for database
+   */
   const createKeyword = (keyword: string) => {
     const newKeywordRef = doc(db.jobKeywords);
     const newJobKeyword = {
@@ -56,7 +68,7 @@ export default function JobKeywordSearch({
       subscribers: [],
     };
     setDoc(newKeywordRef, newJobKeyword).then(() => {
-      addSubscriberKeyword(newJobKeyword);
+      addKeywordLocal(newJobKeyword);
     });
   };
 
@@ -141,7 +153,7 @@ export default function JobKeywordSearch({
               <button
                 type="button"
                 key={index}
-                onClick={() => addSubscriberKeyword(keyword)}
+                onClick={() => addKeywordLocal(keyword)}
                 className="mb-1 block w-full rounded-md bg-gray-700 px-4 py-2 text-start text-sm text-white transition-all hover:bg-gray-600 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900"
               >
                 <p className="">{keyword.keyword}</p>
@@ -160,7 +172,7 @@ export default function JobKeywordSearch({
           <DeleteButton
             size={20}
             data-testid={`keyword-delete-button-${keyword.id}`}
-            onClick={() => removeSubscriberKeyword(keyword.id)}
+            onClick={() => removeKeywordLocal(keyword.id)}
           />
         </div>
       ))}

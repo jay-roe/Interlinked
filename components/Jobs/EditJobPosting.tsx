@@ -130,13 +130,17 @@ const EditJobPosting = ({
       });
       window.location.reload();
 
-      createNotification({
-        notifType: NotifType.JOB,
-        context: definedJob.title,
-        sender: definedJob.companyId,
-        receiver: 'qDIWdvP2J1dahsSzkLdmpTOfjGe2',
+      // Notify each subscriber of each keyword in job posting
+      keywords.forEach((keyword) => {
+        keyword.subscribers.forEach((userid) => {
+          createNotification({
+            notifType: NotifType.JOB,
+            context: definedJob.title,
+            sender: definedJob.companyId, // TODO fix sender link
+            receiver: userid,
+          });
+        });
       });
-      //add postingId to the notification here
     } else {
       const docRef = doc(
         typeCollection<JobPosting>(
