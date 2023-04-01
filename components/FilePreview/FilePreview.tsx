@@ -8,7 +8,10 @@ export default function FilePreview({
   name: string;
 }) {
   return (
-    <div className="rounded-md border-2 border-white bg-gray-600 p-2 ">
+    <div
+      data-testid="file-preview-test"
+      className="rounded-md border-2 border-white bg-gray-600 p-2 "
+    >
       <a href={url} type={type} target="_blank" download>
         <p>{name}</p>
       </a>
