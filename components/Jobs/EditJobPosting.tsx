@@ -130,15 +130,19 @@ const EditJobPosting = ({
       });
       window.location.reload();
 
-      // Notify each subscriber of each keyword in job posting
-      keywords.forEach((keyword) => {
-        keyword.subscribers.forEach((userid) => {
-          createNotification({
-            notifType: NotifType.JOB,
-            context: definedJob.title,
-            sender: definedJob.companyId, // TODO fix sender link
-            receiver: userid,
-          });
+      // Remove duplicate subscribers (make sure you don't notify the same person multiple times about the same job)
+      // flatMap collects all subscribers from all keywords. Set removes duplicates. Set is converted back to an array!
+      const uniqueSubscribers = [
+        ...new Set(keywords.flatMap((keyword) => keyword.subscribers)),
+      ];
+
+      // Notify each unique subscriber
+      uniqueSubscribers.forEach((userid) => {
+        createNotification({
+          notifType: NotifType.JOB,
+          context: definedJob.title,
+          sender: definedJob.companyId, // TODO fix sender link
+          receiver: userid,
         });
       });
     } else {
