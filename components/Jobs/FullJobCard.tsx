@@ -34,7 +34,7 @@ export default function Jobs({
         style={{ backgroundColor: '', flex: 3 }}
       >
         {/* Post card */}
-        <div className="inline-block">
+        <div className="inline-block" data-testid="job-post-card">
           <div>
             <Card className="">
               <div className="mb-7 text-sm font-light max-md:hidden">
@@ -79,19 +79,28 @@ export default function Jobs({
                   </div>
                   <div>
                     {job.jobType === JobType.FULLTIME && (
-                      <div className="flex gap-1">
+                      <div
+                        data-testid="full-time-job-display"
+                        className="flex gap-1"
+                      >
                         <BsCalendar3 className="text-accent-orange" />
                         Full-time
                       </div>
                     )}
                     {job.jobType === JobType.PARTTIME && (
-                      <div className="flex gap-1">
+                      <div
+                        data-testid="part-time-job-display"
+                        className="flex gap-1"
+                      >
                         <BsCalendar3 className="text-accent-orange" />
                         Part-time
                       </div>
                     )}
                     {job.jobType === JobType.INTERNSHIP && (
-                      <div className="flex gap-1">
+                      <div
+                        data-testid="internship-job-display"
+                        className="flex gap-1"
+                      >
                         <BsCalendar3 className="text-accent-orange" />
                         Internship
                       </div>
@@ -133,6 +142,7 @@ export default function Jobs({
                   {/* Main apply button */}
                   <div>
                     <Button
+                      data-testid="apply-button"
                       onClick={(e) => {
                         e.preventDefault();
                         setEditing((curr) => !curr);

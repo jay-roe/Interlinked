@@ -136,7 +136,6 @@ export default function Feeds() {
       <div className="my-4 flex flex-col items-center align-middle text-xl sm:flex-row sm:space-x-4">
         <JobSearchBar setSearchKey={setSearchKey} searchKey={searchKey} />
         <CheckBox
-          data-testid="full-time-filter"
           name="FullTime"
           checked={fullTime}
           onChange={() => {
@@ -145,7 +144,6 @@ export default function Feeds() {
           label="Full-time"
         />
         <CheckBox
-          data-testid="part-time-filter"
           name="PartTime"
           checked={partTime}
           onChange={() => {
@@ -154,7 +152,6 @@ export default function Feeds() {
           label="Part-Time"
         />
         <CheckBox
-          data-testid="internship-filter"
           name="Internship"
           checked={internship}
           onChange={() => {
