@@ -14,7 +14,7 @@ import { db } from '@/config/firestore';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import type { UserWithId } from '@/types/User';
 
-const SearchBar = ({ handleSearch }: { handleSearch: () => void }) => {
+const SearchBar = ({ toggleSearch }: { toggleSearch: () => void }) => {
   const [searchTerm, setSearchTerm] = useState(''); // search input
   const [searchResults, setSearchResults] = useState<UserWithId[]>([]); // search results
   const [showResults, setShowResults] = useState(false); // show search results
@@ -81,7 +81,7 @@ const SearchBar = ({ handleSearch }: { handleSearch: () => void }) => {
             <Link
               key={user.userId}
               href={`/profile/${user.userId}`}
-              onClick={handleSearch}
+              onClick={toggleSearch}
               className="block px-4 py-2 text-sm text-white"
             >
               <div className="flex items-center space-x-2">
