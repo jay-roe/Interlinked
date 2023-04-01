@@ -5,7 +5,14 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FiBell } from 'react-icons/fi';
 import { Report } from '@/types/Report';
-import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
+} from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from 'next/link';
@@ -29,8 +36,11 @@ const Admin = () => {
     async function getReports() {
       if (currentAdmin) {
         const res = await getDocs(
-          typeCollection<Report>(
-            collection(doc(db.users, authUser.uid), 'report')
+          query(
+            typeCollection<Report>(
+              collection(doc(db.users, authUser.uid), 'report')
+            ),
+            orderBy('reportTime')
           )
         );
         return res.docs.map((resData) => resData.data());
