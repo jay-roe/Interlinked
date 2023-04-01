@@ -12,6 +12,7 @@ const ReportMessageCard = ({
 }) => {
   return (
     <div
+      data-testid="report-card-sender"
       className={`my-3 flex gap-x-3 
       ${
         message.sender.name == report.reporterName
