@@ -1,0 +1,3 @@
+describe('Users can view jobs', () => {
+  
+});
