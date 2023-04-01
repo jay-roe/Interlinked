@@ -247,6 +247,7 @@ export default function ChatRoom({ params }) {
               (fileBuffer.type.includes('image') ? (
                 <div className="flex gap-2 self-center">
                   <ImageOptimized
+                    data-testid="dm-image-preview"
                     className="h-[13rem] w-[13rem] object-scale-down hover:opacity-50"
                     src={imgPreview}
                     alt={imgPreview}
@@ -254,6 +255,7 @@ export default function ChatRoom({ params }) {
                     height={208}
                   />
                   <button
+                    data-testid="dm-remove-image-button"
                     className="hover:text-red-900"
                     onClick={() => removeFile()}
                   >
@@ -268,6 +270,7 @@ export default function ChatRoom({ params }) {
                     type={fileBuffer.type}
                   />
                   <button
+                    data-testid="dm-remove-file-button"
                     className="hover:text-red-900"
                     onClick={() => removeFile()}
                   >
@@ -277,13 +280,17 @@ export default function ChatRoom({ params }) {
               ))}
           </div>
         </form>
-        <button onClick={handleClick} className=" pl-3 pr-2">
+        <button
+          data-testid="dm-button-file-upload"
+          onClick={handleClick}
+          className=" pl-3 pr-2"
+        >
           <FaFileUpload />
         </button>
 
         <input
-          id="image_upload"
-          data-testid="image-upload"
+          id="dm-image_upload"
+          data-testid="dm-image-upload"
           type="file"
           ref={hiddenFileInput}
           onChange={(files) => handleSelectedFile(files.target.files)}
