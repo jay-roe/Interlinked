@@ -9,9 +9,10 @@ import {
   updateDoc,
   arrayUnion,
   getDoc,
+  getDocs,
+  collection,
 } from 'firebase/firestore';
-
-import { db } from '@/config/firestore';
+import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
 import Card from '@/components/Card/Card';
@@ -23,6 +24,7 @@ import type { UserWithId } from '@/types/User';
 import Link from 'next/link';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
+import { Report } from '@/types/Report';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -110,6 +112,28 @@ export default function ChatRoom({ params }) {
 
   const dummy = useRef<HTMLDivElement>();
 
+  async function getReports() {
+    if (!!process.env.NEXT_PUBLIC_EMULATOR) {
+      adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
+    }
+    const res = await getDocs(
+      typeCollection<Report>(collection(doc(db.users, adminId), 'report'))
+    );
+    return res.docs.map((resData) => resData.data());
+  }
+
+  //check if reporter has reported reported user already
+  async function checkIfReported(reporter: string, reported: string) {
+    const reports = await getReports();
+    let isReported = false;
+    reports.forEach((report) => {
+      if (report.reporter == reporter && report.reported == reported) {
+        isReported = true;
+      }
+    });
+    return isReported;
+  }
+
   return (
     <div data-testid="chat-room-root" className="flex h-[85vh] flex-col">
       <div className="flex gap-4">
@@ -133,7 +157,7 @@ export default function ChatRoom({ params }) {
               <Button
                 className="mb-3"
                 data-testid="report-user-btn"
-                onClick={() => {
+                onClick={async () => {
                   if (!!process.env.NEXT_PUBLIC_EMULATOR) {
                     adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
                   }
@@ -149,9 +173,12 @@ export default function ChatRoom({ params }) {
                     chatroomId: params.uid,
                     adminId: adminId,
                   };
-
-                  createReport(report);
-                  alert('User reported!');
+                  if (await checkIfReported(authUser.uid, person.userId)) {
+                    alert('You have already reported this user.');
+                  } else {
+                    createReport(report);
+                    alert('User reported!');
+                  }
                 }}
               >
                 Report this user

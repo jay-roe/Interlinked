@@ -25,7 +25,7 @@ const Admin = () => {
       router.push('/');
     }
 
-    // get all the reports of the admin
+    // get all the reports of the admin and sort them by date most recent first
     async function getReports() {
       if (currentAdmin) {
         const res = await getDocs(
@@ -34,12 +34,15 @@ const Admin = () => {
           )
         );
         return res.docs.map((resData) => resData.data());
-      } else return [];
+      }
+      return [];
     }
 
     // set the reports of the admin
     getReports().then((rep) => {
-      setReports(rep);
+      setReports(
+        rep.sort((a, b) => b.reportTime.seconds - a.reportTime.seconds)
+      );
       setLoading(false);
     });
   }, [currentAdmin, router, authUser]);

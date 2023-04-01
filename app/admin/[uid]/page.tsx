@@ -146,23 +146,22 @@ const ViewReport = ({ params }) => {
     <div className="container mx-auto text-white" data-testid="admin-home">
       Participants:
       <div className="flex gap-4">
-        {!participantsLoading &&
-          participants.map((person) => (
-            <Link
-              key={person.userId}
-              href={`/profile/${person.userId}`}
-              className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
-            >
-              <ImageOptimized
-                className="rounded-full"
-                src={person.profilePicture}
-                alt={person.name}
-                width={50}
-                height={50}
-              />
-              <h1 className="text-2xl font-bold">{person.name}</h1>
-            </Link>
-          ))}
+        {participants.map((person) => (
+          <Link
+            key={person.userId}
+            href={`/profile/${person.userId}`}
+            className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
+          >
+            <ImageOptimized
+              className="rounded-full"
+              src={person.profilePicture}
+              alt={person.name}
+              width={50}
+              height={50}
+            />
+            <h1 className="text-2xl font-bold">{person.name}</h1>
+          </Link>
+        ))}
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
         {/* display who reported the conversation and the report message */}
@@ -212,15 +211,13 @@ const ViewReport = ({ params }) => {
                   key={option.value}
                   data-testid={`timeout-report-${option.value}`}
                 >
-                  {({ active }) => (
-                    <div
-                      className={`
+                  <div
+                    className={`
                          m-1 inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900`}
-                      onClick={() => timeoutAccount(option.value)}
-                    >
-                      {option.label}
-                    </div>
-                  )}
+                    onClick={() => timeoutAccount(option.value)}
+                  >
+                    {option.label}
+                  </div>
                 </Menu.Item>
               ))}
             </Menu.Items>
