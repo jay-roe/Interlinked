@@ -25,8 +25,12 @@ const Locked = () => {
   // calculate time left until account is unlocked
   function timeLeft() {
     const now = new Date();
-    const timeoutUntil = currentUser.accountTimeoutUntil.toDate();
-    const timeLeftMs = timeoutUntil.getTime() - now.getTime();
+    const timeoutUntil = currentUser.accountTimeoutUntil;
+    if (!timeoutUntil) {
+      return 0;
+    }
+    const timeoutUntilDate = timeoutUntil.toDate();
+    const timeLeftMs = timeoutUntilDate.getTime() - now.getTime();
     const timeLeftMin = Math.ceil(timeLeftMs / 60000);
     return timeLeftMin;
   }
@@ -49,7 +53,7 @@ const Locked = () => {
 
   return (
     // blurred background
-    <div className="container mx-auto text-white">
+    <div className="container mx-auto p-12 text-white">
       <div className="blur">
         <h1
           className="mb-3 text-center font-logo text-7xl font-extrabold"
@@ -57,18 +61,6 @@ const Locked = () => {
         >
           INTERLINKED
         </h1>
-        {currentUser ? (
-          <p data-testid="welcome-msg" className="text-center text-2xl">
-            Welcome, {currentUser?.name || currentUser?.email}. Let&apos;s get
-            you interlinked.
-          </p>
-        ) : (
-          <>
-            <p data-testid="base-msg" className="text-center text-2xl">
-              We will become interlinked.
-            </p>
-          </>
-        )}
       </div>
       {/* if account is locked, show locked message */}
       {currentUser?.accountLocked && (
