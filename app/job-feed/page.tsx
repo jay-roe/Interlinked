@@ -45,11 +45,8 @@ export default function Feeds() {
     getUsers();
   }, []);
 
-  console.log('post1', companies);
-
   useEffect(() => {
     // if (loading) {
-    setJobs([]);
     companies.forEach((comp) => {
       getDocs(
         query(
@@ -111,7 +108,14 @@ export default function Feeds() {
       </p>
       {/* job postings go here */}
       {jobs?.map((jb, index) => {
-        return <FullJobCard job={jb} setJob={setJobs} />;
+        return (
+          <FullJobCard
+            key={index}
+            job={jb}
+            setJob={setJobs}
+            postingId={jb.postingId}
+          />
+        );
       })}
       {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
     </div>
