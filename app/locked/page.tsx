@@ -73,7 +73,9 @@ const Locked = () => {
             <br /> <br />
           </p>
           <Link href="/" className="flex justify-center">
-            <Button onClick={logout}>Return to homepage</Button>
+            <Button onClick={logout} data-testid="locked-account-logout">
+              Return to homepage
+            </Button>
           </Link>
         </div>
       )}

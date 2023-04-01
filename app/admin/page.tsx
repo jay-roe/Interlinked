@@ -8,6 +8,8 @@ import { Report } from '@/types/Report';
 import { collection, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
+import Link from 'next/link';
+import Button from '@/components/Buttons/Button';
 
 const Admin = () => {
   const router = useRouter();
@@ -74,6 +76,11 @@ const Admin = () => {
     <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
         <h1 className="text-3xl font-extrabold">Reports</h1>
+        <Link href={'/admin/lockedList'}>
+          <Button data-testid="list-of-banned-users-btn">
+            List of banned users
+          </Button>
+        </Link>
         <div>
           <button
             data-testid="read-all-button"

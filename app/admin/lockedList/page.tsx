@@ -61,6 +61,7 @@ export default function LockedList() {
                   <p>{user.name}</p>
                 </div>
                 <Button
+                  data-testid="unban-account-btn"
                   onClick={() => {
                     unlockAccount(user.userId);
                   }}

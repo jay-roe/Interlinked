@@ -4,7 +4,6 @@ import { Report } from '@/types/Report';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
-import Button from '../Buttons/Button';
 import SingleReport from './SingleReport';
 
 export default function ReportList({
@@ -14,8 +13,6 @@ export default function ReportList({
   reports: Report[];
   setReports?: Dispatch<SetStateAction<Report[]>>;
 }) {
-  const router = useRouter();
-
   return (
     <div>
       <ul className="pt-3" data-testid="live-reports">
@@ -30,9 +27,6 @@ export default function ReportList({
           </li>
         ))}
       </ul>
-      <Link href={'/admin/lockedList'}>
-        <Button>List of banned users</Button>
-      </Link>
     </div>
   );
 }
