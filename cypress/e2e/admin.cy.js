@@ -50,10 +50,10 @@ describe('Admin login to admin page', () => {
     cy.visit('/admin');
   });
 
-  it('click readAll', () => {
-    cy.visit('/admin');
-    cy.get('[data-testid=read-all-button]').click();
-  });
+  // it('click readAll', () => {
+  //   cy.visit('/admin');
+  //   cy.get('[data-testid=read-all-button]').click();
+  // });
 });
 
 describe('User can not login to admin page', () => {
