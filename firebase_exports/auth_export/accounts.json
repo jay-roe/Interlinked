@@ -7,7 +7,7 @@
       "lastLoginAt": "1678577459011",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
-      "passwordUpdatedAt": 1680403343960,
+      "passwordUpdatedAt": 1680410956396,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -16,7 +16,7 @@
           "rawId": "verycool@test.com"
         }
       ],
-      "validSince": "1680403343",
+      "validSince": "1680410956",
       "email": "verycool@test.com",
       "emailVerified": false,
       "disabled": false
@@ -27,7 +27,7 @@
       "lastLoginAt": "1680410384688",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1680403343961,
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -36,11 +36,10 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1680403343",
+      "validSince": "1680410956",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
-      "disabled": false,
-      "lastRefreshAt": "2023-04-02T04:39:44.688Z"
+      "disabled": false
     },
     {
       "localId": "HvAOuFbE5diXp0ayCpqwUjDXOfBy",
@@ -50,7 +49,7 @@
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
       "salt": "fakeSalt7sr6nhhBFxv17Dsk7oAb",
-      "passwordUpdatedAt": 1680403343961,
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -61,7 +60,7 @@
           "photoUrl": ""
         }
       ],
-      "validSince": "1680403343",
+      "validSince": "1680410956",
       "email": "admin@interlinked.live",
       "emailVerified": false,
       "disabled": false
@@ -72,7 +71,7 @@
       "lastLoginAt": "1679934366407",
       "passwordHash": "fakeHash:salt=fakeSaltakCTGhp09NQikYcbgI6j:password=123456",
       "salt": "fakeSaltakCTGhp09NQikYcbgI6j",
-      "passwordUpdatedAt": 1680403343961,
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -81,21 +80,18 @@
           "rawId": "melisa@melisa.ca"
         }
       ],
-      "validSince": "1680403343",
+      "validSince": "1680410956",
       "email": "melisa@melisa.ca",
       "emailVerified": false,
       "disabled": false
     },
     {
       "localId": "LifpyvUDwB3tnsnO0aC7VMsDQOFZ",
-      "lastLoginAt": "1680406510563",
-      "emailVerified": false,
-      "email": "realrecruiter@recruiters.com",
-      "salt": "fakeSaltOc80Ea0t0WCuESW9gLXo",
-      "passwordHash": "fakeHash:salt=fakeSaltOc80Ea0t0WCuESW9gLXo:password=123456",
-      "passwordUpdatedAt": 1680404382315,
-      "validSince": "1680404382",
       "createdAt": "1680404382315",
+      "lastLoginAt": "1680406510563",
+      "passwordHash": "fakeHash:salt=fakeSaltOc80Ea0t0WCuESW9gLXo:password=123456",
+      "salt": "fakeSaltOc80Ea0t0WCuESW9gLXo",
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -104,18 +100,18 @@
           "rawId": "realrecruiter@recruiters.com"
         }
       ],
-      "lastRefreshAt": "2023-04-02T03:35:10.563Z"
+      "validSince": "1680410956",
+      "email": "realrecruiter@recruiters.com",
+      "emailVerified": false,
+      "disabled": false
     },
     {
       "localId": "lpfttR1C4FWrGHHYpxwhqiI0mJbc",
-      "lastLoginAt": "1680403501863",
-      "emailVerified": false,
-      "email": "paninifactory@italy.com",
-      "salt": "fakeSaltpisLJmciaZ7f1SHutLAB",
-      "passwordHash": "fakeHash:salt=fakeSaltpisLJmciaZ7f1SHutLAB:password=123456",
-      "passwordUpdatedAt": 1680403501863,
-      "validSince": "1680403501",
       "createdAt": "1680403501863",
+      "lastLoginAt": "1680403501863",
+      "passwordHash": "fakeHash:salt=fakeSaltpisLJmciaZ7f1SHutLAB:password=123456",
+      "salt": "fakeSaltpisLJmciaZ7f1SHutLAB",
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -124,7 +120,10 @@
           "rawId": "paninifactory@italy.com"
         }
       ],
-      "lastRefreshAt": "2023-04-02T02:45:01.864Z"
+      "validSince": "1680410956",
+      "email": "paninifactory@italy.com",
+      "emailVerified": false,
+      "disabled": false
     },
     {
       "localId": "tdbtqBkneIDsIgDs7pJ2H39jnBZI",
@@ -132,7 +131,7 @@
       "lastLoginAt": "1680372297491",
       "passwordHash": "fakeHash:salt=fakeSaltZbxxhSXJi7Ts5NotAhij:password=123456",
       "salt": "fakeSaltZbxxhSXJi7Ts5NotAhij",
-      "passwordUpdatedAt": 1680403343961,
+      "passwordUpdatedAt": 1680410956397,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -141,7 +140,7 @@
           "rawId": "incorporated@company.com"
         }
       ],
-      "validSince": "1680403343",
+      "validSince": "1680410956",
       "email": "incorporated@company.com",
       "emailVerified": false,
       "disabled": false
