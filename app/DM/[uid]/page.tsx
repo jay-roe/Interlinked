@@ -1,6 +1,7 @@
 'use client';
+updateDoc;
 import MessageCard from '@/components/DM/MessageCard';
-import { FaRegPaperPlane } from 'react-icons/fa';
+import { FaRegPaperPlane, FaFileUpload, FaTrash } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import {
   doc,
@@ -22,6 +23,9 @@ import { NotifType } from '@/types/Notification';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import type { UserWithId } from '@/types/User';
 import Link from 'next/link';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { storage } from '@/config/firebase';
+import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
@@ -34,15 +38,48 @@ export default function ChatRoom({ params }) {
 
   const [message, setMessage] = useState<string>(''); // message to be sent
   const [chatMessages, setChatMessages] = useState<Message[]>([]); // messages seen by both parties
+  const [imgPreview, setImgPreview] = useState<string>();
+  const [fileBuffer, setFileBuffer] = useState<File>();
 
   // Participants (not including current user)
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
 
+  // User not logged in
+  if (!currentUser || !authUser) {
+    return (
+      <div className="text-white">
+        <h1 className="text-lg font-bold">Your DMs</h1>
+        <h2 data-testid="profile-login-prompt">
+          You must be logged in to view your messages.
+        </h2>
+        <Link href="/login">
+          <Button>Login</Button>
+        </Link>
+        <Link href="/register">
+          <Button>Register</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  const uploadFile = async () => {
+    if (fileBuffer == null) return null;
+
+    const storageRef = ref(storage, `chats/${params.uid}/'${fileBuffer.name}`);
+
+    //upload and get download reference
+    await uploadBytesResumable(storageRef, fileBuffer);
+    const fileDownload = await getDownloadURL(storageRef);
+    return fileDownload;
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (message === '') return; //don't send empty messages
+    if (fileBuffer == null && message === '') return; //don't send empty messages
+
+    const fileURL = await uploadFile();
 
     const newMessage: Message = {
       content: message,
@@ -51,12 +88,17 @@ export default function ChatRoom({ params }) {
         profilePicture: currentUser.profilePicture,
       },
       time_stamp: Timestamp.now(),
+      file: fileURL,
+      fileType: fileBuffer?.type || null,
+      fileName: fileBuffer?.name || null,
     };
 
     updateDoc(chatRoomRef, {
       recentTimeStamp: newMessage.time_stamp,
       lastMessage: newMessage,
       messages: arrayUnion(newMessage),
+    }).catch(() => {
+      return;
     });
 
     //send notification to user using ID from chat
@@ -82,6 +124,8 @@ export default function ChatRoom({ params }) {
     });
 
     setMessage('');
+    setFileBuffer(null);
+    setImgPreview(null);
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -95,6 +139,14 @@ export default function ChatRoom({ params }) {
 
   useEffect(() => {
     getDoc(chatRoomRef).then((room) => {
+      //make sure user is in chatroom
+      let belongs = false;
+      room.data().participants.forEach((participantID) => {
+        if (participantID == authUser.uid) {
+          belongs = true;
+        }
+      });
+
       room
         .data()
         .participants.filter((participantID) => participantID !== authUser.uid)
@@ -110,7 +162,27 @@ export default function ChatRoom({ params }) {
     });
   }, []);
 
+  async function handleSelectedFile(fileList: FileList) {
+    const file: File = fileList[0];
+    setFileBuffer(file);
+    setImgPreview(URL.createObjectURL(file));
+  }
+
+  const removeFile = () => {
+    setFileBuffer(null);
+    setImgPreview(null);
+    hiddenFileInput.current.value = ''; // reset input value
+  };
+
+  const handleClick = () => {
+    hiddenFileInput.current.click();
+  };
+
+  // reference to bring user back to bottom of chat
   const dummy = useRef<HTMLDivElement>();
+
+  // reference to the hidden input so a custom button may be used
+  const hiddenFileInput = useRef(null);
 
   async function getReports() {
     if (!!process.env.NEXT_PUBLIC_EMULATOR) {
@@ -201,21 +273,77 @@ export default function ChatRoom({ params }) {
       </Card>
       <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="flex flex-row  rounded-md bg-chat-text-input p-1 ">
-            <input
-              className="w-full bg-chat-text-input p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
-              type="text"
-              placeholder="Write your message..."
-              value={message}
-              data-testid="dm-page-message"
-              onChange={(event) => setMessage(event.target.value)}
-            />
+          <div className="flex flex-col  rounded-md bg-chat-text-input ">
+            <div className="flex flex-row p-1 ">
+              <input
+                data-testid="dm-text-input"
+                className="w-full bg-chat-text-input p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
+                type="text"
+                placeholder="Write your message..."
+                value={message}
+                onChange={(event) => setMessage(event.target.value)}
+              />
 
-            <button type="submit" data-testid="send-dm">
-              <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
-            </button>
+              <button data-testid="send-dm" type="submit" className="pr-2">
+                <FaRegPaperPlane className="active hover:text-accent-orange active:text-white" />
+              </button>
+            </div>
+
+            {imgPreview != null &&
+              fileBuffer != null &&
+              (fileBuffer.type.includes('image') ? (
+                <div className="flex gap-2 self-center">
+                  <ImageOptimized
+                    data-testid="dm-image-preview"
+                    className="h-[13rem] w-[13rem] object-scale-down hover:opacity-50"
+                    src={imgPreview}
+                    alt={imgPreview}
+                    width={208}
+                    height={208}
+                  />
+                  <button
+                    data-testid="dm-remove-image-button"
+                    className="hover:text-red-900"
+                    onClick={() => removeFile()}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ) : (
+                <div className="flex gap-2 self-center">
+                  <FilePreview
+                    data-testid="file-preview-dm"
+                    url={URL.createObjectURL(fileBuffer)}
+                    name={fileBuffer.name}
+                    type={fileBuffer.type}
+                  />
+                  <button
+                    data-testid="dm-remove-file-button"
+                    className="hover:text-red-900"
+                    onClick={() => removeFile()}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
           </div>
         </form>
+        <button
+          data-testid="dm-button-file-upload"
+          onClick={handleClick}
+          className=" pl-3 pr-2"
+        >
+          <FaFileUpload />
+        </button>
+
+        <input
+          id="dm-image-upload"
+          data-testid="dm-image-upload"
+          type="file"
+          ref={hiddenFileInput}
+          onChange={(files) => handleSelectedFile(files.target.files)}
+          style={{ display: 'none' }}
+        ></input>
       </div>
     </div>
   );
