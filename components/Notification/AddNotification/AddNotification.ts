@@ -16,6 +16,7 @@ export async function createNotification({
   read = false,
   receiver,
   chatroomId,
+  postingId,
 }: {
   notifType: NotifType;
   context: string;
@@ -23,6 +24,7 @@ export async function createNotification({
   read?: boolean;
   receiver: string; //User ID of the receiver User
   chatroomId?: string;
+  postingId?: string;
 }) {
   // get notification subcollection in user
   const notificationRef = typeCollection<Notification>(
@@ -36,6 +38,7 @@ export async function createNotification({
     sender: sender,
     read: read || false,
     chatroomId: chatroomId || '',
+    postingId: postingId || '',
   };
 
   // add new doc to collection "notification"

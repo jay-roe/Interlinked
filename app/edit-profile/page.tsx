@@ -38,6 +38,7 @@ import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/Pr
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
+import ProfileJobHunt from '@/components/ProfilePage/ProfileJobHunt/ProfileJobHunt';
 
 export default function EditProfile() {
   const router = useRouter();
@@ -71,8 +72,14 @@ export default function EditProfile() {
 
   const [isPrivate, setIsPrivate] = useState<boolean>(
     currentUser?.isPrivate || false
-  ); //deafults to false
+  ); //defaults to false
   const [privacyEditing, setPrivacyEditing] = useState<boolean>(false);
+
+  // Job Notifs component states
+  const [isWantJobNotif, setIsWantJobNotif] = useState<boolean>(
+    currentUser?.isWantJobNotif || false
+  ); //defaults to false
+  const [jobNotifEditing, setJobNotifEditing] = useState<boolean>(false);
 
   // Documents component states
   const [resume, setResume] = useState<User['resume']>(
@@ -212,6 +219,7 @@ export default function EditProfile() {
     certifications: certifications.filter((_, i) => !certificationsEditing[i]),
     volunteering: volunteering.filter((_, i) => !volunteeringEditing[i]),
     isPrivate: isPrivate,
+    isWantJobNotif: isWantJobNotif,
     resume: resume,
     coverLetter: coverLetter,
   };
@@ -388,6 +396,15 @@ export default function EditProfile() {
         />
 
         <ViewLinkButton linkedUserIds={currentUser.linkedUserIds} />
+
+        <ProfileJobHunt
+          isEditable
+          userid={authUser.uid}
+          isWantJobNotif={isWantJobNotif}
+          setIsWantJobNotif={setIsWantJobNotif}
+          jobNotifEditing={jobNotifEditing}
+          setJobNotifEditing={setJobNotifEditing}
+        />
 
         <ProfileContact
           isEditable

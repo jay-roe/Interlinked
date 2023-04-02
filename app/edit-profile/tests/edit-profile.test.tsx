@@ -21,6 +21,9 @@ jest.mock('firebase/firestore', () => ({
   doc: jest.fn(),
   setDoc: jest.fn(),
   updateDoc: jest.fn(),
+  where: jest.fn(),
+  query: jest.fn(),
+  getDocs: jest.fn().mockResolvedValue({ docs: [], forEach: jest.fn() }),
   collection: () => {
     return {
       withConverter: jest.fn(),

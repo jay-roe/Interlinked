@@ -1,27 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
-import { JobPosting, JobPostingWithId } from '@/types/JobPost';
+import { JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
-import {
-  collection,
-  collectionGroup,
-  doc,
-  getDocs,
-  query,
-  Timestamp,
-} from 'firebase/firestore';
+import { collection, doc, getDocs, query } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
-import { User } from 'firebase/auth';
 import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
 
-export default function Feeds() {
-  const { currentUser, authUser } = useAuth();
+export default function Feeds({ searchParams }) {
+  const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<JobPostingWithId[]>([]);
@@ -30,7 +22,13 @@ export default function Feeds() {
   const [fullTime, setFullTime] = useState<boolean>(false);
   const [partTime, setPartTime] = useState<boolean>(false);
   const [internship, setInternship] = useState<boolean>(false);
-  const [searchKey, setSearchKey] = useState<string>('');
+  const [searchKey, setSearchKey] = useState<string>(
+    searchParams.searchParam
+      ? typeof searchParams.searchParam === 'string'
+        ? searchParams.searchParam
+        : searchParams.searchParam[0]
+      : ''
+  );
 
   useEffect(() => {
     async function getUsers() {
@@ -39,10 +37,7 @@ export default function Feeds() {
       const res = await getDocs(db.companies);
       res.forEach((doc) => {
         if (doc.data().isCompany) {
-          // companies.push(doc.id);
-          setCompanies((cur) => {
-            return [...cur, doc.id];
-          });
+          setCompanies((cur) => [...cur, doc.id]);
         }
       });
     }
@@ -50,7 +45,6 @@ export default function Feeds() {
   }, []);
 
   useEffect(() => {
-    // if (loading) {
     companies.forEach((comp) => {
       getDocs(
         query(
@@ -58,26 +52,19 @@ export default function Feeds() {
             collection(doc(db.companies, comp), 'jobPosts')
           )
         )
-      ).then((jobs) => {
-        jobs.forEach((job) => {
-          setJobs((cur) => {
-            return [...cur, { ...job.data(), postingId: job.id }];
-          });
-          // }
+      ).then((jobsTemp) => {
+        jobsTemp.forEach((job) => {
+          setJobs((cur) => [...cur, { ...job.data(), postingId: job.id }]);
         });
       });
     });
-    console.log(jobs);
     setFilteredJobs(jobs);
-    setLoading(false);
-    // }
   }, [displayJobs]);
 
   useEffect(() => {
     setFilteredJobs([]);
-    let tempFiltered = jobs;
-    tempFiltered.forEach((job) => {
-      if (
+    jobs
+      .filter((job) =>
         checkIfJobIsInFilter({
           fullTime: fullTime,
           partTime: partTime,
@@ -85,13 +72,12 @@ export default function Feeds() {
           job: job,
           searchKey: searchKey,
         })
-      ) {
-        setFilteredJobs((cur) => {
-          return [...cur, job];
-        });
-      }
-    });
-  }, [partTime, fullTime, internship, searchKey]);
+      )
+      .forEach((job) => {
+        setFilteredJobs((cur) => [...cur, job]);
+      });
+    setLoading(false);
+  }, [partTime, fullTime, internship, searchKey, jobs]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -150,35 +136,17 @@ export default function Feeds() {
           label="Internship"
         />
       </div>
-      {/* job postings go here */}
-      {/*if there is no filter, display jobs*/}
-      {!fullTime &&
-        !partTime &&
-        !internship &&
-        searchKey == '' &&
-        jobs?.map((jb, index) => {
-          return (
-            <FullJobCard
-              key={index}
-              job={jb}
-              setJob={setJobs}
-              postingId={jb.postingId}
-            />
-          );
-        })}
       {/*if there is a filter, display jobs*/}
-      {(fullTime || partTime || internship || searchKey != '') &&
-        filteredJobs?.map((jb, index) => {
-          return (
-            <FullJobCard
-              key={index}
-              job={jb}
-              setJob={setJobs}
-              postingId={jb.postingId}
-            />
-          );
-        })}
-      {/* {jobs && <FullJobCard job={jobs[0]}></FullJobCard>} */}
+      {filteredJobs?.map((jb, index) => {
+        return (
+          <FullJobCard
+            key={index}
+            job={jb}
+            setJob={setJobs}
+            postingId={jb.postingId}
+          />
+        );
+      })}
     </div>
   );
 }
