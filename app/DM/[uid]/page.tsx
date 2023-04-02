@@ -27,7 +27,6 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
-import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
 
