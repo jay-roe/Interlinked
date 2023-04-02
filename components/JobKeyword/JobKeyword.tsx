@@ -121,8 +121,8 @@ export default function JobKeywordSearch({
         {/* </div> */}
         <Input
           id="search"
-          data-testid="job-keywords-button"
-          name="search"
+          data-testid="job-keywords-input"
+          name="job-keywords"
           className="inline w-full rounded-md border-none bg-inherit leading-6 text-white placeholder-gray-400 focus:placeholder-gray-500 focus:outline-none  "
           placeholder="Search keywords"
           type="search"

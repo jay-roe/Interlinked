@@ -26,9 +26,9 @@ describe('Job notifications and keywords spec', () => {
 
     // Add keywords
     keywords.forEach((keyword) => {
-      cy.get('[data-testid=job-keywords-button]').type(keyword);
+      cy.get('[data-testid=job-keywords-input]').type(keyword);
       cy.contains('button', keyword).click();
-      cy.get('[data-testid=job-keywords-button]').clear();
+      cy.get('[data-testid=job-keywords-input]').clear();
     });
 
     // Save keywords in account
@@ -60,9 +60,9 @@ describe('Job notifications and keywords spec', () => {
 
     // Add 2 keywords
     for (let keywordIndex = 0; keywordIndex < 2; keywordIndex++) {
-      cy.get('[data-testid=job-keywords-button]').type(keywords[keywordIndex]);
+      cy.get('[data-testid=job-keywords-input]').type(keywords[keywordIndex]);
       cy.contains('button', keywords[keywordIndex]).click();
-      cy.get('[data-testid=job-keywords-button]').clear();
+      cy.get('[data-testid=job-keywords-input]').clear();
     }
 
     // Create job posting

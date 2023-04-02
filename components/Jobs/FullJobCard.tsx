@@ -286,6 +286,7 @@ export default function Jobs({
                       <InputField
                         name={'resume'}
                         placeholder="Resume file name"
+                        data-testid="cover-letter-input"
                         defaultValue={tempResume?.name}
                         onChange={(e) =>
                           setTempResume((res) => {
@@ -316,6 +317,7 @@ export default function Jobs({
                     <div>
                       <InputField
                         name={'cover-letter'}
+                        data-testid="resume-input"
                         placeholder="Cover letter file name"
                         defaultValue={tempCoverLetter?.name}
                         onChange={(e) =>

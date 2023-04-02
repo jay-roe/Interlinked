@@ -1,19 +1,5 @@
 import React, { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import Link from 'next/link';
-import {
-  endAt,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  startAt,
-  where,
-} from 'firebase/firestore';
-import { db } from '@/config/firestore';
-import ImageOptimized from '../ImageOptimized/ImageOptimized';
-import type { UserWithId } from '@/types/User';
-import { JobPostingWithId } from '@/types/JobPost';
 
 const JobSearchBar = ({
   setSearchKey,
@@ -22,17 +8,9 @@ const JobSearchBar = ({
   setSearchKey: Dispatch<SetStateAction<string>>;
   searchKey: string;
 }) => {
-  const [searchTerm, setSearchTerm] = useState(''); // search input
-  const [searchResults, setSearchResults] = useState<UserWithId[]>([]); // search results
-
   const handleChange = (e) => {
     setSearchKey(e.target.value);
   };
-
-  useEffect(() => {
-    setSearchResults([]);
-    const searchTermLowerCase = searchTerm.toLowerCase();
-  }, [searchTerm]);
 
   return (
     // search input box

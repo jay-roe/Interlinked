@@ -30,6 +30,9 @@ export function checkIfJobIsInFilter({
     job.description.toLowerCase().includes(searchKey.toLowerCase()) ||
     job.skills.some((skill) =>
       skill.toLowerCase().includes(searchKey.toLowerCase())
+    ) ||
+    job.keywords?.some((keyword) =>
+      keyword.keyword.includes(searchKey.toLowerCase())
     );
 
   return jobTypeMatches && searchMatches;

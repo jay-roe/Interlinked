@@ -140,7 +140,8 @@ const EditJobPosting = ({
       uniqueSubscribers.forEach((userid) => {
         createNotification({
           notifType: NotifType.JOB,
-          context: definedJob.title,
+          postingId: definedJob.title,
+          context: `Company ${definedJob.companyName} has posted a new job: ${definedJob.title}`,
           sender: definedJob.companyId, // TODO fix sender link
           receiver: userid,
         });

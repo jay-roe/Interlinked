@@ -97,7 +97,7 @@ export default function ProfileJobHunt({
               <label>
                 <JobHuntIcon isWantJobNotif={isWantJobNotif} />
               </label>
-              <div className="mt-3 flex items-center gap-3">
+              <div className="my-3 flex items-center gap-3">
                 <CheckBox
                   name="jobHunt"
                   label="Receive Job Notifications"
@@ -107,7 +107,10 @@ export default function ProfileJobHunt({
               </div>
               {isWantJobNotif && !loading && (
                 <div>
-                  <h3>Job keywords to notify you:</h3>
+                  <hr className="mb-3" />
+                  <h3 className="mb-3 text-xl font-bold">
+                    Select keywords to notify you
+                  </h3>
                   <JobKeywordSearch
                     jobKeywords={jobKeywords}
                     addKeyword={addSubscriberKeyword}

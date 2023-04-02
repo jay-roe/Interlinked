@@ -20,22 +20,28 @@ export default function jobNotification({
       className="start flex items-center justify-between"
       data-testid="job-notification"
     >
-      {/* <Link href={senderRedirect}> */}
-      <div className="flex items-center justify-center">
-        <div
-          className="ml-4 text-accent-orange"
-          data-testid="redirect-onclick-location"
-        >
-          <MdWork size={60} className="align-self-center" />
-        </div>
-        <div className="ml-5">
-          <NotificationHeader notification={notification} />
-          <div className="m-3">
-            <p>{notification.context}</p>
+      <Link
+        href={{
+          pathname: '/job-feed',
+          query: { searchParam: notification.postingId },
+        }}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
+        <div className="flex items-center justify-center ">
+          <div
+            className="ml-4 text-accent-orange"
+            data-testid="redirect-onclick-location"
+          >
+            <MdWork size={60} className="align-self-center" />
+          </div>
+          <div className="ml-5">
+            <NotificationHeader notification={notification} />
+            <div className="m-3">
+              <p>{notification.context}</p>
+            </div>
           </div>
         </div>
-      </div>
-      {/* </Link> */}
+      </Link>
       <div className="m-4 flex items-center justify-between">
         <NotificationDeleteButton
           notification={notification}
