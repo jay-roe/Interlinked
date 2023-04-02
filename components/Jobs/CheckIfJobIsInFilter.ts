@@ -17,16 +17,20 @@ export function checkIfJobIsInFilter({
 }) {
   // check if the job matches the job type
   // check if there is no filter applied or job types match
-  const jobTypeMatches = (!fullTime && !partTime && !internship) 
-    || (job.jobType === 'FULLTIME' && fullTime) 
-    || (job.jobType == 'PARTTIME' && partTime) 
-    || (job.jobType == 'INTERNSHIP' && internship)
+  const jobTypeMatches =
+    (!fullTime && !partTime && !internship) ||
+    (job.jobType === 'FULLTIME' && fullTime) ||
+    (job.jobType == 'PARTTIME' && partTime) ||
+    (job.jobType == 'INTERNSHIP' && internship);
 
   // check if the job matches the search
-  const searchMatches = job.title.toLowerCase().includes(searchKey.toLowerCase())
-    || job.companyName.toLowerCase().includes(searchKey.toLowerCase())
-    || job.description.toLowerCase().includes(searchKey.toLowerCase())
-    || job.skills.some((skill) => skill.toLowerCase().includes(searchKey.toLowerCase())
+  const searchMatches =
+    job.title.toLowerCase().includes(searchKey.toLowerCase()) ||
+    job.companyName.toLowerCase().includes(searchKey.toLowerCase()) ||
+    job.description.toLowerCase().includes(searchKey.toLowerCase()) ||
+    job.skills.some((skill) =>
+      skill.toLowerCase().includes(searchKey.toLowerCase())
+    );
 
   return jobTypeMatches && searchMatches;
 }
