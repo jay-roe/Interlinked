@@ -60,16 +60,6 @@ export default function Feeds() {
         )
       ).then((jobs) => {
         jobs.forEach((job) => {
-          // check if the job is in the filtered options
-          // if (
-          //   checkIfJobIsInFilter({
-          //     fullTime: fullTime,
-          //     partTime: partTime,
-          //     internship: internship,
-          //     job: job.data(),
-          //     searchKey: searchKey,
-          //   })
-          // ) {
           setJobs((cur) => {
             return [...cur, { ...job.data(), postingId: job.id }];
           });
