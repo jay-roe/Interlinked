@@ -40,6 +40,5 @@ export function checkIfJobIsInFilter({
     });
   }
 
-  if (jobTypeMatches && searchMatches) return true;
-  else return false;
+  return jobTypeMatches && searchMatches;
 }
