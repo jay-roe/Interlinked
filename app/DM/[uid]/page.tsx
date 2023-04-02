@@ -10,8 +10,10 @@ import {
   updateDoc,
   arrayUnion,
   getDoc,
+  getDocs,
+  collection,
 } from 'firebase/firestore';
-import { db } from '@/config/firestore';
+import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
 import Card from '@/components/Card/Card';
@@ -25,9 +27,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
+import Button from '@/components/Buttons/Button';
+import { createReport } from '@/components/Report/AddReport';
+import { Report } from '@/types/Report';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
+  let adminId = '85C6Pe9p0VehxlqlQqNJlSP55Wn1';
 
   const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
@@ -147,7 +153,6 @@ export default function ChatRoom({ params }) {
         .participants.filter((participantID) => participantID !== authUser.uid)
         .forEach((participantID) => {
           getDoc(doc(db.users, participantID)).then((user) => {
-            console.log(user.data().name);
             setParticipants((curr) => {
               if (curr.some((usr) => usr.userId === user.id)) return curr;
               return [...curr, { ...user.data(), userId: user.id }];
@@ -180,26 +185,74 @@ export default function ChatRoom({ params }) {
   // reference to the hidden input so a custom button may be used
   const hiddenFileInput = useRef(null);
 
+  async function getReports() {
+    if (!!process.env.NEXT_PUBLIC_EMULATOR) {
+      adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
+    }
+    const res = await getDocs(
+      typeCollection<Report>(collection(doc(db.users, adminId), 'report'))
+    );
+    return res.docs.map((resData) => resData.data());
+  }
+
+  //check if reporter has reported reported user already
+  async function checkIfReported(reporter: string, reported: string) {
+    const reports = await getReports();
+    return reports.some(
+      (report) => report.reporter === reporter && report.reported === reported
+    );
+  }
+
   return (
     <div data-testid="chat-room-root" className="flex h-[85vh] flex-col">
       <div className="flex gap-4">
         {/* TODO: Adjust this when group chats are added. */}
         {!participantsLoading &&
           participants.map((person) => (
-            <Link
-              key={person.userId}
-              className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
-              href={`/profile/${person.userId}`}
-            >
-              <ImageOptimized
-                className="rounded-full"
-                src={person.profilePicture}
-                alt={person.name}
-                width={50}
-                height={50}
-              />
-              <h1 className="text-2xl font-bold">{person.name}</h1>
-            </Link>
+            <div key={person.userId}>
+              <Link
+                className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
+                href={`/profile/${person.userId}`}
+              >
+                <ImageOptimized
+                  className="rounded-full"
+                  src={person.profilePicture}
+                  alt={person.name}
+                  width={50}
+                  height={50}
+                />
+                <h1 className="text-2xl font-bold">{person.name}</h1>
+              </Link>
+              <Button
+                className="mb-3"
+                data-testid="report-user-btn"
+                onClick={async () => {
+                  if (!!process.env.NEXT_PUBLIC_EMULATOR) {
+                    adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
+                  }
+                  const report = {
+                    context:
+                      'User ' +
+                      person.name +
+                      ' has been reported for bad DM etiquette.',
+                    reporter: authUser.uid, // User ID of person that reported
+                    reporterName: currentUser.name, // name of person that reported
+                    reported: person.userId, // User ID of person that got reported
+                    reportedName: person.name, // name of person that got reported
+                    chatroomId: params.uid,
+                    adminId: adminId,
+                  };
+                  if (await checkIfReported(authUser.uid, person.userId)) {
+                    alert('You have already reported this user.');
+                  } else {
+                    createReport(report);
+                    alert('User reported!');
+                  }
+                }}
+              >
+                Report this user
+              </Button>
+            </div>
           ))}
       </div>
       <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">

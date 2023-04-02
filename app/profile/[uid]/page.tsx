@@ -23,7 +23,7 @@ import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
 
 export default function ViewProfile({ params }) {
-  const { currentUser, authUser } = useAuth();
+  const { currentUser, currentAdmin, authUser } = useAuth();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
 
@@ -83,7 +83,7 @@ export default function ViewProfile({ params }) {
           href={`/profile/${params.uid}/links`}
           linkedUserIds={user?.linkedUserIds}
         />
-        <LinkButton profileOwnerUID={params.uid} />
+        {!currentAdmin && <LinkButton profileOwnerUID={params.uid} />}
       </div>
 
       <ProfileContact email={user.email} phone={user.phone} />

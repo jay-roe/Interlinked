@@ -39,8 +39,8 @@ describe('DM spec', () => {
     cy.get('[data-testid=nav-dm]').click();
 
     // select the only dm
-    cy.get('[data-testid=chatroom-giNIZZIhptwtFmeLJZru]').click();
-    cy.url().should('contain', 'giNIZZIhptwtFmeLJZru');
+    cy.get('[data-testid=chatroom-BLDDmG6hDn2eAYqiW4t7]').click();
+    cy.url().should('contain', 'BLDDmG6hDn2eAYqiW4t7');
 
     //can type in the modal
     let newMessage = 'This message has an image';
