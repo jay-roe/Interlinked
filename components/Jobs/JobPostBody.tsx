@@ -78,7 +78,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         <AiOutlineEye className="my-auto text-accent-orange" />
         <p>{'Hidden: ' + (jobPost?.hidden ? 'Yes' : 'No')}</p>
       </div>
-      <div>
+      <div data-testid="job-post-keywords">
         🔑 Keywords:{' '}
         {jobPost?.keywords && jobPost?.keywords.length > 0
           ? jobPost.keywords.map((kw) => kw.keyword).join(', ')

@@ -116,7 +116,11 @@ export default function ProfileJobHunt({
                 </div>
               )}
               <div>
-                <Button className="mt-3" type="submit">
+                <Button
+                  data-testid="job-hunt-save-button"
+                  className="mt-3"
+                  type="submit"
+                >
                   Save Job Notification Settings
                 </Button>
               </div>

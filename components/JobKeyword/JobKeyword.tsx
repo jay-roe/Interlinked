@@ -74,7 +74,7 @@ export default function JobKeywordSearch({
   };
 
   useEffect(() => {
-    setSearchResults([]);
+    // setSearchResults([]);
 
     const searchTermLowerCase = searchTerm.toLowerCase();
 

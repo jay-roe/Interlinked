@@ -1,11 +1,10 @@
-describe('Admin login to admin page', () => {
-  let email = 'admin@interlinked.live';
-  let pw = '1234567';
+import { adminEmail, adminPw } from '../support/e2e';
 
+describe('Admin login to admin page', () => {
   before(() => {
     cy.visit('login');
-    cy.get('input[name=email]').type(email);
-    cy.get('input[name=password]').type(pw);
+    cy.get('input[name=email]').type(adminEmail);
+    cy.get('input[name=password]').type(adminPw);
 
     cy.get('[data-testid=login]').click();
   });

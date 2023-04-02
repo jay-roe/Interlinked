@@ -7,3 +7,4 @@ import './dm.cy';
 import './navbar.cy';
 import './admin.cy';
 import './job-post.cy';
+// import './jobnotification.cy';
