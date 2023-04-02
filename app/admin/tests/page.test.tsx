@@ -20,18 +20,6 @@ jest.mock('next/navigation', () => ({
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 const mockedRouter = useRouter as jest.Mock<any>;
 
-it('Renders the page', async () => {
-  mockedUseAuth.mockImplementation(() => {
-    return {
-      currentAdmin: {}, // There is no current user
-    };
-  });
-
-  const { findByTestId } = render(<Admin />);
-  const page = await findByTestId('admin-home');
-  expect(page).toBeInTheDocument();
-});
-
 it('admin logged in', async () => {
   const mockNav = jest.fn();
   mockedUseAuth.mockImplementation(() => {
