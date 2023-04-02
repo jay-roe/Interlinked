@@ -50,9 +50,7 @@ const Admin = () => {
 
     // set the reports of the admin
     getReports().then((rep) => {
-      setReports(
-        rep.sort((a, b) => b.reportTime.seconds - a.reportTime.seconds)
-      );
+      setReports(rep);
       setLoading(false);
     });
   }, [currentAdmin, router, authUser]);
