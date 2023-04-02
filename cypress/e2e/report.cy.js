@@ -92,7 +92,7 @@ describe('Entire report flow', () => {
     //Delete report
     cy.visit('/admin');
     cy.get('[data-testid=delete-report-btn]').click();
-    cy.visit('/admin');
+    cy.get('[data-testid=no-reports]').should('contain', 'Wow, such empty');
 
     //Logout admin
     logout();
