@@ -103,7 +103,7 @@ export default function Jobs({
         {/* Post card */}
         {/* <div className="flex flex-wrap gap-3 "> */}
         {/* <div> */}
-        <Card className="col-span-1 transition-all">
+        <Card className="col-span-1 transition-all" data-testid="job-post-card">
           <div className="mb-7 text-sm font-light max-md:hidden">
             {job?.datePosted?.toDate().toLocaleString('en-US', {
               month: 'long',
@@ -124,14 +124,10 @@ export default function Jobs({
                 <p style={{ overflowWrap: 'break-word' }}>{job.description}</p>
               </div>
             </Card>
-            <ul
-              className="inline-flex flex-wrap"
-              data-testid="live-code-langs" // MUST CHANGE DATA-TESTID
-            >
+            <ul className="inline-flex flex-wrap">
               {job.skills.map((sk, index) => (
                 <li
                   key={index}
-                  data-testid={`live-coding-lang-${index}`} // MUST CHANGE DATA-TESTID
                   className="mb-3 mt-1 mr-3 flex max-w-fit flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-3 text-lg font-light"
                 >
                   {sk}
@@ -144,19 +140,28 @@ export default function Jobs({
               </div>
               <div>
                 {job.jobType === JobType.FULLTIME && (
-                  <div className="flex gap-1">
+                  <div
+                    data-testid="full-time-job-display"
+                    className="flex gap-1"
+                  >
                     <BsCalendar3 className="text-accent-orange" />
                     Full-time
                   </div>
                 )}
                 {job.jobType === JobType.PARTTIME && (
-                  <div className="flex gap-1">
+                  <div
+                    data-testid="part-time-job-display"
+                    className="flex gap-1"
+                  >
                     <BsCalendar3 className="text-accent-orange" />
                     Part-time
                   </div>
                 )}
                 {job.jobType === JobType.INTERNSHIP && (
-                  <div className="flex gap-1">
+                  <div
+                    data-testid="internship-job-display"
+                    className="flex gap-1"
+                  >
                     <BsCalendar3 className="text-accent-orange" />
                     Internship
                   </div>
@@ -198,6 +203,7 @@ export default function Jobs({
               {/* Main apply button */}
               <div>
                 <Button
+                  data-testid="apply-button"
                   onClick={(e) => {
                     e.preventDefault();
                     setEditing((curr) => !curr);
@@ -258,7 +264,10 @@ export default function Jobs({
           <Card className="relative row-span-2 break-words">
             {/* <div className="mt-2 flex justify-end"> */}
             {/* <CardGrid> */}
-            <div className="mb-4 flex gap-1 text-xl font-bold text-accent-orange">
+            <div
+              data-testid="job-application-form"
+              className="mb-4 flex gap-1 text-xl font-bold text-accent-orange"
+            >
               Job Application
             </div>
             <div className="flex-wrap gap-2">
@@ -275,6 +284,7 @@ export default function Jobs({
                     </label>
                     <div>
                       <InputField
+                        name={'resume'}
                         placeholder="Resume file name"
                         defaultValue={tempResume?.name}
                         onChange={(e) =>
@@ -305,6 +315,7 @@ export default function Jobs({
                     </label>
                     <div>
                       <InputField
+                        name={'cover-letter'}
                         placeholder="Cover letter file name"
                         defaultValue={tempCoverLetter?.name}
                         onChange={(e) =>
@@ -336,6 +347,7 @@ export default function Jobs({
               <div className="flex flex-wrap gap-2">
                 <div>
                   <Button
+                    data-testid="cancel-application-button"
                     onClick={(e) => {
                       e.preventDefault();
                       setEditing((curr) => !curr);
@@ -344,8 +356,9 @@ export default function Jobs({
                     Cancel
                   </Button>
                 </div>
-                <div>
+                <div data-testid="quick-apply-button">
                   <Button
+                    data-testid="send-application-button"
                     onClick={(e) => {
                       e.preventDefault();
                       if (job.cvRequired && !tempResume) {
