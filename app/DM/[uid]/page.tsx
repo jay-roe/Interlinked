@@ -125,13 +125,9 @@ export default function ChatRoom({ params }) {
   //check if reporter has reported reported user already
   async function checkIfReported(reporter: string, reported: string) {
     const reports = await getReports();
-    let isReported = false;
-    reports.forEach((report) => {
-      if (report.reporter == reporter && report.reported == reported) {
-        isReported = true;
-      }
-    });
-    return isReported;
+    return reports.some(
+      (report) => report.reporter === reporter && report.reported === reported
+    );
   }
 
   return (
