@@ -103,7 +103,7 @@ export default function Jobs({
         {/* Post card */}
         {/* <div className="flex flex-wrap gap-3 "> */}
         {/* <div> */}
-        <Card className="col-span-1 transition-all">
+        <Card className="col-span-1 transition-all" data-testid="job-post-card">
           <div className="mb-7 text-sm font-light max-md:hidden">
             {job?.datePosted?.toDate().toLocaleString('en-US', {
               month: 'long',
@@ -268,7 +268,10 @@ export default function Jobs({
           <Card className="relative row-span-2 break-words">
             {/* <div className="mt-2 flex justify-end"> */}
             {/* <CardGrid> */}
-            <div className="mb-4 flex gap-1 text-xl font-bold text-accent-orange">
+            <div
+              data-testid="job-application-form"
+              className="mb-4 flex gap-1 text-xl font-bold text-accent-orange"
+            >
               Job Application
             </div>
             <div className="flex-wrap gap-2">
@@ -285,6 +288,7 @@ export default function Jobs({
                     </label>
                     <div>
                       <InputField
+                        name={'resume'}
                         placeholder="Resume file name"
                         defaultValue={tempResume?.name}
                         onChange={(e) =>
@@ -315,6 +319,7 @@ export default function Jobs({
                     </label>
                     <div>
                       <InputField
+                        name={'cover-letter'}
                         placeholder="Cover letter file name"
                         defaultValue={tempCoverLetter?.name}
                         onChange={(e) =>
@@ -346,6 +351,7 @@ export default function Jobs({
               <div className="flex flex-wrap gap-2">
                 <div>
                   <Button
+                    data-testid="cancel-application-button"
                     onClick={(e) => {
                       e.preventDefault();
                       setEditing((curr) => !curr);
@@ -354,8 +360,9 @@ export default function Jobs({
                     Cancel
                   </Button>
                 </div>
-                <div>
+                <div data-testid="quick-apply-button">
                   <Button
+                    data-testid="send-application-button"
                     onClick={(e) => {
                       e.preventDefault();
                       if (job.cvRequired && !tempResume) {
