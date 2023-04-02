@@ -91,6 +91,8 @@ export default function ChatRoom({ params }) {
       recentTimeStamp: newMessage.time_stamp,
       lastMessage: newMessage,
       messages: arrayUnion(newMessage),
+    }).catch(() => {
+      return;
     });
 
     //send notification to user using ID from chat
