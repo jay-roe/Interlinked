@@ -458,7 +458,7 @@ describe('Full edit profile spec', () => {
       //Assertion
       expect(txt).to.contain('Successfully updated your profile!');
     });
-    
+
     cy.url().should('contain', '/profile');
     cy.get('[data-testid=profile-info]').should('exist');
 

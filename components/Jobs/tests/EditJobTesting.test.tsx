@@ -2,42 +2,6 @@ import '@testing-library/jest-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { render, fireEvent } from '@testing-library/react';
 import EditJobPosting from '../EditJobPosting';
-import { FiRefreshCcw } from 'react-icons/fi';
-
-jest.mock('@/config/firestore', () => ({
-  db: jest.fn(),
-  typeCollection: jest.fn(),
-}));
-
-jest.mock('config/firebase', () => ({
-  storage: jest.fn(),
-}));
-
-jest.mock('firebase/storage', () => ({
-  getStorage: jest.fn(),
-  getDownloadURL: jest.fn(),
-  ref: jest.fn(),
-  uploadBytesResumable: jest.fn(),
-}));
-
-jest.mock('firebase/firestore', () => ({
-  doc: jest.fn(),
-  Timestamp: {
-    fromMillis: jest.fn(),
-  },
-  setDoc: jest.fn(),
-  getDoc: jest.fn(),
-  updateDoc: jest.fn(),
-  getDocs: jest.fn().mockResolvedValue({ docs: [], forEach: jest.fn() }),
-  orderBy: jest.fn(),
-  query: jest.fn(),
-  where: jest.fn(),
-  collection: () => {
-    return {
-      withConverter: jest.fn(),
-    };
-  },
-}));
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),

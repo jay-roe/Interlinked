@@ -1,4 +1,5 @@
 import type { Timestamp } from 'firebase/firestore';
+import { JobKeyword } from './JobKeyword';
 import type { Document } from './User';
 
 export type JobPosting = {
@@ -17,6 +18,7 @@ export type JobPosting = {
   hidden: boolean;
   applications: Application[];
   jobType: JobType;
+  keywords?: JobKeyword[];
 };
 
 export enum JobType {

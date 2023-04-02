@@ -2,7 +2,9 @@
 
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
+import type { JobKeyword } from '@/types/JobKeyword';
 import { JobPosting, JobPostingWithId, JobType } from '@/types/JobPost';
+import { NotifType } from '@/types/Notification';
 import {
   collection,
   doc,
@@ -16,6 +18,8 @@ import Button from '../Buttons/Button';
 import CheckBox from '../InputFields/CheckBox/CheckBox';
 import Input from '../InputFields/Input/Input';
 import TextArea from '../InputFields/TextArea/TextArea';
+import JobKeywordSearch from '../JobKeyword/JobKeyword';
+import { createNotification } from '../Notification/AddNotification/AddNotification';
 import ProfileSkills from '../ProfilePage/ProfileSkills/ProfileSkills';
 import ExternalApplication from './ExternalApplication';
 
@@ -70,6 +74,17 @@ const EditJobPosting = ({
   const [jobType, setJobType] = useState<JobType>(
     jobPosting?.jobType || JobType.FULLTIME
   );
+  const [keywords, setKeywords] = useState(jobPosting?.keywords || []);
+
+  const addKeywordToJob = (keyword: JobKeyword) => {
+    setKeywords((currKeys) => [...currKeys, keyword]);
+  };
+
+  const removeKeywordFromJob = (keywordId: string) => {
+    setKeywords((currKeys) =>
+      currKeys.filter((keyword) => keyword.id !== keywordId)
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -100,6 +115,7 @@ const EditJobPosting = ({
       datePosted: jobPosting?.datePosted || null,
       externalApplications: externalApp ? externalApplications : [],
       jobType: jobType,
+      keywords: keywords,
     };
 
     if (newJob && !jobPosting) {
@@ -113,6 +129,23 @@ const EditJobPosting = ({
         datePosted: serverTimestamp(),
       });
       window.location.reload();
+
+      // Remove duplicate subscribers (make sure you don't notify the same person multiple times about the same job)
+      // flatMap collects all subscribers from all keywords. Set removes duplicates. Set is converted back to an array!
+      const uniqueSubscribers = [
+        ...new Set(keywords.flatMap((keyword) => keyword.subscribers)),
+      ];
+
+      // Notify each unique subscriber
+      uniqueSubscribers.forEach((userid) => {
+        createNotification({
+          notifType: NotifType.JOB,
+          postingId: definedJob.title,
+          context: `Company ${definedJob.companyName} has posted a new job: ${definedJob.title}`,
+          sender: definedJob.companyId, // TODO fix sender link
+          receiver: userid,
+        });
+      });
     } else {
       const docRef = doc(
         typeCollection<JobPosting>(
@@ -138,7 +171,7 @@ const EditJobPosting = ({
     <div className="flex-col space-y-2">
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Name:
+          Job Name <span className="text-red-500">*</span>
         </p>
         <Input
           type="text"
@@ -172,7 +205,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Description:
+          Job Description <span className="text-red-500">*</span>
         </p>
         <TextArea
           required
@@ -185,7 +218,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Location 📍
+          Location <span className="text-red-500">*</span> 📍
         </p>
         <Input
           type="text"
@@ -198,7 +231,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Application Deadline 📆
+          Application Deadline <span className="text-red-500">*</span> 📆
         </p>
         <Input
           type="date"
@@ -211,6 +244,18 @@ const EditJobPosting = ({
               Timestamp.fromDate(new Date(e.target.value || Date.now()))
             )
           }
+        />
+      </div>
+
+      <div className="flex-col">
+        <p className="my-auto mb-2 whitespace-nowrap text-2xl font-extrabold">
+          Keywords 🔑
+        </p>
+        <JobKeywordSearch
+          jobKeywords={keywords}
+          addKeyword={addKeywordToJob}
+          removeKeyword={removeKeywordFromJob}
+          canCreateKeywords
         />
       </div>
 

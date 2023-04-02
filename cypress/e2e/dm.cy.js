@@ -47,7 +47,7 @@ describe('DM spec', () => {
     cy.get('[data-testid=send-dm]').click();
     cy.get('[data-testid=chat-room-root]').should('contain', newMessage);
 
-    let timeDividerText = "March 10, 2023";  // This is directly from emulator export please do not change
+    let timeDividerText = 'March 10, 2023'; // This is directly from emulator export please do not change
     cy.get('[data-testid=chat-room-root]').should('contain', timeDividerText);
   });
 });

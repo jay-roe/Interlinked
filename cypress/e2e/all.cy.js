@@ -8,3 +8,4 @@ import './navbar.cy';
 import './admin.cy';
 import './job-post.cy';
 import './view-jobs.cy';
+// import './jobnotification.cy';
