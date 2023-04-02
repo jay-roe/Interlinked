@@ -23,22 +23,10 @@ export function checkIfJobIsInFilter({
     || (job.jobType == 'INTERNSHIP' && internship)
 
   // check if the job matches the search
-  let searchMatches = false;
-
-  if (job.title.toLowerCase().includes(searchKey.toLowerCase()))
-    searchMatches = true; // check if the key is in the title
-  else if (job.companyName.toLowerCase().includes(searchKey.toLowerCase()))
-    searchMatches = true; // check if the key is in the company name
-  else if (job.description.toLowerCase().includes(searchKey.toLowerCase()))
-    searchMatches = true; // check if the key is in the description
-  else {
-    // check if the key is in the skills
-    let existInSkills = true;
-    job.skills.forEach((skill) => {
-      if (skill.toLowerCase().includes(searchKey.toLowerCase()))
-        searchMatches = true;
-    });
-  }
+  const searchMatches = job.title.toLowerCase().includes(searchKey.toLowerCase())
+    || job.companyName.toLowerCase().includes(searchKey.toLowerCase())
+    || job.description.toLowerCase().includes(searchKey.toLowerCase())
+    || job.skills.some((skill) => skill.toLowerCase().includes(searchKey.toLowerCase())
 
   return jobTypeMatches && searchMatches;
 }
