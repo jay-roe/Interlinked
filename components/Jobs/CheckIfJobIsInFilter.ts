@@ -29,17 +29,18 @@ export function checkIfJobIsInFilter({
   // check if the job matches the search
   let searchMatches = false;
 
-  if (job.title.includes(searchKey))
+  if (job.title.toLowerCase().includes(searchKey.toLowerCase()))
     searchMatches = true; // check if the key is in the title
-  else if (job.companyName.includes(searchKey))
+  else if (job.companyName.toLowerCase().includes(searchKey.toLowerCase()))
     searchMatches = true; // check if the key is in the company name
-  else if (job.description.includes(searchKey))
+  else if (job.description.toLowerCase().includes(searchKey.toLowerCase()))
     searchMatches = true; // check if the key is in the description
   else {
     // check if the key is in the skills
     let existInSkills = true;
     job.skills.forEach((skill) => {
-      if (skill.includes(searchKey)) searchMatches = true;
+      if (skill.toLowerCase().includes(searchKey.toLowerCase()))
+        searchMatches = true;
     });
   }
 

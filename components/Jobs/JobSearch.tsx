@@ -24,7 +24,6 @@ const JobSearchBar = ({
 }) => {
   const [searchTerm, setSearchTerm] = useState(''); // search input
   const [searchResults, setSearchResults] = useState<UserWithId[]>([]); // search results
-  const [showResults, setShowResults] = useState(false); // show search results
 
   const handleChange = (e) => {
     setSearchKey(e.target.value);
@@ -32,7 +31,6 @@ const JobSearchBar = ({
 
   useEffect(() => {
     setSearchResults([]);
-
     const searchTermLowerCase = searchTerm.toLowerCase();
   }, [searchTerm]);
 
