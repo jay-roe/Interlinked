@@ -12,7 +12,8 @@ import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
 
-export default function Feeds({ searchParams }) {
+export default function Feeds(props) {
+  const {params, searchParams} = props;
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);

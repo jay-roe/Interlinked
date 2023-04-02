@@ -13,7 +13,19 @@ describe('Entire report flow', () => {
     cy.get('input[name=email]').type(email);
     cy.get('input[name=password]').type(pw);
     cy.get('[data-testid=login]').click();
+    cy.get('[data-testid=welcome-msg]').should('contain', 'Welcome');
   };
+
+  const loginAdmin = (email, pw) => {
+    cy.visit('login');
+    cy.get('input[name=email]').type(email);
+    cy.get('input[name=password]').type(pw);
+    cy.get('[data-testid=login]').click();
+    cy.get('[data-testid=base-msg]').should(
+      'contain',
+      'We will become interlinked.'
+    );
+  }
 
   const logout = () => {
     cy.visit('');
@@ -23,6 +35,10 @@ describe('Entire report flow', () => {
     cy.get('[data-testid=nav-logout]')
       .should('be.visible')
       .click({ force: true });
+    cy.get('[data-testid=base-msg]').should(
+      'contain',
+      'We will become interlinked.'
+    );
   };
 
   const reportUser = () => {
@@ -43,7 +59,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Discard report
     cy.visit('/admin');
@@ -66,7 +82,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Delete report
     cy.visit('/admin');
@@ -88,7 +104,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Lock account
     cy.visit('/admin');
@@ -123,7 +139,7 @@ describe('Entire report flow', () => {
     //--------------------------------------------------------------------------------
     //Timeout an account
     //Login as reporter
-    login(emailReporter, pwReporter);
+    loginAdmin(emailReporter, pwReporter);
 
     //Report a user
     reportUser();
@@ -132,7 +148,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Timeout account
     cy.visit('/admin');
