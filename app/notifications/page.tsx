@@ -13,6 +13,7 @@ export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
+  const router = useRouter();
 
   useEffect(() => {
     // if not logged in, redirect to home page
