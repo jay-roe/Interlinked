@@ -4,7 +4,7 @@
     {
       "localId": "5AyB9OTr9HkI8ZVDfj24SYZh0mv4",
       "createdAt": "1678577459011",
-      "lastLoginAt": "1678577459011",
+      "lastLoginAt": "1680412411768",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
       "passwordUpdatedAt": 1680410956396,
@@ -19,12 +19,13 @@
       "validSince": "1680410956",
       "email": "verycool@test.com",
       "emailVerified": false,
-      "disabled": false
+      "disabled": false,
+      "lastRefreshAt": "2023-04-02T05:13:31.768Z"
     },
     {
       "localId": "DAfAr24t3j3UUXgLuGrU2sgrri5S",
       "createdAt": "1678390113242",
-      "lastLoginAt": "1680410384688",
+      "lastLoginAt": "1680412689107",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
       "passwordUpdatedAt": 1680410956397,
@@ -39,12 +40,13 @@
       "validSince": "1680410956",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
-      "disabled": false
+      "disabled": false,
+      "lastRefreshAt": "2023-04-02T05:18:09.107Z"
     },
     {
       "localId": "HvAOuFbE5diXp0ayCpqwUjDXOfBy",
       "createdAt": "1679507408769",
-      "lastLoginAt": "1679507408769",
+      "lastLoginAt": "1680412666331",
       "displayName": "admin",
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
@@ -63,7 +65,8 @@
       "validSince": "1680410956",
       "email": "admin@interlinked.live",
       "emailVerified": false,
-      "disabled": false
+      "disabled": false,
+      "lastRefreshAt": "2023-04-02T05:17:46.331Z"
     },
     {
       "localId": "Jc9kqYwRz2WaxnyVFomnxdmKbZaw",
@@ -88,7 +91,7 @@
     {
       "localId": "LifpyvUDwB3tnsnO0aC7VMsDQOFZ",
       "createdAt": "1680404382315",
-      "lastLoginAt": "1680406510563",
+      "lastLoginAt": "1680412221041",
       "passwordHash": "fakeHash:salt=fakeSaltOc80Ea0t0WCuESW9gLXo:password=123456",
       "salt": "fakeSaltOc80Ea0t0WCuESW9gLXo",
       "passwordUpdatedAt": 1680410956397,
@@ -103,7 +106,8 @@
       "validSince": "1680410956",
       "email": "realrecruiter@recruiters.com",
       "emailVerified": false,
-      "disabled": false
+      "disabled": false,
+      "lastRefreshAt": "2023-04-02T05:10:21.041Z"
     },
     {
       "localId": "lpfttR1C4FWrGHHYpxwhqiI0mJbc",

@@ -19,7 +19,7 @@ export default function LinkButton({
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
   const [notification, setNotification] = useState<Notification>();
-  const [linkIds, setLinkIds] = useState(currentUser.linkedUserIds);
+  const [linkIds, setLinkIds] = useState(currentUser?.linkedUserIds || []);
 
   // Get the link request notification to visited user
   useEffect(() => {

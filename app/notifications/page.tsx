@@ -1,31 +1,28 @@
 'use client';
 
-import { getDocs, collection, query, updateDoc } from 'firebase/firestore';
+import { getDocs, collection, updateDoc, doc } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import Button from '@/components/Buttons/Button';
 import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';
 import { typeCollection, db } from '@/config/firestore';
-import { doc } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { Notification, NotifType } from '@/types/Notification';
-import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
+import { Notification } from '@/types/Notification';
 import { useRouter } from 'next/navigation';
 
 export default function Notifications() {
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
-  const [newNotification, setNewNotification] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    if (!authUser) {
+    // if not logged in, redirect to home page
+    if (!currentUser || !authUser) {
       alert('You need to be logged in to view your notifications.');
       router.push('/login');
     }
 
+    // get the notifications from the database
     async function getNotifications() {
       const res = await getDocs(
         typeCollection<Notification>(
@@ -35,6 +32,7 @@ export default function Notifications() {
       return res.docs.map((resData) => resData.data());
     }
 
+    // set the notifications
     if (currentUser) {
       getNotifications().then((notifs) => {
         setNotifications(notifs);
@@ -47,6 +45,7 @@ export default function Notifications() {
     return <div>Loading...</div>;
   }
 
+  // mark all the user's notifications as read
   async function readAll() {
     const notifUnreadQuery = typeCollection<Notification>(
       collection(doc(db.users, authUser.uid), 'notifications')
@@ -61,13 +60,13 @@ export default function Notifications() {
       );
     });
 
+    // set the notifications to a new value
     setNotifications((curr) =>
       curr.map((notif) => ({
         ...notif,
         read: true,
       }))
     );
-    setNewNotification((curr) => !curr);
   }
 
   return (
