@@ -2,32 +2,12 @@
   "kind": "identitytoolkit#DownloadAccountResponse",
   "users": [
     {
-      "localId": "4lpgsS5Ga2X4v4jL5OnmsaYlGRNm",
-      "lastLoginAt": "1680385469199",
-      "emailVerified": false,
-      "email": "realrecruiter@recruiters.com",
-      "salt": "fakeSaltugFvgwNraiGWCTY6So37",
-      "passwordHash": "fakeHash:salt=fakeSaltugFvgwNraiGWCTY6So37:password=123456",
-      "passwordUpdatedAt": 1680385469199,
-      "validSince": "1680385469",
-      "createdAt": "1680385469199",
-      "providerUserInfo": [
-        {
-          "providerId": "password",
-          "email": "realrecruiter@recruiters.com",
-          "federatedId": "realrecruiter@recruiters.com",
-          "rawId": "realrecruiter@recruiters.com"
-        }
-      ],
-      "lastRefreshAt": "2023-04-01T21:44:29.200Z"
-    },
-    {
       "localId": "5AyB9OTr9HkI8ZVDfj24SYZh0mv4",
       "createdAt": "1678577459011",
       "lastLoginAt": "1678577459011",
       "passwordHash": "fakeHash:salt=fakeSaltr4XkESxCobnsQEEZCdkh:password=123456",
       "salt": "fakeSaltr4XkESxCobnsQEEZCdkh",
-      "passwordUpdatedAt": 1680385444334,
+      "passwordUpdatedAt": 1680371945684,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -36,7 +16,7 @@
           "rawId": "verycool@test.com"
         }
       ],
-      "validSince": "1680385444",
+      "validSince": "1680371945",
       "email": "verycool@test.com",
       "emailVerified": false,
       "disabled": false
@@ -47,7 +27,7 @@
       "lastLoginAt": "1679933174586",
       "passwordHash": "fakeHash:salt=fakeSaltZOUdA5cvP6JEaorUFGHx:password=123456",
       "salt": "fakeSaltZOUdA5cvP6JEaorUFGHx",
-      "passwordUpdatedAt": 1680385444334,
+      "passwordUpdatedAt": 1680371945685,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -56,10 +36,11 @@
           "rawId": "test2+cypress@test.com"
         }
       ],
-      "validSince": "1680385444",
+      "validSince": "1680371945",
       "email": "test2+cypress@test.com",
       "emailVerified": false,
-      "disabled": false
+      "disabled": false,
+      "lastRefreshAt": "2023-04-01T18:02:41.244Z"
     },
     {
       "localId": "HvAOuFbE5diXp0ayCpqwUjDXOfBy",
@@ -69,7 +50,7 @@
       "photoUrl": "",
       "passwordHash": "fakeHash:salt=fakeSalt7sr6nhhBFxv17Dsk7oAb:password=1234567",
       "salt": "fakeSalt7sr6nhhBFxv17Dsk7oAb",
-      "passwordUpdatedAt": 1680385444335,
+      "passwordUpdatedAt": 1680371945685,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -80,7 +61,7 @@
           "photoUrl": ""
         }
       ],
-      "validSince": "1680385444",
+      "validSince": "1680371945",
       "email": "admin@interlinked.live",
       "emailVerified": false,
       "disabled": false
@@ -91,7 +72,7 @@
       "lastLoginAt": "1679934366407",
       "passwordHash": "fakeHash:salt=fakeSaltakCTGhp09NQikYcbgI6j:password=123456",
       "salt": "fakeSaltakCTGhp09NQikYcbgI6j",
-      "passwordUpdatedAt": 1680385444335,
+      "passwordUpdatedAt": 1680371945685,
       "providerUserInfo": [
         {
           "providerId": "password",
@@ -100,10 +81,30 @@
           "rawId": "melisa@melisa.ca"
         }
       ],
-      "validSince": "1680385444",
+      "validSince": "1680371945",
       "email": "melisa@melisa.ca",
       "emailVerified": false,
       "disabled": false
+    },
+    {
+      "localId": "tdbtqBkneIDsIgDs7pJ2H39jnBZI",
+      "lastLoginAt": "1680372297491",
+      "emailVerified": false,
+      "email": "incorporated@company.com",
+      "salt": "fakeSaltZbxxhSXJi7Ts5NotAhij",
+      "passwordHash": "fakeHash:salt=fakeSaltZbxxhSXJi7Ts5NotAhij:password=123456",
+      "passwordUpdatedAt": 1680372297491,
+      "validSince": "1680372297",
+      "createdAt": "1680372297491",
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "incorporated@company.com",
+          "federatedId": "incorporated@company.com",
+          "rawId": "incorporated@company.com"
+        }
+      ],
+      "lastRefreshAt": "2023-04-01T18:04:57.491Z"
     }
   ]
 }
