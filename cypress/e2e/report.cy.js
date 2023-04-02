@@ -25,7 +25,7 @@ describe('Entire report flow', () => {
       'contain',
       'We will become interlinked.'
     );
-  }
+  };
 
   const logout = () => {
     cy.visit('');
@@ -45,6 +45,11 @@ describe('Entire report flow', () => {
     cy.visit('/DM');
     cy.get('[data-testid=chatroom-card-test-id]').click();
     cy.get('[data-testid=report-user-btn]').click();
+    cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('User reported!');
+    });
   };
 
   it('Everything', () => {
@@ -125,7 +130,7 @@ describe('Entire report flow', () => {
     //----------------------------------------------
     //Unlock an account
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Unlock account
     cy.visit('/admin');
@@ -139,7 +144,7 @@ describe('Entire report flow', () => {
     //--------------------------------------------------------------------------------
     //Timeout an account
     //Login as reporter
-    loginAdmin(emailReporter, pwReporter);
+    login(emailReporter, pwReporter);
 
     //Report a user
     reportUser();
