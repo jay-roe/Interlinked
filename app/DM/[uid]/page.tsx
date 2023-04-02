@@ -1,4 +1,5 @@
 'use client';
+updateDoc;
 import MessageCard from '@/components/DM/MessageCard';
 import { FaRegPaperPlane, FaFileUpload, FaTrash } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
@@ -83,8 +84,8 @@ export default function ChatRoom({ params }) {
       },
       time_stamp: Timestamp.now(),
       file: fileURL,
-      fileType: fileBuffer?.type,
-      fileName: fileBuffer?.name,
+      fileType: fileBuffer?.type || null,
+      fileName: fileBuffer?.name || null,
     };
 
     updateDoc(chatRoomRef, {
