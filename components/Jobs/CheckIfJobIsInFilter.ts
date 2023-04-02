@@ -16,15 +16,11 @@ export function checkIfJobIsInFilter({
   job: JobPostingWithId;
 }) {
   // check if the job matches the job type
-  let jobTypeMatches = false;
-
-  // if there is no filter applied, return true
-  if (!fullTime && !partTime && !internship) jobTypeMatches = true;
-  // find out if any job types match
-  else if (job.jobType == 'FULLTIME' && fullTime == true) jobTypeMatches = true;
-  else if (job.jobType == 'PARTTIME' && partTime == true) jobTypeMatches = true;
-  else if (job.jobType == 'INTERNSHIP' && internship == true)
-    jobTypeMatches = true;
+  // check if there is no filter applied or job types match
+  const jobTypeMatches = (!fullTime && !partTime && !internship) 
+    || (job.jobType === 'FULLTIME' && fullTime) 
+    || (job.jobType == 'PARTTIME' && partTime) 
+    || (job.jobType == 'INTERNSHIP' && internship)
 
   // check if the job matches the search
   let searchMatches = false;
