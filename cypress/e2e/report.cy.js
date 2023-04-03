@@ -13,6 +13,18 @@ describe('Entire report flow', () => {
     cy.get('input[name=email]').type(email);
     cy.get('input[name=password]').type(pw);
     cy.get('[data-testid=login]').click();
+    cy.get('[data-testid=welcome-msg]').should('contain', 'Welcome');
+  };
+
+  const loginAdmin = (email, pw) => {
+    cy.visit('login');
+    cy.get('input[name=email]').type(email);
+    cy.get('input[name=password]').type(pw);
+    cy.get('[data-testid=login]').click();
+    cy.get('[data-testid=base-msg]').should(
+      'contain',
+      'We will become interlinked.'
+    );
   };
 
   const logout = () => {
@@ -23,12 +35,21 @@ describe('Entire report flow', () => {
     cy.get('[data-testid=nav-logout]')
       .should('be.visible')
       .click({ force: true });
+    cy.get('[data-testid=base-msg]').should(
+      'contain',
+      'We will become interlinked.'
+    );
   };
 
   const reportUser = () => {
     cy.visit('/DM');
     cy.get('[data-testid=chatroom-card-test-id]').click();
     cy.get('[data-testid=report-user-btn]').click();
+    cy.on('window:confirm', () => true);
+    cy.on('window:alert', (txt) => {
+      //Assertion
+      expect(txt).to.contain('User reported!');
+    });
   };
 
   it('Everything', () => {
@@ -43,7 +64,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Discard report
     cy.visit('/admin');
@@ -66,12 +87,12 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Delete report
     cy.visit('/admin');
     cy.get('[data-testid=delete-report-btn]').click();
-    cy.visit('/admin');
+    cy.get('[data-testid=no-reports]').should('contain', 'Wow, such empty');
 
     //Logout admin
     logout();
@@ -88,7 +109,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Lock account
     cy.visit('/admin');
@@ -109,7 +130,7 @@ describe('Entire report flow', () => {
     //----------------------------------------------
     //Unlock an account
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Unlock account
     cy.visit('/admin');
@@ -132,7 +153,7 @@ describe('Entire report flow', () => {
     logout();
 
     //Login as admin
-    login(emailAdmin, pwAdmin);
+    loginAdmin(emailAdmin, pwAdmin);
 
     //Timeout account
     cy.visit('/admin');

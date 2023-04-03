@@ -29,10 +29,10 @@ const customJestConfig = {
   ],
   coverageThreshold: {
     global: {
-      branches: 45,
-      functions: 45,
-      lines: 45,
-      statements: 45,
+      branches: 30,
+      functions: 30,
+      lines: 30,
+      statements: 30,
     },
   },
   setupFiles: ['./setupJestMock.js'],

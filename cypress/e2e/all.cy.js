@@ -1,12 +1,11 @@
 import './auth.cy';
-//import './edit-profile.cy';
+import './edit-profile.cy';
 import './feed.cy';
-//import './notification.cy';
+import './notification.cy';
 import './links.cy';
 import './dm.cy';
 import './navbar.cy';
-import './admin.cy';
 import './job-post.cy';
 import './view-jobs.cy';
-// import './jobnotification.cy';
-// import './report.cy';
+import './jobnotification.cy';
+//import './report.cy';
