@@ -83,47 +83,45 @@ describe('Users can view jobs', () => {
     // all jobs load
     cy.get('[data-testid=card]').should('exist');
 
-    // click apply button
+    // quick apply for job that requires neither resume or cover letter (Donkey riding lessons)
+    cy.get('[data-testid=full-job-card-cv-false-cover-false]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid=quick-apply-button]').click();
+      });
+
+    // // quick apply for a job that requires a resume but not cover letter
+    cy.get('[data-testid=full-job-card-cv-true-cover-false]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid=quick-apply-button]').click();
+      });
+
+    // // quick apply for a job that requires a resume and cover letter
+    cy.get('[data-testid=full-job-card-cv-true-cover-true]')
+      .first()
+      .within(() => {
+        cy.get('[data-testid=quick-apply-button]').click();
+      });
+
+    // // quick apply for a job that requires a cover letter but not resume
+    cy.get('[data-testid=full-job-card-cv-false-cover-true]').within(() => {
+      cy.get('[data-testid=quick-apply-button]').click();
+    });
+
+    // // click apply button
     cy.get('[data-testid=apply-button]').first().click();
 
-    // check if application box pop up
+    // check if application box pops up
     cy.get('[data-testid=job-application-form]').should('exist');
 
     // fill in resume text
-    cy.get('[data-testid=resume-input]').type('hi');
+    cy.get('[data-testid=resume-input]').first().type('hi');
 
     // fill in cover letter text
-    cy.get('[data-testid=cover-letter-input]').type('hi');
-
-    // put a resume
-    cy.get('input[type=file]')
-      .first()
-      .selectFile({ contents: 'testFile/test.pdf' }, { force: true });
-
-    // put a cover letter
-    cy.get('input[type=file]')
-      .eq(1)
-      .selectFile({ contents: 'testFile/test.pdf' }, { force: true });
+    cy.get('[data-testid=cover-letter-input]').first().type('hi');
 
     // click apply button
     cy.get('[data-testid=send-application-button]').first().click();
-
-    // quick apply
-    cy.get('[data-testid=quick-apply-button]').first().click();
-
-    // quick apply for a job that requires a resume but not cover letter
-    cy.get('[data-testid=apply-button]').eq(0).click();
-    cy.get('[data-testid=job-application-form]').should('exist');
-    cy.get('[data-testid=quick-apply-button]').eq(1).click();
-
-    // quick apply for a job that requires a resume and cover letter
-    cy.get('[data-testid=apply-button]').eq(0).click();
-    cy.get('[data-testid=job-application-form]').should('exist');
-    cy.get('[data-testid=quick-apply-button]').eq(2).click();
-
-    // quick apply for a job that requires a cover letter but not resume
-    cy.get('[data-testid=apply-button]').eq(0).click();
-    cy.get('[data-testid=job-application-form]').should('exist');
-    cy.get('[data-testid=quick-apply-button]').eq(3).click();
   });
 });

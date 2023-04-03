@@ -94,7 +94,10 @@ export default function Jobs({
   };
 
   return (
-    <div className="mb-3 flex flex-wrap items-stretch justify-between">
+    <div
+      data-testid={`full-job-card-cv-${job.cvRequired}-cover-${job.coverLetterRequired}`}
+      className="mb-3 flex flex-wrap items-stretch justify-between"
+    >
       <CardGrid
         data-testid="card-grid"
         className="w-full grid-cols-1 lg:grid-cols-2-1"
@@ -215,6 +218,7 @@ export default function Jobs({
               {/* Quick apply to job button */}
               <div>
                 <Button
+                  data-testid="quick-apply-button"
                   className="bg-indigo-900"
                   onClick={(e) => {
                     e.preventDefault();
@@ -358,7 +362,7 @@ export default function Jobs({
                     Cancel
                   </Button>
                 </div>
-                <div data-testid="quick-apply-button">
+                <div>
                   <Button
                     data-testid="send-application-button"
                     onClick={(e) => {
@@ -368,28 +372,34 @@ export default function Jobs({
                       } else if (job.coverLetterRequired && !tempCoverLetter) {
                         alert('You need a cover letter to apply to this job.');
                       } else {
-                        setJob((jobs) => {
-                          let actJob = jobs.find((tempJob) => job === tempJob);
-                          let newApp = {
-                            applicantId: authUser.uid,
-                            applicantName: currentUser.name,
-                            applicantProfilePic: currentUser.profilePicture,
-                            documents: [tempResume, tempCoverLetter],
-                          };
-                          actJob.applications.push(newApp);
-                          return jobs;
-                        });
-                        updateDoc(
-                          doc(
-                            collection(
-                              doc(db.users, job.companyId),
-                              'jobPosts'
+                        try {
+                          setJob((jobs) => {
+                            let actJob = jobs.find(
+                              (tempJob) => job === tempJob
+                            );
+                            let newApp = {
+                              applicantId: authUser.uid,
+                              applicantName: currentUser.name,
+                              applicantProfilePic: currentUser.profilePicture,
+                              documents: [tempResume, tempCoverLetter],
+                            };
+                            actJob.applications.push(newApp);
+                            return jobs;
+                          });
+                          updateDoc(
+                            doc(
+                              collection(
+                                doc(db.users, job.companyId),
+                                'jobPosts'
+                              ),
+                              postingId
                             ),
-                            postingId
-                          ),
-                          job
-                        );
-                        alert('application sent!');
+                            job
+                          );
+                          alert('application sent!');
+                        } catch (err) {
+                          console.log(err);
+                        }
                       }
                     }}
                   >
