@@ -33,10 +33,17 @@ export default function NavBar() {
     currentUser: User,
     currentAdmin: Admin
   ) {
+    if (currentUser && currentUser.isCompany) {
+      return [
+        { name: 'Home', href: '/', current: true },
+        { name: 'Manage Postings', href: '/manage-jobs', current: false },
+      ];
+    }
     if (currentUser) {
       return [
         { name: 'Home', href: '/', current: true },
         { name: 'Feed', href: '/feed', current: false },
+        { name: 'Jobs', href: '/job-feed', current: false },
       ];
     } else if (currentAdmin) {
       return [{ name: 'Reports', href: '/admin', current: true }];

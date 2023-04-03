@@ -1,0 +1,19 @@
+{
+  "name": "users/DAfAr24t3j3UUXgLuGrU2sgrri5S/application/resume/test.pdf",
+  "bucket": "interlinked-420e3.appspot.com",
+  "metageneration": 1,
+  "generation": 1680412143511,
+  "contentType": "application/pdf",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "b09a7764-b7aa-41a8-853c-edfe59cb7c71"
+  ],
+  "etag": "lQTw5hnpegFVHDWadoddqIvUsCY",
+  "customMetadata": {},
+  "timeCreated": "2023-04-02T05:09:03.511Z",
+  "updated": "2023-04-02T05:09:03.511Z",
+  "size": 0,
+  "md5Hash": "1B2M2Y8AsgTpgAmY7PhCfg==",
+  "crc32c": "0"
+}

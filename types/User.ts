@@ -13,8 +13,6 @@ export type User = {
   education?: Education[];
   email: string;
   experience?: WorkExperience[];
-  isCompany?: boolean;
-  isPrivate?: boolean;
   languages?: Language[];
   linkedUserIds?: string[];
   name: string;
@@ -29,6 +27,11 @@ export type User = {
     instagram?: string;
   };
   volunteering?: VolunteeringExperience[];
+  isPrivate?: boolean;
+  isWantJobNotif?: boolean;
+  isCompany?: boolean;
+  resume?: Document;
+  coverLetter?: Document;
 };
 
 export type Company = User & { isCompany: true };
@@ -144,4 +147,10 @@ type Recommendation = {
   title: string;
   description: string;
   recommender: User;
+};
+
+export type Document = {
+  name: string;
+  link: string;
+  isPrivate: boolean;
 };

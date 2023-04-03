@@ -1,6 +1,6 @@
 'use client';
 
-import { getDocs, collection, updateDoc, doc } from 'firebase/firestore';
+import { getDocs, collection, updateDoc, doc, query, orderBy } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';
@@ -25,8 +25,11 @@ export default function Notifications() {
     // get the notifications from the database
     async function getNotifications() {
       const res = await getDocs(
-        typeCollection<Notification>(
-          collection(doc(db.users, authUser.uid), 'notifications')
+        query(
+          typeCollection<Notification>(
+            collection(doc(db.users, authUser.uid), 'notifications')
+          ),
+          orderBy('notifTime', 'desc')
         )
       );
       return res.docs.map((resData) => resData.data());

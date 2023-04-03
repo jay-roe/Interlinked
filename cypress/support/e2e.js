@@ -21,5 +21,14 @@ import './commands';
 export const email = 'test2+cypress@test.com';
 export const pw = '123456';
 
+export const jobEmail = 'test3+cypress@test.com';
+export const jobPw = '123456';
+
+export const adminEmail = 'admin@interlinked.live';
+export const adminPw = '1234567';
+
+export const recruiterEmail = 'realrecruiter@recruiters.com';
+export const recruiterPw = '123456';
+
 // Alternatively you can use CommonJS syntax:
 // require('./commands')

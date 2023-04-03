@@ -9,6 +9,8 @@ import LinkRequestNotification from '../LinkRequestNotification/LinkRequestNotif
 import DmNotification from '../DmNotification/DmNotification';
 import LinkAcceptNotification from '../LinkAcceptNotification/LinkAcceptNotification';
 import { Dispatch, SetStateAction } from 'react';
+import JobNotification from '../JobNotification/JobNotification';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function NotificationList({
   notifications,
@@ -17,6 +19,8 @@ export default function NotificationList({
   notifications: Notification[];
   setNotifications?: Dispatch<SetStateAction<Notification[]>>;
 }) {
+  const { currentUser } = useAuth();
+
   return (
     <ul className="pt-3" data-testid="live-notifications">
       {
@@ -68,6 +72,12 @@ export default function NotificationList({
               )}
               {notif.notifType === NotifType.DM && (
                 <DmNotification
+                  notification={notif}
+                  setNotification={setNotifications}
+                />
+              )}
+              {notif.notifType === NotifType.JOB && (
+                <JobNotification
                   notification={notif}
                   setNotification={setNotifications}
                 />
