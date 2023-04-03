@@ -244,14 +244,21 @@ export default function Jobs({
                         actJob.applications.push(newApp);
                         return jobs;
                       });
-                      updateDoc(
-                        doc(
-                          collection(doc(db.users, job.companyId), 'jobPosts'),
-                          postingId
-                        ),
-                        job
-                      );
-                      alert('application sent!');
+                      try {
+                        updateDoc(
+                          doc(
+                            collection(
+                              doc(db.users, job.companyId),
+                              'jobPosts'
+                            ),
+                            postingId
+                          ),
+                          job
+                        );
+                        alert('application sent!');
+                      } catch (err) {
+                        console.log(err);
+                      }
                     }
                   }}
                 >
@@ -350,10 +357,12 @@ export default function Jobs({
                   </div>
                 </Card>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div
+                data-testid="cancel-application-button"
+                className="flex flex-wrap gap-2"
+              >
                 <div>
                   <Button
-                    data-testid="cancel-application-button"
                     onClick={(e) => {
                       e.preventDefault();
                       setEditing((curr) => !curr);

@@ -123,5 +123,8 @@ describe('Users can view jobs', () => {
 
     // click apply button
     cy.get('[data-testid=send-application-button]').first().click();
+
+    // close the application card
+    cy.get('[data-testid=cancel-application-button]').first().click();
   });
 });
