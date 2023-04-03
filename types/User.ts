@@ -29,7 +29,6 @@ export type User = {
     instagram?: string;
   };
   volunteering?: VolunteeringExperience[];
-  isPrivate?: boolean;
   resume?: Document;
   coverLetter?: Document;
 };
