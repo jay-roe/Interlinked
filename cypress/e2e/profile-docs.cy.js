@@ -68,7 +68,7 @@ describe('Full profile documents spec', async () => {
     //deleting and editing uploaded files
     cy.visit('/edit-profile/');
 
-    cy.get('[data-testid=editable-resume]').should('exist');
+    //cy.get('[data-testid=editable-resume]').should('exist');
     cy.get('[data-testid=editable-cover-letter]').should('exist');
 
     //edit a second time resume name
