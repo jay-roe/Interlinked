@@ -1,6 +1,9 @@
 import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
+  accountLocked?: boolean;
+  accountTimeout?: boolean;
+  accountTimeoutUntil?: Timestamp;
   awards?: Award[];
   bio?: string;
   certifications?: Certification[];
@@ -10,6 +13,8 @@ export type User = {
   education?: Education[];
   email: string;
   experience?: WorkExperience[];
+  isCompany?: boolean;
+  isPrivate?: boolean;
   languages?: Language[];
   linkedUserIds?: string[];
   name: string;
@@ -40,6 +45,9 @@ export type Admin = {
 };
 
 export const testUser = {
+  accountLocked: false,
+  accountTimeout: false,
+  accountTimeoutUntil: null,
   awards: null,
   bio: 'string;',
   certifications: null,
@@ -49,6 +57,8 @@ export const testUser = {
   education: null,
   email: 'bobsaget@unicorn.bob',
   experience: null,
+  isCompany: false,
+  isPrivate: false,
   languages: null,
   linkedUserIds: null,
   name: 'bob saget',

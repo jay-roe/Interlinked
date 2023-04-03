@@ -2,6 +2,7 @@ import { Message } from '@/types/Message';
 import { useAuth } from '@/contexts/AuthContext';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { Disclosure } from '@headlessui/react';
+import FilePreview from '../FilePreview/FilePreview';
 
 const MessageCard = ({ message }: { message: Message }) => {
   const { currentUser } = useAuth();
@@ -31,8 +32,31 @@ const MessageCard = ({ message }: { message: Message }) => {
 
       <Disclosure as="div">
         <Disclosure.Button>
-          <div className="rounded-xl bg-purple-message-area p-4 ">
-            <p>{message.content}</p>
+          <div
+            className={`rounded-xl ${
+              message.content == '' ? '' : 'bg-purple-message-area'
+            }  p-4 `}
+          >
+            {message.content && <p>{message.content}</p>}
+            {message.file &&
+              message.fileType &&
+              (message.fileType.includes('image') ? (
+                <ImageOptimized
+                  className="mt-1 h-[13rem] w-[13rem] rounded-md object-scale-down"
+                  src={message.file}
+                  alt={message.file}
+                  width={208}
+                  height={208}
+                />
+              ) : (
+                <div className="mt-1">
+                  <FilePreview
+                    url={message.file}
+                    type={message.fileType}
+                    name={message.fileName}
+                  />
+                </div>
+              ))}
           </div>
         </Disclosure.Button>
         <Disclosure.Panel

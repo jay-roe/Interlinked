@@ -18,6 +18,7 @@ import type { User, Admin } from '../types/User';
 import { db } from '../config/firestore';
 import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   currentUser: User;
@@ -58,6 +59,9 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  // Router for redirecting users globally.
+  const router = useRouter();
+
   // User data from Firestore database. Use this for most data.
   const [currentUser, setCurrentUser] = useState<User>();
   const [currentAdmin, setCurrentAdmin] = useState<Admin>();
@@ -161,7 +165,8 @@ export function AuthProvider({ children }) {
    * Logs out of the current user session.
    */
   async function logout() {
-    return await auth.signOut();
+    await auth.signOut();
+    router.push('/');
   }
 
   /**
