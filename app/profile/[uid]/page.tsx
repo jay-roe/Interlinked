@@ -109,10 +109,7 @@ export default function ViewProfile({ params }) {
 
       <ProfileContact email={user.email} phone={user.phone} />
 
-      <ProfileDocuments
-        resume={currentUser.resume}
-        coverLetter={currentUser.coverLetter}
-      />
+      <ProfileDocuments resume={user.resume} coverLetter={user.coverLetter} />
 
       <ProfileLanguages languages={user.languages} />
 
