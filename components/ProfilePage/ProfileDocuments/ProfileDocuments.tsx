@@ -89,10 +89,12 @@ export default function ProfileDocuments({
 
   // Live version of documents component
   if (!isEditable) {
+    if (!resume && !coverLetter) return;
+
     //****CardStack has to output first the resume , then the coverletter*****
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold"> Docs </h2>
+        <h2 className="mb-2 text-2xl font-extrabold">Docs</h2>
         <div className="flex gap-2">
           {resume && <FileButton link={resume.link}>{resume.name}</FileButton>}
           {coverLetter && (

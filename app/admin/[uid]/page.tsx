@@ -44,15 +44,11 @@ const ViewReport = ({ params }) => {
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
 
-  // if not logged in, redirect to home page
-  useEffect(() => {
-    if (!authUser?.uid) {
-      router.push('/');
-    }
-  }, [authUser, router]);
-
   // get the report
   useEffect(() => {
+    if (!authUser?.uid) {
+      return;
+    }
     getDoc(
       doc(
         typeCollection<Report>(
