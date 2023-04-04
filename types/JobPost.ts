@@ -1,4 +1,6 @@
 import type { Timestamp } from 'firebase/firestore';
+import { JobKeyword } from './JobKeyword';
+import type { Document } from './User';
 
 export type JobPosting = {
   title: string;
@@ -15,7 +17,15 @@ export type JobPosting = {
   externalApplications?: ApplicationLink[];
   hidden: boolean;
   applications: Application[];
+  jobType: JobType;
+  keywords?: JobKeyword[];
 };
+
+export enum JobType {
+  FULLTIME = 'FULLTIME',
+  PARTTIME = 'PARTTIME',
+  INTERNSHIP = 'INTERNSHIP',
+}
 
 type ApplicationLink = {
   name: string;
@@ -30,6 +40,6 @@ export type Application = {
   applicantId: string;
   applicantName: string;
   applicantProfilePic?: string;
-  documents: never;
+  documents: Document[];
   // TODO: this type is not complete, the people working on job applications will finish this
 };

@@ -10,7 +10,10 @@ const JobPostHeader = ({
   jobPost?: JobPosting;
 }) => {
   return (
-    <div className="mb-3 flex items-center justify-start space-x-4">
+    <div
+      data-testid="header-page"
+      className="mb-3 flex items-center justify-start space-x-4"
+    >
       {
         // TODO: Implement link to profile page IF company profile page made
         /* <Link

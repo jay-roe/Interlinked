@@ -6,7 +6,11 @@ export async function deleteNotification(
   notificationId: string,
   userID: string
 ) {
-  await deleteDoc(
-    doc(collection(doc(db.users, userID), 'notifications'), notificationId)
-  );
+  try {
+    await deleteDoc(
+      doc(collection(doc(db.users, userID), 'notifications'), notificationId)
+    );
+  } catch (err) {
+    console.log(err);
+  }
 }

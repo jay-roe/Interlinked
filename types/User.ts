@@ -1,6 +1,9 @@
 import type { Timestamp } from 'firebase/firestore';
 
 export type User = {
+  accountLocked?: boolean;
+  accountTimeout?: boolean;
+  accountTimeoutUntil?: Timestamp;
   awards?: Award[];
   bio?: string;
   certifications?: Certification[];
@@ -25,6 +28,7 @@ export type User = {
   };
   volunteering?: VolunteeringExperience[];
   isPrivate?: boolean;
+  isWantJobNotif?: boolean;
   isCompany?: boolean;
   resume?: Document;
   coverLetter?: Document;
@@ -40,6 +44,9 @@ export type Admin = {
 };
 
 export const testUser = {
+  accountLocked: false,
+  accountTimeout: false,
+  accountTimeoutUntil: null,
   awards: null,
   bio: 'string;',
   certifications: null,
@@ -49,6 +56,8 @@ export const testUser = {
   education: null,
   email: 'bobsaget@unicorn.bob',
   experience: null,
+  isCompany: false,
+  isPrivate: false,
   languages: null,
   linkedUserIds: null,
   name: 'bob saget',
@@ -140,7 +149,7 @@ type Recommendation = {
   recommender: User;
 };
 
-type Document = {
+export type Document = {
   name: string;
   link: string;
   isPrivate: boolean;
