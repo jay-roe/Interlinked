@@ -1,6 +1,13 @@
 'use client';
 
-import { getDocs, collection, updateDoc, doc, query, orderBy } from 'firebase/firestore';
+import {
+  getDocs,
+  collection,
+  updateDoc,
+  doc,
+  query,
+  orderBy,
+} from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import NotificationList from '@/components/Notification/NotificationList/NotificationList';
 import { FiBell } from 'react-icons/fi';

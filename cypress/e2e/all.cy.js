@@ -5,6 +5,7 @@ import './notification.cy';
 import './links.cy';
 import './dm.cy';
 import './navbar.cy';
+//import './profile-docs.cy';
 import './job-post.cy';
 import './view-jobs.cy';
 import './jobnotification.cy';

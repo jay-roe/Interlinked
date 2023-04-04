@@ -6,9 +6,7 @@
   "contentType": "application/pdf",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
-  "downloadTokens": [
-    "1f7d045a-c3a1-4f1c-b6fc-7e48b8c3aeed"
-  ],
+  "downloadTokens": ["1f7d045a-c3a1-4f1c-b6fc-7e48b8c3aeed"],
   "etag": "i41kNBW/E1bbeGC6C1W/vtj5aK8",
   "customMetadata": {},
   "timeCreated": "2023-04-02T05:09:03.537Z",

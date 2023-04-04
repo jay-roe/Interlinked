@@ -4,7 +4,7 @@ import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
-import { FaCloudUploadAlt } from 'react-icons/fa';
+import { FaCloudUploadAlt, FaCheck } from 'react-icons/fa';
 import {
   deleteObject,
   getDownloadURL,
@@ -129,6 +129,7 @@ export default function ProfileDocuments({
               </label>
               <div>
                 <InputField
+                  data-testid="change-resume-name"
                   placeholder="Public resume display name"
                   defaultValue={resume.name}
                   onChange={(e) =>
@@ -139,16 +140,27 @@ export default function ProfileDocuments({
                     })
                   }
                 />
-                <Button onClick={handleResumeUploadClick} type="button">
-                  Upload Resume &nbsp; <FaCloudUploadAlt size={25} />
+
+                <Button
+                  data-testid="upload-resume-btn"
+                  onClick={handleResumeUploadClick}
+                  type="button"
+                >
+                  Upload Resume &nbsp;
+                  {!resume.link && <FaCloudUploadAlt size={25} />}
+                  {resume.link && (
+                    <FaCheck data-testid="resume-check"> </FaCheck>
+                  )}
                 </Button>
 
                 <input
                   type="file"
+                  data-testid="input-resume"
                   ref={resumeInputRef}
                   style={{ display: 'none' }}
                   onChange={(e) => handleFileUpload(e, 'resume')}
                 />
+                <p data-testid="uploaded-res-link"></p>
               </div>
             </div>
           ) : (
@@ -209,6 +221,7 @@ export default function ProfileDocuments({
 
       {coverLetter ? (
         <form
+          data-testid="submit-cover-letter"
           action=""
           className="mb-3 flex flex-wrap items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-5"
           onSubmit={(e) => {
@@ -226,6 +239,7 @@ export default function ProfileDocuments({
                 Cover Letter <span className="text-yellow-600">*</span>
               </label>
               <InputField
+                data-testid="change-cover-name"
                 placeholder="Public cover letter display name"
                 defaultValue={coverLetter.name}
                 onChange={(e) =>
@@ -236,16 +250,26 @@ export default function ProfileDocuments({
                   })
                 }
               />
-              <Button onClick={handleCoverLetterUploadClick} type="button">
-                Upload Cover Letter &nbsp; <FaCloudUploadAlt size={25} />
+              <Button
+                data-testid="upload-coverletter-btn"
+                onClick={handleCoverLetterUploadClick}
+                type="button"
+              >
+                Upload Cover Letter &nbsp;
+                {!coverLetter.link && <FaCloudUploadAlt size={25} />}
+                {coverLetter.link && (
+                  <FaCheck data-testid="coverletter-check"> </FaCheck>
+                )}
               </Button>
 
               <input
                 type="file"
+                data-testid="input-coverletter"
                 ref={coverLetterInputRef}
                 style={{ display: 'none' }}
                 onChange={(e) => handleFileUpload(e, 'coverLetter')}
               />
+              <p data-testid="uploaded-cov-link">{}</p>
             </div>
           ) : (
             <div data-testid="editable-cover-letter">
