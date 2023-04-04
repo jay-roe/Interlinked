@@ -1,5 +1,5 @@
-import { User, Company } from '../types/User';
-import { Post } from '../types/Post';
+import { Post, Comment } from '../types/Post';
+import { User, Company, Admin } from '../types/User';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';
 import type {
@@ -8,6 +8,7 @@ import type {
   DocumentData,
 } from 'firebase/firestore';
 import { ChatRoom } from '@/types/Message';
+import { JobKeyword } from '@/types/JobKeyword';
 
 // Visit this article for a description of the approach to get types in Firestore: https://medium.com/swlh/using-firestore-with-typescript-65bd2a602945
 
@@ -28,8 +29,11 @@ export const typeCollection = <T>(
 
 // List of supported collections exported as 'db'
 export const db = {
+  genericUser: dataPoint<User | Company | Admin>('users'),
   users: dataPoint<User>('users'),
   companies: dataPoint<Company>('users'),
+  admin: dataPoint<Admin>('users'),
   posts: dataPoint<Post>('posts'),
   chatrooms: dataPoint<ChatRoom>('chatrooms'),
+  jobKeywords: dataPoint<JobKeyword>('jobkeywords'),
 };

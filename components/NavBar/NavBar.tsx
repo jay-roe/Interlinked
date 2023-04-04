@@ -5,7 +5,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
-import { User } from '@/types/User';
+import { User, Admin } from '@/types/User';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
@@ -17,227 +17,274 @@ function classNames(...classes) {
 
 export default function NavBar() {
   const [showSearch, setShowSearch] = useState(false);
-  const { currentUser, logout } = useAuth();
+  const { currentUser, currentAdmin, logout } = useAuth();
   const pathname = usePathname();
 
   // Allow state access in SearchBar component
-  const handleSearch = () => {
-    setShowSearch(!showSearch);
+  const toggleSearch = () => {
+    setShowSearch((curr) => !curr);
   };
 
-  const navLinks = (function navigation(currentUser: User) {
-    return currentUser
-      ? [
-          { name: 'Home', href: '/', current: true },
-          { name: 'Feed', href: '/feed', current: false },
-        ]
-      : [
-          { name: 'Home', href: '/', current: true },
-          {
-            name: 'Login',
-            href: '/login',
-            dataTestid: 'nav-login',
-            current: false,
-          },
-          { name: 'Register', href: '/register', current: false },
-        ];
-  })(currentUser);
+  const hideSearch = () => {
+    setShowSearch(false);
+  };
 
-  return (
-    <Disclosure as="nav" className="">
-      {({ open }) => (
-        <>
-          <div className="container mx-auto">
-            <div className="relative flex h-16 items-center justify-between">
-              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <HiOutlineXMark
-                      className="block h-6 w-6"
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <FiMenu className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-              </div>
-              <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  {/* // TODO Fix font family for logo */}
-                  <h1
-                    data-testid="home-interlinked"
-                    className="font-logo text-white lg:text-3xl xl:text-4xl"
-                  >
-                    INTERLINKED
-                  </h1>
+  const navLinks = (function navigation(
+    currentUser: User,
+    currentAdmin: Admin
+  ) {
+    if (currentUser && currentUser.isCompany) {
+      return [
+        { name: 'Home', href: '/', current: true },
+        { name: 'Manage Postings', href: '/manage-jobs', current: false },
+      ];
+    }
+    if (currentUser) {
+      return [
+        { name: 'Home', href: '/', current: true },
+        { name: 'Feed', href: '/feed', current: false },
+        { name: 'Jobs', href: '/job-feed', current: false },
+      ];
+    } else if (currentAdmin) {
+      return [{ name: 'Reports', href: '/admin', current: true }];
+    } else {
+      return [
+        { name: 'Home', href: '/', current: true },
+        {
+          name: 'Login',
+          href: '/login',
+          dataTestid: 'nav-login',
+          current: false,
+        },
+        { name: 'Register', href: '/register', current: false },
+      ];
+    }
+  })(currentUser, currentAdmin);
+
+  // if user account is not locked or timed out
+  if (!currentUser?.accountLocked && !currentUser?.accountTimeout) {
+    return (
+      <Disclosure as="nav" className="">
+        {({ open }) => (
+          <>
+            <div className="container mx-auto">
+              <div className="relative flex h-16 items-center justify-between">
+                <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                  {/* Mobile menu button*/}
+                  <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <HiOutlineXMark
+                        className="block h-6 w-6"
+                        aria-hidden="true"
+                      />
+                    ) : (
+                      <FiMenu className="block h-6 w-6" aria-hidden="true" />
+                    )}
+                  </Disclosure.Button>
                 </div>
-                <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
-                    {navLinks.map((item) => (
-                      <Link
-                        key={item.name}
-                        href={item.href}
-                        data-testid={item.dataTestid}
-                        className={classNames(
-                          item.href === pathname
-                            ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium transition-all'
-                        )}
-                        aria-current={
-                          item.href === pathname ? 'page' : undefined
-                        }
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
+                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                  <div className="flex flex-shrink-0 items-center">
+                    {/* // TODO Fix font family for logo */}
+                    <h1
+                      data-testid="home-interlinked"
+                      className="font-logo text-white lg:text-3xl xl:text-4xl"
+                    >
+                      INTERLINKED
+                    </h1>
+                  </div>
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      {navLinks.map((item, index) => (
+                        <Link
+                          key={index}
+                          href={item.href}
+                          onClick={hideSearch}
+                          data-testid={item.dataTestid}
+                          className={classNames(
+                            item.href === pathname
+                              ? 'bg-gray-900 text-white'
+                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            'rounded-md px-3 py-2 text-sm font-medium transition-all'
+                          )}
+                          aria-current={
+                            item.href === pathname ? 'page' : undefined
+                          }
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {currentUser && (
-                //when FiSearch button is clicked, the search bar will appear/dissapear
-                <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    onClick={() => setShowSearch(!showSearch)}
-                  >
-                    <span className="sr-only">Search</span>
-                    <FiSearch size={24} aria-hidden="true" />
-                  </button>
-
-                  <Link
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
-                    href={'/DM'}
-                  >
-                    <span className="sr-only">DMs</span>
-                    <FaRegCommentDots size={24} aria-hidden="true" />
-                  </Link>
-
-                  <Link
-                    href="/notifications"
-                    type="button"
-                    className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <FiBell size={24} aria-hidden="true" />
-                  </Link>
-
-                  {/* Profile dropdown */}
-                  <Menu as="div" className="relative">
-                    <div>
-                      <Menu.Button
-                        data-testid="nav-menu"
-                        className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">Open user menu</span>
-                        <ImageOptimized
-                          className="h-8 w-8 rounded-full"
-                          src={currentUser.profilePicture}
-                          alt={currentUser.name}
-                          width={32}
-                          height={32}
-                        />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
+                {currentUser && (
+                  //when FiSearch button is clicked, the search bar will appear/dissapear
+                  <div className="absolute inset-y-0 right-0 flex items-center gap-2 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                    <button
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      onClick={toggleSearch}
                     >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <Menu.Item>
-                          {({ active }) => (
+                      <span className="sr-only">Search</span>
+                      <FiSearch size={24} aria-hidden="true" />
+                    </button>
+
+                    <Link
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none "
+                      href={'/DM'}
+                      onClick={hideSearch}
+                      data-testid="nav-dm"
+                    >
+                      <span className="sr-only">DMs</span>
+                      <FaRegCommentDots size={24} aria-hidden="true" />
+                    </Link>
+
+                    <Link
+                      href="/notifications"
+                      onClick={hideSearch}
+                      type="button"
+                      className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    >
+                      <span className="sr-only">View notifications</span>
+                      <FiBell size={24} aria-hidden="true" />
+                    </Link>
+
+                    {/* Profile dropdown */}
+                    <Menu as="div" className="relative">
+                      <div>
+                        <Menu.Button
+                          onClick={hideSearch}
+                          data-testid="nav-menu"
+                          className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                          <span className="sr-only">Open user menu</span>
+                          <ImageOptimized
+                            className="h-8 w-8 rounded-full"
+                            src={currentUser.profilePicture}
+                            alt={currentUser.name}
+                            width={32}
+                            height={32}
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
                             <Link
                               href="/profile"
                               data-testid="nav-menu-profile"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               Your Profile
                             </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
+                          </Menu.Item>
+                          <Menu.Item>
                             <Link
                               data-testid="nav-menu-edit-profile"
                               href="/edit-profile"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
+                              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
                               Edit Profile
                             </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
-                            <Link
-                              href="#"
-                              data-testid="nav-menu-settings"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block px-4 py-2 text-sm text-gray-700`}
-                            >
-                              Settings
-                            </Link>
-                          )}
-                        </Menu.Item>
-                        <Menu.Item>
-                          {({ active }) => (
+                          </Menu.Item>
+                          <Menu.Item>
                             <button
                               onClick={logout}
                               data-testid="nav-logout"
-                              className={`${
-                                active ? 'bg-gray-100' : ''
-                              } block w-full px-4 py-2 text-left text-sm text-gray-700`}
+                              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                             >
                               Log out
                             </button>
-                          )}
-                        </Menu.Item>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </div>
-              )}
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                )}
+                {/* admin navbar */}
+                {currentAdmin && (
+                  <div>
+                    {/* Profile dropdown */}
+                    <Menu as="div" className="relative">
+                      <div>
+                        <Menu.Button
+                          data-testid="nav-menu"
+                          className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        >
+                          <span className="sr-only">Open user menu</span>
+                          <ImageOptimized
+                            className="h-8 w-8 rounded-full"
+                            src={currentAdmin.profilePicture}
+                            alt={currentAdmin.name}
+                            width={32}
+                            height={32}
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          <Menu.Item>
+                            <button
+                              onClick={logout}
+                              data-testid="nav-logout"
+                              className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+                            >
+                              Log out
+                            </button>
+                          </Menu.Item>
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                )}
+              </div>
+              <div className="mb-2 flex justify-end">
+                {/* search bar that appears when search button is clicked*/}
+                {showSearch && <SearchBar toggleSearch={toggleSearch} />}
+              </div>
             </div>
-            <div className="mb-2 flex justify-end">
-              {/* search bar that appears when search button is clicked*/}
-              {showSearch && <SearchBar handleSearch={handleSearch} />}
-            </div>
-          </div>
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navLinks.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={classNames(
-                    item.href === pathname
-                      ? 'bg-gray-900 text-white'
-                      : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                    'block rounded-md px-3 py-2 text-base font-medium'
-                  )}
-                  aria-current={item.href === pathname ? 'page' : undefined}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-          </Disclosure.Panel>
-        </>
-      )}
-    </Disclosure>
-  );
+            <Disclosure.Panel className="sm:hidden">
+              <div className="space-y-1 px-2 pt-2 pb-3">
+                {navLinks.map((item, index) => (
+                  <Link
+                    key={index}
+                    href={item.href}
+                    className={classNames(
+                      item.href === pathname
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'block rounded-md px-3 py-2 text-base font-medium'
+                    )}
+                    aria-current={item.href === pathname ? 'page' : undefined}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </Disclosure.Panel>
+          </>
+        )}
+      </Disclosure>
+    );
+  } else {
+    return <div className="p-7" />;
+  }
 }

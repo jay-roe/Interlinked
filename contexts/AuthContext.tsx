@@ -14,23 +14,23 @@ import type { UserCredential } from 'firebase/auth';
 
 import auth from '../config/firebase';
 import type { User as AuthUser } from 'firebase/auth';
-import type { User } from '../types/User';
+import type { User, Admin } from '../types/User';
 import { db } from '../config/firestore';
-import {
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocFromServer,
-  setDoc,
-} from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   currentUser: User;
+  currentAdmin: Admin;
   authUser: AuthUser;
   login: (email: string, password: string) => Promise<UserCredential>;
   loginWithGoogle: () => Promise<UserCredential>;
-  register: (email: string, password: string) => Promise<UserCredential>;
+  register: (
+    email: string,
+    password: string,
+    company: boolean
+  ) => Promise<UserCredential>;
   refresh: () => Promise<User>;
   logout: () => Promise<void>;
   deleteAccount: () => Promise<void>;
@@ -44,6 +44,7 @@ interface AuthContextType {
 // Creates a context that will be passed down to all routes, allowing authentication functions to be used
 const AuthContext = createContext({
   currentUser: null,
+  currentAdmin: null,
   authUser: null,
   login: null,
   loginWithGoogle: null,
@@ -58,8 +59,12 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  // Router for redirecting users globally.
+  const router = useRouter();
+
   // User data from Firestore database. Use this for most data.
   const [currentUser, setCurrentUser] = useState<User>();
+  const [currentAdmin, setCurrentAdmin] = useState<Admin>();
 
   // User data from Firebase Auth. Use this for email verification or provider data.
   const [authUser, setAuthUser] = useState<AuthUser>();
@@ -68,7 +73,7 @@ export function AuthProvider({ children }) {
   /**
    * Creates user in Firestore and updates current user state
    */
-  async function createUser(newUser: AuthUser) {
+  async function createUser(newUser: AuthUser, company: boolean = false) {
     // Create a new user document in database using same user id as auth
     const emptyUser: User = {
       awards: [],
@@ -94,6 +99,7 @@ export function AuthProvider({ children }) {
       recommendations: [],
       skills: [],
       volunteering: [],
+      isCompany: company,
     };
 
     await setDoc(doc(db.users, newUser.uid), emptyUser);
@@ -108,14 +114,14 @@ export function AuthProvider({ children }) {
   /**
    * Register user with email and password.
    */
-  async function register(email: string, password: string) {
+  async function register(email: string, password: string, company: boolean) {
     const credential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    await createUser(credential.user);
+    await createUser(credential.user, company);
 
     return credential;
   }
@@ -124,13 +130,7 @@ export function AuthProvider({ children }) {
    * Login user with email and password. Passes logic to firebase function
    */
   async function login(email: string, password: string) {
-    const credential = await signInWithEmailAndPassword(auth, email, password);
-
-    // Set user as state from database
-    const userDoc = await getDoc(doc(db.users, credential.user.uid));
-    setCurrentUser(userDoc.data());
-
-    return credential;
+    return await signInWithEmailAndPassword(auth, email, password);
   }
 
   /**
@@ -138,25 +138,7 @@ export function AuthProvider({ children }) {
    */
   async function loginWithGoogle() {
     const googleProvider = new GoogleAuthProvider();
-    const credential = await signInWithPopup(auth, googleProvider);
-
-    // Get user from database
-    const userDoc = await getDocFromServer(doc(db.users, credential.user.uid));
-
-    // User exists -> set user as state
-    if (userDoc.exists()) {
-      console.log('user doc exists: ', userDoc.data());
-
-      setCurrentUser(userDoc.data());
-    }
-    // User doesn't exist -> create user
-    else {
-      console.log('user doc does not exist. Creating it.');
-
-      await createUser(credential.user);
-    }
-
-    return credential;
+    return await signInWithPopup(auth, googleProvider);
   }
 
   /**
@@ -183,7 +165,8 @@ export function AuthProvider({ children }) {
    * Logs out of the current user session.
    */
   async function logout() {
-    return await auth.signOut();
+    await auth.signOut();
+    router.push('/');
   }
 
   /**
@@ -225,16 +208,23 @@ export function AuthProvider({ children }) {
       // User just logged out
       if (!user) {
         setCurrentUser(null);
+        setCurrentAdmin(null);
         setLoading(false);
       }
 
-      // Ensure user data is loaded if user logged in
-      else if (!currentUser) {
-        getDoc(doc(db.users, user.uid)).then((res) => {
-          if (!res.exists()) {
-            createUser(auth.currentUser);
+      // User/Admin logged in
+      else if (!currentAdmin && !currentUser) {
+        getDoc(doc(db.genericUser, user.uid)).then((res) => {
+          if (res.exists()) {
+            if (res.get('isAdmin')) {
+              // Admin logged in
+              setCurrentAdmin(res.data() as Admin);
+            } else {
+              // User logged in
+              setCurrentUser(res.data());
+            }
           } else {
-            setCurrentUser(res.data());
+            createUser(user);
           }
           setLoading(false);
         });
@@ -248,6 +238,7 @@ export function AuthProvider({ children }) {
   const value = useMemo(
     () => ({
       currentUser,
+      currentAdmin,
       authUser,
       login,
       loginWithGoogle,
@@ -258,7 +249,7 @@ export function AuthProvider({ children }) {
       reauthenticateEmail,
       reauthenticateOAuth,
     }),
-    [currentUser, authUser]
+    [currentUser, currentAdmin, authUser]
   );
 
   return (

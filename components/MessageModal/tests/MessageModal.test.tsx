@@ -1,8 +1,5 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render } from '@testing-library/react';
-import { testUser } from '@/types/User';
-import { testChatRoom } from '@/types/Message';
-import { useAuth } from '@/contexts/AuthContext';
 import MessageModal from '../MessageModal';
 import 'intersection-observer';
 
