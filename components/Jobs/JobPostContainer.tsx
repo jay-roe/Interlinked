@@ -49,6 +49,7 @@ const FullPostCard = ({
           edits={editsOpen}
           setEdits={setEditsOpen}
           setJobArray={setJobArray}
+          testKey={testKey}
         />
       </div>
     </Card>

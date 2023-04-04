@@ -79,7 +79,7 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=job-post-hidden]').should('contain', 'Yes');
 
     // footer
-    cy.get('[data-testid=job-post-applicants]').should('exist');
+    cy.get('[data-testid=job-post-applicants-0]').should('exist');
 
     cy.logout();
   });
@@ -89,7 +89,7 @@ describe('Company register and post spec', () => {
     cy.visit('manage-jobs');
 
     // editing
-    cy.get('[data-testid=job-post-edit]').click();
+    cy.get('[data-testid=job-post-edit-0]').click();
     cy.get('[data-testid=new-job-title]').should('not.exist');
 
     cy.get('[data-testid=change-title]').type('Intern');
@@ -116,7 +116,7 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=job-post-hidden]').should('contain', 'No');
 
     // delete posting
-    cy.get('[data-testid=job-post-delete]').click();
+    cy.get('[data-testid=job-post-delete-0]').click();
 
     // delete account
     cy.visit('edit-profile');
@@ -127,5 +127,26 @@ describe('Company register and post spec', () => {
       'contain',
       'We will become interlinked.'
     );
+  });
+
+  it('Looks at applicants', () => {
+    cy.login('realrecruiter@recruiters.com', jobPw);
+
+    //job with no applicants
+    cy.visit('manage-jobs');
+
+    cy.get('[data-testid=post-card-0]').should('exist');
+    cy.get('[data-testid=job-post-applicants-0]').click();
+    cy.get('[data-testid=no-apps-msg]').should('exist');
+
+    //job with applicants
+    cy.visit('manage-jobs');
+
+    cy.get('[data-testid=post-card-1]').should('exist');
+    cy.get('[data-testid=job-post-applicants-1]').click();
+    cy.get('[data-testid=no-apps-msg]').should('not.exist');
+    cy.get('[data-testid=profile-card-0]').should('exist');
+
+    cy.logout();
   });
 });
