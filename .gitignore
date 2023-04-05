@@ -46,3 +46,6 @@ env.test.local
 firebase-debug.log
 firestore-debug.log
 ui-debug.log
+
+# Cypress Screenshots
+screenshots
