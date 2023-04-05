@@ -3,17 +3,20 @@ import Button from '../Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import { typeCollection, db } from '@/config/firestore';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
+import Link from 'next/link';
 
 const PostFooter = ({
   jobPost,
   edits,
   setEdits,
   setJobArray,
+  testKey,
 }: {
   jobPost: JobPostingWithId;
   edits: boolean;
   setEdits: Dispatch<SetStateAction<boolean>>;
   setJobArray: Dispatch<SetStateAction<JobPostingWithId[]>>;
+  testKey: number;
 }) => {
   const handleDelete = async () => {
     if (confirm('Are you sure you want to delete this job post?')) {
@@ -36,7 +39,7 @@ const PostFooter = ({
   return (
     <div className="mt-4 flex flex-wrap items-center gap-2">
       <Button
-        data-testid="job-post-edit"
+        data-testid={`job-post-edit-${testKey}`}
         onClick={() => {
           if (edits && confirm('All unsaved changes will be lost!')) {
             setEdits((curr) => !curr);
@@ -46,10 +49,14 @@ const PostFooter = ({
         Edit Job Posting
       </Button>
       {/* TODO: Do view applicants when applications are being worked on */}
-      <Button data-testid="job-post-applicants">View Applicants</Button>
+      <Link href={`manage-jobs/${jobPost.postingId}`}>
+        <Button data-testid={`job-post-applicants-${testKey}`}>
+          View Applicants
+        </Button>
+      </Link>
       <Button
         variant="danger"
-        data-testid="job-post-delete"
+        data-testid={`job-post-delete-${testKey}`}
         onClick={handleDelete}
       >
         Delete Job Posting
