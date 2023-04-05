@@ -122,7 +122,7 @@ export default function Jobs({
               <p>{job.companyName}</p>
             </div>
 
-            <Card className="mb-3">
+            <Card data-testid="card" className="mb-3">
               <div className="mr-2 max-w-fit">
                 <p style={{ overflowWrap: 'break-word' }}>{job.description}</p>
               </div>
@@ -272,7 +272,7 @@ export default function Jobs({
 
         {/* Apply button innards */}
         {!isEditable && (
-          <Card className="relative row-span-2 break-words">
+          <Card data-testid="card" className="relative row-span-2 break-words">
             {/* <div className="mt-2 flex justify-end"> */}
             {/* <CardGrid> */}
             <div
@@ -288,7 +288,7 @@ export default function Jobs({
                           My Resume
                         </FileButton>
                       </div> */}
-                <Card className="mb-2">
+                <Card data-testid="card" className="mb-2">
                   <div>
                     <label>
                       Resume <span className="text-yellow-600">*</span>
@@ -320,7 +320,7 @@ export default function Jobs({
                     </div>
                   </div>
                 </Card>
-                <Card className="mb-2">
+                <Card data-testid="card" className="mb-2">
                   <div>
                     <label>
                       Cover Letter <span className="text-yellow-600">*</span>
