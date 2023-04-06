@@ -5,8 +5,8 @@ type CardProps = ComponentProps<'div'>;
 const Card = (props: CardProps) => {
   return (
     <div
-      className={`${props.className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
       {...props}
+      className={`${props.className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
     >
       {props.children}
     </div>
