@@ -45,6 +45,45 @@ export default function ChatRoom({ params }) {
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
 
+  // reference to bring user back to bottom of chat
+  const dummy = useRef<HTMLDivElement>();
+
+  // reference to the hidden input so a custom button may be used
+  const hiddenFileInput = useRef(null);
+
+  useEffect(() => {
+    if (!chatRoomRef || !authUser) return;
+
+    getDoc(chatRoomRef).then((room) => {
+      //make sure user is in chatroom
+      let belongs = false;
+      room.data().participants.forEach((participantID) => {
+        if (participantID == authUser.uid) {
+          belongs = true;
+        }
+      });
+
+      room
+        .data()
+        .participants.filter((participantID) => participantID !== authUser.uid)
+        .forEach((participantID) => {
+          getDoc(doc(db.users, participantID)).then((user) => {
+            setParticipants((curr) => {
+              if (curr.some((usr) => usr.userId === user.id)) return curr;
+              return [...curr, { ...user.data(), userId: user.id }];
+            });
+          });
+        });
+      setParticipantsLoading(false);
+    });
+
+    const unsub = onSnapshot(chatRoomRef, (doc) => {
+      setChatMessages(doc.data().messages);
+    });
+
+    return () => unsub(); // removes listener
+  }, []);
+
   // User not logged in
   if (!currentUser || !authUser) {
     return (
@@ -129,39 +168,6 @@ export default function ChatRoom({ params }) {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-  useEffect(() => {
-    const unsub = onSnapshot(chatRoomRef, (doc) => {
-      setChatMessages(doc.data().messages);
-    });
-
-    return () => unsub(); // removes listener
-  }, []);
-
-  useEffect(() => {
-    getDoc(chatRoomRef).then((room) => {
-      //make sure user is in chatroom
-      let belongs = false;
-      room.data().participants.forEach((participantID) => {
-        if (participantID == authUser.uid) {
-          belongs = true;
-        }
-      });
-
-      room
-        .data()
-        .participants.filter((participantID) => participantID !== authUser.uid)
-        .forEach((participantID) => {
-          getDoc(doc(db.users, participantID)).then((user) => {
-            setParticipants((curr) => {
-              if (curr.some((usr) => usr.userId === user.id)) return curr;
-              return [...curr, { ...user.data(), userId: user.id }];
-            });
-          });
-        });
-      setParticipantsLoading(false);
-    });
-  }, []);
-
   async function handleSelectedFile(fileList: FileList) {
     const file: File = fileList[0];
     setFileBuffer(file);
@@ -177,12 +183,6 @@ export default function ChatRoom({ params }) {
   const handleClick = () => {
     hiddenFileInput.current.click();
   };
-
-  // reference to bring user back to bottom of chat
-  const dummy = useRef<HTMLDivElement>();
-
-  // reference to the hidden input so a custom button may be used
-  const hiddenFileInput = useRef(null);
 
   async function getReports() {
     if (!!process.env.NEXT_PUBLIC_EMULATOR) {
