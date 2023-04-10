@@ -3,6 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import { useState } from 'react';
 import { CreatePostProps } from '@/types/CreatPostProps';
+import TextEditor from '@/components/TextEditor/TextEditor';
 
 export default function CreatePost({ getText }: CreatePostProps) {
   const { currentUser } = useAuth();
@@ -32,6 +33,9 @@ export default function CreatePost({ getText }: CreatePostProps) {
         </div>
         <div>
           <form>
+            <TextEditor
+            // onChange={}
+            />
             <textarea
               id="message"
               data-testid="post-content"
