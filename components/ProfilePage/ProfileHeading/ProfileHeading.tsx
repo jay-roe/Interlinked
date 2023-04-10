@@ -3,9 +3,11 @@ import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Input from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import MessageModal from '@/components/MessageModal/MessageModal';
-import type { Dispatch, SetStateAction } from 'react';
+import TextEditor from '@/components/TextEditor/TextEditor';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import React from 'react';
 import { FaRegEdit } from 'react-icons/fa';
+import TextEditorPreview from '@/components/TextEditor/TextEditorPreview';
 
 /* eslint-disable @next/next/no-img-element */
 
@@ -43,6 +45,10 @@ export default function ProfileHeading({
   setBioEditing?: Dispatch<SetStateAction<boolean>>;
   uid?: string;
 }) {
+  const handleBioChange = useCallback((newBio: string) => {
+    setBio(newBio);
+  }, []);
+
   // Set profile picture preview if not empty file
   const handleFileSelected = (event: React.ChangeEvent<HTMLInputElement>) => {
     const images = Array.from(event.target.files);
@@ -128,18 +134,19 @@ export default function ProfileHeading({
         <div className="flex items-center">
           {bioEditing ? (
             // editable bio
-            <TextArea
+            <TextEditor
+              className="w-full"
               data-testid="bio-editing"
-              name="bio"
-              rows={4}
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
+              initialText={bio}
+              onTextChange={handleBioChange}
             />
           ) : (
             // live bio
-            <p className="m-auto md:m-0" data-testid="profile-bio">
-              {bio || 'No bio given.'}
-            </p>
+            <TextEditorPreview
+              className="m-auto text-left md:m-0"
+              data-testid="profile-bio"
+              message={bio || 'No bio given.'}
+            />
           )}
           {isEditable && (
             <EditButton

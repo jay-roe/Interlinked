@@ -5,21 +5,37 @@ import { EditorView, keymap } from '@codemirror/view';
 import { markdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import { oneDark } from '@codemirror/theme-one-dark';
-import { useEffect, useRef, useState } from 'react';
+import {
+  ComponentProps,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
-export default function TextEditor(props: {
+interface TextEditorProps extends ComponentProps<'div'> {
+  onTextChange: (doc: string) => void;
   initialText?: string;
-  onChange: (state: EditorState) => void;
-}) {
+}
+
+export default function TextEditor(props: TextEditorProps) {
   const editorRef = useRef(null);
   const [editorView, setEditorView] = useState(null);
+  const { onTextChange, initialText } = props;
+
+  const handleChange = useCallback(
+    (state: EditorState) => {
+      onTextChange(state.doc.toJSON().join('\n')); // TODO CHECK
+    },
+    [onTextChange]
+  );
 
   // Create editor view on initial load
   useEffect(() => {
     if (!editorRef.current) return;
 
     const initialEditorState = EditorState.create({
-      doc: props.initialText,
+      doc: initialText,
       extensions: [
         basicSetup,
         keymap.of(defaultKeymap),
@@ -32,7 +48,7 @@ export default function TextEditor(props: {
         EditorView.lineWrapping,
         EditorView.updateListener.of((update) => {
           if (update.changes) {
-            props.onChange && props.onChange(update.state);
+            handleChange && handleChange(update.state);
           }
         }),
       ],
@@ -42,7 +58,11 @@ export default function TextEditor(props: {
       state: initialEditorState,
       parent: editorRef.current,
     });
+    setEditorView(editorView);
+    return () => {
+      editorView.destroy();
+    };
   }, [editorRef]);
 
-  return <div>TextEditor</div>;
+  return <div {...props} ref={editorRef}></div>;
 }
