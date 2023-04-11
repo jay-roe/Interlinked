@@ -7,7 +7,8 @@ import { typeCollection, db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { JobPosting } from '@/types/JobPost';
 import { collection, getDoc, doc } from 'firebase/firestore';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import { useEffect, useState } from 'react';
 import { GrDocumentDownload } from 'react-icons/gr';
 

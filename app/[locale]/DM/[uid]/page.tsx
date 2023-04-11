@@ -22,7 +22,7 @@ import { createNotification } from '@/components/Notification/AddNotification/Ad
 import { NotifType } from '@/types/Notification';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import type { UserWithId } from '@/types/User';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FilePreview from '@/components/FilePreview/FilePreview';

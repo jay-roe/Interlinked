@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import { useEffect, useState } from 'react';
 import Button from '@/components/Buttons/Button';
 import { useAuth } from '@/contexts/AuthContext';

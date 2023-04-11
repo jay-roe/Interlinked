@@ -2,7 +2,7 @@ import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import type { Comment } from '@/types/Post';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 const CommentHeader = ({
   comment,

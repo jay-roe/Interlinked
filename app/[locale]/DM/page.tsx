@@ -7,7 +7,7 @@ import { db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function DMs() {
   const { authUser } = useAuth();

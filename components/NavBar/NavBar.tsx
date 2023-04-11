@@ -6,7 +6,7 @@ import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
 import { User, Admin } from '@/types/User';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';

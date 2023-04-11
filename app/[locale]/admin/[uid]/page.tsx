@@ -22,7 +22,7 @@ import TimeDivider from '@/components/DM/TimeDivider';
 import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 const ViewReport = ({ params }) => {
   // timeout options

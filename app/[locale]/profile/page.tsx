@@ -13,7 +13,8 @@ import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfilePro
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';

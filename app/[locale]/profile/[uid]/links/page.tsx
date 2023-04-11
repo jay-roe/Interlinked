@@ -7,7 +7,8 @@ import CardGrid from '@/components/Card/CardGrid';
 
 import type { User, UserWithId } from '@/types/User';
 
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import { useState, useRef, useEffect } from 'react';
 import Button from '@/components/Buttons/Button';
 import { db } from '@/config/firestore';

@@ -21,7 +21,7 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 import { db } from '@/config/firestore';
 import { collection, doc, getDocs, Query, updateDoc } from 'firebase/firestore';

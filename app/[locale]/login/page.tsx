@@ -1,10 +1,11 @@
 'use client';
 
 import styles from './Login.module.css';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 
@@ -116,4 +117,4 @@ export default function Login() {
       </div>
     </div>
   );
-};
+}

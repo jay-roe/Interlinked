@@ -15,7 +15,7 @@ import {
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import Button from '@/components/Buttons/Button';
 
 const Admin = () => {

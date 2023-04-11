@@ -1,6 +1,7 @@
 'use client';
 
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import styles from './Register.module.css';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';

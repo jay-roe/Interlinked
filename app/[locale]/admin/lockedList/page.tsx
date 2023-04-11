@@ -5,7 +5,7 @@ import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { User, UserWithId } from '@/types/User';
 import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 

@@ -4,7 +4,7 @@ import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
 import { JobPosting } from '@/types/JobPost';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function ExternalApplication({
   externalApplications,

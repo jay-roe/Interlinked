@@ -6,7 +6,8 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Timestamp } from 'firebase/firestore';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import CardStack from '@/components/CardStack/CardStack';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 

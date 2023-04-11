@@ -7,7 +7,8 @@ import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 export default function ProfileCertifications({
   certifications,
   isEditable = false,

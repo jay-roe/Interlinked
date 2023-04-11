@@ -3,7 +3,7 @@ import Button from '../Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import { typeCollection, db } from '@/config/firestore';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 const PostFooter = ({
   jobPost,

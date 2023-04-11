@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
 export default function ViewLinkButton({

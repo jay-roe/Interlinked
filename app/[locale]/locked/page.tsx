@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import Button from '@/components/Buttons/Button';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 const Locked = () => {
   const router = useRouter();
