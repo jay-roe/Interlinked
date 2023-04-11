@@ -2,11 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTranslations } from 'next-intl';
 
 const Home = () => {
   const router = useRouter();
   const { currentUser } = useAuth();
+  const t = useTranslations('Home');
 
   // if account is locked or timed out, redirect to locked page
   useEffect(() => {
@@ -26,13 +28,13 @@ const Home = () => {
       {/* Here goes the app's components */}
       {currentUser ? (
         <p data-testid="welcome-msg" className="text-center text-2xl">
-          Welcome, {currentUser.name || currentUser.email}. Let&apos;s get you
-          interlinked.
+          {t('welcome')}, {currentUser.name || currentUser.email}. 
+          {t('get-you-interlinked')}.
         </p>
       ) : (
         <>
           <p data-testid="base-msg" className="text-center text-2xl">
-            We will become interlinked.
+            {t('become-interlinked')}.
           </p>
         </>
       )}
