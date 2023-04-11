@@ -13,6 +13,7 @@ import {
 } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import FileButton from '@/components/Buttons/FileButton/FileButton';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileDocuments({
   isEditable = false,
@@ -37,6 +38,8 @@ export default function ProfileDocuments({
   setCoverLetter?: Dispatch<SetStateAction<User['coverLetter']>>;
   uid?: string;
 }) {
+  const t = useTranslations('Profile.Documents');
+
   // uploading a file from button
 
   const resumeInputRef = useRef(null);
@@ -94,7 +97,7 @@ export default function ProfileDocuments({
     //****CardStack has to output first the resume , then the coverletter*****
     return (
       <div className="mb-10">
-        <h2 className="mb-2 text-2xl font-extrabold">Docs</h2>
+        <h2 className="mb-2 text-2xl font-extrabold">{t('docs')}</h2>
         <div className="flex gap-2">
           {resume && <FileButton link={resume.link}>{resume.name}</FileButton>}
           {coverLetter && (
@@ -108,7 +111,7 @@ export default function ProfileDocuments({
   // Editable version of documents component
   return (
     <div className="mb-3">
-      <h2 className="mb-1 text-2xl font-extrabold">Your Documents</h2>
+      <h2 className="mb-1 text-2xl font-extrabold">{t('your-docs')}</h2>
 
       {/* Resume */}
       {resume ? (
@@ -118,7 +121,7 @@ export default function ProfileDocuments({
           onSubmit={(e) => {
             e.preventDefault();
             if (!resume.link) {
-              alert('You must upload a resume before continuing.');
+              alert(t('alert-must-upload-resume'));
               return;
             }
             setResumeEditing((curr) => !curr);
@@ -127,12 +130,12 @@ export default function ProfileDocuments({
           {resumeEditing ? (
             <div className="mr-2 mb-3 w-full max-w-xs">
               <label>
-                Resume <span className="text-yellow-600">*</span>
+                {t('resume')} <span className="text-yellow-600">*</span>
               </label>
               <div>
                 <InputField
                   data-testid="change-resume-name"
-                  placeholder="Public resume display name"
+                  placeholder={t('resume-placeholder')}
                   defaultValue={resume.name}
                   onChange={(e) =>
                     setResume((res) => {
@@ -148,7 +151,7 @@ export default function ProfileDocuments({
                   onClick={handleResumeUploadClick}
                   type="button"
                 >
-                  Upload Resume &nbsp;
+                  {t('upload-resume')}
                   {!resume.link && <FaCloudUploadAlt size={25} />}
                   {resume.link && (
                     <FaCheck data-testid="resume-check"> </FaCheck>
@@ -178,7 +181,7 @@ export default function ProfileDocuments({
                 type="submit"
                 data-testid="resume-save-btn"
               >
-                Save Resume
+                {t('save-resume')}
               </Button>
             ) : (
               <EditButton
@@ -208,14 +211,14 @@ export default function ProfileDocuments({
           onClick={() => {
             // Add new resume
             setResume({
-              name: 'resume',
+              name: t('resume'),
               link: '',
               isPrivate: false,
             });
             setResumeEditing(true);
           }}
         >
-          Add Resume
+          {t('add-resume')}
         </Button>
       )}
 
@@ -229,7 +232,7 @@ export default function ProfileDocuments({
           onSubmit={(e) => {
             e.preventDefault();
             if (!coverLetter.link) {
-              alert('You must upload a cover letter before continuing.');
+              alert(t('alert-must-upload-cover-letter'));
               return;
             }
             setCoverLetterEditing((curr) => !curr);
@@ -238,11 +241,11 @@ export default function ProfileDocuments({
           {coverLetterEditing ? (
             <div>
               <label>
-                Cover Letter <span className="text-yellow-600">*</span>
+                {t('cover-letter')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid="change-cover-name"
-                placeholder="Public cover letter display name"
+                placeholder={t('cover-letter-placeholder')}
                 defaultValue={coverLetter.name}
                 onChange={(e) =>
                   setCoverLetter((res) => {
@@ -257,7 +260,7 @@ export default function ProfileDocuments({
                 onClick={handleCoverLetterUploadClick}
                 type="button"
               >
-                Upload Cover Letter &nbsp;
+                {t('upload-cover-letter')}
                 {!coverLetter.link && <FaCloudUploadAlt size={25} />}
                 {coverLetter.link && (
                   <FaCheck data-testid="coverletter-check"> </FaCheck>
@@ -288,7 +291,7 @@ export default function ProfileDocuments({
                 type="submit"
                 data-testid="cover-letter-save-btn"
               >
-                Save Cover Letter
+                {t('save-cover-letter')}
               </Button>
             ) : (
               <EditButton
@@ -318,14 +321,14 @@ export default function ProfileDocuments({
           onClick={() => {
             // Add cover letter
             setCoverLetter({
-              name: 'cover letter',
+              name: t('cover-letter'),
               link: '',
               isPrivate: false,
             });
             setCoverLetterEditing(true);
           }}
         >
-          Add Cover Letter
+          {t('add-cover-letter')}
         </Button>
       )}
     </div>

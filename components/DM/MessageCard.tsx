@@ -78,9 +78,3 @@ const MessageCard = ({ message }: { message: Message }) => {
 };
 
 export default MessageCard;
-<Disclosure>
-  <Disclosure.Button>Is team pricing available?</Disclosure.Button>
-  <Disclosure.Panel className="text-gray-500">
-    Yes! You can purchase a license that you can share with your entire team.
-  </Disclosure.Panel>
-</Disclosure>;

@@ -11,6 +11,7 @@ import {
   startAt,
   where,
 } from 'firebase/firestore';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import Button from '../Buttons/Button';
@@ -28,6 +29,7 @@ export default function JobKeywordSearch({
   removeKeyword: (keywordId: string) => void;
   canCreateKeywords?: boolean;
 }) {
+  const t = useTranslations('Jobs.Keywords');
   const [searchTerm, setSearchTerm] = useState(''); // search input
   const [searchResults, setSearchResults] = useState<JobKeyword[]>([]); // search results
   const [showResults, setShowResults] = useState(false); // show search results
@@ -124,7 +126,7 @@ export default function JobKeywordSearch({
           data-testid="job-keywords-input"
           name="job-keywords"
           className="inline w-full rounded-md border-none bg-inherit leading-6 text-white placeholder-gray-400 focus:placeholder-gray-500 focus:outline-none  "
-          placeholder="Search keywords"
+          placeholder={t('search')}
           type="search"
           value={searchTerm}
           onChange={handleSearchTermChange}

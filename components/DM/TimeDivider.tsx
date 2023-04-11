@@ -1,7 +1,9 @@
 import type { Timestamp } from 'firebase/firestore';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 const TimeDivider = ({ time }: { time: Timestamp }) => {
+  const t = useTranslations('DM.TimeDivider');
   const [display, setDisplay] = useState<string>();
 
   useEffect(() => {
@@ -15,10 +17,10 @@ const TimeDivider = ({ time }: { time: Timestamp }) => {
       });
     } else if (timeDifference < 172800) {
       // over 1 day less than 2
-      timeToShow = '1 day ago';
+      timeToShow = t('1-day-ago');
     } else if (timeDifference < 259200) {
       // less than 3 days
-      timeToShow = '2 days ago';
+      timeToShow = t('2-days-ago');
     } else {
       timeToShow = time.toDate().toLocaleString('en-US', {
         month: 'long',

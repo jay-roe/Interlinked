@@ -17,7 +17,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 import { createNotification } from '../Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
+import { useTranslations } from 'next-intl';
 export default function CreateChatModal({ userUID }: { userUID: string }) {
+  const t = useTranslations('DM.CreateChatModal');
   const { currentUser, authUser } = useAuth();
   const [message, setMessage] = useState<string>('');
   const router = useRouter();
@@ -92,9 +94,9 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
     });
 
     setMessage('');
-    if (confirm('Go to chats?'))
+    if (confirm(t('confirm-go-to-chat')))
       router.push('/DM/' + roomID); // send to chatroom
-    else alert('Message sent!');
+    else alert(t('alert-sent'));
   };
 
   return (
@@ -105,7 +107,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
             className="w-full rounded-md bg-purple-text-area p-1 focus:outline-none dark:text-white dark:placeholder-gray-400"
             data-testid="chat-modal-input"
             type="text"
-            placeholder="Write your message..."
+            placeholder={t('write-message')}
             value={message}
             onChange={(event) => setMessage(event.target.value)}
           />

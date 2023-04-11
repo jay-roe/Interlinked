@@ -3,6 +3,7 @@ import { db } from '@/config/firestore';
 import type { Notification } from '@/types/Notification';
 import { User } from '@/types/User';
 import { doc, getDoc } from 'firebase/firestore';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import ImageOptimized from '../../ImageOptimized/ImageOptimized';
 
@@ -11,6 +12,7 @@ export default function NotificationHeader({
 }: {
   notification: Notification;
 }) {
+  const t = useTranslations('Notification.Header');
   const [sender, setSender] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function NotificationHeader({
   if (loading) {
     return (
       <div>
-        <p>loading</p>
+        <p>{t('loading')}</p>
       </div>
     );
   }

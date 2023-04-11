@@ -10,6 +10,7 @@ import Link from '@/components/Link/Link';
 
 import CardStack from '@/components/CardStack/CardStack';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileProjects({
   projects,
@@ -24,12 +25,14 @@ export default function ProfileProjects({
   setProjectsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setProjects?: Dispatch<SetStateAction<User['projects']>>;
 }) {
+  const t = useTranslations('Profile.Projects');
+
   if (!isEditable) {
     if (!projects || !projects[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
+        <h2 className="text-2xl font-extrabold">{t('projects')} 🛠</h2>
         <CardStack>
           {projects.map((proj, index) => (
             <div key={index} data-testid={`live-proj-${index}`}>
@@ -66,7 +69,7 @@ export default function ProfileProjects({
                       data-testid={`live-proj-repo-${index}`}
                       href={proj.repoLink}
                     >
-                      <Button>View Repo</Button>
+                      <Button>{t('view-repo')}</Button>
                     </Link>
                   </div>
                 )}
@@ -76,7 +79,7 @@ export default function ProfileProjects({
                       data-testid={`live-proj-demo-${index}`}
                       href={proj.demoLink}
                     >
-                      <Button>View Demo</Button>
+                      <Button>{t('view-demo')}</Button>
                     </Link>
                   </div>
                 )}
@@ -89,7 +92,7 @@ export default function ProfileProjects({
   }
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Projects 🛠</h2>
+      <h2 className="text-2xl font-extrabold">{t('projects')} 🛠</h2>
       {projects.map((project, index) => (
         <form
           action=""
@@ -105,7 +108,7 @@ export default function ProfileProjects({
           {projectsEditing && projectsEditing[index] ? (
             <div className="mr-2 mb-3">
               <label>
-                Title <span className="text-yellow-600">*</span>
+                {t('title')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-proj-title-${index}`}
@@ -123,7 +126,7 @@ export default function ProfileProjects({
                 required
               />
               <label>
-                Collaborators <span className="text-yellow-600">*</span>
+                {t('collaborators')} <span className="text-yellow-600">*</span>
               </label>
 
               {project.collaborators.map((co, index) => (
@@ -150,11 +153,11 @@ export default function ProfileProjects({
                   className="inline"
                   // Add new text field
                 >
-                  Add New Collaborator
+                  {t('add-collaborator')}
                 </Button>
               )}
 
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`edit-proj-description-${index}`}
                 name="info"
@@ -170,7 +173,7 @@ export default function ProfileProjects({
               <div className="flex flex-wrap gap-2">
                 <div className="w-full">
                   <label>
-                    Start Date <span className="text-yellow-600">*</span>
+                    {t('start-date')} <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
                     data-testid={`edit-proj-startDate-${index}`}
@@ -196,7 +199,7 @@ export default function ProfileProjects({
                   />
                 </div>
                 <div className="w-full">
-                  <label>End Date</label>
+                  <label>{t('end-date')}</label>
                   <InputField
                     data-testid={`edit-proj-endDate-${index}`}
                     type="date"
@@ -220,7 +223,7 @@ export default function ProfileProjects({
                   />
                 </div>
               </div>
-              <label> Repo Link </label>
+              <label> {t('repo-link')} </label>
               <InputField
                 data-testid={`edit-proj-repoLink-${index}`}
                 type="link"
@@ -234,7 +237,7 @@ export default function ProfileProjects({
                   })
                 }
               ></InputField>
-              <label> Demo Link </label>
+              <label> {t('demo-link')} </label>
               <InputField
                 data-testid={`edit-proj-demoLink-${index}`}
                 type="link"
@@ -279,14 +282,14 @@ export default function ProfileProjects({
                 {project.repoLink && (
                   <div>
                     <Link href={project.repoLink}>
-                      <Button>View Repo</Button>
+                      <Button>{t('view-repo')}</Button>
                     </Link>
                   </div>
                 )}
                 {project.demoLink && (
                   <div>
                     <Link href={project.demoLink}>
-                      <Button>View Demo</Button>
+                      <Button>{t('view-demo')}</Button>
                     </Link>
                   </div>
                 )}
@@ -302,7 +305,7 @@ export default function ProfileProjects({
                   type="submit"
                   data-testid={`proj-save-button-${index}`}
                 >
-                  Save Project
+                  {t('save')}
                 </Button>
               ) : (
                 <EditButton
@@ -354,7 +357,7 @@ export default function ProfileProjects({
             setProjectsEditing((proedits) => [...proedits, true]);
           }}
         >
-          Add New Project
+          {t('add-new')}
         </Button>
       )}
     </div>

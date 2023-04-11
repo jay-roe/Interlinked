@@ -1,4 +1,5 @@
 import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 
@@ -9,6 +10,7 @@ export default function ViewLinkButton({
   linkedUserIds: string[];
   href?: string;
 }) {
+  const t = useTranslations('Button.Link');
   return (
     <button
       data-testid="view-link-button"
@@ -17,7 +19,9 @@ export default function ViewLinkButton({
       <Link href={href || ''}>
         <span className="flex items-center gap-2">
           <LinkIcon />
-          <p>{linkedUserIds?.length || 0} Links</p>
+          <p>
+            {linkedUserIds?.length || 0} {t('links')}
+          </p>
         </span>
       </Link>
     </button>

@@ -1,8 +1,10 @@
 import { User } from '@/types/User';
+import { useTranslations } from 'next-intl';
 import { MdOutlinePublic } from 'react-icons/md';
 import { MdOutlinePublicOff } from 'react-icons/md';
 
 export default function PrivacyIcon({ isPrivate }: { isPrivate: boolean }) {
+  const t = useTranslations('Icons.Privacy');
   return (
     <div
       data-testid="privacy"
@@ -12,7 +14,7 @@ export default function PrivacyIcon({ isPrivate }: { isPrivate: boolean }) {
         <div className="flex items-center justify-between gap-2">
           <MdOutlinePublicOff size={30} />
           <div className="ml-2 self-center">
-            <p>Your profile is private</p>
+            <p>{t('private')}</p>
           </div>
         </div>
       ) : (
@@ -20,7 +22,7 @@ export default function PrivacyIcon({ isPrivate }: { isPrivate: boolean }) {
         <div className="flex items-center justify-between gap-2">
           <MdOutlinePublic size={30} />
           <div className="ml-2 self-center">
-            <p>Your profile is public</p>
+            <p>{t('public')}</p>
           </div>
         </div>
       )}

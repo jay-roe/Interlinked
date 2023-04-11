@@ -9,6 +9,7 @@ import CardGrid from './CardGrid';
 import CommentHeader from '../Comment/CommentHeader';
 import CommentBody from '../Comment/CommentBody';
 import AddComment from '../Comment/AddComment';
+import { useTranslations } from 'next-intl';
 
 const FullPostCard = ({
   author,
@@ -27,6 +28,7 @@ const FullPostCard = ({
   userID?: string;
   testKey?: number;
 }) => {
+  const t = useTranslations('Card.FullPostCard');
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [comments, setComments] = useState(post?.comments);
 
@@ -98,8 +100,8 @@ const FullPostCard = ({
           comments === undefined ? (
             <>
               <Card data-testid={`comments-${testKey}`}>
-                There are no comments here.
-                <br /> Now is the time to make your voice heard.
+                {t('no-comments')}
+                <br /> {t('now-time')}
               </Card>
             </>
           ) : (

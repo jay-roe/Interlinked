@@ -3,8 +3,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import { useState } from 'react';
 import { CreatePostProps } from '@/types/CreatPostProps';
+import { useTranslations } from 'next-intl';
 
 export default function CreatePost({ getText }: CreatePostProps) {
+  const t = useTranslations('CreatePost.CreatePost');
   const { currentUser } = useAuth();
   const [message, setMessage] = useState('');
 
@@ -26,8 +28,8 @@ export default function CreatePost({ getText }: CreatePostProps) {
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold">Create a Post </h1>
-            <h4 className="">Write anything to your heart&apos;s content</h4>
+            <h1 className="text-2xl font-bold">{t('create')}</h1>
+            <h4 className="">{t('write-anything')}</h4>
           </div>
         </div>
         <div>
@@ -36,7 +38,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
               id="message"
               data-testid="post-content"
               className="   row-span-4 h-[10rem] w-full rounded-lg bg-purple-text-area p-1 text-sm text-white shadow-lg "
-              placeholder="Write text here..."
+              placeholder={t('placeholder')}
               value={message}
               onChange={(e) => {
                 setMessage(e.target.value);

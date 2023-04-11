@@ -5,6 +5,7 @@ import SocialIcon from '@/components/Icons/SocialIcon/SocialIcon';
 import SocialIconGroup from '../../Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileSocials({
   isEditable = false,
@@ -19,6 +20,7 @@ export default function ProfileSocials({
   socialsEditing?: boolean;
   setSocialsEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const t = useTranslations('Profile.Socials');
   // live version
   if (!isEditable) {
     return (
@@ -50,7 +52,7 @@ export default function ProfileSocials({
           socials &&
           Object.keys(socials).every(
             (social) => socials[social].length === 0
-          ) && <p data-testid="not-editing-no-socials">No socials given</p>}
+          ) && <p data-testid="not-editing-no-socials">{t('no-socials')}</p>}
 
         {/* Actual editing logic */}
         {socialsEditing && (
@@ -93,7 +95,7 @@ export default function ProfileSocials({
             />
             <div>
               <Button data-testid="save-socials" className="mt-3" type="submit">
-                Save Socials
+                {t('save')}
               </Button>
             </div>
           </div>

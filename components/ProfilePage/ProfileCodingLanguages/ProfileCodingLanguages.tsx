@@ -3,6 +3,7 @@ import { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
+import { useTranslations } from 'next-intl';
 export default function ProfileCodingLanguages({
   isEditable = false,
   codingLanguages,
@@ -22,13 +23,16 @@ export default function ProfileCodingLanguages({
   setCodingLanguagesHovering?: Dispatch<SetStateAction<boolean[]>>;
   setNewCodingLanguage?: Dispatch<SetStateAction<string>>;
 }) {
+  const t = useTranslations('Profile.CodingLanguages');
   // Live version of Coding Languages component
   if (!isEditable) {
     if (!codingLanguages || !codingLanguages[0]) return;
 
     return (
       <div className="mb-7">
-        <h2 className="mb-2 text-2xl font-extrabold">Coding Languages 🗨 </h2>
+        <h2 className="mb-2 text-2xl font-extrabold">
+          {t('coding-languages')} 🗨{' '}
+        </h2>
         <ul className="inline-flex flex-wrap" data-testid="live-code-langs">
           {codingLanguages.map((cl, index) => (
             <li
@@ -47,7 +51,7 @@ export default function ProfileCodingLanguages({
   // Editable version of Coding languages component
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Coding Languages 🗨 </h2>
+      <h2 className="text-2xl font-extrabold">{t('coding-languages')} 🗨 </h2>
       {codingLanguages.map((cl, index) => (
         <div key={index}>
           <ul className="inline-flex">
@@ -149,7 +153,7 @@ export default function ProfileCodingLanguages({
           setCodingLanguagesHovering((clhovers) => [...clhovers, false]);
         }}
       >
-        Add New Coding Language
+        {t('add-new')}
       </Button>
     </div>
   );

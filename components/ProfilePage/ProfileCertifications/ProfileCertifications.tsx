@@ -8,6 +8,7 @@ import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
 import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileCertifications({
   certifications,
@@ -22,13 +23,15 @@ export default function ProfileCertifications({
   setCertificationsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setCertifications?: Dispatch<SetStateAction<User['certifications']>>;
 }) {
+  const t = useTranslations('Profile.Certifications');
+
   // Live version of certifications component
   if (!isEditable) {
     if (!certifications || !certifications[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Certifications</h2>
+        <h2 className="text-2xl font-extrabold">{t('certifications')}</h2>
         <CardStack>
           {certifications.map((cert, index) => (
             <div key={index} data-testid={`live-certification-${index}`}>
@@ -42,7 +45,7 @@ export default function ProfileCertifications({
               </h6>
               {cert.link && (
                 <Link data-testid={`live-cert-link-${index}`} href={cert.link}>
-                  <Button>View Credential</Button>
+                  <Button>{t('view-credential')}</Button>
                 </Link>
               )}
             </div>
@@ -55,7 +58,7 @@ export default function ProfileCertifications({
   // Editable version of certifications component
   return (
     <div>
-      <h2 className="text-2xl font-extrabold">Certifications</h2>
+      <h2 className="text-2xl font-extrabold">{t('certifications')}</h2>
       {certifications?.map((cert, index) => (
         <form
           action=""
@@ -71,7 +74,7 @@ export default function ProfileCertifications({
           {certificationsEditing && certificationsEditing[index] ? (
             <div className="mr-2 mb-3 w-full max-w-xs">
               <label>
-                Certification Name <span className="text-yellow-600">*</span>
+                {t('cert-name')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`certifications-name-box-${index}`}
@@ -89,7 +92,7 @@ export default function ProfileCertifications({
                 required
               />
               <label>
-                Issuer <span className="text-yellow-600">*</span>
+                {t('issuer')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`certifications-issuer-box-${index}`}
@@ -107,7 +110,7 @@ export default function ProfileCertifications({
                 required
               />
               <label>
-                Date <span className="text-yellow-600">*</span>
+                {t('date')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`certifications-date-box-${index}`}
@@ -126,7 +129,7 @@ export default function ProfileCertifications({
                 }
                 required
               />
-              <label>Certification Link</label>
+              <label>{t('cert-link')}</label>
               <InputField
                 data-testid={`certifications-link-box-${index}`}
                 type="text"
@@ -154,7 +157,7 @@ export default function ProfileCertifications({
               </h6>
               {cert.link && (
                 <Link href={cert.link}>
-                  <Button>View Credential</Button>
+                  <Button>{t('view-credential')}</Button>
                 </Link>
               )}
             </div>
@@ -167,7 +170,7 @@ export default function ProfileCertifications({
                 type="submit"
                 data-testid={`certifications-save-btn-${index}`}
               >
-                Save Certification
+                {t('save')}
               </Button>
             ) : (
               <EditButton
@@ -211,7 +214,7 @@ export default function ProfileCertifications({
           setCertificationsEditing((certs) => [...certs, true]);
         }}
       >
-        Add New Certification
+        {t('add-new')}
       </Button>
     </div>
   );
