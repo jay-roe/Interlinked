@@ -3,10 +3,6 @@ import NavBar from '@/components/NavBar/NavBar';
 import {NextIntlClientProvider} from 'next-intl/client';
 import { AuthProvider } from '@/contexts/AuthContext';
 
-export function generateStaticParams() {
-  return [{locale: 'en'}, {locale: 'de'}];
-}
-
 export default async function RootLayout({
   children,
   params: {locale}
