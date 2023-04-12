@@ -12,8 +12,10 @@ import { typeCollection, db } from '@/config/firestore';
 import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
+import { useTranslations } from 'next-intl';
 
 export default function ManagePostings() {
+  const t = useTranslations('ManageJobs');
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobPostings, setJobPostings] = useState<JobPostingWithId[]>([]);
@@ -46,7 +48,7 @@ export default function ManagePostings() {
 
   if (loading) {
     // TODO make a better loading page
-    return <p>Loading...</p>;
+    return <p>{t('loading')}</p>;
   }
 
   if (!currentUser) {
@@ -54,14 +56,14 @@ export default function ManagePostings() {
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          You should login first.
+          {t('should-login')}
         </p>
         <div className="flex space-x-1.5">
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button>{t('sign-in')}</Button>
           </Link>
           <Link href="/register">
-            <Button>Register</Button>
+            <Button>{t('register')}</Button>
           </Link>
         </div>
       </div>
@@ -77,7 +79,7 @@ export default function ManagePostings() {
       {newJob ? (
         <Card className="mb-4">
           <h1 className="text-3xl font-semibold" data-testid="new-job-title">
-            Create A Job Posting
+            {t('create-posting')}
           </h1>
           <hr className="my-1 opacity-10"></hr>
           <EditJobPosting newJob />
@@ -88,7 +90,7 @@ export default function ManagePostings() {
           className="mb-4"
           data-testid="create-new-job"
         >
-          Create New Job
+          {t('create-job')}
         </Button>
       )}
       {jobPostings?.map((job, index) => {

@@ -15,8 +15,10 @@ import { typeCollection, db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Notification } from '@/types/Notification';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 export default function Notifications() {
+  const t = useTranslations('NotificationsPage');
   const { authUser, currentUser } = useAuth();
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
@@ -25,7 +27,7 @@ export default function Notifications() {
   useEffect(() => {
     // if not logged in, redirect to home page
     if (!currentUser || !authUser) {
-      alert('You need to be logged in to view your notifications.');
+      alert(t('alert-must-login'));
       router.push('/login');
     }
 
@@ -52,7 +54,7 @@ export default function Notifications() {
   }, [authUser?.uid]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   // mark all the user's notifications as read
@@ -83,7 +85,7 @@ export default function Notifications() {
     // tried a bunch of stuff but I can't get "read all" and the bell button side by side loll:')
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
-        <h1 className="text-3xl font-extrabold">Notifications</h1>
+        <h1 className="text-3xl font-extrabold">{t('notifications')}</h1>
         <div className="flex gap-3">
           <button
             data-testid="read-all-button"
@@ -93,7 +95,7 @@ export default function Notifications() {
           >
             <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
               <FiBell />
-              <p>Read all</p>
+              <p>{t('read-all')}</p>
             </div>
           </button>
         </div>
@@ -105,7 +107,7 @@ export default function Notifications() {
             setNotifications={setNotifications}
           />
         ) : (
-          <p data-testid="no-notifications">Wow, such empty</p>
+          <p data-testid="no-notifications">{t('empty')}</p>
         )}
       </div>
     </div>

@@ -8,8 +8,10 @@ import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Link from '@/components/Link/Link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 export default function LockedList() {
+  const t = useTranslations('Admin.lockedList');
   const [loading, setLoading] = useState(true);
   const [banned, setBanned] = useState<UserWithId[]>([]);
 
@@ -44,7 +46,7 @@ export default function LockedList() {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   return (
@@ -66,7 +68,7 @@ export default function LockedList() {
                     unlockAccount(user.userId);
                   }}
                 >
-                  Unban account
+                  {t('unban')}
                 </Button>
               </div>
             </li>
@@ -74,7 +76,7 @@ export default function LockedList() {
         </ul>
       </Card>
       <Link href={'/admin'}>
-        <Button>Return to reports</Button>
+        <Button>{t('return')}</Button>
       </Link>
     </div>
   );

@@ -336,5 +336,138 @@
     "UploadMedia": {
       "upload": "Upload Media"
     }
+  },
+
+  "Register": {
+    "create": "Create an Account",
+    "register": "Register",
+    "register-goog": "Register with Google",
+    "already-have-account": "Already have an account? Login"
+  },
+  "PreviewProfile": {
+    "profile": "Your Profile",
+    "must-be-logged": "You must be logged in to preview your profile.",
+    "login": "Login",
+    "register": "Register",
+    "uid": {
+      "loading": "Loading...",
+      "invalid": "Invalid User.",
+      "links": {
+        "login-first": "You should login first.",
+        "sign-in": "Sign In",
+        "register": "Register",
+        "load-more": "Load More...",
+        "no-more": "No more links "
+      }
+    }
+  },
+  "NotificationsPage": {
+    "alert-must-login": "You need to be logged in to view your notifications",
+    "loading": "Loading...",
+    "notifications": "Notifications",
+    "read-all": "Read all",
+    "empty": "Wow, such empty"
+  },
+  "ManageJobs": {
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "create-posting": "Create a Job Posting",
+    "create-job": "Create New Job",
+    "your-postings": "Your Job Postings",
+    "jid": {
+      "view-applicants": "View Applicants",
+      "loading": "Loading...",
+      "should-login": "You should login first.",
+      "sign-in": "Sign In",
+      "register": "Register",
+      "job-no-exist": "Job does not exist",
+      "no-applications": "No applications yet "
+    }
+  },
+  "Login": {
+    "alert-failed": "Failed to login",
+    "welcome": "Welcome back",
+    "login": "Login",
+    "login-goog": "Login with Google",
+    "no-account": "Don't have an account? Register"
+  },
+  "Locked": {
+    "welcome": "Welcome",
+    "up-to-no-good": "Looks like you were up to no good.",
+    "account-locked": "Your account has been locked. Uh oh ",
+    "return": "Return to homepage",
+    "account-timeout": "You are in timeout for ",
+    "timeout-mins": "mins. Uh oh "
+  },
+  "JobsFeed": {
+    "jobs-feed": "Jobs Feed",
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "find": "Find new jobs."
+  },
+  "Feed": {
+    "feed": "Your feed",
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "see-what-links-talkinbout": "Let's see what your links are talking about.",
+    "load-more": "Load More...",
+    "no-more": "No more posts "
+  },
+  "EditProfile": {
+    "profile": "Your Profile",
+    "should-login": "You should login first.",
+    "login": "Login",
+    "register": "Register",
+    "confirm-unsaved": "Unsaved changes will be lost. Conitnue?",
+    "alert-success": "Successfully updated your profile!",
+    "edit-profile": "Edit Profile",
+    "save": "Save Changes",
+    "manage": "Manage Profile",
+    "sorry": "We're sorry to see you go. Click the button below to permanently delete your account and all of its information.",
+    "delete": "Delete Account"
+  },
+  "DMPage": {
+    "dms": "Your DMs",
+    "strength": "Strengthen your web",
+    "uid": {
+      "dms": "Your DMs",
+      "should-login": "You should login to view your messages",
+      "user": "User ",
+      "bad-etiquette": " has been reported for bad DM etiquette.",
+      "login": "Login",
+      "register": "Register",
+      "alert-reported": "User reported!",
+      "alert-already-reported": "You have already reported this user.",
+      "report": "Report this user"
+    }
+  },
+  "Admin": {
+    "loading": "Loading...",
+    "reports": "Reports",
+    "list-banned": "List of banned users",
+    "read-all": "Read all",
+    "empty": "Wow, such empty",
+    "lockedList": {
+      "loading": "Loading...",
+      "unban": "Unban account",
+      "return": "Return to reports"
+    },
+    "uid": {
+      "loading": "Loading...",
+      "participants-loading": "Participants Loading...",
+      "participants": "Participants",
+      "has-reported": " has reported this conversation",
+      "report-message": "Report message",
+      "lock": "Lock ",
+      "timeout": "Timeout ",
+      "saccount": "'s Account",
+      "discard": "Discard Report"
+    }
   }
 }

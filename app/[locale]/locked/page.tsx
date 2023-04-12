@@ -7,8 +7,10 @@ import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import Button from '@/components/Buttons/Button';
 import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 const Locked = () => {
+  const t = useTranslations('Locked');
   const router = useRouter();
   const { authUser, currentUser, logout } = useAuth();
 
@@ -67,14 +69,14 @@ const Locked = () => {
         <div>
           <p data-testid="welcome-msg" className="text-center text-2xl">
             <br /> <br />
-            Welcome, {currentUser?.name || currentUser?.email}. <br />
-            Look&apos;s like you were up to no good. <br />
-            Your account has been locked. Uh oh 😢
+            {t('welcome')}, {currentUser?.name || currentUser?.email}. <br />
+            {t('up-to-no-good')} <br />
+            {t('account-locked')}😢
             <br /> <br />
           </p>
           <Link href="/" className="flex justify-center">
             <Button onClick={logout} data-testid="locked-account-logout">
-              Return to homepage
+              {t('return')}
             </Button>
           </Link>
         </div>
@@ -84,14 +86,15 @@ const Locked = () => {
         <div>
           <p data-testid="welcome-msg" className="text-center text-2xl">
             <br /> <br />
-            Welcome, {currentUser?.name || currentUser?.email}. <br />
-            Look&apos;s like you were up to no good. <br />
-            You are in timeout for {timeLeft()} mins. Uh oh 😢
+            {t('welcome')}, {currentUser?.name || currentUser?.email}. <br />
+            {t('up-to-no-good')} <br />
+            {t('account-timeout')}
+            {timeLeft()} {t('timeout-mins')}😢
             <br /> <br />
           </p>
           <Link href="/" className="flex justify-center">
             <Button onClick={logout} data-testid="timeout-account-logout">
-              Return to homepage
+              {t('return')}
             </Button>
           </Link>
         </div>

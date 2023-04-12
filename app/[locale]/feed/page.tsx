@@ -22,8 +22,10 @@ import { Post, PostWithId } from '@/types/Post';
 import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
+import { useTranslations } from 'next-intl';
 
 export default function Feeds() {
+  const t = useTranslations('Feed');
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState<PostWithId[]>([]);
@@ -131,14 +133,14 @@ export default function Feeds() {
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          You should login first.
+          {t('should-login')}
         </p>
         <div className="flex space-x-1.5">
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button>{t('sign-in')}</Button>
           </Link>
           <Link href="/register">
-            <Button>Register</Button>
+            <Button>{t('register')}</Button>
           </Link>
         </div>
       </div>
@@ -149,7 +151,7 @@ export default function Feeds() {
     <div>
       <CreatePostGroup />
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
-        Let&apos;s see what your links are talking about.
+        {t('see-what-links-talkinbout')}
       </p>
 
       <CardGrid className="grid-cols-1">
@@ -196,10 +198,10 @@ export default function Feeds() {
               })
             }
           >
-            Load More...
+            {t('load-more')}
           </Button>
         ) : (
-          <p>No more posts 😥</p>
+          <p>{t('no-more')}😥</p>
         )}
       </div>
     </div>

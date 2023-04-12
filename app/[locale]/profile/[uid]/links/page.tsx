@@ -15,9 +15,10 @@ import { db } from '@/config/firestore';
 import { doc, getDoc } from '@firebase/firestore';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
-import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
+import { useTranslations } from 'next-intl';
 
 export default function Links({ params }) {
+  const t = useTranslations('PreviewProfile.uid.links');
   const PAGE_SIZE = 20;
   const { currentUser, authUser } = useAuth();
   const myPage = authUser?.uid === params.uid || false;
@@ -80,14 +81,14 @@ export default function Links({ params }) {
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          You should login first.
+          {t('login-first')}
         </p>
         <div className="flex space-x-1.5">
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button>{t('sign-in')}</Button>
           </Link>
           <Link href="/register">
-            <Button>Register</Button>
+            <Button>{t('register')}</Button>
           </Link>
         </div>
       </div>
@@ -157,10 +158,10 @@ export default function Links({ params }) {
               })
             }
           >
-            Load More...
+            {t('load-more')}
           </Button>
         ) : (
-          <p data-testid="no-load-more">No more links 😥</p>
+          <p data-testid="no-load-more">{t('no-more')}😥</p>
         )}
       </div>
     </>

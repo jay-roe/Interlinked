@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react';
 import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
 import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 export default function DMs() {
+  const t = useTranslations('DMPage');
   const { authUser } = useAuth();
   const [chats, setChats] = useState<KeyedChatRoom[]>();
 
@@ -41,9 +43,9 @@ export default function DMs() {
   return (
     <div className="flex max-h-[85vh] flex-col" data-testid="dms-page">
       <h1 className="text-4xl font-black ">
-        <b>Your DMs</b>
+        <b>{t('dms')}</b>
       </h1>
-      <p className="mb-3 text-light-white-text">Strengthen your web</p>
+      <p className="mb-3 text-light-white-text">{t('strength')}</p>
       <Card className="flex flex-grow flex-col overflow-auto">
         {chats?.map((keyRoom) => {
           return (

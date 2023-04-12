@@ -22,8 +22,10 @@ import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked'
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
+import { useTranslations } from 'next-intl';
 
 export default function ViewProfile({ params }) {
+  const t = useTranslations('PreviewProfile.uid');
   const { currentUser, currentAdmin, authUser } = useAuth();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
@@ -41,11 +43,11 @@ export default function ViewProfile({ params }) {
   }, [params.uid]);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <h1>{t('loading')}</h1>;
   }
 
   if (!user || !user.name || !user.email)
-    return <h1 className="text-2xl font-extrabold">Invalid User.</h1>;
+    return <h1 className="text-2xl font-extrabold">{t('invalid')}</h1>;
 
   // User is private and not linked with auth user -> Locked out
   // User is currently logged in -> Show normal page

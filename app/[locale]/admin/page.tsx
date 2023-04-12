@@ -17,8 +17,10 @@ import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from '@/components/Link/Link';
 import Button from '@/components/Buttons/Button';
+import { useTranslations } from 'next-intl';
 
 const Admin = () => {
+  const t = useTranslations('Admin');
   const router = useRouter();
   const { authUser, currentAdmin } = useAuth();
 
@@ -56,7 +58,7 @@ const Admin = () => {
   }, [currentAdmin, router, authUser]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   // mark all the admins's reports as read
@@ -86,10 +88,10 @@ const Admin = () => {
   return (
     <div className="container mx-auto text-white" data-testid="admin-home">
       <div className="mb-3 flex justify-between">
-        <h1 className="text-3xl font-extrabold">Reports</h1>
+        <h1 className="text-3xl font-extrabold">{t('reports')}</h1>
         <Link href={'/admin/lockedList'}>
           <Button data-testid="list-of-banned-users-btn">
-            List of banned users
+            {t('list-banned')}
           </Button>
         </Link>
         <div>
@@ -101,7 +103,7 @@ const Admin = () => {
           >
             <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
               <FiBell />
-              <p>Read all</p>
+              <p>{t('read-all')}</p>
             </div>
           </button>
         </div>
@@ -110,7 +112,7 @@ const Admin = () => {
         {reports.length > 0 ? (
           <ReportList reports={reports} setReports={setReports} />
         ) : (
-          <p data-testid="no-reports">Wow, such empty</p>
+          <p data-testid="no-reports">{t('empty')}</p>
         )}
       </div>
     </div>

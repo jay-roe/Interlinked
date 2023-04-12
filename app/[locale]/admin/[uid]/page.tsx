@@ -23,8 +23,10 @@ import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
 import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 const ViewReport = ({ params }) => {
+  const t = useTranslations('Admin.uid');
   // timeout options
   const TIMEOUT_OPTIONS = [
     { value: 120000, label: '2 minutes' },
@@ -129,18 +131,18 @@ const ViewReport = ({ params }) => {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   if (participantsLoading) {
-    return <div>Participants Loading...</div>;
+    return <div>{t('participants-loading')}</div>;
   }
 
   // display the report
   return (
     // display the participants and their profile pictures
     <div className="container mx-auto text-white" data-testid="admin-home">
-      Participants:
+      {t('participants')}:
       <div className="flex gap-4">
         {participants.map((person) => (
           <Link
@@ -162,9 +164,12 @@ const ViewReport = ({ params }) => {
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
         {/* display who reported the conversation and the report message */}
         <h3 className="text-3xl font-extrabold">
-          {report.reporterName} has reported this conversation
+          {report.reporterName}
+          {t('has-reported')}
         </h3>
-        <div>Report message: {report.context}</div>
+        <div>
+          {t('report-message')}: {report.context}
+        </div>
         {/* display the chat messages */}
         <Card className="m-5 flex h-96 flex-grow flex-col overflow-y-auto">
           {chatMessages.map((m, id) => {
@@ -189,7 +194,9 @@ const ViewReport = ({ params }) => {
               lockAccount();
             }}
           >
-            Lock {report.reportedName}&apos;s Account
+            {t('lock')}
+            {report.reportedName}
+            {t('saccount')}
           </Button>
           {/* timeout button and dropdown menu to select the timeout duration */}
           <Menu>
@@ -199,7 +206,9 @@ const ViewReport = ({ params }) => {
                 ' inline-flex items-center rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900'
               }
             >
-              Timeout {report.reportedName}&apos;s Account
+              {t('timeout')}
+              {report.reportedName}
+              {t('saccount')}
             </Menu.Button>
             <Menu.Items>
               {TIMEOUT_OPTIONS.map((option) => (
@@ -225,7 +234,7 @@ const ViewReport = ({ params }) => {
               discardReport();
             }}
           >
-            Discard Report
+            {t('discard')}
           </Button>
         </div>
       </div>

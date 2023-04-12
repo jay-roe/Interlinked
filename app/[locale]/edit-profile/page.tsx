@@ -5,7 +5,6 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
-import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 
 import type { User } from '@/types/User';
 import type { Language } from '@/types/User';
@@ -24,23 +23,20 @@ import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards'
 import Link from '@/components/Link/Link';
 
 import { db } from '@/config/firestore';
-import { collection, doc, getDocs, Query, updateDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import Button from '@/components/Buttons/Button';
 import ProfileSocials from '@/components/ProfilePage/ProfileSocials/ProfileSocials';
 import { storage } from '@/config/firebase';
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytes,
-} from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 import ProfileJobHunt from '@/components/ProfilePage/ProfileJobHunt/ProfileJobHunt';
+import { useTranslations } from 'next-intl';
 
 export default function EditProfile() {
+  const t = useTranslations('EditProfile');
   const router = useRouter();
   const { currentUser, authUser, deleteAccount, refresh } = useAuth();
   const [isModalShow, setIsModalShow] = useState(false);
@@ -187,15 +183,13 @@ export default function EditProfile() {
   if (!currentUser || !authUser) {
     return (
       <div className="text-white">
-        <h1 className="text-lg font-bold">Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to edit your profile.
-        </h2>
+        <h1 className="text-lg font-bold">{t('profile')}</h1>
+        <h2 data-testid="profile-login-prompt">{t('should-login')}</h2>
         <Link href="/login">
-          <Button>Login</Button>
+          <Button>{t('login')}</Button>
         </Link>
         <Link href="/register">
-          <Button>Register</Button>
+          <Button>{t('register')}</Button>
         </Link>
       </div>
     );
@@ -236,7 +230,7 @@ export default function EditProfile() {
   }
 
   async function updateAccount() {
-    const save = confirm('Unsaved changes will be lost. Continue?');
+    const save = confirm(t('confirm-unsaved'));
     if (!save) {
       return;
     }
@@ -248,7 +242,7 @@ export default function EditProfile() {
       await updateDoc(doc(db.users, authUser.uid), statesToUpdate);
 
       await refresh();
-      alert('Successfully updated your profile!');
+      alert(t('alert-success'));
       router.push('/profile');
     } catch (err) {
       console.error(err);
@@ -272,13 +266,13 @@ export default function EditProfile() {
     return (
       <div className="container mx-auto text-white">
         <div className="mb-3 flex justify-between">
-          <h1 className="text-7xl font-extrabold">Edit Profile</h1>
+          <h1 className="text-7xl font-extrabold">{t('edit-profile')}</h1>
           <Button
             className="max-h-10 self-end"
             data-testid="update-account-button"
             onClick={updateAccount}
           >
-            Save Changes
+            {t('save')}
           </Button>
         </div>
         <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
@@ -325,21 +319,18 @@ export default function EditProfile() {
         </div>
         <div className="flex justify-end">
           <Button data-testid="update-account-button2" onClick={updateAccount}>
-            Save Changes
+            {t('save')}
           </Button>
         </div>
 
-        <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
-        <p className="mb-1">
-          We&apos;re sorry to see you go. Click the button below to permanently
-          delete your account and all of its information.
-        </p>
+        <h1 className="mb-3 text-3xl font-extrabold">{t('manage')}</h1>
+        <p className="mb-1">{t('sorry')}</p>
         <Button
           data-testid="danger-zone"
           variant="danger"
           onClick={() => setIsModalShow(true)}
         >
-          Delete account
+          {t('delete')}
         </Button>
         <DeleteAccountPopup
           show={isModalShow}
@@ -354,13 +345,13 @@ export default function EditProfile() {
   return (
     <div className="container mx-auto text-white">
       <div className="mb-3 flex justify-between">
-        <h1 className="text-7xl font-extrabold">Edit Profile</h1>
+        <h1 className="text-7xl font-extrabold">{t('edit-profile')}</h1>
         <Button
           className="max-h-10 self-end"
           data-testid="update-account-button"
           onClick={updateAccount}
         >
-          Save Changes
+          {t('save')}
         </Button>
       </div>
       <div className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-5">
@@ -517,21 +508,18 @@ export default function EditProfile() {
       </div>
       <div className="flex justify-end">
         <Button data-testid="update-account-button2" onClick={updateAccount}>
-          Save Changes
+          {t('save')}
         </Button>
       </div>
 
-      <h1 className="mb-3 text-3xl font-extrabold">Manage Profile</h1>
-      <p className="mb-1">
-        We&apos;re sorry to see you go. Click the button below to permanently
-        delete your account and all of its information.
-      </p>
+      <h1 className="mb-3 text-3xl font-extrabold">{t('manage')}</h1>
+      <p className="mb-1">{t('sorry')}</p>
       <Button
         data-testid="danger-zone"
         variant="danger"
         onClick={() => setIsModalShow(true)}
       >
-        Delete account
+        {t('delete')}
       </Button>
       <DeleteAccountPopup
         show={isModalShow}

@@ -10,8 +10,10 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
+import { useTranslations } from 'next-intl';
 
 export default function Register() {
+  const t = useTranslations('Register');
   const router = useRouter();
   const { authUser, register, loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -54,7 +56,7 @@ export default function Register() {
             className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
             data-testid="register-title"
           >
-            Create an Account
+            {t('create')}
           </h2>
         </div>
         <form className="mt-8 space-y-6">
@@ -115,13 +117,13 @@ export default function Register() {
               disabled={loading}
               className=" flex w-full justify-center rounded-md border border-transparent bg-sky-800 py-2 px-4 text-sm font-medium text-white hover:bg-sky-900"
             >
-              Register
+              {t('register')}
             </Button>
           </div>
           <div className={styles.HorizontalSeparator}></div>
           <div>
             <GoogleButton onClick={() => loginWithGoogle()}>
-              Register with Google
+              {t('register-goog')}
             </GoogleButton>
           </div>
           <div className="flex items-center justify-between">
@@ -130,7 +132,7 @@ export default function Register() {
                 href="/login"
                 className="text-blue-600 hover:underline dark:text-blue-500"
               >
-                Already have an account? Login
+                {t('already-have-account')}
               </Link>
             </div>
           </div>

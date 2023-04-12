@@ -8,8 +8,10 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
+import { useTranslations } from 'next-intl';
 
 export default function Login() {
+  const t = useTranslations('Login');
   const router = useRouter();
 
   const [email, setEmail] = useState('');
@@ -31,7 +33,7 @@ export default function Login() {
       await login(email, password);
     } catch (err) {
       console.error(err);
-      alert('Failed to login');
+      alert(t('alert-failed'));
     }
 
     setLoading(false);
@@ -45,7 +47,7 @@ export default function Login() {
             data-testid="login-title"
             className="mt-4 text-center text-3xl font-light tracking-tight dark:text-white"
           >
-            Welcome back
+            {t('welcome')}
           </h2>
         </div>
         <form action="" className="mt-8 space-y-6">
@@ -87,7 +89,7 @@ export default function Login() {
               disabled={loading}
               className=" flex w-full justify-center rounded border border-transparent bg-sky-800 py-2 px-4 text-sm font-medium text-white hover:bg-sky-900"
             >
-              Login
+              {t('login')}
             </Button>
           </div>
           <div className={styles.HorizontalSeparator}></div>
@@ -100,7 +102,7 @@ export default function Login() {
               }}
               data-testid="googleLogin"
             >
-              Login with Google
+              {t('login-goog')}
             </GoogleButton>
           </div>
           <div className="flex items-center justify-between">
@@ -109,7 +111,7 @@ export default function Login() {
                 href="/register"
                 className="text-blue-600 hover:underline dark:text-blue-500"
               >
-                Don&apos;t have an account? Register
+                {t('no-account')}
               </Link>
             </div>
           </div>

@@ -11,8 +11,10 @@ import Link from '@/components/Link/Link';
 
 import { useEffect, useState } from 'react';
 import { GrDocumentDownload } from 'react-icons/gr';
+import { useTranslations } from 'next-intl';
 
 export default function JobDetails({ params }) {
+  const t = useTranslations('ManageJobs.jid');
   const jobId = params.jid;
   const { currentUser, authUser } = useAuth();
   const [job, setJob] = useState<JobPosting>();
@@ -36,7 +38,7 @@ export default function JobDetails({ params }) {
     });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>{t('loading')}</p>;
 
   if (!currentUser && authUser.uid !== job.companyId) {
     // user isnt logged in or the page is still loading
@@ -44,14 +46,14 @@ export default function JobDetails({ params }) {
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          You should login first.
+          {t('should-login')}
         </p>
         <div className="flex space-x-1.5">
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button>{t('sign-in')}</Button>
           </Link>
           <Link href="/register">
-            <Button>Register</Button>
+            <Button>{t('register')}</Button>
           </Link>
         </div>
       </div>
@@ -61,7 +63,7 @@ export default function JobDetails({ params }) {
   if (!job) {
     return (
       <p data-testid="no-apps-msg" className="mb-3 text-left text-2xl">
-        Job does not exist
+        {t('job-no-exist')}
       </p>
     );
   }
@@ -69,7 +71,7 @@ export default function JobDetails({ params }) {
   if (job && (!job?.applications || job?.applications?.length === 0)) {
     return (
       <p data-testid="no-apps-msg" className="mb-3 text-left text-2xl">
-        No applications yet 😥
+        {t('no-applications')}😥
       </p>
     );
   }

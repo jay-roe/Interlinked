@@ -29,10 +29,12 @@ import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
+import { useTranslations } from 'next-intl';
 
 export default function ChatRoom({ params }) {
+  const t = useTranslations('DMPage.uid');
   const { currentUser, authUser } = useAuth();
-  let adminId = '85C6Pe9p0VehxlqlQqNJlSP55Wn1';
+  let adminId = '85C6Pe9p0VehxlqlQqNJlSP55Wn1'; // THIS IS ABSOLUTE BUFFOONERY I TELL YOU
 
   const chatRoomRef = doc(db.chatrooms, params.uid); // get right chat
 
@@ -88,15 +90,13 @@ export default function ChatRoom({ params }) {
   if (!currentUser || !authUser) {
     return (
       <div className="text-white">
-        <h1 className="text-lg font-bold">Your DMs</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to view your messages.
-        </h2>
+        <h1 className="text-lg font-bold">{t('dms')}</h1>
+        <h2 data-testid="profile-login-prompt">{t('should-login')}</h2>
         <Link href="/login">
-          <Button>Login</Button>
+          <Button>{t('login')}</Button>
         </Link>
         <Link href="/register">
-          <Button>Register</Button>
+          <Button>{t('register')}</Button>
         </Link>
       </div>
     );
@@ -230,10 +230,7 @@ export default function ChatRoom({ params }) {
                     adminId = 'HvAOuFbE5diXp0ayCpqwUjDXOfBy';
                   }
                   const report = {
-                    context:
-                      'User ' +
-                      person.name +
-                      ' has been reported for bad DM etiquette.',
+                    context: t('user') + person.name + t('bad-etiquette'),
                     reporter: authUser.uid, // User ID of person that reported
                     reporterName: currentUser.name, // name of person that reported
                     reported: person.userId, // User ID of person that got reported
@@ -242,14 +239,14 @@ export default function ChatRoom({ params }) {
                     adminId: adminId,
                   };
                   if (await checkIfReported(authUser.uid, person.userId)) {
-                    alert('You have already reported this user.');
+                    alert(t('already-reported'));
                   } else {
                     createReport(report);
-                    alert('User reported!');
+                    alert(t('reported'));
                   }
                 }}
               >
-                Report this user
+                {t('report')}
               </Button>
             </div>
           ))}

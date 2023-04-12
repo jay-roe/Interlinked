@@ -12,8 +12,10 @@ import { db, typeCollection } from '@/config/firestore';
 import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
+import { useTranslations } from 'next-intl';
 
 export default function Feeds(props) {
+  const t = useTranslations('JobsFeed');
   const { params, searchParams } = props;
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
@@ -82,7 +84,7 @@ export default function Feeds(props) {
   }, [partTime, fullTime, internship, searchKey, jobs]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>{t('loading')}</div>;
   }
 
   if (!currentUser || loading) {
@@ -91,14 +93,14 @@ export default function Feeds(props) {
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          You should login first.
+          {t('should-login')}
         </p>
         <div className="flex space-x-1.5">
           <Link href="/login">
-            <Button>Sign In</Button>
+            <Button>{t('sign-in')}</Button>
           </Link>
           <Link href="/register">
-            <Button>Register</Button>
+            <Button>{t('register')}</Button>
           </Link>
         </div>
       </div>
@@ -109,7 +111,7 @@ export default function Feeds(props) {
     <div>
       {/* <CreatePostGroup /> */}
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
-        Find new jobs.
+        {t('find')}
       </p>
       <div className="my-4 flex flex-col items-center align-middle text-xl sm:flex-row sm:space-x-4">
         <JobSearchBar setSearchKey={setSearchKey} searchKey={searchKey} />

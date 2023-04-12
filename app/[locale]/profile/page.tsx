@@ -17,28 +17,27 @@ import Link from '@/components/Link/Link';
 
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
 import Button from '@/components/Buttons/Button';
-import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
+import { useTranslations } from 'next-intl';
 
 export default function PreviewProfile() {
+  const t = useTranslations('PreviewProfile');
   const { currentUser, authUser } = useAuth();
 
   // User not logged in, can't preview
   if (!currentUser) {
     return (
       <>
-        <h1>Your Profile</h1>
-        <h2 data-testid="profile-login-prompt">
-          You must be logged in to preview your profile.
-        </h2>
+        <h1>{t('profile')}</h1>
+        <h2 data-testid="profile-login-prompt">{t('must-be-logged')}</h2>
         <Link href="/login">
-          <Button>Login</Button>
+          <Button>{t('login')}</Button>
         </Link>
         <Link href="/register">
-          <Button>Register</Button>
+          <Button>{t('register')}</Button>
         </Link>
       </>
     );
