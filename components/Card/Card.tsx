@@ -1,16 +1,14 @@
-const Card = ({
-  children,
-  className = '',
-}: {
-  children?: React.ReactNode;
-  className?: string;
-}) => {
+import type { ComponentProps } from 'react';
+
+type CardProps = ComponentProps<'div'>;
+
+const Card = (props: CardProps) => {
   return (
     <div
-      data-testid="card"
-      className={`${className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
+      {...props}
+      className={`${props.className} min-h-min rounded-xl bg-white bg-opacity-[0.12] p-4`}
     >
-      {children}
+      {props.children}
     </div>
   );
 };

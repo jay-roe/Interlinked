@@ -18,6 +18,7 @@ import type { User, Admin } from '../types/User';
 import { db } from '../config/firestore';
 import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
+import { useRouter } from 'next/navigation';
 
 interface AuthContextType {
   currentUser: User;
@@ -25,7 +26,11 @@ interface AuthContextType {
   authUser: AuthUser;
   login: (email: string, password: string) => Promise<UserCredential>;
   loginWithGoogle: () => Promise<UserCredential>;
-  register: (email: string, password: string) => Promise<UserCredential>;
+  register: (
+    email: string,
+    password: string,
+    company: boolean
+  ) => Promise<UserCredential>;
   refresh: () => Promise<User>;
   logout: () => Promise<void>;
   deleteAccount: () => Promise<void>;
@@ -54,6 +59,9 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+  // Router for redirecting users globally.
+  const router = useRouter();
+
   // User data from Firestore database. Use this for most data.
   const [currentUser, setCurrentUser] = useState<User>();
   const [currentAdmin, setCurrentAdmin] = useState<Admin>();
@@ -65,7 +73,7 @@ export function AuthProvider({ children }) {
   /**
    * Creates user in Firestore and updates current user state
    */
-  async function createUser(newUser: AuthUser) {
+  async function createUser(newUser: AuthUser, company: boolean = false) {
     // Create a new user document in database using same user id as auth
     const emptyUser: User = {
       awards: [],
@@ -91,6 +99,7 @@ export function AuthProvider({ children }) {
       recommendations: [],
       skills: [],
       volunteering: [],
+      isCompany: company,
     };
 
     await setDoc(doc(db.users, newUser.uid), emptyUser);
@@ -105,14 +114,14 @@ export function AuthProvider({ children }) {
   /**
    * Register user with email and password.
    */
-  async function register(email: string, password: string) {
+  async function register(email: string, password: string, company: boolean) {
     const credential = await createUserWithEmailAndPassword(
       auth,
       email,
       password
     );
 
-    await createUser(credential.user);
+    await createUser(credential.user, company);
 
     return credential;
   }
@@ -156,7 +165,8 @@ export function AuthProvider({ children }) {
    * Logs out of the current user session.
    */
   async function logout() {
-    return await auth.signOut();
+    await auth.signOut();
+    router.push('/');
   }
 
   /**

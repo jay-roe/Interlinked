@@ -4,6 +4,9 @@ export type Message = {
   content: string;
   sender: { name: string; profilePicture: string };
   time_stamp?: Timestamp;
+  file?: string;
+  fileType?: string;
+  fileName?: string;
 };
 
 export type ChatMessage = {
@@ -11,6 +14,7 @@ export type ChatMessage = {
   id: string;
 };
 
+//type for a chat room
 export type ChatRoom = {
   roomName?: string;
   recentTimeStamp: Timestamp;
@@ -19,6 +23,7 @@ export type ChatRoom = {
   participants: string[]; // uid of participants
 };
 
+// used to be able to have a key for each chat room when rendering
 export type KeyedChatRoom = {
   room: ChatRoom;
   key: string;

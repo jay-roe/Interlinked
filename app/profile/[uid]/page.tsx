@@ -11,6 +11,7 @@ import ProfileExperience from '@/components/ProfilePage/ProfileExperience/Profil
 import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfileProjects';
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
+import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 import { db } from '@/config/firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
@@ -23,7 +24,7 @@ import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
 
 export default function ViewProfile({ params }) {
-  const { currentUser, authUser } = useAuth();
+  const { currentUser, currentAdmin, authUser } = useAuth();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
 
@@ -65,6 +66,26 @@ export default function ViewProfile({ params }) {
     );
   }
 
+  // user is a company
+  if (user.isCompany) {
+    return (
+      <div data-testid="profile" className="container mx-auto text-white">
+        <ProfileHeading
+          profilePictureURL={user.profilePicture}
+          name={user.name}
+          bio={user.bio}
+          uid={params.uid}
+        />
+
+        <div className="mx-auto mb-3">
+          <SocialIconGroup socials={user?.socials} />
+        </div>
+
+        <ProfileContact email={user.email} phone={user.phone} />
+      </div>
+    );
+  }
+
   return (
     <div data-testid="profile" className="container mx-auto text-white">
       <ProfileHeading
@@ -83,10 +104,12 @@ export default function ViewProfile({ params }) {
           href={`/profile/${params.uid}/links`}
           linkedUserIds={user?.linkedUserIds}
         />
-        <LinkButton profileOwnerUID={params.uid} />
+        {!currentAdmin && <LinkButton profileOwnerUID={params.uid} />}
       </div>
 
       <ProfileContact email={user.email} phone={user.phone} />
+
+      <ProfileDocuments resume={user.resume} coverLetter={user.coverLetter} />
 
       <ProfileLanguages languages={user.languages} />
 

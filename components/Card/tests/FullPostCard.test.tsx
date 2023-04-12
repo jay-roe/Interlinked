@@ -97,7 +97,9 @@ it('renders card grid in FullPostCard', async () => {
 });
 
 it('renders uno card in FullPostCard', async () => {
-  const { findByTestId } = render(<Card className={'col-span-1'} />);
+  const { findByTestId } = render(
+    <Card data-testid="card" className={'col-span-1'} />
+  );
 
   const cardUno = await findByTestId('card', { exact: false });
   expect(cardUno).toBeInTheDocument();

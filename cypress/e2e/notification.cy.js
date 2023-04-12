@@ -15,7 +15,7 @@ describe('Full notification spec', async () => {
   let email = 'test2+cypress@test.com';
   let melEmail = 'melisa@melisa.ca';
   let pw = '123456';
-  let melUserId = 'tIN8i6N2MpcTvLrSVU9zG6ke7ljL';
+  let melUserId = 'Jc9kqYwRz2WaxnyVFomnxdmKbZaw';
 
   before(() => {
     cy.login(email, pw);
@@ -28,7 +28,7 @@ describe('Full notification spec', async () => {
   it('notifications are sent and displayed', () => {
     cy.visit('/profile/' + melUserId);
     cy.get('[data-testid=link-btn]').click();
-    cy.visit('/profile');
+    cy.get('[data-testid=unlink-btn]').should('exist');
 
     cy.logout();
     cy.login(melEmail, pw);
@@ -36,7 +36,7 @@ describe('Full notification spec', async () => {
     cy.visit('/notifications');
 
     cy.get('[data-testid=accept-link-button]').click();
-    cy.visit('');
+    cy.get('[data-testid=no-notifications]').should('exist');
 
     cy.logout();
     cy.login(email, pw);
@@ -45,6 +45,10 @@ describe('Full notification spec', async () => {
 
     cy.get('[data-testid=link-acc-notification]').should('exist');
     cy.get('[data-testid=read-all-button]').click();
-    cy.get('[data-testid=clear-notif-btn]').click();
+    cy.get('[data-testid=clear-notif-btn]').first().click();
+    cy.get('[data-testid=clear-notif-btn]').should('have.length', 2);
+    //cy.get('[data-testid=no-notifications]').should('exist');
+
+    cy.visit('/');
   });
 });

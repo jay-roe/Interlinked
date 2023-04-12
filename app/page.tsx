@@ -1,9 +1,19 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 
 const Home = () => {
+  const router = useRouter();
   const { currentUser } = useAuth();
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/locked');
+    }
+  }, [currentUser, router]);
 
   return (
     <div className="container mx-auto text-white">
