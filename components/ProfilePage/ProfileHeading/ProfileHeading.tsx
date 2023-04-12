@@ -105,7 +105,7 @@ export default function ProfileHeading({
         </div>
       </div>
       <div className="row-auto place-self-start self-center text-center md:min-w-[80%] md:text-left">
-        <div className="flex items-center">
+        <div className="mb-1 flex items-center">
           {nameEditing ? (
             // editable name
             <Input
@@ -143,7 +143,7 @@ export default function ProfileHeading({
           ) : (
             // live bio
             <TextEditorPreview
-              className="m-auto text-left md:m-0"
+              className="m-auto rounded-md bg-white bg-opacity-[0.12] p-3 text-left md:m-0"
               data-testid="profile-bio"
               message={bio || 'No bio given.'}
             />
