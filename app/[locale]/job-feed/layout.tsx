@@ -1,3 +1,5 @@
+'use client';
+
 import { useTranslations } from 'next-intl';
 
 const jobLayout = ({ children }: { children: React.ReactNode }) => {
