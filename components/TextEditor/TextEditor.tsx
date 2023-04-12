@@ -35,7 +35,7 @@ export default function TextEditor(props: TextEditorProps) {
     if (!editorRef.current) return;
 
     const initialEditorState = EditorState.create({
-      doc: initialText,
+      doc: initialText || '\n\n\n\n',
       extensions: [
         basicSetup,
         keymap.of(defaultKeymap),
@@ -64,5 +64,11 @@ export default function TextEditor(props: TextEditorProps) {
     };
   }, [editorRef]);
 
-  return <div {...props} ref={editorRef}></div>;
+  return (
+    <div
+      {...props}
+      className={`${props.className} rounded-md`}
+      ref={editorRef}
+    ></div>
+  );
 }

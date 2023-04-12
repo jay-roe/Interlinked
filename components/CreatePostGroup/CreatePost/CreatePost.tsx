@@ -7,6 +7,7 @@ import TextEditor from '@/components/TextEditor/TextEditor';
 import TextEditorPreview from '@/components/TextEditor/TextEditorPreview';
 import Link from 'next/link';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { Tab } from '@headlessui/react';
 
 export default function CreatePost({ getText }: CreatePostProps) {
   const { currentUser } = useAuth();
@@ -55,16 +56,46 @@ export default function CreatePost({ getText }: CreatePostProps) {
             </h4>
           </div>
         </div>
-        <div className="mb-3">
-          <TextEditor
-            key={submitted ? 0 : 1}
-            initialText={message}
-            onTextChange={useCallback((newMessage: string) => {
-              setMessage(newMessage);
-            }, [])}
-          />
-        </div>
-
+        <Tab.Group>
+          <Tab.List className="flex gap-1 rounded-xl bg-white bg-opacity-[0.12] p-1">
+            <Tab
+              className={({ selected }) =>
+                `w-full rounded-lg py-2.5 outline-none ${
+                  selected
+                    ? 'bg-yellow-700 shadow'
+                    : 'text-yellow-500 hover:bg-white/[0.12] hover:text-white'
+                }`
+              }
+            >
+              Edit
+            </Tab>
+            <Tab
+              className={({ selected }) =>
+                `w-full rounded-lg py-2.5 outline-none ${
+                  selected
+                    ? 'bg-yellow-700 shadow'
+                    : 'text-yellow-500 hover:bg-white/[0.12] hover:text-white'
+                }`
+              }
+            >
+              Preview
+            </Tab>
+          </Tab.List>
+          <Tab.Panels className="my-3">
+            <Tab.Panel>
+              <TextEditor
+                key={submitted ? 0 : 1}
+                initialText={message}
+                onTextChange={useCallback((newMessage: string) => {
+                  setMessage(newMessage);
+                }, [])}
+              />
+            </Tab.Panel>
+            <Tab.Panel className="w-full rounded-lg bg-white bg-opacity-[0.12] p-4 px-7">
+              <TextEditorPreview message={message} />
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
         <div className="flex justify-end">
           <button
             className="justify-end"
@@ -75,11 +106,6 @@ export default function CreatePost({ getText }: CreatePostProps) {
           </button>
         </div>
       </div>
-      {message && (
-        <div className="mt-3 w-full rounded-lg bg-white bg-opacity-[0.12] p-4 px-7 shadow-lg">
-          <TextEditorPreview message={message} />
-        </div>
-      )}
     </div>
   );
 }
