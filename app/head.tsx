@@ -5,7 +5,7 @@ export default function Head() {
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
-        content="Connect with like minded tech enthusiasts for making freinds or finding job oppurtunities! "
+        content="Connect with like minded tech enthusiasts for making friends or finding job oppurtunities! "
       />
       <link rel="icon" href="/interlinked-logo.ico" />
     </>
