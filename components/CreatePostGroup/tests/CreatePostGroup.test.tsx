@@ -65,7 +65,7 @@ it('can post', async () => {
   const { findByTestId } = render(<CreatePostGroup />);
 
   const contentDiv = await findByTestId('post-content');
-  fireEvent.change(contentDiv, { target: { value: 'post' } });
+  contentDiv.setAttribute('text', 'post');
 
   expect(contentDiv).toBeInTheDocument();
 
@@ -73,8 +73,10 @@ it('can post', async () => {
 
   fireEvent.click(postButton);
 
+  // Post clears after posting
   await waitFor(() => expect(mockAlert).toBeCalled);
-  expect(contentDiv).toHaveValue('');
+  const newContentDiv = await findByTestId('post-content');
+  expect(newContentDiv.getAttribute('text')).toMatch(/^\n*$/g);
 });
 
 it('can add image', async () => {
@@ -93,7 +95,7 @@ it('can add image', async () => {
 
   const contentDiv = await findByTestId('post-content');
 
-  await waitFor(() => expect(contentDiv).toHaveValue(''));
+  await waitFor(() => expect(contentDiv).toHaveAttribute('text', ''));
 });
 
 it('can remove image', async () => {

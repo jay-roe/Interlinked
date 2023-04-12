@@ -15,17 +15,17 @@ import {
 
 interface TextEditorProps extends ComponentProps<'div'> {
   onTextChange: (doc: string) => void;
-  initialText?: string;
+  text?: string;
 }
 
 export default function TextEditor(props: TextEditorProps) {
   const editorRef = useRef(null);
   const [editorView, setEditorView] = useState(null);
-  const { onTextChange, initialText } = props;
+  const { onTextChange, text } = props;
 
   const handleChange = useCallback(
     (state: EditorState) => {
-      onTextChange(state.doc.toJSON().join('\n')); // TODO CHECK
+      onTextChange(state.doc.toJSON().join('\n'));
     },
     [onTextChange]
   );
@@ -35,7 +35,7 @@ export default function TextEditor(props: TextEditorProps) {
     if (!editorRef.current) return;
 
     const initialEditorState = EditorState.create({
-      doc: initialText || '\n\n\n\n',
+      doc: text || '\n\n\n\n',
       extensions: [
         basicSetup,
         keymap.of(defaultKeymap),

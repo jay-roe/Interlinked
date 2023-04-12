@@ -70,6 +70,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
               Edit
             </Tab>
             <Tab
+              data-testid="create-post-preview-button"
               className={({ selected }) =>
                 `w-full rounded-lg py-2.5 outline-none ${
                   selected
@@ -84,15 +85,19 @@ export default function CreatePost({ getText }: CreatePostProps) {
           <Tab.Panels className="my-3">
             <Tab.Panel>
               <TextEditor
+                data-testid="post-content"
                 key={submitted ? 0 : 1}
-                initialText={message}
+                text={message}
                 onTextChange={useCallback((newMessage: string) => {
                   setMessage(newMessage);
                 }, [])}
               />
             </Tab.Panel>
             <Tab.Panel className="w-full rounded-lg bg-white bg-opacity-[0.12] p-4 px-7">
-              <TextEditorPreview message={message} />
+              <TextEditorPreview
+                data-testid="post-preview-content"
+                message={message}
+              />
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>

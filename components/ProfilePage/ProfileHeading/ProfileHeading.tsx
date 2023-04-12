@@ -137,7 +137,7 @@ export default function ProfileHeading({
             <TextEditor
               className="w-full"
               data-testid="bio-editing"
-              initialText={bio}
+              text={bio}
               onTextChange={handleBioChange}
             />
           ) : (
