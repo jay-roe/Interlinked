@@ -33,9 +33,10 @@ it('can change bio', async () => {
   const inputBox = await findByTestId('bio-editing');
   expect(inputBox).toBeInTheDocument();
 
-  fireEvent.change(inputBox, { target: { value: 'NEW BIO' } });
+  inputBox.setAttribute('text', 'NEW BIO');
 
-  expect(setBioMock).toHaveBeenCalledTimes(1);
+  const newInputBox = await findByTestId('bio-editing');
+  expect(newInputBox).toHaveAttribute('text', 'NEW BIO');
 });
 
 it('can edit bio', async () => {

@@ -22,10 +22,17 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@codemirror/commands": "^6.2.2",
+    "@codemirror/lang-markdown": "^6.1.0",
+    "@codemirror/language-data": "^6.2.0",
+    "@codemirror/state": "^6.2.0",
+    "@codemirror/theme-one-dark": "^6.1.1",
+    "@codemirror/view": "^6.9.3",
     "@headlessui/react": "1.7.8",
     "@next/font": "13.1.6",
     "@react-spring/web": "^9.6.1",
     "@use-gesture/react": "^10.2.24",
+    "codemirror": "^6.0.1",
     "crypto": "^1.0.1",
     "encoding": "^0.1.13",
     "eslint": "8.33.0",
@@ -37,10 +44,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "^5.1.1",
-    "react-icons": "^4.8.0"
+    "react-icons": "^4.8.0",
+    "react-markdown": "^8.0.6",
+    "remark-gfm": "^3.0.1"
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
+    "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@types/md5": "^2.3.2",

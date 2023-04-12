@@ -61,6 +61,7 @@ describe('Full feed spec', () => {
 
     // get more posts
     cy.get('[data-testid="load-more-button"]').click();
+    cy.get('[data-testid="load-more-button"]').click();
     cy.get('[data-testid="load-more-button"]').should(
       'contain',
       'No more posts'
