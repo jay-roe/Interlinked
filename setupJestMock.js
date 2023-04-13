@@ -11,3 +11,9 @@ jest.mock('./components/TextEditor/TextEditorPreview', () => (props) => {
   console.log(props);
   return <div {...props}>{props.message}</div>;
 });
+
+const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
+useRouter.mockImplementationOnce(() => ({
+  query: { locale: locale },
+}));
