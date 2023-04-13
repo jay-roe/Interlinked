@@ -1,7 +1,7 @@
 {
   "Home": {
     "welcome": "Welcome",
-    "get-you-interlinked": "Let's get you interlinked",
+    "get-you-interlinked": " Let's get you interlinked",
     "become-interlinked": "We will become interlinked"
   },
   "NavBar": {
@@ -307,11 +307,11 @@
       "create": "Create a Post",
       "write-anything": "Write anything to your heart's content",
       "placeholder": "Write text here...",
-      "support-markdown":"Posts support Markdown. Use `backticks` to write code and more! ",
-      "visit-guide":"Visit the Markdown guide",
-      "for-more-info":"for more information.",
-      "edit":"Edit",
-      "preview":"Preview"
+      "support-markdown": "Posts support Markdown. Use `backticks` to write code and more! ",
+      "visit-guide": "Visit the Markdown guide",
+      "for-more-info": "for more information.",
+      "edit": "Edit",
+      "preview": "Preview"
     }
   },
   "Card": {
@@ -413,9 +413,9 @@
     "sign-in": "Sign In",
     "register": "Register",
     "find": "Find new jobs.",
-    "full-time":"Full-time",
-    "part-time":"Part-time",
-    "internship":"Internship"
+    "full-time": "Full-time",
+    "part-time": "Part-time",
+    "internship": "Internship"
   },
   "Feed": {
     "feed": "Your feed",
