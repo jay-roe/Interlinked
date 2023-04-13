@@ -11,6 +11,7 @@ import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';
 import { useTranslations } from 'next-intl';
+import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -95,6 +96,7 @@ export default function NavBar() {
                       INTERLINKED
                     </h1>
                   </div>
+                  <LocaleSwitcher/>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navLinks.map((item, index) => (
