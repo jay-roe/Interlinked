@@ -121,7 +121,7 @@ export default function Feeds(props) {
           onChange={() => {
             setFullTime((curr) => !curr);
           }}
-          label="Full-time"
+          label={t('full-time')}
         />
         <CheckBox
           name="PartTime"
@@ -129,7 +129,7 @@ export default function Feeds(props) {
           onChange={() => {
             setPartTime((curr) => !curr);
           }}
-          label="Part-Time"
+          label={t('part-time')}
         />
         <CheckBox
           name="Internship"
@@ -137,7 +137,7 @@ export default function Feeds(props) {
           onChange={() => {
             setInternship((curr) => !curr);
           }}
-          label="Internship"
+          label={t('internship')}
         />
       </div>
       {/*if there is a filter, display jobs*/}

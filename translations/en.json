@@ -407,7 +407,10 @@
     "should-login": "You should login first.",
     "sign-in": "Sign In",
     "register": "Register",
-    "find": "Find new jobs."
+    "find": "Find new jobs.",
+    "full-time":"Full-time",
+    "part-time":"Part-time",
+    "internship":"Internship"
   },
   "Feed": {
     "feed": "Your feed",

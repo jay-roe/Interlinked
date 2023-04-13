@@ -407,7 +407,10 @@
     "should-login": "Du solltest dich zuerst anmelden.",
     "sign-in": "Anmelden",
     "register": "Registrieren",
-    "find": "Finde neue Jobs."
+    "find": "Finde neue Jobs.",
+    "full-time":"Vollzeit",
+    "part-time":"Teilzeit",
+    "internship":"Praktikum"
   },
   "Feed": {
     "feed": "Dein Feed",
