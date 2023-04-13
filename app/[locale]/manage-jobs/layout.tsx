@@ -10,7 +10,7 @@ const postingLayout = ({ children }: { children: React.ReactNode }) => {
         className="mb-3 text-left text-7xl font-extrabold"
         data-testid="title"
       >
-        {t('yout-postings')}
+        {t('your-postings')}
       </h1>
       {children}
       <div className="h-32"></div>

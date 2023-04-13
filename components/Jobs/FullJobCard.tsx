@@ -301,7 +301,7 @@ export default function Jobs({
                       <InputField
                         name={'resume'}
                         placeholder={t('resume-filename')}
-                        data-testid="cover-letter-input"
+                        data-testid="resume-input"
                         defaultValue={tempResume?.name}
                         onChange={(e) =>
                           setTempResume((res) => {

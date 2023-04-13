@@ -51,7 +51,7 @@ const PostFooter = ({
         {t('edit')}
       </Button>
       {/* TODO: Do view applicants when applications are being worked on */}
-      <Link href={`manage-jobs/${jobPost.postingId}`}>
+      <Link href={`/manage-jobs/${jobPost.postingId}`}>
         <Button data-testid={`job-post-applicants-${testKey}`}>
           {t('view')}
         </Button>
