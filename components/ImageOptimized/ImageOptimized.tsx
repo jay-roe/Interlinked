@@ -9,8 +9,6 @@ const placeholderImage =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mPcu/bSbAAHRALZD7Io9wAAAABJRU5ErkJggg==';
 
 export default function ImageOptimized(props: ImageOptimizedProps) {
-  if (props.variant === 'cover') {
-  }
   return (
     <NextImage
       placeholder={props.width >= 40 ? 'blur' : 'empty'}
