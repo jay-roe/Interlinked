@@ -45,16 +45,16 @@ export default function CreatePost({ getText }: CreatePostProps) {
             <h1 className="text-2xl font-bold">{t('create')}</h1>
             <h4 className="">{t('write-anything')}</h4>
             <h4>
-              Posts support Markdown. Use `backticks` to write code and more!{' '}
+              {t('support-markdown')}
               <Link
                 className="font-bold text-yellow-500 transition-colors hover:text-yellow-400"
                 href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax"
                 target="_blank"
                 rel="noreferrer"
               >
-                Visit the Markdown guide
+                {t('visit-guide')}
               </Link>{' '}
-              for more information.
+              {t('for-more-info')}
             </h4>
           </div>
         </div>
@@ -69,7 +69,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
                 }`
               }
             >
-              Edit
+              {t('edit')}
             </Tab>
             <Tab
               data-testid="create-post-preview-button"
@@ -81,7 +81,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
                 }`
               }
             >
-              Preview
+              {t('preview')}
             </Tab>
           </Tab.List>
           <Tab.Panels className="my-3">

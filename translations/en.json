@@ -306,7 +306,12 @@
     "CreatePost": {
       "create": "Create a Post",
       "write-anything": "Write anything to your heart's content",
-      "placeholder": "Write text here..."
+      "placeholder": "Write text here...",
+      "support-markdown":"Posts support Markdown. Use `backticks` to write code and more! ",
+      "visit-guide":"Visit the Markdown guide",
+      "for-more-info":"for more information.",
+      "edit":"Edit",
+      "preview":"Preview"
     }
   },
   "Card": {
