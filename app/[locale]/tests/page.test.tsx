@@ -47,7 +47,7 @@ it('redirects to locked page when account is locked', () => {
   });
 
   render(<Home />);
-  expect(mockedUseRouter().push).toHaveBeenCalledWith('/locked');
+  expect(mockedUseRouter().push).toHaveBeenCalledWith('/en/locked');
 });
 
 it('redirects to locked page when account is timed out', () => {
@@ -59,7 +59,7 @@ it('redirects to locked page when account is timed out', () => {
   });
 
   render(<Home />);
-  expect(mockedUseRouter().push).toHaveBeenCalledWith('/locked');
+  expect(mockedUseRouter().push).toHaveBeenCalledWith('/en/locked');
 });
 
 it('does not redirect when account is not locked or timed out', () => {

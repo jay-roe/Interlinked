@@ -45,7 +45,7 @@ describe('Locked', () => {
 
     render(<Locked />);
 
-    expect(routerPushMock).toHaveBeenCalledWith('/');
+    expect(routerPushMock).toHaveBeenCalledWith('/en/');
   });
 
   it('redirects to home page if account is not locked or timed out', () => {
@@ -57,7 +57,7 @@ describe('Locked', () => {
 
     render(<Locked />);
 
-    expect(routerPushMock).toHaveBeenCalledWith('/');
+    expect(routerPushMock).toHaveBeenCalledWith('/en/');
   });
 
   it('shows locked message if account is locked', () => {
@@ -68,7 +68,7 @@ describe('Locked', () => {
     const { getByTestId } = render(<Locked />);
 
     expect(getByTestId('welcome-msg')).toHaveTextContent(
-      `Welcome, ${currentUserMock.name}. Look's like you were up to no good. Your account has been locked. Uh oh 😢`
+      `Welcome, ${currentUserMock.name}. Looks like you were up to no good. Your account has been locked. Uh oh 😢`
     );
   });
 
@@ -81,7 +81,7 @@ describe('Locked', () => {
     const { getByTestId } = render(<Locked />);
 
     expect(getByTestId('welcome-msg')).toHaveTextContent(
-      `Welcome, ${currentUserMock.name}. Look's like you were up to no good. You are in timeout for 0 mins. Uh oh 😢`
+      `Welcome, ${currentUserMock.name}. Looks like you were up to no good. You are in timeout for 0 mins. Uh oh 😢`
     );
   });
 
