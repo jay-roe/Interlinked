@@ -1,6 +1,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import CreatePost from '../CreatePost';
 
 jest.mock('contexts/AuthContext', () => ({

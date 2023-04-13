@@ -3,7 +3,8 @@
 
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { useRouter } from 'next/navigation';
 import { ProtectedRoute } from '../ProtectedRoute';
 
@@ -47,7 +48,7 @@ it('page is redirected to login when user is not authenticated', async () => {
   );
 
   // Check if the router function was called (ie, user was redirected)
-  expect(myPush).toHaveBeenCalledWith('/login');
+  expect(myPush).toHaveBeenCalledWith('/en/login');
 });
 
 // check if the user is authenticated. If they are, there should be no redirect called
@@ -74,5 +75,5 @@ it('page is not redirected to when user is authenticated', async () => {
   );
 
   // Check if the router function was not called (ie, user was redirected)
-  expect(myPush).not.toHaveBeenCalledWith('/login');
+  expect(myPush).not.toHaveBeenCalledWith('/en/login');
 });

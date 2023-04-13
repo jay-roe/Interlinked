@@ -1,10 +1,6 @@
 import '@testing-library/jest-dom';
-import {
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { findByTestId, fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import ExternalApplication from '../ExternalApplication';
 
 it('renders jobs', async () => {

@@ -1,10 +1,6 @@
 import '@testing-library/jest-dom';
-import {
-  createEvent,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { createEvent, fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import ChatRoom from '../page';
 import { useAuth } from '@/contexts/AuthContext';
 

@@ -1,6 +1,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { act, render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { Timestamp } from 'firebase/firestore';
 import Feeds from '../page';
 import React from 'react';

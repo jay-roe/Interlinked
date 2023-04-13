@@ -1,7 +1,8 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { User } from '@/types/User';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { collection, Firestore } from 'firebase/firestore';
 import React from 'react';
 import Links from '../page';

@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import { useAuth } from '@/contexts/AuthContext';
 import Profile from '../page';
 import { db } from '@/config/firestore';

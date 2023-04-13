@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import Admin from '../page';
 
 jest.mock('contexts/AuthContext', () => ({

@@ -1,11 +1,7 @@
 import '@testing-library/jest-dom';
-import {
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { findByTestId, fireEvent, waitFor } from '@testing-library/react';
 import ProfileSkills from '../ProfileSkills';
+import { render } from '@/renderWrapper';
 
 it('renders skills given user', async () => {
   const { findByText } = render(

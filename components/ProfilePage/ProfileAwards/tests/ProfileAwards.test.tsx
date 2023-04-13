@@ -4,9 +4,9 @@ import {
   findAllByTestId,
   findByTestId,
   fireEvent,
-  render,
   waitFor,
 } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import { Timestamp } from 'firebase/firestore';
 import ProfileAwards from '../ProfileAwards';
 

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import NavBar from '../NavBar';
 
 jest.mock('contexts/AuthContext', () => ({

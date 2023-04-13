@@ -1,7 +1,8 @@
 import { useAuth } from '@/contexts/AuthContext';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { Timestamp } from 'firebase/firestore';
 import CommentHeader from '../CommentHeader';
 

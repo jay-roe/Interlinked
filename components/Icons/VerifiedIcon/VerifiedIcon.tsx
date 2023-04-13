@@ -16,7 +16,7 @@ function VerifiedIcon({ verified, showText, showIcon }: VerifiedIconProps) {
   return (
     <span className="text-red-500" data-testid="unverified-icon-container">
       {showIcon && <FaTimesCircle />}
-      {showText && t('note-verified')}
+      {showText && t('not-verified')}
     </span>
   );
 }
