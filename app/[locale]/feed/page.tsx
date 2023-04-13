@@ -21,7 +21,6 @@ import Button from '@/components/Buttons/Button';
 import { Post, PostWithId } from '@/types/Post';
 import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
-import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 import { useTranslations } from 'next-intl';
 
 export default function Feeds() {
@@ -37,7 +36,6 @@ export default function Feeds() {
   const allAuthorsInfo = useRef<boolean>(false);
   const DAYS_INTERVAL: number = 5;
   const POST_LIMIT: number = 20;
-  // const router = useRouter();
 
   useEffect(() => {
     if (currentUser?.linkedUserIds) {

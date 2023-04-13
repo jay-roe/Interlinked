@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
@@ -15,6 +16,7 @@ import { useTranslations } from 'next-intl';
 export default function Register() {
   const t = useTranslations('Register');
   const router = useRouter();
+  const locale = useLocale();
   const { authUser, register, loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +28,7 @@ export default function Register() {
   // If user logged in, send them to home
   useEffect(() => {
     if (authUser) {
-      router.push('/');
+      router.push('/' + locale + '/');
     }
   }, [authUser, router]);
 
@@ -40,7 +42,7 @@ export default function Register() {
     try {
       setLoading(true);
       await register(email, password, isCompany);
-      router.push('/');
+      router.push('/' + locale + '/');
     } catch (err) {
       alert(err.message);
     }

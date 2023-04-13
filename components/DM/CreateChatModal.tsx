@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { createNotification } from '../Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
 import { useTranslations } from 'next-intl';
@@ -23,6 +24,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
   const { currentUser, authUser } = useAuth();
   const [message, setMessage] = useState<string>('');
   const router = useRouter();
+  const locale = useLocale();
 
   const createChatRoom = async () => {
     const chatRef = doc(db.chatrooms);
@@ -95,7 +97,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
 
     setMessage('');
     if (confirm(t('confirm-go-to-chat')))
-      router.push('/DM/' + roomID); // send to chatroom
+      router.push('/' + locale + '/DM/' + roomID); // send to chatroom
     else alert(t('alert-sent'));
   };
 

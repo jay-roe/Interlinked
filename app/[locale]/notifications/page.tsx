@@ -15,6 +15,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Notification } from '@/types/Notification';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useTranslations } from 'next-intl';
 
 export default function Notifications() {
@@ -23,12 +24,13 @@ export default function Notifications() {
   const [loading, setLoading] = useState(true);
   const [notifications, setNotifications] = useState<Notification[]>();
   const router = useRouter();
+  const locale = useLocale();
 
   useEffect(() => {
     // if not logged in, redirect to home page
     if (!currentUser || !authUser) {
       alert(t('alert-must-login'));
-      router.push('/login');
+      router.push('/' + locale + '/login');
     }
 
     // get the notifications from the database

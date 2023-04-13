@@ -3,6 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import Button from '@/components/Buttons/Button';
@@ -12,6 +13,7 @@ import { useTranslations } from 'next-intl';
 const Locked = () => {
   const t = useTranslations('Locked');
   const router = useRouter();
+  const locale = useLocale();
   const { authUser, currentUser, logout } = useAuth();
 
   // if account is not locked, timed out, or not logged in, redirect to home page
@@ -20,7 +22,7 @@ const Locked = () => {
       (!currentUser?.accountLocked && !currentUser?.accountTimeout) ||
       !currentUser
     ) {
-      router.push('/');
+      router.push('/' + locale + '/');
     }
   }, [currentUser, router]);
 

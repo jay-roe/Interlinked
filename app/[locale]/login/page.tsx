@@ -4,6 +4,7 @@ import styles from './Login.module.css';
 import Link from '@/components/Link/Link';
 
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
@@ -13,6 +14,7 @@ import { useTranslations } from 'next-intl';
 export default function Login() {
   const t = useTranslations('Login');
   const router = useRouter();
+  const locale = useLocale();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,7 +23,7 @@ export default function Login() {
 
   useEffect(() => {
     if (authUser) {
-      router.push('/');
+      router.push('/' + locale + '/');
     }
   }, [authUser, router]);
 

@@ -3,6 +3,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { FiBell } from 'react-icons/fi';
 import { Report } from '@/types/Report';
 import {
@@ -22,6 +23,7 @@ import { useTranslations } from 'next-intl';
 const Admin = () => {
   const t = useTranslations('Admin');
   const router = useRouter();
+  const locale = useLocale();
   const { authUser, currentAdmin } = useAuth();
 
   // Uncomment for implementation
@@ -31,7 +33,7 @@ const Admin = () => {
   useEffect(() => {
     // if not logged in, redirect to home page
     if (!currentAdmin) {
-      router.push('/');
+      router.push('/' + locale + '/');
     }
 
     // get all the reports of the admin and sort them by date most recent first

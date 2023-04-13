@@ -16,6 +16,7 @@ import { Report } from '@/types/Report';
 import { UserWithId } from '@/types/User';
 import { Message } from '@/types/Message';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { Menu } from '@headlessui/react';
 import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
@@ -36,6 +37,7 @@ const ViewReport = ({ params }) => {
 
   const { authUser } = useAuth();
   const router = useRouter();
+  const locale = useLocale();
 
   const [report, setReport] = useState<Report>();
   const [loading, setLoading] = useState(true);
@@ -127,7 +129,7 @@ const ViewReport = ({ params }) => {
     await deleteDoc(
       doc(collection(doc(db.users, authUser.uid), 'report'), report.reportId)
     );
-    router.push('/admin'); //redirect to admin home
+    router.push('/' + locale + '/admin'); //redirect to admin home
   }
 
   if (loading) {

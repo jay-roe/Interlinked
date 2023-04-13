@@ -15,8 +15,8 @@
     "logout": "Abmelden",
     "home": "Startseite",
     "manage-postings": "Beiträge verwalten",
-    "feed": "Feed",
-    "jobs": "Jobs",
+    "feed": "Neuigkeiten",
+    "jobs": "Arbeitsplätze",
     "reports": "Berichte",
     "login": "Anmelden",
     "register": "Registrieren"
@@ -412,13 +412,13 @@
     "should-login": "Du solltest dich zuerst anmelden.",
     "sign-in": "Anmelden",
     "register": "Registrieren",
-    "find": "Finde neue Jobs.",
-    "full-time":"Vollzeit",
-    "part-time":"Teilzeit",
-    "internship":"Praktikum"
+    "find": "Finde neue Arbeitsplätze.",
+    "full-time": "Vollzeit",
+    "part-time": "Teilzeit",
+    "internship": "Praktikum"
   },
   "Feed": {
-    "feed": "Dein Feed",
+    "feed": "Dein Neuigkeiten",
     "loading": "Ladevorgang...",
     "should-login": "Du solltest dich zuerst anmelden.",
     "sign-in": "Anmelden",

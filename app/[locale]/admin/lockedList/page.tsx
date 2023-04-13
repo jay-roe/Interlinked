@@ -7,6 +7,7 @@ import { User, UserWithId } from '@/types/User';
 import { doc, getDocs, query, updateDoc, where } from 'firebase/firestore';
 import Link from '@/components/Link/Link';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 
@@ -17,10 +18,11 @@ export default function LockedList() {
 
   const { authUser } = useAuth();
   const router = useRouter();
+  const locale = useLocale();
 
   useEffect(() => {
     if (!authUser?.uid) {
-      router.push('/');
+      router.push('/' + locale + '/');
     }
   }, [authUser, router]);
 

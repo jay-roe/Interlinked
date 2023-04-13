@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 import type { User } from '@/types/User';
 import type { Language } from '@/types/User';
@@ -38,6 +39,7 @@ import { useTranslations } from 'next-intl';
 export default function EditProfile() {
   const t = useTranslations('EditProfile');
   const router = useRouter();
+  const locale = useLocale();
   const { currentUser, authUser, deleteAccount, refresh } = useAuth();
   const [isModalShow, setIsModalShow] = useState(false);
 
@@ -243,7 +245,7 @@ export default function EditProfile() {
 
       await refresh();
       alert(t('alert-success'));
-      router.push('/profile');
+      router.push('/' + locale + '/profile');
     } catch (err) {
       console.error(err);
     }
@@ -254,7 +256,7 @@ export default function EditProfile() {
       await deleteAccount();
 
       // Redirect to home page, with state saying account was just deleted
-      router.push('/'); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
+      router.push('/' + locale + '/'); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
       setIsModalShow(false);
     } catch (err) {
       console.error(err);

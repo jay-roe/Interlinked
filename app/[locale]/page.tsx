@@ -1,19 +1,21 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useTranslations } from 'next-intl';
 
 const Home = () => {
   const router = useRouter();
+  const locale = useLocale();
   const { currentUser } = useAuth();
   const t = useTranslations('Home');
 
   // if account is locked or timed out, redirect to locked page
   useEffect(() => {
     if (currentUser?.accountLocked || currentUser?.accountTimeout) {
-      router.push('/locked');
+      router.push('/' + locale + '/locked');
     }
   }, [currentUser, router]);
 
@@ -28,7 +30,7 @@ const Home = () => {
       {/* Here goes the app's components */}
       {currentUser ? (
         <p data-testid="welcome-msg" className="text-center text-2xl">
-          {t('welcome')}, {currentUser.name || currentUser.email}. 
+          {t('welcome')}, {currentUser.name || currentUser.email}.
           {t('get-you-interlinked')}.
         </p>
       ) : (
