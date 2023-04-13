@@ -10,9 +10,7 @@ export default async function RootLayout({
   let translations;
   try {
     translations = (await import(`../../translations/${locale}.json`)).default;
-  } catch (error) {
-    console.log("Some locale error. Blame Jay I guess.")
-  }
+  } catch (error) {}
   return (
     <html lang={locale} data-testid="root-container">
       {/*
