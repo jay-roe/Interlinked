@@ -347,10 +347,14 @@
   },
   "Register": {
     "create": "Create an Account",
+    "email-placeholder": "Email Address",
+    "pw-placeholder": "Password",
+    "confirm-pw-placeholder": "Confirm Password",
     "register": "Register",
     "register-goog": "Register with Google",
-    "already-have-account": "Already have an account? Login",
-    "passwords-do-not-match": "Passwords do not match"
+    "passwords-do-not-match": "Passwords do not match",
+    "register-as-recruiter": "Register as Recruiter",
+    "already-have-account": "Already have an account? Login"
   },
   "PreviewProfile": {
     "profile": "Your Profile",
