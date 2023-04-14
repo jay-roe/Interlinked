@@ -6,7 +6,7 @@ import { CreatePostProps } from '@/types/CreatPostProps';
 import { useTranslations } from 'next-intl';
 import TextEditor from '@/components/TextEditor/TextEditor';
 import TextEditorPreview from '@/components/TextEditor/TextEditorPreview';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import { Tab } from '@headlessui/react';
 
