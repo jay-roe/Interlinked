@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import ProfileHeading from '../ProfileHeading';
 
 it('renders name given user', async () => {

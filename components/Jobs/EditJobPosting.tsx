@@ -13,6 +13,7 @@ import {
   Timestamp,
   updateDoc,
 } from 'firebase/firestore';
+import { useTranslations } from 'next-intl';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../Buttons/Button';
 import CheckBox from '../InputFields/CheckBox/CheckBox';
@@ -34,6 +35,7 @@ const EditJobPosting = ({
   setJobPostingArray?: Dispatch<SetStateAction<JobPostingWithId[]>>;
   setEditsOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
+  const t = useTranslations('Jobs.EditPosting');
   const { currentUser, authUser } = useAuth();
   const [postTitle, setPostTitle] = useState<string>(jobPosting?.title || '');
   const [postDescription, setPostDescription] = useState<string>(
@@ -95,7 +97,7 @@ const EditJobPosting = ({
       postLocation === '' ||
       (externalApp && externalApplications === null)
     ) {
-      alert('Job Posting Not Complete');
+      alert(t('alert-posting-incomplete'));
       return;
     }
 
@@ -141,7 +143,9 @@ const EditJobPosting = ({
         createNotification({
           notifType: NotifType.JOB,
           postingId: definedJob.title,
-          context: `Company ${definedJob.companyName} has posted a new job: ${definedJob.title}`,
+          context: `${t('company')} ${definedJob.companyName} ${t(
+            'has-posted-new'
+          )}: ${definedJob.title}`,
           sender: definedJob.companyId, // TODO fix sender link
           receiver: userid,
         });
@@ -171,7 +175,7 @@ const EditJobPosting = ({
     <div className="flex-col space-y-2">
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Name <span className="text-red-500">*</span>
+          {t('job-name')} <span className="text-red-500">*</span>
         </p>
         <Input
           type="text"
@@ -187,25 +191,25 @@ const EditJobPosting = ({
           name="FullTime"
           checked={jobType == 'FULLTIME'}
           onChange={() => setJobType(() => JobType.FULLTIME)}
-          label="Full-time"
+          label={t('full-time')}
         />
         <CheckBox
           name="PartTime"
           checked={jobType == 'PARTTIME'}
           onChange={() => setJobType(() => JobType.PARTTIME)}
-          label="Part-Time"
+          label={t('part-time')}
         />
         <CheckBox
           name="Internship"
           checked={jobType == 'INTERNSHIP'}
           onChange={() => setJobType(() => JobType.INTERNSHIP)}
-          label="Internship"
+          label={t('internship')}
         />
       </div>
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Job Description <span className="text-red-500">*</span>
+          {t('description')} <span className="text-red-500">*</span>
         </p>
         <TextArea
           required
@@ -218,7 +222,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Location <span className="text-red-500">*</span> 📍
+          {t('location')} <span className="text-red-500">*</span> 📍
         </p>
         <Input
           type="text"
@@ -231,7 +235,7 @@ const EditJobPosting = ({
 
       <div className="flex flex-col align-middle">
         <p className="my-auto whitespace-nowrap text-2xl font-extrabold">
-          Application Deadline <span className="text-red-500">*</span> 📆
+          {t('app-deadline')} <span className="text-red-500">*</span> 📆
         </p>
         <Input
           type="date"
@@ -249,7 +253,7 @@ const EditJobPosting = ({
 
       <div className="flex-col">
         <p className="my-auto mb-2 whitespace-nowrap text-2xl font-extrabold">
-          Keywords 🔑
+          {t('keywords')} 🔑
         </p>
         <JobKeywordSearch
           jobKeywords={keywords}
@@ -273,7 +277,7 @@ const EditJobPosting = ({
               setPostTagsEditing((curr) => !curr);
             }}
           >
-            {postTagsEditing ? 'Save Skills' : 'Edit Skills'}
+            {postTagsEditing ? t('save-skills') : t('edit-skills')}
           </Button>
         </div>
       </div>
@@ -283,25 +287,25 @@ const EditJobPosting = ({
           name="cv"
           checked={postCV}
           onChange={() => setPostCV((curr) => !curr)}
-          label="Resume Required?"
+          label={t('resume-required')}
         />
         <CheckBox
           name="coverletter"
           checked={postCoverLetter}
           onChange={() => setPostCoverLetter((curr) => !curr)}
-          label="Cover Letter Required?"
+          label={t('cl-required')}
         />
         <CheckBox
           name="external"
           checked={externalApp}
           onChange={() => setExternalApp((curr) => !curr)}
-          label="External Application?"
+          label={t('external-app')}
         />
         <CheckBox
           name="hidden"
           checked={postHidden}
           onChange={() => setPostHidden((curr) => !curr)}
-          label="Hide Job Posting?"
+          label={t('hide')}
         />
       </div>
 
@@ -324,7 +328,7 @@ const EditJobPosting = ({
           data-testid={newJob ? 'new-job-submit' : 'edit-job-submit'}
           onClick={handleSubmit}
         >
-          {newJob ? 'Create Job Posting' : 'Update Job Posting'}
+          {newJob ? t('create-posting') : t('update-posting')}
         </Button>
       </div>
     </div>

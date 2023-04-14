@@ -1,17 +1,17 @@
 import type { DeleteAccountPopupChildProps } from '@/types/DeleteAccountPopup';
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { FaGoogle } from 'react-icons/fa';
 import type { UserCredential } from 'firebase/auth';
 
-import { Dialog } from '@headlessui/react';
 import Button from '../Buttons/Button';
 import GoogleButton from '../Buttons/GoogleButton/GoogleButton';
+import { useTranslations } from 'next-intl';
 
 export default function DeleteAccountPopupOAuth({
   onHide,
   onDeleteAccount,
 }: DeleteAccountPopupChildProps) {
+  const t = useTranslations('DeleteAccountOAuth');
   const [credential, setCredential] = useState<UserCredential>();
   const [isAuthError, setAuthError] = useState<boolean>(false);
 
@@ -51,27 +51,22 @@ export default function DeleteAccountPopupOAuth({
       {/* TODO: Add logic to iterate through all providers, giving them the option to reauthenticate how they want. It is possible they have email + Google auth. */}
       {!credential ? (
         <div>
-          <h5 className="mb-2">
-            Please log in with one of the methods below before deleting.
-          </h5>
+          <h5 className="mb-2">{t('login-prompt')}</h5>
           <GoogleButton
             data-testid="update-credentials-oauth"
             onClick={() => updateCredential()}
           >
-            Login with Google
+            {t('login-goog')}
           </GoogleButton>
           {isAuthError && (
             <p data-testid="auth-error" className="text-red-500">
-              Authentication error. Please try logging in again.
+              {t('auth-err')}
             </p>
           )}
         </div>
       ) : (
         <div>
-          <p className="mb-2 text-sm text-red-500">
-            This action is irreversible. Your account, and all of its data, will
-            be permanently deleted.
-          </p>
+          <p className="mb-2 text-sm text-red-500">{t('delete-warning')}</p>
           <Button
             data-testid="del-acc"
             variant="danger"
@@ -79,12 +74,12 @@ export default function DeleteAccountPopupOAuth({
             disabled={!credential}
             onClick={() => handleDeleteClick()}
           >
-            Delete account
+            {t('delete')}
           </Button>
         </div>
       )}
       <Button data-testid="close-popup-oauth" onClick={onHideLocal}>
-        Close
+        {t('close')}
       </Button>
     </div>
   );

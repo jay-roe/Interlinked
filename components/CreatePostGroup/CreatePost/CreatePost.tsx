@@ -3,13 +3,15 @@ import { useAuth } from '@/contexts/AuthContext';
 import { FaUserCircle } from 'react-icons/fa';
 import { useCallback, useState } from 'react';
 import { CreatePostProps } from '@/types/CreatPostProps';
+import { useTranslations } from 'next-intl';
 import TextEditor from '@/components/TextEditor/TextEditor';
 import TextEditorPreview from '@/components/TextEditor/TextEditorPreview';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import { Tab } from '@headlessui/react';
 
 export default function CreatePost({ getText }: CreatePostProps) {
+  const t = useTranslations('CreatePost.CreatePost');
   const { currentUser } = useAuth();
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
@@ -40,19 +42,19 @@ export default function CreatePost({ getText }: CreatePostProps) {
           </div>
 
           <div>
-            <h1 className="text-2xl font-bold">Create a Post </h1>
-            <h4>Write anything to your heart&apos;s content.</h4>
+            <h1 className="text-2xl font-bold">{t('create')}</h1>
+            <h4 className="">{t('write-anything')}</h4>
             <h4>
-              Posts support Markdown. Use `backticks` to write code and more!{' '}
+              {t('support-markdown')}
               <Link
                 className="font-bold text-yellow-500 transition-colors hover:text-yellow-400"
                 href="https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax"
                 target="_blank"
                 rel="noreferrer"
               >
-                Visit the Markdown guide
+                {t('visit-guide')}
               </Link>{' '}
-              for more information.
+              {t('for-more-info')}
             </h4>
           </div>
         </div>
@@ -67,7 +69,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
                 }`
               }
             >
-              Edit
+              {t('edit')}
             </Tab>
             <Tab
               data-testid="create-post-preview-button"
@@ -79,7 +81,7 @@ export default function CreatePost({ getText }: CreatePostProps) {
                 }`
               }
             >
-              Preview
+              {t('preview')}
             </Tab>
           </Tab.List>
           <Tab.Panels className="my-3">

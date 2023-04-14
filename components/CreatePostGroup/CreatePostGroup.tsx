@@ -11,16 +11,13 @@ import {
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  StorageReference,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import { Post } from '@/types/Post';
+import { useTranslations } from 'next-intl';
 
 export default function CreatePostGroup() {
+  const t = useTranslations('CreatePost.CreatePostGroup');
   const { currentUser, authUser } = useAuth();
   const [image, setImage] = useState<File[]>([]);
   const [URLs, setURLs] = useState<string[]>([]);
@@ -29,7 +26,7 @@ export default function CreatePostGroup() {
 
   const retrieveText = async (text: string) => {
     if (text == '' && !image) {
-      alert('No content to post');
+      alert(t('alert-no-content'));
       return;
     }
 
@@ -70,7 +67,7 @@ export default function CreatePostGroup() {
     });
 
     setTrigger((trig) => trig + 1);
-    alert('Posted!');
+    alert(t('alert-posted'));
   };
 
   async function upLoadImage(img: File, text: string) {
@@ -82,7 +79,7 @@ export default function CreatePostGroup() {
       'state_changed',
       (snapshot) => {},
       (error) => {
-        alert('Image upload failed');
+        alert(t('alert-failed'));
       },
       async () => {
         await getDownloadURL(uploadTask.snapshot.ref).then((url) => {

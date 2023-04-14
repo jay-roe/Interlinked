@@ -1,4 +1,5 @@
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { Timestamp } from 'firebase/firestore';
 import Card from '../Card';
 import CardGrid from '../CardGrid';

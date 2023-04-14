@@ -1,7 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
-import ChatroomCardHeadder from '../ChatroomCardHeader';
-import { testUser } from '@/types/User';
+import { render } from '@/renderWrapper';
 import { testChatRoom } from '@/types/Message';
 import ChatroomCard from '../ChatroomCard';
 import { useAuth } from '@/contexts/AuthContext';

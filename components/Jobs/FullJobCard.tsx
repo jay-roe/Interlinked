@@ -9,7 +9,6 @@ import {
 } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
-import FileButton from '../Buttons/FileButton/FileButton';
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { collection, doc, updateDoc } from 'firebase/firestore';
@@ -23,6 +22,7 @@ import {
 import { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
+import { useTranslations } from 'next-intl';
 
 export default function Jobs({
   job,
@@ -33,6 +33,8 @@ export default function Jobs({
   setJob: Dispatch<SetStateAction<JobPosting[]>>;
   postingId: string;
 }) {
+  const t = useTranslations('Jobs.FullJobCard');
+
   const { currentUser, authUser } = useAuth();
   const [isEditable, setEditing] = useState<boolean>(true);
 
@@ -148,7 +150,7 @@ export default function Jobs({
                     className="flex gap-1"
                   >
                     <BsCalendar3 className="text-accent-orange" />
-                    Full-time
+                    {t('full-time')}
                   </div>
                 )}
                 {job.jobType === JobType.PARTTIME && (
@@ -157,7 +159,7 @@ export default function Jobs({
                     className="flex gap-1"
                   >
                     <BsCalendar3 className="text-accent-orange" />
-                    Part-time
+                    {t('part-time')}
                   </div>
                 )}
                 {job.jobType === JobType.INTERNSHIP && (
@@ -166,14 +168,14 @@ export default function Jobs({
                     className="flex gap-1"
                   >
                     <BsCalendar3 className="text-accent-orange" />
-                    Internship
+                    {t('internship')}
                   </div>
                 )}
               </div>
               <div className="flex gap-1">
                 <AiOutlineClockCircle className="text-accent-orange" />
                 <div>
-                  {'Apply before ' +
+                  {t('apply-before') +
                     job.deadline.toDate().toLocaleString('en-US', {
                       month: 'long',
                       year: 'numeric',
@@ -184,19 +186,19 @@ export default function Jobs({
               {job.coverLetterRequired && job.cvRequired && (
                 <div className="flex gap-1">
                   <AiOutlineExclamationCircle className="text-accent-orange" />
-                  Submit with resume and cover letter
+                  {t('submit-with-res-and-cl')}
                 </div>
               )}
               {job.coverLetterRequired && !job.cvRequired && (
                 <div className="flex gap-1">
                   <AiOutlineExclamationCircle className="text-accent-orange" />
-                  Submit with cover letter
+                  {t('submit-with-cl')}
                 </div>
               )}
               {!job.coverLetterRequired && job.cvRequired && (
                 <div className="flex gap-1">
                   <AiOutlineExclamationCircle className="text-accent-orange" />
-                  Submit with resume
+                  {t('submit-with-resume')}
                 </div>
               )}
             </div>
@@ -212,7 +214,7 @@ export default function Jobs({
                     setEditing((curr) => !curr);
                   }}
                 >
-                  Apply <FaPaperPlane className="" />
+                  {t('apply')} <FaPaperPlane className="" />
                 </Button>
               </div>
               {/* Quick apply to job button */}
@@ -223,12 +225,12 @@ export default function Jobs({
                   onClick={(e) => {
                     e.preventDefault();
                     if (job.cvRequired && !currentUser.resume) {
-                      alert('You need a resume to apply to this job.');
+                      alert(t('alert-need-resume'));
                     } else if (
                       job.coverLetterRequired &&
                       !currentUser.coverLetter
                     ) {
-                      alert('You need a cover letter to apply to this job.');
+                      alert(t('alert-need-cl'));
                     } else {
                       setJob((jobs) => {
                         let actJob = jobs.find((tempJob) => job === tempJob);
@@ -255,14 +257,15 @@ export default function Jobs({
                           ),
                           job
                         );
-                        alert('application sent!');
+                        alert(t('alert-app-sent'));
                       } catch (err) {
                         console.log(err);
                       }
                     }
                   }}
                 >
-                  Quick Apply <FaPaperPlane className="" />
+                  {t('quick-apply')}
+                  <FaPaperPlane className="" />
                 </Button>
               </div>
             </div>
@@ -279,7 +282,7 @@ export default function Jobs({
               data-testid="job-application-form"
               className="mb-4 flex gap-1 text-xl font-bold text-accent-orange"
             >
-              Job Application
+              {t('job-application')}
             </div>
             <div className="flex-wrap gap-2">
               <div className="flex-wrap gap-2">
@@ -291,13 +294,13 @@ export default function Jobs({
                 <Card data-testid="card" className="mb-2">
                   <div>
                     <label>
-                      Resume <span className="text-yellow-600">*</span>
+                      {t('resume')} <span className="text-yellow-600">*</span>
                     </label>
                     <div>
                       <InputField
                         name={'resume'}
-                        placeholder="Resume file name"
-                        data-testid="cover-letter-input"
+                        placeholder={t('resume-filename')}
+                        data-testid="resume-input"
                         defaultValue={tempResume?.name}
                         onChange={(e) =>
                           setTempResume((res) => {
@@ -308,7 +311,7 @@ export default function Jobs({
                         }
                       />
                       <Button onClick={handleResumeUploadClick} type="button">
-                        Upload Resume &nbsp; <FaCloudUploadAlt size={25} />
+                        {t('upload-resume')} <FaCloudUploadAlt size={25} />
                       </Button>
 
                       <input
@@ -323,13 +326,14 @@ export default function Jobs({
                 <Card data-testid="card" className="mb-2">
                   <div>
                     <label>
-                      Cover Letter <span className="text-yellow-600">*</span>
+                      {t('cover-letter')}{' '}
+                      <span className="text-yellow-600">*</span>
                     </label>
                     <div>
                       <InputField
                         name={'cover-letter'}
-                        data-testid="resume-input"
-                        placeholder="Cover letter file name"
+                        data-testid="cover-letter-input"
+                        placeholder={t('cover-letter-filename')}
                         defaultValue={tempCoverLetter?.name}
                         onChange={(e) =>
                           setTempCoverLetter((res) => {
@@ -343,7 +347,7 @@ export default function Jobs({
                         onClick={handleCoverLetterUploadClick}
                         type="button"
                       >
-                        Upload Cover Letter &nbsp;{' '}
+                        {t('upload-cover-letter')}{' '}
                         <FaCloudUploadAlt size={25} />
                       </Button>
 
@@ -368,7 +372,7 @@ export default function Jobs({
                       setEditing((curr) => !curr);
                     }}
                   >
-                    Cancel
+                    {t('cancel')}
                   </Button>
                 </div>
                 <div>
@@ -377,9 +381,9 @@ export default function Jobs({
                     onClick={(e) => {
                       e.preventDefault();
                       if (job.cvRequired && !tempResume) {
-                        alert('You need a resume to apply to this job.');
+                        alert(t('alert-need-resume'));
                       } else if (job.coverLetterRequired && !tempCoverLetter) {
-                        alert('You need a cover letter to apply to this job.');
+                        alert(t('alert-need-cl'));
                       } else {
                         try {
                           setJob((jobs) => {
@@ -405,14 +409,14 @@ export default function Jobs({
                             ),
                             job
                           );
-                          alert('application sent!');
+                          alert(t('alert-app-sent'));
                         } catch (err) {
                           console.log(err);
                         }
                       }
                     }}
                   >
-                    Send Application <FaPaperPlane className="ml-2" />
+                    {t('send-application')} <FaPaperPlane className="ml-2" />
                   </Button>
                 </div>
               </div>
