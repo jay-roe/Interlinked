@@ -42,6 +42,7 @@ export default function Jobs({
   const [tempResume, setTempResume] = useState<Document>(null);
   const [tempCoverLetter, setTempCoverLetter] = useState<Document>(null);
 
+  const [applicationSent, setSendingApplication] = useState<boolean>(false);
   // uploading a file from button
 
   const resumeInputRef = useRef(null);
@@ -136,6 +137,12 @@ export default function Jobs({
           } transition-all`}
           data-testid="job-post-card"
         >
+          {applicationSent && (
+            <div className="flex justify-end text-accent-orange">
+              {' '}
+              Already Sent &nbsp; <FaCheck></FaCheck>
+            </div>
+          )}
           <div className="mb-3 text-sm font-light max-md:hidden">
             {job?.datePosted?.toDate().toLocaleString('en-US', {
               month: 'long',
@@ -483,6 +490,7 @@ export default function Jobs({
                           console.log(err);
                         }
                         setEditing((curr) => !curr);
+                        setSendingApplication((curr) => !curr);
                       }
                     }}
                   >
