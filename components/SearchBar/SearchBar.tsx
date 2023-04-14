@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import {
   endAt,
   getDocs,

@@ -5,6 +5,7 @@ import { Fragment, useState } from 'react';
 
 import CreateChatModal from '@/components/DM/CreateChatModal';
 import Button from '../Buttons/Button';
+import { useTranslations } from 'next-intl';
 
 export default function MessageModal({
   userUID,
@@ -13,6 +14,7 @@ export default function MessageModal({
   userUID: string;
   userName: string;
 }) {
+  const t = useTranslations('MessageModal');
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -33,7 +35,7 @@ export default function MessageModal({
           className=" inline-flex items-center gap-2 rounded-lg bg-yellow-600 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-yellow-500 focus:outline-none "
         >
           {isOpen ? <FaCommentDots /> : <FaRegCommentDots />}
-          Message
+          {t('message')}
         </button>
       </div>
 
@@ -67,13 +69,13 @@ export default function MessageModal({
                   className="w-full max-w-md transform overflow-hidden rounded-2xl bg-purple-component p-5 text-left align-middle shadow-xl transition-all"
                 >
                   <Dialog.Title className="pb-3 text-white">
-                    Send <b>{userName}</b> a message!
+                    {t('send')} <b>{userName}</b> {t('a-message')}!
                   </Dialog.Title>
 
                   <CreateChatModal userUID={userUID} />
 
                   <Button className="mt-2" type="button" onClick={closeModal}>
-                    Close
+                    {t('close')}
                   </Button>
                 </Dialog.Panel>
               </Transition.Child>

@@ -1,7 +1,8 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import LinkButton from '../LinkButton';
 import { unlink } from 'components/Buttons/LinkButton/Unlink';
 

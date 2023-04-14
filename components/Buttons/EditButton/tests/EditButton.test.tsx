@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import EditButton from '../EditButton';
 
 it('renders edit button correctly', async () => {

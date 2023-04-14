@@ -1,0 +1,481 @@
+{
+  "Home": {
+    "welcome": "Willkommen",
+    "get-you-interlinked": " Lass uns Sie verlinken",
+    "become-interlinked": "Wir werden verlinkt werden"
+  },
+  "NavBar": {
+    "open-main-menu": "Hauptmenü öffnen",
+    "search": "Suche",
+    "dms": "DMs",
+    "view-notifications": "Benachrichtigungen anzeigen",
+    "open-user-menu": "Benutzermenü öffnen",
+    "profile": "Ihr Profil",
+    "edit-profile": "Profil bearbeiten",
+    "logout": "Abmelden",
+    "home": "Startseite",
+    "manage-postings": "Beiträge verwalten",
+    "feed": "Neuigkeiten",
+    "jobs": "Arbeitsplätze",
+    "reports": "Berichte",
+    "login": "Anmelden",
+    "register": "Registrieren"
+  },
+  "Report": {
+    "moderation-required": "DM-Moderation erforderlich"
+  },
+  "ProtectedRoute": {
+    "must-be-logged-in": "Sie müssen angemeldet sein, um auf diese Seite zugreifen zu können. Weiterleitung."
+  },
+  "Profile": {
+    "Volunteering": {
+      "experience": "Erfahrung im Freiwilligendienst",
+      "title": "Titel",
+      "location": "Ort",
+      "organization": "Organisation",
+      "start-date": "Startdatum",
+      "end-date": "Enddatum",
+      "description": "Beschreibung",
+      "save-experience": "Erfahrung im Freiwilligendienst speichern",
+      "add-new": "Neue Freiwilligenerfahrung hinzufügen"
+    },
+    "Socials": {
+      "no-socials": "Keine Socials angegeben",
+      "save": "Socials speichern"
+    },
+    "Skills": {
+      "skills": "Fähigkeiten",
+      "add-new": "Neue Fähigkeit hinzufügen"
+    },
+    "Projects": {
+      "projects": "Projekte",
+      "view-repo": "Repo anzeigen",
+      "view-demo": "Demo anzeigen",
+      "title": "Titel",
+      "collaborators": "Mitarbeiter",
+      "add-collaborator": "Neuen Mitarbeiter hinzufügen",
+      "description": "Beschreibung",
+      "start-date": "Startdatum",
+      "end-date": "Enddatum",
+      "repo-link": "Repo-Link",
+      "demo-link": "Demo-Link",
+      "save": "Projekt speichern",
+      "add-new": "Neues Projekt hinzufügen"
+    },
+    "Privacy": {
+      "save": "Datenschutzeinstellungen speichern"
+    },
+    "Locked": {
+      "private-account": "Privates Konto",
+      "send": "Senden",
+      "link-req-to-view-profile": "Link-Anfrage, um ihr Profil anzuzeigen"
+    },
+    "Languages": {
+      "languages": "Sprachen",
+      "elementary": "Elementar",
+      "limited-working": "Eingeschränkte Arbeitsfähigkeit",
+      "pro-working": "Professionelle Arbeitsfähigkeit",
+      "full-pro": "Volle berufliche Arbeitsfähigkeit",
+      "native": "Muttersprachler",
+      "add-new": "Neue Sprache hinzufügen"
+    },
+    "JobHunt": {
+      "select-keywords": "Wähle Schlüsselwörter, um benachrichtigt zu werden",
+      "save": "Einstellungen für Jobbenachrichtigungen speichern"
+    },
+    "Experience": {
+      "experience": "Erfahrung",
+      "title": "Titel",
+      "location": "Ort",
+      "employer": "Arbeitgeber",
+      "start-date": "Startdatum",
+      "end-date": "Enddatum",
+      "description": "Beschreibung",
+      "save": "Erfahrung speichern",
+      "add-new": "Neue Erfahrung hinzufügen"
+    },
+    "Education": {
+      "education": "Ausbildung",
+      "program": "Studiengang",
+      "school": "Schule",
+      "location": "Ort",
+      "start-date": "Startdatum",
+      "end-date": "Enddatum",
+      "description": "Beschreibung",
+      "save": "Ausbildung speichern",
+      "add-new": "Neue Ausbildung hinzufügen"
+    },
+    "Documents": {
+      "docs": "Dokumente",
+      "your-docs": "Deine Dokumente",
+      "alert-must-upload-resume": "Du musst einen Lebenslauf hochladen, bevor du fortfahren kannst.",
+      "resume": "Lebenslauf",
+      "resume-placeholder": "Öffentlicher Name des Lebenslaufs",
+      "upload-resume": "Lebenslauf hochladen",
+      "save-resume": "Lebenslauf speichern",
+      "add-resume": "Lebenslauf hinzufügen",
+      "alert-must-upload-cover-letter": "Du musst ein Anschreiben hochladen, bevor du fortfahren kannst.",
+      "cover-letter": "Anschreiben",
+      "cover-letter-placeholder": "Öffentlicher Name des Anschreibens",
+      "upload-cover-letter": "Anschreiben hochladen",
+      "save-cover-letter": "Anschreiben speichern",
+      "add-cover-letter": "Anschreiben hinzufügen"
+    },
+    "Courses": {
+      "courses": "Kurse",
+      "title": "Titel",
+      "course-number": "Kursnummer",
+      "description": "Beschreibung",
+      "save": "Kurs speichern",
+      "add-new": "Neuen Kurs hinzufügen"
+    },
+    "Contact": {
+      "contact": "Kontakt",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "save": "Kontakte speichern"
+    },
+    "CodingLanguages": {
+      "coding-languages": "Programmiersprachen",
+      "add-new": "Neue Programmiersprache hinzufügen"
+    },
+    "Certifications": {
+      "certifications": "Zertifizierungen",
+      "view-credential": "Zugangsdaten anzeigen",
+      "cert-name": "Name der Zertifizierung",
+      "issuer": "Herausgeber",
+      "date": "Datum",
+      "cert-link": "Link zur Zertifizierung",
+      "save": "Zertifizierung speichern",
+      "add-new": "Neue Zertifizierung hinzufügen"
+    },
+    "Awards": {
+      "awards": "Auszeichnungen",
+      "title": "Auszeichnungstitel",
+      "date": "Datum",
+      "description": "Beschreibung",
+      "save": "Auszeichnung speichern",
+      "add-new": "Neue Auszeichnung hinzufügen"
+    }
+  },
+  "Notification": {
+    "Header": {
+      "loading": "Laden"
+    }
+  },
+  "MessageModal": {
+    "message": "Nachricht",
+    "send": "Senden",
+    "a-message": "eine Nachricht",
+    "close": "Schließen"
+  },
+  "Jobs": {
+    "Search": {
+      "search": "Suchen"
+    },
+    "PostFooter": {
+      "edit": "Stellenanzeige bearbeiten",
+      "view": "Bewerber ansehen",
+      "delete": "Stellenanzeige löschen"
+    },
+    "PostBody": {
+      "location": "Ort: ",
+      "deadline": "Bewerbungsfrist: ",
+      "resume-required": "Lebenslauf erforderlich: ",
+      "cover-letter-required": "Anschreiben erforderlich: ",
+      "yes": "Ja",
+      "no": "Nein",
+      "hidden": "Versteckt: ",
+      "keywords": "🔑 Schlüsselwörter:",
+      "none": "Keine",
+      "apply-via": "Bewerbung über",
+      "skills": "💪 Fähigkeiten: "
+    },
+    "FullJobCard": {
+      "full-time": "Vollzeit",
+      "part-time": "Teilzeit",
+      "internship": "Praktikum",
+      "apply-before": "Bewerben bis ",
+      "submit-with-res-and-cl": "Mit Lebenslauf und Anschreiben bewerben",
+      "submit-with-cl": "Mit Anschreiben bewerben",
+      "submit-with-resume": "Mit Lebenslauf bewerben",
+      "apply": "Bewerben",
+      "alert-need-resume": "Sie benötigen einen Lebenslauf, um sich auf diese Stelle zu bewerben.",
+      "alert-need-cl": "Sie benötigen ein Anschreiben, um sich auf diese Stelle zu bewerben.",
+      "alert-app-sent": "Bewerbung gesendet!",
+      "quick-apply": "Schnellbewerbung ",
+      "job-application": "Bewerbung für Stelle",
+      "resume": "Lebenslauf",
+      "upload-resume": "Lebenslauf hochladen",
+      "cover-letter": "Anschreiben",
+      "upload-cover-letter": "Anschreiben hochladen",
+      "cancel": "Abbrechen",
+      "send-application": "Bewerbung senden",
+      "cover-letter-filename": "Dateiname des Anschreibens",
+      "resume-filename": "Dateiname des Lebenslaufs"
+    },
+    "ExternalApplications": {
+      "external-applications": "Externe Bewerbungen",
+      "platform": "Plattform",
+      "job-url": "Stellen-URL",
+      "save": "Externe Anzeige speichern",
+      "add-new": "Neue externe Bewerbung hinzufügen"
+    },
+    "EditPosting": {
+      "alert-posting-incomplete": "Stellenanzeige unvollständig",
+      "company": "Unternehmen",
+      "has-posted-new": "hat eine neue Stelle ausgeschrieben",
+      "job-name": "Stellenbezeichnung",
+      "full-time": "Vollzeit",
+      "part-time": "Teilzeit",
+      "internship": "Praktikum",
+      "description": "Stellenbeschreibung",
+      "location": "Standort",
+      "app-deadline": "Bewerbungsfrist",
+      "keywords": "Schlüsselwörter",
+      "save-skills": "Fähigkeiten speichern",
+      "edit-skills": "Fähigkeiten bearbeiten",
+      "resume-required": "Lebenslauf erforderlich?",
+      "cl-required": "Anschreiben erforderlich?",
+      "external-app": "Externe Bewerbung?",
+      "hide": "Stellenanzeige ausblenden?",
+      "create-posting": "Stellenanzeige erstellen",
+      "update-posting": "Stellenanzeige aktualisieren"
+    },
+    "Keywords": {
+      "search": "Schlüsselwörter suchen"
+    }
+  },
+  "Icons": {
+    "JobHunt": {
+      "receive-notifs": "Sie werden Benachrichtigungen über Stellenangebote erhalten.",
+      "no-notifs": "Sie werden keine Benachrichtigungen über Stellenangebote erhalten."
+    },
+    "Link": {
+      "link": "Verknüpfen",
+      "unlink": "Verknüpfung aufheben"
+    },
+    "Privacy": {
+      "private": "Ihr Profil ist privat.",
+      "public": "Ihr Profil ist öffentlich."
+    },
+    "Verified": {
+      "verified": " Verifiziert",
+      "not-verified": " Nicht verifiziert"
+    }
+  },
+  "DM": {
+    "TimeDivider": {
+      "1-day-ago": "Vor 1 Tag",
+      "2-days-ago": "Vor 2 Tagen"
+    },
+    "CreateChatModal": {
+      "confirm-go-to-chat": "Zu Chats wechseln?",
+      "alert-sent": "Nachricht gesendet!",
+      "write-message": "Schreiben Sie Ihre Nachricht..."
+    }
+  },
+  "DeleteAccountOAuth": {
+    "login-prompt": "Bitte loggen Sie sich mit einer der unten aufgeführten Methoden ein, bevor Sie Ihr Konto löschen.",
+    "login-goog": "Mit Google anmelden",
+    "auth-err": "Authentifizierungsfehler. Bitte versuchen Sie es erneut mit der Anmeldung.",
+    "delete-warning": "Diese Aktion ist unwiderruflich. Ihr Konto und alle zugehörigen Daten werden dauerhaft gelöscht.",
+    "delete": "Konto löschen",
+    "close": "Schließen"
+  },
+  "DeleteAccountEmail": {
+    "delete-warning": "Diese Aktion ist unwiderruflich. Ihr Konto und alle zugehörigen Daten werden dauerhaft gelöscht.",
+    "pw-prompt": "Bitte geben Sie Ihr Passwort ein",
+    "pw-placeholder": "Passwort",
+    "bad-pw": "Falsches Passwort.",
+    "delete": "Konto löschen",
+    "close": "Schließen"
+  },
+  "DeleteAccount": {
+    "delete": "Konto löschen"
+  },
+  "CreatePost": {
+    "CreatePostGroup": {
+      "alert-no-content": "Kein Inhalt zum Posten",
+      "alert-posted": "Gepostet!",
+      "alert-failed": "Fehler beim Hochladen des Bildes"
+    },
+    "PreviewAttachments": {
+      "preview": "Vorschau von Anhängen"
+    },
+    "CreatePost": {
+      "create": "Post erstellen",
+      "write-anything": "Schreiben Sie alles, was Sie möchten",
+      "placeholder": "Hier Text eingeben...",
+      "support-markdown": "Beiträge unterstützen Markdown. Verwenden Sie Backticks, um Code und mehr zu schreiben!",
+      "visit-guide": "Besuchen Sie den Markdown-Leitfaden",
+      "for-more-info": "für weitere Informationen.",
+      "edit": "Bearbeiten",
+      "preview": "Vorschau"
+    }
+  },
+  "Card": {
+    "FullPostCard": {
+      "no-comments": "Es gibt keine Kommentare hier.",
+      "now-time": "Jetzt ist die Zeit, um Ihre Stimme zu erheben."
+    }
+  },
+  "Button": {
+    "Link": {
+      "links": "Links",
+      "would-like-link": " möchte sich mit Ihnen verbinden!",
+      "alert-sent": "Link-Anfrage gesendet!",
+      "confirm-unlink": "Möchten Sie wirklich die Verbindung trennen?",
+      "cancel": "Link-Anfrage abbrechen"
+    },
+    "LoadMore": {
+      "load-more": "Mehr laden...",
+      "loading": "Wird geladen..."
+    },
+    "Post": {
+      "post": "Posten"
+    },
+    "Remove": {
+      "remove": "Entfernen"
+    },
+    "UploadMedia": {
+      "upload": "Medien hochladen"
+    }
+  },
+
+  "Register": {
+    "create": "Konto erstellen",
+    "register": "Registrieren",
+    "register-goog": "Mit Google registrieren",
+    "already-have-account": "Sie haben bereits ein Konto? Anmelden"
+  },
+  "PreviewProfile": {
+    "profile": "Ihr Profil",
+    "must-be-logged": "Sie müssen angemeldet sein, um Ihr Profil anzuzeigen.",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "uid": {
+      "loading": "Wird geladen...",
+      "invalid": "Ungültiger Benutzer.",
+      "links": {
+        "login-first": "Sie sollten sich zuerst anmelden.",
+        "sign-in": "Anmelden",
+        "register": "Registrieren",
+        "load-more": "Mehr laden...",
+        "no-more": "Keine weiteren Links"
+      }
+    }
+  },
+  "NotificationsPage": {
+    "alert-must-login": "Du musst angemeldet sein, um deine Benachrichtigungen zu sehen",
+    "loading": "Laden...",
+    "notifications": "Benachrichtigungen",
+    "read-all": "Alle Lesen",
+    "empty": "Wow, so leer"
+  },
+  "ManageJobs": {
+    "loading": "Laden...",
+    "should-login": "Du solltest dich zuerst anmelden.",
+    "sign-in": "Anmelden",
+    "register": "Registrieren",
+    "create-posting": "Erstelle eine Jobausschreibung",
+    "create-job": "Neuen Job erstellen",
+    "your-postings": "Deine Jobausschreibungen",
+    "jid": {
+      "view-applicants": "Bewerber anzeigen",
+      "loading": "Laden...",
+      "should-login": "Du solltest dich zuerst anmelden.",
+      "sign-in": "Anmelden",
+      "register": "Registrieren",
+      "job-no-exist": "Job existiert nicht",
+      "no-applications": "Noch keine Bewerbungen "
+    }
+  },
+  "Login": {
+    "alert-failed": "Anmeldung fehlgeschlagen",
+    "welcome": "Willkommen zurück",
+    "login": "Anmelden",
+    "login-goog": "Mit Google anmelden",
+    "no-account": "Du hast noch keinen Account? Registrieren"
+  },
+  "Locked": {
+    "welcome": "Willkommen",
+    "up-to-no-good": "Sieht so aus, als hättest du Unsinn getrieben.",
+    "account-locked": "Dein Account wurde gesperrt. Oh oh ",
+    "return": "Zurück zur Startseite",
+    "account-timeout": "Du bist für ",
+    "timeout-mins": "Minuten gesperrt. Oh oh "
+  },
+  "JobsFeed": {
+    "jobs-feed": "Jobangebote",
+    "loading": "Laden...",
+    "should-login": "Du solltest dich zuerst anmelden.",
+    "sign-in": "Anmelden",
+    "register": "Registrieren",
+    "find": "Finde neue Arbeitsplätze.",
+    "full-time": "Vollzeit",
+    "part-time": "Teilzeit",
+    "internship": "Praktikum"
+  },
+  "Feed": {
+    "feed": "Dein Neuigkeiten",
+    "loading": "Ladevorgang...",
+    "should-login": "Du solltest dich zuerst anmelden.",
+    "sign-in": "Anmelden",
+    "register": "Registrieren",
+    "see-what-links-talkinbout": "Lass uns sehen, worüber deine Links sprechen.",
+    "load-more": "Mehr laden...",
+    "no-more": "Keine weiteren Beiträge "
+  },
+  "EditProfile": {
+    "profile": "Dein Profil",
+    "should-login": "Du solltest dich zuerst anmelden.",
+    "login": "Anmelden",
+    "register": "Registrieren",
+    "confirm-unsaved": "Ungespeicherte Änderungen gehen verloren. Fortfahren?",
+    "alert-success": "Dein Profil wurde erfolgreich aktualisiert!",
+    "edit-profile": "Profil bearbeiten",
+    "save": "Änderungen speichern",
+    "manage": "Profil verwalten",
+    "sorry": "Wir bedauern, dass du gehen möchtest. Klicke auf die Schaltfläche unten, um dein Konto und alle Informationen dauerhaft zu löschen.",
+    "delete": "Konto löschen"
+  },
+  "DMPage": {
+    "dms": "Deine Nachrichten",
+    "strength": "Stärke dein Netzwerk",
+    "uid": {
+      "dms": "Deine Nachrichten",
+      "should-login": "Du musst dich anmelden, um deine Nachrichten zu sehen.",
+      "user": "Benutzer ",
+      "bad-etiquette": " wurde wegen schlechter Nachrichten-Etikette gemeldet.",
+      "login": "Anmelden",
+      "register": "Registrieren",
+      "alert-reported": "Benutzer gemeldet!",
+      "alert-already-reported": "Du hast diesen Benutzer bereits gemeldet.",
+      "report": "Diesen Benutzer melden"
+    }
+  },
+  "Admin": {
+    "loading": "Ladevorgang...",
+    "reports": "Meldungen",
+    "list-banned": "Liste gesperrter Benutzer",
+    "read-all": "Alle lesen",
+    "empty": "Wow, so leer",
+    "lockedList": {
+      "loading": "Ladevorgang...",
+      "unban": "Konto entsperren",
+      "return": "Zurück zu den Meldungen"
+    },
+    "uid": {
+      "loading": "Ladevorgang...",
+      "participants-loading": "Teilnehmer werden geladen...",
+      "participants": "Teilnehmer",
+      "has-reported": " hat diese Unterhaltung gemeldet",
+      "report-message": "Nachricht melden",
+      "lock": "Sperren von ",
+      "timeout": "Timeout von ",
+      "saccount": " Konto",
+      "discard": "Meldung verwerfen"
+    }
+  }
+}

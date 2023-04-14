@@ -1,6 +1,7 @@
 import { Post } from '@/types/Post';
 import { User } from '@/types/User';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 

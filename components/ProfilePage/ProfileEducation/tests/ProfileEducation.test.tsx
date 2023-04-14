@@ -1,10 +1,8 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import ProfileEducation from '../ProfileEducation';
-import { Dispatch, SetStateAction } from 'react';
-import { User } from '@/types/User';
-import { act } from 'react-dom/test-utils';
+import { render } from '@/renderWrapper';
 
 let mockedDate = {
   toDate: () => {

@@ -1,9 +1,9 @@
-import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import PrivacyIcon from '@/components/Icons/PrivacyIcon/PrivacyIcon';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
+import { useTranslations } from 'next-intl';
 
 export default function ProfilePrivacy({
   isEditable = false,
@@ -18,6 +18,7 @@ export default function ProfilePrivacy({
   privacyEditing?: boolean;
   setPrivacyEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const t = useTranslations('Profile.Privacy');
   // live version
   if (!isEditable) {
     return (
@@ -63,7 +64,7 @@ export default function ProfilePrivacy({
               </div>
               <div>
                 <Button className="mt-3" type="submit">
-                  Save Privacy Settings
+                  {t('save')}
                 </Button>
               </div>
             </div>

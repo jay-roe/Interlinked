@@ -4,7 +4,7 @@ import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
 import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function linkAcceptNotification({
   notification,

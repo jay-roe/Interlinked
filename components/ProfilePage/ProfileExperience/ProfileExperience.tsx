@@ -7,7 +7,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
-import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileExperience({
   experience,
@@ -22,12 +22,14 @@ export default function ProfileExperience({
   setExperienceEditing?: Dispatch<SetStateAction<boolean[]>>;
   setExperience?: Dispatch<SetStateAction<User['experience']>>;
 }) {
+  const t = useTranslations('Profile.Experience');
+
   if (!isEditable) {
     if (!experience || !experience[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
+        <h2 className="text-2xl font-extrabold">{t('experience')} 🏢</h2>
         <CardStack>
           {experience.map((exp, index) => (
             <div key={index} data-testid={`live-exp-${index}`}>
@@ -49,7 +51,7 @@ export default function ProfileExperience({
   }
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Experience 🏢</h2>
+      <h2 className="text-2xl font-extrabold">{t('experience')} 🏢</h2>
       {experience.map((exp, index) => (
         <form
           key={index}
@@ -66,7 +68,7 @@ export default function ProfileExperience({
           {experienceEditing && experienceEditing[index] ? (
             <div className="mr-2 mb-3">
               <label>
-                Title <span className="text-yellow-600">*</span>
+                {t('title')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-exp-title-${index}`}
@@ -84,7 +86,7 @@ export default function ProfileExperience({
                 required
               />
               <label>
-                Location <span className="text-yellow-600">*</span>
+                {t('location')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-exp-location-${index}`}
@@ -101,7 +103,7 @@ export default function ProfileExperience({
                 required
               />
               <label>
-                Employer <span className="text-yellow-600">*</span>
+                {t('employer')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-exp-employer-${index}`}
@@ -121,7 +123,7 @@ export default function ProfileExperience({
               <div className="flex flex-wrap gap-2">
                 <div className="w-full">
                   <label>
-                    Start Date <span className="text-yellow-600">*</span>
+                    {t('start-date')} <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
                     data-testid={`edit-exp-startDate-${index}`}
@@ -147,7 +149,7 @@ export default function ProfileExperience({
                   />
                 </div>
                 <div className="w-full">
-                  <label>End Date</label>
+                  <label>{t('end-date')}</label>
                   <InputField
                     data-testid={`edit-exp-endDate-${index}`}
                     type="date"
@@ -166,7 +168,7 @@ export default function ProfileExperience({
                   />
                 </div>
               </div>
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`edit-exp-description-${index}`}
                 name="info"
@@ -209,7 +211,7 @@ export default function ProfileExperience({
                   type="submit"
                   data-testid={`exp-save-btn-${index}`}
                 >
-                  Save Experience
+                  {t('save')}
                 </Button>
               ) : (
                 <EditButton
@@ -258,7 +260,7 @@ export default function ProfileExperience({
             setExperienceEditing((exedits) => [...exedits, true]);
           }}
         >
-          Add New Experience
+          {t('add-new')}
         </Button>
       )}
     </div>

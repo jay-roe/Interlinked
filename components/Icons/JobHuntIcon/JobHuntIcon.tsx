@@ -1,11 +1,12 @@
-import { MdWork } from 'react-icons/md';
-import { MdWorkOff } from 'react-icons/md';
+import { useTranslations } from 'next-intl';
+import { MdWork, MdWorkOff } from 'react-icons/md';
 
 export default function JobHuntIcon({
   isWantJobNotif,
 }: {
   isWantJobNotif: boolean;
 }) {
+  const t = useTranslations('Icons.JobHunt');
   return (
     <div
       data-testid="jobHunt"
@@ -15,7 +16,7 @@ export default function JobHuntIcon({
         <div className="flex items-center justify-between gap-2">
           <MdWork size={30} />
           <div className="ml-2 self-center">
-            <p>You will recieve job opportunity notifications</p>
+            <p>{t('receive-notifs')}</p>
           </div>
         </div>
       ) : (
@@ -23,7 +24,7 @@ export default function JobHuntIcon({
         <div className="flex items-center justify-between gap-2">
           <MdWorkOff size={30} />
           <div className="ml-2 self-center">
-            <p>You will not recieve job opportunity notifications</p>
+            <p>{t('no-notifs')}</p>
           </div>
         </div>
       )}

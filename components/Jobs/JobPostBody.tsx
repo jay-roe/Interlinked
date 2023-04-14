@@ -6,9 +6,11 @@ import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import Button from '../Buttons/Button';
+import { useTranslations } from 'next-intl';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic
+  const t = useTranslations('Jobs.PostBody');
   return (
     <div className="mb-3 flex flex-col space-y-2 border-y-2 border-y-white border-opacity-10 p-2">
       {jobPost?.title ? (
@@ -31,7 +33,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         data-testid="job-post-location"
       >
         <HiLocationMarker className="my-auto text-accent-orange" />
-        <p>{'Location: ' + jobPost?.location}</p>
+        <p>{t('location') + jobPost?.location}</p>
       </div>
       <div className="flex space-x-1 align-middle">
         <AiOutlineClockCircle className="my-auto text-accent-orange" />
@@ -39,7 +41,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
           data-testid="test-date"
           className="text-sm font-light max-md:hidden"
         >
-          {'Deadline: ' +
+          {t('deadline') +
             jobPost?.deadline?.toDate().toLocaleString('en-US', {
               month: 'long',
               year: 'numeric',
@@ -49,7 +51,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
             }) || 'Unknown'}
         </div>
         <div className="text-sm font-light md:hidden">
-          {'Deadline: ' +
+          {t('deadline') +
             jobPost?.deadline?.toDate().toLocaleString('en-US', {
               month: '2-digit',
               year: '2-digit',
@@ -62,13 +64,15 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
       </div>
       <div className="flex space-x-1 align-middle" data-testid="job-post-cv">
         <AiOutlinePaperClip className="my-auto text-accent-orange" />
-        <p>{'Resume Required: ' + (jobPost?.cvRequired ? 'Yes' : 'No')}</p>
+        <p>
+          {t('resume-required') + (jobPost?.cvRequired ? t('yes') : t('no'))}
+        </p>
       </div>
       <div className="flex space-x-1 align-middle" data-testid="job-post-cl">
         <AiOutlinePaperClip className="my-auto text-accent-orange" />
         <p>
-          {'Cover Letter Required: ' +
-            (jobPost?.coverLetterRequired ? 'Yes' : 'No')}
+          {t('cover-letter-required') +
+            (jobPost?.coverLetterRequired ? t('yes') : t('no'))}
         </p>
       </div>
       <div
@@ -76,13 +80,13 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         data-testid="job-post-hidden"
       >
         <AiOutlineEye className="my-auto text-accent-orange" />
-        <p>{'Hidden: ' + (jobPost?.hidden ? 'Yes' : 'No')}</p>
+        <p>{t('hidden') + (jobPost?.hidden ? t('yes') : t('no'))}</p>
       </div>
       <div data-testid="job-post-keywords">
-        🔑 Keywords:{' '}
+        {t('keywords')}{' '}
         {jobPost?.keywords && jobPost?.keywords.length > 0
           ? jobPost.keywords.map((kw) => kw.keyword).join(', ')
-          : 'None'}
+          : t('none')}
       </div>
       <div data-testid="job-post-external">
         {jobPost?.externalApplications?.map((externalApp, index) => (
@@ -93,7 +97,9 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
               rel="noreferrer"
               className="inline"
             >
-              <Button>Apply via {externalApp.name}</Button>
+              <Button>
+                {t('apply-via')} {externalApp.name}
+              </Button>
             </a>
             <br />
           </div>
@@ -104,9 +110,9 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
         data-testid="job-post-skills"
       >
         <p>
-          {'💪 Skills: ' +
+          {t('skills') +
             (jobPost?.skills.length === 0
-              ? 'None'
+              ? t('none')
               : jobPost?.skills.join(', '))}
         </p>
       </div>

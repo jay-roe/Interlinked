@@ -7,7 +7,7 @@ import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
-import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileVolunteering({
   volunteering,
@@ -22,12 +22,14 @@ export default function ProfileVolunteering({
   setVolunteeringEditing?: Dispatch<SetStateAction<boolean[]>>;
   setVolunteering?: Dispatch<SetStateAction<User['volunteering']>>;
 }) {
+  const t = useTranslations('Profile.Volunteering');
+
   if (!isEditable) {
     if (!volunteering || !volunteering[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+        <h2 className="text-2xl font-extrabold">{t('experience')}</h2>
         <CardStack>
           {volunteering?.map((vol, index) => (
             <div key={index} data-testid={`live-vol-${index}`}>
@@ -49,7 +51,7 @@ export default function ProfileVolunteering({
   }
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Volunteering Experience</h2>
+      <h2 className="text-2xl font-extrabold">{t('experience')}</h2>
       {volunteering.map((vol, index) => (
         <form
           key={index}
@@ -66,7 +68,7 @@ export default function ProfileVolunteering({
           {volunteeringEditing && volunteeringEditing[index] ? (
             <div className="mr-2 mb-3">
               <label>
-                Title <span className="text-yellow-600">*</span>
+                {t('title')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-vol-title-${index}`}
@@ -84,7 +86,7 @@ export default function ProfileVolunteering({
                 required
               />
               <label>
-                Location <span className="text-yellow-600">*</span>
+                {t('location')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-vol-location-${index}`}
@@ -101,7 +103,7 @@ export default function ProfileVolunteering({
                 required
               />
               <label>
-                Organization <span className="text-yellow-600">*</span>
+                {t('organization')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`edit-vol-organization-${index}`}
@@ -121,7 +123,7 @@ export default function ProfileVolunteering({
               <div className="flex flex-wrap gap-2">
                 <div className="w-full">
                   <label>
-                    Start Date <span className="text-yellow-600">*</span>
+                    {t('start-date')} <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
                     data-testid={`edit-vol-startDate-${index}`}
@@ -147,7 +149,7 @@ export default function ProfileVolunteering({
                   />
                 </div>
                 <div className="w-full">
-                  <label>End Date</label>
+                  <label>{t('end-date')}</label>
                   <InputField
                     data-testid={`edit-vol-endDate-${index}`}
                     type="date"
@@ -168,7 +170,7 @@ export default function ProfileVolunteering({
                   />
                 </div>
               </div>
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`edit-vol-description-${index}`}
                 name="info"
@@ -211,7 +213,7 @@ export default function ProfileVolunteering({
                   type="submit"
                   data-testid={`vol-save-btn-${index}`}
                 >
-                  Save Volunteering Experience
+                  {t('save-experience')}
                 </Button>
               ) : (
                 <EditButton
@@ -260,7 +262,7 @@ export default function ProfileVolunteering({
             setVolunteeringEditing((voledits) => [...voledits, true]);
           }}
         >
-          Add New Volunteering Experience
+          {t('add-new')}
         </Button>
       )}
     </div>
