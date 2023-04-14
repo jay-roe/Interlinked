@@ -15,7 +15,7 @@ export default function Register() {
   const t = useTranslations('Register');
   const router = useRouter();
   const locale = useLocale();
-  const { authUser, register, loginWithGoogle } = useAuth();
+  const { currentUser, authUser, register, loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
 
   const [email, setEmail] = useState('');
@@ -28,7 +28,11 @@ export default function Register() {
     if (authUser) {
       router.push('/' + locale + '/');
     }
-  }, [authUser, router]);
+    // if account is locked or timed out, redirect to locked page
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [authUser, currentUser, router]);
 
   async function handleFormSubmit(e: React.MouseEvent) {
     e.preventDefault();

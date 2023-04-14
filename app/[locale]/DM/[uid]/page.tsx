@@ -29,10 +29,13 @@ import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function ChatRoom({ params }) {
   const t = useTranslations('DMPage.uid');
+  const router = useRouter();
+  const locale = useLocale();
   const { currentUser, authUser } = useAuth();
   let adminId = '85C6Pe9p0VehxlqlQqNJlSP55Wn1'; // THIS IS ABSOLUTE BUFFOONERY I TELL YOU
 
@@ -52,6 +55,13 @@ export default function ChatRoom({ params }) {
 
   // reference to the hidden input so a custom button may be used
   const hiddenFileInput = useRef(null);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (!chatRoomRef || !authUser) return;

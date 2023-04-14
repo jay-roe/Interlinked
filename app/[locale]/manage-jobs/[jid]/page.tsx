@@ -11,14 +11,24 @@ import Link from '@/components/Link/Link';
 
 import { useEffect, useState } from 'react';
 import { GrDocumentDownload } from 'react-icons/gr';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function JobDetails({ params }) {
   const t = useTranslations('ManageJobs.jid');
+  const router = useRouter();
+  const locale = useLocale();
   const jobId = params.jid;
   const { currentUser, authUser } = useAuth();
   const [job, setJob] = useState<JobPosting>();
   const [loading, setLoading] = useState(true);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     const fetchJobPosting = async () => {
