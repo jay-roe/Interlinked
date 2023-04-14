@@ -349,7 +349,8 @@
     "create": "Konto erstellen",
     "register": "Registrieren",
     "register-goog": "Mit Google registrieren",
-    "already-have-account": "Sie haben bereits ein Konto? Anmelden"
+    "already-have-account": "Sie haben bereits ein Konto? Anmelden",
+    "passwords-do-not-match": "Passwörter stimmen nicht überein."
   },
   "PreviewProfile": {
     "profile": "Ihr Profil",

@@ -34,7 +34,7 @@ export default function Register() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return alert('Passwords do not match');
+      return alert(t('passwords-do-not-match'));
     }
 
     try {
