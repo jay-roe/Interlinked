@@ -7,6 +7,10 @@ import Feeds from '../page';
 import React from 'react';
 import { User } from '@/types/User';
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
   typeCollection: jest.fn(),
