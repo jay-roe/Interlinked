@@ -6,10 +6,12 @@ import { FiMenu, FiBell, FiSearch } from 'react-icons/fi';
 import { HiOutlineXMark } from 'react-icons/hi2';
 import { useAuth } from '../../contexts/AuthContext';
 import { User, Admin } from '@/types/User';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 import { usePathname } from 'next/navigation';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';
+import { useTranslations } from 'next-intl';
+import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -19,6 +21,7 @@ export default function NavBar() {
   const [showSearch, setShowSearch] = useState(false);
   const { currentUser, currentAdmin, logout } = useAuth();
   const pathname = usePathname();
+  const t = useTranslations('NavBar');
 
   // Allow state access in SearchBar component
   const toggleSearch = () => {
@@ -35,28 +38,28 @@ export default function NavBar() {
   ) {
     if (currentUser && currentUser.isCompany) {
       return [
-        { name: 'Home', href: '/', current: true },
-        { name: 'Manage Postings', href: '/manage-jobs', current: false },
+        { name: t('home'), href: '/', current: true },
+        { name: t('manage-postings'), href: '/manage-jobs', current: false },
       ];
     }
     if (currentUser) {
       return [
-        { name: 'Home', href: '/', current: true },
-        { name: 'Feed', href: '/feed', current: false },
-        { name: 'Jobs', href: '/job-feed', current: false },
+        { name: t('home'), href: '/', current: true },
+        { name: t('feed'), href: '/feed', current: false },
+        { name: t('jobs'), href: '/job-feed', current: false },
       ];
     } else if (currentAdmin) {
-      return [{ name: 'Reports', href: '/admin', current: true }];
+      return [{ name: t('reports'), href: '/admin', current: true }];
     } else {
       return [
-        { name: 'Home', href: '/', current: true },
+        { name: t('home'), href: '/', current: true },
         {
-          name: 'Login',
+          name: t('login'),
           href: '/login',
           dataTestid: 'nav-login',
           current: false,
         },
-        { name: 'Register', href: '/register', current: false },
+        { name: t('register'), href: '/register', current: false },
       ];
     }
   })(currentUser, currentAdmin);
@@ -72,7 +75,7 @@ export default function NavBar() {
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
                   <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">{t('open-main-menu')}</span>
                     {open ? (
                       <HiOutlineXMark
                         className="block h-6 w-6"
@@ -93,6 +96,7 @@ export default function NavBar() {
                       INTERLINKED
                     </h1>
                   </div>
+                  <LocaleSwitcher/>
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navLinks.map((item, index) => (
@@ -125,7 +129,7 @@ export default function NavBar() {
                       className="rounded-full bg-gray-800 p-1 text-gray-400 transition-all hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                       onClick={toggleSearch}
                     >
-                      <span className="sr-only">Search</span>
+                      <span className="sr-only">{t('search')}</span>
                       <FiSearch size={24} aria-hidden="true" />
                     </button>
 
@@ -136,7 +140,7 @@ export default function NavBar() {
                       onClick={hideSearch}
                       data-testid="nav-dm"
                     >
-                      <span className="sr-only">DMs</span>
+                      <span className="sr-only">{t('dms')}</span>
                       <FaRegCommentDots size={24} aria-hidden="true" />
                     </Link>
 
@@ -146,7 +150,7 @@ export default function NavBar() {
                       type="button"
                       className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     >
-                      <span className="sr-only">View notifications</span>
+                      <span className="sr-only">{t('view-notifications')}</span>
                       <FiBell size={24} aria-hidden="true" />
                     </Link>
 
@@ -158,7 +162,7 @@ export default function NavBar() {
                           data-testid="nav-menu"
                           className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                         >
-                          <span className="sr-only">Open user menu</span>
+                          <span className="sr-only">{t('open-user-menu')}</span>
                           <ImageOptimized
                             className="h-8 w-8 rounded-full"
                             src={currentUser.profilePicture}
@@ -184,7 +188,7 @@ export default function NavBar() {
                               data-testid="nav-menu-profile"
                               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Your Profile
+                              {t('profile')}
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
@@ -193,7 +197,7 @@ export default function NavBar() {
                               href="/edit-profile"
                               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Edit Profile
+                              {t('edit-profile')}
                             </Link>
                           </Menu.Item>
                           <Menu.Item>
@@ -202,7 +206,7 @@ export default function NavBar() {
                               data-testid="nav-logout"
                               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Log out
+                              {t('logout')}
                             </button>
                           </Menu.Item>
                         </Menu.Items>
@@ -220,7 +224,7 @@ export default function NavBar() {
                           data-testid="nav-menu"
                           className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                         >
-                          <span className="sr-only">Open user menu</span>
+                          <span className="sr-only">{t('open-user-menu')}</span>
                           <ImageOptimized
                             className="h-8 w-8 rounded-full"
                             src={currentAdmin.profilePicture}
@@ -246,7 +250,7 @@ export default function NavBar() {
                               data-testid="nav-logout"
                               className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                             >
-                              Log out
+                              {t('logout')}
                             </button>
                           </Menu.Item>
                         </Menu.Items>

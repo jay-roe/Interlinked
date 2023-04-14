@@ -4,7 +4,8 @@ import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
 import { JobPosting } from '@/types/JobPost';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 export default function ExternalApplication({
   externalApplications,
@@ -19,6 +20,7 @@ export default function ExternalApplication({
   setApplicationEditing?: Dispatch<SetStateAction<boolean[]>>;
   setApplication?: Dispatch<SetStateAction<JobPosting['externalApplications']>>;
 }) {
+  const t = useTranslations('Jobs.ExternalApplications');
   // Live version of externalApplications component
   if (!isEditable) {
     if (!externalApplications || !externalApplications[0]) return;
@@ -26,7 +28,7 @@ export default function ExternalApplication({
     return (
       <div className="mb-7">
         <h2 className="mb-2 text-2xl font-extrabold">
-          External Applications 🔗
+          {t('external-applications')} 🔗
         </h2>
         <ul className="inline-flex flex-wrap">
           {externalApplications.map((externalApp, index) => (
@@ -47,7 +49,9 @@ export default function ExternalApplication({
   // editable version
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">External Applications 🔗</h2>
+      <h2 className="text-2xl font-extrabold">
+        {t('external-applications')} 🔗
+      </h2>
       {externalApplications.map((externalApp, index) => (
         <form
           action=""
@@ -67,7 +71,7 @@ export default function ExternalApplication({
             <div className="mr-2 mb-3 flex flex-row space-x-3">
               <div>
                 <label>
-                  Platform <span className="text-yellow-600">*</span>
+                  {t('platform')} <span className="text-yellow-600">*</span>
                 </label>
                 <InputField
                   data-testid={`job-platform-input-${index}`}
@@ -88,7 +92,7 @@ export default function ExternalApplication({
               <div className="">
                 {/* If someone could figure out how to make this input field take up the rest of the space that would be great lol */}
                 <label>
-                  Job URL <span className="text-yellow-600">*</span>
+                  {t('job-url')} <span className="text-yellow-600">*</span>
                 </label>
                 <InputField
                   data-testid={`job-url-input-${index}`}
@@ -121,7 +125,7 @@ export default function ExternalApplication({
                   className="mr-2"
                   type="submit"
                 >
-                  Save External Posting
+                  {t('save')}
                 </Button>
               ) : (
                 <EditButton
@@ -162,7 +166,7 @@ export default function ExternalApplication({
             setApplicationEditing((skeditds) => [...skeditds, true]);
           }}
         >
-          Add New External Application
+          {t('add-new')}
         </Button>
       )}
     </div>

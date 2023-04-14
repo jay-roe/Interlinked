@@ -1,12 +1,6 @@
-import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import {
-  findAllByTestId,
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import { Timestamp } from 'firebase/firestore';
 import ProfileAwards from '../ProfileAwards';
 

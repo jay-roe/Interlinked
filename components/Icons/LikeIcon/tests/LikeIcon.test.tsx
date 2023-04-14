@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import LikeIcon from '../LikeIcon';
 
 jest.mock('@/config/firestore', () => ({

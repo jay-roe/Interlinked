@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { act, fireEvent, render } from '@testing-library/react';
+import { act, fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import AddComment from '../AddComment';
 
 jest.mock('@/config/firestore', () => ({

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import 'intersection-observer';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import React from 'react';
 import JobPostHeader from '../JobPostHeader';
 
