@@ -13,7 +13,7 @@ import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function ManagePostings() {
   const t = useTranslations('ManageJobs');
