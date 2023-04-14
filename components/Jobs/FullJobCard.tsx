@@ -42,9 +42,6 @@ export default function Jobs({
   const [tempResume, setTempResume] = useState<Document>(null);
   const [tempCoverLetter, setTempCoverLetter] = useState<Document>(null);
 
-  //sent application star
-  const [sendingApplication, setSendingApplication] = useState<boolean>(true);
-
   // uploading a file from button
 
   const resumeInputRef = useRef(null);
