@@ -1,7 +1,5 @@
 import '@testing-library/jest-dom';
 import { render } from '@/renderWrapper';
-
-import { testUser } from '@/types/User';
 import DMs from '../page';
 import { useAuth } from '@/contexts/AuthContext';
 

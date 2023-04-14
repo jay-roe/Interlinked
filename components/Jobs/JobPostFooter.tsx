@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Button from '../Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import { typeCollection, db } from '@/config/firestore';

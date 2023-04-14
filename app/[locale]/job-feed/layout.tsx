@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-const jobLayout = ({ children }: { children: React.ReactNode }) => {
+const JobLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations('JobsFeed');
   return (
     <div className="container mx-auto text-white">
@@ -18,4 +18,4 @@ const jobLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default jobLayout;
+export default JobLayout;

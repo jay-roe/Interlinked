@@ -1,4 +1,3 @@
-import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import type { Comment } from '@/types/Post';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';

@@ -9,7 +9,6 @@ import {
 } from 'react-icons/ai';
 import { FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
-import FileButton from '../Buttons/FileButton/FileButton';
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { collection, doc, updateDoc } from 'firebase/firestore';

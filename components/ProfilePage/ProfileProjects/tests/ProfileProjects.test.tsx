@@ -1,4 +1,3 @@
-import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
 import { fireEvent, waitFor } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';

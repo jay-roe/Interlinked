@@ -1,6 +1,6 @@
 import type { Post } from '@/types/Post';
 import { User } from '@/types/User';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import PostFooter from '../Post/PostFooter';
 import PostHeader from '../Post/PostHeader';
 import PostBody from '../Post/PostBody';

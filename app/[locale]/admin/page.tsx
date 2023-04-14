@@ -3,7 +3,6 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
 import { FiBell } from 'react-icons/fi';
 import { Report } from '@/types/Report';
 import {
@@ -18,7 +17,7 @@ import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from '@/components/Link/Link';
 import Button from '@/components/Buttons/Button';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 const Admin = () => {
   const t = useTranslations('Admin');

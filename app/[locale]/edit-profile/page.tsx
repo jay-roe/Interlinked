@@ -5,10 +5,9 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import DeleteAccountPopup from '@/components/DeleteAccountPopup/DeleteAccountPopup';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
-import type { User } from '@/types/User';
-import type { Language } from '@/types/User';
+import type { User, Language } from '@/types/User';
 
 import ProfileHeading from '@/components/ProfilePage/ProfileHeading/ProfileHeading';
 import ProfileContact from '@/components/ProfilePage/ProfileContact/ProfileContact';
@@ -34,7 +33,6 @@ import ProfileCertifications from '@/components/ProfilePage/ProfileCertification
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
 import ProfileJobHunt from '@/components/ProfilePage/ProfileJobHunt/ProfileJobHunt';
-import { useTranslations } from 'next-intl';
 
 export default function EditProfile() {
   const t = useTranslations('EditProfile');

@@ -15,10 +15,10 @@ import { useState } from 'react';
 import { FaRegPaperPlane } from 'react-icons/fa';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { createNotification } from '../Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
-import { useTranslations } from 'next-intl';
+
 export default function CreateChatModal({ userUID }: { userUID: string }) {
   const t = useTranslations('DM.CreateChatModal');
   const { currentUser, authUser } = useAuth();

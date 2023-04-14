@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
-import { fireEvent, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 import { render } from '@/renderWrapper';
 
 import Admin from '../page';

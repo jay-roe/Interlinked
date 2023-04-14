@@ -3,12 +3,11 @@
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db } from '@/config/firestore';
 import Button from '@/components/Buttons/Button';
 import Link from '@/components/Link/Link';
-import { useTranslations } from 'next-intl';
 
 const Locked = () => {
   const t = useTranslations('Locked');

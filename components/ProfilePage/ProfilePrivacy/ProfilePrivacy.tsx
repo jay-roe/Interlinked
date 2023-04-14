@@ -1,4 +1,3 @@
-import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';

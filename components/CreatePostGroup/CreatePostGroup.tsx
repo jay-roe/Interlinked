@@ -11,12 +11,7 @@ import {
 } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  StorageReference,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from 'firebase/storage';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '@/config/firebase';
 import { Post } from '@/types/Post';
 import { useTranslations } from 'next-intl';

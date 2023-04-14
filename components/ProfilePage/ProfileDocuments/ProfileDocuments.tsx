@@ -1,6 +1,6 @@
 import type { User } from '@/types/User';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';

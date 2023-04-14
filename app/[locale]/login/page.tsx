@@ -4,12 +4,11 @@ import styles from './Login.module.css';
 import Link from '@/components/Link/Link';
 
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
-import { useTranslations } from 'next-intl';
 
 export default function Login() {
   const t = useTranslations('Login');

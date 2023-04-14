@@ -1,6 +1,5 @@
 import { useTranslations } from 'next-intl';
-import { MdWork } from 'react-icons/md';
-import { MdWorkOff } from 'react-icons/md';
+import { MdWork, MdWorkOff } from 'react-icons/md';
 
 export default function JobHuntIcon({
   isWantJobNotif,

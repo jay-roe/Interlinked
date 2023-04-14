@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-const postingLayout = ({ children }: { children: React.ReactNode }) => {
+const PostingLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations('ManageJobs.jid');
   return (
     <div className="container mx-auto text-white">
@@ -17,4 +17,4 @@ const postingLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default postingLayout;
+export default PostingLayout;

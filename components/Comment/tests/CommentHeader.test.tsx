@@ -1,5 +1,4 @@
 import { useAuth } from '@/contexts/AuthContext';
-import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
 import '@testing-library/jest-dom';
 import { render } from '@/renderWrapper';
 

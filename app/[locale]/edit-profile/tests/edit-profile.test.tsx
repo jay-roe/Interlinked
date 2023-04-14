@@ -5,11 +5,8 @@ import { render } from '@/renderWrapper';
 
 import { useAuth } from '@/contexts/AuthContext';
 import EditProfile from '../page';
-import { db } from '@/config/firestore';
-import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Timestamp } from 'firebase/firestore';
-import { act } from 'react-dom/test-utils';
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),

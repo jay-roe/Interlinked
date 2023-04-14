@@ -1,6 +1,6 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { act, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { render } from '@/renderWrapper';
 import CreatePostGroup from '../CreatePostGroup';
 

@@ -2,8 +2,6 @@ import '@testing-library/jest-dom';
 import { render } from '@/renderWrapper';
 import { useAuth } from '@/contexts/AuthContext';
 import Profile from '../page';
-import { db } from '@/config/firestore';
-import { doc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { Timestamp } from 'firebase/firestore';
 

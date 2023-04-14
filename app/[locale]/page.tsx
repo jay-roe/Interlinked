@@ -1,10 +1,9 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTranslations } from 'next-intl';
 
 const Home = () => {
   const router = useRouter();

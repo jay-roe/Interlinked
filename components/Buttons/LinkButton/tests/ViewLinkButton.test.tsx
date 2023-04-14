@@ -1,5 +1,3 @@
-import { useAuth } from '@/contexts/AuthContext';
-import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import '@testing-library/jest-dom';
 import { render } from '@/renderWrapper';
 import ViewLinkButton from '../ViewLinkButton';

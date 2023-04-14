@@ -3,15 +3,13 @@
 import Link from '@/components/Link/Link';
 
 import styles from './Register.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
-import { useTranslations } from 'next-intl';
 
 export default function Register() {
   const t = useTranslations('Register');

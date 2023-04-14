@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl';
-import React, { useState, useEffect, SetStateAction, Dispatch } from 'react';
+import React, { SetStateAction, Dispatch } from 'react';
 import { FiSearch } from 'react-icons/fi';
 
 const JobSearchBar = ({

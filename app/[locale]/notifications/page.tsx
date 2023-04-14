@@ -15,8 +15,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Notification } from '@/types/Notification';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function Notifications() {
   const t = useTranslations('NotificationsPage');

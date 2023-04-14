@@ -1,7 +1,6 @@
-import { firestore } from '@/config/firebase';
-import { db, typeCollection } from '@/config/firestore';
+import { db } from '@/config/firestore';
 import type { JobKeyword } from '@/types/JobKeyword';
-import { collection, query, setDoc } from '@firebase/firestore';
+import { query, setDoc } from '@firebase/firestore';
 import {
   doc,
   endAt,

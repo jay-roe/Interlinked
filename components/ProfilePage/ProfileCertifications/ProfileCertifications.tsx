@@ -5,7 +5,6 @@ import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
-import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
 import Link from '@/components/Link/Link';
 import { useTranslations } from 'next-intl';

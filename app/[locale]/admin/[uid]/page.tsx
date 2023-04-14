@@ -16,7 +16,6 @@ import { Report } from '@/types/Report';
 import { UserWithId } from '@/types/User';
 import { Message } from '@/types/Message';
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
 import { Menu } from '@headlessui/react';
 import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
@@ -24,7 +23,7 @@ import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
 import Link from '@/components/Link/Link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 const ViewReport = ({ params }) => {
   const t = useTranslations('Admin.uid');

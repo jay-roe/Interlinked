@@ -1,7 +1,5 @@
-import { User } from '@/types/User';
 import { useTranslations } from 'next-intl';
-import { MdOutlinePublic } from 'react-icons/md';
-import { MdOutlinePublicOff } from 'react-icons/md';
+import { MdOutlinePublic, MdOutlinePublicOff } from 'react-icons/md';
 
 export default function PrivacyIcon({ isPrivate }: { isPrivate: boolean }) {
   const t = useTranslations('Icons.Privacy');

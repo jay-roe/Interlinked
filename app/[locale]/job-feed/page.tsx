@@ -16,7 +16,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Feeds(props) {
   const t = useTranslations('JobsFeed');
-  const { params, searchParams } = props;
+  const { searchParams } = props;
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);

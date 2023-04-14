@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTranslations } from 'next-intl';
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { currentUser } = useAuth();

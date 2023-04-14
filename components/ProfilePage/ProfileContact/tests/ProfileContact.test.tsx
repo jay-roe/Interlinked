@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { findByTestId, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { render } from '@/renderWrapper';
 import ProfileContact from '../ProfileContact';
 

@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 
-const feedLayout = ({ children }: { children: React.ReactNode }) => {
+const FeedLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations('Feed');
   return (
     <div className="container mx-auto text-white">
@@ -18,4 +18,4 @@ const feedLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default feedLayout;
+export default FeedLayout;
