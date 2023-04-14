@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { findByTestId, render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import TimeDivider from '../TimeDivider';
 import { Timestamp } from 'firebase/firestore';
 

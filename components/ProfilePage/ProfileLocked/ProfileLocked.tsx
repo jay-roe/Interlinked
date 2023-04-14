@@ -1,5 +1,6 @@
 import LinkButton from '@/components/Buttons/LinkButton/LinkButton';
 import type { User } from '@/types/User';
+import { useTranslations } from 'next-intl';
 import { FaLock } from 'react-icons/fa';
 import ProfileHeading from '../ProfileHeading/ProfileHeading';
 
@@ -14,6 +15,7 @@ export default function ProfileLocked({
   profilePictureURL: User['profilePicture'];
   bio: User['bio'];
 }) {
+  const t = useTranslations('Profile.Locked');
   return (
     <div className="container mx-auto text-white">
       <ProfileHeading
@@ -23,9 +25,9 @@ export default function ProfileLocked({
       />
       <LinkButton profileOwnerUID={userID} />
       <div className="text-center">
-        <h1 className="text-3xl font-extrabold">Private Account</h1>
+        <h1 className="text-3xl font-extrabold">{t('private-account')}</h1>
         <h2 className="mb-3">
-          Send <b>{name}</b> a link request to view their profile.
+          {t('send')} <b>{name}</b> {t('link-req-to-view-profile')}.
         </h2>
         <FaLock className="m-auto" size={70} />
       </div>

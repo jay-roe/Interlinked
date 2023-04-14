@@ -1,8 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
-import ChatroomCardHeadder from '../ChatroomCardHeader';
-import { testUser } from '@/types/User';
-import { testChatRoom } from '@/types/Message';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import CreateChatModal from '../CreateChatModal';
 import { useAuth } from '@/contexts/AuthContext';
 

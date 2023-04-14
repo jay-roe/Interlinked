@@ -1,14 +1,8 @@
-import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import {
-  findAllByTestId,
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import { Timestamp } from 'firebase/firestore';
 import ProfileExperience from '../ProfileExperience';
+import { render } from '@/renderWrapper';
 
 jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),

@@ -1,13 +1,7 @@
 import '@testing-library/jest-dom';
-import {
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
 import ProfileCodingLanguages from '../ProfileCodingLanguages';
-import Button from '@/components/Buttons/Button';
-import { assert } from 'console';
+import { render } from '@/renderWrapper';
 
 it('tests the live version', async () => {
   const { findByTestId } = render(

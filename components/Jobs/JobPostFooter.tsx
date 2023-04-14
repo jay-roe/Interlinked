@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import Button from '../Buttons/Button';
 import { JobPosting, JobPostingWithId } from '@/types/JobPost';
 import { typeCollection, db } from '@/config/firestore';
 import { collection, deleteDoc, doc } from 'firebase/firestore';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+import { useTranslations } from 'next-intl';
 
 const PostFooter = ({
   jobPost,
@@ -18,6 +19,7 @@ const PostFooter = ({
   setJobArray: Dispatch<SetStateAction<JobPostingWithId[]>>;
   testKey: number;
 }) => {
+  const t = useTranslations('Jobs.PostFooter');
   const handleDelete = async () => {
     if (confirm('Are you sure you want to delete this job post?')) {
       setJobArray((curr) => {
@@ -46,12 +48,12 @@ const PostFooter = ({
           } else if (!edits) setEdits((curr) => !curr);
         }}
       >
-        Edit Job Posting
+        {t('edit')}
       </Button>
       {/* TODO: Do view applicants when applications are being worked on */}
-      <Link href={`manage-jobs/${jobPost.postingId}`}>
+      <Link href={`/manage-jobs/${jobPost.postingId}`}>
         <Button data-testid={`job-post-applicants-${testKey}`}>
-          View Applicants
+          {t('view')}
         </Button>
       </Link>
       <Button
@@ -59,7 +61,7 @@ const PostFooter = ({
         data-testid={`job-post-delete-${testKey}`}
         onClick={handleDelete}
       >
-        Delete Job Posting
+        {t('delete')}
       </Button>
     </div>
   );

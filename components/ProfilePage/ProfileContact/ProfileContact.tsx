@@ -1,8 +1,8 @@
-import type { User } from '@/types/User';
 import type { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import EditButton from '@/components/Buttons/EditButton/EditButton';
 import InputField from '@/components/InputFields/Input/Input';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileContact({
   isEditable = false,
@@ -21,11 +21,12 @@ export default function ProfileContact({
   contactEditing?: boolean;
   setContactEditing?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const t = useTranslations('Profile.Contact');
   // Live version
   if (!isEditable) {
     return (
       <div className="mb-8">
-        <h1 className="text-2xl font-extrabold">Contact</h1>
+        <h1 className="text-2xl font-extrabold">{t('contact')}</h1>
         <div
           className="mt-2 flex w-fit flex-col items-start justify-between rounded-xl bg-white bg-opacity-[8%] p-4"
           data-testid="live-contact"
@@ -53,7 +54,7 @@ export default function ProfileContact({
   // Editable version
   return (
     <>
-      <h1 className="text-2xl font-extrabold">Contact</h1>
+      <h1 className="text-2xl font-extrabold">{t('contact')}</h1>
       <div className="flex flex-row">
         <form
           action=""
@@ -66,7 +67,7 @@ export default function ProfileContact({
           {contactEditing && (
             <div>
               <label>
-                Email <span className="text-yellow-600">*</span>
+                {t('email')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid="edit-email"
@@ -78,7 +79,7 @@ export default function ProfileContact({
                 required
               />
               <label>
-                Phone <span className="text-yellow-600"></span>
+                {t('phone')} <span className="text-yellow-600"></span>
               </label>
               <InputField
                 data-testid="edit-phone"
@@ -94,7 +95,7 @@ export default function ProfileContact({
                   data-testid="save-contacts-button"
                   type="submit"
                 >
-                  Save Contacts
+                  {t('save')}
                 </Button>
               </div>
             </div>
