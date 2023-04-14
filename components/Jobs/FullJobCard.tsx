@@ -42,6 +42,9 @@ export default function Jobs({
   const [tempResume, setTempResume] = useState<Document>(null);
   const [tempCoverLetter, setTempCoverLetter] = useState<Document>(null);
 
+  //sent application star
+  const [sendingApplication, setSendingApplication] = useState<boolean>(true);
+
   // uploading a file from button
 
   const resumeInputRef = useRef(null);
@@ -373,7 +376,7 @@ export default function Jobs({
                     <div>
                       <InputField
                         name={'cover-letter'}
-                        data-testid="resume-input"
+                        data-testid="-input"
                         placeholder="Cover letter file name"
                         defaultValue={tempCoverLetter?.name}
                         onChange={(e) =>
@@ -385,7 +388,11 @@ export default function Jobs({
                         }
                       />
                       <Button
-                        onClick={handleCoverLetterUploadClick}
+                        //  onClick={handleCoverLetterUploadClick}
+                        onClick={(e) => {
+                          handleCoverLetterUploadClick();
+                          setGetttingProfileCoverLetter((curr) => !curr);
+                        }}
                         type="button"
                       >
                         Upload Cover Letter &nbsp;{' '}
@@ -393,12 +400,13 @@ export default function Jobs({
                           <FaCloudUploadAlt size={25} />
                         )}
                         {gettingProfileCoverLetter && (
-                          <FaCheck data-testid="job-resume-check"> </FaCheck>
+                          <FaCheck data-testid="job-coverLetter-check">
+                            {' '}
+                          </FaCheck>
                         )}
-                        {/* <FaCloudUploadAlt size={25} /> */}
                       </Button>
 
-                      {currentUser.coverLetter ? (
+                      {currentUser.coverLetter && (
                         <Button
                           className="ml-3"
                           onClick={(e) => {
@@ -408,8 +416,6 @@ export default function Jobs({
                         >
                           <FaLink> </FaLink> &nbsp; Profile Cover Letter
                         </Button>
-                      ) : (
-                        <p></p>
                       )}
 
                       {/* { gettingProfileCoverLetter &&
@@ -479,6 +485,7 @@ export default function Jobs({
                         } catch (err) {
                           console.log(err);
                         }
+                        setEditing((curr) => !curr);
                       }
                     }}
                   >
