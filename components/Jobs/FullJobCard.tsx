@@ -7,7 +7,8 @@ import {
   AiOutlineExclamationCircle,
   AiOutlineClockCircle,
 } from 'react-icons/ai';
-import { FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
+import { FaLink } from 'react-icons/fa';
+import { FaCheck, FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
 import FileButton from '../Buttons/FileButton/FileButton';
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
@@ -23,6 +24,8 @@ import {
 import { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
+import { hoverAction } from '@use-gesture/react';
+import LinkButton from '../Buttons/LinkButton/LinkButton';
 
 export default function Jobs({
   job,
@@ -50,6 +53,29 @@ export default function Jobs({
 
   const handleCoverLetterUploadClick = () => {
     coverLetterInputRef.current.click();
+  };
+  // getting profile documents
+  const [gettingProfileResume, setGetttingProfileResume] =
+    useState<boolean>(false);
+  const [gettingProfileCoverLetter, setGetttingProfileCoverLetter] =
+    useState<boolean>(false);
+  const getResumefromProfile = () => {
+    const profileResume = currentUser.resume;
+    setTempResume((resume) => {
+      let tempResume = { ...resume };
+      tempResume.link = profileResume.link;
+      tempResume.name = profileResume.name;
+      return tempResume;
+    });
+  };
+  const getCoverLetterfromProfile = () => {
+    const profileCoverLetter = currentUser.coverLetter;
+    setTempCoverLetter((coverLetter) => {
+      let tempCoverLetter = { ...coverLetter };
+      tempCoverLetter.link = profileCoverLetter.link;
+      tempCoverLetter.name = profileCoverLetter.name;
+      return tempCoverLetter;
+    });
   };
 
   const handleFileUpload = async (
@@ -96,18 +122,21 @@ export default function Jobs({
   return (
     <div
       data-testid={`full-job-card-cv-${job.cvRequired}-cover-${job.coverLetterRequired}`}
-      className="mb-3 flex flex-wrap items-stretch justify-between"
+      className="mb-7 items-stretch justify-between "
     >
       <CardGrid
         data-testid="card-grid"
-        className="w-full grid-cols-1 lg:grid-cols-2-1"
-        // style={{ backgroundColor: ''}}
+        className={`card flex:1 grid-cols-1 lg:grid-cols-2-1`}
       >
         {/* Post card */}
-        {/* <div className="flex flex-wrap gap-3 "> */}
-        {/* <div> */}
-        <Card className="col-span-1 transition-all" data-testid="job-post-card">
-          <div className="mb-7 text-sm font-light max-md:hidden">
+
+        <Card
+          className={`${
+            !isEditable ? 'col-span-1' : 'col-span-3'
+          } transition-all`}
+          data-testid="job-post-card"
+        >
+          <div className="mb-3 text-sm font-light max-md:hidden">
             {job?.datePosted?.toDate().toLocaleString('en-US', {
               month: 'long',
               year: 'numeric',
@@ -137,7 +166,7 @@ export default function Jobs({
                 </li>
               ))}
             </ul>
-            <div>
+            <div className=" ">
               <div className="flex gap-1">
                 <GoLocation className="text-accent-orange" /> {job.location}
               </div>
@@ -212,7 +241,7 @@ export default function Jobs({
                     setEditing((curr) => !curr);
                   }}
                 >
-                  Apply <FaPaperPlane className="" />
+                  Apply <FaPaperPlane className="ml-2" />
                 </Button>
               </div>
               {/* Quick apply to job button */}
@@ -262,32 +291,24 @@ export default function Jobs({
                     }
                   }}
                 >
-                  Quick Apply <FaPaperPlane className="" />
+                  Quick Apply <FaPaperPlane className="ml-2" />
                 </Button>
               </div>
             </div>
           )}
         </Card>
-        {/* </div> */}
 
         {/* Apply button innards */}
         {!isEditable && (
           <Card data-testid="card" className="relative row-span-2 break-words">
-            {/* <div className="mt-2 flex justify-end"> */}
-            {/* <CardGrid> */}
             <div
               data-testid="job-application-form"
-              className="mb-4 flex gap-1 text-xl font-bold text-accent-orange"
+              className=" mb-2 flex-wrap gap-2 text-xl font-bold text-accent-orange"
             >
-              Job Application
+              Apply to Job with new documents
             </div>
             <div className="flex-wrap gap-2">
               <div className="flex-wrap gap-2">
-                {/* <div>
-                        <FileButton link={'should link to resume'}>
-                          My Resume
-                        </FileButton>
-                      </div> */}
                 <Card data-testid="card" className="mb-2">
                   <div>
                     <label>
@@ -307,9 +328,33 @@ export default function Jobs({
                           })
                         }
                       />
-                      <Button onClick={handleResumeUploadClick} type="button">
-                        Upload Resume &nbsp; <FaCloudUploadAlt size={25} />
+                      <Button
+                        onClick={(e) => {
+                          handleResumeUploadClick();
+                          setGetttingProfileResume((curr) => !curr);
+                        }}
+                        type="button"
+                      >
+                        Upload Resume &nbsp;
+                        {!gettingProfileResume && (
+                          <FaCloudUploadAlt size={25} />
+                        )}
+                        {gettingProfileResume && (
+                          <FaCheck data-testid="job-resume-check"> </FaCheck>
+                        )}
                       </Button>
+
+                      {currentUser.resume && (
+                        <Button
+                          className="ml-5"
+                          onClick={(e) => {
+                            getResumefromProfile();
+                            setGetttingProfileResume((curr) => !curr);
+                          }}
+                        >
+                          <FaLink> </FaLink> &nbsp; Profile Resume
+                        </Button>
+                      )}
 
                       <input
                         type="file"
@@ -344,8 +389,32 @@ export default function Jobs({
                         type="button"
                       >
                         Upload Cover Letter &nbsp;{' '}
-                        <FaCloudUploadAlt size={25} />
+                        {!gettingProfileCoverLetter && (
+                          <FaCloudUploadAlt size={25} />
+                        )}
+                        {gettingProfileCoverLetter && (
+                          <FaCheck data-testid="job-resume-check"> </FaCheck>
+                        )}
+                        {/* <FaCloudUploadAlt size={25} /> */}
                       </Button>
+
+                      {currentUser.coverLetter ? (
+                        <Button
+                          className="ml-3"
+                          onClick={(e) => {
+                            getCoverLetterfromProfile();
+                            setGetttingProfileCoverLetter((curr) => !curr);
+                          }}
+                        >
+                          <FaLink> </FaLink> &nbsp; Profile Cover Letter
+                        </Button>
+                      ) : (
+                        <p></p>
+                      )}
+
+                      {/* { gettingProfileCoverLetter &&
+                      <p>  { tempCoverLetter.name || 'none'} </p> 
+                      } */}
 
                       <input
                         type="file"
@@ -362,14 +431,15 @@ export default function Jobs({
                 className="flex flex-wrap gap-2"
               >
                 <div>
-                  <Button
+                  <button
+                    className=" inline-flex items-center rounded-lg bg-gray-400 px-5 py-2.5 text-center text-sm font-bold text-purple-background transition-all hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-900"
                     onClick={(e) => {
                       e.preventDefault();
                       setEditing((curr) => !curr);
                     }}
                   >
                     Cancel
-                  </Button>
+                  </button>
                 </div>
                 <div>
                   <Button
