@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { FiEdit3, FiBriefcase, FiMessageSquare } from 'react-icons/fi';
 import Link from '@/components/Link/Link';
+import Card from '@/components/Card/Card';
 
 const Home = () => {
   const router = useRouter();
@@ -18,16 +19,19 @@ const Home = () => {
       href: '/feed',
       label: t('post-to-your-feed'),
       icon: FiEdit3,
+      className: 'hover:bg-purple-900',
     },
     {
       href: '/job-feed',
       label: t('browse-job-opportunities'),
       icon: FiBriefcase,
+      className: 'hover:bg-indigo-900',
     },
     {
       href: '/DM',
       label: t('discuss-tech-jobs-or-anything-you-desire'),
       icon: FiMessageSquare,
+      className: 'hover:bg-blue-900',
     },
   ];
 
@@ -54,22 +58,16 @@ const Home = () => {
             {t('get-you-interlinked')}.
           </p>
           <ul className="mx-auto mt-20 max-w-3xl text-left text-4xl">
-            {links.map(({ href, label, icon: Icon }, index) => (
-              <li
-                key={`${href}${label}`}
-                className={`border-white ${
-                  index < links.length - 1 ? 'mb-2' : ''
-                }`}
-                style={{
-                  borderBottomWidth: index < links.length - 1 ? '2px' : 0,
-                }}
-              >
-                <Link href={href}>
-                  <div className="m-8 flex items-center">
-                    {Icon && <Icon className="mr-6 text-5xl" />}
-                    <span>{label}</span>
-                  </div>
-                </Link>
+            {links.map(({ href, label, icon: Icon, className }, index) => (
+              <li key={`${href}${label}`} className={`m-8`}>
+                <Card className={`${className}`}>
+                  <Link href={href}>
+                    <div className="m-8 flex items-center">
+                      {Icon && <Icon className="mr-6 text-5xl" />}
+                      <span>{label}</span>
+                    </div>
+                  </Link>
+                </Card>
               </li>
             ))}
           </ul>
