@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function Register() {
   const router = useRouter();
@@ -43,6 +44,10 @@ export default function Register() {
     }
 
     setLoading(false);
+  }
+
+  if (loading) {
+    return <LoadingScreen />;
   }
 
   return (

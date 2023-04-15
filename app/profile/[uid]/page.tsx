@@ -22,6 +22,7 @@ import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked'
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function ViewProfile({ params }) {
   const { currentUser, currentAdmin, authUser } = useAuth();
@@ -41,7 +42,7 @@ export default function ViewProfile({ params }) {
   }, [params.uid]);
 
   if (loading) {
-    return <h1>Loading...</h1>;
+    return <LoadingScreen />;
   }
 
   if (!user || !user.name || !user.email)

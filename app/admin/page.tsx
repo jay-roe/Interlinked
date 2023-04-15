@@ -17,6 +17,7 @@ import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from 'next/link';
 import Button from '@/components/Buttons/Button';
+import LoadingScreen from '@/components/Loading/Loading';
 
 const Admin = () => {
   const router = useRouter();
@@ -56,7 +57,7 @@ const Admin = () => {
   }, [currentAdmin, router, authUser]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   // mark all the admins's reports as read

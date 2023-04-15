@@ -15,6 +15,7 @@ import { doc, getDoc } from '@firebase/firestore';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
 import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function Links({ params }) {
   const PAGE_SIZE = 20;
@@ -73,7 +74,11 @@ export default function Links({ params }) {
     setLoading(false);
   }, []);
 
-  if (!currentUser || loading) {
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (!currentUser) {
     // user isnt logged in or the page is still loading
     // TODO make a better loading page
     return (

@@ -11,6 +11,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function ManagePostings() {
   const { currentUser, authUser } = useAuth();
@@ -22,7 +23,6 @@ export default function ManagePostings() {
     if (currentUser && currentUser.isCompany) {
       fetchJobPostings().then((jobArray) => {
         setJobPostings(jobArray);
-        setLoading(false);
       });
     }
     setLoading(false);
@@ -45,7 +45,7 @@ export default function ManagePostings() {
 
   if (loading) {
     // TODO make a better loading page
-    return <p>Loading...</p>;
+    return <LoadingScreen />;
   }
 
   if (!currentUser) {

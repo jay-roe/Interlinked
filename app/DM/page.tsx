@@ -8,10 +8,12 @@ import { useEffect, useState } from 'react';
 import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
 import Link from 'next/link';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function DMs() {
   const { authUser } = useAuth();
   const [chats, setChats] = useState<KeyedChatRoom[]>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     let tempChats: KeyedChatRoom[] = [];
@@ -35,6 +37,7 @@ export default function DMs() {
 
       setChats(tempChats);
     });
+    setLoading(false);
     return () => unsub();
   }, []);
 
@@ -45,6 +48,7 @@ export default function DMs() {
       </h1>
       <p className="mb-3 text-light-white-text">Strengthen your web</p>
       <Card className="flex flex-grow flex-col overflow-auto">
+        {loading && <LoadingScreen />}
         {chats?.map((keyRoom) => {
           return (
             <Link

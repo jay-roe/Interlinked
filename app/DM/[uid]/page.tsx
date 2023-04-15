@@ -29,6 +29,7 @@ import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function ChatRoom({ params }) {
   const { currentUser, authUser } = useAuth();
@@ -83,6 +84,10 @@ export default function ChatRoom({ params }) {
 
     return () => unsub(); // removes listener
   }, []);
+
+  if (participantsLoading) {
+    return <LoadingScreen />;
+  }
 
   // User not logged in
   if (!currentUser || !authUser) {

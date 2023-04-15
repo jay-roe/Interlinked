@@ -23,6 +23,7 @@ import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
 import Link from 'next/link';
+import LoadingScreen from '@/components/Loading/Loading';
 
 const ViewReport = ({ params }) => {
   // timeout options
@@ -40,7 +41,6 @@ const ViewReport = ({ params }) => {
 
   // DM chatroom
   const [participants, setParticipants] = useState<UserWithId[]>([]);
-  const [participantsLoading, setParticipantsLoading] = useState(true);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
 
@@ -97,7 +97,7 @@ const ViewReport = ({ params }) => {
               });
             });
           });
-        setParticipantsLoading(false);
+        setLoading(false);
       });
     }
   }, [authUser, chatRoomRef, report]);
@@ -129,11 +129,7 @@ const ViewReport = ({ params }) => {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (participantsLoading) {
-    return <div>Participants Loading...</div>;
+    return <LoadingScreen />;
   }
 
   // display the report

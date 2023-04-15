@@ -22,6 +22,7 @@ import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import LoadMoreButton from '@/components/Buttons/LoadMoreButton/LoadMoreButton';
 import { BounceLoader, PacmanLoader, PropagateLoader } from 'react-spinners';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function Feeds() {
   const { currentUser, authUser } = useAuth();
@@ -129,7 +130,7 @@ export default function Feeds() {
   };
 
   if (loading) {
-    <PacmanLoader color="#e58f40" />;
+    <LoadingScreen />;
   }
 
   if (!currentUser) {
@@ -175,7 +176,7 @@ export default function Feeds() {
           );
         })}
         {
-          loadingPosts && <BounceLoader color="#e58f40" />
+          loadingPosts && <LoadingScreen />
           // loadingPosts && <PacmanLoader color='#e58f40' />
         }
       </CardGrid>

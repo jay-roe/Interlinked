@@ -3,6 +3,7 @@
 import Button from '@/components/Buttons/Button';
 import Card from '@/components/Card/Card';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import LoadingScreen from '@/components/Loading/Loading';
 import { typeCollection, db } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { JobPosting } from '@/types/JobPost';
@@ -35,7 +36,7 @@ export default function JobDetails({ params }) {
     });
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingScreen />;
 
   if (!currentUser && authUser.uid !== job.companyId) {
     // user isnt logged in or the page is still loading

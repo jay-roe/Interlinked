@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function Login() {
   const router = useRouter();
@@ -34,6 +35,10 @@ export default function Login() {
     }
 
     setLoading(false);
+  }
+
+  if (loading) {
+    return <LoadingScreen />;
   }
 
   return (
@@ -116,4 +121,4 @@ export default function Login() {
       </div>
     </div>
   );
-};
+}

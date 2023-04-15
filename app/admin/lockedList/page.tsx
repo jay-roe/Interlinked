@@ -1,6 +1,7 @@
 'use client';
 import Button from '@/components/Buttons/Button';
 import Card from '@/components/Card/Card';
+import LoadingScreen from '@/components/Loading/Loading';
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { User, UserWithId } from '@/types/User';
@@ -44,7 +45,7 @@ export default function LockedList() {
   }
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <LoadingScreen />;
   }
 
   return (
