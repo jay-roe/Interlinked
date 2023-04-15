@@ -19,19 +19,19 @@ const Home = () => {
       href: '/feed',
       label: t('post-to-your-feed'),
       icon: FiEdit3,
-      className: 'hover:bg-purple-900',
+      className: 'hover:bg-purple-900 hover:bg-opacity-75',
     },
     {
       href: '/job-feed',
       label: t('browse-job-opportunities'),
       icon: FiBriefcase,
-      className: 'hover:bg-indigo-900',
+      className: 'hover:bg-indigo-900 hover:bg-opacity-75',
     },
     {
       href: '/DM',
       label: t('discuss-tech-jobs-or-anything-you-desire'),
       icon: FiMessageSquare,
-      className: 'hover:bg-blue-900',
+      className: 'hover:bg-blue-900 hover:bg-opacity-75',
     },
   ];
 
@@ -60,7 +60,7 @@ const Home = () => {
           <ul className="mx-auto mt-20 max-w-3xl text-left text-4xl">
             {links.map(({ href, label, icon: Icon, className }, index) => (
               <li key={`${href}${label}`} className={`m-8`}>
-                <Card className={`${className}`}>
+                <Card className={className}>
                   <Link href={href}>
                     <div className="m-8 flex items-center">
                       {Icon && <Icon className="mr-6 text-5xl" />}
