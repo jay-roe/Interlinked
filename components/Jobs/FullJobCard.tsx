@@ -1,4 +1,4 @@
-import { JobPosting, JobType } from '@/types/JobPost';
+import { JobPosting, JobPostingWithId, JobType } from '@/types/JobPost';
 import Card from '../Card/Card';
 import CardGrid from '../Card/CardGrid';
 import { GoLocation } from 'react-icons/go';
@@ -11,17 +11,32 @@ import { FaLink } from 'react-icons/fa';
 import { FaCheck, FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
 import FileButton from '../Buttons/FileButton/FileButton';
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import {
+  ChangeEvent,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { collection, doc, updateDoc } from 'firebase/firestore';
-import { db } from '@/config/firestore';
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  query,
+  updateDoc,
+  where,
+} from 'firebase/firestore';
+import { db, typeCollection } from '@/config/firestore';
 import {
   deleteObject,
   getDownloadURL,
   ref,
   uploadBytes,
 } from 'firebase/storage';
-import { storage } from '@/config/firebase';
+import auth, { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
 import { hoverAction } from '@use-gesture/react';
@@ -42,7 +57,7 @@ export default function Jobs({
   const [tempResume, setTempResume] = useState<Document>(null);
   const [tempCoverLetter, setTempCoverLetter] = useState<Document>(null);
 
-  const [applicationSent, setSendingApplication] = useState<boolean>(false);
+  const [applicationSent, setApplicationSent] = useState<boolean>(false);
   // uploading a file from button
 
   const resumeInputRef = useRef(null);
@@ -119,6 +134,24 @@ export default function Jobs({
       });
     }
   };
+
+  useEffect(() => {
+    getDoc(
+      doc(
+        typeCollection<JobPostingWithId>(
+          collection(doc(db.companies, job.companyId), 'jobPosts')
+        ),
+        postingId
+      )
+    ).then((job) => {
+      let applcations = job.data().applications;
+      applcations.forEach((application) => {
+        if (application.applicantId === authUser.uid) {
+          setApplicationSent(true);
+        }
+      });
+    });
+  }, [authUser.uid, job.companyId, postingId]);
 
   return (
     <div
@@ -237,7 +270,7 @@ export default function Jobs({
               )}
             </div>
           </Card>
-          {isEditable && (
+          {isEditable && !applicationSent && (
             <div className="flex flex-wrap gap-3">
               {/* Main apply button */}
               <div>
@@ -291,6 +324,7 @@ export default function Jobs({
                           ),
                           job
                         );
+                        setApplicationSent(true);
                         alert('application sent!');
                       } catch (err) {
                         console.log(err);
@@ -335,33 +369,39 @@ export default function Jobs({
                           })
                         }
                       />
-                      <Button
-                        onClick={(e) => {
-                          handleResumeUploadClick();
-                          setGetttingProfileResume((curr) => !curr);
-                        }}
-                        type="button"
-                      >
-                        Upload Resume &nbsp;
-                        {!gettingProfileResume && (
-                          <FaCloudUploadAlt size={25} />
-                        )}
-                        {gettingProfileResume && (
-                          <FaCheck data-testid="job-resume-check"> </FaCheck>
-                        )}
-                      </Button>
-
-                      {currentUser.resume && (
-                        <Button
-                          className="ml-5"
-                          onClick={(e) => {
-                            getResumefromProfile();
-                            setGetttingProfileResume((curr) => !curr);
-                          }}
-                        >
-                          <FaLink> </FaLink> &nbsp; Profile Resume
-                        </Button>
-                      )}
+                      <div className="flex gap-2">
+                        <div>
+                          <Button
+                            onClick={(e) => {
+                              handleResumeUploadClick();
+                              setGetttingProfileResume((curr) => !curr);
+                            }}
+                            type="button"
+                          >
+                            Upload Resume &nbsp;
+                            {!gettingProfileResume && (
+                              <FaCloudUploadAlt size={25} />
+                            )}
+                            {gettingProfileResume && (
+                              <FaCheck data-testid="job-resume-check">
+                                {' '}
+                              </FaCheck>
+                            )}
+                          </Button>
+                        </div>
+                        <div>
+                          {currentUser.resume && (
+                            <Button
+                              onClick={(e) => {
+                                getResumefromProfile();
+                                setGetttingProfileResume((curr) => !curr);
+                              }}
+                            >
+                              <FaLink> </FaLink> &nbsp; Profile Resume
+                            </Button>
+                          )}
+                        </div>
+                      </div>
 
                       <input
                         type="file"
@@ -391,36 +431,41 @@ export default function Jobs({
                           })
                         }
                       />
-                      <Button
-                        //  onClick={handleCoverLetterUploadClick}
-                        onClick={(e) => {
-                          handleCoverLetterUploadClick();
-                          setGetttingProfileCoverLetter((curr) => !curr);
-                        }}
-                        type="button"
-                      >
-                        Upload Cover Letter &nbsp;{' '}
-                        {!gettingProfileCoverLetter && (
-                          <FaCloudUploadAlt size={25} />
-                        )}
-                        {gettingProfileCoverLetter && (
-                          <FaCheck data-testid="job-coverLetter-check">
-                            {' '}
-                          </FaCheck>
-                        )}
-                      </Button>
 
-                      {currentUser.coverLetter && (
-                        <Button
-                          className="ml-3"
-                          onClick={(e) => {
-                            getCoverLetterfromProfile();
-                            setGetttingProfileCoverLetter((curr) => !curr);
-                          }}
-                        >
-                          <FaLink> </FaLink> &nbsp; Profile Cover Letter
-                        </Button>
-                      )}
+                      <div className="flex gap-2">
+                        <div>
+                          <Button
+                            //  onClick={handleCoverLetterUploadClick}
+                            onClick={(e) => {
+                              handleCoverLetterUploadClick();
+                              setGetttingProfileCoverLetter((curr) => !curr);
+                            }}
+                            type="button"
+                          >
+                            Upload Cover Letter &nbsp;{' '}
+                            {!gettingProfileCoverLetter && (
+                              <FaCloudUploadAlt size={25} />
+                            )}
+                            {gettingProfileCoverLetter && (
+                              <FaCheck data-testid="job-coverLetter-check">
+                                {' '}
+                              </FaCheck>
+                            )}
+                          </Button>
+                        </div>
+                        <div>
+                          {currentUser.coverLetter && (
+                            <Button
+                              onClick={(e) => {
+                                getCoverLetterfromProfile();
+                                setGetttingProfileCoverLetter((curr) => !curr);
+                              }}
+                            >
+                              <FaLink> </FaLink> &nbsp; Profile Cover Letter
+                            </Button>
+                          )}
+                        </div>
+                      </div>
 
                       {/* { gettingProfileCoverLetter &&
                       <p>  { tempCoverLetter.name || 'none'} </p> 
@@ -490,7 +535,7 @@ export default function Jobs({
                           console.log(err);
                         }
                         setEditing((curr) => !curr);
-                        setSendingApplication((curr) => !curr);
+                        setApplicationSent(true);
                       }
                     }}
                   >
