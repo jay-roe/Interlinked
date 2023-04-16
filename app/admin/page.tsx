@@ -56,10 +56,6 @@ const Admin = () => {
     });
   }, [currentAdmin, router, authUser]);
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
   // mark all the admins's reports as read
   async function readAll() {
     const reportCollectionReference = typeCollection<Report>(
@@ -108,7 +104,8 @@ const Admin = () => {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        {reports.length > 0 ? (
+        {loading && <LoadingScreen />}
+        {reports?.length > 0 ? (
           <ReportList reports={reports} setReports={setReports} />
         ) : (
           <p data-testid="no-reports">Wow, such empty</p>

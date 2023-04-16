@@ -4,6 +4,7 @@ import { Report } from '@/types/Report';
 import Link from 'next/link';
 import { Dispatch, SetStateAction } from 'react';
 import SingleReport from './SingleReport';
+import LoadingScreen from '../Loading/Loading';
 
 export default function ReportList({
   reports,

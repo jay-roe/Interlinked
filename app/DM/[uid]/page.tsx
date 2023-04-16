@@ -45,6 +45,7 @@ export default function ChatRoom({ params }) {
   // Participants (not including current user)
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
+  const [messagesLoading, setMessagesLoading] = useState(true);
 
   // reference to bring user back to bottom of chat
   const dummy = useRef<HTMLDivElement>();
@@ -81,13 +82,10 @@ export default function ChatRoom({ params }) {
     const unsub = onSnapshot(chatRoomRef, (doc) => {
       setChatMessages(doc.data().messages);
     });
+    setMessagesLoading(false);
 
     return () => unsub(); // removes listener
   }, []);
-
-  if (participantsLoading) {
-    return <LoadingScreen />;
-  }
 
   // User not logged in
   if (!currentUser || !authUser) {
@@ -260,6 +258,7 @@ export default function ChatRoom({ params }) {
           ))}
       </div>
       <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">
+        {messagesLoading && <LoadingScreen />}
         {chatMessages.map((m, id) => {
           return (
             <div key={id}>
