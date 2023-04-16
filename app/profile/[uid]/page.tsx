@@ -42,7 +42,7 @@ export default function ViewProfile({ params }) {
   }, [params.uid]);
 
   if (loading) {
-    return <LoadingScreen />;
+    return <p>Loading...</p>;
   }
 
   if (!user || !user.name || !user.email)
