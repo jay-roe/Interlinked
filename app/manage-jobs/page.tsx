@@ -44,7 +44,6 @@ export default function ManagePostings() {
   };
 
   if (loading) {
-    // TODO make a better loading page
     return <LoadingScreen />;
   }
 

@@ -52,10 +52,6 @@ export default function Notifications() {
     }
   }, [authUser?.uid]);
 
-  if (loading) {
-    return <LoadingScreen />;
-  }
-
   // mark all the user's notifications as read
   async function readAll() {
     const notifUnreadQuery = typeCollection<Notification>(
@@ -100,7 +96,8 @@ export default function Notifications() {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        {notifications.length > 0 ? (
+        {loading && <LoadingScreen />}
+        {notifications?.length > 0 ? (
           <NotificationList
             notifications={notifications}
             setNotifications={setNotifications}
