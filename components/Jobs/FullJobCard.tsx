@@ -207,7 +207,7 @@ export default function Jobs({
               ))}
             </ul>
             <div className=" ">
-              <div className="flex gap-1">
+              <div className="flex gap-1" style={{ alignItems: 'center' }}>
                 <GoLocation className="text-accent-orange" /> {job.location}
               </div>
               <div>
@@ -215,6 +215,7 @@ export default function Jobs({
                   <div
                     data-testid="full-time-job-display"
                     className="flex gap-1"
+                    style={{ alignItems: 'center' }}
                   >
                     <BsCalendar3 className="text-accent-orange" />
                     Full-time
@@ -224,6 +225,7 @@ export default function Jobs({
                   <div
                     data-testid="part-time-job-display"
                     className="flex gap-1"
+                    style={{ alignItems: 'center' }}
                   >
                     <BsCalendar3 className="text-accent-orange" />
                     Part-time
@@ -233,14 +235,15 @@ export default function Jobs({
                   <div
                     data-testid="internship-job-display"
                     className="flex gap-1"
+                    style={{ alignItems: 'center' }}
                   >
                     <BsCalendar3 className="text-accent-orange" />
                     Internship
                   </div>
                 )}
               </div>
-              <div className="flex gap-1">
-                <AiOutlineClockCircle className="text-accent-orange" />
+              <div className="flex gap-1" style={{ alignItems: 'center' }}>
+                <AiOutlineClockCircle className="text-accent-orange " />
                 <div>
                   {'Apply before ' +
                     job.deadline.toDate().toLocaleString('en-US', {
@@ -251,19 +254,19 @@ export default function Jobs({
                 </div>
               </div>
               {job.coverLetterRequired && job.cvRequired && (
-                <div className="flex gap-1">
+                <div className="flex gap-1" style={{ alignItems: 'center' }}>
                   <AiOutlineExclamationCircle className="text-accent-orange" />
                   Submit with resume and cover letter
                 </div>
               )}
               {job.coverLetterRequired && !job.cvRequired && (
-                <div className="flex gap-1">
+                <div className="flex gap-1" style={{ alignItems: 'center' }}>
                   <AiOutlineExclamationCircle className="text-accent-orange" />
                   Submit with cover letter
                 </div>
               )}
               {!job.coverLetterRequired && job.cvRequired && (
-                <div className="flex gap-1">
+                <div className="flex gap-1" style={{ alignItems: 'center' }}>
                   <AiOutlineExclamationCircle className="text-accent-orange" />
                   Submit with resume
                 </div>
