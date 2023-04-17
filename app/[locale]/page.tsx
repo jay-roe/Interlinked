@@ -31,7 +31,7 @@ const Home = () => {
       href: '/DM',
       label: t('discuss-tech-jobs-or-anything-you-desire'),
       icon: FiMessageSquare,
-      className: 'hover:bg-blue-900 hover:bg-opacity-75',
+      className: 'hover:bg-blue-900 hover:bg-opacity-30',
     },
   ];
 
