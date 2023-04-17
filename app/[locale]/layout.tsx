@@ -1,12 +1,9 @@
 import 'styles/globals.css';
 import NavBar from '@/components/NavBar/NavBar';
-import {NextIntlClientProvider} from 'next-intl/client';
+import { NextIntlClientProvider } from 'next-intl/client';
 import { AuthProvider } from '@/contexts/AuthContext';
 
-export default async function RootLayout({
-  children,
-  params: {locale}
-}) {
+export default async function RootLayout({ children, params: { locale } }) {
   let translations;
   try {
     translations = (await import(`../../translations/${locale}.json`)).default;
@@ -19,14 +16,13 @@ export default async function RootLayout({
       */}
       <head />
       <body>
-      <NextIntlClientProvider locale={locale} messages={translations}>
-        <AuthProvider>
-          
-          <main className="flex min-h-screen flex-col bg-purple-background">
-            <NavBar />
-            {children}
-          </main>
-        </AuthProvider>
+        <NextIntlClientProvider locale={locale} messages={translations}>
+          <AuthProvider>
+            <main className="flex min-h-screen flex-col bg-purple-background">
+              <NavBar />
+              {children}
+            </main>
+          </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>

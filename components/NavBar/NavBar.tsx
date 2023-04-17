@@ -96,7 +96,7 @@ export default function NavBar() {
                       INTERLINKED
                     </h1>
                   </div>
-                  <LocaleSwitcher/>
+                  <LocaleSwitcher />
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navLinks.map((item, index) => (
