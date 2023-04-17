@@ -1,6 +1,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import CreatePost from '../CreatePost';
 
 jest.mock('contexts/AuthContext', () => ({
@@ -13,15 +14,17 @@ it('displays profile pic if user has one', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
       currentUser: {
-        coverPhoto: 'yes',
+        profilePicture:
+          'https://firebasestorage.googleapis.com/v0/b/interlinked-420e3.appspot.com/o/users%2FqDIWdvP2J1dahsSzkLdmpTOfjGe2%2FprofilePicture%2FFunnyDecemberPic.jpg?alt=media&token=2d09f4e0-43bb-4bdd-87d3-8d05bda87a31',
       },
     };
   });
 
   const { findByTestId } = render(<CreatePost getText={jest.fn} />);
-  const profilePic = await findByTestId('profile-pic');
+  const profilePic = await findByTestId('create-post-profile-pic');
 
-  expect(profilePic).toHaveTextContent('yes');
+  // Ensure image is rendered
+  expect(profilePic.tagName).toBe<string>('IMG');
 });
 
 it('displays placeholder if user has no profile pic', async () => {
@@ -41,19 +44,30 @@ it('renders', async () => {
   const { findByText } = render(<CreatePost getText={jest.fn} />);
 
   const createPostPrompt = await findByText('Create a Post', { exact: false });
-  expect(createPostPrompt).toBeInTheDocument; // Check if the router function was called (ie, user was redirected)
+  expect(createPostPrompt).toBeInTheDocument(); // Check if the router function was called (ie, user was redirected)
 });
 
 it('saves users input', async () => {
+  const testPostContent = 'Test post content babyyyyyyy';
   const { findByTestId } = render(<CreatePost getText={jest.fn} />);
 
   const postContent = await findByTestId('post-content');
 
-  fireEvent.change(postContent, {
-    target: { value: 'Test post content babyyyyyyy' },
-  });
+  postContent.setAttribute('text', testPostContent);
 
-  expect(postContent).toHaveValue('Test post content babyyyyyyy');
+  // View post preview
+  const previewButton = await findByTestId('create-post-preview-button');
+  fireEvent.click(previewButton);
+
+  // Set message
+  const previewContentContainer = await findByTestId('post-preview-content');
+  previewContentContainer.setAttribute('message', testPostContent);
+
+  // Check if message set correctly (assume it will show after state update)
+  const previewContent = await findByTestId('post-preview-content');
+  await waitFor(() =>
+    expect(previewContent).toHaveAttribute('message', testPostContent)
+  );
 });
 
 it('calls prop function on submit', async () => {

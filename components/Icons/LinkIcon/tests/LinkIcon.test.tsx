@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import LinkIcon from '../LinkIcon';
 
 it('renders link icon if not linked', async () => {

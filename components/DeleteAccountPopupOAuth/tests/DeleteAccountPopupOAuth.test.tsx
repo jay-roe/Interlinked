@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import DeleteAccountPopup from '../../DeleteAccountPopup/DeleteAccountPopup';
-import { useAuth } from '@/contexts/AuthContext';
 import { act } from 'react-dom/test-utils';
 
 const mockReauth = jest.fn();

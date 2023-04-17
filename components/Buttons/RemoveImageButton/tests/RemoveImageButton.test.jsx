@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import RemoveImageButton from '../RemoveImageButton';
 
 it('render remove image button', async () => {

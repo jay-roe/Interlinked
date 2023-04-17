@@ -23,7 +23,7 @@ describe('Company register and post spec', () => {
 
     cy.get('[data-testid=new-job-title]').should(
       'contain',
-      'Create A Job Posting'
+      'Create a Job Posting'
     );
 
     cy.get('[data-testid=change-title]').type('Senior Fullstack Programer');

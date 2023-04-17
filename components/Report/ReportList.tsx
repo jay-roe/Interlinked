@@ -1,7 +1,8 @@
 'use client';
 
 import { Report } from '@/types/Report';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
+
 import { Dispatch, SetStateAction } from 'react';
 import SingleReport from './SingleReport';
 import LoadingScreen from '../Loading/Loading';

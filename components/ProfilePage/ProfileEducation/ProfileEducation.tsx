@@ -7,7 +7,7 @@ import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
-import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { useTranslations } from 'next-intl';
 export default function ProfileEducation({
   education,
   isEditable = false,
@@ -23,13 +23,15 @@ export default function ProfileEducation({
   setEducation?: Dispatch<SetStateAction<User['education']>>;
   setNewEducation?: (education: User['education']) => void;
 }) {
+  const t = useTranslations('Profile.Education');
+
   // Live version of education component
   if (!isEditable) {
     if (!education || !education[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Education 🏫</h2>
+        <h2 className="text-2xl font-extrabold">{t('education')} 🏫</h2>
         <CardStack data-testid="education-stack">
           {education.map((ed, index) => (
             <div data-testid={`live-edu-${index}`} key={index}>
@@ -59,7 +61,7 @@ export default function ProfileEducation({
   // Editable version of education component
   return (
     <div className="mb-3" data-testid="editable-edu">
-      <h2 className="text-2xl font-extrabold">Education 🏫 </h2>
+      <h2 className="text-2xl font-extrabold">{t('education')} 🏫 </h2>
       {education.map((ed, index) => (
         <form
           data-testid="submit-education"
@@ -76,7 +78,7 @@ export default function ProfileEducation({
           {educationEditing && educationEditing[index] ? (
             <div className="mr-2 mb-3">
               <label>
-                Program <span className="text-yellow-600">*</span>
+                {t('program')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`change-edu-program-${index}`}
@@ -94,7 +96,7 @@ export default function ProfileEducation({
                 required
               />
               <label>
-                School <span className="text-yellow-600">*</span>
+                {t('school')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`change-edu-school-${index}`}
@@ -111,7 +113,7 @@ export default function ProfileEducation({
                 required
               />
               <label>
-                Location <span className="text-yellow-600">*</span>
+                {t('location')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`change-edu-location-${index}`}
@@ -131,7 +133,7 @@ export default function ProfileEducation({
               <div className="flex flex-wrap gap-2">
                 <div className="w-full">
                   <label>
-                    Start Date <span className="text-yellow-600">*</span>
+                    {t('start-date')} <span className="text-yellow-600">*</span>
                   </label>
                   <InputField
                     type="date"
@@ -157,7 +159,7 @@ export default function ProfileEducation({
                   />
                 </div>
                 <div className="w-full">
-                  <label>End Date</label>
+                  <label>{t('end-date')}</label>
                   <InputField
                     type="date"
                     name="enddate"
@@ -176,7 +178,7 @@ export default function ProfileEducation({
                   />
                 </div>
               </div>
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`change-edu-description-${index}`}
                 name="info"
@@ -218,7 +220,7 @@ export default function ProfileEducation({
                 type="submit"
                 data-testid={`save-education-${index}`}
               >
-                Save Education
+                {t('save')}
               </Button>
             ) : (
               <EditButton
@@ -265,7 +267,7 @@ export default function ProfileEducation({
           setEducationEditing((eduedits) => [...eduedits, true]);
         }}
       >
-        Add New Education
+        {t('add-new')}
       </Button>
     </div>
   );

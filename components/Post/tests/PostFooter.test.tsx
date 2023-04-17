@@ -1,7 +1,8 @@
 import CommentIcon from '@/components/Icons/CommentIcon/CommentIcon';
 import { Post } from '@/types/Post';
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { Timestamp } from 'firebase/firestore';
 import PostFooter from '../PostFooter';
 

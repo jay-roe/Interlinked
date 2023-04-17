@@ -1,11 +1,14 @@
 'use client';
 import { Report } from '@/types/Report';
+import { useTranslations } from 'next-intl';
 
 export default function ReportHeader({ report }: { report: Report }) {
+  const t = useTranslations('Report');
+
   return (
     <div className="start flex">
       <div>
-        <p className="text-xl font-extrabold">DM moderation required</p>
+        <p className="text-xl font-extrabold">{t('moderation-required')}</p>
         <p className="text-xs">
           {report.reportTime?.toDate().toLocaleString('en-US', {
             month: 'long',
