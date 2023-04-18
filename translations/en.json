@@ -215,7 +215,9 @@
       "cancel": "Cancel",
       "send-application": "Send Application ",
       "cover-letter-filename": "Cover letter file name",
-      "resume-filename": "Resume file name"
+      "resume-filename": "Resume file name",
+      "profile-resume": "Profile Resume",
+      "profile-cover-letter": "Profile Cover Letter"
     },
     "ExternalApplications": {
       "external-applications": "External Applications",

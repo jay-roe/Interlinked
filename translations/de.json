@@ -215,7 +215,9 @@
       "cancel": "Abbrechen",
       "send-application": "Bewerbung senden",
       "cover-letter-filename": "Dateiname des Anschreibens",
-      "resume-filename": "Dateiname des Lebenslaufs"
+      "resume-filename": "Dateiname des Lebenslaufs",
+      "profile-resume": "Profil Lebenslauf",
+      "profile-cover-letter": "Profil Anschreiben"
     },
     "ExternalApplications": {
       "external-applications": "Externe Bewerbungen",

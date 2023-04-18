@@ -373,16 +373,17 @@ export default function Jobs({
                           })
                         }
                       />
-                      <div className="flex gap-2">
+                      <div className="flex-col gap-2 ">
                         <div>
                           <Button
+                            className="mb-3"
                             onClick={(e) => {
                               handleResumeUploadClick();
                               setGetttingProfileResume((curr) => !curr);
                             }}
                             type="button"
                           >
-                            {t('upload-resume')}&nbsp;
+                            {t('upload-resume')} &nbsp;
                             {!gettingProfileResume && (
                               <FaCloudUploadAlt size={25} />
                             )}
@@ -437,9 +438,10 @@ export default function Jobs({
                         }
                       />
 
-                      <div className="flex gap-2">
+                      <div className="flex-col gap-2">
                         <div>
                           <Button
+                            className="mb-3"
                             //  onClick={handleCoverLetterUploadClick}
                             onClick={(e) => {
                               handleCoverLetterUploadClick();
@@ -472,10 +474,6 @@ export default function Jobs({
                           )}
                         </div>
                       </div>
-
-                      {/* { gettingProfileCoverLetter &&
-                      <p>  { tempCoverLetter.name || 'none'} </p> 
-                      } */}
 
                       <input
                         type="file"
