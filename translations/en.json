@@ -2,7 +2,10 @@
   "Home": {
     "welcome": "Welcome",
     "get-you-interlinked": " Let's get you interlinked",
-    "become-interlinked": "We will become interlinked"
+    "become-interlinked": "We will become interlinked",
+    "post-to-your-feed": "Post to your feed",
+    "browse-job-opportunities": "Browse job opportunities",
+    "discuss-tech-jobs-or-anything-you-desire": "Discuss tech jobs or anything you desire"
   },
   "NavBar": {
     "open-main-menu": "Open main menu",
@@ -342,11 +345,15 @@
       "upload": "Upload Media"
     }
   },
-
   "Register": {
     "create": "Create an Account",
+    "email-placeholder": "Email Address",
+    "pw-placeholder": "Password",
+    "confirm-pw-placeholder": "Confirm Password",
     "register": "Register",
     "register-goog": "Register with Google",
+    "passwords-do-not-match": "Passwords do not match",
+    "register-as-recruiter": "Register as Recruiter",
     "already-have-account": "Already have an account? Login"
   },
   "PreviewProfile": {
