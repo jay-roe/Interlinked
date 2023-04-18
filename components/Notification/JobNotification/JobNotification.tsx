@@ -23,7 +23,7 @@ export default function jobNotification({
       <Link
         href={{
           pathname: '/job-feed',
-          query: { searchParam: notification.postingId },
+          query: { keyword: notification.postingId },
         }}
         className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
       >

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from '@/components/Link/Link';
-
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
@@ -14,9 +14,9 @@ import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
 import { useTranslations } from 'next-intl';
 
-export default function Feeds(props) {
+export default function Feeds() {
   const t = useTranslations('JobsFeed');
-  const { searchParams } = props;
+  const searchParams = useSearchParams();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
@@ -27,11 +27,7 @@ export default function Feeds(props) {
   const [partTime, setPartTime] = useState<boolean>(false);
   const [internship, setInternship] = useState<boolean>(false);
   const [searchKey, setSearchKey] = useState<string>(
-    searchParams.searchParam
-      ? typeof searchParams.searchParam === 'string'
-        ? searchParams.searchParam
-        : searchParams.searchParam[0]
-      : ''
+    searchParams.get('keyword') ? searchParams.get('keyword') : ''
   );
 
   useEffect(() => {
