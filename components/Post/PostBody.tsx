@@ -1,6 +1,7 @@
 import { Post } from '@/types/Post';
 import { User } from '@/types/User';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
+import TextEditorPreview from '../TextEditor/TextEditorPreview';
 
 const PostBody = ({
   author,
@@ -14,7 +15,7 @@ const PostBody = ({
   // Creates the body of the post constaining the title, body text, and image if there is one
   return (
     <div className="mb-3 flex flex-col space-y-2 border-y-2 border-y-white border-opacity-10 p-2">
-      <div className="leading-normal">{post?.text_content || ''}</div>
+      <TextEditorPreview message={post?.text_content || ''} />
       {post?.image_content &&
         post.image_content[0] &&
         post.image_content.map((image, index) => {

@@ -1,13 +1,7 @@
 import '@testing-library/jest-dom';
-import {
-  findAllByTestId,
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 import ProfileSocials from '../ProfileSocials';
-import { assert } from 'console';
+import { render } from '@/renderWrapper';
 
 it('verifies social links are present in the live version', async () => {
   const { findByTestId } = render(

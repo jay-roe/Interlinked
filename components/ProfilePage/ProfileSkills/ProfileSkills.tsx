@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from 'react';
 import Button from '@/components/Buttons/Button';
 import DeleteButton from '@/components/Buttons/DeleteButton/DeleteButton';
 import InputField from '@/components/InputFields/Input/Input';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileSkills({
   skills,
@@ -18,13 +19,14 @@ export default function ProfileSkills({
   setSkillsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setSkills?: Dispatch<SetStateAction<User['skills']>>;
 }) {
+  const t = useTranslations('Profile.Skills');
   // Live version of skills component
   if (!isEditable) {
     if (!skills || !skills[0]) return;
 
     return (
       <div className="mb-7">
-        <h2 className="mb-2 text-2xl font-extrabold">Skills 💪</h2>
+        <h2 className="mb-2 text-2xl font-extrabold">{t('skills')} 💪</h2>
         <ul className="inline-flex flex-wrap">
           {skills.map((skill, index) => (
             <p
@@ -42,7 +44,7 @@ export default function ProfileSkills({
   // editable version
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Skills 💪</h2>
+      <h2 className="text-2xl font-extrabold">{t('skills')} 💪</h2>
       {skills.map((skill, index) => (
         <form
           action=""
@@ -132,7 +134,7 @@ export default function ProfileSkills({
             setSkillsEditing((skeditds) => [...skeditds, true]);
           }}
         >
-          Add New Skill
+          {t('add-new')}
         </Button>
       )}
     </div>

@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom';
 import { useAuth } from '@/contexts/AuthContext';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import EditJobPosting from '../EditJobPosting';
 
 jest.mock('contexts/AuthContext', () => ({

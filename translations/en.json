@@ -1,0 +1,488 @@
+{
+  "Home": {
+    "welcome": "Welcome",
+    "get-you-interlinked": " Let's get you interlinked",
+    "become-interlinked": "We will become interlinked",
+    "post-to-your-feed": "Post to your feed",
+    "browse-job-opportunities": "Browse job opportunities",
+    "discuss-tech-jobs-or-anything-you-desire": "Discuss tech jobs or anything you desire"
+  },
+  "NavBar": {
+    "open-main-menu": "Open main menu",
+    "search": "Search",
+    "dms": "DMs",
+    "view-notifications": "View notifications",
+    "open-user-menu": "Open user menu",
+    "profile": "Your Profile",
+    "edit-profile": "Edit Profile",
+    "logout": "Log out",
+    "home": "Home",
+    "manage-postings": "Manage Postings",
+    "feed": "Feed",
+    "jobs": "Jobs",
+    "reports": "Reports",
+    "login": "Login",
+    "register": "Register"
+  },
+  "Report": {
+    "moderation-required": "DM moderation required"
+  },
+  "ProtectedRoute": {
+    "must-be-logged-in": "You must be logged in to access this page, redirecting."
+  },
+  "Profile": {
+    "Volunteering": {
+      "experience": "Volunteering Experience",
+      "title": "Title",
+      "location": "Location",
+      "organization": "Organization",
+      "start-date": "Start Date",
+      "end-date": "End Date",
+      "description": "Description",
+      "save-experience": "Save Volunteering Experience",
+      "add-new": "Add New Volunteering Experience"
+    },
+    "Socials": {
+      "no-socials": "No socials given",
+      "save": "Save Socials"
+    },
+    "Skills": {
+      "skills": "Skills",
+      "add-new": "Add New Skill"
+    },
+    "Projects": {
+      "projects": "Projects",
+      "view-repo": "View Repo",
+      "view-demo": "View Demo",
+      "title": "Title",
+      "collaborators": "Collaborators",
+      "add-collaborator": "Add New Collaborator",
+      "description": "Description",
+      "start-date": "Start Date",
+      "end-date": "End Date",
+      "repo-link": "Repo Link",
+      "demo-link": "Demo Link",
+      "save": "Save Project",
+      "add-new": "Add New Project"
+    },
+    "Privacy": {
+      "save": "Save Privacy Settings"
+    },
+    "Locked": {
+      "private-account": "Private Account",
+      "send": "Send",
+      "link-req-to-view-profile": "a link request to view their profile"
+    },
+    "Languages": {
+      "languages": "Languages",
+      "elementary": "Elementary",
+      "limited-working": "Limited working",
+      "pro-working": "Professional working",
+      "full-pro": "Full professional",
+      "native": "Native",
+      "add-new": "Add New Language"
+    },
+    "JobHunt": {
+      "select-keywords": "Select keywords to notify you",
+      "save": "Save Job Notification Settings"
+    },
+    "Experience": {
+      "experience": "Experience",
+      "title": "Title",
+      "location": "Location",
+      "employer": "Employer",
+      "start-date": "Start Date",
+      "end-date": "End Date",
+      "description": "Description",
+      "save": "Save Experience",
+      "add-new": "Add New Experience"
+    },
+    "Education": {
+      "education": "Education",
+      "program": "Program",
+      "school": "School",
+      "location": "Location",
+      "start-date": "Start Date",
+      "end-date": "End Date",
+      "description": "Description",
+      "save": "Save Education",
+      "add-new": "Add New Education"
+    },
+    "Documents": {
+      "docs": "Docs",
+      "your-docs": "Your Documents",
+      "alert-must-upload-resume": "You must upload a resume before continuing.",
+      "resume": "Resume",
+      "resume-placeholder": "Public resume display name",
+      "upload-resume": "Upload Resume",
+      "save-resume": "Save Resume",
+      "add-resume": "Add Resume",
+      "alert-must-upload-cover-letter": "You must upload a cover letter before continuing.",
+      "cover-letter": "Cover Letter",
+      "cover-letter-placeholder": "Public cover letter display name",
+      "upload-cover-letter": "Upload Cover Letter",
+      "save-cover-letter": "Save Cover Letter",
+      "add-cover-letter": "Add Cover Letter"
+    },
+    "Courses": {
+      "courses": "Courses",
+      "title": "Title",
+      "course-number": "Course Number",
+      "description": "Description",
+      "save": "Save Course",
+      "add-new": "Add New Course"
+    },
+    "Contact": {
+      "contact": "Contact",
+      "email": "Email",
+      "phone": "Phone",
+      "save": "Save Contacts"
+    },
+    "CodingLanguages": {
+      "coding-languages": "Coding Languages",
+      "add-new": "Add New Coding Language"
+    },
+    "Certifications": {
+      "certifications": "Certifications",
+      "view-credential": "View Credential",
+      "cert-name": "Certification Name",
+      "issuer": "Issuer",
+      "date": "Date",
+      "cert-link": "Certification Link",
+      "save": "Save Certification",
+      "add-new": "Add New Certification"
+    },
+    "Awards": {
+      "awards": "Awards",
+      "title": "Award Title",
+      "date": "Date",
+      "description": "Description",
+      "save": "Save Award",
+      "add-new": "Add New Award"
+    }
+  },
+  "Notification": {
+    "Header": {
+      "loading": "loading"
+    }
+  },
+  "MessageModal": {
+    "message": "Message",
+    "send": "Send",
+    "a-message": "a message",
+    "close": "Close"
+  },
+  "Jobs": {
+    "Search": {
+      "search": "Search"
+    },
+    "PostFooter": {
+      "edit": "Edit Job Posting",
+      "view": "View Applicants",
+      "delete": "Delete Job Posting"
+    },
+    "PostBody": {
+      "location": "Location: ",
+      "deadline": "Deadline: ",
+      "resume-required": "Resume Required: ",
+      "cover-letter-required": "Cover Letter Required: ",
+      "yes": "Yes",
+      "no": "No",
+      "hidden": "Hidden: ",
+      "keywords": "🔑 Keywords:",
+      "none": "None",
+      "apply-via": "Apply via",
+      "skills": "💪 Skills: "
+    },
+    "FullJobCard": {
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "internship": "Internship",
+      "apply-before": "Apply before ",
+      "submit-with-res-and-cl": "Submit with resume and cover letter",
+      "submit-with-cl": "Submit with cover letter",
+      "submit-with-resume": "Submit with resume",
+      "apply": "Apply",
+      "alert-need-resume": "You need a resume to apply to this job.",
+      "alert-need-cl": "You need a cover letter to apply to this job.",
+      "alert-app-sent": "application sent!",
+      "quick-apply": "Quick Apply ",
+      "job-application": "Job Application",
+      "resume": "Resume",
+      "upload-resume": "Upload Resume",
+      "cover-letter": "Cover Letter",
+      "upload-cover-letter": "Upload Cover Letter",
+      "cancel": "Cancel",
+      "send-application": "Send Application ",
+      "cover-letter-filename": "Cover letter file name",
+      "resume-filename": "Resume file name"
+    },
+    "ExternalApplications": {
+      "external-applications": "External Applications",
+      "platform": "Platform",
+      "job-url": "Job URL",
+      "save": "Save External Posting",
+      "add-new": "Add New External Application"
+    },
+    "EditPosting": {
+      "alert-posting-incomplete": "Job Posting Not Complete",
+      "company": "Company",
+      "has-posted-new": "has posted a new job",
+      "job-name": "Job Name",
+      "full-time": "Full-time",
+      "part-time": "Part-time",
+      "internship": "Internship",
+      "description": "Job Description",
+      "location": "Location",
+      "app-deadline": "Application Deadline",
+      "keywords": "Keywords",
+      "save-skills": "Save Skills",
+      "edit-skills": "Edit Skills",
+      "resume-required": "Resume Required?",
+      "cl-required": "Cover Letter Required?",
+      "external-app": "External Application?",
+      "hide": "Hide Job Posting?",
+      "create-posting": "Create Job Posting",
+      "update-posting": "Update Job Posting"
+    },
+    "Keywords": {
+      "search": "Search Keywords"
+    }
+  },
+  "Icons": {
+    "JobHunt": {
+      "receive-notifs": "You will receive job opportunity notifications",
+      "no-notifs": "You will not receive job opportunity notifications"
+    },
+    "Link": {
+      "link": "Link",
+      "unlink": "Unlink"
+    },
+    "Privacy": {
+      "private": "Your profile is private",
+      "public": "Your profile is public"
+    },
+    "Verified": {
+      "verified": " Verified",
+      "not-verified": " Not verified"
+    }
+  },
+  "DM": {
+    "TimeDivider": {
+      "1-day-ago": "1 day ago",
+      "2-days-ago": "2 days ago"
+    },
+    "CreateChatModal": {
+      "confirm-go-to-chat": "Go to chats?",
+      "alert-sent": "Message sent!",
+      "write-message": "Write your message..."
+    }
+  },
+  "DeleteAccountOAuth": {
+    "login-prompt": "Please log in with one of the methods below before deleting.",
+    "login-goog": "Login with Google",
+    "auth-err": "Authentication error. Please try logging in again.",
+    "delete-warning": "This action is irreversible. Your account, and all of its data, will be permanently deleted.",
+    "delete": "Delete account",
+    "close": "Close"
+  },
+  "DeleteAccountEmail": {
+    "delete-warning": "This action is irreversible. Your account, and all of its data, will be permanently deleted.",
+    "pw-prompt": "Please enter your password",
+    "pw-placeholder": "Password",
+    "bad-pw": "Incorrect password.",
+    "delete": "Delete account",
+    "close": "Close"
+  },
+  "DeleteAccount": {
+    "delete": "Delete Account"
+  },
+  "CreatePost": {
+    "CreatePostGroup": {
+      "alert-no-content": "No content to post",
+      "alert-posted": "Posted!",
+      "alert-failed": "Image upload failed"
+    },
+    "PreviewAttachments": {
+      "preview": "Preview Attachments"
+    },
+    "CreatePost": {
+      "create": "Create a Post",
+      "write-anything": "Write anything to your heart's content",
+      "placeholder": "Write text here...",
+      "support-markdown": "Posts support Markdown. Use `backticks` to write code and more! ",
+      "visit-guide": "Visit the Markdown guide",
+      "for-more-info": "for more information.",
+      "edit": "Edit",
+      "preview": "Preview"
+    }
+  },
+  "Card": {
+    "FullPostCard": {
+      "no-comments": "There are no comments here.",
+      "now-time": "Now is the time to make your voice heard."
+    }
+  },
+  "Button": {
+    "Link": {
+      "links": "Links",
+      "would-like-link": " would like to link with you!",
+      "alert-sent": "Link request sent!",
+      "confirm-unlink": "Are you sure you want to unlink?",
+      "cancel": "Cancel Link Request"
+    },
+    "LoadMore": {
+      "load-more": "Load More...",
+      "loading": "Loading..."
+    },
+    "Post": {
+      "post": "Post"
+    },
+    "Remove": {
+      "remove": "Remove"
+    },
+    "UploadMedia": {
+      "upload": "Upload Media"
+    }
+  },
+  "Register": {
+    "create": "Create an Account",
+    "email-placeholder": "Email Address",
+    "pw-placeholder": "Password",
+    "confirm-pw-placeholder": "Confirm Password",
+    "register": "Register",
+    "register-goog": "Register with Google",
+    "passwords-do-not-match": "Passwords do not match",
+    "register-as-recruiter": "Register as Recruiter",
+    "already-have-account": "Already have an account? Login"
+  },
+  "PreviewProfile": {
+    "profile": "Your Profile",
+    "must-be-logged": "You must be logged in to preview your profile.",
+    "login": "Login",
+    "register": "Register",
+    "uid": {
+      "loading": "Loading...",
+      "invalid": "Invalid User.",
+      "links": {
+        "login-first": "You should login first.",
+        "sign-in": "Sign In",
+        "register": "Register",
+        "load-more": "Load More...",
+        "no-more": "No more links "
+      }
+    }
+  },
+  "NotificationsPage": {
+    "alert-must-login": "You need to be logged in to view your notifications",
+    "loading": "Loading...",
+    "notifications": "Notifications",
+    "read-all": "Read all",
+    "empty": "Wow, such empty"
+  },
+  "ManageJobs": {
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "create-posting": "Create a Job Posting",
+    "create-job": "Create New Job",
+    "your-postings": "Your Job Postings",
+    "jid": {
+      "view-applicants": "View Applicants",
+      "loading": "Loading...",
+      "should-login": "You should login first.",
+      "sign-in": "Sign In",
+      "register": "Register",
+      "job-no-exist": "Job does not exist",
+      "no-applications": "No applications yet "
+    }
+  },
+  "Login": {
+    "alert-failed": "Failed to login",
+    "welcome": "Welcome back",
+    "login": "Login",
+    "login-goog": "Login with Google",
+    "no-account": "Don't have an account? Register"
+  },
+  "Locked": {
+    "welcome": "Welcome",
+    "up-to-no-good": "Looks like you were up to no good.",
+    "account-locked": "Your account has been locked. Uh oh ",
+    "return": "Return to homepage",
+    "account-timeout": "You are in timeout for ",
+    "timeout-mins": "mins. Uh oh "
+  },
+  "JobsFeed": {
+    "jobs-feed": "Jobs Feed",
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "find": "Find new jobs.",
+    "full-time": "Full-time",
+    "part-time": "Part-time",
+    "internship": "Internship"
+  },
+  "Feed": {
+    "feed": "Your feed",
+    "loading": "Loading...",
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "see-what-links-talkinbout": "Let's see what your links are talking about.",
+    "load-more": "Load More...",
+    "no-more": "No more posts "
+  },
+  "EditProfile": {
+    "profile": "Your Profile",
+    "should-login": "You should login first.",
+    "login": "Login",
+    "register": "Register",
+    "confirm-unsaved": "Unsaved changes will be lost. Conitnue?",
+    "alert-success": "Successfully updated your profile!",
+    "edit-profile": "Edit Profile",
+    "save": "Save Changes",
+    "manage": "Manage Profile",
+    "sorry": "We're sorry to see you go. Click the button below to permanently delete your account and all of its information.",
+    "delete": "Delete Account"
+  },
+  "DMPage": {
+    "dms": "Your DMs",
+    "strength": "Strengthen your web",
+    "uid": {
+      "dms": "Your DMs",
+      "should-login": "You should login to view your messages",
+      "user": "User ",
+      "bad-etiquette": " has been reported for bad DM etiquette.",
+      "login": "Login",
+      "register": "Register",
+      "alert-reported": "User reported!",
+      "alert-already-reported": "You have already reported this user.",
+      "report": "Report this user"
+    }
+  },
+  "Admin": {
+    "loading": "Loading...",
+    "reports": "Reports",
+    "list-banned": "List of banned users",
+    "read-all": "Read all",
+    "empty": "Wow, such empty",
+    "lockedList": {
+      "loading": "Loading...",
+      "unban": "Unban account",
+      "return": "Return to reports"
+    },
+    "uid": {
+      "loading": "Loading...",
+      "participants-loading": "Participants Loading...",
+      "participants": "Participants",
+      "has-reported": " has reported this conversation",
+      "report-message": "Report message",
+      "lock": "Lock ",
+      "timeout": "Timeout ",
+      "saccount": "'s Account",
+      "discard": "Discard Report"
+    }
+  }
+}

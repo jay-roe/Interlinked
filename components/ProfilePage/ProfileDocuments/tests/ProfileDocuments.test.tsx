@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { fireEvent, waitFor } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import ProfileDocuments from '../ProfileDocuments';
-import { FiRefreshCcw } from 'react-icons/fi';
 
 const fakeDocumentRes = {
   name: 'resume',

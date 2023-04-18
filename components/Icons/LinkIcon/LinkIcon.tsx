@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { FaLink } from 'react-icons/fa';
 
 export default function LinkIcon({
@@ -9,6 +10,7 @@ export default function LinkIcon({
   showText?: boolean;
   size?: number;
 }) {
+  const t = useTranslations('Icons.Link');
   // Linked, show 'Unlink' button
   if (linked) {
     return (
@@ -21,7 +23,7 @@ export default function LinkIcon({
         </div>
         {showText && (
           <p className="my-auto ml-2 min-w-min basis-4 text-accent-orange">
-            Unlink
+            {t('unlink')}
           </p>
         )}
       </div>
@@ -46,7 +48,7 @@ export default function LinkIcon({
           data-testid="link-prompt"
           className="my-auto ml-2 flex min-w-min basis-4 text-accent-orange"
         >
-          Link
+          {t('link')}
         </p>
       )}
     </div>

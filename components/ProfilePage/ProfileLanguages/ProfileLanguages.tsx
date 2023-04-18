@@ -4,6 +4,7 @@ import type { User } from '@/types/User';
 import { Dispatch, SetStateAction } from 'react';
 import InputField from '@/components/InputFields/Input/Input';
 import type { Language } from '@/types/User';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileLanguages({
   isEditable = false,
@@ -24,13 +25,14 @@ export default function ProfileLanguages({
   setLanguagesHovering?: Dispatch<SetStateAction<boolean[]>>;
   setNewLanguage?: Dispatch<SetStateAction<Language>>;
 }) {
+  const t = useTranslations('Profile.Languages');
   // every language string ends with a number from 1-5 that represents proficiency
   if (!isEditable) {
     if (!languages || !languages[0]) return;
 
     return (
       <div className="mb-7">
-        <h2 className="mb-2 text-2xl font-extrabold">Languages 🗨 </h2>
+        <h2 className="mb-2 text-2xl font-extrabold">{t('languages')} 🗨 </h2>
         <ul className="inline-flex flex-wrap" data-testid="live-lang-profile">
           {languages.map((lang, index) => (
             <li
@@ -49,7 +51,7 @@ export default function ProfileLanguages({
 
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Languages 🗨 </h2>
+      <h2 className="text-2xl font-extrabold">{t('languages')} 🗨 </h2>
       {languages?.map((lang, index) => (
         <div key={index}>
           <ul className="inline-flex">
@@ -139,38 +141,38 @@ export default function ProfileLanguages({
                         >
                           {languages[index].proficiency === '1' ? (
                             <option value="1" selected>
-                              Elementary
+                              {t('elementary')}
                             </option>
                           ) : (
-                            <option value="1">Elementary</option>
+                            <option value="1">{t('elementary')}</option>
                           )}
                           {languages[index].proficiency === '2' ? (
                             <option value="2" selected>
-                              Limited working
+                              {t('limited-working')}
                             </option>
                           ) : (
-                            <option value="2">Limited working</option>
+                            <option value="2">{t('limited-working')}</option>
                           )}
                           {languages[index].proficiency === '3' ? (
                             <option value="3" selected>
-                              Professional working
+                              {t('pro-working')}
                             </option>
                           ) : (
-                            <option value="3">Professional working</option>
+                            <option value="3">{t('pro-working')}</option>
                           )}
                           {languages[index].proficiency === '4' ? (
                             <option value="4" selected>
-                              Full professional
+                              {t('full-pro')}
                             </option>
                           ) : (
-                            <option value="4">Full professional</option>
+                            <option value="4">{t('full-pro')}</option>
                           )}
                           {languages[index].proficiency === '5' ? (
                             <option value="5" selected>
-                              Native
+                              {t('native')}
                             </option>
                           ) : (
-                            <option value="5">Native</option>
+                            <option value="5">{t('native')}</option>
                           )}
                         </select>
                       </div>
@@ -216,7 +218,7 @@ export default function ProfileLanguages({
           setLanguagesHovering((langhovers) => [...langhovers, false]);
         }}
       >
-        Add New Language
+        {t('add-new')}
       </Button>
     </div>
   );

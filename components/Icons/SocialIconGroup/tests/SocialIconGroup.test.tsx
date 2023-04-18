@@ -1,11 +1,5 @@
 import '@testing-library/jest-dom';
-import { useAuth } from '@/contexts/AuthContext';
-import {
-  findByTestId,
-  fireEvent,
-  render,
-  waitFor,
-} from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import SocialIconGroup from '../SocialIconGroup';
 
 it('Social icon group renders', async () => {

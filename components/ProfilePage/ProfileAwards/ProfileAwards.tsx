@@ -7,6 +7,7 @@ import { Timestamp } from 'firebase/firestore';
 import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import CardStack from '@/components/CardStack/CardStack';
+import { useTranslations } from 'next-intl';
 export default function ProfileAwards({
   awards,
   isEditable = false,
@@ -20,13 +21,14 @@ export default function ProfileAwards({
   setAwardsEditing?: Dispatch<SetStateAction<boolean[]>>;
   setAwards?: Dispatch<SetStateAction<User['awards']>>;
 }) {
+  const t = useTranslations('Profile.Awards');
   // Live version of awards component
   if (!isEditable) {
     if (!awards || !awards[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
+        <h2 className="text-2xl font-extrabold">{t('awards')} 🏆</h2>
         <CardStack>
           {awards.map((award, index) => (
             <div key={index} data-testid={`live-award-${index}`}>
@@ -48,7 +50,7 @@ export default function ProfileAwards({
   // Editable version of awards component
   return (
     <div>
-      <h2 className="text-2xl font-extrabold">Awards 🏆</h2>
+      <h2 className="text-2xl font-extrabold">{t('awards')} 🏆</h2>
       {awards.map((award, index) => (
         <form
           action=""
@@ -64,7 +66,8 @@ export default function ProfileAwards({
           {awardsEditing && awardsEditing[index] ? (
             <div className="mr-2 mb-3 w-full max-w-xs">
               <label>
-                Award Title<span className="text-yellow-600">*</span>
+                {t('title')}
+                <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`awards-title-box-${index}`}
@@ -82,7 +85,7 @@ export default function ProfileAwards({
                 required
               />
               <label>
-                Date <span className="text-yellow-600">*</span>
+                {t('date')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`awards-date-box-${index}`}
@@ -101,7 +104,7 @@ export default function ProfileAwards({
                 }
                 required
               />
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`awards-desc-box-${index}`}
                 name="info"
@@ -135,7 +138,7 @@ export default function ProfileAwards({
                 type="submit"
                 data-testid={`awards-save-btn-${index}`}
               >
-                Save Award
+                {t('save')}
               </Button>
             ) : (
               <EditButton
@@ -178,7 +181,7 @@ export default function ProfileAwards({
           setAwardsEditing((awds) => [...awds, true]);
         }}
       >
-        Add New Award
+        {t('add-new')}
       </Button>
     </div>
   );
