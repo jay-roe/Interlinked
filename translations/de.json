@@ -2,7 +2,10 @@
   "Home": {
     "welcome": "Willkommen",
     "get-you-interlinked": " Lass uns Sie verlinken",
-    "become-interlinked": "Wir werden verlinkt werden"
+    "become-interlinked": "Wir werden verlinkt werden",
+    "post-to-your-feed": "Posten Sie auf Ihrem Feed",
+    "browse-job-opportunities": "Stöbern Sie nach Jobangeboten",
+    "discuss-tech-jobs-or-anything-you-desire": "Diskutieren Sie Technik, Jobs oder alles, was Sie wünschen"
   },
   "NavBar": {
     "open-main-menu": "Hauptmenü öffnen",
@@ -342,11 +345,15 @@
       "upload": "Medien hochladen"
     }
   },
-
   "Register": {
     "create": "Konto erstellen",
+    "email-placeholder": "E-Mail-Adresse",
+    "pw-placeholder": "Passwort",
+    "confirm-pw-placeholder": "Passwort bestätigen",
     "register": "Registrieren",
     "register-goog": "Mit Google registrieren",
+    "passwords-do-not-match": "Passwörter stimmen nicht überein",
+    "register-as-recruiter": "Als Recruiter registrieren",
     "already-have-account": "Sie haben bereits ein Konto? Anmelden"
   },
   "PreviewProfile": {

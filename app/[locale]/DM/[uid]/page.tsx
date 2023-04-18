@@ -239,10 +239,10 @@ export default function ChatRoom({ params }) {
                     adminId: adminId,
                   };
                   if (await checkIfReported(authUser.uid, person.userId)) {
-                    alert(t('already-reported'));
+                    alert(t('alert-already-reported'));
                   } else {
                     createReport(report);
-                    alert(t('reported'));
+                    alert(t('alert-reported'));
                   }
                 }}
               >

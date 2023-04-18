@@ -34,7 +34,7 @@ export default function Register() {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return alert('Passwords do not match');
+      return alert(t('passwords-do-not-match'));
     }
 
     try {
@@ -71,7 +71,7 @@ export default function Register() {
                 autoComplete="email"
                 required
                 className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t('email-placeholder')}
               />
             </div>
             <div>
@@ -84,7 +84,7 @@ export default function Register() {
                 autoComplete="current-password"
                 required
                 className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-                placeholder="Password"
+                placeholder={t('pw-placeholder')}
               />
             </div>
             <div>
@@ -97,13 +97,13 @@ export default function Register() {
                 autoComplete="current-password"
                 required
                 className="mb-2 block w-full appearance-none rounded border border-gray-300 bg-gray-50 px-3 py-2 text-sm text-gray-900 placeholder-gray-500 focus:z-10 focus:border-blue-500 focus:outline-none focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 sm:text-sm"
-                placeholder="Confirm Password"
+                placeholder={t('confirm-pw-placeholder')}
               />
             </div>
             <div>
               <CheckBox
                 name="company"
-                label="Register as Recruiter"
+                label={t('register-as-recruiter')}
                 onChange={() => setIsCompany((curr) => !curr)}
                 checked={isCompany}
               />
