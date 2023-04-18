@@ -172,7 +172,10 @@ export default function Jobs({
           data-testid="job-post-card"
         >
           {applicationSent && (
-            <div className="flex justify-end text-accent-orange">
+            <div
+              className="flex justify-end text-accent-orange"
+              data-testid="already-sent-check"
+            >
               {' '}
               Already Sent &nbsp; <FaCheck></FaCheck>
             </div>
