@@ -32,6 +32,11 @@ export default function Notifications() {
       router.push('/' + locale + '/login');
     }
 
+    // if account is locked or timed out, redirect to locked page
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+
     // get the notifications from the database
     async function getNotifications() {
       const res = await getDocs(

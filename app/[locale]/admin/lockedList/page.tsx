@@ -15,7 +15,7 @@ export default function LockedList() {
   const [loading, setLoading] = useState(true);
   const [banned, setBanned] = useState<UserWithId[]>([]);
 
-  const { authUser } = useAuth();
+  const { authUser, currentUser } = useAuth();
   const router = useRouter();
   const locale = useLocale();
 
@@ -23,7 +23,12 @@ export default function LockedList() {
     if (!authUser?.uid) {
       router.push('/' + locale + '/');
     }
-  }, [authUser, router]);
+
+    // if account is locked or timed out, redirect to locked page
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [authUser, currentUser, router]);
 
   useEffect(() => {
     getDocs(

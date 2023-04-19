@@ -1,0 +1,10 @@
+
+# Block all crawlers for /accounts
+User-agent: *
+Disallow: /DM/
+Disallow: /admin/
+Disallow: /manage-jobs
+
+# Allow all crawlers
+User-agent: *
+Allow: /
