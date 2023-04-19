@@ -91,10 +91,17 @@ export default function NavBar() {
                     {/* // TODO Fix font family for logo */}
                     <h1
                       data-testid="home-interlinked"
-                      className="font-logo text-white lg:text-3xl xl:text-4xl"
+                      className="hidden font-logo text-white sm:block lg:text-3xl xl:text-4xl"
                     >
                       INTERLINKED
                     </h1>
+                    <ImageOptimized
+                      src="/../public/interlinked-logo.ico"
+                      alt="interlinked logo"
+                      className="sm:block"
+                      width={30}
+                      height={30}
+                    />
                   </div>
                   <LocaleSwitcher />
                   <div className="hidden sm:ml-6 sm:block">
