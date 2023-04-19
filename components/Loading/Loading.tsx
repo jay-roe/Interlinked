@@ -1,6 +1,6 @@
 'use client';
 
-import loadingGif from './loadingGif.gif';
+import loadingGif from './LoadingGif.gif';
 
 export default function LoadingScreen() {
   return (
