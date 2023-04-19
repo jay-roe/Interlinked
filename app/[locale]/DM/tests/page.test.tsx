@@ -7,6 +7,10 @@ jest.mock('contexts/AuthContext', () => ({
   useAuth: jest.fn(),
 }));
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
 
 mockedUseAuth.mockImplementation(() => {
