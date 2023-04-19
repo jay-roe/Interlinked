@@ -21,11 +21,22 @@ import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/Pr
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function PreviewProfile() {
   const t = useTranslations('PreviewProfile');
   const { currentUser, authUser } = useAuth();
+  const router = useRouter();
+  const locale = useLocale();
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   // User not logged in, can't preview
   if (!currentUser) {

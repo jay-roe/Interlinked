@@ -22,13 +22,23 @@ import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked'
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function ViewProfile({ params }) {
   const t = useTranslations('PreviewProfile.uid');
+  const router = useRouter();
+  const locale = useLocale();
   const { currentUser, currentAdmin, authUser } = useAuth();
   const [user, setUser] = useState<User>();
   const [loading, setLoading] = useState(true);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     async function getUser(uid: string) {

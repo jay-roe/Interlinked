@@ -17,14 +17,18 @@ export default function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { authUser, login, loginWithGoogle } = useAuth();
+  const { authUser, currentUser, login, loginWithGoogle } = useAuth();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (authUser) {
       router.push('/' + locale + '/');
     }
-  }, [authUser, router]);
+    // if account is locked or timed out, redirect to locked page
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [authUser, currentUser, router]);
 
   async function handleFormSubmit(e: React.MouseEvent) {
     e.preventDefault();

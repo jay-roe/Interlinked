@@ -47,6 +47,13 @@ export default function EditProfile() {
     currentUser?.profilePicture
   );
 
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
+
   // Preview uploaded profile picture before posting to database
   useEffect(() => {
     if (!profilePicture) {
