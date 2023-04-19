@@ -82,6 +82,7 @@ export default function ChatRoom({ params }) {
       });
 
       if (!belongs) {
+        alert('You don't belong here!');
         router.push(`/${locale}/DM`);
         return () => unsub();
       }
