@@ -98,7 +98,7 @@ export default function NavBar() {
                     <ImageOptimized
                       src="/../public/interlinked-logo.ico"
                       alt="interlinked logo"
-                      className="sm:block"
+                      className="sm:ml-1 sm:block"
                       width={30}
                       height={30}
                     />
