@@ -63,7 +63,7 @@ const Home = () => {
   return (
     <div className="container mx-auto text-white">
       <h1
-        className="mb-3 text-center font-logo text-7xl font-extrabold"
+        className="mb-3 text-center font-logo text-5xl font-extrabold sm:text-7xl"
         data-testid="home-brand"
       >
         INTERLINKED
