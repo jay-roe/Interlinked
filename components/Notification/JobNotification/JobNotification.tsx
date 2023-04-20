@@ -15,7 +15,7 @@ export default function jobNotification({
 }) {
   return (
     <div
-      className="start grid w-full grid-cols-1 items-center justify-between gap-y-8 lg:grid-cols-2-1"
+      className="start grid w-full grid-cols-1 items-center justify-between gap-y-2 sm:grid-cols-2-1"
       data-testid="job-notification"
     >
       <Link
@@ -25,12 +25,12 @@ export default function jobNotification({
         }}
         className="grid rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
       >
-        <div className="grid w-full grid-cols-1 items-center justify-start gap-y-8 lg:grid-cols-6">
+        <div className="grid w-full grid-cols-1 items-center justify-start gap-y-2 sm:grid-cols-6">
           <div
             className="col-span-1 ml-4 text-accent-orange"
             data-testid="redirect-onclick-location"
           >
-            <MdWork size={60} className="align-self-center" />
+            <MdWork size={60} className="align-self-center hidden sm:block" />
           </div>
           <div className="col-span-5 ml-5">
             <NotificationHeader notification={notification} />
