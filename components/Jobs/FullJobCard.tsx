@@ -127,12 +127,14 @@ export default function Jobs({
         tempResume.link = fileURL;
         return tempResume;
       });
+      setGetttingProfileResume(true);
     } else if (fileType === 'coverLetter') {
       setTempCoverLetter((coverLetter) => {
         let tempCoverLetter = { ...coverLetter };
         tempCoverLetter.link = fileURL;
         return tempCoverLetter;
       });
+      setGetttingProfileCoverLetter(true);
     }
   };
 
@@ -145,12 +147,15 @@ export default function Jobs({
         postingId
       )
     ).then((job) => {
-      let applcations = job.data().applications;
-      applcations.forEach((application) => {
-        if (application.applicantId === authUser.uid) {
-          setApplicationSent(true);
-        }
-      });
+      if (
+        job
+          .data()
+          .applications.some(
+            (application) => application.applicantId === authUser.uid
+          )
+      ) {
+        setApplicationSent(true);
+      }
     });
   }, [authUser.uid, job.companyId, postingId]);
 
@@ -171,15 +176,6 @@ export default function Jobs({
           } transition-all`}
           data-testid="job-post-card"
         >
-          {applicationSent && (
-            <div
-              className="flex justify-end text-accent-orange"
-              data-testid="already-sent-check"
-            >
-              {' '}
-              Already Sent &nbsp; <FaCheck></FaCheck>
-            </div>
-          )}
           <div className="mb-3 text-sm font-light max-md:hidden">
             {job?.datePosted?.toDate().toLocaleString('en-US', {
               month: 'long',
@@ -277,6 +273,18 @@ export default function Jobs({
               )}
             </div>
           </Card>
+          {/* 'Already Sent' check replaces application buttons when job application is sent */}
+          {applicationSent && (
+            <div
+              className="flex justify-start "
+              style={{ color: 'green' }}
+              data-testid="already-sent-check"
+            >
+              {' '}
+              &nbsp; {t('already-sent')} &nbsp;
+              <FaCheck></FaCheck>
+            </div>
+          )}
           {isEditable && !applicationSent && (
             <div className="flex flex-wrap gap-3">
               {/* Main apply button */}
@@ -382,7 +390,6 @@ export default function Jobs({
                             className="mb-3"
                             onClick={(e) => {
                               handleResumeUploadClick();
-                              setGetttingProfileResume((curr) => !curr);
                             }}
                             type="button"
                           >
@@ -398,11 +405,22 @@ export default function Jobs({
                           </Button>
                         </div>
                         <div>
-                          {currentUser.resume && (
+                          {/* if ever the resume is not saved with a name the button defaults to 'profile resume' */}
+                          {currentUser.resume && currentUser.resume.name ? (
                             <Button
                               onClick={(e) => {
                                 getResumefromProfile();
-                                setGetttingProfileResume((curr) => !curr);
+                                setGetttingProfileResume(true);
+                              }}
+                            >
+                              <FaLink> </FaLink> &nbsp;{' '}
+                              {currentUser.resume.name}
+                            </Button>
+                          ) : (
+                            <Button
+                              onClick={(e) => {
+                                getResumefromProfile();
+                                setGetttingProfileResume(true);
                               }}
                             >
                               <FaLink> </FaLink> &nbsp; {t('profile-resume')}
@@ -448,7 +466,6 @@ export default function Jobs({
                             //  onClick={handleCoverLetterUploadClick}
                             onClick={(e) => {
                               handleCoverLetterUploadClick();
-                              setGetttingProfileCoverLetter((curr) => !curr);
                             }}
                             type="button"
                           >
@@ -464,11 +481,23 @@ export default function Jobs({
                           </Button>
                         </div>
                         <div>
-                          {currentUser.coverLetter && (
+                          {/* if ever the cover letter is not saved with a name the button defaults to 'profile cover letter' */}
+                          {currentUser.coverLetter &&
+                          currentUser.coverLetter.name ? (
                             <Button
                               onClick={(e) => {
                                 getCoverLetterfromProfile();
-                                setGetttingProfileCoverLetter((curr) => !curr);
+                                setGetttingProfileCoverLetter(true);
+                              }}
+                            >
+                              <FaLink> </FaLink> &nbsp;{' '}
+                              {currentUser.coverLetter.name}
+                            </Button>
+                          ) : (
+                            <Button
+                              onClick={(e) => {
+                                getCoverLetterfromProfile();
+                                setGetttingProfileCoverLetter(true);
                               }}
                             >
                               <FaLink> </FaLink> &nbsp;{' '}
@@ -542,7 +571,6 @@ export default function Jobs({
                           console.log(err);
                         }
                         setEditing((curr) => !curr);
-                        setApplicationSent(true);
                       }
                     }}
                   >
