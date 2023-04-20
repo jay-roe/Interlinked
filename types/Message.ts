@@ -31,7 +31,7 @@ export type KeyedChatRoom = {
 
 export const testMessage = {
   content: 'some beautiful content',
-  sender: { name: 'bob', profilePicture: 'test' },
+  sender: { name: 'bob', profilePicture: 'test', id: '123456' },
   time_stamp: Timestamp.now(),
 };
 
