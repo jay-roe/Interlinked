@@ -13,14 +13,24 @@ import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
 import LoadingScreen from '@/components/Loading/Loading';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function ManagePostings() {
   const t = useTranslations('ManageJobs');
+  const router = useRouter();
+  const locale = useLocale();
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobPostings, setJobPostings] = useState<JobPostingWithId[]>([]);
   const [newJob, setNewJob] = useState(false);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (currentUser && currentUser.isCompany) {

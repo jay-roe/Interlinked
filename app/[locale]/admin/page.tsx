@@ -24,7 +24,7 @@ const Admin = () => {
   const t = useTranslations('Admin');
   const router = useRouter();
   const locale = useLocale();
-  const { authUser, currentAdmin } = useAuth();
+  const { authUser, currentAdmin, currentUser } = useAuth();
 
   // Uncomment for implementation
   const [loading, setLoading] = useState(true);
@@ -34,6 +34,11 @@ const Admin = () => {
     // if not logged in, redirect to home page
     if (!currentAdmin) {
       router.push('/' + locale + '/');
+    }
+
+    // if account is locked or timed out, redirect to locked page
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
     }
 
     // get all the reports of the admin and sort them by date most recent first
@@ -57,7 +62,7 @@ const Admin = () => {
       setReports(rep);
       setLoading(false);
     });
-  }, [currentAdmin, router, authUser]);
+  }, [currentAdmin, router, authUser, currentUser]);
 
   // mark all the admins's reports as read
   async function readAll() {

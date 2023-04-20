@@ -10,6 +10,10 @@ const params = {
   uid: 1,
 };
 
+jest.mock('next/navigation', () => ({
+  useRouter: jest.fn(),
+}));
+
 jest.mock('@/config/firestore', () => ({
   db: jest.fn(),
   typeCollection: jest.fn(),

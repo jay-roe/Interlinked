@@ -1,7 +1,7 @@
 'use client';
 import { KeyedChatRoom } from '@/types/Message';
 import { useAuth } from '@/contexts/AuthContext';
-import { where, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { where, onSnapshot, query } from 'firebase/firestore';
 
 import { db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
@@ -9,13 +9,23 @@ import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
 import LoadingScreen from '@/components/Loading/Loading';
 import Link from '@/components/Link/Link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function DMs() {
   const t = useTranslations('DMPage');
-  const { authUser } = useAuth();
+  const router = useRouter();
+  const locale = useLocale();
+  const { authUser, currentUser } = useAuth();
   const [chats, setChats] = useState<KeyedChatRoom[]>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     let tempChats: KeyedChatRoom[] = [];

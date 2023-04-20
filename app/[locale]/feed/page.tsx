@@ -21,10 +21,13 @@ import { Post, PostWithId } from '@/types/Post';
 import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
 import LoadingScreen from '@/components/Loading/Loading';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function Feeds() {
   const t = useTranslations('Feed');
+  const router = useRouter();
+  const locale = useLocale();
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [loadingPosts, setLoadingPosts] = useState(true);
@@ -37,6 +40,13 @@ export default function Feeds() {
   const allAuthorsInfo = useRef<boolean>(false);
   const DAYS_INTERVAL: number = 5;
   const POST_LIMIT: number = 20;
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (currentUser?.linkedUserIds) {

@@ -35,7 +35,7 @@ const ViewReport = ({ params }) => {
     { value: 2592000000, label: '1 month' },
   ];
 
-  const { authUser } = useAuth();
+  const { authUser, currentUser } = useAuth();
   const router = useRouter();
   const locale = useLocale();
 
@@ -46,6 +46,13 @@ const ViewReport = ({ params }) => {
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   // get the report
   useEffect(() => {

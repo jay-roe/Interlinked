@@ -13,10 +13,13 @@ import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
 import LoadingScreen from '@/components/Loading/Loading';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function Feeds(props) {
   const t = useTranslations('JobsFeed');
+  const router = useRouter();
+  const locale = useLocale();
   const { searchParams } = props;
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
@@ -34,6 +37,13 @@ export default function Feeds(props) {
         : searchParams.searchParam[0]
       : ''
   );
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     async function getUsers() {

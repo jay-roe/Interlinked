@@ -16,10 +16,13 @@ import { doc, getDoc } from '@firebase/firestore';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
 import LoadingScreen from '@/components/Loading/Loading';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { useRouter } from 'next/navigation';
 
 export default function Links({ params }) {
   const t = useTranslations('PreviewProfile.uid.links');
+  const router = useRouter();
+  const locale = useLocale();
   const PAGE_SIZE = 20;
   const { currentUser, authUser } = useAuth();
   const myPage = authUser?.uid === params.uid || false;
@@ -63,6 +66,13 @@ export default function Links({ params }) {
     }
     return links;
   };
+
+  // if account is locked or timed out, redirect to locked page
+  useEffect(() => {
+    if (currentUser?.accountLocked || currentUser?.accountTimeout) {
+      router.push('/' + locale + '/locked');
+    }
+  }, [currentUser, router]);
 
   useEffect(() => {
     if (currentUser && !allLinksFound) {
