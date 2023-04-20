@@ -8,8 +8,10 @@ export default function ReportHeader({ report }: { report: Report }) {
   return (
     <div className="start flex">
       <div>
-        <p className="text-xl font-extrabold">{t('moderation-required')}</p>
-        <p className="text-xs">
+        <p className="text-sm font-extrabold sm:text-xl">
+          {t('moderation-required')}
+        </p>
+        <p className="text-xs sm:text-xs">
           {report.reportTime?.toDate().toLocaleString('en-US', {
             month: 'long',
             year: 'numeric',
