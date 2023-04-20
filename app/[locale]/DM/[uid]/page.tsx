@@ -147,6 +147,7 @@ export default function ChatRoom({ params }) {
       sender: {
         name: currentUser.name,
         profilePicture: currentUser.profilePicture,
+        id: authUser.uid,
       },
       time_stamp: Timestamp.now(),
       file: fileURL,
