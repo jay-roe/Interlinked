@@ -71,11 +71,14 @@ const Home = () => {
       {/* Here goes the app's components */}
       {currentUser ? (
         <div>
-          <p data-testid="welcome-msg" className="text-center text-2xl">
+          <p
+            data-testid="welcome-msg"
+            className="text-center text-xl sm:text-2xl"
+          >
             {t('welcome')}, {currentUser.name || currentUser.email}.
             {t('get-you-interlinked')}.
           </p>
-          <ul className="mx-auto mt-20 max-w-3xl text-left text-4xl">
+          <ul className="mx-auto mt-20 max-w-3xl text-left text-2xl sm:text-4xl">
             {links.map(({ href, label, icon: Icon, className }, index) => (
               <li key={`${href}${label}`} className={`m-8`}>
                 <Link href={href}>
@@ -92,7 +95,7 @@ const Home = () => {
         </div>
       ) : (
         <>
-          <p data-testid="base-msg" className="text-center text-2xl">
+          <p data-testid="base-msg" className="text-center text-xl sm:text-2xl">
             {t('become-interlinked')}.
           </p>
         </>
