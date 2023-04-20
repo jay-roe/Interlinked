@@ -14,7 +14,7 @@ export default function postNotification({
 }) {
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start flex items-center justify-between hover:bg-white hover:bg-opacity-10"
       data-testid="post-notification"
     >
       <div className="flex items-center justify-center">
