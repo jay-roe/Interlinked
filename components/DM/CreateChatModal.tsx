@@ -34,6 +34,7 @@ export default function CreateChatModal({ userUID }: { userUID: string }) {
       sender: {
         name: currentUser.name,
         profilePicture: currentUser.profilePicture,
+        id: authUser.uid,
       },
       time_stamp: Timestamp.now(),
     };
