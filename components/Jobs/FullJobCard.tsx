@@ -406,7 +406,7 @@ export default function Jobs({
                         </div>
                         <div>
                           {/* if ever the resume is not saved with a name the button defaults to 'profile resume' */}
-                          {currentUser.resume && currentUser.resume.name ? (
+                          {currentUser.resume && currentUser.resume.name && (
                             <Button
                               onClick={(e) => {
                                 getResumefromProfile();
@@ -416,7 +416,8 @@ export default function Jobs({
                               <FaLink> </FaLink> &nbsp;{' '}
                               {currentUser.resume.name}
                             </Button>
-                          ) : (
+                          )}
+                          {currentUser.resume && !currentUser.resume.name && (
                             <Button
                               onClick={(e) => {
                                 getResumefromProfile();
@@ -483,27 +484,30 @@ export default function Jobs({
                         <div>
                           {/* if ever the cover letter is not saved with a name the button defaults to 'profile cover letter' */}
                           {currentUser.coverLetter &&
-                          currentUser.coverLetter.name ? (
-                            <Button
-                              onClick={(e) => {
-                                getCoverLetterfromProfile();
-                                setGetttingProfileCoverLetter(true);
-                              }}
-                            >
-                              <FaLink> </FaLink> &nbsp;{' '}
-                              {currentUser.coverLetter.name}
-                            </Button>
-                          ) : (
-                            <Button
-                              onClick={(e) => {
-                                getCoverLetterfromProfile();
-                                setGetttingProfileCoverLetter(true);
-                              }}
-                            >
-                              <FaLink> </FaLink> &nbsp;{' '}
-                              {t('profile-cover-letter')}
-                            </Button>
-                          )}
+                            currentUser.coverLetter.name && (
+                              <Button
+                                onClick={(e) => {
+                                  getCoverLetterfromProfile();
+                                  setGetttingProfileCoverLetter(true);
+                                }}
+                              >
+                                <FaLink> </FaLink> &nbsp;{' '}
+                                {currentUser.coverLetter.name}
+                              </Button>
+                            )}
+
+                          {currentUser.coverLetter &&
+                            !currentUser.coverLetter.name && (
+                              <Button
+                                onClick={(e) => {
+                                  getCoverLetterfromProfile();
+                                  setGetttingProfileCoverLetter(true);
+                                }}
+                              >
+                                <FaLink> </FaLink> &nbsp;{' '}
+                                {t('profile-cover-letter')}
+                              </Button>
+                            )}
                         </div>
                       </div>
 
