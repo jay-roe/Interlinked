@@ -23,6 +23,7 @@ import { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
 import { useTranslations } from 'next-intl';
+import Link from '../Link/Link';
 
 export default function Jobs({
   job,
@@ -203,7 +204,7 @@ export default function Jobs({
               )}
             </div>
           </Card>
-          {isEditable && (
+          {isEditable && job.externalApplications.length === 0 && (
             <div className="flex flex-wrap gap-3">
               {/* Main apply button */}
               <div>
@@ -214,7 +215,7 @@ export default function Jobs({
                     setEditing((curr) => !curr);
                   }}
                 >
-                  {t('apply')} <FaPaperPlane className="" />
+                  {t('apply')} <FaPaperPlane className="ml-1" />
                 </Button>
               </div>
               {/* Quick apply to job button */}
@@ -265,9 +266,31 @@ export default function Jobs({
                   }}
                 >
                   {t('quick-apply')}
-                  <FaPaperPlane className="" />
+                  <FaPaperPlane className="ml-1" />
                 </Button>
               </div>
+            </div>
+          )}
+          {job.externalApplications.length !== 0 && (
+            <div className="flex flex-wrap gap-3">
+              {job.externalApplications.map((externalApp, index) => (
+                <Link
+                  key={index}
+                  href={
+                    externalApp.url.startsWith('http')
+                      ? externalApp.url
+                      : 'http://' + externalApp.url
+                  }
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline"
+                >
+                  <Button>
+                    {t('apply-via')} {externalApp.name}
+                    <FaPaperPlane className="ml-1" />
+                  </Button>
+                </Link>
+              ))}
             </div>
           )}
         </Card>

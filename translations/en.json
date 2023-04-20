@@ -5,7 +5,8 @@
     "become-interlinked": "We will become interlinked",
     "post-to-your-feed": "Post to your feed",
     "browse-job-opportunities": "Browse job opportunities",
-    "discuss-tech-jobs-or-anything-you-desire": "Discuss tech jobs or anything you desire"
+    "discuss-tech-jobs-or-anything-you-desire": "Discuss tech jobs or anything you desire",
+    "manage-jobs": "Manage your job postings"
   },
   "NavBar": {
     "open-main-menu": "Open main menu",
@@ -215,7 +216,8 @@
       "cancel": "Cancel",
       "send-application": "Send Application ",
       "cover-letter-filename": "Cover letter file name",
-      "resume-filename": "Resume file name"
+      "resume-filename": "Resume file name",
+      "apply-via": "Apply via"
     },
     "ExternalApplications": {
       "external-applications": "External Applications",

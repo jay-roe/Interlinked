@@ -14,26 +14,44 @@ const Home = () => {
   const { currentUser } = useAuth();
   const t = useTranslations('Home');
 
-  const links = [
-    {
-      href: '/feed',
-      label: t('post-to-your-feed'),
-      icon: FiEdit3,
-      className: 'hover:bg-purple-900 hover:bg-opacity-75',
-    },
-    {
-      href: '/job-feed',
-      label: t('browse-job-opportunities'),
-      icon: FiBriefcase,
-      className: 'hover:bg-indigo-900 hover:bg-opacity-75',
-    },
-    {
-      href: '/DM',
-      label: t('discuss-tech-jobs-or-anything-you-desire'),
-      icon: FiMessageSquare,
-      className: 'hover:bg-blue-900 hover:bg-opacity-30',
-    },
-  ];
+  let links = [];
+  if (currentUser && currentUser.isCompany) {
+    links = [
+      {
+        href: '/manage-jobs',
+        label: t('manage-jobs'),
+        icon: FiBriefcase,
+        className: 'hover:bg-indigo-900 hover:bg-opacity-75',
+      },
+      {
+        href: '/DM',
+        label: t('discuss-tech-jobs-or-anything-you-desire'),
+        icon: FiMessageSquare,
+        className: 'hover:bg-blue-900 hover:bg-opacity-30',
+      },
+    ];
+  } else if (currentUser && !currentUser.isCompany) {
+    links = [
+      {
+        href: '/feed',
+        label: t('post-to-your-feed'),
+        icon: FiEdit3,
+        className: 'hover:bg-purple-900 hover:bg-opacity-75',
+      },
+      {
+        href: '/job-feed',
+        label: t('browse-job-opportunities'),
+        icon: FiBriefcase,
+        className: 'hover:bg-indigo-900 hover:bg-opacity-75',
+      },
+      {
+        href: '/DM',
+        label: t('discuss-tech-jobs-or-anything-you-desire'),
+        icon: FiMessageSquare,
+        className: 'hover:bg-blue-900 hover:bg-opacity-30',
+      },
+    ];
+  }
 
   // if account is locked or timed out, redirect to locked page
   useEffect(() => {
@@ -60,14 +78,14 @@ const Home = () => {
           <ul className="mx-auto mt-20 max-w-3xl text-left text-4xl">
             {links.map(({ href, label, icon: Icon, className }, index) => (
               <li key={`${href}${label}`} className={`m-8`}>
-                <Card className={className}>
-                  <Link href={href}>
+                <Link href={href}>
+                  <Card className={className}>
                     <div className="m-8 flex items-center">
                       {Icon && <Icon className="mr-6 text-5xl" />}
                       <span>{label}</span>
                     </div>
-                  </Link>
-                </Card>
+                  </Card>
+                </Link>
               </li>
             ))}
           </ul>

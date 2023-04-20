@@ -5,7 +5,8 @@
     "become-interlinked": "Wir werden verlinkt werden",
     "post-to-your-feed": "Posten Sie auf Ihrem Feed",
     "browse-job-opportunities": "Stöbern Sie nach Jobangeboten",
-    "discuss-tech-jobs-or-anything-you-desire": "Diskutieren Sie Technik, Jobs oder alles, was Sie wünschen"
+    "discuss-tech-jobs-or-anything-you-desire": "Diskutieren Sie Technik, Jobs oder alles, was Sie wünschen",
+    "manage-jobs": "Verwalten Sie Ihre Stellenanzeigen"
   },
   "NavBar": {
     "open-main-menu": "Hauptmenü öffnen",
@@ -215,7 +216,8 @@
       "cancel": "Abbrechen",
       "send-application": "Bewerbung senden",
       "cover-letter-filename": "Dateiname des Anschreibens",
-      "resume-filename": "Dateiname des Lebenslaufs"
+      "resume-filename": "Dateiname des Lebenslaufs",
+      "apply-via": "Bewerbung über"
     },
     "ExternalApplications": {
       "external-applications": "Externe Bewerbungen",
