@@ -18,10 +18,10 @@ export default function postNotification({
       data-testid="post-notification"
     >
       <div className="flex items-center justify-center">
-        <div className="text-red-600 sm:my-2 sm:ml-4">
+        <div className="hidden text-red-600 sm:my-2 sm:ml-4 sm:block">
           <BsExclamationLg size={60} className="align-self-center" />
         </div>
-        <div className="sm:ml-5">
+        <div className="m-3 sm:m-5">
           <ReportHeader report={report} />
           <div className="mt-3">
             <p className="text-sm sm:text-lg">{report.context}</p>
