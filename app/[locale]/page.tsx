@@ -60,14 +60,14 @@ const Home = () => {
           <ul className="mx-auto mt-20 max-w-3xl text-left text-4xl">
             {links.map(({ href, label, icon: Icon, className }, index) => (
               <li key={`${href}${label}`} className={`m-8`}>
-                <Card className={className}>
-                  <Link href={href}>
+                <Link href={href}>
+                  <Card className={className}>
                     <div className="m-8 flex items-center">
                       {Icon && <Icon className="mr-6 text-5xl" />}
                       <span>{label}</span>
                     </div>
-                  </Link>
-                </Card>
+                  </Card>
+                </Link>
               </li>
             ))}
           </ul>
