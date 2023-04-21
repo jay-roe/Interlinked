@@ -455,6 +455,7 @@
   "DMPage": {
     "dms": "Deine Nachrichten",
     "strength": "Stärke dein Netzwerk",
+    "warning": "Private Nachrichten werden moderiert. Wenn Sie einen Benutzer in einer Unterhaltung melden, wird ein Moderator über das Schicksal des gemeldeten Benutzers entscheiden.",
     "uid": {
       "dms": "Deine Nachrichten",
       "should-login": "Du musst dich anmelden, um deine Nachrichten zu sehen.",

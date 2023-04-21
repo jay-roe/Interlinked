@@ -454,7 +454,8 @@
   },
   "DMPage": {
     "dms": "Your DMs",
-    "strength": "Strengthen your web",
+    "strength": "Strengthen your web.",
+    "warning": "DMs are moderated. By reporting a user in a conversation, a moderator will decide the reported user's fate.",
     "uid": {
       "dms": "Your DMs",
       "should-login": "You should login to view your messages",
