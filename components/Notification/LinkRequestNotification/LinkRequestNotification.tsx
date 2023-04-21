@@ -23,15 +23,15 @@ export default function LinkRequestNotification({
   const senderRedirect = 'profile/' + notification.sender;
   return (
     <div
-      className="flex items-center justify-between"
+      className="start grid w-full grid-cols-1 items-center justify-between gap-y-2 sm:grid-cols-2-1"
       data-testid="link-req-notification"
     >
       <Link href={senderRedirect}>
-        <div className="start flex items-center">
-          <div className="ml-4 text-accent-orange">
+        <div className="grid w-full grid-cols-1 items-center justify-start gap-y-2 sm:grid-cols-6">
+          <div className="col-span-1 ml-4 hidden text-accent-orange sm:block">
             <LinkIcon size={60} />
           </div>
-          <div className="ml-5">
+          <div className="col-span-5 ml-5">
             <NotificationHeader notification={notification} />
             <div className="m-3">
               <p>{notification.context}</p>
@@ -39,7 +39,7 @@ export default function LinkRequestNotification({
           </div>
         </div>
       </Link>
-      <div className="start flex items-center text-accent-orange">
+      <div className="start flex items-center justify-center text-accent-orange sm:gap-0 lg:justify-end">
         <button
           data-testid="accept-link-button"
           className="mb-3 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
@@ -71,7 +71,7 @@ export default function LinkRequestNotification({
         >
           <BsCheckLg className="m-4" size={30} />
         </button>
-        <div className="m-4 flex items-center justify-between">
+        <div className="m-4 flex items-center justify-center sm:gap-0 lg:justify-end">
           <NotificationDeleteButton
             notification={notification}
             setNotification={setNotification}
