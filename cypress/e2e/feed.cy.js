@@ -10,8 +10,6 @@ describe('Full feed spec', () => {
   });
 
   let postMessage = 'Test Post';
-  // TODO this should include deleting posts once we have the capability
-
   it('can post', () => {
     cy.visit('feed');
     // create post

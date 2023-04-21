@@ -261,7 +261,7 @@ export default function EditProfile() {
       await deleteAccount();
 
       // Redirect to home page, with state saying account was just deleted
-      router.push('/' + locale + '/'); // TODO reintroduce deleted account alert, { state: { deletedAccount: true } });
+      router.push('/' + locale + '/');
       setIsModalShow(false);
     } catch (err) {
       console.error(err);

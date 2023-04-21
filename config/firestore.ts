@@ -1,4 +1,4 @@
-import { Post, Comment } from '../types/Post';
+import { Post } from '../types/Post';
 import { User, Company, Admin } from '../types/User';
 import { firestore } from './firebase';
 import { collection } from 'firebase/firestore';

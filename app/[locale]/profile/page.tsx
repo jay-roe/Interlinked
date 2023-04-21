@@ -106,8 +106,6 @@ export default function PreviewProfile() {
 
       <ProfileLanguages languages={currentUser.languages} />
 
-      {/* TODO: change coding languages picture */}
-
       <ProfileCodingLanguages codingLanguages={currentUser.codingLanguages} />
 
       <ProfileEducation education={currentUser.education} />

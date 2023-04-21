@@ -229,7 +229,6 @@ it('can delete accont', async () => {
   const deleteAccountBtn = await findByTestId('danger-zone');
 
   fireEvent.click(deleteAccountBtn);
-  // todo need to get into the popup somehow...
 });
 
 it('does not update without confirmation', async () => {

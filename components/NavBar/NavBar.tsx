@@ -38,13 +38,13 @@ export default function NavBar() {
   ) {
     if (currentUser && currentUser.isCompany) {
       return [
-        { name: t('home'), href: '/', current: true },
+        // { name: t('home'), href: '/', current: true },
         { name: t('manage-postings'), href: '/manage-jobs', current: false },
       ];
     }
     if (currentUser) {
       return [
-        { name: t('home'), href: '/', current: true },
+        // { name: t('home'), href: '/', current: true },
         { name: t('feed'), href: '/feed', current: false },
         { name: t('jobs'), href: '/job-feed', current: false },
       ];
@@ -52,7 +52,7 @@ export default function NavBar() {
       return [{ name: t('reports'), href: '/admin', current: true }];
     } else {
       return [
-        { name: t('home'), href: '/', current: true },
+        // { name: t('home'), href: '/', current: true },
         {
           name: t('login'),
           href: '/login',
@@ -87,15 +87,14 @@ export default function NavBar() {
                   </Disclosure.Button>
                 </div>
                 <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                  <div className="flex flex-shrink-0 items-center">
-                    {/* // TODO Fix font family for logo */}
+                  <Link href="/" className="flex flex-shrink-0 items-center">
                     <h1
                       data-testid="home-interlinked"
-                      className="font-logo text-white lg:text-3xl xl:text-4xl"
+                      className="font-logo text-white transition-colors hover:text-yellow-500 lg:text-3xl xl:text-4xl"
                     >
                       INTERLINKED
                     </h1>
-                  </div>
+                  </Link>
                   <LocaleSwitcher />
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">

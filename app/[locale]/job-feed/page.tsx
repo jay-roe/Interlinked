@@ -100,7 +100,6 @@ export default function Feeds(props) {
 
   if (!currentUser || loading) {
     // user isnt logged in or the page is still loading
-    // TODO make a better loading page
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
