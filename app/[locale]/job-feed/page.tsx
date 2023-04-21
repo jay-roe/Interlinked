@@ -7,7 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import { JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
-import { collection, doc, getDocs, query } from 'firebase/firestore';
+import { collection, doc, getDocs, query, orderBy } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
@@ -59,7 +59,8 @@ export default function Feeds() {
         query(
           typeCollection<JobPostingWithId>(
             collection(doc(db.companies, comp), 'jobPosts')
-          )
+          ),
+          orderBy('datePosted', 'desc')
         )
       ).then((jobsTemp) => {
         jobsTemp.forEach((job) => {
