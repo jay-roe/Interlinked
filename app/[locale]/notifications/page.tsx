@@ -105,7 +105,7 @@ export default function Notifications() {
           </button>
         </div>
       </div>
-      <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
+      <div className="sm:rounded-xl sm:bg-white sm:bg-opacity-[8%] sm:p-5">
         {notifications.length > 0 ? (
           <NotificationList
             notifications={notifications}
