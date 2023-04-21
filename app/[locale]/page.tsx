@@ -21,13 +21,13 @@ const Home = () => {
         href: '/manage-jobs',
         label: t('manage-jobs'),
         icon: FiBriefcase,
-        className: 'hover:bg-indigo-900 hover:bg-opacity-75',
+        className: 'hover:bg-indigo-900 hover:bg-opacity-75 transition-all',
       },
       {
         href: '/DM',
-        label: t('discuss-tech-jobs-or-anything-you-desire'),
+        label: t('message-users'),
         icon: FiMessageSquare,
-        className: 'hover:bg-blue-900 hover:bg-opacity-30',
+        className: 'hover:bg-blue-900 hover:bg-opacity-30 transition-all',
       },
     ];
   } else if (currentUser && !currentUser.isCompany) {
@@ -36,19 +36,19 @@ const Home = () => {
         href: '/feed',
         label: t('post-to-your-feed'),
         icon: FiEdit3,
-        className: 'hover:bg-purple-900 hover:bg-opacity-75',
+        className: 'hover:bg-purple-900 hover:bg-opacity-75 transition-all',
       },
       {
         href: '/job-feed',
         label: t('browse-job-opportunities'),
         icon: FiBriefcase,
-        className: 'hover:bg-indigo-900 hover:bg-opacity-75',
+        className: 'hover:bg-indigo-900 hover:bg-opacity-75 transition-all',
       },
       {
         href: '/DM',
-        label: t('discuss-tech-jobs-or-anything-you-desire'),
+        label: t('message-users'),
         icon: FiMessageSquare,
-        className: 'hover:bg-blue-900 hover:bg-opacity-30',
+        className: 'hover:bg-blue-900 hover:bg-opacity-30 transition-all',
       },
     ];
   }
@@ -61,9 +61,9 @@ const Home = () => {
   }, [currentUser, router]);
 
   return (
-    <div className="container mx-auto text-white">
+    <div className="mx-4 text-white sm:container sm:mx-auto">
       <h1
-        className="mb-3 text-center font-logo text-5xl font-extrabold sm:text-7xl"
+        className="mb-3 text-center font-logo text-[10vw] font-extrabold sm:text-7xl"
         data-testid="home-brand"
       >
         INTERLINKED
@@ -80,11 +80,11 @@ const Home = () => {
           </p>
           <ul className="mx-auto mt-20 max-w-3xl text-left text-2xl sm:text-4xl">
             {links.map(({ href, label, icon: Icon, className }, index) => (
-              <li key={`${href}${label}`} className={`m-8`}>
+              <li key={`${href}${label}`} className="mb-3">
                 <Link href={href}>
                   <Card className={className}>
-                    <div className="m-8 flex items-center">
-                      {Icon && <Icon className="mr-6 text-5xl" />}
+                    <div className="flex items-center py-6 px-3">
+                      {Icon && <Icon size={48} className="mr-6" />}
                       <span>{label}</span>
                     </div>
                   </Card>
