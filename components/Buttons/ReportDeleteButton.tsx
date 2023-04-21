@@ -16,7 +16,7 @@ export default function ReportDeleteButton({
   return (
     <button
       data-testid="delete-report-btn"
-      className="mb-3 mr-2 flex items-center gap-2 rounded-full bg-white bg-opacity-[0.12] font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20 sm:max-w-fit sm:p-3"
+      className="mr-3 flex items-center gap-2 rounded-full bg-white bg-opacity-[0.12] font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20 sm:max-w-fit sm:p-3"
       onClick={(e) => {
         e.preventDefault();
         deleteReport(report.reportId, authUser.uid);

@@ -24,7 +24,7 @@ export default function postNotification({
         <div className="m-3 sm:m-5">
           <ReportHeader report={report} />
           <div className="mt-3">
-            <p className="text-sm sm:text-lg">{report.context}</p>
+            <p className="text-xs sm:text-lg">{report.context}</p>
           </div>
         </div>
       </div>

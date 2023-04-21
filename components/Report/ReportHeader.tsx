@@ -8,7 +8,7 @@ export default function ReportHeader({ report }: { report: Report }) {
   return (
     <div className="start flex">
       <div>
-        <p className="text-sm font-extrabold sm:text-xl">
+        <p className="text-xs font-extrabold sm:text-xl">
           {t('moderation-required')}
         </p>
         <p className="text-xs sm:text-xs">
