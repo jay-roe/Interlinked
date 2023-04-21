@@ -64,9 +64,15 @@ export default function ChatRoom({ params }) {
   }, [currentUser, router]);
 
   useEffect(() => {
-    if (!chatRoomRef || !authUser) return;
+    if (!chatRoomRef || !authUser) return () => unsub();
 
     getDoc(chatRoomRef).then((room) => {
+      if (room.data() === undefined) {
+        alert('Unrecognized link, redirecting to DMs');
+        router.push(`/${locale}/DM`);
+        return () => unsub();
+      }
+
       //make sure user is in chatroom
       let belongs = false;
       room.data().participants.forEach((participantID) => {
@@ -74,6 +80,12 @@ export default function ChatRoom({ params }) {
           belongs = true;
         }
       });
+
+      if (!belongs) {
+        alert('You do not belong here!');
+        router.push(`/${locale}/DM`);
+        return () => unsub();
+      }
 
       room
         .data()
@@ -135,6 +147,7 @@ export default function ChatRoom({ params }) {
       sender: {
         name: currentUser.name,
         profilePicture: currentUser.profilePicture,
+        id: authUser.uid,
       },
       time_stamp: Timestamp.now(),
       file: fileURL,
@@ -213,7 +226,7 @@ export default function ChatRoom({ params }) {
   }
 
   return (
-    <div data-testid="chat-room-root" className="flex h-[85vh] flex-col">
+    <div data-testid="chat-room-root" className="flex h-[85vh] flex-col ">
       <div className="flex gap-4">
         {/* TODO: Adjust this when group chats are added. */}
         {!participantsLoading &&
@@ -261,7 +274,7 @@ export default function ChatRoom({ params }) {
             </div>
           ))}
       </div>
-      <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">
+      <div className=" flex min-h-min flex-grow flex-col overflow-y-auto bg-white bg-opacity-[0.12] p-4 sm:rounded-t-xl  ">
         {chatMessages.map((m, id) => {
           return (
             <div key={id}>
@@ -277,8 +290,8 @@ export default function ChatRoom({ params }) {
           );
         })}
         <div className="pb-12" ref={dummy}></div>
-      </Card>
-      <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
+      </div>
+      <div className="flex w-full bg-chat-input-secondary p-2 sm:rounded-b-xl">
         <form onSubmit={handleSubmit} className="w-full">
           <div className="flex flex-col  rounded-md bg-chat-text-input ">
             <div className="flex flex-row p-1 ">
