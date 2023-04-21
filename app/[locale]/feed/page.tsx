@@ -135,6 +135,7 @@ export default function Feeds() {
   };
 
   if (loading) {
+    // TODO make a better loading page
     return <div>{t('loading')}</div>;
   }
 
