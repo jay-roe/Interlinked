@@ -38,13 +38,11 @@ export default function NavBar() {
   ) {
     if (currentUser && currentUser.isCompany) {
       return [
-        // { name: t('home'), href: '/', current: true },
         { name: t('manage-postings'), href: '/manage-jobs', current: false },
       ];
     }
     if (currentUser) {
       return [
-        // { name: t('home'), href: '/', current: true },
         { name: t('feed'), href: '/feed', current: false },
         { name: t('jobs'), href: '/job-feed', current: false },
       ];
@@ -52,7 +50,6 @@ export default function NavBar() {
       return [{ name: t('reports'), href: '/admin', current: true }];
     } else {
       return [
-        // { name: t('home'), href: '/', current: true },
         {
           name: t('login'),
           href: '/login',
