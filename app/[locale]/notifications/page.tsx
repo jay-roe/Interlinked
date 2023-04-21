@@ -88,7 +88,6 @@ export default function Notifications() {
   }
 
   return (
-    // tried a bunch of stuff but I can't get "read all" and the bell button side by side loll:')
     <div className="container mx-auto text-white">
       <div className="mb-2 flex justify-between">
         <h1 className="text-3xl font-extrabold">{t('notifications')}</h1>

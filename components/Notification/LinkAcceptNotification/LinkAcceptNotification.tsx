@@ -17,15 +17,15 @@ export default function linkAcceptNotification({
 
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start grid w-full grid-cols-1 items-center justify-between gap-y-2 sm:grid-cols-2-1"
       data-testid="link-acc-notification"
     >
       <Link href={senderRedirect}>
-        <div className="flex items-center justify-center">
-          <div className="ml-4 text-accent-orange">
+        <div className="grid w-full grid-cols-1 items-center justify-start gap-y-2 sm:grid-cols-6">
+          <div className="col-span-1 ml-4 hidden text-accent-orange sm:block">
             <LinkIcon linked size={60} />
           </div>
-          <div className="ml-5">
+          <div className="col-span-5 ml-5">
             <NotificationHeader notification={notification} />
             <div className="m-3">
               <p>{notification.context}</p>
@@ -33,7 +33,7 @@ export default function linkAcceptNotification({
           </div>
         </div>
       </Link>
-      <div className="m-4 flex items-center justify-between">
+      <div className="m-4 flex items-center justify-center gap-x-6 sm:gap-0 lg:justify-end">
         <NotificationDeleteButton
           data-testid="delete-button"
           notification={notification}
