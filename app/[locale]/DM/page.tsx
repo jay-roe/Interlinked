@@ -53,7 +53,8 @@ export default function DMs() {
   }, []);
 
   if (!currentUser || !authUser) {
-    return router.push(`/${locale}`);
+    router.push(`/${locale}`);
+    return;
   }
 
   return (
