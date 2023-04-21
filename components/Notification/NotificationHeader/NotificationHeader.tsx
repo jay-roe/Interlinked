@@ -29,7 +29,7 @@ export default function NotificationHeader({
     );
   }
   return (
-    <div className="start flex">
+    <div className="start mt-3 flex">
       <ImageOptimized
         alt={sender.name}
         width={32}

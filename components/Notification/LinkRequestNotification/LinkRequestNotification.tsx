@@ -71,7 +71,7 @@ export default function LinkRequestNotification({
         >
           <BsCheckLg className="m-4" size={30} />
         </button>
-        <div className="m-4 flex items-center justify-center sm:gap-0 lg:justify-end">
+        <div className="m-4 flex items-center justify-center sm:justify-end sm:gap-0">
           <NotificationDeleteButton
             notification={notification}
             setNotification={setNotification}

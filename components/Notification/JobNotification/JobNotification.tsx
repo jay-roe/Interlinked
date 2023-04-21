@@ -40,7 +40,7 @@ export default function jobNotification({
           </div>
         </div>
       </Link>
-      <div className="m-4 flex items-center justify-center gap-x-6 sm:gap-0 lg:justify-end">
+      <div className="m-4 flex items-center justify-center gap-x-6 sm:justify-end sm:gap-0">
         <NotificationDeleteButton
           notification={notification}
           setNotification={setNotification}
