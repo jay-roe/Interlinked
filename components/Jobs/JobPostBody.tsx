@@ -7,6 +7,7 @@ import {
 } from 'react-icons/ai';
 import Button from '../Buttons/Button';
 import { useTranslations } from 'next-intl';
+import Link from '../Link/Link';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic
@@ -91,8 +92,12 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
       <div data-testid="job-post-external">
         {jobPost?.externalApplications?.map((externalApp, index) => (
           <div className="mb-2" key={index}>
-            <a
-              href={externalApp.url}
+            <Link
+              href={
+                externalApp.url.startsWith('http')
+                  ? externalApp.url
+                  : 'http://' + externalApp.url
+              }
               target="_blank"
               rel="noreferrer"
               className="inline"
@@ -100,7 +105,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
               <Button>
                 {t('apply-via')} {externalApp.name}
               </Button>
-            </a>
+            </Link>
             <br />
           </div>
         ))}
