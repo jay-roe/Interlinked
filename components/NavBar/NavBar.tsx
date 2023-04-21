@@ -38,13 +38,11 @@ export default function NavBar() {
   ) {
     if (currentUser && currentUser.isCompany) {
       return [
-        { name: t('home'), href: '/', current: true },
         { name: t('manage-postings'), href: '/manage-jobs', current: false },
       ];
     }
     if (currentUser) {
       return [
-        { name: t('home'), href: '/', current: true },
         { name: t('feed'), href: '/feed', current: false },
         { name: t('jobs'), href: '/job-feed', current: false },
       ];
@@ -52,7 +50,6 @@ export default function NavBar() {
       return [{ name: t('reports'), href: '/admin', current: true }];
     } else {
       return [
-        { name: t('home'), href: '/', current: true },
         {
           name: t('login'),
           href: '/login',
@@ -87,8 +84,7 @@ export default function NavBar() {
                   </Disclosure.Button>
                 </div>
                 <div className="ml-11 flex flex-1 items-center justify-start sm:ml-0 sm:items-stretch">
-                  <div className="flex flex-shrink-0 items-center">
-                    {/* // TODO Fix font family for logo */}
+                  <Link href="/" className="flex flex-shrink-0 items-center">
                     <h1
                       data-testid="home-interlinked"
                       className="hidden font-logo text-white sm:block lg:text-3xl xl:text-4xl"
@@ -102,7 +98,7 @@ export default function NavBar() {
                       width={30}
                       height={30}
                     />
-                  </div>
+                  </Link>
                   <LocaleSwitcher />
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
