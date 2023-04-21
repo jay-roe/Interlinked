@@ -188,7 +188,7 @@ export default function EditProfile() {
 
   // User not logged in, redirect to account required
   if (!currentUser || !authUser) {
-    return router.push('/' + locale + '/account-required');
+    router.push('/' + locale + '/account-required');
   }
 
   const statesToUpdate: Partial<User> = {
