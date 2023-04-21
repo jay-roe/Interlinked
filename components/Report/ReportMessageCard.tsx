@@ -15,14 +15,14 @@ const ReportMessageCard = ({
       data-testid="report-card-sender"
       className={`my-3 flex gap-x-3 
       ${
-        message.sender.name == report.reporterName
+        message.sender.id == report.reporter
           ? ' order-first justify-end '
           : ' order-last justify-start '
       }`}
     >
       <div
         className={`${
-          message.sender.name == report.reporterName ? 'order-last ' : ''
+          message.sender.id == report.reporter ? 'order-last ' : ''
         }`}
       >
         <ImageOptimized
@@ -43,9 +43,7 @@ const ReportMessageCard = ({
         <Disclosure.Panel
           as="div"
           className={`flex text-gray-500 ${
-            message.sender.name == report.reporterName
-              ? 'justify-items-end '
-              : ''
+            message.sender.id == report.reporter ? 'justify-items-end ' : ''
           }`}
         >
           <p>
