@@ -2,7 +2,7 @@ import { Timestamp } from 'firebase/firestore';
 
 export type Message = {
   content: string;
-  sender: { name: string; profilePicture: string };
+  sender: { name: string; profilePicture: string; id: string };
   time_stamp?: Timestamp;
   file?: string;
   fileType?: string;
@@ -31,7 +31,7 @@ export type KeyedChatRoom = {
 
 export const testMessage = {
   content: 'some beautiful content',
-  sender: { name: 'bob', profilePicture: 'test' },
+  sender: { name: 'bob', profilePicture: 'test', id: '123456' },
   time_stamp: Timestamp.now(),
 };
 
