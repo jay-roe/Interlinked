@@ -17,11 +17,11 @@ export default function linkAcceptNotification({
 
   return (
     <div
-      className="start grid w-full grid-cols-1 items-center justify-between gap-y-2 sm:grid-cols-2-1"
+      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="link-acc-notification"
     >
       <Link href={senderRedirect}>
-        <div className="grid w-full grid-cols-1 items-center justify-start gap-y-2 sm:grid-cols-6">
+        <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
           <div className="col-span-1 ml-4 hidden text-accent-orange sm:block">
             <LinkIcon linked size={60} />
           </div>

@@ -14,10 +14,10 @@ export default function postNotification({
 }) {
   return (
     <div
-      className="start grid w-full grid-cols-1 items-center justify-between gap-y-2 sm:grid-cols-2-1"
+      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="post-notification"
     >
-      <div className="grid w-full grid-cols-1 items-center justify-start gap-y-2 sm:grid-cols-6">
+      <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
         <div className="col-span-1 ml-4 text-accent-orange">
           <MdDescription
             size={60}
