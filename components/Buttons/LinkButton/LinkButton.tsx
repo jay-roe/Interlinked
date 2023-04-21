@@ -40,7 +40,7 @@ export default function LinkButton({
     });
   }, []);
 
-  return !notification && profileOwnerUID !== authUser.uid ? (
+  return !notification && profileOwnerUID !== authUser?.uid ? (
     <button
       data-testid="link-btn"
       className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
