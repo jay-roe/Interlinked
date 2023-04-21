@@ -401,6 +401,12 @@
       "no-applications": "No applications yet "
     }
   },
+  "AccountRequired": {
+    "should-login": "You should login first.",
+    "sign-in": "Sign In",
+    "register": "Register",
+    "cannot-access-page": "Cannot access this page just yet..."
+  },
   "Login": {
     "alert-failed": "Failed to login",
     "welcome": "Welcome back",

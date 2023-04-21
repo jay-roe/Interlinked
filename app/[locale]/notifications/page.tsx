@@ -26,10 +26,9 @@ export default function Notifications() {
   const locale = useLocale();
 
   useEffect(() => {
-    // if not logged in, redirect to home page
+    // User not logged in, redirect to account required
     if (!currentUser || !authUser) {
-      alert(t('alert-must-login'));
-      router.push('/' + locale + '/login');
+      router.push('/' + locale + '/account-required');
     }
 
     // if account is locked or timed out, redirect to locked page

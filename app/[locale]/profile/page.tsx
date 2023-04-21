@@ -38,20 +38,9 @@ export default function PreviewProfile() {
     }
   }, [currentUser, router]);
 
-  // User not logged in, can't preview
+  // User not logged in, redirect to account required
   if (!currentUser) {
-    return (
-      <>
-        <h1>{t('profile')}</h1>
-        <h2 data-testid="profile-login-prompt">{t('must-be-logged')}</h2>
-        <Link href="/login">
-          <Button>{t('login')}</Button>
-        </Link>
-        <Link href="/register">
-          <Button>{t('register')}</Button>
-        </Link>
-      </>
-    );
+    return router.push('/' + locale + '/account-required');
   }
 
   if (currentUser.isCompany) {
