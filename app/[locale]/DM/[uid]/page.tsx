@@ -16,7 +16,6 @@ import {
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
-import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
@@ -64,27 +63,23 @@ export default function ChatRoom({ params }) {
   }, [currentUser, router]);
 
   useEffect(() => {
-    if (!chatRoomRef || !authUser) return () => unsub();
+    if (!authUser) return;
 
     getDoc(chatRoomRef).then((room) => {
       if (room.data() === undefined) {
         alert('Unrecognized link, redirecting to DMs');
         router.push(`/${locale}/DM`);
-        return () => unsub();
+        return;
       }
 
       //make sure user is in chatroom
-      let belongs = false;
-      room.data().participants.forEach((participantID) => {
-        if (participantID == authUser.uid) {
-          belongs = true;
-        }
-      });
-
-      if (!belongs) {
-        alert('You do not belong here!');
+      if (
+        !room
+          .data()
+          .participants.some((participantID) => participantID === authUser.uid)
+      ) {
         router.push(`/${locale}/DM`);
-        return () => unsub();
+        return;
       }
 
       room

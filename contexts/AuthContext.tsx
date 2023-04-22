@@ -167,8 +167,8 @@ export function AuthProvider({ children }) {
    * Logs out of the current user session.
    */
   async function logout() {
-    await auth.signOut();
     router.push('/' + locale + '/');
+    await auth.signOut();
   }
 
   /**

@@ -50,12 +50,13 @@ const PostFooter = ({
       >
         {t('edit')}
       </Button>
-      {/* TODO: Do view applicants when applications are being worked on */}
-      <Link href={`/manage-jobs/${jobPost.postingId}`}>
-        <Button data-testid={`job-post-applicants-${testKey}`}>
-          {t('view')}
-        </Button>
-      </Link>
+      {jobPost.externalApplications?.length === 0 && (
+        <Link href={`/manage-jobs/${jobPost.postingId}`}>
+          <Button data-testid={`job-post-applicants-${testKey}`}>
+            {t('view')}
+          </Button>
+        </Link>
+      )}
       <Button
         variant="danger"
         data-testid={`job-post-delete-${testKey}`}
