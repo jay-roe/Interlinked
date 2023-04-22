@@ -153,14 +153,17 @@ it('check if user is logged in', async () => {
 });
 
 it('check if user is logged out', async () => {
-  mockedUseAuth.mockImplementation(() => {
+  const mockedUseAuth = useAuth as jest.Mock<any>;
+  const mockedUseRouter = useRouter as jest.Mock<any>;
+  mockedUseAuth.mockReturnValue(() => {
     return {
       authUser: null, // There IS a current users
     };
   });
+  mockedUseRouter.mockReturnValue({
+    push: jest.fn(),
+  });
 
-  const { findByTestId } = render(<Profile />);
-
-  const profileInfo = await findByTestId('profile-login-prompt');
-  expect(profileInfo).toBeInTheDocument();
+  render(<Profile />);
+  expect(mockedUseRouter().push).toHaveBeenCalledWith('/en/account-required');
 });

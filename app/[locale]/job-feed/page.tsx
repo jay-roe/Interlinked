@@ -90,26 +90,17 @@ export default function Feeds() {
     setLoading(false);
   }, [partTime, fullTime, internship, searchKey, jobs]);
 
-  if (!currentUser) {
-    // user isnt logged in or the page is still loading
-    // TODO make a better loading page
-    return (
-      <div>
-        <p data-testid="base-msg" className="mb-3 text-left text-2xl">
-          {t('should-login')}
-        </p>
-        <div className="flex space-x-1.5">
-          <Link href="/login">
-            <Button>{t('sign-in')}</Button>
-          </Link>
-          <Link href="/register">
-            <Button>{t('register')}</Button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
+  if (loading) {
+    // TODO make a better loading page
+    return <div>{t('loading')}</div>;
+  }
+  // User not logged in, redirect to account required
+  if (!currentUser) {
+    router.push('/' + locale + '/account-required');
+    return <div> </div>;
+  }
+  
   return (
     <div>
       {/* <CreatePostGroup /> */}
