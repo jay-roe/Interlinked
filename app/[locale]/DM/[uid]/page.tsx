@@ -63,7 +63,7 @@ export default function ChatRoom({ params }) {
   }, [currentUser, router]);
 
   useEffect(() => {
-    if (!chatRoomRef || !authUser) return;
+    if (!authUser) return;
 
     getDoc(chatRoomRef).then((room) => {
       if (room.data() === undefined) {
