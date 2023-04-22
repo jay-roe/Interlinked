@@ -29,12 +29,12 @@ export default function NotificationHeader({
     );
   }
   return (
-    <div className="start flex">
+    <div className="start mt-3 flex">
       <ImageOptimized
         alt={sender.name}
         width={32}
         height={32}
-        className="h-25 min-h-[2rem] w-8 min-w-[2rem] rounded-full p-2 md:h-12 md:w-12"
+        className="h-12 w-12 rounded-full p-2 md:h-12 md:w-12"
         src={sender.profilePicture}
       />
       <div>

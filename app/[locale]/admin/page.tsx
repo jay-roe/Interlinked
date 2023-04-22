@@ -93,10 +93,10 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto text-white" data-testid="admin-home">
-      <div className="mb-3 flex justify-between">
-        <h1 className="text-3xl font-extrabold">{t('reports')}</h1>
+      <div className="mb-3 justify-between sm:flex">
+        <h1 className="my-2 text-3xl font-extrabold sm:my-0">{t('reports')}</h1>
         <Link href={'/admin/lockedList'}>
-          <Button data-testid="list-of-banned-users-btn">
+          <Button data-testid="list-of-banned-users-btn my-2 sm:my-0">
             {t('list-banned')}
           </Button>
         </Link>
@@ -107,7 +107,7 @@ const Admin = () => {
               readAll();
             }}
           >
-            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+            <div className="my-2 flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3 sm:my-0">
               <FiBell />
               <p>{t('read-all')}</p>
             </div>
