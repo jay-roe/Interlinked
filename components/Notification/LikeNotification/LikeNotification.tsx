@@ -14,21 +14,21 @@ export default function likeNotification({
 }) {
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="like-notification"
     >
-      <div className="flex items-center justify-center">
-        <div className="ml-4 text-accent-orange">
-          <AiFillLike size={60} className="align-self-center" />
+      <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
+        <div className="col-span-1 ml-4 text-accent-orange">
+          <AiFillLike size={60} className="align-self-center hidden sm:block" />
         </div>
-        <div className="ml-5">
+        <div className="col-span-5 ml-5">
           <NotificationHeader notification={notification} />
           <div className="m-3">
             <p>{notification.context}</p>
           </div>
         </div>
       </div>
-      <div className="m-4 flex items-center justify-between">
+      <div className="m-4 flex items-center justify-center gap-x-6 sm:justify-end sm:gap-0">
         <NotificationDeleteButton
           notification={notification}
           setNotification={setNotification}

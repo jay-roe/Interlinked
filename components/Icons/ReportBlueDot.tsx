@@ -47,11 +47,11 @@ export default function ReportBlueDot({
         );
       }}
     >
-      <div className="text-indigo-600 hover:text-emerald-600">
+      <div className="w-full text-indigo-600 hover:text-emerald-600">
         {read ? (
-          <RiCheckboxBlankCircleLine size={40} data-testid="blue-dot" />
+          <RiCheckboxBlankCircleLine size={30} data-testid="blue-dot" />
         ) : (
-          <RiCheckboxBlankCircleFill size={40} data-testid="blue-dot" />
+          <RiCheckboxBlankCircleFill size={30} data-testid="blue-dot" />
         )}
       </div>
     </button>
