@@ -12,6 +12,7 @@ import { db, typeCollection } from '@/config/firestore';
 import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 
 export default function Feeds() {
@@ -89,11 +90,7 @@ export default function Feeds() {
     setLoading(false);
   }, [partTime, fullTime, internship, searchKey, jobs]);
 
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
-
-  if (!currentUser || loading) {
+  if (!currentUser) {
     // user isnt logged in or the page is still loading
     // TODO make a better loading page
     return (
@@ -147,6 +144,7 @@ export default function Feeds() {
         />
       </div>
       {/*if there is a filter, display jobs*/}
+      {loading && <LoadingScreen />}
       {filteredJobs?.map((jb, index) => {
         return (
           <FullJobCard

@@ -15,6 +15,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import { Notification } from '@/types/Notification';
 import { useRouter } from 'next/navigation';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 
 export default function Notifications() {
@@ -58,10 +59,6 @@ export default function Notifications() {
       });
     }
   }, [authUser?.uid]);
-
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
 
   // mark all the user's notifications as read
   async function readAll() {

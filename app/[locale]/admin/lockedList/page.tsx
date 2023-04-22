@@ -1,6 +1,7 @@
 'use client';
 import Button from '@/components/Buttons/Button';
 import Card from '@/components/Card/Card';
+import LoadingScreen from '@/components/Loading/Loading';
 import { db, typeCollection } from '@/config/firestore';
 import { useAuth } from '@/contexts/AuthContext';
 import { User, UserWithId } from '@/types/User';
@@ -51,34 +52,42 @@ export default function LockedList() {
     window.location.reload();
   }
 
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
-
   return (
     <div className="container mx-auto text-white">
       <Card className="mb-3">
+        {loading && <LoadingScreen />}
         <ul>
-          {banned.map((user, index) => (
-            <li
-              key={index}
-              className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
-            >
-              <div className="start flex items-center justify-between">
-                <div className="flex items-center justify-center">
-                  <p>{user.name}</p>
+          {!loading &&
+            banned.map((user, index) => (
+              <li
+                key={index}
+                className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
+              >
+                <div className="start flex items-center justify-between">
+                  <div className="flex items-center justify-center">
+                    <p>{user.name}</p>
+                  </div>
+                  <Button
+                    data-testid="unban-account-btn"
+                    onClick={() => {
+                      unlockAccount(user.userId);
+                    }}
+                  >
+                    Unban account
+                  </Button>
                 </div>
-                <Button
-                  data-testid="unban-account-btn"
-                  onClick={() => {
-                    unlockAccount(user.userId);
-                  }}
-                >
-                  {t('unban')}
-                </Button>
-              </div>
-            </li>
-          ))}
+                <div>
+                  <Button
+                    data-testid="unban-account-btn"
+                    onClick={() => {
+                      unlockAccount(user.userId);
+                    }}
+                  >
+                    {t('unban')}
+                  </Button>
+                </div>
+              </li>
+            ))}
         </ul>
       </Card>
       <Link href={'/admin'}>

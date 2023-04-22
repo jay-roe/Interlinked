@@ -28,6 +28,7 @@ import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -48,6 +49,7 @@ export default function ChatRoom({ params }) {
   // Participants (not including current user)
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
+  const [messagesLoading, setMessagesLoading] = useState(true);
 
   // reference to bring user back to bottom of chat
   const dummy = useRef<HTMLDivElement>();
@@ -99,6 +101,7 @@ export default function ChatRoom({ params }) {
     const unsub = onSnapshot(chatRoomRef, (doc) => {
       setChatMessages(doc.data().messages);
     });
+    setMessagesLoading(false);
 
     return () => unsub(); // removes listener
   }, []);
