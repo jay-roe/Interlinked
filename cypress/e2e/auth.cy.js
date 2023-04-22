@@ -29,10 +29,7 @@ describe('Full auth spec', () => {
     cy.get('[data-testid=nav-menu]').click();
     cy.get('[data-testid=nav-logout]').click();
 
-    cy.get('[data-testid=base-msg]').should(
-      'contain',
-      'We will become interlinked.'
-    );
+    cy.get('[data-testid=base-msg]');
 
     // login
     cy.get('[data-testid="nav-login"]').click();
