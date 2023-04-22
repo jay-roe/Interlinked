@@ -79,7 +79,7 @@ describe('Company register and post spec', () => {
     cy.get('[data-testid=job-post-hidden]').should('contain', 'Yes');
 
     // footer
-    cy.get('[data-testid=job-post-applicants-0]').should('exist');
+    cy.get('[data-testid=job-post-applicants-0]').should('not.exist');
 
     cy.logout();
   });

@@ -1,26 +1,25 @@
 'use client';
 
 import Link from '@/components/Link/Link';
-
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import Button from '@/components/Buttons/Button';
 import { JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
-import { collection, doc, getDocs, query } from 'firebase/firestore';
+import { collection, doc, getDocs, query, orderBy } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { checkIfJobIsInFilter } from '@/components/Jobs/CheckIfJobIsInFilter';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
 import JobSearchBar from '@/components/Jobs/JobSearch';
 import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
-import { useRouter } from 'next/navigation';
 
-export default function Feeds(props) {
+export default function Feeds() {
   const t = useTranslations('JobsFeed');
+  const searchParams = useSearchParams();
   const router = useRouter();
   const locale = useLocale();
-  const { searchParams } = props;
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
   const [jobs, setJobs] = useState<JobPostingWithId[]>([]);
@@ -31,11 +30,7 @@ export default function Feeds(props) {
   const [partTime, setPartTime] = useState<boolean>(false);
   const [internship, setInternship] = useState<boolean>(false);
   const [searchKey, setSearchKey] = useState<string>(
-    searchParams.searchParam
-      ? typeof searchParams.searchParam === 'string'
-        ? searchParams.searchParam
-        : searchParams.searchParam[0]
-      : ''
+    searchParams.get('keyword') ? searchParams.get('keyword') : ''
   );
 
   // if account is locked or timed out, redirect to locked page
@@ -65,7 +60,8 @@ export default function Feeds(props) {
         query(
           typeCollection<JobPostingWithId>(
             collection(doc(db.companies, comp), 'jobPosts')
-          )
+          ),
+          orderBy('datePosted', 'desc')
         )
       ).then((jobsTemp) => {
         jobsTemp.forEach((job) => {

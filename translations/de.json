@@ -5,7 +5,8 @@
     "become-interlinked": "Wir werden verlinkt werden",
     "post-to-your-feed": "Posten Sie auf Ihrem Feed",
     "browse-job-opportunities": "Stöbern Sie nach Jobangeboten",
-    "discuss-tech-jobs-or-anything-you-desire": "Diskutieren Sie Technik, Jobs oder alles, was Sie wünschen"
+    "message-users": "Nachrichten an andere Benutzer",
+    "manage-jobs": "Verwalten Sie Ihre Stellenanzeigen"
   },
   "NavBar": {
     "open-main-menu": "Hauptmenü öffnen",
@@ -215,7 +216,11 @@
       "cancel": "Abbrechen",
       "send-application": "Bewerbung senden",
       "cover-letter-filename": "Dateiname des Anschreibens",
-      "resume-filename": "Dateiname des Lebenslaufs"
+      "resume-filename": "Dateiname des Lebenslaufs",
+      "apply-via": "Bewerbung über",
+      "profile-resume": "Profil Lebenslauf",
+      "profile-cover-letter": "Profil Anschreiben",
+      "already-sent": "Bereits gesendet"
     },
     "ExternalApplications": {
       "external-applications": "Externe Bewerbungen",
@@ -450,6 +455,7 @@
   "DMPage": {
     "dms": "Deine Nachrichten",
     "strength": "Stärke dein Netzwerk",
+    "warning": "Private Nachrichten werden moderiert. Wenn Sie einen Benutzer in einer Unterhaltung melden, wird ein Moderator über das Schicksal des gemeldeten Benutzers entscheiden.",
     "uid": {
       "dms": "Deine Nachrichten",
       "should-login": "Du musst dich anmelden, um deine Nachrichten zu sehen.",

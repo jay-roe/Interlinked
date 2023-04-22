@@ -60,7 +60,7 @@ export default function ManagePostings() {
     return <LoadingScreen />;
   }
 
-  if (!currentUser) {
+  if (!currentUser || !currentUser.isCompany) {
     // user isnt logged in or the page is still loading
     return (
       <div>

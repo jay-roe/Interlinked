@@ -147,12 +147,12 @@ const ViewReport = ({ params }) => {
     // display the participants and their profile pictures
     <div className="container mx-auto text-white" data-testid="admin-home">
       {t('participants')}:
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row md:gap-4">
         {participants.map((person) => (
           <Link
             key={person.userId}
             href={`/profile/${person.userId}`}
-            className="mb-3 flex w-max items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component"
+            className="mb-3 flex items-center gap-4 rounded-xl p-3 hover:bg-purple-component active:bg-purple-component md:mb-0"
           >
             <ImageOptimized
               className="rounded-full"

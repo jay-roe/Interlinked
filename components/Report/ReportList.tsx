@@ -16,11 +16,11 @@ export default function ReportList({
 }) {
   return (
     <div>
-      <ul className="pt-3" data-testid="live-reports">
+      <ul className="sm:pt-3" data-testid="live-reports">
         {reports.map((rep, index) => (
           <li
             key={index}
-            className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-3"
+            className="mb-3 rounded-xl bg-white bg-opacity-[8%] p-1 sm:p-3"
           >
             <Link href={'/admin/' + reports[index].reportId}>
               <SingleReport report={rep} setReports={setReports} />

@@ -16,7 +16,6 @@ import {
 import { db, typeCollection } from '@/config/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { Message } from '@/types/Message';
-import Card from '@/components/Card/Card';
 import TimeDivider from '@/components/DM/TimeDivider';
 import { createNotification } from '@/components/Notification/AddNotification/AddNotification';
 import { NotifType } from '@/types/Notification';
@@ -32,6 +31,7 @@ import { Report } from '@/types/Report';
 import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import Card from '@/components/Card/Card';
 
 export default function ChatRoom({ params }) {
   const t = useTranslations('DMPage.uid');
@@ -66,16 +66,24 @@ export default function ChatRoom({ params }) {
   }, [currentUser, router]);
 
   useEffect(() => {
-    if (!chatRoomRef || !authUser) return;
+    if (!authUser) return;
 
     getDoc(chatRoomRef).then((room) => {
+      if (room.data() === undefined) {
+        alert('Unrecognized link, redirecting to DMs');
+        router.push(`/${locale}/DM`);
+        return;
+      }
+
       //make sure user is in chatroom
-      let belongs = false;
-      room.data().participants.forEach((participantID) => {
-        if (participantID == authUser.uid) {
-          belongs = true;
-        }
-      });
+      if (
+        !room
+          .data()
+          .participants.some((participantID) => participantID === authUser.uid)
+      ) {
+        router.push(`/${locale}/DM`);
+        return;
+      }
 
       room
         .data()
@@ -138,6 +146,7 @@ export default function ChatRoom({ params }) {
       sender: {
         name: currentUser.name,
         profilePicture: currentUser.profilePicture,
+        id: authUser.uid,
       },
       time_stamp: Timestamp.now(),
       file: fileURL,
@@ -216,7 +225,7 @@ export default function ChatRoom({ params }) {
   }
 
   return (
-    <div data-testid="chat-room-root" className="flex h-[85vh] flex-col">
+    <div data-testid="chat-room-root" className="flex h-[85vh] flex-col ">
       <div className="flex gap-4">
         {/* TODO: Adjust this when group chats are added. */}
         {!participantsLoading &&
@@ -264,7 +273,7 @@ export default function ChatRoom({ params }) {
             </div>
           ))}
       </div>
-      <Card className="flex flex-grow flex-col overflow-y-auto rounded-b-none">
+      <Card className="flex min-h-min flex-grow flex-col overflow-y-auto bg-white bg-opacity-[0.12] p-4 sm:rounded-t-xl">
         {messagesLoading && <LoadingScreen />}
         {chatMessages.map((m, id) => {
           return (
@@ -282,7 +291,7 @@ export default function ChatRoom({ params }) {
         })}
         <div className="pb-12" ref={dummy}></div>
       </Card>
-      <div className="flex w-full rounded-b-xl bg-chat-input-secondary p-2">
+      <div className="flex w-full bg-chat-input-secondary p-2 sm:rounded-b-xl">
         <form onSubmit={handleSubmit} className="w-full">
           <div className="flex flex-col  rounded-md bg-chat-text-input ">
             <div className="flex flex-row p-1 ">

@@ -14,17 +14,17 @@ export default function postNotification({
 }) {
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start flex items-center justify-between hover:bg-white hover:bg-opacity-10"
       data-testid="post-notification"
     >
       <div className="flex items-center justify-center">
-        <div className="my-2 ml-4 text-red-600">
+        <div className="hidden text-red-600 sm:my-2 sm:ml-4 sm:block">
           <BsExclamationLg size={60} className="align-self-center" />
         </div>
-        <div className="ml-5">
+        <div className="m-3 sm:m-5">
           <ReportHeader report={report} />
-          <div className="m-3">
-            <p>{report.context}</p>
+          <div className="mt-3">
+            <p className="text-xs sm:text-lg">{report.context}</p>
           </div>
         </div>
       </div>
