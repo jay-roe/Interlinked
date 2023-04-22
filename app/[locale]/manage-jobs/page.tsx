@@ -12,6 +12,7 @@ import { typeCollection, db } from '@/config/firestore';
 import { query, collection, orderBy, doc, getDocs } from 'firebase/firestore';
 import { UserWithId } from '@/types/User';
 import JobPostContainer from '@/components/Jobs/JobPostContainer';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -35,7 +36,6 @@ export default function ManagePostings() {
     if (currentUser && currentUser.isCompany) {
       fetchJobPostings().then((jobArray) => {
         setJobPostings(jobArray);
-        setLoading(false);
       });
     }
     setLoading(false);
@@ -57,8 +57,7 @@ export default function ManagePostings() {
   };
 
   if (loading) {
-    // TODO make a better loading page
-    return <p>{t('loading')}</p>;
+    return <LoadingScreen />;
   }
 
   // User not logged in, redirect to account required

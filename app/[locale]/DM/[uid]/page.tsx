@@ -28,8 +28,10 @@ import FilePreview from '@/components/FilePreview/FilePreview';
 import Button from '@/components/Buttons/Button';
 import { createReport } from '@/components/Report/AddReport';
 import { Report } from '@/types/Report';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import Card from '@/components/Card/Card';
 
 export default function ChatRoom({ params }) {
   const t = useTranslations('DMPage.uid');
@@ -48,6 +50,7 @@ export default function ChatRoom({ params }) {
   // Participants (not including current user)
   const [participants, setParticipants] = useState<UserWithId[]>([]);
   const [participantsLoading, setParticipantsLoading] = useState(true);
+  const [messagesLoading, setMessagesLoading] = useState(true);
 
   // reference to bring user back to bottom of chat
   const dummy = useRef<HTMLDivElement>();
@@ -99,6 +102,7 @@ export default function ChatRoom({ params }) {
     const unsub = onSnapshot(chatRoomRef, (doc) => {
       setChatMessages(doc.data().messages);
     });
+    setMessagesLoading(false);
 
     return () => unsub(); // removes listener
   }, []);
@@ -258,7 +262,8 @@ export default function ChatRoom({ params }) {
             </div>
           ))}
       </div>
-      <div className=" flex min-h-min flex-grow flex-col overflow-y-auto bg-white bg-opacity-[0.12] p-4 sm:rounded-t-xl  ">
+      <Card className="flex min-h-min flex-grow flex-col overflow-y-auto bg-white bg-opacity-[0.12] p-4 sm:rounded-t-xl">
+        {messagesLoading && <LoadingScreen />}
         {chatMessages.map((m, id) => {
           return (
             <div key={id}>
@@ -274,7 +279,7 @@ export default function ChatRoom({ params }) {
           );
         })}
         <div className="pb-12" ref={dummy}></div>
-      </div>
+      </Card>
       <div className="flex w-full bg-chat-input-secondary p-2 sm:rounded-b-xl">
         <form onSubmit={handleSubmit} className="w-full">
           <div className="flex flex-col  rounded-md bg-chat-text-input ">

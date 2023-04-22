@@ -17,6 +17,7 @@ import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from '@/components/Link/Link';
 import Button from '@/components/Buttons/Button';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useTranslations, useLocale } from 'next-intl';
 
 const Admin = () => {
@@ -62,10 +63,6 @@ const Admin = () => {
       setLoading(false);
     });
   }, [currentAdmin, router, authUser, currentUser]);
-
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
 
   // mark all the admins's reports as read
   async function readAll() {
@@ -115,7 +112,8 @@ const Admin = () => {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        {reports.length > 0 ? (
+        {loading && <LoadingScreen />}
+        {reports?.length > 0 ? (
           <ReportList reports={reports} setReports={setReports} />
         ) : (
           <p data-testid="no-reports">{t('empty')}</p>

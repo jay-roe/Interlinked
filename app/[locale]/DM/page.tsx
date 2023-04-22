@@ -7,6 +7,7 @@ import { db } from '@/config/firestore';
 import { useEffect, useState } from 'react';
 import ChatroomCard from '@/components/DM/ChatroomCard';
 import Card from '@/components/Card/Card';
+import LoadingScreen from '@/components/Loading/Loading';
 import Link from '@/components/Link/Link';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -17,6 +18,7 @@ export default function DMs() {
   const locale = useLocale();
   const { authUser, currentUser } = useAuth();
   const [chats, setChats] = useState<KeyedChatRoom[]>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   // if account is locked or timed out, redirect to locked page
   useEffect(() => {
@@ -49,6 +51,7 @@ export default function DMs() {
 
       setChats(tempChats);
     });
+    setLoading(false);
     return () => unsub();
   }, []);
 
@@ -65,6 +68,7 @@ export default function DMs() {
       <p className="mb-3 text-light-white-text">{t('strength')}</p>
       <p className="mb-3 text-light-white-text">⚠️ {t('warning')}</p>
       <Card className="flex flex-grow flex-col overflow-auto">
+        {loading && <LoadingScreen />}
         {chats?.map((keyRoom) => {
           return (
             <Link

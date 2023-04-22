@@ -22,6 +22,7 @@ import TimeDivider from '@/components/DM/TimeDivider';
 import ReportMessageCard from '@/components/Report/ReportMessageCard';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import Button from '@/components/Buttons/Button';
+import LoadingScreen from '@/components/Loading/Loading';
 import Link from '@/components/Link/Link';
 import { useTranslations, useLocale } from 'next-intl';
 
@@ -43,7 +44,6 @@ const ViewReport = ({ params }) => {
 
   // DM chatroom
   const [participants, setParticipants] = useState<UserWithId[]>([]);
-  const [participantsLoading, setParticipantsLoading] = useState(true);
   const [chatMessages, setChatMessages] = useState<Message[]>([]);
   const [chatRoomRef, setChatRoomRef] = useState<any>(null);
 
@@ -107,7 +107,7 @@ const ViewReport = ({ params }) => {
               });
             });
           });
-        setParticipantsLoading(false);
+        setLoading(false);
       });
     }
   }, [authUser, chatRoomRef, report]);
@@ -139,11 +139,7 @@ const ViewReport = ({ params }) => {
   }
 
   if (loading) {
-    return <div>{t('loading')}</div>;
-  }
-
-  if (participantsLoading) {
-    return <div>{t('participants-loading')}</div>;
+    return <LoadingScreen />;
   }
 
   // display the report
