@@ -40,7 +40,8 @@ export default function PreviewProfile() {
 
   // User not logged in, redirect to account required
   if (!currentUser) {
-    return router.push('/' + locale + '/account-required');
+    router.push('/' + locale + '/account-required');
+    return <div> </div>;
   }
 
   if (currentUser.isCompany) {

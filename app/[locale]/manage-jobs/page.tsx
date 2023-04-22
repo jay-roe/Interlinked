@@ -63,7 +63,8 @@ export default function ManagePostings() {
 
   // User not logged in, redirect to account required
   if (!currentUser || !currentUser.isCompany) {
-    return router.push('/' + locale + '/account-required');
+    router.push('/' + locale + '/account-required');
+    return <div> </div>;
   }
 
   const user: UserWithId = authUser

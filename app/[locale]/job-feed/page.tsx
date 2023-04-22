@@ -95,7 +95,8 @@ export default function Feeds() {
   }
   // User not logged in, redirect to account required
   if (!currentUser) {
-    return router.push('/' + locale + '/account-required');
+    router.push('/' + locale + '/account-required');
+    return <div> </div>;
   }
   return (
     <div>
