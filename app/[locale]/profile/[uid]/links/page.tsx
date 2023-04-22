@@ -15,6 +15,7 @@ import { db } from '@/config/firestore';
 import { doc, getDoc } from '@firebase/firestore';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
 import LinkButtonNoNumber from '@/components/Buttons/LinkButton/LinkButtonNoNumber';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -85,7 +86,11 @@ export default function Links({ params }) {
     setLoading(false);
   }, []);
 
-  if (!currentUser || loading) {
+  if (loading) {
+    return <LoadingScreen />;
+  }
+
+  if (!currentUser) {
     // user isnt logged in or the page is still loading
     // TODO make a better loading page
     return (

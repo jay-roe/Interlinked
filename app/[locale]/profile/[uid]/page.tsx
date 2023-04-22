@@ -22,6 +22,7 @@ import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked'
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -53,7 +54,7 @@ export default function ViewProfile({ params }) {
   }, [params.uid]);
 
   if (loading) {
-    return <h1>{t('loading')}</h1>;
+    return <p>Loading...</p>;
   }
 
   if (!user || !user.name || !user.email)
