@@ -12,6 +12,7 @@ import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
+import { locales } from '@/middleware';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -20,7 +21,12 @@ function classNames(...classes) {
 export default function NavBar() {
   const [showSearch, setShowSearch] = useState(false);
   const { currentUser, currentAdmin, logout } = useAuth();
-  const pathname = usePathname();
+
+  // Remove locale from pathname (only want to consider page path)
+  const pathname = usePathname()
+    .split('/')
+    .filter((path) => !locales.some((locale) => locale === path))
+    .join('/');
   const t = useTranslations('NavBar');
 
   // Allow state access in SearchBar component
