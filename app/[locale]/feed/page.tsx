@@ -63,6 +63,7 @@ export default function Feeds() {
               ),
             ];
           });
+          setLoadingPosts(false);
         })
         .catch((err) => console.error(err));
     }
@@ -184,10 +185,7 @@ export default function Feeds() {
             />
           );
         })}
-        {
-          loadingPosts && <LoadingScreen />
-          // loadingPosts && <PacmanLoader color='#e58f40' />
-        }
+        {loadingPosts && <LoadingScreen />}
       </CardGrid>
       <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {postsLeft ? (
