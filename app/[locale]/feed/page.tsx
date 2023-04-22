@@ -20,6 +20,7 @@ import Button from '@/components/Buttons/Button';
 import { Post, PostWithId } from '@/types/Post';
 import { UserWithId } from '@/types/User';
 import CreatePostGroup from '@/components/CreatePostGroup/CreatePostGroup';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -29,6 +30,7 @@ export default function Feeds() {
   const locale = useLocale();
   const { currentUser, authUser } = useAuth();
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingPosts, setLoadingPosts] = useState(true);
   const [posts, setPosts] = useState<PostWithId[]>([]);
   const [authors, setAuthors] = useState<UserWithId[]>([]);
   const [postsLeft, setPostsLeft] = useState<boolean>(true);
@@ -61,6 +63,7 @@ export default function Feeds() {
               ),
             ];
           });
+          setLoadingPosts(false);
         })
         .catch((err) => console.error(err));
     }
@@ -125,7 +128,9 @@ export default function Feeds() {
     // The thing is, this is recursive and queries n times the number of people the user is linked with which may become an issue at some point
     if (postArray.length === 0) {
       // no posts found in given range
+      setLoadingPosts(true);
       const deepSearch = await getPostsOhAndAlsoAuthors(countdown - 1);
+      setLoadingPosts(false);
       if (deepSearch.length === 0) {
         setPostsLeft(false);
       }
@@ -134,14 +139,18 @@ export default function Feeds() {
     return postArray;
   };
 
-  if (!currentUser || loading) {
+  if (loading) {
+    <LoadingScreen />;
+  }
+
+  if (!currentUser) {
     // user isnt logged in or the page is still loading
     return (
       <div>
         <p data-testid="base-msg" className="mb-3 text-left text-2xl">
           {t('should-login')}
         </p>
-        <div className="flex space-x-1.5">
+        <div className="text-or flex space-x-1.5">
           <Link href="/login">
             <Button>{t('sign-in')}</Button>
           </Link>
@@ -175,6 +184,7 @@ export default function Feeds() {
             />
           );
         })}
+        {loadingPosts && <LoadingScreen />}
       </CardGrid>
       <div className="mt-4 flex justify-center" data-testid="load-more-button">
         {postsLeft ? (
@@ -191,7 +201,8 @@ export default function Feeds() {
           // })}/>
           <Button
             className="mx-auto"
-            onClick={() =>
+            onClick={() => {
+              setLoadingPosts(true);
               getPostsOhAndAlsoAuthors().then((newPosts) => {
                 setPosts((current) => {
                   return [
@@ -201,8 +212,9 @@ export default function Feeds() {
                     ),
                   ];
                 });
-              })
-            }
+                setLoadingPosts(false);
+              });
+            }}
           >
             {t('load-more')}
           </Button>

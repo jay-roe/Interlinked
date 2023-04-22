@@ -17,6 +17,7 @@ import { db, typeCollection } from '@/config/firestore';
 import ReportList from '@/components/Report/ReportList';
 import Link from '@/components/Link/Link';
 import Button from '@/components/Buttons/Button';
+import LoadingScreen from '@/components/Loading/Loading';
 import { useTranslations, useLocale } from 'next-intl';
 
 const Admin = () => {
@@ -63,10 +64,6 @@ const Admin = () => {
     });
   }, [currentAdmin, router, authUser, currentUser]);
 
-  if (loading) {
-    return <div>{t('loading')}</div>;
-  }
-
   // mark all the admins's reports as read
   async function readAll() {
     const reportCollectionReference = typeCollection<Report>(
@@ -93,10 +90,10 @@ const Admin = () => {
 
   return (
     <div className="container mx-auto text-white" data-testid="admin-home">
-      <div className="mb-3 flex justify-between">
-        <h1 className="text-3xl font-extrabold">{t('reports')}</h1>
+      <div className="mb-3 justify-between sm:flex">
+        <h1 className="my-2 text-3xl font-extrabold sm:my-0">{t('reports')}</h1>
         <Link href={'/admin/lockedList'}>
-          <Button data-testid="list-of-banned-users-btn">
+          <Button data-testid="list-of-banned-users-btn my-2 sm:my-0">
             {t('list-banned')}
           </Button>
         </Link>
@@ -107,7 +104,7 @@ const Admin = () => {
               readAll();
             }}
           >
-            <div className="flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3">
+            <div className="my-2 flex items-center gap-2 rounded-xl bg-white bg-opacity-[8%] p-3 sm:my-0">
               <FiBell />
               <p>{t('read-all')}</p>
             </div>
@@ -115,7 +112,8 @@ const Admin = () => {
         </div>
       </div>
       <div className="rounded-xl bg-white bg-opacity-[8%] p-5">
-        {reports.length > 0 ? (
+        {loading && <LoadingScreen />}
+        {reports?.length > 0 ? (
           <ReportList reports={reports} setReports={setReports} />
         ) : (
           <p data-testid="no-reports">{t('empty')}</p>

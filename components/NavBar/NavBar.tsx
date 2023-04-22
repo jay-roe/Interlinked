@@ -89,14 +89,21 @@ export default function NavBar() {
                     )}
                   </Disclosure.Button>
                 </div>
-                <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                <div className="ml-11 flex flex-1 items-center justify-start sm:ml-0 sm:items-stretch">
                   <Link href="/" className="flex flex-shrink-0 items-center">
                     <h1
                       data-testid="home-interlinked"
-                      className="font-logo text-white transition-colors hover:text-yellow-500 lg:text-3xl xl:text-4xl"
+                      className="hidden font-logo text-white transition-colors hover:text-yellow-500 sm:block lg:text-3xl xl:text-4xl"
                     >
                       INTERLINKED
                     </h1>
+                    <ImageOptimized
+                      src="/../public/interlinked-logo.ico"
+                      alt="interlinked logo"
+                      className="sm:ml-1 sm:block"
+                      width={30}
+                      height={30}
+                    />
                   </Link>
                   <LocaleSwitcher />
                   <div className="hidden sm:ml-6 sm:block">

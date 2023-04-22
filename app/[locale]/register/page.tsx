@@ -10,6 +10,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Button from '@/components/Buttons/Button';
 import GoogleButton from '@/components/Buttons/GoogleButton/GoogleButton';
 import CheckBox from '@/components/InputFields/CheckBox/CheckBox';
+import LoadingScreen from '@/components/Loading/Loading';
 
 export default function Register() {
   const t = useTranslations('Register');
@@ -50,6 +51,10 @@ export default function Register() {
     }
 
     setLoading(false);
+  }
+
+  if (loading) {
+    return <LoadingScreen />;
   }
 
   return (

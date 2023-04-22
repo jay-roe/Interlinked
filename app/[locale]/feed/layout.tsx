@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { Suspense } from 'react';
 
 const FeedLayout = ({ children }: { children: React.ReactNode }) => {
   const t = useTranslations('Feed');
@@ -12,7 +13,7 @@ const FeedLayout = ({ children }: { children: React.ReactNode }) => {
       >
         {t('feed')}
       </h1>
-      {children}
+      <Suspense>{children}</Suspense>
       <div className="h-32"></div>
     </div>
   );
