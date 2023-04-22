@@ -26,7 +26,10 @@ export default function LinkRequestNotification({
       className="flex items-center justify-between"
       data-testid="link-req-notification"
     >
-      <Link href={senderRedirect}>
+      <Link
+        href={senderRedirect}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
         <div className="start flex items-center">
           <div className="ml-4 text-accent-orange">
             <LinkIcon size={60} />

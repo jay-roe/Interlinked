@@ -20,7 +20,10 @@ export default function linkAcceptNotification({
       className="start flex items-center justify-between"
       data-testid="link-acc-notification"
     >
-      <Link href={senderRedirect}>
+      <Link
+        href={senderRedirect}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
         <div className="flex items-center justify-center">
           <div className="ml-4 text-accent-orange">
             <LinkIcon linked size={60} />

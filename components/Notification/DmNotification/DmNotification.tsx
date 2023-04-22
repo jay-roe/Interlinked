@@ -20,7 +20,10 @@ export default function dmNotification({
       className="start flex items-center justify-between"
       data-testid="dm-notification"
     >
-      <Link href={senderRedirect}>
+      <Link
+        href={senderRedirect}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
         <div className="flex items-center justify-center">
           <div
             className="ml-4 text-accent-orange"
