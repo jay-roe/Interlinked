@@ -21,11 +21,13 @@ export default function DMs() {
   // if account is locked or timed out, redirect to locked page
   useEffect(() => {
     if (currentUser?.accountLocked || currentUser?.accountTimeout) {
-      router.push('/' + locale + '/locked');
+      router.push(`/${locale}/locked`);
     }
   }, [currentUser, router]);
 
   useEffect(() => {
+    if (!authUser) return;
+
     let tempChats: KeyedChatRoom[] = [];
     //get rooms that user is in
     const potentialRooms = query(
@@ -50,12 +52,18 @@ export default function DMs() {
     return () => unsub();
   }, []);
 
+  if (!currentUser || !authUser) {
+    router.push(`/${locale}`);
+    return;
+  }
+
   return (
     <div className="flex max-h-[85vh] flex-col" data-testid="dms-page">
       <h1 className="text-4xl font-black ">
         <b>{t('dms')}</b>
       </h1>
       <p className="mb-3 text-light-white-text">{t('strength')}</p>
+      <p className="mb-3 text-light-white-text">⚠️ {t('warning')}</p>
       <Card className="flex flex-grow flex-col overflow-auto">
         {chats?.map((keyRoom) => {
           return (

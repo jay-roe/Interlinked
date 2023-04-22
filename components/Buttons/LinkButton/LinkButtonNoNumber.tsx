@@ -23,22 +23,26 @@ const LinkButtonNoNumber = ({
         className="z-50 flex max-w-fit items-center gap-1 rounded-md bg-white bg-opacity-0 p-2 transition-all hover:bg-opacity-10 active:bg-opacity-20"
         onClick={(event) => {
           event.preventDefault();
-          posterUID &&
+          if (
+            posterUID &&
             posterUID !== authUser.uid &&
-            !linkIds?.some((receiverID) => receiverID === posterUID) &&
+            !linkIds?.some((receiverID) => receiverID === posterUID)
+          ) {
             createNotification({
               notifType: NotifType.LINK_REQ,
               context: currentUser.name + t('would-like-link'),
               sender: authUser.uid, // sender
               receiver: posterUID, // receiver
-            }) &&
+            });
             alert(t('alert-sent'));
-
-          posterUID &&
+          } else if (
+            posterUID &&
             confirm(t('confirm-unlink')) &&
-            linkIds?.some((receiverID) => receiverID === posterUID) &&
-            unlink(authUser.uid, posterUID) &&
+            linkIds?.some((receiverID) => receiverID === posterUID)
+          ) {
+            unlink(authUser.uid, posterUID);
             setLinkIds((curr) => curr.filter((id) => id !== posterUID));
+          }
         }}
       >
         <LinkIcon

@@ -40,6 +40,7 @@ import auth, { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
 import { useTranslations } from 'next-intl';
+import Link from '../Link/Link';
 
 export default function Jobs({
   job,
@@ -285,71 +286,95 @@ export default function Jobs({
               <FaCheck></FaCheck>
             </div>
           )}
-          {isEditable && !applicationSent && (
-            <div className="flex flex-wrap gap-3">
-              {/* Main apply button */}
-              <div>
-                <Button
-                  data-testid="apply-button"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    setEditing((curr) => !curr);
-                  }}
-                >
-                  {t('apply')} <FaPaperPlane className="" />
-                </Button>
-              </div>
-              {/* Quick apply to job button */}
-              <div>
-                <Button
-                  data-testid="quick-apply-button"
-                  className="bg-indigo-900"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (job.cvRequired && !currentUser.resume) {
-                      alert(t('alert-need-resume'));
-                    } else if (
-                      job.coverLetterRequired &&
-                      !currentUser.coverLetter
-                    ) {
-                      alert(t('alert-need-cl'));
-                    } else {
-                      setJob((jobs) => {
-                        let actJob = jobs.find((tempJob) => job === tempJob);
-                        let newApp = {
-                          applicantId: authUser.uid,
-                          applicantName: currentUser.name,
-                          applicantProfilePic: currentUser.profilePicture,
-                          documents: [
-                            currentUser?.resume,
-                            currentUser?.coverLetter,
-                          ],
-                        };
-                        actJob.applications.push(newApp);
-                        return jobs;
-                      });
-                      try {
-                        updateDoc(
-                          doc(
-                            collection(
-                              doc(db.users, job.companyId),
-                              'jobPosts'
+          {isEditable &&
+            !applicationSent &&
+            job.externalApplications.length === 0 && (
+              <div className="flex flex-wrap gap-3">
+                {/* Main apply button */}
+                <div>
+                  <Button
+                    data-testid="apply-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setEditing((curr) => !curr);
+                    }}
+                  >
+                    {t('apply')} <FaPaperPlane className="ml-1" />
+                  </Button>
+                </div>
+                {/* Quick apply to job button */}
+                <div>
+                  <Button
+                    data-testid="quick-apply-button"
+                    className="bg-indigo-900"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if (job.cvRequired && !currentUser.resume) {
+                        alert(t('alert-need-resume'));
+                      } else if (
+                        job.coverLetterRequired &&
+                        !currentUser.coverLetter
+                      ) {
+                        alert(t('alert-need-cl'));
+                      } else {
+                        setJob((jobs) => {
+                          let actJob = jobs.find((tempJob) => job === tempJob);
+                          let newApp = {
+                            applicantId: authUser.uid,
+                            applicantName: currentUser.name,
+                            applicantProfilePic: currentUser.profilePicture,
+                            documents: [
+                              currentUser?.resume,
+                              currentUser?.coverLetter,
+                            ],
+                          };
+                          actJob.applications.push(newApp);
+                          return jobs;
+                        });
+                        try {
+                          updateDoc(
+                            doc(
+                              collection(
+                                doc(db.users, job.companyId),
+                                'jobPosts'
+                              ),
+                              postingId
                             ),
-                            postingId
-                          ),
-                          job
-                        );
-                        alert(t('alert-app-sent'));
-                      } catch (err) {
-                        console.log(err);
+                            job
+                          );
+                          alert(t('alert-app-sent'));
+                        } catch (err) {
+                          console.log(err);
+                        }
                       }
-                    }
-                  }}
-                >
-                  {t('quick-apply')}
-                  <FaPaperPlane className="" />
-                </Button>
+                    }}
+                  >
+                    {t('quick-apply')}
+                    <FaPaperPlane className="ml-1" />
+                  </Button>
+                </div>
               </div>
+            )}
+          {job.externalApplications.length !== 0 && (
+            <div className="flex flex-wrap gap-3">
+              {job.externalApplications.map((externalApp, index) => (
+                <Link
+                  key={index}
+                  href={
+                    externalApp.url.startsWith('http')
+                      ? externalApp.url
+                      : 'http://' + externalApp.url
+                  }
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline"
+                >
+                  <Button>
+                    {t('apply-via')} {externalApp.name}
+                    <FaPaperPlane className="ml-1" />
+                  </Button>
+                </Link>
+              ))}
             </div>
           )}
         </Card>

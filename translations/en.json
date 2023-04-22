@@ -5,7 +5,8 @@
     "become-interlinked": "We will become interlinked",
     "post-to-your-feed": "Post to your feed",
     "browse-job-opportunities": "Browse job opportunities",
-    "discuss-tech-jobs-or-anything-you-desire": "Discuss tech jobs or anything you desire"
+    "message-users": "Message other users",
+    "manage-jobs": "Manage your job postings"
   },
   "NavBar": {
     "open-main-menu": "Open main menu",
@@ -216,6 +217,7 @@
       "send-application": "Send Application ",
       "cover-letter-filename": "Cover letter file name",
       "resume-filename": "Resume file name",
+      "apply-via": "Apply via",
       "profile-resume": "Profile Resume",
       "profile-cover-letter": "Profile Cover Letter",
       "already-sent": "Already Sent"
@@ -458,7 +460,8 @@
   },
   "DMPage": {
     "dms": "Your DMs",
-    "strength": "Strengthen your web",
+    "strength": "Strengthen your web.",
+    "warning": "DMs are moderated. By reporting a user in a conversation, a moderator will decide the reported user's fate.",
     "uid": {
       "dms": "Your DMs",
       "should-login": "You should login to view your messages",

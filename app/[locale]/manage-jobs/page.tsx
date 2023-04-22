@@ -62,7 +62,7 @@ export default function ManagePostings() {
   }
 
   // User not logged in, redirect to account required
-  if (!currentUser) {
+  if (!currentUser || !currentUser.isCompany) {
     return router.push('/' + locale + '/account-required');
   }
 
