@@ -1,3 +1,4 @@
+import { localeToDateLocale } from '@/middleware';
 import { JobPosting } from '@/types/JobPost';
 import { UserWithId } from '@/types/User';
 import { useLocale } from 'next-intl';
@@ -38,7 +39,7 @@ const JobPostHeader = ({
           {'Posted: ' +
             jobPost?.datePosted
               ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleString(localeToDateLocale[locale], {
                 month: 'long',
                 year: 'numeric',
                 day: '2-digit',
@@ -50,7 +51,7 @@ const JobPostHeader = ({
           {'Posted: ' +
             jobPost?.datePosted
               ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleString(localeToDateLocale[locale], {
                 month: '2-digit',
                 year: '2-digit',
                 day: '2-digit',

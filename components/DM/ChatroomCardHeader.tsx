@@ -1,3 +1,4 @@
+import { localeToDateLocale } from '@/middleware';
 import { ChatRoom, Message } from '@/types/Message';
 import { User } from '@/types/User';
 import { useLocale } from 'next-intl';
@@ -26,7 +27,7 @@ export default function ChatroomCardHeader({
         <p>
           {room.lastMessage.time_stamp
             ?.toDate()
-            .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+            .toLocaleString(localeToDateLocale[locale], {
               month: 'long',
               year: 'numeric',
               day: '2-digit',

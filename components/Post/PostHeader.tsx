@@ -5,6 +5,7 @@ import Link from '@/components/Link/Link';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/middleware';
 
 const PostHeader = ({
   author,
@@ -39,27 +40,23 @@ const PostHeader = ({
             data-testid="test-date"
             className="text-sm font-light max-md:hidden"
           >
-            {post?.date
-              ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
-                month: 'long',
-                year: 'numeric',
-                day: '2-digit',
-                hour: '2-digit',
-                minute: '2-digit',
-              })}
+            {post?.date?.toDate().toLocaleString(localeToDateLocale[locale], {
+              month: 'long',
+              year: 'numeric',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
           </div>
           <div className="text-sm font-light md:hidden">
-            {post?.date
-              ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
-                month: '2-digit',
-                year: '2-digit',
-                day: '2-digit',
-                hour: '2-digit',
-                hour12: false,
-                minute: '2-digit',
-              })}
+            {post?.date?.toDate().toLocaleString(localeToDateLocale[locale], {
+              month: '2-digit',
+              year: '2-digit',
+              day: '2-digit',
+              hour: '2-digit',
+              hour12: false,
+              minute: '2-digit',
+            })}
           </div>
         </div>
       </Link>

@@ -1,3 +1,4 @@
+import { localeToDateLocale } from '@/middleware';
 import { Report } from '@/types/Report';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -14,7 +15,7 @@ export default function ReportHeader({ report }: { report: Report }) {
         <p className="text-xs sm:text-xs">
           {report.reportTime
             ?.toDate()
-            .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+            .toLocaleString(localeToDateLocale[locale], {
               month: 'long',
               year: 'numeric',
               day: '2-digit',

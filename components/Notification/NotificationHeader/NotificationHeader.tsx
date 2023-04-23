@@ -1,5 +1,6 @@
 'use client';
 import { db } from '@/config/firestore';
+import { localeToDateLocale } from '@/middleware';
 import type { Notification } from '@/types/Notification';
 import { User } from '@/types/User';
 import { doc, getDoc } from 'firebase/firestore';
@@ -47,7 +48,7 @@ export default function NotificationHeader({
         <p>
           {notification.notifTime
             ?.toDate()
-            .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+            .toLocaleString(localeToDateLocale[locale], {
               month: 'long',
               year: 'numeric',
               day: '2-digit',

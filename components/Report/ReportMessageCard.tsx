@@ -3,6 +3,7 @@ import { Disclosure } from '@headlessui/react';
 import { Report } from '@/types/Report';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/middleware';
 
 const ReportMessageCard = ({
   message,
@@ -52,7 +53,7 @@ const ReportMessageCard = ({
           <p>
             {message.time_stamp
               .toDate()
-              .toLocaleTimeString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleTimeString(localeToDateLocale[locale], {
                 hour: '2-digit',
                 minute: '2-digit',
               })}

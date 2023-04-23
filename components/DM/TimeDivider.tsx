@@ -1,3 +1,4 @@
+import { localeToDateLocale } from '@/middleware';
 import type { Timestamp } from 'firebase/firestore';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -14,7 +15,7 @@ const TimeDivider = ({ time }: { time: Timestamp }) => {
       // less than 1 day
       timeToShow = time
         .toDate()
-        .toLocaleTimeString(locale === 'de' ? 'de-DE' : 'en-US', {
+        .toLocaleTimeString(localeToDateLocale[locale], {
           hour: '2-digit',
           minute: '2-digit',
         });
@@ -25,13 +26,11 @@ const TimeDivider = ({ time }: { time: Timestamp }) => {
       // less than 3 days
       timeToShow = t('2-days-ago');
     } else {
-      timeToShow = time
-        .toDate()
-        .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
-          month: 'long',
-          year: 'numeric',
-          day: '2-digit',
-        });
+      timeToShow = time.toDate().toLocaleString(localeToDateLocale[locale], {
+        month: 'long',
+        year: 'numeric',
+        day: '2-digit',
+      });
     }
     setDisplay(timeToShow);
   }, []);

@@ -32,6 +32,7 @@ import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
+import { localeToDateLocale } from '@/middleware';
 
 export default function Jobs({
   job,
@@ -172,7 +173,7 @@ export default function Jobs({
           <div className="mb-3 text-sm font-light max-md:hidden">
             {job?.datePosted
               ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleString(localeToDateLocale[locale], {
                 month: 'long',
                 year: 'numeric',
                 day: '2-digit',
@@ -243,7 +244,7 @@ export default function Jobs({
                   {t('apply-before') +
                     job.deadline
                       .toDate()
-                      .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+                      .toLocaleString(localeToDateLocale[locale], {
                         month: 'long',
                         year: 'numeric',
                         day: '2-digit',

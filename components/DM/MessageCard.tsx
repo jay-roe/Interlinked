@@ -4,6 +4,7 @@ import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { Disclosure } from '@headlessui/react';
 import FilePreview from '../FilePreview/FilePreview';
 import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/middleware';
 
 const MessageCard = ({ message }: { message: Message }) => {
   const { authUser } = useAuth();
@@ -68,7 +69,7 @@ const MessageCard = ({ message }: { message: Message }) => {
           <p>
             {message.time_stamp
               .toDate()
-              .toLocaleTimeString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleTimeString(localeToDateLocale[locale], {
                 hour: '2-digit',
                 minute: '2-digit',
               })}

@@ -8,6 +8,7 @@ import {
 import Button from '../Buttons/Button';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
+import { localeToDateLocale } from '@/middleware';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic
@@ -47,7 +48,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
           {t('deadline') +
             jobPost?.deadline
               ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleString(localeToDateLocale[locale], {
                 month: 'long',
                 year: 'numeric',
                 day: '2-digit',
@@ -59,7 +60,7 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
           {t('deadline') +
             jobPost?.deadline
               ?.toDate()
-              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              .toLocaleString(localeToDateLocale[locale], {
                 month: '2-digit',
                 year: '2-digit',
                 day: '2-digit',
