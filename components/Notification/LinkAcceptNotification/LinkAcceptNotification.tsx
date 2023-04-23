@@ -4,7 +4,7 @@ import LinkIcon from '../../Icons/LinkIcon/LinkIcon';
 import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
 import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function linkAcceptNotification({
   notification,
@@ -13,19 +13,22 @@ export default function linkAcceptNotification({
   notification: Notification;
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  const senderRedirect = 'profile/' + notification.sender;
+  const senderRedirect = '/profile/' + notification.sender;
 
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="link-acc-notification"
     >
-      <Link href={senderRedirect}>
-        <div className="flex items-center justify-center">
-          <div className="ml-4 text-accent-orange">
+      <Link
+        href={senderRedirect}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
+        <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
+          <div className="col-span-1 hidden text-accent-orange sm:block">
             <LinkIcon linked size={60} />
           </div>
-          <div className="ml-5">
+          <div className="col-span-5 ml-5">
             <NotificationHeader notification={notification} />
             <div className="m-3">
               <p>{notification.context}</p>
@@ -33,7 +36,7 @@ export default function linkAcceptNotification({
           </div>
         </div>
       </Link>
-      <div className="m-4 flex items-center justify-between">
+      <div className="m-4 flex items-center justify-center gap-x-6 sm:justify-end sm:gap-0">
         <NotificationDeleteButton
           data-testid="delete-button"
           notification={notification}

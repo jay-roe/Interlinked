@@ -91,7 +91,5 @@ describe('Job notifications and keywords spec', () => {
       'contain',
       'Coffin retriever'
     );
-
-    // TODO click on it and go to job page
   });
 });

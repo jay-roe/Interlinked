@@ -19,6 +19,7 @@ import { db } from '../config/firestore';
 import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
 import { useRouter } from 'next/navigation';
+import { useLocale } from 'next-intl';
 
 interface AuthContextType {
   currentUser: User;
@@ -61,6 +62,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   // Router for redirecting users globally.
   const router = useRouter();
+  const locale = useLocale();
 
   // User data from Firestore database. Use this for most data.
   const [currentUser, setCurrentUser] = useState<User>();
@@ -165,8 +167,8 @@ export function AuthProvider({ children }) {
    * Logs out of the current user session.
    */
   async function logout() {
+    router.push('/' + locale + '/');
     await auth.signOut();
-    router.push('/');
   }
 
   /**

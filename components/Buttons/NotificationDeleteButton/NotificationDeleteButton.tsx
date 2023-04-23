@@ -15,7 +15,7 @@ export default function NotificationDeleteButton({
   return (
     <button
       data-testid="clear-notif-btn"
-      className="mb-3 mr-2 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-3 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20"
+      className="mb-1 mr-2 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-1 font-semibold text-accent-orange hover:bg-opacity-20 active:bg-opacity-20 sm:mb-3 sm:p-3"
       onClick={() => {
         deleteNotification(notification.notificationId, authUser.uid);
         setNotification((notifs) =>
@@ -25,7 +25,7 @@ export default function NotificationDeleteButton({
         );
       }}
     >
-      <BsXLg className="m-4" size={30} />
+      <BsXLg className="m-2 sm:m-4" size={30} />
     </button>
   );
 }

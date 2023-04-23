@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import FilePreview from '../FilePreview';
 
 const img = 'gs://interlinked-420e3.appspot.com/`image/1637773583.png`';

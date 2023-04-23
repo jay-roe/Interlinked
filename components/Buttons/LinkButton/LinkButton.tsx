@@ -9,12 +9,14 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import { ImCancelCircle } from 'react-icons/im';
 import { deleteNotification } from '@/components/Notification/DeleteNotification/DeleteNotification';
+import { useTranslations } from 'next-intl';
 
 export default function LinkButton({
   profileOwnerUID,
 }: {
   profileOwnerUID?: string;
 }) {
+  const t = useTranslations('Button.Link');
   // set the current user
   const { currentUser, authUser } = useAuth(); // User sending out the request
 
@@ -38,7 +40,7 @@ export default function LinkButton({
     });
   }, []);
 
-  return !notification && profileOwnerUID !== authUser.uid ? (
+  return !notification && profileOwnerUID !== authUser?.uid ? (
     <button
       data-testid="link-btn"
       className="mb-3 flex max-w-fit items-center gap-2 rounded-xl bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
@@ -49,7 +51,7 @@ export default function LinkButton({
         ) {
           const notif = {
             notifType: NotifType.LINK_REQ,
-            context: currentUser.name + ' would like to link with you!',
+            context: currentUser.name + t('would-like-link'),
             sender: authUser.uid, // sender
             receiver: profileOwnerUID, // receiver
           };
@@ -59,7 +61,7 @@ export default function LinkButton({
           });
         } else {
           // After completely unlinked -> refresh window (in case they're viewing a private account)
-          if (confirm('Are you sure you want to unlink?')) {
+          if (confirm(t('confirm-unlink'))) {
             unlink(authUser.uid, profileOwnerUID) &&
               setLinkIds((curr) => curr.filter((id) => id !== profileOwnerUID));
 
@@ -87,7 +89,7 @@ export default function LinkButton({
         }}
       >
         <ImCancelCircle size={30} />
-        Cancel Link Request
+        {t('cancel')}
       </button>
     )
   );

@@ -5,21 +5,19 @@ import { Disclosure } from '@headlessui/react';
 import FilePreview from '../FilePreview/FilePreview';
 
 const MessageCard = ({ message }: { message: Message }) => {
-  const { currentUser } = useAuth();
+  const { currentUser, authUser } = useAuth();
 
   return (
     <div
       className={`my-3 flex gap-x-3 
       ${
-        message.sender.name == currentUser.name
+        message.sender.id == authUser.uid
           ? ' order-first justify-end '
           : ' order-last justify-start '
       }`}
     >
       <div
-        className={`${
-          message.sender.name == currentUser.name ? 'order-last ' : ''
-        }`}
+        className={`${message.sender.id == authUser.uid ? 'order-last ' : ''}`}
       >
         <ImageOptimized
           className="h-25 min-h-[2rem] w-8 min-w-[2rem] rounded-full p-2 md:h-12 md:w-12"
@@ -62,7 +60,7 @@ const MessageCard = ({ message }: { message: Message }) => {
         <Disclosure.Panel
           as="div"
           className={`flex text-gray-500 ${
-            message.sender.name == currentUser.name ? 'justify-items-end ' : ''
+            message.sender.id == authUser.uid ? 'justify-items-end ' : ''
           }`}
         >
           <p>
@@ -78,9 +76,3 @@ const MessageCard = ({ message }: { message: Message }) => {
 };
 
 export default MessageCard;
-<Disclosure>
-  <Disclosure.Button>Is team pricing available?</Disclosure.Button>
-  <Disclosure.Panel className="text-gray-500">
-    Yes! You can purchase a license that you can share with your entire team.
-  </Disclosure.Panel>
-</Disclosure>;

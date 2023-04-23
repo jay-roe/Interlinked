@@ -6,6 +6,7 @@ import InputField from '@/components/InputFields/Input/Input';
 import TextArea from '@/components/InputFields/TextArea/TextArea';
 import { Dispatch, SetStateAction } from 'react';
 import CardStack from '@/components/CardStack/CardStack';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileCourses({
   courses,
@@ -20,13 +21,15 @@ export default function ProfileCourses({
   setCoursesEditing?: Dispatch<SetStateAction<boolean[]>>;
   setCourses?: Dispatch<SetStateAction<User['courses']>>;
 }) {
+  const t = useTranslations('Profile.Courses');
+
   // live version
   if (!isEditable) {
     if (!courses || !courses[0]) return;
 
     return (
       <div className="mb-10">
-        <h2 className="text-2xl font-extrabold">Courses 📚</h2>
+        <h2 className="text-2xl font-extrabold">{t('courses')} 📚</h2>
         <CardStack>
           {courses.map((course, index) => (
             <div key={index} data-testid={`live-courses-${index}`}>
@@ -42,7 +45,7 @@ export default function ProfileCourses({
   // editable version
   return (
     <div className="mb-3">
-      <h2 className="text-2xl font-extrabold">Courses 📚</h2>
+      <h2 className="text-2xl font-extrabold">{t('courses')} 📚</h2>
       {courses.map((course, index) => (
         <form
           key={index}
@@ -59,7 +62,7 @@ export default function ProfileCourses({
           {coursesEditing && coursesEditing[index] ? (
             <div className="mr-2 mb-3">
               <label>
-                Title <span className="text-yellow-600">*</span>
+                {t('title')} <span className="text-yellow-600">*</span>
               </label>
               <InputField
                 data-testid={`course-title-${index}`}
@@ -76,7 +79,7 @@ export default function ProfileCourses({
                 }
                 required
               />
-              <p>Course Number</p>
+              <p>{t('course-number')}</p>
               <TextArea
                 data-testid={`course-number-${index}`}
                 name="info"
@@ -89,7 +92,7 @@ export default function ProfileCourses({
                   })
                 }
               />
-              <p>Description</p>
+              <p>{t('description')}</p>
               <TextArea
                 data-testid={`course-desc-${index}`}
                 name="info"
@@ -119,7 +122,7 @@ export default function ProfileCourses({
                   data-testid={`save-course-button-${index}`}
                   type="submit"
                 >
-                  Save Course
+                  {t('save')}
                 </Button>
               ) : (
                 <EditButton
@@ -167,7 +170,7 @@ export default function ProfileCourses({
             setCoursesEditing((cedits) => [...cedits, true]);
           }}
         >
-          Add New Course
+          {t('add-new')}
         </Button>
       )}
     </div>

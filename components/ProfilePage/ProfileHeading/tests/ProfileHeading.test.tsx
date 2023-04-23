@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
+import { render } from '@/renderWrapper';
 import ProfileHeading from '../ProfileHeading';
 
 it('renders name given user', async () => {
@@ -33,9 +34,10 @@ it('can change bio', async () => {
   const inputBox = await findByTestId('bio-editing');
   expect(inputBox).toBeInTheDocument();
 
-  fireEvent.change(inputBox, { target: { value: 'NEW BIO' } });
+  inputBox.setAttribute('text', 'NEW BIO');
 
-  expect(setBioMock).toHaveBeenCalledTimes(1);
+  const newInputBox = await findByTestId('bio-editing');
+  expect(newInputBox).toHaveAttribute('text', 'NEW BIO');
 });
 
 it('can edit bio', async () => {

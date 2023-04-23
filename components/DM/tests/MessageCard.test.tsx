@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import MessageCard from '../MessageCard';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '@/contexts/AuthContext';
@@ -14,6 +15,9 @@ it('renders with name not equal', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
       currentUser: 'SOMEThING',
+      authUser: {
+        uid: '123456',
+      },
     };
   });
 
@@ -25,6 +29,7 @@ it('renders with name not equal', async () => {
           name: 'me',
           profilePicture:
             'gs://interlinked-420e3.appspot.com/`image/1637773583.png`',
+          id: '12345',
         },
         time_stamp: Timestamp.now(),
       }}
@@ -39,6 +44,9 @@ it('renders with name equal', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
       currentUser: 'me',
+      authUser: {
+        uid: '123456',
+      },
     };
   });
 
@@ -50,6 +58,7 @@ it('renders with name equal', async () => {
           name: 'me',
           profilePicture:
             'gs://interlinked-420e3.appspot.com/`image/1637773583.png`',
+          id: '12345',
         },
         time_stamp: Timestamp.now(),
       }}

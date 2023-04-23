@@ -10,8 +10,6 @@ describe('Full feed spec', () => {
   });
 
   let postMessage = 'Test Post';
-  // TODO this should include deleting posts once we have the capability
-
   it('can post', () => {
     cy.visit('feed');
     // create post
@@ -60,6 +58,7 @@ describe('Full feed spec', () => {
     cy.get('[data-testid=comment-body-0-0]').should('contain', comment);
 
     // get more posts
+    cy.get('[data-testid="load-more-button"]').click();
     cy.get('[data-testid="load-more-button"]').click();
     cy.get('[data-testid="load-more-button"]').should(
       'contain',

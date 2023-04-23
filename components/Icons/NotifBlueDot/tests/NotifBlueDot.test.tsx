@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom';
 import { Timestamp } from 'firebase/firestore';
 import NotifBlueDot from '../NotifBlueDot';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import { NotifType } from '@/types/Notification';
 
 it('renders the blue dot', async () => {

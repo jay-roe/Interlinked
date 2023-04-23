@@ -4,7 +4,7 @@ import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/Not
 import NotifBlueDot from '../../Icons/NotifBlueDot/NotifBlueDot';
 import NotificationHeader from '../NotificationHeader/NotificationHeader';
 import { Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function jobNotification({
   notification,
@@ -13,28 +13,26 @@ export default function jobNotification({
   notification: Notification;
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  //const senderRedirect = 'JOB/' + notification.postingId;
-
   return (
     <div
-      className="start flex items-center justify-between"
+      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="job-notification"
     >
       <Link
         href={{
           pathname: '/job-feed',
-          query: { searchParam: notification.postingId },
+          query: { keyword: notification.postingId },
         }}
-        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+        className="grid rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
       >
-        <div className="flex items-center justify-center ">
+        <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
           <div
-            className="ml-4 text-accent-orange"
+            className="col-span-1 text-accent-orange"
             data-testid="redirect-onclick-location"
           >
-            <MdWork size={60} className="align-self-center" />
+            <MdWork size={60} className="align-self-center hidden sm:block" />
           </div>
-          <div className="ml-5">
+          <div className="col-span-5 ml-5">
             <NotificationHeader notification={notification} />
             <div className="m-3">
               <p>{notification.context}</p>
@@ -42,7 +40,7 @@ export default function jobNotification({
           </div>
         </div>
       </Link>
-      <div className="m-4 flex items-center justify-between">
+      <div className="m-4 flex items-center justify-center gap-x-6 sm:justify-end sm:gap-0">
         <NotificationDeleteButton
           notification={notification}
           setNotification={setNotification}

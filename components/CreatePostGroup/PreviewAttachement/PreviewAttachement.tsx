@@ -3,12 +3,14 @@ import UploadMediaButton from '@/components/Buttons/UploadMediaButton/UploadMedi
 import { PreviewImageProps } from '@/types/PreviewImage';
 import { imageIdentifier } from '@/types/ImageIdentifier';
 import ImageOptimized from '@/components/ImageOptimized/ImageOptimized';
+import { useTranslations } from 'next-intl';
 
 export default function PreviewAttachement({
   clean,
   deleteImage,
   getImage,
 }: PreviewImageProps) {
+  const t = useTranslations('CreatePost.PreviewAttachments');
   const [images, setImages] = useState<File[]>([]);
   const [preview, setPreview] = useState<imageIdentifier[]>([]);
   const FILE_SIZE_MAXIMUM = 10000000;
@@ -77,7 +79,7 @@ export default function PreviewAttachement({
   return (
     <div className="w-full">
       <div className="rounded-lg bg-purple-component p-4 px-7 shadow-lg ">
-        <h1 className="text-2xl text-white">Preview Attachments</h1>
+        <h1 className="text-2xl text-white">{t('preview')}</h1>
 
         <ul className="h-[12rem] overflow-y-auto">
           {preview != null &&

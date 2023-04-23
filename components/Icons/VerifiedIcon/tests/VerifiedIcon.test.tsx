@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom';
-import { render } from '@testing-library/react';
+import { render } from '@/renderWrapper';
+
 import VerifiedIcon from '../VerifiedIcon';
 
 it('verified icon is shown', async () => {

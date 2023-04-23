@@ -15,6 +15,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { db } from '@/config/firestore';
+import { useTranslations } from 'next-intl';
 
 export default function ProfileJobHunt({
   isEditable = false,
@@ -33,6 +34,7 @@ export default function ProfileJobHunt({
 }) {
   const [jobKeywords, setJobKeywords] = useState<JobKeyword[]>([]);
   const [loading, setLoading] = useState(true);
+  const t = useTranslations('Profile.JobHunt');
 
   useEffect(() => {
     // Get all job keywords that user is subscribed to
@@ -109,7 +111,7 @@ export default function ProfileJobHunt({
                 <div>
                   <hr className="mb-3" />
                   <h3 className="mb-3 text-xl font-bold">
-                    Select keywords to notify you
+                    {t('select-keywords')}
                   </h3>
                   <JobKeywordSearch
                     jobKeywords={jobKeywords}
@@ -124,7 +126,7 @@ export default function ProfileJobHunt({
                   className="mt-3"
                   type="submit"
                 >
-                  Save Job Notification Settings
+                  {t('save')}
                 </Button>
               </div>
             </div>

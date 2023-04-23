@@ -10,7 +10,7 @@ import { db } from '@/config/firestore';
 import { deleteNotification } from '../DeleteNotification/DeleteNotification';
 import NotificationDeleteButton from '../../Buttons/NotificationDeleteButton/NotificationDeleteButton';
 import { Dispatch, SetStateAction } from 'react';
-import Link from 'next/link';
+import Link from '@/components/Link/Link';
 
 export default function LinkRequestNotification({
   notification,
@@ -20,18 +20,22 @@ export default function LinkRequestNotification({
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
   const { currentUser, authUser } = useAuth();
-  const senderRedirect = 'profile/' + notification.sender;
+  const senderRedirect = '/profile/' + notification.sender;
+
   return (
     <div
-      className="flex items-center justify-between"
+      className="grid w-full grid-cols-1 items-center justify-between md:grid-cols-2-1"
       data-testid="link-req-notification"
     >
-      <Link href={senderRedirect}>
-        <div className="start flex items-center">
-          <div className="ml-4 text-accent-orange">
+      <Link
+        href={senderRedirect}
+        className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
+      >
+        <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
+          <div className="col-span-1 hidden text-accent-orange sm:block">
             <LinkIcon size={60} />
           </div>
-          <div className="ml-5">
+          <div className="col-span-5">
             <NotificationHeader notification={notification} />
             <div className="m-3">
               <p>{notification.context}</p>
@@ -39,10 +43,10 @@ export default function LinkRequestNotification({
           </div>
         </div>
       </Link>
-      <div className="start flex items-center text-accent-orange">
+      <div className="flex items-center justify-center text-accent-orange md:gap-0 lg:justify-end">
         <button
           data-testid="accept-link-button"
-          className="mb-3 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-3 font-semibold hover:bg-opacity-20 active:bg-opacity-20"
+          className="mb-1 flex max-w-fit items-center gap-2 rounded-full bg-white bg-opacity-[0.12] p-1 font-semibold hover:bg-opacity-20 active:bg-opacity-20 sm:mb-3 sm:p-3"
           onClick={async () => {
             createNotification({
               notifType: NotifType.LINK_ACC,
@@ -69,9 +73,9 @@ export default function LinkRequestNotification({
             );
           }}
         >
-          <BsCheckLg className="m-4" size={30} />
+          <BsCheckLg className="m-2 sm:m-4" size={30} />
         </button>
-        <div className="m-4 flex items-center justify-between">
+        <div className="m-4 flex items-center justify-center gap-2 md:justify-end md:gap-0">
           <NotificationDeleteButton
             notification={notification}
             setNotification={setNotification}
