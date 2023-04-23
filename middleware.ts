@@ -1,10 +1,9 @@
 /* istanbul ignore file */
 import { createIntlMiddleware } from 'next-intl/server';
-import { locales } from './config/locales';
 
 export default createIntlMiddleware({
   // A list of all locales that are supported
-  locales: locales,
+  locales: ['en', 'de'],
 
   // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
   defaultLocale: 'en',
