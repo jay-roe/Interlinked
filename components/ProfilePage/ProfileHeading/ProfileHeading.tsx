@@ -142,11 +142,13 @@ export default function ProfileHeading({
             />
           ) : (
             // live bio
-            <TextEditorPreview
-              className="m-auto rounded-md bg-white bg-opacity-[0.12] p-3 text-left md:m-0"
-              data-testid="profile-bio"
-              message={bio || 'No bio given.'}
-            />
+            <div className="mb-3 mt-2">
+              <TextEditorPreview
+                className="m-auto rounded-md bg-white bg-opacity-[0.12] p-3 text-left md:m-0"
+                data-testid="profile-bio"
+                message={bio || 'No bio given.'}
+              />
+            </div>
           )}
           {isEditable && (
             <EditButton

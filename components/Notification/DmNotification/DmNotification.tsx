@@ -13,11 +13,11 @@ export default function dmNotification({
   notification: Notification;
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  const senderRedirect = 'DM/' + notification.chatroomId;
+  const senderRedirect = '/DM/' + notification.chatroomId;
 
   return (
     <div
-      className="start grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
+      className="grid w-full grid-cols-1 items-center justify-between sm:grid-cols-2-1"
       data-testid="dm-notification"
     >
       <Link
@@ -26,7 +26,7 @@ export default function dmNotification({
       >
         <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
           <div
-            className="col-span-1 ml-4 text-accent-orange"
+            className="col-span-1 text-accent-orange"
             data-testid="redirect-onclick-location"
           >
             <SiGooglemessages

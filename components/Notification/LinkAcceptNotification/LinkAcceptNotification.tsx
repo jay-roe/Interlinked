@@ -13,7 +13,7 @@ export default function linkAcceptNotification({
   notification: Notification;
   setNotification?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  const senderRedirect = 'profile/' + notification.sender;
+  const senderRedirect = '/profile/' + notification.sender;
 
   return (
     <div
@@ -25,7 +25,7 @@ export default function linkAcceptNotification({
         className="rounded-md p-2 transition-all hover:bg-white hover:bg-opacity-10"
       >
         <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
-          <div className="col-span-1 ml-4 hidden text-accent-orange sm:block">
+          <div className="col-span-1 hidden text-accent-orange sm:block">
             <LinkIcon linked size={60} />
           </div>
           <div className="col-span-5 ml-5">

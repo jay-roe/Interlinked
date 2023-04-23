@@ -13,6 +13,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
 import { locales } from '@/middleware';
+import logo from '../../public/interlinked-logo.ico';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -98,7 +99,7 @@ export default function NavBar() {
                       INTERLINKED
                     </h1>
                     <ImageOptimized
-                      src="/../public/interlinked-logo.ico"
+                      src={logo}
                       alt="interlinked logo"
                       className="sm:ml-1 sm:block"
                       width={30}

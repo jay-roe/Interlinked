@@ -1,5 +1,3 @@
-'use client';
-
 import { NotifType } from '@/types/Notification';
 import type { Notification } from '@/types/Notification';
 import PostNotification from '../PostNotification/PostNotification';
@@ -10,7 +8,6 @@ import DmNotification from '../DmNotification/DmNotification';
 import LinkAcceptNotification from '../LinkAcceptNotification/LinkAcceptNotification';
 import { Dispatch, SetStateAction } from 'react';
 import JobNotification from '../JobNotification/JobNotification';
-import { useAuth } from '@/contexts/AuthContext';
 
 export default function NotificationList({
   notifications,
@@ -19,8 +16,6 @@ export default function NotificationList({
   notifications: Notification[];
   setNotifications?: Dispatch<SetStateAction<Notification[]>>;
 }) {
-  const { currentUser } = useAuth();
-
   return (
     <ul className="pt-3" data-testid="live-notifications">
       {
