@@ -32,7 +32,7 @@ import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
-import { localeToDateLocale } from '@/middleware';
+import { localeToDateLocale } from '@/translations/locales';
 
 export default function Jobs({
   job,

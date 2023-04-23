@@ -1,13 +1,6 @@
 /* istanbul ignore file */
 import { createIntlMiddleware } from 'next-intl/server';
-
-export const locales = ['en', 'de'];
-
-// Used for `toLocaleString` internationalization
-export const localeToDateLocale = {
-  en: 'en-US',
-  de: 'de-DE',
-};
+import { locales } from './translations/locales';
 
 export default createIntlMiddleware({
   // A list of all locales that are supported

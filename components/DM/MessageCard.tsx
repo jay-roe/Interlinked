@@ -4,7 +4,7 @@ import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { Disclosure } from '@headlessui/react';
 import FilePreview from '../FilePreview/FilePreview';
 import { useLocale } from 'next-intl';
-import { localeToDateLocale } from '@/middleware';
+import { localeToDateLocale } from '@/translations/locales';
 
 const MessageCard = ({ message }: { message: Message }) => {
   const { authUser } = useAuth();

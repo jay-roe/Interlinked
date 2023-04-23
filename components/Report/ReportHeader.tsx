@@ -1,4 +1,4 @@
-import { localeToDateLocale } from '@/middleware';
+import { localeToDateLocale } from '@/translations/locales';
 import { Report } from '@/types/Report';
 import { useLocale, useTranslations } from 'next-intl';
 

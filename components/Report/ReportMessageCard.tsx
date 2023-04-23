@@ -3,7 +3,7 @@ import { Disclosure } from '@headlessui/react';
 import { Report } from '@/types/Report';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { useLocale } from 'next-intl';
-import { localeToDateLocale } from '@/middleware';
+import { localeToDateLocale } from '@/translations/locales';
 
 const ReportMessageCard = ({
   message,

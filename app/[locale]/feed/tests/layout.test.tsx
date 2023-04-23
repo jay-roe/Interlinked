@@ -7,6 +7,6 @@ const children = <div>test</div>;
 
 it('renders the root', async () => {
   const { findByTestId } = render(<RootLayout>{children}</RootLayout>);
-  const root = await findByTestId('title');
+  const root = await findByTestId('feed-layout');
   expect(root).toBeInTheDocument();
 });

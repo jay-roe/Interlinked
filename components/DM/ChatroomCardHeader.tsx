@@ -1,5 +1,5 @@
-import { localeToDateLocale } from '@/middleware';
-import { ChatRoom, Message } from '@/types/Message';
+import { localeToDateLocale } from '@/translations/locales';
+import { ChatRoom } from '@/types/Message';
 import { User } from '@/types/User';
 import { useLocale } from 'next-intl';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';

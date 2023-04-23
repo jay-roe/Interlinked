@@ -8,7 +8,7 @@ import {
 import Button from '../Buttons/Button';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
-import { localeToDateLocale } from '@/middleware';
+import { localeToDateLocale } from '@/translations/locales';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic

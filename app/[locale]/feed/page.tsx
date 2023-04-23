@@ -149,12 +149,7 @@ export default function Feeds() {
 
   return (
     <div>
-      <h1
-        className="mb-3 text-left text-7xl font-extrabold"
-        data-testid="title"
-      >
-        {t('feed')}
-      </h1>
+      <h1 className="mb-3 text-left text-7xl font-extrabold">{t('feed')}</h1>
       <CreatePostGroup />
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         {t('see-what-links-talkinbout')}

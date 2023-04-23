@@ -1,10 +1,8 @@
 'use client';
 
-import Link from '@/components/Link/Link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import Button from '@/components/Buttons/Button';
 import { JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
 import { collection, doc, getDocs, query, orderBy } from 'firebase/firestore';
