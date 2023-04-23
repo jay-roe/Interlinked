@@ -1,6 +1,6 @@
 'use client';
 import { db } from '@/config/firestore';
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 import type { Notification } from '@/types/Notification';
 import { User } from '@/types/User';
 import { doc, getDoc } from 'firebase/firestore';

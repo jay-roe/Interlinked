@@ -1,4 +1,4 @@
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 import type { Timestamp } from 'firebase/firestore';
 import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';

@@ -1,4 +1,4 @@
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 import { ChatRoom } from '@/types/Message';
 import { User } from '@/types/User';
 import { useLocale } from 'next-intl';

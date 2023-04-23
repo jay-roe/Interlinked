@@ -12,7 +12,7 @@ import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
-import { locales } from '@/translations/locales';
+import { locales } from '@/config/locales';
 import logo from '../../public/interlinked-logo.ico';
 
 function classNames(...classes) {

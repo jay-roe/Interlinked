@@ -5,7 +5,7 @@ import Link from '@/components/Link/Link';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { useLocale } from 'next-intl';
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 
 const PostHeader = ({
   author,

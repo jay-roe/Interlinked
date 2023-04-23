@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 import { createIntlMiddleware } from 'next-intl/server';
-import { locales } from './translations/locales';
+import { locales } from './config/locales';
 
 export default createIntlMiddleware({
   // A list of all locales that are supported

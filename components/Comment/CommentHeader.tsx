@@ -2,7 +2,7 @@ import type { Comment } from '@/types/Post';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import Link from '@/components/Link/Link';
 import { useLocale } from 'next-intl';
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 
 const CommentHeader = ({ comment }: { comment?: Comment }) => {
   const locale = useLocale();

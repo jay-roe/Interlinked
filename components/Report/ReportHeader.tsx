@@ -1,4 +1,4 @@
-import { localeToDateLocale } from '@/translations/locales';
+import { localeToDateLocale } from '@/config/locales';
 import { Report } from '@/types/Report';
 import { useLocale, useTranslations } from 'next-intl';
 
