@@ -154,18 +154,19 @@ const fakeUser = {
 
 // if there's no current user or the user isn't autheniticated, it says you must be logged in to edit your profile
 
-it('check if user is logged out', async () => {
+it('check if user is logged out, redirects to account-required page', async () => {
   mockedUseAuth.mockImplementation(() => {
     return {
       authUser: null,
       currentUser: null,
     };
   });
+  mockedRouter.mockReturnValue({
+    push: jest.fn(),
+  });
 
-  const { findByTestId } = render(<EditProfile />);
-
-  const loginPrompt = await findByTestId('profile-login-prompt');
-  expect(loginPrompt).toBeInTheDocument();
+  render(<EditProfile />);
+  expect(mockedRouter().push).toHaveBeenCalledWith('/en/account-required');
 });
 
 it('try to update account', async () => {

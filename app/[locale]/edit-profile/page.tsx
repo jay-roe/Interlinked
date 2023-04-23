@@ -186,20 +186,10 @@ export default function EditProfile() {
     currentUser?.volunteering.map(() => false)
   );
 
-  // User not logged in
+  // User not logged in, redirect to account required
   if (!currentUser || !authUser) {
-    return (
-      <div className="text-white">
-        <h1 className="text-lg font-bold">{t('profile')}</h1>
-        <h2 data-testid="profile-login-prompt">{t('should-login')}</h2>
-        <Link href="/login">
-          <Button>{t('login')}</Button>
-        </Link>
-        <Link href="/register">
-          <Button>{t('register')}</Button>
-        </Link>
-      </div>
-    );
+    router.push('/' + locale + '/account-required');
+    return <div></div>;
   }
 
   const statesToUpdate: Partial<User> = {

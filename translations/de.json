@@ -403,6 +403,12 @@
       "no-applications": "Noch keine Bewerbungen "
     }
   },
+  "AccountRequired": {
+    "should-login": "Du solltest dich zuerst anmelden.",
+    "sign-in": "Anmelden",
+    "register": "Registrieren",
+    "cannot-access-page": "Kann diese Seite noch nicht aufrufen..."
+  },
   "Login": {
     "alert-failed": "Anmeldung fehlgeschlagen",
     "welcome": "Willkommen zurück",
