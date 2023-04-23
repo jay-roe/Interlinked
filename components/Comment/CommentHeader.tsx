@@ -1,15 +1,11 @@
-import { User } from '@/types/User';
 import type { Comment } from '@/types/Post';
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import Link from '@/components/Link/Link';
+import { useLocale } from 'next-intl';
 
-const CommentHeader = ({
-  comment,
-  currentUser,
-}: {
-  comment?: Comment;
-  currentUser?: User;
-}) => {
+const CommentHeader = ({ comment }: { comment?: Comment }) => {
+  const locale = useLocale();
+
   return (
     <div className="mb-1 flex flex-col justify-start">
       <div className="flex justify-between">
@@ -23,13 +19,15 @@ const CommentHeader = ({
         </div>
       </div>
       <div data-testid="test-comment-date" className="text-sm font-light">
-        {comment?.date?.toDate().toLocaleString('en-US', {
-          month: 'long',
-          year: 'numeric',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-        }) || 'Unknown'}
+        {comment?.date
+          ?.toDate()
+          .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+            month: 'long',
+            year: 'numeric',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          }) || 'Unknown'}
       </div>
     </div>
   );

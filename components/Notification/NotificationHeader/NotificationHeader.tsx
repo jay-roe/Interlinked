@@ -3,7 +3,7 @@ import { db } from '@/config/firestore';
 import type { Notification } from '@/types/Notification';
 import { User } from '@/types/User';
 import { doc, getDoc } from 'firebase/firestore';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import ImageOptimized from '../../ImageOptimized/ImageOptimized';
 
@@ -13,14 +13,18 @@ export default function NotificationHeader({
   notification: Notification;
 }) {
   const t = useTranslations('Notification.Header');
+  const locale = useLocale();
+
   const [sender, setSender] = useState<User>();
   const [loading, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     getDoc(doc(db.users, notification.sender)).then((res) => {
       setSender(res.data());
       setLoading(false);
     });
   }, []);
+
   if (loading) {
     return (
       <div>
@@ -28,6 +32,7 @@ export default function NotificationHeader({
       </div>
     );
   }
+
   return (
     <div className="start mt-3 flex">
       <ImageOptimized
@@ -40,13 +45,15 @@ export default function NotificationHeader({
       <div>
         <p>{sender.name}</p>
         <p>
-          {notification.notifTime?.toDate().toLocaleString('en-US', {
-            month: 'long',
-            year: 'numeric',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
+          {notification.notifTime
+            ?.toDate()
+            .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              month: 'long',
+              year: 'numeric',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
         </p>
       </div>
     </div>

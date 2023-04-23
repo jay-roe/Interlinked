@@ -1,5 +1,6 @@
 import { JobPosting } from '@/types/JobPost';
-import { User, UserWithId } from '@/types/User';
+import { UserWithId } from '@/types/User';
+import { useLocale } from 'next-intl';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 const JobPostHeader = ({
@@ -9,18 +10,13 @@ const JobPostHeader = ({
   author?: UserWithId;
   jobPost?: JobPosting;
 }) => {
+  const locale = useLocale();
+
   return (
     <div
       data-testid="header-page"
       className="mb-3 flex items-center justify-start space-x-4"
     >
-      {
-        // TODO: Implement link to profile page IF company profile page made
-        /* <Link
-        href={`/profile/${author.userId}`}
-        className="flex items-center justify-start space-x-4"
-      > */
-      }
       <span>
         <ImageOptimized
           data-testid="test-coverphoto"
@@ -40,24 +36,28 @@ const JobPostHeader = ({
           className="text-sm font-light max-md:hidden"
         >
           {'Posted: ' +
-            jobPost?.datePosted?.toDate().toLocaleString('en-US', {
-              month: 'long',
-              year: 'numeric',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-            }) || 'Unknown'}
+            jobPost?.datePosted
+              ?.toDate()
+              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+                month: 'long',
+                year: 'numeric',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              }) || 'Unknown'}
         </div>
         <div className="text-sm font-light md:hidden">
           {'Posted: ' +
-            jobPost?.datePosted?.toDate().toLocaleString('en-US', {
-              month: '2-digit',
-              year: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              hour12: false,
-              minute: '2-digit',
-            }) || 'Unknown'}
+            jobPost?.datePosted
+              ?.toDate()
+              .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+                month: '2-digit',
+                year: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                hour12: false,
+                minute: '2-digit',
+              }) || 'Unknown'}
         </div>
       </div>
       {/* </Link> */}

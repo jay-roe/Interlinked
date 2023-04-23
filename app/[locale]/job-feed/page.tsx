@@ -103,6 +103,12 @@ export default function Feeds() {
   return (
     <div>
       {/* <CreatePostGroup /> */}
+      <h1
+        className="mb-3 text-left text-7xl font-extrabold"
+        data-testid="title"
+      >
+        {t('jobs-feed')}
+      </h1>
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         {t('find')}
       </p>

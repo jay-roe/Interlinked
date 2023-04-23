@@ -1,9 +1,9 @@
-'use client';
 import { Report } from '@/types/Report';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function ReportHeader({ report }: { report: Report }) {
   const t = useTranslations('Report');
+  const locale = useLocale();
 
   return (
     <div className="start flex">
@@ -12,13 +12,15 @@ export default function ReportHeader({ report }: { report: Report }) {
           {t('moderation-required')}
         </p>
         <p className="text-xs sm:text-xs">
-          {report.reportTime?.toDate().toLocaleString('en-US', {
-            month: 'long',
-            year: 'numeric',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
+          {report.reportTime
+            ?.toDate()
+            .toLocaleString(locale === 'de' ? 'de-DE' : 'en-US', {
+              month: 'long',
+              year: 'numeric',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
         </p>
       </div>
     </div>
