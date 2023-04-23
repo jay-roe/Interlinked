@@ -12,6 +12,8 @@ import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import SearchBar from '../SearchBar/SearchBar';
 import { useTranslations } from 'next-intl';
 import LocaleSwitcher from '../LocaleSwitcher/LocaleSwitcher';
+import { locales } from '@/middleware';
+import logo from '../../public/interlinked-logo.ico';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -20,7 +22,12 @@ function classNames(...classes) {
 export default function NavBar() {
   const [showSearch, setShowSearch] = useState(false);
   const { currentUser, currentAdmin, logout } = useAuth();
-  const pathname = usePathname();
+
+  // Remove locale from pathname (only want to consider page path)
+  const pathname = usePathname()
+    .split('/')
+    .filter((path) => !locales.some((locale) => locale === path))
+    .join('/');
   const t = useTranslations('NavBar');
 
   // Allow state access in SearchBar component
@@ -87,12 +94,12 @@ export default function NavBar() {
                   <Link href="/" className="flex flex-shrink-0 items-center">
                     <h1
                       data-testid="home-interlinked"
-                      className="hidden font-logo text-white sm:block lg:text-3xl xl:text-4xl"
+                      className="hidden font-logo text-white transition-colors hover:text-yellow-500 sm:block lg:text-3xl xl:text-4xl"
                     >
                       INTERLINKED
                     </h1>
                     <ImageOptimized
-                      src="/../public/interlinked-logo.ico"
+                      src={logo}
                       alt="interlinked logo"
                       className="sm:ml-1 sm:block"
                       width={30}

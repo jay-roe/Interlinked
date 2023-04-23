@@ -40,7 +40,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
       thrownCards.clear();
       animator.start(() => draggingSpring());
       setFrontCardIndex(0);
-    }, 300);
+    }, 200);
   }
 
   // Add delay on animation when clicking next
@@ -56,37 +56,31 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
         };
     });
     setTimeout(() => {
-      nextCard(true);
+      nextCard();
     }, 150);
   }
 
   // Go to the next card after being thrown
-  function nextCard(isClicked: boolean = false) {
+  function nextCard() {
     thrownCards.add(frontCardIndex);
     setTimeout(() => {
       animator.start((i) => {
         if (frontCardIndex === i) {
-          if (isClicked) {
-            return {
-              scale: 1,
-              x: 200,
-              display: 'none',
-            };
-          }
           return {
             scale: 1,
+            x: 200,
             display: 'none',
           };
         }
       });
-    }, 100);
-    if (frontCardIndex === children.length - 1) {
-      resetCards();
-    } else {
-      setTimeout(() => {
-        setFrontCardIndex(frontCardIndex + 1);
-      }, 200);
-    }
+      if (frontCardIndex === children.length - 1) {
+        resetCards();
+      } else {
+        setTimeout(() => {
+          setFrontCardIndex(frontCardIndex + 1);
+        }, 200);
+      }
+    }, 200);
   }
 
   // Triggered whenever user drags on a card
@@ -113,7 +107,7 @@ export default function CardStack({ children }: { children: JSX.Element[] }) {
 
         // If let go with high velocity, or dragging too far, remove card
         if (
-          (!active && Math.abs(mx) > 30.0 && vx > 0.3) ||
+          (!active && Math.abs(mx) > 50.0 && vx > 0.75) ||
           (active && Math.abs(mx) > 300.0)
         ) {
           // Stop animating (avoids any unwanted physics)

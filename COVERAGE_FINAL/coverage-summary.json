@@ -1,0 +1,703 @@
+{
+  "total": {
+    "lines": { "total": 1779, "covered": 1543, "skipped": 0, "pct": 86.73 },
+    "statements": {
+      "total": 1950,
+      "covered": 1672,
+      "skipped": 0,
+      "pct": 85.74
+    },
+    "functions": { "total": 828, "covered": 699, "skipped": 0, "pct": 84.42 },
+    "branches": { "total": 1117, "covered": 902, "skipped": 0, "pct": 80.75 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/page.tsx": {
+    "lines": { "total": 9, "covered": 8, "skipped": 0, "pct": 88.89 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 9, "covered": 8, "skipped": 0, "pct": 88.89 },
+    "branches": { "total": 8, "covered": 6, "skipped": 0, "pct": 75 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/DM/page.tsx": {
+    "lines": { "total": 15, "covered": 14, "skipped": 0, "pct": 93.33 },
+    "functions": { "total": 7, "covered": 6, "skipped": 0, "pct": 85.71 },
+    "statements": { "total": 16, "covered": 15, "skipped": 0, "pct": 93.75 },
+    "branches": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/DM/[uid]/page.tsx": {
+    "lines": { "total": 86, "covered": 82, "skipped": 0, "pct": 95.35 },
+    "functions": { "total": 30, "covered": 26, "skipped": 0, "pct": 86.67 },
+    "statements": { "total": 93, "covered": 84, "skipped": 0, "pct": 90.32 },
+    "branches": { "total": 42, "covered": 33, "skipped": 0, "pct": 78.57 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/edit-profile/page.tsx": {
+    "lines": { "total": 97, "covered": 92, "skipped": 0, "pct": 94.85 },
+    "functions": { "total": 24, "covered": 22, "skipped": 0, "pct": 91.67 },
+    "statements": { "total": 98, "covered": 93, "skipped": 0, "pct": 94.9 },
+    "branches": { "total": 36, "covered": 35, "skipped": 0, "pct": 97.22 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/feed/layout.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/feed/page.tsx": {
+    "lines": { "total": 56, "covered": 52, "skipped": 0, "pct": 92.86 },
+    "functions": { "total": 15, "covered": 12, "skipped": 0, "pct": 80 },
+    "statements": { "total": 58, "covered": 54, "skipped": 0, "pct": 93.1 },
+    "branches": { "total": 21, "covered": 19, "skipped": 0, "pct": 90.48 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/job-feed/layout.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/job-feed/page.tsx": {
+    "lines": { "total": 41, "covered": 40, "skipped": 0, "pct": 97.56 },
+    "functions": { "total": 22, "covered": 22, "skipped": 0, "pct": 100 },
+    "statements": { "total": 48, "covered": 47, "skipped": 0, "pct": 97.92 },
+    "branches": { "total": 12, "covered": 8, "skipped": 0, "pct": 66.67 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/login/page.tsx": {
+    "lines": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 },
+    "functions": { "total": 6, "covered": 5, "skipped": 0, "pct": 83.33 },
+    "statements": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/manage-jobs/layout.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/manage-jobs/page.tsx": {
+    "lines": { "total": 26, "covered": 25, "skipped": 0, "pct": 96.15 },
+    "functions": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 },
+    "statements": { "total": 26, "covered": 25, "skipped": 0, "pct": 96.15 },
+    "branches": { "total": 12, "covered": 9, "skipped": 0, "pct": 75 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/manage-jobs/[jid]/layout.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/manage-jobs/[jid]/page.tsx": {
+    "lines": { "total": 22, "covered": 20, "skipped": 0, "pct": 90.91 },
+    "functions": { "total": 6, "covered": 6, "skipped": 0, "pct": 100 },
+    "statements": { "total": 23, "covered": 21, "skipped": 0, "pct": 91.3 },
+    "branches": { "total": 17, "covered": 11, "skipped": 0, "pct": 64.71 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/notifications/page.tsx": {
+    "lines": { "total": 26, "covered": 24, "skipped": 0, "pct": 92.31 },
+    "functions": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "statements": { "total": 28, "covered": 26, "skipped": 0, "pct": 92.86 },
+    "branches": { "total": 10, "covered": 8, "skipped": 0, "pct": 80 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/profile/page.tsx": {
+    "lines": { "total": 7, "covered": 5, "skipped": 0, "pct": 71.43 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 7, "covered": 5, "skipped": 0, "pct": 71.43 },
+    "branches": { "total": 4, "covered": 2, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/profile/[uid]/page.tsx": {
+    "lines": { "total": 20, "covered": 16, "skipped": 0, "pct": 80 },
+    "functions": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "statements": { "total": 20, "covered": 16, "skipped": 0, "pct": 80 },
+    "branches": { "total": 16, "covered": 11, "skipped": 0, "pct": 68.75 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/profile/[uid]/links/page.tsx": {
+    "lines": { "total": 40, "covered": 37, "skipped": 0, "pct": 92.5 },
+    "functions": { "total": 11, "covered": 8, "skipped": 0, "pct": 72.73 },
+    "statements": { "total": 42, "covered": 38, "skipped": 0, "pct": 90.48 },
+    "branches": { "total": 22, "covered": 19, "skipped": 0, "pct": 86.36 }
+  },
+  "/home/jay/Projects/Interlinked/app/[locale]/register/page.tsx": {
+    "lines": { "total": 28, "covered": 26, "skipped": 0, "pct": 92.86 },
+    "functions": { "total": 10, "covered": 9, "skipped": 0, "pct": 90 },
+    "statements": { "total": 29, "covered": 27, "skipped": 0, "pct": 93.1 },
+    "branches": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/Button.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/DeleteButton/DeleteButton.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/EditButton/EditButton.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/FileButton/FileButton.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/GoogleButton/GoogleButton.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/LinkButton/LinkButton.tsx": {
+    "lines": { "total": 21, "covered": 15, "skipped": 0, "pct": 71.43 },
+    "functions": { "total": 11, "covered": 7, "skipped": 0, "pct": 63.64 },
+    "statements": { "total": 22, "covered": 15, "skipped": 0, "pct": 68.18 },
+    "branches": { "total": 18, "covered": 12, "skipped": 0, "pct": 66.67 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/LinkButton/LinkButtonNoNumber.tsx": {
+    "lines": { "total": 12, "covered": 6, "skipped": 0, "pct": 50 },
+    "functions": { "total": 7, "covered": 2, "skipped": 0, "pct": 28.57 },
+    "statements": { "total": 13, "covered": 6, "skipped": 0, "pct": 46.15 },
+    "branches": { "total": 15, "covered": 4, "skipped": 0, "pct": 26.67 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/LinkButton/Unlink.ts": {
+    "lines": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/LinkButton/ViewLinkButton.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/NotificationDeleteButton/NotificationDeleteButton.tsx": {
+    "lines": { "total": 6, "covered": 6, "skipped": 0, "pct": 100 },
+    "functions": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "statements": { "total": 6, "covered": 6, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/PostButton/PostButton.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Buttons/UploadMediaButton/UploadMediaButton.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Card/Card.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Card/CardGrid.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 }
+  },
+  "/home/jay/Projects/Interlinked/components/Card/FullPostCard.tsx": {
+    "lines": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 },
+    "branches": { "total": 9, "covered": 9, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Comment/AddComment.tsx": {
+    "lines": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "functions": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "statements": { "total": 11, "covered": 10, "skipped": 0, "pct": 90.91 },
+    "branches": { "total": 6, "covered": 3, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Comment/CommentBody.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 1, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Comment/CommentHeader.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 4, "covered": 2, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/CreatePostGroup/CreatePostGroup.tsx": {
+    "lines": { "total": 43, "covered": 38, "skipped": 0, "pct": 88.37 },
+    "functions": { "total": 18, "covered": 17, "skipped": 0, "pct": 94.44 },
+    "statements": { "total": 45, "covered": 40, "skipped": 0, "pct": 88.89 },
+    "branches": { "total": 14, "covered": 10, "skipped": 0, "pct": 71.43 }
+  },
+  "/home/jay/Projects/Interlinked/components/CreatePostGroup/CreatePost/CreatePost.tsx": {
+    "lines": { "total": 12, "covered": 12, "skipped": 0, "pct": 100 },
+    "functions": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "statements": { "total": 12, "covered": 12, "skipped": 0, "pct": 100 },
+    "branches": { "total": 8, "covered": 5, "skipped": 0, "pct": 62.5 }
+  },
+  "/home/jay/Projects/Interlinked/components/CreatePostGroup/PreviewAttachement/PreviewAttachement.tsx": {
+    "lines": { "total": 35, "covered": 33, "skipped": 0, "pct": 94.29 },
+    "functions": { "total": 15, "covered": 14, "skipped": 0, "pct": 93.33 },
+    "statements": { "total": 38, "covered": 35, "skipped": 0, "pct": 92.11 },
+    "branches": { "total": 16, "covered": 12, "skipped": 0, "pct": 75 }
+  },
+  "/home/jay/Projects/Interlinked/components/DM/ChatroomCard.tsx": {
+    "lines": { "total": 13, "covered": 13, "skipped": 0, "pct": 100 },
+    "functions": { "total": 6, "covered": 6, "skipped": 0, "pct": 100 },
+    "statements": { "total": 13, "covered": 13, "skipped": 0, "pct": 100 },
+    "branches": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/DM/ChatroomCardHeader.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/DM/CreateChatModal.tsx": {
+    "lines": { "total": 30, "covered": 26, "skipped": 0, "pct": 86.67 },
+    "functions": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "statements": { "total": 31, "covered": 26, "skipped": 0, "pct": 83.87 },
+    "branches": { "total": 11, "covered": 7, "skipped": 0, "pct": 63.64 }
+  },
+  "/home/jay/Projects/Interlinked/components/DM/MessageCard.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 15, "covered": 15, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/DM/TimeDivider.tsx": {
+    "lines": { "total": 15, "covered": 13, "skipped": 0, "pct": 86.67 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 15, "covered": 13, "skipped": 0, "pct": 86.67 },
+    "branches": { "total": 6, "covered": 4, "skipped": 0, "pct": 66.67 }
+  },
+  "/home/jay/Projects/Interlinked/components/DeleteAccountPopup/DeleteAccountPopup.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 1, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/DeleteAccountPopupEmail/DeleteAccountPopupEmail.tsx": {
+    "lines": { "total": 18, "covered": 14, "skipped": 0, "pct": 77.78 },
+    "functions": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "statements": { "total": 18, "covered": 14, "skipped": 0, "pct": 77.78 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/DeleteAccountPopupOAuth/DeleteAccountPopupOAuth.tsx": {
+    "lines": { "total": 23, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 6, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 23, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 6, "covered": 0, "skipped": 0, "pct": 0 }
+  },
+  "/home/jay/Projects/Interlinked/components/FilePreview/FilePreview.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/CommentIcon/CommentIcon.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/JobHuntIcon/JobHuntIcon.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/LikeIcon/LikeIcon.tsx": {
+    "lines": { "total": 11, "covered": 10, "skipped": 0, "pct": 90.91 },
+    "functions": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "statements": { "total": 13, "covered": 12, "skipped": 0, "pct": 92.31 },
+    "branches": { "total": 16, "covered": 13, "skipped": 0, "pct": 81.25 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/LinkIcon/LinkIcon.tsx": {
+    "lines": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "branches": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/NotifBlueDot/NotifBlueDot.tsx": {
+    "lines": { "total": 13, "covered": 6, "skipped": 0, "pct": 46.15 },
+    "functions": { "total": 6, "covered": 2, "skipped": 0, "pct": 33.33 },
+    "statements": { "total": 14, "covered": 6, "skipped": 0, "pct": 42.86 },
+    "branches": { "total": 4, "covered": 2, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/NotifBlueDotIcon/NotifBlueDotIcon.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 1, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/PrivacyIcon/PrivacyIcon.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 1, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/SocialIcon/SocialIcon.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Icons/SocialIconGroup/SocialIconGroup.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/ImageOptimized/ImageOptimized.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 6, "covered": 5, "skipped": 0, "pct": 83.33 }
+  },
+  "/home/jay/Projects/Interlinked/components/InputFields/CheckBox/CheckBox.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/InputFields/Input/Input.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/InputFields/TextArea/TextArea.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/JobKeyword/JobKeyword.tsx": {
+    "lines": { "total": 37, "covered": 29, "skipped": 0, "pct": 78.38 },
+    "functions": { "total": 21, "covered": 14, "skipped": 0, "pct": 66.67 },
+    "statements": { "total": 40, "covered": 30, "skipped": 0, "pct": 75 },
+    "branches": { "total": 11, "covered": 10, "skipped": 0, "pct": 90.91 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/CheckIfJobIsInFilter.ts": {
+    "lines": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "functions": { "total": 3, "covered": 2, "skipped": 0, "pct": 66.67 },
+    "statements": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "branches": { "total": 16, "covered": 16, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/EditJobPosting.tsx": {
+    "lines": { "total": 61, "covered": 52, "skipped": 0, "pct": 85.25 },
+    "functions": { "total": 33, "covered": 22, "skipped": 0, "pct": 66.67 },
+    "statements": { "total": 71, "covered": 57, "skipped": 0, "pct": 80.28 },
+    "branches": { "total": 59, "covered": 55, "skipped": 0, "pct": 93.22 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/ExternalApplication.tsx": {
+    "lines": { "total": 28, "covered": 25, "skipped": 0, "pct": 89.29 },
+    "functions": { "total": 21, "covered": 20, "skipped": 0, "pct": 95.24 },
+    "statements": { "total": 35, "covered": 31, "skipped": 0, "pct": 88.57 },
+    "branches": { "total": 23, "covered": 17, "skipped": 0, "pct": 73.91 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/FullJobCard.tsx": {
+    "lines": { "total": 77, "covered": 46, "skipped": 0, "pct": 59.74 },
+    "functions": { "total": 26, "covered": 13, "skipped": 0, "pct": 50 },
+    "statements": { "total": 80, "covered": 48, "skipped": 0, "pct": 60 },
+    "branches": { "total": 43, "covered": 31, "skipped": 0, "pct": 72.09 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/JobPostBody.tsx": {
+    "lines": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "functions": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "statements": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "branches": { "total": 22, "covered": 17, "skipped": 0, "pct": 77.27 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/JobPostContainer.tsx": {
+    "lines": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/JobPostFooter.tsx": {
+    "lines": { "total": 12, "covered": 11, "skipped": 0, "pct": 91.67 },
+    "functions": { "total": 7, "covered": 6, "skipped": 0, "pct": 85.71 },
+    "statements": { "total": 16, "covered": 14, "skipped": 0, "pct": 87.5 },
+    "branches": { "total": 8, "covered": 4, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/JobPostHeader.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 10, "covered": 4, "skipped": 0, "pct": 40 }
+  },
+  "/home/jay/Projects/Interlinked/components/Jobs/JobSearch.tsx": {
+    "lines": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Link/Link.tsx": {
+    "lines": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "branches": { "total": 4, "covered": 3, "skipped": 0, "pct": 75 }
+  },
+  "/home/jay/Projects/Interlinked/components/LocaleSwitcher/LocaleSwitcher.tsx": {
+    "lines": { "total": 8, "covered": 3, "skipped": 0, "pct": 37.5 },
+    "functions": { "total": 3, "covered": 1, "skipped": 0, "pct": 33.33 },
+    "statements": { "total": 8, "covered": 3, "skipped": 0, "pct": 37.5 },
+    "branches": { "total": 6, "covered": 1, "skipped": 0, "pct": 16.67 }
+  },
+  "/home/jay/Projects/Interlinked/components/MessageModal/MessageModal.tsx": {
+    "lines": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "functions": { "total": 3, "covered": 2, "skipped": 0, "pct": 66.67 },
+    "statements": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/NavBar/NavBar.tsx": {
+    "lines": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 },
+    "functions": { "total": 9, "covered": 7, "skipped": 0, "pct": 77.78 },
+    "statements": { "total": 24, "covered": 20, "skipped": 0, "pct": 83.33 },
+    "branches": { "total": 28, "covered": 19, "skipped": 0, "pct": 67.86 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/AddNotification/AddNotification.ts": {
+    "lines": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "branches": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/CommentNotification/CommentNotification.tsx": {
+    "lines": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/DeleteNotification/DeleteNotification.ts": {
+    "lines": { "total": 3, "covered": 2, "skipped": 0, "pct": 66.67 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 2, "skipped": 0, "pct": 66.67 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/DmNotification/DmNotification.tsx": {
+    "lines": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/JobNotification/JobNotification.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/LikeNotification/LikeNotification.tsx": {
+    "lines": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/LinkAcceptNotification/LinkAcceptNotification.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/LinkRequestNotification/LinkRequestNotification.tsx": {
+    "lines": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "functions": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "statements": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/NotificationHeader/NotificationHeader.tsx": {
+    "lines": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "functions": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "statements": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/NotificationList/NotificationList.tsx": {
+    "lines": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "functions": { "total": 4, "covered": 4, "skipped": 0, "pct": 100 },
+    "statements": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "branches": { "total": 18, "covered": 14, "skipped": 0, "pct": 77.78 }
+  },
+  "/home/jay/Projects/Interlinked/components/Notification/PostNotification/PostNotification.tsx": {
+    "lines": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/Post/PostBody.tsx": {
+    "lines": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "functions": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "statements": { "total": 3, "covered": 3, "skipped": 0, "pct": 100 },
+    "branches": { "total": 7, "covered": 6, "skipped": 0, "pct": 85.71 }
+  },
+  "/home/jay/Projects/Interlinked/components/Post/PostFooter.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 7, "covered": 6, "skipped": 0, "pct": 85.71 }
+  },
+  "/home/jay/Projects/Interlinked/components/Post/PostHeader.tsx": {
+    "lines": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 2, "covered": 2, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileAwards/ProfileAwards.tsx": {
+    "lines": { "total": 32, "covered": 29, "skipped": 0, "pct": 90.63 },
+    "functions": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 },
+    "statements": { "total": 41, "covered": 36, "skipped": 0, "pct": 87.8 },
+    "branches": { "total": 21, "covered": 17, "skipped": 0, "pct": 80.95 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileCertifications/ProfileCertifications.tsx": {
+    "lines": { "total": 36, "covered": 33, "skipped": 0, "pct": 91.67 },
+    "functions": { "total": 25, "covered": 22, "skipped": 0, "pct": 88 },
+    "statements": { "total": 45, "covered": 40, "skipped": 0, "pct": 88.89 },
+    "branches": { "total": 25, "covered": 21, "skipped": 0, "pct": 84 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileCodingLanguages/ProfileCodingLanguages.tsx": {
+    "lines": { "total": 33, "covered": 27, "skipped": 0, "pct": 81.82 },
+    "functions": { "total": 27, "covered": 21, "skipped": 0, "pct": 77.78 },
+    "statements": { "total": 41, "covered": 33, "skipped": 0, "pct": 80.49 },
+    "branches": { "total": 23, "covered": 19, "skipped": 0, "pct": 82.61 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileContact/ProfileContact.tsx": {
+    "lines": { "total": 9, "covered": 9, "skipped": 0, "pct": 100 },
+    "functions": { "total": 7, "covered": 7, "skipped": 0, "pct": 100 },
+    "statements": { "total": 11, "covered": 11, "skipped": 0, "pct": 100 },
+    "branches": { "total": 18, "covered": 18, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileCourses/ProfileCourses.tsx": {
+    "lines": { "total": 31, "covered": 31, "skipped": 0, "pct": 100 },
+    "functions": { "total": 23, "covered": 23, "skipped": 0, "pct": 100 },
+    "statements": { "total": 39, "covered": 39, "skipped": 0, "pct": 100 },
+    "branches": { "total": 23, "covered": 21, "skipped": 0, "pct": 91.3 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileDocuments/ProfileDocuments.tsx": {
+    "lines": { "total": 65, "covered": 55, "skipped": 0, "pct": 84.62 },
+    "functions": { "total": 29, "covered": 23, "skipped": 0, "pct": 79.31 },
+    "statements": { "total": 72, "covered": 61, "skipped": 0, "pct": 84.72 },
+    "branches": { "total": 43, "covered": 39, "skipped": 0, "pct": 90.7 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileEducation/ProfileEducation.tsx": {
+    "lines": { "total": 44, "covered": 44, "skipped": 0, "pct": 100 },
+    "functions": { "total": 29, "covered": 29, "skipped": 0, "pct": 100 },
+    "statements": { "total": 53, "covered": 52, "skipped": 0, "pct": 98.11 },
+    "branches": { "total": 25, "covered": 24, "skipped": 0, "pct": 96 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileExperience/ProfileExperience.tsx": {
+    "lines": { "total": 44, "covered": 44, "skipped": 0, "pct": 100 },
+    "functions": { "total": 29, "covered": 29, "skipped": 0, "pct": 100 },
+    "statements": { "total": 53, "covered": 52, "skipped": 0, "pct": 98.11 },
+    "branches": { "total": 29, "covered": 28, "skipped": 0, "pct": 96.55 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileHeading/ProfileHeading.tsx": {
+    "lines": { "total": 11, "covered": 10, "skipped": 0, "pct": 90.91 },
+    "functions": { "total": 8, "covered": 8, "skipped": 0, "pct": 100 },
+    "statements": { "total": 13, "covered": 12, "skipped": 0, "pct": 92.31 },
+    "branches": { "total": 27, "covered": 24, "skipped": 0, "pct": 88.89 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileJobHunt/ProfileJobHunt.tsx": {
+    "lines": { "total": 19, "covered": 16, "skipped": 0, "pct": 84.21 },
+    "functions": { "total": 14, "covered": 10, "skipped": 0, "pct": 71.43 },
+    "statements": { "total": 24, "covered": 19, "skipped": 0, "pct": 79.17 },
+    "branches": { "total": 7, "covered": 5, "skipped": 0, "pct": 71.43 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileLanguages/ProfileLanguages.tsx": {
+    "lines": { "total": 43, "covered": 40, "skipped": 0, "pct": 93.02 },
+    "functions": { "total": 32, "covered": 29, "skipped": 0, "pct": 90.63 },
+    "statements": { "total": 49, "covered": 45, "skipped": 0, "pct": 91.84 },
+    "branches": { "total": 41, "covered": 36, "skipped": 0, "pct": 87.8 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileLocked/ProfileLocked.tsx": {
+    "lines": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 1, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 2, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfilePrivacy/ProfilePrivacy.tsx": {
+    "lines": { "total": 8, "covered": 4, "skipped": 0, "pct": 50 },
+    "functions": { "total": 6, "covered": 1, "skipped": 0, "pct": 16.67 },
+    "statements": { "total": 10, "covered": 4, "skipped": 0, "pct": 40 },
+    "branches": { "total": 6, "covered": 5, "skipped": 0, "pct": 83.33 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileProjects/ProfileProjects.tsx": {
+    "lines": { "total": 50, "covered": 44, "skipped": 0, "pct": 88 },
+    "functions": { "total": 34, "covered": 29, "skipped": 0, "pct": 85.29 },
+    "statements": { "total": 59, "covered": 52, "skipped": 0, "pct": 88.14 },
+    "branches": { "total": 43, "covered": 38, "skipped": 0, "pct": 88.37 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileSkills/ProfileSkills.tsx": {
+    "lines": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 },
+    "functions": { "total": 19, "covered": 16, "skipped": 0, "pct": 84.21 },
+    "statements": { "total": 31, "covered": 27, "skipped": 0, "pct": 87.1 },
+    "branches": { "total": 23, "covered": 20, "skipped": 0, "pct": 86.96 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileSocials/ProfileSocials.tsx": {
+    "lines": { "total": 17, "covered": 16, "skipped": 0, "pct": 94.12 },
+    "functions": { "total": 11, "covered": 11, "skipped": 0, "pct": 100 },
+    "statements": { "total": 19, "covered": 18, "skipped": 0, "pct": 94.74 },
+    "branches": { "total": 16, "covered": 14, "skipped": 0, "pct": 87.5 }
+  },
+  "/home/jay/Projects/Interlinked/components/ProfilePage/ProfileVolunteering/ProfileVolunteering.tsx": {
+    "lines": { "total": 45, "covered": 45, "skipped": 0, "pct": 100 },
+    "functions": { "total": 29, "covered": 29, "skipped": 0, "pct": 100 },
+    "statements": { "total": 55, "covered": 53, "skipped": 0, "pct": 96.36 },
+    "branches": { "total": 31, "covered": 29, "skipped": 0, "pct": 93.55 }
+  },
+  "/home/jay/Projects/Interlinked/components/Report/AddReport.ts": {
+    "lines": { "total": 5, "covered": 3, "skipped": 0, "pct": 60 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 5, "covered": 3, "skipped": 0, "pct": 60 },
+    "branches": { "total": 5, "covered": 4, "skipped": 0, "pct": 80 }
+  },
+  "/home/jay/Projects/Interlinked/components/SearchBar/SearchBar.tsx": {
+    "lines": { "total": 18, "covered": 1, "skipped": 0, "pct": 5.56 },
+    "functions": { "total": 6, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 18, "covered": 1, "skipped": 0, "pct": 5.56 },
+    "branches": { "total": 4, "covered": 0, "skipped": 0, "pct": 0 }
+  },
+  "/home/jay/Projects/Interlinked/components/TextEditor/TextEditor.tsx": {
+    "lines": { "total": 15, "covered": 15, "skipped": 0, "pct": 100 },
+    "functions": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "statements": { "total": 16, "covered": 15, "skipped": 0, "pct": 93.75 },
+    "branches": { "total": 8, "covered": 6, "skipped": 0, "pct": 75 }
+  },
+  "/home/jay/Projects/Interlinked/components/TextEditor/TextEditorPreview.tsx": {
+    "lines": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "functions": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "statements": { "total": 1, "covered": 1, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/config/firebase.ts": {
+    "lines": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "functions": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 },
+    "statements": { "total": 10, "covered": 10, "skipped": 0, "pct": 100 },
+    "branches": { "total": 2, "covered": 1, "skipped": 0, "pct": 50 }
+  },
+  "/home/jay/Projects/Interlinked/config/firestore.ts": {
+    "lines": { "total": 8, "covered": 8, "skipped": 0, "pct": 100 },
+    "functions": { "total": 5, "covered": 5, "skipped": 0, "pct": 100 },
+    "statements": { "total": 9, "covered": 9, "skipped": 0, "pct": 100 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 100 }
+  },
+  "/home/jay/Projects/Interlinked/contexts/AuthContext.tsx": {
+    "lines": { "total": 55, "covered": 48, "skipped": 0, "pct": 87.27 },
+    "functions": { "total": 15, "covered": 13, "skipped": 0, "pct": 86.67 },
+    "statements": { "total": 55, "covered": 48, "skipped": 0, "pct": 87.27 },
+    "branches": { "total": 25, "covered": 17, "skipped": 0, "pct": 68 }
+  },
+  "/home/jay/Projects/Interlinked/types/JobPost.ts": {
+    "lines": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 }
+  },
+  "/home/jay/Projects/Interlinked/types/Notification.ts": {
+    "lines": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "functions": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "statements": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 },
+    "branches": { "total": 0, "covered": 0, "skipped": 0, "pct": 0 }
+  }
+}

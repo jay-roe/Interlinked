@@ -27,7 +27,7 @@ export default function jobNotification({
       >
         <div className="grid w-full grid-cols-1 items-center justify-start sm:grid-cols-6">
           <div
-            className="col-span-1 ml-4 text-accent-orange"
+            className="col-span-1 text-accent-orange"
             data-testid="redirect-onclick-location"
           >
             <MdWork size={60} className="align-self-center hidden sm:block" />

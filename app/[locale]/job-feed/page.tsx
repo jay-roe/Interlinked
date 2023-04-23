@@ -90,7 +90,6 @@ export default function Feeds() {
     setLoading(false);
   }, [partTime, fullTime, internship, searchKey, jobs]);
 
-
   if (loading) {
     // TODO make a better loading page
     return <div>{t('loading')}</div>;
@@ -100,7 +99,7 @@ export default function Feeds() {
     router.push('/' + locale + '/account-required');
     return <div> </div>;
   }
-  
+
   return (
     <div>
       {/* <CreatePostGroup /> */}

@@ -146,7 +146,7 @@ const EditJobPosting = ({
           context: `${t('company')} ${definedJob.companyName} ${t(
             'has-posted-new'
           )}: ${definedJob.title}`,
-          sender: definedJob.companyId, // TODO fix sender link
+          sender: definedJob.companyId,
           receiver: userid,
         });
       });
