@@ -2,6 +2,8 @@ import { Message } from '@/types/Message';
 import { Disclosure } from '@headlessui/react';
 import { Report } from '@/types/Report';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
+import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/config/locales';
 
 const ReportMessageCard = ({
   message,
@@ -10,6 +12,8 @@ const ReportMessageCard = ({
   message: Message;
   report: Report;
 }) => {
+  const locale = useLocale();
+
   return (
     <div
       data-testid="report-card-sender"
@@ -47,10 +51,12 @@ const ReportMessageCard = ({
           }`}
         >
           <p>
-            {message.time_stamp.toDate().toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            {message.time_stamp
+              .toDate()
+              .toLocaleTimeString(localeToDateLocale[locale], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
           </p>
         </Disclosure.Panel>
       </Disclosure>

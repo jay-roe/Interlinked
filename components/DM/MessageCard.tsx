@@ -3,9 +3,12 @@ import { useAuth } from '@/contexts/AuthContext';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 import { Disclosure } from '@headlessui/react';
 import FilePreview from '../FilePreview/FilePreview';
+import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/config/locales';
 
 const MessageCard = ({ message }: { message: Message }) => {
-  const { currentUser, authUser } = useAuth();
+  const { authUser } = useAuth();
+  const locale = useLocale();
 
   return (
     <div
@@ -64,10 +67,12 @@ const MessageCard = ({ message }: { message: Message }) => {
           }`}
         >
           <p>
-            {message.time_stamp.toDate().toLocaleTimeString('en-US', {
-              hour: '2-digit',
-              minute: '2-digit',
-            })}
+            {message.time_stamp
+              .toDate()
+              .toLocaleTimeString(localeToDateLocale[locale], {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
           </p>
         </Disclosure.Panel>
       </Disclosure>

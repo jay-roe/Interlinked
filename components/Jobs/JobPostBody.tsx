@@ -6,12 +6,15 @@ import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import Button from '../Buttons/Button';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
+import { localeToDateLocale } from '@/config/locales';
 
 const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
   // Creates the body of the post constaining the title, body text and also handles editing logic
   const t = useTranslations('Jobs.PostBody');
+  const locale = useLocale();
+
   return (
     <div className="mb-3 flex flex-col space-y-2 border-y-2 border-y-white border-opacity-10 p-2">
       {jobPost?.title ? (
@@ -43,24 +46,28 @@ const PostBody = ({ jobPost }: { jobPost?: JobPostingWithId }) => {
           className="text-sm font-light max-md:hidden"
         >
           {t('deadline') +
-            jobPost?.deadline?.toDate().toLocaleString('en-US', {
-              month: 'long',
-              year: 'numeric',
-              day: '2-digit',
-              hour: '2-digit',
-              minute: '2-digit',
-            }) || 'Unknown'}
+            jobPost?.deadline
+              ?.toDate()
+              .toLocaleString(localeToDateLocale[locale], {
+                month: 'long',
+                year: 'numeric',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              }) || 'Unknown'}
         </div>
         <div className="text-sm font-light md:hidden">
           {t('deadline') +
-            jobPost?.deadline?.toDate().toLocaleString('en-US', {
-              month: '2-digit',
-              year: '2-digit',
-              day: '2-digit',
-              hour: '2-digit',
-              hour12: false,
-              minute: '2-digit',
-            }) || 'Unknown'}
+            jobPost?.deadline
+              ?.toDate()
+              .toLocaleString(localeToDateLocale[locale], {
+                month: '2-digit',
+                year: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                hour12: false,
+                minute: '2-digit',
+              }) || 'Unknown'}
         </div>
       </div>
       <div className="flex space-x-1 align-middle" data-testid="job-post-cv">

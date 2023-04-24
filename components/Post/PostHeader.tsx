@@ -4,18 +4,20 @@ import Link from '@/components/Link/Link';
 
 import LinkButtonNoNumber from '../Buttons/LinkButton/LinkButtonNoNumber';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
+import { useLocale } from 'next-intl';
+import { localeToDateLocale } from '@/config/locales';
 
 const PostHeader = ({
   author,
   authorID,
   post,
-  currentUser,
 }: {
   author?: User;
   authorID?: string;
   post?: Post;
-  currentUser?: User;
 }) => {
+  const locale = useLocale();
+
   return (
     <div className="mb-3 flex items-center justify-start space-x-4">
       <Link
@@ -38,7 +40,7 @@ const PostHeader = ({
             data-testid="test-date"
             className="text-sm font-light max-md:hidden"
           >
-            {post?.date?.toDate().toLocaleString('en-US', {
+            {post?.date?.toDate().toLocaleString(localeToDateLocale[locale], {
               month: 'long',
               year: 'numeric',
               day: '2-digit',
@@ -47,7 +49,7 @@ const PostHeader = ({
             })}
           </div>
           <div className="text-sm font-light md:hidden">
-            {post?.date?.toDate().toLocaleString('en-US', {
+            {post?.date?.toDate().toLocaleString(localeToDateLocale[locale], {
               month: '2-digit',
               year: '2-digit',
               day: '2-digit',

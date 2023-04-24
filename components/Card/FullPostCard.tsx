@@ -50,12 +50,7 @@ const FullPostCard = ({
           id="post-content"
           ref={postContainer}
         >
-          <PostHeader
-            author={author}
-            authorID={authorID}
-            post={post}
-            currentUser={currentUser}
-          />
+          <PostHeader author={author} authorID={authorID} post={post} />
           <PostBody author={author} post={post} currentUser={currentUser} />
           <PostFooter
             data-testid="post-footer"
@@ -110,10 +105,7 @@ const FullPostCard = ({
               {comments?.map((comment, index) => {
                 return (
                   <Card key={index} className={`flex flex-col`}>
-                    <CommentHeader
-                      comment={comment}
-                      currentUser={currentUser}
-                    />
+                    <CommentHeader comment={comment} />
                     <CommentBody
                       testKey={`comment-body-${testKey}-${index}`}
                       comment={comment}

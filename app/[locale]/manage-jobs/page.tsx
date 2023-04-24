@@ -1,7 +1,5 @@
 'use client';
 
-import Link from '@/components/Link/Link';
-
 import { useEffect, useState } from 'react';
 import Button from '@/components/Buttons/Button';
 import { useAuth } from '@/contexts/AuthContext';
@@ -72,6 +70,12 @@ export default function ManagePostings() {
 
   return (
     <div>
+      <h1
+        className="mb-3 text-left text-7xl font-extrabold"
+        data-testid="title"
+      >
+        {t('your-postings')}
+      </h1>
       {newJob ? (
         <Card className="mb-4">
           <h1 className="text-3xl font-semibold" data-testid="new-job-title">

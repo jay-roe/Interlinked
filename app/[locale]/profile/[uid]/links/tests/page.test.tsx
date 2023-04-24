@@ -5,6 +5,7 @@ import { render } from '@/renderWrapper';
 
 import React from 'react';
 import Links from '../page';
+import { useRouter } from 'next/navigation';
 
 const params = {
   uid: 1,
@@ -12,6 +13,7 @@ const params = {
 
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
+  push: jest.fn(),
 }));
 
 jest.mock('@/config/firestore', () => ({
@@ -51,6 +53,7 @@ jest.mock('contexts/AuthContext', () => ({
 }));
 
 const mockedUseAuth = useAuth as jest.Mock<any>; // make useAuth modifiable based on the test case
+const mockedRouter = useRouter as jest.Mock<any>;
 
 const currentUser = {
   awards: [],
@@ -96,10 +99,15 @@ it('renders page with no user or loading', async () => {
       currentUser: null,
     };
   });
-  const { findByTestId } = render(<Links params={params} />);
 
-  const linkNoUser = await findByTestId('base-msg');
-  expect(linkNoUser).toBeInTheDocument();
+  const mockPush = jest.fn();
+  mockedRouter.mockImplementation(() => ({
+    push: mockPush,
+  }));
+
+  render(<Links params={params} />);
+
+  expect(mockPush).toBeCalled(); // Check if the router function was called (ie, user was redirected)
 });
 
 it('renders page with user and no loading', async () => {

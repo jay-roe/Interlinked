@@ -10,7 +10,6 @@ import {
 import { FaLink } from 'react-icons/fa';
 import { FaCheck, FaCloudUploadAlt, FaPaperPlane } from 'react-icons/fa';
 import Button from '../Buttons/Button';
-import FileButton from '../Buttons/FileButton/FileButton';
 import {
   ChangeEvent,
   Dispatch,
@@ -20,15 +19,7 @@ import {
   useState,
 } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import {
-  collection,
-  doc,
-  getDocs,
-  getDoc,
-  query,
-  updateDoc,
-  where,
-} from 'firebase/firestore';
+import { collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db, typeCollection } from '@/config/firestore';
 import {
   deleteObject,
@@ -36,11 +27,12 @@ import {
   ref,
   uploadBytes,
 } from 'firebase/storage';
-import auth, { storage } from '@/config/firebase';
+import { storage } from '@/config/firebase';
 import type { Document } from '../../types/User';
 import InputField from '@/components/InputFields/Input/Input';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from '../Link/Link';
+import { localeToDateLocale } from '@/config/locales';
 
 export default function Jobs({
   job,
@@ -52,6 +44,7 @@ export default function Jobs({
   postingId: string;
 }) {
   const t = useTranslations('Jobs.FullJobCard');
+  const locale = useLocale();
 
   const { currentUser, authUser } = useAuth();
   const [isEditable, setEditing] = useState<boolean>(true);
@@ -178,11 +171,13 @@ export default function Jobs({
           data-testid="job-post-card"
         >
           <div className="mb-3 text-sm font-light max-md:hidden">
-            {job?.datePosted?.toDate().toLocaleString('en-US', {
-              month: 'long',
-              year: 'numeric',
-              day: '2-digit',
-            })}
+            {job?.datePosted
+              ?.toDate()
+              .toLocaleString(localeToDateLocale[locale], {
+                month: 'long',
+                year: 'numeric',
+                day: '2-digit',
+              })}
           </div>
           <Card className="mb-3">
             <div className="break-all text-2xl font-extrabold">
@@ -247,11 +242,13 @@ export default function Jobs({
                 <AiOutlineClockCircle className="text-accent-orange " />
                 <div>
                   {t('apply-before') +
-                    job.deadline.toDate().toLocaleString('en-US', {
-                      month: 'long',
-                      year: 'numeric',
-                      day: '2-digit',
-                    })}
+                    job.deadline
+                      .toDate()
+                      .toLocaleString(localeToDateLocale[locale], {
+                        month: 'long',
+                        year: 'numeric',
+                        day: '2-digit',
+                      })}
                 </div>
               </div>
               {job.coverLetterRequired && job.cvRequired && (
