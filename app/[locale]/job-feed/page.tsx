@@ -1,10 +1,8 @@
 'use client';
 
-import Link from '@/components/Link/Link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import Button from '@/components/Buttons/Button';
 import { JobPostingWithId } from '@/types/JobPost';
 import FullJobCard from '@/components/Jobs/FullJobCard';
 import { collection, doc, getDocs, query, orderBy } from 'firebase/firestore';
@@ -103,6 +101,12 @@ export default function Feeds() {
   return (
     <div>
       {/* <CreatePostGroup /> */}
+      <h1
+        className="mb-3 text-left text-7xl font-extrabold"
+        data-testid="title"
+      >
+        {t('jobs-feed')}
+      </h1>
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         {t('find')}
       </p>

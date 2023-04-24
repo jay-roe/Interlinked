@@ -5,7 +5,7 @@ export default function Head() {
       <meta content="width=device-width, initial-scale=1" name="viewport" />
       <meta
         name="description"
-        content="Connect with like minded tech enthusiasts for making friends or finding job oppurtunities! "
+        content="Connect with like minded tech enthusiasts for making friends or finding job opportunities!"
       />
       <link rel="shortcut icon" href="/interlinked-logo.ico"></link>
       <link rel="icon" href="/interlinked-logo.ico" />
@@ -13,7 +13,7 @@ export default function Head() {
       <meta property="og:title" content="Interlinked" />
       <meta
         property="og:description"
-        content="Connect with like minded tech enthusiasts for making friends or finding job oppurtunities!"
+        content="Connect with like minded tech enthusiasts for making friends or finding job opportunities!"
       />
       <meta name="image" property="og:image" content="/interlinked-logo.ico" />
       <meta property="og:url" content="https://interlinked.live/" />

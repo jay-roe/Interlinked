@@ -22,7 +22,6 @@ import ProfileLocked from '@/components/ProfilePage/ProfileLocked/ProfileLocked'
 import { useAuth } from '@/contexts/AuthContext';
 import { useEffect, useState } from 'react';
 import { User } from '@/types/User';
-import LoadingScreen from '@/components/Loading/Loading';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 

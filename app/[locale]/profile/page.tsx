@@ -13,20 +13,16 @@ import ProfileProjects from '@/components/ProfilePage/ProfileProjects/ProfilePro
 import ProfileSkills from '@/components/ProfilePage/ProfileSkills/ProfileSkills';
 import ProfileAwards from '@/components/ProfilePage/ProfileAwards/ProfileAwards';
 
-import Link from '@/components/Link/Link';
-
 import SocialIconGroup from '@/components/Icons/SocialIconGroup/SocialIconGroup';
-import Button from '@/components/Buttons/Button';
 import ProfileVolunteering from '@/components/ProfilePage/ProfileVolunteering/ProfileVolunteering';
 import ProfileCertifications from '@/components/ProfilePage/ProfileCertifications/ProfileCertifications';
 import ProfilePrivacy from '@/components/ProfilePage/ProfilePrivacy/ProfilePrivacy';
 import ProfileDocuments from '@/components/ProfilePage/ProfileDocuments/ProfileDocuments';
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function PreviewProfile() {
-  const t = useTranslations('PreviewProfile');
   const { currentUser, authUser } = useAuth();
   const router = useRouter();
   const locale = useLocale();

@@ -1,5 +1,7 @@
-import { ChatRoom, Message } from '@/types/Message';
+import { localeToDateLocale } from '@/config/locales';
+import { ChatRoom } from '@/types/Message';
 import { User } from '@/types/User';
+import { useLocale } from 'next-intl';
 import ImageOptimized from '../ImageOptimized/ImageOptimized';
 
 export default function ChatroomCardHeader({
@@ -9,6 +11,8 @@ export default function ChatroomCardHeader({
   room: ChatRoom;
   user: User;
 }) {
+  const locale = useLocale();
+
   return (
     <div className="start flex items-center" data-testid="chat-room-header">
       <ImageOptimized
@@ -21,13 +25,15 @@ export default function ChatroomCardHeader({
       <div>
         <h2 className="text-xl font-bold">{user.name}</h2>
         <p>
-          {room.lastMessage.time_stamp?.toDate().toLocaleString('en-US', {
-            month: 'long',
-            year: 'numeric',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          })}
+          {room.lastMessage.time_stamp
+            ?.toDate()
+            .toLocaleString(localeToDateLocale[locale], {
+              month: 'long',
+              year: 'numeric',
+              day: '2-digit',
+              hour: '2-digit',
+              minute: '2-digit',
+            })}
         </p>
       </div>
     </div>
