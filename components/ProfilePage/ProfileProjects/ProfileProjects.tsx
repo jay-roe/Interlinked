@@ -210,22 +210,6 @@ export default function ProfileProjects({
                   : 'present'}
               </h6>
               <div>{project.description}</div>
-              {project.collaborators.map((co, index) => (
-                <Link key={index} href={`/profile/${co.id}`}>
-                  <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
-                    {co.profilePicture && (
-                      <ImageOptimized
-                        className="h-10 w-10 rounded-full"
-                        src={co.profilePicture}
-                        alt={co.name}
-                        width={40}
-                        height={40}
-                      />
-                    )}
-                    <p>{co.name} </p>
-                  </div>
-                </Link>
-              ))}
               <div className="flex gap-2">
                 {project.repoLink && (
                   <div>
@@ -294,7 +278,6 @@ export default function ProfileProjects({
               {
                 title: '',
                 description: '',
-                collaborators: [],
                 repoLink: '',
                 demoLink: '',
                 startDate: Timestamp.now(),

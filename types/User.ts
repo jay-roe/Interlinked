@@ -130,11 +130,6 @@ export type Language = {
 
 type Project = {
   title: string;
-  collaborators?: {
-    name: User['name'];
-    profilePicture?: User['profilePicture'];
-    id: string;
-  }[];
   repoLink?: string;
   demoLink?: string;
   description?: string;
