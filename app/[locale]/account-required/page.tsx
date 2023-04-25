@@ -2,10 +2,11 @@
 
 import Button from '@/components/Buttons/Button';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 export default function AccountRequired() {
   const t = useTranslations('AccountRequired');
+  const locale = useLocale();
 
   return (
     <div>
@@ -19,10 +20,10 @@ export default function AccountRequired() {
         {t('should-login')}
       </p>
       <div className="flex space-x-1.5">
-        <Link href="/login">
+        <Link href={`/${locale}/login`}>
           <Button>{t('sign-in')}</Button>
         </Link>
-        <Link href="/register">
+        <Link href={`/${locale}/register`}>
           <Button>{t('register')}</Button>
         </Link>
       </div>

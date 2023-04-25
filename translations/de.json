@@ -370,6 +370,9 @@
       "loading": "Wird geladen...",
       "invalid": "Ungültiger Benutzer.",
       "links": {
+        "view-your-links": "Mal sehen, wer Ihre Links sind.",
+        "view-other-links-start": "Mal sehen, wer",
+        "view-other-links-end": "s Links sind.",
         "login-first": "Sie sollten sich zuerst anmelden.",
         "sign-in": "Anmelden",
         "register": "Registrieren",

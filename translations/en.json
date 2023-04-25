@@ -370,6 +370,9 @@
       "loading": "Loading...",
       "invalid": "Invalid User.",
       "links": {
+        "view-your-links": "Let's see who your links are.",
+        "view-other-links-start": "Let's see who",
+        "view-other-links-end": "'s links are.",
         "login-first": "You should login first.",
         "sign-in": "Sign In",
         "register": "Register",
@@ -450,7 +453,7 @@
     "should-login": "You should login first.",
     "login": "Login",
     "register": "Register",
-    "confirm-unsaved": "Unsaved changes will be lost. Conitnue?",
+    "confirm-unsaved": "Unsaved changes will be lost. Continue?",
     "alert-success": "Successfully updated your profile!",
     "edit-profile": "Edit Profile",
     "save": "Save Changes",
