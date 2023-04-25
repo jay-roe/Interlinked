@@ -20,6 +20,8 @@ import { deleteDoc, doc, getDoc, setDoc } from 'firebase/firestore';
 import md5 from 'md5';
 import { useRouter } from 'next/navigation';
 import { useLocale } from 'next-intl';
+import LoadingScreen from '@/components/Loading/Loading';
+import NavBar from '@/components/NavBar/NavBar';
 
 interface AuthContextType {
   currentUser: User;
@@ -254,9 +256,17 @@ export function AuthProvider({ children }) {
     [currentUser, currentAdmin, authUser]
   );
 
+  // Render loading screen instead of page content while authentication loading
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? (
+        <main className="flex min-h-screen flex-col bg-purple-background">
+          <NavBar />
+          <LoadingScreen />
+        </main>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }
