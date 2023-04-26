@@ -116,7 +116,9 @@ export default function ViewProfile({ params }) {
           href={`/profile/${params.uid}/links`}
           linkedUserIds={user?.linkedUserIds}
         />
-        {!currentAdmin && <LinkButton profileOwnerUID={params.uid} />}
+        {!currentAdmin && !currentUser.isCompany && (
+          <LinkButton profileOwnerUID={params.uid} />
+        )}
       </div>
 
       <ProfileContact email={user.email} phone={user.phone} />

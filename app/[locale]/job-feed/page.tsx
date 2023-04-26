@@ -73,14 +73,15 @@ export default function Feeds() {
   useEffect(() => {
     setFilteredJobs([]);
     jobs
-      .filter((job) =>
-        checkIfJobIsInFilter({
-          fullTime: fullTime,
-          partTime: partTime,
-          internship: internship,
-          job: job,
-          searchKey: searchKey,
-        })
+      .filter(
+        (job) =>
+          checkIfJobIsInFilter({
+            fullTime: fullTime,
+            partTime: partTime,
+            internship: internship,
+            job: job,
+            searchKey: searchKey,
+          }) && job.deadline.toMillis() > new Date().getTime()
       )
       .forEach((job) => {
         setFilteredJobs((cur) => [...cur, job]);

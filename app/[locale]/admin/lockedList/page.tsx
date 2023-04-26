@@ -46,10 +46,10 @@ export default function LockedList() {
 
   async function unlockAccount(uid: string) {
     // get account of the person reported and set accountLocked to false
-    updateDoc(doc(db.users, uid), {
+    await updateDoc(doc(db.users, uid), {
       accountLocked: false,
     });
-    window.location.reload();
+    setBanned((curr) => curr.filter((bannedUser) => bannedUser.userId !== uid));
   }
 
   return (
@@ -67,16 +67,6 @@ export default function LockedList() {
                   <div className="flex items-center justify-center">
                     <p>{user.name}</p>
                   </div>
-                  <Button
-                    data-testid="unban-account-btn"
-                    onClick={() => {
-                      unlockAccount(user.userId);
-                    }}
-                  >
-                    Unban account
-                  </Button>
-                </div>
-                <div>
                   <Button
                     data-testid="unban-account-btn"
                     onClick={() => {
