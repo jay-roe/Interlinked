@@ -37,6 +37,7 @@ export default function Login() {
     try {
       setLoading(true);
       await login(email, password);
+      router.push('/' + locale + '/');
     } catch (err) {
       console.error(err);
       alert(t('alert-failed'));

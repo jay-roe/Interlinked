@@ -17,7 +17,8 @@ const LinkButtonNoNumber = ({
   const { currentUser, authUser } = useAuth(); // User sending out the request
   const [linkIds, setLinkIds] = useState(currentUser.linkedUserIds);
   return (
-    posterUID !== authUser.uid && (
+    posterUID !== authUser.uid &&
+    !currentUser.isCompany && (
       <button
         data-testid="link-btn-no-number"
         className="z-50 flex max-w-fit items-center gap-1 rounded-md bg-white bg-opacity-0 p-2 transition-all hover:bg-opacity-10 active:bg-opacity-20"

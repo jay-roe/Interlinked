@@ -51,7 +51,7 @@ export default function Links({ params }) {
     let links: UserWithId[] = [];
     for (
       let i = linkedIndex.current;
-      i < linkedIndex.current + PAGE_SIZE && i < linkedIds.current.length;
+      i < linkedIndex.current + PAGE_SIZE && i < linkedIds?.current?.length;
       i++
     ) {
       const linkedUser = await getDoc(doc(db.users, linkedIds.current[i]));
@@ -101,8 +101,10 @@ export default function Links({ params }) {
     <>
       <p data-testid="welcome-msg" className="mb-3 text-left text-2xl">
         {myPage
-          ? `Let's see who your links are.`
-          : `Let's see who ${user.name}'s links are.`}
+          ? t('view-your-links')
+          : `${t('view-other-links-start')} ${user.name}${t(
+              'view-other-links-end'
+            )}`}
       </p>
       <CardGrid className="gap-y-4">
         {links?.map((link, index) => {
@@ -144,11 +146,6 @@ export default function Links({ params }) {
         data-testid="load-more-button-container"
       >
         {!allLinksFound ? (
-          // <LoadMoreButton onClick={() =>
-          //   getLinkInfo().then((links) => {
-          //   setLinks((current) => [...current, ...links]);
-          // })
-          // }/>
           <Button
             className="mx-auto"
             data-testid="load-more"

@@ -42,26 +42,6 @@ export default function ProfileProjects({
                 {proj.endDate ? proj.endDate.toDate().getFullYear() : 'present'}
               </h6>
               <div>{proj.description}</div>
-              {proj.collaborators.map((co, index) => (
-                <Link
-                  key={index}
-                  href={`/profile/${co.id}`}
-                  className="inline-block"
-                >
-                  <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
-                    {co.profilePicture && (
-                      <ImageOptimized
-                        className="h-10 w-10 rounded-full"
-                        src={co.profilePicture}
-                        alt={co.name}
-                        width={40}
-                        height={40}
-                      />
-                    )}
-                    <p>{co.name} </p>
-                  </div>
-                </Link>
-              ))}
               <div className="flex gap-2">
                 {proj.repoLink && (
                   <div>
@@ -125,38 +105,6 @@ export default function ProfileProjects({
                 }
                 required
               />
-              <label>
-                {t('collaborators')} <span className="text-yellow-600">*</span>
-              </label>
-
-              {project.collaborators.map((co, index) => (
-                <form key={index}>
-                  <InputField
-                    data-testid={`edit-proj-collaborators-${index}`}
-                    type="text"
-                    name="collab"
-                    id="profileCollabs"
-                    value={co.name}
-                    onChange={(e) =>
-                      setProjects((pro) => {
-                        let tempArr = [...pro];
-                        //tempArr[index].collaborators= e.target.value;
-                        return tempArr;
-                      })
-                    }
-                  />
-                </form>
-              ))}
-              {/* Adding new collaborators, appears after all collaborators list */}
-              {isEditable && (
-                <Button
-                  className="inline"
-                  // Add new text field
-                >
-                  {t('add-collaborator')}
-                </Button>
-              )}
-
               <p>{t('description')}</p>
               <TextArea
                 data-testid={`edit-proj-description-${index}`}
@@ -262,22 +210,6 @@ export default function ProfileProjects({
                   : 'present'}
               </h6>
               <div>{project.description}</div>
-              {project.collaborators.map((co, index) => (
-                <Link key={index} href={`/profile/${co.id}`}>
-                  <div className="my-2 flex w-fit items-center gap-2 rounded-md bg-white bg-opacity-10 p-3">
-                    {co.profilePicture && (
-                      <ImageOptimized
-                        className="h-10 w-10 rounded-full"
-                        src={co.profilePicture}
-                        alt={co.name}
-                        width={40}
-                        height={40}
-                      />
-                    )}
-                    <p>{co.name} </p>
-                  </div>
-                </Link>
-              ))}
               <div className="flex gap-2">
                 {project.repoLink && (
                   <div>
@@ -346,7 +278,6 @@ export default function ProfileProjects({
               {
                 title: '',
                 description: '',
-                collaborators: [],
                 repoLink: '',
                 demoLink: '',
                 startDate: Timestamp.now(),

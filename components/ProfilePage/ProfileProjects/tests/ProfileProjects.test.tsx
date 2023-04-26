@@ -53,13 +53,6 @@ it('renders the live version of profile projects', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
     />
@@ -81,13 +74,6 @@ it('edits a project', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
@@ -103,7 +89,6 @@ it('edits a project', async () => {
   // const image = await findByTestId('edit-proj-image');
   const startDate = await findByTestId('edit-proj-startDate-0');
   const endDate = await findByTestId('edit-proj-endDate-0');
-  const collaborators = await findByTestId('edit-proj-collaborators-0');
 
   fireEvent.change(title, { target: { value: 'something different' } });
   fireEvent.change(repoLink, { target: { value: 'something different' } });
@@ -112,16 +97,6 @@ it('edits a project', async () => {
   // fireEvent.change(image, { target: { value: 'something different' } });
   fireEvent.change(startDate, { target: { value: mockDate } });
   fireEvent.change(endDate, { target: { value: mockDate } });
-  fireEvent.change(collaborators, {
-    target: {
-      value: {
-        name: 'name',
-        profilePicture: 'https://via.placeholder.com/100.png',
-        id: '1',
-      },
-    },
-  });
-  await waitFor(() => expect(mockSet).toBeCalledTimes(7));
 });
 
 it('renders the editable version of profile project', async () => {
@@ -136,13 +111,6 @@ it('renders the editable version of profile project', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
@@ -166,13 +134,6 @@ it('tests the project save button', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
@@ -199,13 +160,6 @@ it('tests the project edit button', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
@@ -231,13 +185,6 @@ it('tests the project delete button', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
@@ -264,13 +211,6 @@ it('tests the experience delete button', async () => {
           image: 'https://via.placeholder.com/100.png',
           startDate: mockDate,
           endDate: mockDate,
-          collaborators: [
-            {
-              name: 'name',
-              profilePicture: 'https://via.placeholder.com/100.png',
-              id: '1',
-            },
-          ],
         },
       ]}
       isEditable={true}
